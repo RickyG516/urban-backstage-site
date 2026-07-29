@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Naming &amp; Filing Rules | Urban Backstage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#0f0f0f;--orange:#e36b1e;--white:#fff;--charcoal:#1a1a1a;--light:#f5f5f5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--dark);color:var(--light);font-family:'Open Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none}
+  .ub-nav{display:flex;align-items:center;gap:8px;padding:0 28px;height:56px;background:var(--dark);
+          border-bottom:1px solid #262626;position:sticky;top:0;z-index:60}
+  .ub-brand{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;
+            color:var(--white);white-space:nowrap;margin-right:16px}
+  .ub-brand span{color:var(--orange)}
+  .ub-links{display:flex;gap:4px;flex-wrap:wrap}
+  .ub-links a{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:13px;color:#9a9a9a;padding:8px 14px;border-radius:6px}
+  .ub-links a:hover{color:var(--white);background:var(--charcoal)}
+  .ub-links a.active{color:var(--orange);background:rgba(227,107,30,.12)}
+  .ub-flag{margin-left:auto;font-size:10px;letter-spacing:.12em;color:#5a5a5a;border:1px solid #2a2a2a;padding:4px 10px;border-radius:99px;white-space:nowrap}
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px}
+  .crumb{margin:26px 0 0;font-size:12px;color:#6a6a6a}
+  .crumb a{color:var(--orange)}
+  h1{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:29px;margin:10px 0 8px;color:var(--white)}
+  .sub{color:#8e8e8e;font-size:14.5px;line-height:1.65;margin:0 0 12px}
+  h2{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;
+     text-transform:uppercase;color:#7a7a7a;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid #222}
+  p{line-height:1.7;color:#c2c2c2;font-size:14.5px}
+  code{background:#141414;border:1px solid #2b2b2b;border-radius:5px;padding:2px 6px;font-family:ui-monospace,monospace;font-size:12.5px;color:#e0e0e0}
+  .pattern{background:var(--charcoal);border:1px solid #262626;border-radius:9px;padding:16px 20px;
+           font-family:ui-monospace,monospace;font-size:13.5px;color:#e8e8e8;line-height:1.9;overflow-x:auto}
+  .pattern b{color:var(--orange);font-weight:400}
+
+  /* builder */
+  .builder{background:linear-gradient(180deg,rgba(227,107,30,.07),transparent);border:1px solid #2a2018;
+           border-radius:10px;padding:20px 22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  label{display:block;font-size:10.5px;letter-spacing:.1em;color:#7a7a7a;text-transform:uppercase;
+        font-family:'Montserrat',Arial,sans-serif;font-weight:600;margin-bottom:5px}
+  select,input{width:100%;padding:9px 11px;border-radius:7px;border:1px solid #333;background:#111;
+               color:var(--white);font-size:13.5px;font-family:'Open Sans',Arial,sans-serif}
+  select:focus,input:focus{outline:2px solid var(--orange)}
+  .out{margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .out .fn{flex:1;min-width:260px;background:#0b0b0b;border:1px solid #2b2b2b;border-radius:7px;
+           padding:12px 14px;font-family:ui-monospace,monospace;font-size:13.5px;color:var(--orange);word-break:break-all}
+  .out button{background:var(--orange);border:none;border-radius:7px;padding:12px 20px;color:#111;
+              font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;letter-spacing:.04em}
+  .out button:hover{filter:brightness(1.1)}
+  .warn{margin-top:10px;font-size:12.5px;color:#e0a56b}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font-family:'Montserrat',Arial,sans-serif;font-size:11px;letter-spacing:.08em;
+     text-transform:uppercase;color:#7a7a7a;padding:9px 12px;border-bottom:1px solid #2a2a2a}
+  td{padding:10px 12px;border-bottom:1px solid #1f1f1f;color:#c2c2c2;vertical-align:top}
+  td code{font-size:12px}
+  .never{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .never span{background:#2a1414;border:1px solid #4a2020;color:#e08b8b;border-radius:7px;padding:6px 12px;font-size:13px;text-decoration:line-through}
+  .note{background:var(--charcoal);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;
+        padding:14px 18px;font-size:13.5px;color:#c2c2c2;line-height:1.7}
+  footer{color:#5a5a5a;font-size:11.5px;border-top:1px solid #1e1e1e;margin-top:40px;padding:22px 0 48px}
+</style>
+</head>
+<body>
+
+<nav class="ub-nav">
+  <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
+  <div class="ub-links">
+    <a href="/">Home</a>
+    <a href="/sales-ops/workspace/">Workspace</a>
+    <a href="/playbook/" class="active">Playbook</a>
+    <a href="/demo/">Demos</a>
+    <a href="/verticals/">Verticals</a>
+  </div>
+  <span class="ub-flag">INTERNAL · NOT INDEXED</span>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="/playbook/">&larr; Playbook</a></div>
+  <h1>Naming &amp; Filing Rules</h1>
+  <p class="sub">Every file that leaves a session gets a name from this pattern and a filing stamp at the top.
+     No exceptions &mdash; it's what keeps Drive from turning back into a junk drawer.</p>
+
+  <h2>The Pattern</h2>
+  <div class="pattern">
+    <b>Standard</b> &nbsp; [Entity]_[DocType]_[Description]_[YYYY-MM-DD].[ext]<br>
+    <b>Versioned</b> &nbsp; [Entity]_[DocType]_[Description]_v[N]_[YYYY-MM-DD].[ext]
+  </div>
+  <p style="font-size:13.5px;color:#8a8a8a">No spaces. Underscores <i>between</i> parts, hyphens <i>within</i> a part.</p>
+
+  <h2>Filename Builder</h2>
+  <div class="builder">
+    <div class="grid">
+      <div>
+        <label>Entity</label>
+        <select id="ent">
+          <option>UNC</option><option>ITC</option><option>KOBE</option>
+          <option value="__client">[Client shortname]</option>
+        </select>
+      </div>
+      <div>
+        <label>Doc Type</label>
+        <select id="dt">
+          <optgroup label="Client-facing">
+            <option>SEO-Report</option><option>GBP-Report</option><option>PPC-Report</option>
+            <option>Content-Report</option><option>Email-Report</option><option>Reputation-Report</option>
+            <option>AI-Report</option><option>Bundle-Report</option><option>Site-Audit</option>
+            <option>GBP-Audit</option><option>Proposal</option><option>Contract</option>
+            <option>Invoice</option><option>Quote</option><option>Onboard</option>
+            <option>Guide</option><option>Case-Study</option><option>BattleCard</option>
+          </optgroup>
+          <optgroup label="Internal">
+            <option>Session-Memory</option><option>SOP</option><option>Tracker</option><option>Skill</option>
+            <option>Cowork-Cmd</option><option>Social-Post</option><option>Blog-Post</option>
+            <option>Asset-Brand</option><option>Asset-Photo</option><option>Strategy</option>
+            <option>Training</option><option>Cold-Script</option><option>Email-Script</option>
+            <option>DM-Script</option><option>Video-Script</option>
+          </optgroup>
+        </select>
+      </div>
+      <div>
+        <label>Description</label>
+        <input id="desc" placeholder="Jun2026 / LocalAuthority / HVAC">
+      </div>
+      <div>
+        <label>Version (if required)</label>
+        <input id="ver" placeholder="1" inputmode="numeric">
+      </div>
+      <div>
+        <label>Date</label>
+        <input id="dt2" placeholder="2026-07-29">
+      </div>
+      <div>
+        <label>Extension</label>
+        <select id="ext"><option>pdf</option><option>md</option><option>xlsx</option><option>docx</option><option>pptx</option><option>html</option><option>js</option><option>json</option><option>png</option><option>svg</option></select>
+      </div>
+    </div>
+    <div class="out">
+      <div class="fn" id="fn">&mdash;</div>
+      <button id="cp">COPY</button>
+    </div>
+    <div class="warn" id="warn"></div>
+  </div>
+
+  <h2>Description Vocabulary</h2>
+  <table>
+    <tbody>
+      <tr><td style="width:210px"><b style="color:#fff">Monthly reports</b></td><td><code>[Mon][YYYY]</code> &mdash; e.g. <code>Jun2026</code></td></tr>
+      <tr><td><b style="color:#fff">Proposals by bundle</b></td><td><code>LocalAuthority</code> · <code>MarketGrowth</code> · <code>TotalDomination</code> · <code>Custom-[scope]</code></td></tr>
+      <tr><td><b style="color:#fff">Website proposals</b></td><td><code>WebsiteStarter</code> · <code>WebsiteStandard</code> · <code>WebsiteAdvanced</code></td></tr>
+      <tr><td><b style="color:#fff">Merch quotes</b></td><td><code>[N]pc-[X]Color</code> &mdash; e.g. <code>162pc-2Color</code></td></tr>
+      <tr><td><b style="color:#fff">Trade scripts</b></td><td><code>Roofer</code> · <code>HVAC</code> · <code>Plumber</code> · <code>Electrician</code> · <code>Landscaper</code> · <code>GC</code> · <code>Painter</code> · <code>Concrete</code></td></tr>
+      <tr><td><b style="color:#fff">Assets</b></td><td><code>LogoMain</code> · <code>LogoDark</code> · <code>LogoLight</code></td></tr>
+      <tr><td><b style="color:#fff">Trackers</b></td><td><code>PaymentDispersal</code> · <code>Pipeline</code> · <code>ContentCalendar</code></td></tr>
+      <tr><td><b style="color:#fff">Sessions</b></td><td>CamelCase topic slug &mdash; e.g. <code>ExecSystemBuild</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Version Numbers</h2>
+  <p style="margin-top:0"><b style="color:#fff">Required</b> on Proposals, Contracts, Quotes, Cold / Email / DM Scripts, SOPs, and Guides.<br>
+     <b style="color:#fff">Not used</b> on Reports, Session-Memory, Trackers, Assets, or Social-Posts.</p>
+
+  <h2>Never Use</h2>
+  <div class="never">
+    <span>Untitled</span><span>Copy of</span><span>Final</span><span>FINAL</span>
+    <span>CORRECTED</span><span>Updated</span><span>New</span>
+  </div>
+
+  <h2>The Filing Stamp</h2>
+  <p style="margin-top:0">Goes at the very top of every file, before any other content. No stamp, no filing.</p>
+  <div class="pattern">FILING DESTINATION: [DEPARTMENT] / [Subfolder] / [Sub-subfolder if needed]<br>
+SOURCE: CLAUDE OUTPUT &mdash; Ricky Garner<br>
+&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;</div>
+
+  <h2>Where It Goes</h2>
+  <table>
+    <thead><tr><th>Content type</th><th>Destination</th></tr></thead>
+    <tbody>
+      <tr><td>Board meeting snapshots</td><td><code>EXECUTIVE COMMAND / [Month Year]</code></td></tr>
+      <tr><td>Department weekly reports</td><td><code>EXECUTIVE COMMAND / [Month Year]</code></td></tr>
+      <tr><td>Garage HQ planning</td><td><code>EXECUTIVE COMMAND / Garage HQ</code></td></tr>
+      <tr><td>Client audits, onboarding, deliverables</td><td><code>CLIENT SUCCESS / [Rep] Clients / [Client] / [Sub]</code></td></tr>
+      <tr><td>Proposals, pitch decks</td><td><code>REVENUE &amp; GROWTH / Proposals</code> or <code>/ Pitch Decks</code></td></tr>
+      <tr><td>Cold DM / email / call scripts</td><td><code>REVENUE &amp; GROWTH / Cold Outreach / [Type]</code></td></tr>
+      <tr><td>Merch quotes</td><td><code>REVENUE &amp; GROWTH / Pricing</code></td></tr>
+      <tr><td>SOPs, checklists, process docs</td><td><code>DELIVERY &amp; OPS / SOPs</code></td></tr>
+      <tr><td>Cowork commands / prompts</td><td><code>DELIVERY &amp; OPS / Cowork Commands</code></td></tr>
+      <tr><td>Trackers / dashboards</td><td><code>DELIVERY &amp; OPS / Trackers</code></td></tr>
+      <tr><td>Session summaries, accountability logs</td><td><code>DELIVERY &amp; OPS / Memory</code></td></tr>
+      <tr><td>Social posts / captions</td><td><code>CONTENT &amp; BRAND / Social Media</code></td></tr>
+      <tr><td>Video scripts</td><td><code>CONTENT &amp; BRAND / Video Scripts</code></td></tr>
+      <tr><td>Case studies, logos, brand assets</td><td><code>CONTENT &amp; BRAND / Brand Assets</code></td></tr>
+      <tr><td>Invoices / payment records</td><td><code>FINANCE &amp; ADMIN / Invoices</code></td></tr>
+      <tr><td>Contracts</td><td><code>FINANCE &amp; ADMIN / Contracts</code></td></tr>
+      <tr><td>ITC docs</td><td><code>FINANCE &amp; ADMIN / ITC</code></td></tr>
+      <tr><td>Payment trackers</td><td><code>FINANCE &amp; ADMIN / P&amp;L Dashboard</code></td></tr>
+      <tr><td>Website files (HTML/CSS/JS)</td><td><code>TECH &amp; SYSTEMS / Website Files / Urban Niche Co Site</code></td></tr>
+      <tr><td>Automations / Apps Script</td><td><code>TECH &amp; SYSTEMS / AI &amp; Automation</code></td></tr>
+      <tr><td>Skill files (.md)</td><td><code>TECH &amp; SYSTEMS / Skills</code></td></tr>
+      <tr><td>Unclear / unclassifiable</td><td><code>NEEDS CHECKED</code> &mdash; stamp it, flag it, never leave it loose</td></tr>
+    </tbody>
+  </table>
+
+  <h2>The Other Standing Rules</h2>
+  <table>
+    <tbody>
+      <tr><td style="width:110px"><b style="color:#fff">Rule 2</b></td><td>Everything saves to <code>C:\UrbanNicheCo\Staging\</code> first. Upload to Drive, delete local, machine stays clean. Bulk purges use <code>Downloads\TO_UPLOAD\</code> and <code>Downloads\TO_DELETE\</code> &mdash; OAuth / client_secret JSON goes to TO_DELETE only, never Drive.</td></tr>
+      <tr><td><b style="color:#fff">Rule 3</b></td><td>PDF for anything client-facing or archived. <b style="color:#e36b1e">HTML for internal daily-use docs</b> that live on backstage. Amended July 2026 &mdash; used to be PDF for everything a human reads.</td></tr>
+      <tr><td><b style="color:#fff">Rule 4</b></td><td>Pull or clone before editing. Audit first. Surgical changes only. Never break existing layout or styling.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="margin-top:26px">
+    <b style="color:#fff">Careful what lands on the open playbook.</b> The test is simple &mdash;
+    if a competitor read this, would it hurt? Account IDs, namespace IDs, tokens, security runbooks
+    and competitive intel stay behind the cockpit PIN or in Drive only. Process, training,
+    personas and brand are safe out here.
+  </div>
+
+  <footer>
+    URBAN NICHE CO. | urbannicheco.com | (515) 344-4053 &mdash;
+    Marketing built for contractors. Let's build something.
+  </footer>
+</div>
+
+<script>
+  const ent=document.getElementById('ent'), dt=document.getElementById('dt'),
+        desc=document.getElementById('desc'), ver=document.getElementById('ver'),
+        dt2=document.getElementById('dt2'), ext=document.getElementById('ext'),
+        fn=document.getElementById('fn'), warn=document.getElementById('warn');
+
+  const NEEDS_VERSION = ['Proposal','Contract','Quote','Cold-Script','Email-Script','DM-Script','SOP','Guide'];
+  const NO_VERSION = ['Session-Memory','Tracker','Asset-Brand','Asset-Photo','Social-Post'];
+
+  // date defaults to today, computed in the browser so it is always current
+  const t = new Date();
+  dt2.value = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+
+  function build(){
+    const e = ent.value === '__client' ? 'ClientName' : ent.value;
+    const d = (desc.value || 'Description').trim().replace(/\s+/g,'');
+    const v = ver.value.trim();
+    const parts = [e, dt.value, d];
+    if (v) parts.push('v' + v.replace(/^v/i,''));
+    parts.push(dt2.value || 'YYYY-MM-DD');
+    fn.textContent = parts.join('_') + '.' + ext.value;
+
+    const needs = NEEDS_VERSION.includes(dt.value);
+    const forbids = NO_VERSION.includes(dt.value);
+    if (needs && !v) warn.textContent = '⚠ ' + dt.value + ' requires a version number.';
+    else if (forbids && v) warn.textContent = '⚠ ' + dt.value + ' does not use version numbers — drop it.';
+    else if (ent.value === '__client') warn.textContent = 'Replace ClientName with the client shortname — no city in the filename.';
+    else warn.textContent = '';
+  }
+  [ent,dt,desc,ver,dt2,ext].forEach(el => el.addEventListener('input', build));
+  document.getElementById('cp').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(fn.textContent); } catch(e) {}
+    const b = document.getElementById('cp'); b.textContent = 'COPIED';
+    setTimeout(()=>b.textContent='COPY', 1100);
+  });
+  build();
+</script>
+</body>
+</html>

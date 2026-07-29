@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Brand Standards | Urban Backstage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#0f0f0f;--orange:#e36b1e;--white:#fff;--charcoal:#1a1a1a;--light:#f5f5f5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--dark);color:var(--light);font-family:'Open Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none}
+  .ub-nav{display:flex;align-items:center;gap:8px;padding:0 28px;height:56px;background:var(--dark);
+          border-bottom:1px solid #262626;position:sticky;top:0;z-index:60}
+  .ub-brand{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;
+            color:var(--white);white-space:nowrap;margin-right:16px}
+  .ub-brand span{color:var(--orange)}
+  .ub-links{display:flex;gap:4px;flex-wrap:wrap}
+  .ub-links a{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:13px;color:#9a9a9a;
+              padding:8px 14px;border-radius:6px}
+  .ub-links a:hover{color:var(--white);background:var(--charcoal)}
+  .ub-links a.active{color:var(--orange);background:rgba(227,107,30,.12)}
+  .ub-flag{margin-left:auto;font-size:10px;letter-spacing:.12em;color:#5a5a5a;border:1px solid #2a2a2a;
+           padding:4px 10px;border-radius:99px;white-space:nowrap}
+  .wrap{max-width:900px;margin:0 auto;padding:0 28px}
+  .crumb{margin:26px 0 0;font-size:12px;color:#6a6a6a}
+  .crumb a{color:var(--orange)}
+  h1{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:29px;margin:10px 0 6px;color:var(--white)}
+  .tagline{color:var(--orange);font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:15px;margin:0 0 30px}
+  h2{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;
+     text-transform:uppercase;color:#7a7a7a;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid #222}
+  p{line-height:1.7;color:#c2c2c2;font-size:14.5px}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .sw{border:1px solid #262626;border-radius:9px;overflow:hidden;cursor:pointer}
+  .sw .chip{height:64px}
+  .sw .meta{padding:10px 12px;background:var(--charcoal)}
+  .sw .nm{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:12px;color:var(--white)}
+  .sw .hx{font-size:11.5px;color:#8a8a8a;font-family:ui-monospace,monospace}
+  .sw:hover{border-color:var(--orange)}
+  .copied{color:var(--orange)!important}
+  .type-demo{background:var(--charcoal);border:1px solid #262626;border-radius:9px;padding:20px 22px;margin-top:4px}
+  .type-demo .h{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:24px;color:var(--white);margin-bottom:6px}
+  .type-demo .b{font-family:'Open Sans',Arial,sans-serif;font-size:14.5px;color:#b8b8b8;line-height:1.7}
+  .type-demo .lbl{font-size:11px;color:#6a6a6a;letter-spacing:.08em;margin-top:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
+  th{text-align:left;font-family:'Montserrat',Arial,sans-serif;font-size:11px;letter-spacing:.08em;
+     text-transform:uppercase;color:#7a7a7a;padding:9px 12px;border-bottom:1px solid #2a2a2a}
+  td{padding:11px 12px;border-bottom:1px solid #1f1f1f;color:#c2c2c2;vertical-align:top}
+  code{background:#141414;border:1px solid #2b2b2b;border-radius:5px;padding:2px 6px;
+       font-family:ui-monospace,monospace;font-size:12.5px;color:#e0e0e0}
+  .never{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .never span{background:#2a1414;border:1px solid #4a2020;color:#e08b8b;border-radius:7px;
+              padding:6px 12px;font-size:13px;text-decoration:line-through}
+  .pill{display:inline-block;background:rgba(227,107,30,.12);border:1px solid rgba(227,107,30,.4);
+        color:var(--orange);border-radius:99px;padding:3px 11px;font-size:11.5px;
+        font-family:'Montserrat',Arial,sans-serif;font-weight:600}
+  .proof{background:linear-gradient(90deg,rgba(227,107,30,.10),transparent 70%);
+         border:1px solid #2a2018;border-radius:9px;padding:18px 20px;margin-top:6px}
+  .proof b{color:var(--white)}
+  .footer-box{background:var(--charcoal);border:1px solid #262626;border-radius:9px;padding:16px 20px;
+              font-size:13.5px;color:#c2c2c2;line-height:1.7}
+  footer{color:#5a5a5a;font-size:11.5px;border-top:1px solid #1e1e1e;margin-top:40px;padding:22px 0 48px}
+</style>
+</head>
+<body>
+
+<nav class="ub-nav">
+  <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
+  <div class="ub-links">
+    <a href="/">Home</a>
+    <a href="/sales-ops/workspace/">Workspace</a>
+    <a href="/playbook/" class="active">Playbook</a>
+    <a href="/demo/">Demos</a>
+    <a href="/verticals/">Verticals</a>
+  </div>
+  <span class="ub-flag">INTERNAL · NOT INDEXED</span>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="/playbook/">&larr; Playbook</a></div>
+  <h1>Brand Standards</h1>
+  <p class="tagline">"Let's build something."</p>
+
+  <h2>Colors</h2>
+  <p style="margin-top:0;font-size:13px;color:#8a8a8a">Tap any swatch to copy the hex.</p>
+  <div class="swatches">
+    <div class="sw" data-hex="#0f0f0f"><div class="chip" style="background:#0f0f0f;border-bottom:1px solid #262626"></div><div class="meta"><div class="nm">Dark</div><div class="hx">#0f0f0f</div></div></div>
+    <div class="sw" data-hex="#e36b1e"><div class="chip" style="background:#e36b1e"></div><div class="meta"><div class="nm">Orange</div><div class="hx">#e36b1e</div></div></div>
+    <div class="sw" data-hex="#ffffff"><div class="chip" style="background:#ffffff"></div><div class="meta"><div class="nm">White</div><div class="hx">#ffffff</div></div></div>
+    <div class="sw" data-hex="#1a1a1a"><div class="chip" style="background:#1a1a1a;border-bottom:1px solid #262626"></div><div class="meta"><div class="nm">Charcoal</div><div class="hx">#1a1a1a</div></div></div>
+    <div class="sw" data-hex="#f5f5f5"><div class="chip" style="background:#f5f5f5"></div><div class="meta"><div class="nm">Light</div><div class="hx">#f5f5f5</div></div></div>
+  </div>
+
+  <h2>Typography</h2>
+  <div class="type-demo">
+    <div class="h">Your competitors are ranking above you.</div>
+    <div class="lbl">HEADINGS &mdash; Montserrat 700</div>
+    <div class="b" style="margin-top:16px">Most contractors are excellent at the work and invisible on Google. We fix the second part so the phone rings.</div>
+    <div class="lbl">BODY &mdash; Open Sans 400</div>
+  </div>
+
+  <h2>Voice</h2>
+  <p>Direct. Real. No fluff. <b style="color:#fff">Contractors can smell fake.</b> Plain English always.
+     Write the way you'd talk to a guy on a job site who's busy and has heard three pitches this month.
+     Short sentences. Concrete numbers. No hedging.</p>
+  <p style="margin-bottom:6px"><span class="pill">NEVER USE</span></p>
+  <div class="never">
+    <span>synergy</span><span>leverage (as a verb)</span><span>touch base</span>
+    <span>circle back</span><span>utilize</span><span>innovative solutions</span>
+  </div>
+
+  <h2>Logos</h2>
+  <table>
+    <thead><tr><th>File</th><th>Use when</th></tr></thead>
+    <tbody>
+      <tr><td><code>logo_orange-logo_black-text.png</code></td><td>Light backgrounds, client PDFs, print</td></tr>
+      <tr><td><code>logo_orange-logo_white-text.png</code></td><td>Dark backgrounds, hero sections</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Content Strategy</h2>
+  <p><b style="color:#fff">Private operator content.</b> Facebook and Instagram business pages only.
+     Static graphics. No face, no video. Three posts a week, Monday / Wednesday / Friday.
+     Scheduled through <b style="color:#fff">Buffer</b> &mdash; Meta Business Suite is legacy.</p>
+  <p style="margin-bottom:8px">Four pillars, rotate them:</p>
+  <table>
+    <tbody>
+      <tr><td style="width:190px"><b style="color:#fff">Contractor Education</b></td><td>Teach something they can use today</td></tr>
+      <tr><td><b style="color:#fff">Industry Insights</b></td><td>What's changing in their trade or market</td></tr>
+      <tr><td><b style="color:#fff">Service Explainers</b></td><td>Plain-English what we do and why it works</td></tr>
+      <tr><td><b style="color:#fff">Quiet Proof</b></td><td>Results, no chest-beating</td></tr>
+    </tbody>
+  </table>
+  <p>The goal is legitimacy and sales support &mdash; <b style="color:#fff">not audience growth.</b>
+     Quiet money and privacy. We're not building a personal brand.</p>
+
+  <h2>Proof Points</h2>
+  <div class="proof">
+    <p style="margin:0 0 8px"><b>Kutsch Tree Service</b> &mdash; 25 website leads in June, month one after the rebuild.</p>
+    <p style="margin:0"><b>Fuehrer Painting LLC</b> &mdash; qualified lead within 24 hours of site launch.</p>
+  </div>
+  <p style="font-size:13px;color:#8a8a8a">Use these instead of adjectives. Real numbers beat "results-driven" every time.</p>
+
+  <h2>Document Footer</h2>
+  <p style="margin-top:0;font-size:13px;color:#8a8a8a">Goes on every client-facing deliverable, verbatim.</p>
+  <div class="footer-box">
+    URBAN NICHE CO. | urbannicheco.com | (515) 344-4053<br>
+    Marketing built for contractors. Let's build something.
+  </div>
+
+  <footer>
+    URBAN NICHE CO. | urbannicheco.com | (515) 344-4053 &mdash;
+    Marketing built for contractors. Let's build something.
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.sw').forEach(sw => {
+    sw.addEventListener('click', async () => {
+      const hex = sw.dataset.hex;
+      try { await navigator.clipboard.writeText(hex); } catch(e) {}
+      const hx = sw.querySelector('.hx');
+      const original = hx.textContent;
+      hx.textContent = 'copied';
+      hx.classList.add('copied');
+      setTimeout(() => { hx.textContent = original; hx.classList.remove('copied'); }, 1100);
+    });
+  });
+</script>
+</body>
+</html>
