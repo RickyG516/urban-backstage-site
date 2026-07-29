@@ -1,0 +1,4 @@
+# urbanbackstage.com -- internal staging + Sales OS cockpit for Urban Niche Co.
+# Nothing on this domain is ever for public indexing.
+User-agent: *
+Disallow: /
