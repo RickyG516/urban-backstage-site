@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Verticals Library | Urban Backstage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --dark: #0f0f0f;
@@ -36,7 +39,7 @@
     background: var(--charcoal);
     border-bottom: 1px solid #2a2a2a;
     position: sticky;
-    top: 0;
+    top: 56px;
   }
   input[type="search"] {
     width: 100%;
@@ -79,9 +82,35 @@
     color: #666;
     font-size: 12px;
   }
+
+  /* -- shared backstage nav -- */
+  .ub-nav{display:flex;align-items:center;gap:8px;padding:0 28px;height:56px;
+          background:#0f0f0f;border-bottom:1px solid #262626;position:sticky;top:0;z-index:60}
+  .ub-brand{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;
+            letter-spacing:.14em;color:#fff;text-decoration:none;white-space:nowrap;margin-right:16px}
+  .ub-brand span{color:#e36b1e}
+  .ub-links{display:flex;gap:4px}
+  .ub-links a{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:13px;
+              color:#9a9a9a;text-decoration:none;padding:8px 14px;border-radius:6px;
+              transition:color .12s,background .12s}
+  .ub-links a:hover{color:#fff;background:#1a1a1a}
+  .ub-links a.active{color:#e36b1e;background:rgba(227,107,30,.12)}
+  .ub-flag{margin-left:auto;font-size:10px;letter-spacing:.12em;color:#5a5a5a;
+           border:1px solid #2a2a2a;padding:4px 10px;border-radius:99px;white-space:nowrap}
 </style>
 </head>
 <body>
+<nav class="ub-nav">
+  <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
+  <div class="ub-links">
+    <a href="/">Home</a>
+    <a href="/sales-ops/workspace/">Workspace</a>
+    <a href="/demo/">Demos</a>
+    <a href="/verticals/" class="active">Verticals</a>
+  </div>
+  <span class="ub-flag">INTERNAL &middot; NOT INDEXED</span>
+</nav>
+
 <header>
   <h1>Verticals Library</h1>
   <p class="sub">Generic industry landing page templates &mdash; UNC is contractor-only; these are parked, not in active use. Internal only, never indexed.</p>
