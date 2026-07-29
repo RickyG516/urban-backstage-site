@@ -39,3 +39,19 @@ A security runbook was accidentally published here on 2026-07-29 by a wholesale 
 
 GitHub Pages from `main`, root folder. Custom domain via `CNAME`. Pushes go live in
 roughly 30–60 seconds.
+
+## Pushing (read this if a "unpushed commits" warning nags you)
+
+Push through the `origin` remote — `git push origin main`.
+
+Do **not** push by spelling out the URL (`git push https://<token>@github.com/... main`).
+That works, and the commits really do land on GitHub, but it does **not** update the
+`origin/main` remote-tracking ref. Anything comparing `origin/main..HEAD` — including the
+session's git-check hook — then reports phantom unpushed commits forever, even though
+everything is safely pushed.
+
+If refs have already drifted, resync without touching the remote URL:
+
+```
+git fetch <url> "+refs/heads/main:refs/remotes/origin/main"
+```
