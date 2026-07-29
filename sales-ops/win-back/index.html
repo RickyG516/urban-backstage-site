@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+
+  <!-- GHOST PAGE — do not index -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nositelinkssearchbox" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <title>Win-Back Cockpit — UNC Sales Ops</title>
+  <meta name="description" content="Internal sales operations cockpit. Not for public use." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+
+  <main class="cockpit" data-cockpit="win-back" role="application" aria-label="Win-Back Cockpit">
+
+    <!-- ===== HUD ===== -->
+    <header class="hud" role="banner">
+      <div class="hud__brand">
+        <a href="/sales-ops/" class="hud__logo" style="text-decoration:none">Urban Niche<span>.</span></a>
+        <div class="hud__cockpit-name">Win-Back · v1</div>
+      </div>
+
+      <div class="hud__center">
+        <div class="rep-selector">
+          <span class="rep-selector__label">Rep</span>
+          <select id="rep-select" class="rep-selector__select" aria-label="Active rep"></select>
+        </div>
+        <div class="hud__stat" title="Call duration — auto-starts on first branch click">
+          <span class="hud__stat-label">Time</span>
+          <span id="call-timer" class="hud__stat-value">00:00</span>
+        </div>
+        <div class="hud__stat" title="Dials logged today (resets at midnight local)">
+          <span class="hud__stat-label">Dials</span>
+          <span id="dial-count" class="hud__stat-value hud__stat-value--accent">0</span>
+          <span id="dial-cap"></span>
+        </div>
+        <button id="variant-mode" class="variant-mode-btn" data-mode="auto" title="Toggle opener variant assignment between AUTO (round-robin) and MANUAL (pick yourself)">AUTO</button>
+      </div>
+
+      <div class="hud__right">
+        <div id="sync-status" class="hud__sync" data-status="local" title="Click the sync button to generate a Cowork command for HubSpot updates.">
+          <span class="hud__sync-dot"></span>
+          <span id="sync-status-text">Local Only</span>
+        </div>
+        <div class="hud__sync-badge">
+          <button id="sync-toggle" class="hud__icon-btn" title="Sync unsynced calls to HubSpot via Cowork batch" aria-label="Sync to HubSpot">📤</button>
+          <span id="sync-badge" class="sync-badge" hidden>0</span>
+        </div>
+        <button id="audio-toggle" class="hud__icon-btn" title="Toggle audio cues" aria-label="Toggle audio">🔊</button>
+        <button id="stats-toggle" class="hud__icon-btn" title="Today's stats" aria-label="Stats">📊</button>
+        <button id="csv-export" class="hud__icon-btn" title="Download today's calls as CSV" aria-label="Export CSV">⬇</button>
+      </div>
+    </header>
+
+    <!-- ===== STAGE ===== -->
+    <div class="main">
+      <div class="col-script">
+        <div class="screen-lbl" id="screen-lbl-el">Win-Back</div>
+        <section id="screen-stage" class="screen active" data-screen="start" aria-live="polite">
+          <div class="script-panel"><div class="script-panel__line">Loading cockpit…</div></div>
+        </section>
+      </div>
+      <div class="col-right">
+        <div id="prospect-card" class="prospect-card" hidden></div>
+        <div id="queue-banner" class="queue-banner" hidden></div>
+        <div class="call-notes-panel" id="call-notes-panel" hidden>
+          <div class="call-notes-panel__lbl">Call Notes</div>
+          <textarea id="call-notes" class="notes-area" placeholder="Key details, objections, follow-up timing — saved per contact as you type."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="foot" role="contentinfo">
+      <div class="foot__left">
+        <button id="nav-back" class="action-btn" aria-label="Back (Esc)">← Back</button>
+        <button id="nav-restart" class="action-btn" aria-label="Start over (Space)">↻ Start Over</button>
+      </div>
+      <div class="foot__divider"></div>
+      <div id="outcome-buttons" class="foot__outcomes" hidden aria-label="Log call outcome"></div>
+    </footer>
+
+    <!-- ===== STATS DRAWER ===== -->
+    <aside id="stats-drawer" class="drawer" aria-hidden="true" aria-label="Session stats">
+      <div class="drawer__head">
+        <div class="drawer__title">Session Stats</div>
+        <button class="hud__icon-btn" aria-label="Close stats"
+          onclick="document.getElementById('stats-drawer').classList.remove('open')">✕</button>
+      </div>
+      <div id="stats-body" class="drawer__body"></div>
+    </aside>
+
+    <!-- ===== SYNC MODAL ===== -->
+    <div id="sync-modal" class="sync-modal" role="dialog" aria-label="Sync to HubSpot via Cowork">
+      <div class="sync-modal__box">
+        <div class="sync-modal__head">
+          <div>
+            <span class="sync-modal__title">Sync to HubSpot via Cowork</span>
+            <span class="sync-modal__count" id="sync-count">0</span>
+          </div>
+          <button class="hud__icon-btn" data-sync-close aria-label="Close">✕</button>
+        </div>
+        <div class="sync-modal__body">
+          <div class="sync-modal__instructions">
+            <b>1.</b> Click <b>Copy to clipboard</b>. &nbsp; <b>2.</b> Open the Cowork browser extension. &nbsp; <b>3.</b> Paste and run. &nbsp; <b>4.</b> When Cowork finishes, come back and click <b>Mark all synced</b> to clear the queue.
+            <br><br>
+            Every captured field is in the command: outcome, duration, branch path, opener variant, notes verbatim, callback window, follow-up task timing, custom property updates, pipeline stage move. Nothing dropped.
+          </div>
+          <textarea id="sync-text" class="sync-modal__text" readonly aria-label="Cowork command"></textarea>
+        </div>
+        <div class="sync-modal__foot">
+          <div class="sync-modal__foot-left">Portal: 245833525 · na2 · Owner ID linked from reps.json</div>
+          <div class="sync-modal__foot-right">
+            <button class="action-btn" data-sync-mark>Mark all synced</button>
+            <button class="action-btn action-btn--primary" data-sync-copy>📋 Copy to clipboard</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- removed brand-stamp --><div class="brand-stamp" style="display:none">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+
+  <script src="/sales-ops/shared/nav-shell.js?v=39" defer></script>
+  <script src="/sales-ops/shared/cockpit-shell.js?v=50" defer></script>
+  <script src="/sales-ops/win-back/content.js?v=40" defer></script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

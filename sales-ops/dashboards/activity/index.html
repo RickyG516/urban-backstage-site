@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Activity Dashboard — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="dash">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Activity</h1>
+          <p class="dash__sub">All logged calls across every cockpit. Pulled from localStorage. Sync queue command pushes to HubSpot.</p>
+        </div>
+        <div class="dash__filters">
+          <button class="dash__filter-btn active" data-range="today">Today</button>
+          <button class="dash__filter-btn" data-range="week">Week</button>
+          <button class="dash__filter-btn" data-range="month">Month</button>
+          <button class="dash__filter-btn" data-range="all">All Time</button>
+        </div>
+      </div>
+      <div class="dash__grid">
+        <div class="dash__card"><div class="dash__card-label">Total Calls</div><div class="dash__card-value" id="stat-total">0</div><div class="dash__card-trend" id="stat-total-trend">—</div></div>
+        <div class="dash__card"><div class="dash__card-label">HOT</div><div class="dash__card-value" id="stat-hot">0</div><div class="dash__card-trend">Booked / qualified</div></div>
+        <div class="dash__card"><div class="dash__card-label">WARM</div><div class="dash__card-value" id="stat-warm">0</div><div class="dash__card-trend">Callback pending</div></div>
+        <div class="dash__card"><div class="dash__card-label">Connect Rate</div><div class="dash__card-value" id="stat-connect">0%</div><div class="dash__card-trend">Reached vs. dialed</div></div>
+        <div class="dash__card"><div class="dash__card-label">Conversion</div><div class="dash__card-value" id="stat-conv">0%</div><div class="dash__card-trend">HOT+WARM of all dials</div></div>
+        <div class="dash__card"><div class="dash__card-label">Avg Duration</div><div class="dash__card-value" id="stat-avg">0s</div><div class="dash__card-trend">Per call (seconds)</div></div>
+        <div class="dash__card"><div class="dash__card-label">Unsynced</div><div class="dash__card-value" id="stat-unsynced">0</div><div class="dash__card-trend">Click 📤 in any cockpit</div></div>
+        <div class="dash__card"><div class="dash__card-label">Cockpits Used</div><div class="dash__card-value" id="stat-cockpits">0</div><div class="dash__card-trend">Distinct cockpits</div></div>
+      </div>
+      <div class="dash__section">
+        <div class="dash__section-title">Recent calls</div>
+        <div id="activity-list"></div>
+      </div>
+    </section>
+    <div id="goal-host"></div>
+    <div class="brand-stamp">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <script>
+    let cachedStats = null;
+    let currentRange = 'week';
+    let currentView = 'individual';
+
+    // ── LOCAL STATS ENGINE — reads unc_cockpit_call_log_* from localStorage ──
+    const HOT_CODES  = new Set(['HOT','BOOKED','CLOSED_WON','FOLLOW_UP_BOOKED','PROPOSAL_REQUESTED']);
+    const WARM_CODES = new Set(['WARM','INFO_SENT']);
+    const COLD_CODES = new Set(['COLD','COLD-GK','WRG','DNC','VOICEMAIL','WRONG_NUMBER','GATEKEEPER','PARK']);
+    function allLocalCalls() {
+      const out = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('unc_cockpit_call_log_')) {
+          try { out.push(...JSON.parse(localStorage.getItem(k))); } catch(e) {}
+        }
+      }
+      return out.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+    }
+    function filterByRange(calls, range) {
+      const now = Date.now();
+      const cutoff = range === 'today' ? new Date().setHours(0,0,0,0) :
+                     range === 'week'  ? now - 7*86400000 :
+                     range === 'month' ? now - 30*86400000 : 0;
+      return cutoff ? calls.filter(c => new Date(c.timestamp).getTime() >= cutoff) : calls;
+    }
+    function computeStats(calls) {
+      const byRep = {};
+      const byVariant = {};
+      let dur = 0, durCount = 0;
+      for (const c of calls) {
+        const hot  = HOT_CODES.has(c.outcome_code);
+        const warm = WARM_CODES.has(c.outcome_code);
+        const conn = !COLD_CODES.has(c.outcome_code) && !!c.outcome_code;
+        if (!byRep[c.rep_name||'unknown']) byRep[c.rep_name||'unknown'] = {total:0,hot:0,warm:0,connected:0};
+        byRep[c.rep_name||'unknown'].total++;
+        if (hot) byRep[c.rep_name||'unknown'].hot++;
+        if (warm) byRep[c.rep_name||'unknown'].warm++;
+        if (conn) byRep[c.rep_name||'unknown'].connected++;
+        const v = c.opener_variant_used || 'default';
+        if (!byVariant[v]) byVariant[v] = {total:0,hot:0,warm:0,cold:0};
+        byVariant[v].total++;
+        if (hot) byVariant[v].hot++;
+        else if (warm) byVariant[v].warm++;
+        else byVariant[v].cold++;
+        if (c.duration_seconds > 0) { dur += c.duration_seconds; durCount++; }
+      }
+      const total = calls.length;
+      const hot   = calls.filter(c => HOT_CODES.has(c.outcome_code)).length;
+      const warm  = calls.filter(c => WARM_CODES.has(c.outcome_code)).length;
+      const connected = calls.filter(c => !COLD_CODES.has(c.outcome_code) && !!c.outcome_code).length;
+      return {
+        total, hot, warm, connected,
+        connectRate: total ? Math.round(connected/total*100) : 0,
+        convRate:    total ? Math.round((hot+warm)/total*100) : 0,
+        avgDuration: durCount ? Math.round(dur/durCount) : 0,
+        byRep, byVariant
+      };
+    }
+    function loadStats(range, view) {
+      currentRange = range || currentRange;
+      currentView  = view  || currentView;
+      const repId = (() => { try { return JSON.parse(localStorage.getItem('unc_cockpit_current_rep_id') || 'null') || ''; } catch(e){ return ''; } })();
+      let calls = allLocalCalls();
+      calls = filterByRange(calls, currentRange);
+      if (currentView === 'individual' && repId) calls = calls.filter(c => c.rep_id === repId);
+      const stats = computeStats(calls);
+      const unsynced = calls.filter(c => !c.synced).length;
+      cachedStats = { ok: true, stats: { ...stats, byRep: stats.byRep }, recent: calls.slice(0,50), unsynced };
+      render(cachedStats);
+    }
+    function loadGoals() { /* goals not yet configured — placeholder */ }
+
+    function renderGoal(goal) {
+      const host = document.getElementById('goal-host');
+      if (!host || !goal) return;
+      const pct = Math.min(100, Math.round((goal.current_value / goal.target_value) * 100));
+      host.innerHTML = `
+        <div class="dash__card" style="border-color:${goal.achieved ? '#22c55e' : 'var(--color-accent)'};margin-top:1.5rem">
+          <div class="dash__card-label">TEAM GOAL ${goal.achieved ? '🎉 ACHIEVED' : ''}</div>
+          <div class="dash__card-value" style="font-size:1.2rem">${goal.label}</div>
+          <div style="margin:0.75rem 0;background:var(--color-dark-3);border-radius:20px;height:8px;overflow:hidden">
+            <div style="height:100%;width:${pct}%;background:${goal.achieved ? '#22c55e' : 'var(--color-accent)'};border-radius:20px;transition:width 0.5s"></div>
+          </div>
+          <div class="dash__card-trend">${goal.current_value} / ${goal.target_value} — ${goal.reward}</div>
+        </div>`;
+    }
+
+    function render(data) {
+      if (!data || !data.ok) {
+        document.getElementById('stat-total').textContent = '—';
+        ['stat-hot','stat-warm','stat-connect','stat-conv','stat-avg','stat-unsynced','stat-cockpits'].forEach(id => {
+          const el = document.getElementById(id); if (el) el.textContent = '—';
+        });
+        const list = document.getElementById('activity-list');
+        if (list) list.innerHTML = '<div class="dash__empty"><div class="dash__empty-icon">📞</div><div class="dash__empty-title">No calls logged yet</div><div>Open a cockpit and log an outcome to see activity here.</div></div>';
+        return;
+      }
+      const s = data.stats;
+      document.getElementById('stat-total').textContent = s.total;
+      document.getElementById('stat-hot').textContent = s.hot;
+      document.getElementById('stat-warm').textContent = s.warm;
+      document.getElementById('stat-connect').textContent = s.connectRate + '%';
+      document.getElementById('stat-conv').textContent = s.convRate + '%';
+      document.getElementById('stat-avg').textContent = s.avgDuration + 's';
+      document.getElementById('stat-unsynced').textContent = cachedStats.unsynced || 0;
+      document.getElementById('stat-cockpits').textContent = Object.keys(s.byRep || {}).length;
+      document.getElementById('stat-total-trend').textContent = currentRange === 'today' ? 'Today' : currentRange === 'week' ? 'Past 7 days' : currentRange === 'month' ? 'Past 30 days' : 'All time';
+
+      const list = document.getElementById('activity-list');
+      if (!data.recent || !data.recent.length) {
+        list.innerHTML = '<div class="dash__empty"><div class="dash__empty-icon">📞</div><div class="dash__empty-title">No calls logged yet</div><div>Open a cockpit and log an outcome. Activity surfaces here in real time.</div></div>';
+        return;
+      }
+      list.innerHTML = `<table class="activity-table"><thead><tr><th>When</th><th>Cockpit</th><th>Business</th><th>Outcome</th><th>Duration</th><th>Rep</th></tr></thead><tbody>` +
+        data.recent.map(c => `<tr><td>${new Date(c.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td><td>${c.cockpit || '—'}</td><td>${c.business_name || '—'}</td><td><b style="color:${['HOT','BOOKED','CLOSED_WON'].includes(c.outcome_code)?'#22c55e':['WARM','PROPOSAL_REQUESTED'].includes(c.outcome_code)?'#facc15':'inherit'}">${c.outcome_code}</b></td><td>${c.duration_seconds ? c.duration_seconds + 's' : '—'}</td><td>${c.rep_name || '—'}</td></tr>`).join('') +
+        `</tbody></table>`;
+    }
+
+    // Range selector wiring
+    document.querySelectorAll('[data-range]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-range]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadStats(btn.dataset.range, currentView);
+      });
+    });
+
+    // View selector
+    document.querySelectorAll('[data-view]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-view]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadStats(currentRange, btn.dataset.view);
+      });
+    });
+
+    // Initial load
+    loadStats('week', 'individual');
+    loadGoals();
+    // Refresh every 30 seconds
+    setInterval(() => loadStats(currentRange, currentView), 30000);
+
+  </script>
+</body>
+</html>

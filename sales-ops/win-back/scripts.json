@@ -1,0 +1,34 @@
+{
+  "_version": "3.0",
+  "_last_updated": "2026-06-15",
+  "intro": {
+    "default": "Hey {first_name}, {rep_name} from Urban Niche — been a while since we worked on {business_name}. Quick reason I'm calling: I'm not pitching you anything today. Genuinely curious how things have been going since we stopped. Got 2 minutes?",
+    "training_note": "The fastest way to get a former client to hang up is to sound like you're going to sell them something. Open with pure curiosity. No agenda in your voice, no agenda in reality. Mean it."
+  },
+  "diagnostic": {
+    "script": "Real talk — when we stopped working together, what was the actual reason? I'm not asking to defend anything. I just want to understand. Be straight with me.",
+    "training_note": "Shut up after this question. Let the silence work. Whatever they say is valuable — it's either fixable or it's intel on what to do differently next time.",
+    "listen_for": [
+      "Budget — 'it was too expensive' → Ask: where's {business_name} revenue-wise now versus when we were working together? Frame any restart around ROI, not price.",
+      "Results — 'we didn't see ROI' → Ask what metric they were watching and what they expected. SEO takes 90+ days to compound — if they canceled in month 1, the expectation was never set right.",
+      "Communication — 'we felt out of the loop' → Most fixable reason. Show them exactly what the Monday update looks like now. Offer to walk through a sample.",
+      "External — 'business slowed down / seasonal' → Easiest re-activation. Ask where {business_name} is now and what the next busy season looks like."
+    ]
+  },
+  "learning_capture": {
+    "script": "That's genuinely helpful — and that one's on us. If I told you we've specifically fixed [the issue they named] and I can show you what that looks like for {business_name} in 5 minutes, would that change anything?",
+    "training_note": "Only say this if the issue is actually fixable and you have evidence. Don't promise what you can't deliver. If you can't address what they said, say so — 'that's fair, I don't have a great answer for that' lands better than a weak deflection."
+  },
+  "reengagement_soft": {
+    "script": "No pressure at all. But if you're ever open to a 15-minute conversation about where things stand — on our end and yours — I'd love to reconnect. Want me to send over a quick update on what's changed since you left?",
+    "training_note": "A written update they can read at their pace is lower friction than scheduling a call. Get permission to send it. That's the win from this call if nothing else moves."
+  },
+  "reengagement_hard": {
+    "script": "Here's what I'd actually propose — restart [service] for {business_name}, but with [specific improvement based on why they left]. Investment is [price]. I can have everything back up and running by [specific day]. Are you open to giving it another run?",
+    "training_note": "Only use the hard close if they gave you a clear, fixable reason AND showed genuine interest during the diagnostic. Don't force the hard close on someone who hasn't opened the door."
+  },
+  "last_ask": {
+    "script": "Honestly — when's the right time to revisit this? Three months, six months? I'll set a reminder and reach back out then. Or if you'd rather I don't, just say so and I'm gone for good. No hard feelings either way.",
+    "training_note": "Always give them the clean out. 'Gone for good' removes pressure and counterintuitively makes them more likely to say 'no, check back in a few months.' It works because it respects their decision."
+  }
+}

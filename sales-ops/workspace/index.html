@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- GHOST PAGE — do not index -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nositelinkssearchbox" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <title>Workspace — UNC Sales OS</title>
+  <meta name="description" content="Internal sales operations workspace. Not for public use." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap">
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <style>
+    /* v3-design */
+    :root {
+      --bg: #0d0d0d; --panel: #141414; --panel2: #1c1c1c; --border: #2a2a2a;
+      --text: #ececec; --dim: #8f8f8f; --accent: #e36b1e; --accent-soft: rgba(227,107,30,.13);
+      --accent-glow: rgba(227,107,30,.45); --green: #22c55e;
+      --rail-w: 66px; --strip-w: 54px; --head-h: 48px; --drawer-w: 500px; --intel-w: 0px;
+      --font-head: 'Montserrat', -apple-system, sans-serif;
+      --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(227,107,30,.05), transparent 60%), var(--bg);
+      color: var(--text); font: 13px/1.5 var(--font-body);
+      display: grid; grid-template-rows: var(--head-h) 1fr;
+      grid-template-columns: var(--rail-w) 1fr var(--intel-w) var(--strip-w);
+      grid-template-areas: "head head head head" "rail stage intel strip";
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: #2e2e2e; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    button { font-family: var(--font-body); }
+
+    /* ============ HEADER — glass ============ */
+    header {
+      grid-area: head; display: flex; align-items: center; gap: 14px; padding: 0 16px;
+      background: rgba(15,15,15,.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border); z-index: 50;
+    }
+    .brand { font-family: var(--font-head); font-weight: 800; font-size: 14.5px; letter-spacing: .2px; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+    .brand::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); animation: pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 3px var(--accent-glow); } }
+    .brand small { color: var(--dim); font-family: var(--font-body); font-weight: 600; margin-left: 2px; }
+    #mode-name { font-family: var(--font-head); color: var(--accent); font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: 1.1px; white-space: nowrap; padding-left: 14px; border-left: 1px solid var(--border); }
+    #ws-rep { background: var(--panel2) !important; }
+
+    #stage-strip { display: none; align-items: center; gap: 5px; margin-left: auto; }
+    #stage-strip.on { display: flex; }
+    .seg { width: 28px; height: 9px; border-radius: 5px; background: var(--panel2); border: 1px solid var(--border); transition: all .25s; }
+    .seg.done { background: var(--accent-soft); border-color: rgba(227,107,30,.4); }
+    .seg.now  { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+    .seg.won  { background: var(--green); border-color: var(--green); box-shadow: 0 0 10px rgba(34,197,94,.5); }
+    #stage-label { font-size: 11px; font-weight: 600; color: var(--dim); margin-left: 5px; white-space: nowrap; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+
+    .head-actions { display: flex; gap: 6px; margin-left: 14px; align-items: center; }
+    .head-btn {
+      background: var(--panel2); border: 1px solid var(--border); color: var(--text);
+      border-radius: 8px; padding: 5px 11px; font-size: 12px; cursor: pointer; white-space: nowrap;
+      transition: all .13s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .head-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .head-btn kbd { font-size: 9.5px; color: var(--dim); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+
+    /* ============ RAILS (shared) ============ */
+    nav#rail, aside#strip {
+      background: linear-gradient(180deg, var(--panel) 0%, #101010 100%);
+      display: flex; flex-direction: column; align-items: center; padding: 10px 0 14px; gap: 3px; overflow-y: auto;
+    }
+    nav#rail { grid-area: rail; border-right: 1px solid var(--border); }
+    aside#strip { grid-area: strip; border-left: 1px solid var(--border); }
+    nav#rail::-webkit-scrollbar { display: none; }
+    aside#strip::-webkit-scrollbar { width: 4px; }
+    aside#strip::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 2px; }
+    aside#strip::-webkit-scrollbar-track { background: transparent; }
+    .strip-btn { position: relative; }
+    .strip-btn::after {
+      content: attr(data-name); position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%);
+      background: #1c1c1c; border: 1px solid var(--border); color: var(--text); font-size: 11px; font-weight: 600;
+      padding: 4px 9px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .12s; z-index: 60;
+    }
+    .strip-btn:hover::after { opacity: 1; }
+    .sys-wrap { position: relative; }
+    .sys-wrap #sys-menu {
+      display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 80;
+      background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 6px; min-width: 175px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+    .sys-wrap.open #sys-menu { display: block; }
+    .sys-menu__item {
+      display: flex; align-items: center; gap: 9px; width: 100%; text-align: left;
+      background: transparent; border: 0; color: var(--text); font-size: 12.5px; padding: 8px 10px;
+      border-radius: 7px; cursor: pointer;
+    }
+    .sys-menu__item:hover { background: var(--panel2); color: var(--accent); }
+    .rail-group {
+      font-family: var(--font-head); font-size: 7.5px; font-weight: 800; letter-spacing: 1.6px;
+      color: #5a5a5a; text-transform: uppercase; margin: 9px 0 4px; user-select: none;
+    }
+    .rail-btn, .strip-btn {
+      border: 1px solid transparent; background: transparent; color: var(--dim); cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; transition: all .13s;
+    }
+    .rail-btn { width: 52px; height: 48px; border-radius: 12px; gap: 1px; font-size: 17px; }
+    .rail-btn small { font-family: var(--font-head); font-size: 7.5px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
+    .strip-btn { width: 40px; height: 40px; border-radius: 11px; font-size: 16px; }
+    .rail-btn:hover, .strip-btn:hover { color: var(--text); background: var(--panel2); transform: translateY(-1px); }
+    .rail-btn.active, .strip-btn.active { color: var(--accent); background: var(--accent-soft); border-color: rgba(227,107,30,.35); }
+    .rail-btn.active::before {
+      content: ''; position: absolute; left: -7px; top: 10px; bottom: 10px; width: 3px;
+      border-radius: 3px; background: var(--accent); box-shadow: 0 0 8px var(--accent-glow);
+    }
+    .strip-btn.active::before {
+      content: ''; position: absolute; right: -7px; top: 8px; bottom: 8px; width: 3px;
+      border-radius: 3px; background: var(--accent); box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* ============ STAGE ============ */
+    #stage { grid-area: stage; position: relative; background: transparent; padding: 0; }
+    #stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; opacity: 1; transition: opacity .16s ease; }
+    #stage iframe.loading { opacity: 0; }
+    #stage-loading {
+      position: absolute; inset: 0; display: flex; flex-direction: column; gap: 10px;
+      align-items: center; justify-content: center; color: var(--dim); font-size: 12.5px;
+      z-index: 2; pointer-events: none; opacity: 0; transition: opacity .15s;
+    }
+    #stage-loading.on { opacity: 1; }
+    #stage-loading::before {
+      content: ''; width: 26px; height: 26px; border-radius: 50%;
+      border: 2.5px solid var(--border); border-top-color: var(--accent); animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ============ DRAWER + BACKDROP ============ */
+    #drawer-backdrop {
+      position: fixed; inset: var(--head-h) var(--strip-w) 0 var(--rail-w);
+      background: rgba(0,0,0,.45); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+      opacity: 0; pointer-events: none; transition: opacity .18s; z-index: 39;
+    }
+    #drawer-backdrop.on { opacity: 1; pointer-events: auto; }
+    #drawer {
+      position: fixed; top: var(--head-h); right: var(--strip-w); bottom: 0;
+      width: var(--drawer-w); max-width: calc(100vw - var(--rail-w) - var(--strip-w));
+      background: var(--panel); border-left: 1px solid var(--border);
+      border-top-left-radius: 16px;
+      transform: translateX(calc(100% + var(--strip-w))); transition: transform .2s cubic-bezier(.3,.9,.35,1);
+      display: flex; flex-direction: column; z-index: 40; box-shadow: -24px 0 60px rgba(0,0,0,.6);
+      overflow: hidden;
+    }
+    #drawer.open { transform: translateX(0); }
+    #drawer.wide { width: min(900px, calc(100vw - var(--rail-w) - var(--strip-w))); }
+    #drawer.max { width: calc(100vw - var(--rail-w) - var(--strip-w)); border-top-left-radius: 0; }
+    .drawer-head {
+      height: 42px; flex: none; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 14px; border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, var(--panel2), var(--panel));
+    }
+    .drawer-head b { font-family: var(--font-head); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+    .drawer-head .hint { color: var(--dim); font-size: 11px; margin-left: 10px; font-weight: 400; }
+    .drawer-head button { background: none; border: 0; color: var(--dim); font-size: 15px; cursor: pointer; transition: color .12s; }
+    .drawer-head button:hover { color: var(--accent); }
+    #drawer iframe { flex: 1; width: 100%; border: 0; background: var(--bg); }
+
+    /* ============ COMMAND PALETTE ============ */
+    #palette {
+      position: fixed; inset: 0; z-index: 80; display: none;
+      align-items: flex-start; justify-content: center; padding-top: 12vh;
+      background: rgba(0,0,0,.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    }
+    #palette.on { display: flex; }
+    .pal-box {
+      width: min(560px, 92vw); background: var(--panel); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(227,107,30,.15);
+    }
+    #pal-input {
+      width: 100%; background: var(--panel2); border: 0; outline: 0; color: var(--text);
+      font: 15px var(--font-body); padding: 14px 16px; border-bottom: 1px solid var(--border);
+    }
+    #pal-list { max-height: 46vh; overflow-y: auto; padding: 6px; }
+    .pal-item {
+      display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: 9px;
+      cursor: pointer; color: var(--text); font-size: 13px;
+    }
+    .pal-item .k { margin-left: auto; font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: .5px; }
+    .pal-item.sel, .pal-item:hover { background: var(--accent-soft); color: var(--accent); }
+
+    /* ============ INSTANT TOOLTIPS ============ */
+    #tip {
+      position: fixed; z-index: 90; background: #232323; color: var(--text);
+      border: 1px solid var(--border); border-left: 3px solid var(--accent);
+      border-radius: 8px; padding: 5px 10px; font-size: 11.5px; white-space: pre-line;
+      pointer-events: none; opacity: 0; transform: translateY(2px);
+      transition: opacity .08s ease, transform .08s ease; max-width: 250px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.6);
+    }
+    #tip.on { opacity: 1; transform: translateY(0); }
+
+    /* ============ SHORTCUT POPOVER ============ */
+    #keys-pop {
+      position: fixed; top: 54px; right: 62px; z-index: 60; background: var(--panel2);
+      border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; display: none;
+      box-shadow: 0 14px 36px rgba(0,0,0,.65); font-size: 12px; min-width: 240px;
+    }
+    #keys-pop.on { display: block; }
+    #keys-pop h4 { font-family: var(--font-head); font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: var(--accent); margin-bottom: 8px; }
+    #keys-pop div { display: flex; justify-content: space-between; gap: 18px; padding: 2.5px 0; color: var(--dim); }
+    #keys-pop kbd { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 11px; color: var(--text); font-family: inherit; }
+
+
+    /* ============ INTEL PANEL (right column) ============ */
+    body.intel-open { --intel-w: 304px; }
+    aside#intel {
+      grid-area: intel; display: none; flex-direction: column; overflow: hidden;
+      background: linear-gradient(180deg, var(--panel) 0%, #101010 100%);
+      border-left: 1px solid var(--border);
+    }
+    body.intel-open aside#intel { display: flex; }
+    .intel-scroll { flex: 1; overflow-y: auto; padding: 10px 12px 20px; display: flex; flex-direction: column; gap: 12px; }
+    .intel-sec { background: var(--panel2); border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px; }
+    .intel-sec h5 {
+      font-family: var(--font-head); font-size: 9px; font-weight: 800; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .intel-sec h5 .sub { color: var(--dim); font-weight: 600; letter-spacing: .3px; text-transform: none; font-size: 9.5px; }
+    .intel-kill { font-family: var(--font-head); font-size: 12.5px; font-weight: 700; line-height: 1.45; color: var(--text); }
+    .intel-kill.dim { color: var(--dim); font-weight: 600; }
+    .intel-window { margin-top: 8px; font-size: 11px; color: var(--dim); line-height: 1.5; }
+    .intel-window b { color: var(--text); }
+    .intel-storm { margin-top: 8px; font-size: 11px; line-height: 1.5; color: var(--text);
+      background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.3); border-radius: 8px; padding: 7px 9px; }
+    .intel-storm b { color: #ef4444; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+    .intel-trade-pick { width: 100%; margin-top: 9px; background: var(--bg); color: var(--dim); border: 1px solid var(--border);
+      border-radius: 7px; padding: 4px 7px; font-size: 11px; cursor: pointer; }
+    .lt-name { font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--text); }
+    .lt-row { display: flex; align-items: center; gap: 7px; margin-top: 5px; flex-wrap: wrap; }
+    .lt-badge { font-family: var(--font-head); font-size: 9px; font-weight: 800; letter-spacing: .8px; border-radius: 999px; padding: 2px 8px;
+      background: var(--bg); border: 1px solid var(--border); color: var(--dim); }
+    .lt-badge.hot { color: var(--green); border-color: rgba(34,197,94,.4); }
+    .lt-badge.warm { color: var(--accent); border-color: rgba(227,107,30,.45); }
+    .lt-badge.cold { color: #ef4444; border-color: rgba(239,68,68,.4); }
+    .lt-date { font-size: 10.5px; color: var(--dim); }
+    .lt-notes { margin-top: 6px; font-size: 11px; color: var(--dim); line-height: 1.5; max-height: 74px; overflow-y: auto; }
+    .lt-search { display: flex; gap: 6px; margin-top: 9px; }
+    .lt-search input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 7px;
+      color: var(--text); font: 11px var(--font-body); padding: 5px 8px; outline: none; }
+    .lt-search input:focus { border-color: var(--accent); }
+    .lt-search button { background: var(--panel); border: 1px solid var(--border); color: var(--dim); border-radius: 7px;
+      padding: 0 9px; cursor: pointer; font-size: 12px; }
+    .lt-search button:hover { color: var(--accent); border-color: var(--accent); }
+    .cb-item { border: 1px solid var(--border); border-radius: 9px; padding: 8px 9px; margin-bottom: 7px; cursor: pointer; transition: all .12s; background: var(--bg); }
+    .cb-item:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .cb-item:last-child { margin-bottom: 0; }
+    .cb-top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+    .cb-biz { font-family: var(--font-head); font-size: 11.5px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cb-window { font-size: 9.5px; color: var(--accent); font-weight: 700; white-space: nowrap; }
+    .cb-meta { font-size: 10.5px; color: var(--dim); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cb-empty { font-size: 11px; color: var(--dim); text-align: center; padding: 8px 0; }
+    .intel-refresh { background: none; border: 0; color: var(--dim); cursor: pointer; font-size: 11px; padding: 0; }
+    .intel-refresh:hover { color: var(--accent); }
+
+    /* ============ MOBILE ============ */
+    @media (max-width: 900px) {
+      body { grid-template-rows: var(--head-h) 50px 1fr 50px; grid-template-columns: 1fr;
+             grid-template-areas: "head" "rail" "stage" "strip"; }
+      nav#rail, aside#strip { flex-direction: row; overflow-x: auto; padding: 0 8px; border: 0; }
+      nav#rail { border-bottom: 1px solid var(--border); }
+      aside#strip { border-top: 1px solid var(--border); }
+      .rail-group { display: none; }
+      #drawer, #drawer.wide { right: 0; width: 100vw; max-width: 100vw; border-radius: 0; }
+      #drawer-backdrop { inset: var(--head-h) 0 0 0; }
+      #stage-strip { display: none !important; }
+      aside#intel, #intel-btn { display: none !important; }
+      .brand small, .head-btn kbd { display: none; }
+    }
+    .lt-history-head { font-size: 9px; letter-spacing: .08em; color: var(--dim); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px; }
+    .lt-touch-row { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-top: 1px solid var(--border); font-size: 11px; }
+    .lt-notes-inline { color: var(--dim); font-size: 10px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    /* ---- Search result cards ---- */
+    .sr-card { border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px; margin-bottom: 6px; background: var(--bg); }
+    .sr-card:last-child { margin-bottom: 0; }
+    .sr-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .sr-biz { font-family: var(--font-head); font-size: 11.5px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+    .sr-meta { font-size: 10px; color: var(--dim); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sr-load { background: var(--panel); border: 1px solid var(--accent); color: var(--accent); border-radius: 6px; padding: 2px 7px; cursor: pointer; font-size: 10px; font-weight: 700; font-family: var(--font-head); white-space: nowrap; flex-shrink: 0; transition: all .12s; }
+    .sr-load:hover { background: var(--accent); color: #000; }
+    .sr-loaded { color: var(--green) !important; border-color: rgba(34,197,94,.5) !important; }
+    /* ---- Load Dials ---- */
+    .ld-controls { display: flex; gap: 6px; margin-top: 8px; }
+    .ld-controls select { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; color: var(--text); font: 11px var(--font-body); padding: 5px 8px; outline: none; cursor: pointer; }
+    .ld-go { background: var(--accent); border: 0; color: #000; border-radius: 7px; padding: 5px 12px; cursor: pointer; font: 700 11px var(--font-head); letter-spacing: .05em; white-space: nowrap; transition: opacity .12s; }
+    .ld-go:hover { opacity: .85; }
+    .ld-go:disabled { opacity: .45; cursor: default; }
+    .ld-status { font-size: 11px; color: var(--dim); margin-top: 8px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">Urban Niche<span>.</span><small>Workspace</small></div>
+    <div id="mode-name">Cold Call</div>
+    <select id="ws-rep" title="Active rep — applies to every cockpit and tool"
+      style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:12px;cursor:pointer"></select>
+
+    <div id="stage-strip" title="Live pipeline stage of the prospect on screen">
+      <!-- 8 segments injected -->
+      <span id="stage-label"></span>
+    </div>
+
+    <div class="head-actions">
+      <button class="head-btn" data-tool="pipeline" title="Pipeline board (Alt+B)">📊 Pipeline</button>
+      <button class="head-btn" data-tool="map" title="Territory map">🗺</button>
+      <button class="head-btn" id="intel-btn" title="Intel panel — trade killshot, last touch, callback queue (Alt+I)">🧠 Intel</button>
+      <div id="live-pill" title="Checking worker…" style="display:flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--border);border-radius:999px;padding:4px 11px;font-size:10.5px;font-weight:700;letter-spacing:.8px;cursor:pointer;font-family:var(--font-head)">
+        <span id="live-dot" style="width:8px;height:8px;border-radius:50%;background:#666"></span>
+        <span id="live-text" style="color:var(--dim)">…</span>
+      </div>
+      <button class="head-btn" id="pal-btn" title="Command palette (Ctrl+K)">🔍 <kbd>Ctrl K</kbd></button>
+      <button class="head-btn" id="keys-btn" title="Keyboard shortcuts">⌨</button>
+      <div class="sys-wrap">
+        <button class="head-btn" id="sys-btn" title="Guide, Academy, Demo Hub, Roadmap, Library">🧰 System ▾</button>
+        <div id="sys-menu"></div>
+      </div>
+      <a class="head-btn" href="/sales-ops/hub/" title="Classic hub" style="text-decoration:none">🏠</a>
+      <button class="head-btn" data-tool="settings" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <nav id="rail" aria-label="Cockpit modes"></nav>
+
+  <main id="stage">
+    <div id="stage-loading" class="on">Loading cockpit…</div>
+    <iframe id="stage-frame" title="Active cockpit" src="about:blank"></iframe>
+  </main>
+
+  <aside id="intel" aria-label="Live intel">
+    <div class="intel-scroll">
+      <div class="intel-sec" id="intel-trade">
+        <h5>🎯 Trade Killshot <span class="sub" id="intel-trade-name">—</span></h5>
+        <div class="intel-kill dim" id="intel-kill">Watching the cockpit for a prospect…</div>
+        <div class="intel-window" id="intel-callwin"></div>
+        <div class="intel-storm" id="intel-storm" style="display:none"></div>
+        <select class="intel-trade-pick" id="intel-trade-pick" title="Override auto-detected trade">
+          <option value="">Auto-detect trade</option>
+        </select>
+      </div>
+      <div class="intel-sec" id="intel-lt">
+        <h5>🔍 Prospect Search <span class="sub" id="lt-status"></span></h5>
+        <div class="lt-search">
+          <input id="lt-q" placeholder="Name / business / phone…" autocomplete="off" />
+          <button id="lt-go" title="Search HubSpot — shows results you can load into the active cockpit">Search</button>
+        </div>
+        <div id="lt-body" style="margin-top:8px"><div class="cb-empty">Search to load a prospect, or auto-loads from cockpit phone.</div></div>
+      </div>
+      <div class="intel-sec" id="intel-ld">
+        <h5>📞 Load Dials</h5>
+        <div style="font-size:10.5px;color:var(--dim);line-height:1.45">Pull a prioritized queue from HubSpot — callbacks first, then WARMs, then fresh.</div>
+        <div class="ld-controls">
+          <select id="ld-count">
+            <option value="10">10 dials</option>
+            <option value="15" selected>15 dials</option>
+            <option value="20">20 dials</option>
+          </select>
+          <button id="ld-go" class="ld-go">Load Queue →</button>
+        </div>
+        <div id="ld-status" class="ld-status" style="display:none"></div>
+      </div>
+      <div class="intel-sec" id="intel-cb">
+        <h5>☎️ Callback Queue <button class="intel-refresh" id="cb-refresh" title="Refresh callbacks">↻ refresh</button></h5>
+        <div id="cb-list"><div class="cb-empty">Loading…</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <aside id="strip" aria-label="Tools"></aside>
+
+  <div id="drawer-backdrop"></div>
+  <section id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div><b id="drawer-title">Tool</b><span class="hint" id="drawer-hint"></span></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button id="drawer-expand" aria-label="Expand drawer" title="Cycle size: normal → wide → max">⛶</button>
+        <button id="drawer-close" aria-label="Close (Esc)">✕</button>
+      </div>
+    </div>
+    <iframe id="drawer-frame" title="Tool panel" src="about:blank"></iframe>
+  </section>
+
+  <div id="keys-pop">
+    <h4>Shortcuts</h4>
+    <div><span>Command palette</span><kbd>Ctrl + K</kbd></div>
+    <div><span>Switch mode</span><kbd>Alt + 1–9, 0, -</kbd></div>
+    <div><span>Objections</span><kbd>Alt + O</kbd></div>
+    <div><span>Pricing</span><kbd>Alt + P</kbd></div>
+    <div><span>Snippets</span><kbd>Alt + S</kbd></div>
+    <div><span>Voicemails</span><kbd>Alt + V</kbd></div>
+    <div><span>Trade ref</span><kbd>Alt + T</kbd></div>
+    <div><span>Email launcher</span><kbd>Alt + E</kbd></div>
+    <div><span>Callbacks</span><kbd>Alt + C</kbd></div>
+    <div><span>Lookup</span><kbd>Alt + L</kbd></div>
+    <div><span>Commission</span><kbd>Alt + M</kbd></div>
+    <div><span>Pipeline board</span><kbd>Alt + B</kbd></div>
+    <div><span>Intel panel</span><kbd>Alt + I</kbd></div>
+    <div><span>Close drawer</span><kbd>Esc</kbd></div>
+  </div>
+
+  <div id="palette" role="dialog" aria-label="Command palette">
+    <div class="pal-box">
+      <input id="pal-input" placeholder="Jump to a cockpit, tool, or dashboard…" autocomplete="off" />
+      <div id="pal-list"></div>
+    </div>
+  </div>
+
+  <div id="tip" role="tooltip"></div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ---------- CONFIG ---------- */
+    var MODES = [
+      { id: 'cold-call',            label: 'Cold',    icon: '📞', name: 'Cold Call',        group: 'Hunt' },
+      { id: 'niche-outreach',       label: 'Niche',   icon: '🧭', name: 'Niche Outreach' },
+      { id: 're-engage',            label: 'ReEng',   icon: '♻️', name: 'Re-Engage' },
+      { id: 'inbound',              label: 'Inbnd',   icon: '📥', name: 'Inbound',          group: 'Close' },
+      { id: 'discovery',            label: 'Disco',   icon: '🔍', name: 'Discovery' },
+      { id: 'service-pitch',        label: 'Pitch',   icon: '🎯', name: 'Service Pitch' },
+      { id: 'proposal-walkthrough', label: 'Prop',    icon: '📄', name: 'Proposal' },
+      { id: 'renewal-upsell',       label: 'Renew',   icon: '🔁', name: 'Renewal / Upsell', group: 'Grow' },
+      { id: 'referral-ask',         label: 'Refer',   icon: '🤝', name: 'Referral Ask' },
+      { id: 'win-back',             label: 'WinBk',   icon: '🧲', name: 'Win-Back' },
+      { id: 'onboarding-kickoff',   label: 'Kick',    icon: '🚀', name: 'Onboarding' }
+    ];
+
+    var TOOLS = [
+      { id: 'objections', group: 'Call',      path: '/sales-ops/tools/objections/',      icon: '🛡',  name: 'Objections',      key: 'o' },
+      { id: 'pricing',         path: '/sales-ops/tools/pricing/',         icon: '💰', name: 'Pricing',         key: 'p' },
+      { id: 'snippets',        path: '/sales-ops/tools/snippets/',        icon: '✂️', name: 'Snippets',        key: 's' },
+      { id: 'voicemails',      path: '/sales-ops/tools/voicemails/',      icon: '🎙', name: 'Voicemails',      key: 'v' },
+      { id: 'trade-reference', path: '/sales-ops/tools/trade-reference/', icon: '🏗', name: 'Trade Reference', key: 't' },
+      { id: 'email-launcher', group: 'Act',  path: '/sales-ops/tools/email-launcher/',  icon: '💌', name: 'Email Launcher',  key: 'e' },
+      { id: 'callbacks',       path: '/sales-ops/tools/callbacks/',       icon: '⏰', name: 'Callbacks',       key: 'c' },
+      { id: 'prospect-lookup', path: '/sales-ops/tools/prospect-lookup/', icon: '🔎', name: 'Prospect Lookup', key: 'l' },
+      { id: 'commission',      path: '/sales-ops/tools/commission/',      icon: '💵', name: 'Commission',      key: 'm' },
+      { id: 'today',           path: '/sales-ops/tools/today/',           icon: '🎯', name: 'Start My Day',    key: 'd' },
+      { id: 'pipeline', group: 'Boards',        path: '/sales-ops/dashboards/pipeline/',   icon: '📊', name: 'Pipeline Board',  key: 'b', wide: true },
+      { id: 'activity',        path: '/sales-ops/dashboards/activity/',   icon: '⚡', name: 'Activity',        key: null, wide: true },
+      { id: 'heatmap',         path: '/sales-ops/dashboards/heatmap/',    icon: '🔥', name: 'Dial Windows',    key: null, wide: true },
+      { id: 'reps',            path: '/sales-ops/dashboards/reps/',       icon: '🏆', name: 'Rep Board',       key: null, wide: true },
+      { id: 'leaderboard',     path: '/sales-ops/leaderboard/',           icon: '🥇', name: 'Leaderboard',     key: null, wide: true },
+      { id: 'map', group: 'Sys', hdr: true,  path: '/sales-ops/map/',                   icon: '🗺', name: 'Territory Map',   key: null, wide: true },
+      { id: 'guide',  hdr: true, path: '/sales-ops/guide/',               icon: '📖', name: 'Guide',           key: null, wide: true },
+      { id: 'academy', hdr: true, path: '/sales-ops/academy/',            icon: '🎓', name: 'Academy',         key: null, wide: true },
+      { id: 'demo', hdr: true,  path: '/sales-ops/demo/',                 icon: '🎬', name: 'Demo Hub',        key: null, wide: true },
+      { id: 'roadmap', hdr: true, path: '/sales-ops/roadmap/',            icon: '🗺️', name: 'Roadmap',         key: null, wide: true },
+      { id: 'library', hdr: true, path: '/library/',            icon: '📚', name: 'Library',         key: null, wide: true },
+      { id: 'settings', hdr: true, path: '/sales-ops/settings/',          icon: '⚙',  name: 'Settings',        key: null }
+    ];
+
+    var STAGES = [
+      'Prospect Identified', 'First Touch Sent', 'Follow-Up In Progress', 'Call Scheduled',
+      'Pricing Sent', 'Proposal Out', 'Closed Won', 'Closed Lost / Not Now'
+    ];
+
+    var repParam = new URLSearchParams(location.search).get('rep') || '';
+    var stageFrame  = document.getElementById('stage-frame');
+    var stageLoad   = document.getElementById('stage-loading');
+    var drawer      = document.getElementById('drawer');
+    var drawerFrame = document.getElementById('drawer-frame');
+    var drawerTitle = document.getElementById('drawer-title');
+    var drawerHint  = document.getElementById('drawer-hint');
+    var modeName    = document.getElementById('mode-name');
+    var rail        = document.getElementById('rail');
+    var strip       = document.getElementById('strip');
+    var currentMode = null, currentTool = null;
+
+    /* ---------- BUILD RAILS ---------- */
+    MODES.forEach(function (m, i) {
+      if (m.group) {
+        var g = document.createElement('div'); g.className = 'rail-group'; g.textContent = m.group;
+        rail.appendChild(g);
+      }
+      var b = document.createElement('button');
+      b.className = 'rail-btn'; b.dataset.mode = m.id;
+      var hk = i < 9 ? String(i + 1) : (i === 9 ? '0' : '-');
+      b.title = m.name + '  (Alt+' + hk + ')';
+      b.innerHTML = '<span>' + m.icon + '</span><small>' + m.label + '</small>';
+      b.addEventListener('click', function () { openMode(m.id); });
+      rail.appendChild(b);
+    });
+
+    TOOLS.forEach(function (t) {
+      if (t.hdr) return; // Sys tools live in the header System menu now
+      if (t.group) {
+        var g = document.createElement('div'); g.className = 'rail-group'; g.textContent = t.group;
+        strip.appendChild(g);
+      }
+      var b = document.createElement('button');
+      b.className = 'strip-btn'; b.dataset.tool = t.id;
+      b.title = t.name + (t.key ? '  (Alt+' + t.key.toUpperCase() + ')' : '');
+      b.dataset.name = t.name + (t.key ? ' · Alt+' + t.key.toUpperCase() : '');
+      b.textContent = t.icon;
+      b.addEventListener('click', function () { toggleTool(t.id); });
+      strip.appendChild(b);
+    });
+
+    /* System menu (header) — everything that used to crowd the bottom of the strip */
+    (function () {
+      var menu = document.getElementById('sys-menu');
+      if (!menu) return;
+      TOOLS.filter(function (t) { return t.hdr && t.id !== 'settings' && t.id !== 'map'; }).forEach(function (t) {
+        var b = document.createElement('button');
+        b.className = 'sys-menu__item';
+        b.innerHTML = '<span>' + t.icon + '</span>' + t.name;
+        b.addEventListener('click', function () { toggleTool(t.id); menu.parentElement.classList.remove('open'); });
+        menu.appendChild(b);
+      });
+      var btn = document.getElementById('sys-btn');
+      btn.addEventListener('click', function (e) { e.stopPropagation(); menu.parentElement.classList.toggle('open'); });
+      document.addEventListener('click', function () { menu.parentElement.classList.remove('open'); });
+    })();
+
+    document.querySelectorAll('.head-btn[data-tool]').forEach(function (b) {
+      b.addEventListener('click', function () { toggleTool(b.dataset.tool); });
+    });
+
+    /* ---------- MODE SWITCH ---------- */
+    function openMode(id) {
+      if (currentMode === id) return;
+      currentMode = id;
+      var m = MODES.filter(function (x) { return x.id === id; })[0];
+      modeName.textContent = m ? m.name : id;
+      document.querySelectorAll('.rail-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.mode === id);
+      });
+      stageLoad.classList.add('on');
+      stageFrame.classList.add('loading');
+      var url = '/sales-ops/' + id + '/' + (repParam ? '?rep=' + encodeURIComponent(repParam) : '');
+      stageFrame.src = url;
+      try { localStorage.setItem('unc_ws_mode', id); } catch (e) {}
+    }
+
+    stageFrame.addEventListener('load', function () {
+      stageLoad.classList.remove('on');
+      stageFrame.classList.remove('loading');
+      injectKeys(stageFrame);
+      injectSkin(stageFrame);
+      injectLinkRouter(stageFrame);
+      applyRep(stageFrame);
+      guardStage();
+      startStageWatch();
+    });
+
+    /* ---------- TOOL DRAWER ---------- */
+    function toggleTool(id) {
+      if (currentTool === id && drawer.classList.contains('open')) { closeDrawer(); return; }
+      var t = TOOLS.filter(function (x) { return x.id === id; })[0];
+      if (!t) return;
+      currentTool = id;
+      drawerTitle.textContent = t.name;
+      drawerHint.textContent = t.key ? 'Alt+' + t.key.toUpperCase() + ' toggles · Esc closes' : 'Esc closes';
+      drawer.classList.remove('max');
+      drawer.classList.toggle('wide', !!t.wide);
+      var url = t.path + (repParam ? '?rep=' + encodeURIComponent(repParam) : '');
+      if (drawerFrame.dataset.loaded !== url) { drawerFrame.src = url; drawerFrame.dataset.loaded = url; }
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.getElementById('drawer-backdrop').classList.add('on');
+      markStrip();
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      document.getElementById('drawer-backdrop').classList.remove('on');
+      drawer.setAttribute('aria-hidden', 'true');
+      currentTool = null; markStrip();
+    }
+    function markStrip() {
+      document.querySelectorAll('.strip-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.tool === currentTool && drawer.classList.contains('open'));
+      });
+    }
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-expand').addEventListener('click', function () {
+      if (drawer.classList.contains('max')) { drawer.classList.remove('max', 'wide'); }
+      else if (drawer.classList.contains('wide')) { drawer.classList.remove('wide'); drawer.classList.add('max'); }
+      else { drawer.classList.add('wide'); }
+    });
+
+    drawerFrame.addEventListener('load', function () { injectKeys(drawerFrame); injectSkin(drawerFrame, true); injectLinkRouter(drawerFrame); applyRep(drawerFrame); });
+
+    /* ---------- KEYBOARD ---------- */
+    function isTyping(e) {
+      var t = e.target;
+      if (!t) return false;
+      var tag = (t.tagName || '').toLowerCase();
+      return tag === 'input' || tag === 'textarea' || tag === 'select' || t.isContentEditable;
+    }
+    function handleKey(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { palOpen(); e.preventDefault(); e.stopPropagation(); return; }
+      if (isTyping(e) && e.key !== 'Escape') return;
+      if (e.key === 'Escape' && drawer.classList.contains('open')) { closeDrawer(); e.stopPropagation(); return; }
+      if (!e.altKey || e.ctrlKey || e.metaKey) return;
+      var k = e.key.toLowerCase();
+      var mi = -1;
+      if (k >= '1' && k <= '9') mi = parseInt(k, 10) - 1;
+      else if (k === '0') mi = 9;
+      else if (k === '-') mi = 10;
+      if (mi >= 0 && MODES[mi]) { openMode(MODES[mi].id); e.preventDefault(); return; }
+      var t = TOOLS.filter(function (x) { return x.key === k; })[0];
+      if (t) { toggleTool(t.id); e.preventDefault(); }
+    }
+    document.addEventListener('keydown', handleKey);
+
+    function injectKeys(frame) {
+      try {
+        var doc = frame.contentDocument;
+        if (!doc || doc.__uncWsKeys) return;
+        doc.__uncWsKeys = true;
+        doc.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && drawer.classList.contains('open') && frame === drawerFrame) {
+            closeDrawer(); e.stopPropagation(); e.preventDefault(); return;
+          }
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { palOpen(); e.preventDefault(); e.stopPropagation(); return; }
+          if (e.altKey && !e.ctrlKey && !e.metaKey) handleKey(e);
+        }, true);
+      } catch (err) { /* cross-origin or not ready — ignore */ }
+    }
+
+    /* ---------- LIVE STAGE STRIP ---------- */
+    var stripEl = document.getElementById('stage-strip');
+    var stageLabel = document.getElementById('stage-label');
+    var segs = [];
+    STAGES.forEach(function (s, i) {
+      var d = document.createElement('div');
+      d.className = 'seg'; d.title = s;
+      stripEl.insertBefore(d, stageLabel);
+      segs.push(d);
+    });
+
+    var watchTimer = null;
+    function startStageWatch() {
+      if (watchTimer) clearInterval(watchTimer);
+      watchTimer = setInterval(scanStage, 2500);
+      scanStage();
+    }
+    function scanStage() {
+      var found = null;
+      try {
+        var doc = stageFrame.contentDocument;
+        if (doc) {
+          var card = doc.getElementById('prospect-card');
+          var banner = doc.getElementById('queue-banner');
+          var txt = ((card && card.textContent) || '') + ' ' + ((banner && banner.textContent) || '');
+          for (var i = STAGES.length - 1; i >= 0; i--) {
+            if (txt.indexOf(STAGES[i]) !== -1) { found = i; break; }
+          }
+        }
+      } catch (e) { /* ignore */ }
+      if (found === null) { stripEl.classList.remove('on'); return; }
+      stripEl.classList.add('on');
+      segs.forEach(function (d, i) {
+        d.className = 'seg' +
+          (i < found ? ' done' : '') +
+          (i === found ? (found === 6 ? ' now won' : ' now') : '');
+      });
+      stageLabel.textContent = STAGES[found];
+    }
+
+
+
+    /* ---------- WORKSPACE REP (single source of truth, pushed into every frame) ---------- */
+    var wsRepSel = document.getElementById('ws-rep');
+    var wsRep = repParam || (function(){ try { return localStorage.getItem('unc_ws_rep') || ''; } catch(e){ return ''; } })();
+    fetch('/sales-ops/shared/reps.json', { cache: 'no-cache' }).then(function(r){ return r.json(); }).then(function(d){
+      (d.reps || []).filter(function(r){ return r.active; }).forEach(function(r){
+        var o = document.createElement('option'); o.value = r.id; o.textContent = '👤 ' + r.display_name;
+        wsRepSel.appendChild(o);
+      });
+      if (wsRep) wsRepSel.value = wsRep;
+      wsRep = wsRepSel.value;
+      applyRep(stageFrame);
+    }).catch(function(){ wsRepSel.style.display = 'none'; });
+    wsRepSel.addEventListener('change', function(){
+      wsRep = wsRepSel.value;
+      try { localStorage.setItem('unc_ws_rep', wsRep); } catch(e){}
+      applyRep(stageFrame); applyRep(drawerFrame);
+    });
+    function applyRep(frame) {
+      if (!wsRep) return;
+      try {
+        var sel = frame.contentDocument && frame.contentDocument.getElementById('rep-select');
+        if (sel && sel.value !== wsRep) {
+          sel.value = wsRep;
+          sel.dispatchEvent(new frame.contentWindow.Event('change', { bubbles: true }));
+        }
+      } catch (e) { /* ignore */ }
+    }
+
+    /* ---------- LINK ROUTER — nothing escapes the page ---------- */
+    function routeUrl(href) {
+      var u; try { u = new URL(href, location.origin); } catch(e){ return false; }
+      if (u.origin !== location.origin) { window.open(u.href, '_blank', 'noopener'); return true; }
+      var p = u.pathname.replace(/\/index\.html$/, '');
+      if (!/\/$/.test(p)) p += '/';
+      if (p.indexOf('/sales-ops/') !== 0) { window.open(u.href, '_blank', 'noopener'); return true; }
+      var mode = MODES.filter(function(m){ return '/sales-ops/' + m.id + '/' === p; })[0];
+      if (mode) { openMode(mode.id); return true; }
+      var tool = TOOLS.filter(function(t){ return t.path === p; })[0];
+      if (tool) { toggleTool(tool.id); return true; }
+      if (p === '/sales-ops/' || p === '/sales-ops/workspace/') return true;
+      currentTool = null;
+      drawerTitle.textContent = p.split('/').filter(Boolean).pop().replace(/-/g, ' ');
+      drawerHint.textContent = 'Esc closes';
+      drawer.classList.add('wide');
+      drawerFrame.src = u.href; drawerFrame.dataset.loaded = u.href;
+      drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false');
+      document.getElementById('drawer-backdrop').classList.add('on');
+      return true;
+    }
+    function injectLinkRouter(frame) {
+      try {
+        var doc = frame.contentDocument;
+        if (!doc || doc.__uncWsLinks) return;
+        doc.__uncWsLinks = true;
+        doc.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href]');
+          if (!a) return;
+          var href = a.getAttribute('href');
+          if (!href || href.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(href)) return;
+          if (routeUrl(a.href)) { e.preventDefault(); e.stopPropagation(); }
+        }, true);
+      } catch (err) { /* ignore */ }
+    }
+
+    /* ---------- LOAD GUARD — JS-driven escapes get bounced back ---------- */
+    function guardStage() {
+      var p; try { p = stageFrame.contentWindow.location.pathname; } catch(e){ return; }
+      p = p.replace(/\/index\.html$/, ''); if (!/\/$/.test(p)) p += '/';
+      var expected = '/sales-ops/' + currentMode + '/';
+      if (p === expected) return;
+      var mode = MODES.filter(function(m){ return '/sales-ops/' + m.id + '/' === p; })[0];
+      if (mode) {
+        currentMode = mode.id; modeName.textContent = mode.name;
+        document.querySelectorAll('.rail-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.mode === mode.id); });
+        try { localStorage.setItem('unc_ws_mode', mode.id); } catch(e){}
+        return;
+      }
+      var escaped = null;
+      try { escaped = stageFrame.contentWindow.location.href; } catch(e){}
+      var m = currentMode; currentMode = null; openMode(m);
+      if (escaped) routeUrl(escaped);
+    }
+
+    /* ---------- INSTANT TOOLTIPS (100ms, replaces slow native title) ---------- */
+    var tip = document.getElementById('tip');
+    var tipTimer = null;
+    function bindTips(root) {
+      (root || document).querySelectorAll('[title]').forEach(function (el) {
+        if (el.closest('#drawer') || el.dataset.tip) return;
+        el.dataset.tip = el.getAttribute('title');
+        el.removeAttribute('title');
+      });
+    }
+    document.addEventListener('mouseover', function (e) {
+      var el = e.target.closest('[data-tip]');
+      clearTimeout(tipTimer);
+      if (!el) { tip.classList.remove('on'); return; }
+      tipTimer = setTimeout(function () {
+        tip.textContent = el.dataset.tip;
+        var r = el.getBoundingClientRect();
+        tip.style.top = Math.min(window.innerHeight - 60, r.top + r.height / 2 - 14) + 'px';
+        tip.style.left = 'auto'; tip.style.right = 'auto';
+        if (r.left > window.innerWidth / 2) tip.style.right = (window.innerWidth - r.left + 8) + 'px';
+        else tip.style.left = (r.right + 8) + 'px';
+        tip.classList.add('on');
+      }, 100);
+    });
+    document.addEventListener('mouseout', function () { clearTimeout(tipTimer); tip.classList.remove('on'); });
+    document.addEventListener('click', function () { tip.classList.remove('on'); });
+    bindTips(document);
+
+    /* ---------- EMBED SKIN — injected into cockpit iframes so the center
+       matches the workspace chrome. Standalone pages are untouched. ---------- */
+    var EMBED_CSS = [
+      ':root { --hud-height: 52px; }',
+      '.hud__brand { display: none !important; }',
+      '.hud { padding: 0 1rem !important; }',
+      '.main { padding: 1rem 1.15rem 0 !important; gap: 1rem !important; }',
+      '.script-panel { padding: 2.1rem 2.4rem !important; border-radius: 14px !important; }',
+      '.script-panel__line { font-size: 1.07em !important; line-height: 1.62 !important; }',
+      '.prospect-card, .call-notes-panel, .queue-banner { border-radius: 13px !important; }',
+      '.foot { padding-left: .9rem !important; padding-right: .9rem !important; }',
+      '#global-nav-wrap { display: none !important; }',
+      '.rep-selector { display: none !important; }',
+      '#cmd-palette-trigger, #mobile-cmd-trigger, #mobile-nav-toggle, #cmd-palette { display: none !important; }',
+      '#ft-tools-btn, .ft-panel, [id^=\"ft-panel\"] { display: none !important; }',
+      '.trade-box { display: none !important; }',
+      'body { padding-top: 0 !important; }'
+    ].join('\n');
+    var DRAWER_CSS = [
+      'html, body { overflow: auto !important; height: auto !important; min-height: 100%; }',
+      'body { padding-bottom: 48px !important; }',
+      '.cockpit { height: auto !important; min-height: 100vh; overflow: visible !important; }',
+      '.main, .dash, .dash__body, section { overflow: visible !important; height: auto !important; max-height: none !important; }'
+    ].join('\n');
+    var FONT_CSS = "h1, h2, h3, h4, .drawer-title, .dash__header { font-family: 'Montserrat', -apple-system, sans-serif !important; letter-spacing: .3px; }";
+    function injectSkin(frame, isDrawer) {
+      try {
+        var doc = frame.contentDocument;
+        if (!doc || doc.getElementById('unc-embed-skin')) return;
+        if ((frame.src || '').indexOf('/sales-ops/') === -1 &&
+            ((frame.contentWindow.location.pathname || '').indexOf('/sales-ops/') !== 0)) return;
+        var fl = doc.createElement('link');
+        fl.rel = 'stylesheet';
+        fl.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap';
+        (doc.head || doc.documentElement).appendChild(fl);
+        var s = doc.createElement('style');
+        s.id = 'unc-embed-skin';
+        s.textContent = EMBED_CSS + '\n' + FONT_CSS + (isDrawer ? '\n' + DRAWER_CSS : '');
+        (doc.head || doc.documentElement).appendChild(s);
+      } catch (e) { /* ignore */ }
+    }
+
+
+
+    /* ---------- LIVE STATUS — worker + HubSpot pipeline heartbeat ---------- */
+    var WORKER_URL = 'https://unc-sales-os-sync.ricky-a17.workers.dev/';
+    var WORKER_KEY = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})();
+    var liveDot = document.getElementById('live-dot');
+    var liveText = document.getElementById('live-text');
+    var livePill = document.getElementById('live-pill');
+    function setLive(state, detail) {
+      if (state === 'live') {
+        liveDot.style.background = 'var(--green)';
+        liveDot.style.boxShadow = '0 0 8px rgba(34,197,94,.6)';
+        liveText.textContent = 'LIVE'; liveText.style.color = 'var(--green)';
+        livePill.dataset.tip = 'Connected — every outcome you log syncs to HubSpot in real time.' + (detail ? '\n' + detail : '');
+      } else if (state === 'off') {
+        liveDot.style.background = '#ef4444';
+        liveDot.style.boxShadow = '0 0 8px rgba(239,68,68,.55)';
+        liveText.textContent = 'LOCAL'; liveText.style.color = '#ef4444';
+        livePill.dataset.tip = 'Worker unreachable — FAILSAFE ACTIVE.\nCalls keep logging to this browser. Use the cockpit 📤 sync button to generate the Cowork command and push everything to HubSpot manually.';
+      } else {
+        liveDot.style.background = '#666'; liveDot.style.boxShadow = 'none';
+        liveText.textContent = '…'; liveText.style.color = 'var(--dim)';
+        livePill.dataset.tip = 'Checking worker connection…';
+      }
+    }
+    function checkLive() {
+      setLive('checking');
+      var ctrl = new AbortController();
+      var to = setTimeout(function () { ctrl.abort(); }, 6000);
+      fetch(WORKER_URL, { signal: ctrl.signal, cache: 'no-store', headers: { 'x-unc-key': WORKER_KEY } })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          clearTimeout(to);
+          if (d && d.ok) setLive('live', 'Service: ' + (d.service || 'sales-os-sync') + ' v' + (d.version || '?') + (d.kv ? ' · KV bound' : ''));
+          else setLive('off');
+        })
+        .catch(function () { clearTimeout(to); setLive('off'); });
+    }
+    livePill.addEventListener('click', checkLive);
+    checkLive();
+    setInterval(checkLive, 30000);
+
+    /* ---------- COMMAND PALETTE (Ctrl+K) ---------- */
+    var pal = document.getElementById('palette');
+    var palInput = document.getElementById('pal-input');
+    var palList = document.getElementById('pal-list');
+    var palItems = [], palSel = 0;
+    function palData() {
+      return MODES.map(function (m) { return { label: m.name, icon: m.icon, kind: 'Cockpit', run: function () { openMode(m.id); } }; })
+        .concat(TOOLS.map(function (t) { return { label: t.name, icon: t.icon, kind: 'Panel', run: function () { toggleTool(t.id); } }; }));
+    }
+    function palOpen() { pal.classList.add('on'); palInput.value = ''; palRender(''); palInput.focus(); }
+    function palClose() { pal.classList.remove('on'); }
+    function palRender(q) {
+      q = q.toLowerCase();
+      palItems = palData().filter(function (i) { return i.label.toLowerCase().indexOf(q) !== -1; });
+      palSel = 0;
+      palList.innerHTML = palItems.map(function (i, n) {
+        return '<div class="pal-item' + (n === 0 ? ' sel' : '') + '" data-n="' + n + '">' +
+               '<span>' + i.icon + '</span><span>' + i.label + '</span><span class="k">' + i.kind + '</span></div>';
+      }).join('') || '<div class="pal-item">No matches</div>';
+    }
+    function palMark() {
+      palList.querySelectorAll('.pal-item').forEach(function (el, n) { el.classList.toggle('sel', n === palSel); });
+      var sel = palList.querySelector('.pal-item.sel');
+      if (sel) sel.scrollIntoView({ block: 'nearest' });
+    }
+    palInput.addEventListener('input', function () { palRender(palInput.value); });
+    palInput.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { palSel = Math.min(palSel + 1, palItems.length - 1); palMark(); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { palSel = Math.max(palSel - 1, 0); palMark(); e.preventDefault(); }
+      else if (e.key === 'Enter') { if (palItems[palSel]) { palClose(); palItems[palSel].run(); } e.preventDefault(); }
+      else if (e.key === 'Escape') { palClose(); e.stopPropagation(); }
+    });
+    palList.addEventListener('click', function (e) {
+      var it = e.target.closest('.pal-item'); if (!it || it.dataset.n === undefined) return;
+      palClose(); palItems[+it.dataset.n].run();
+    });
+    pal.addEventListener('click', function (e) { if (e.target === pal) palClose(); });
+    document.getElementById('pal-btn').addEventListener('click', palOpen);
+    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+
+    /* ---------- SHORTCUT POPOVER ---------- */
+    var pop = document.getElementById('keys-pop');
+    document.getElementById('keys-btn').addEventListener('click', function (e) {
+      pop.classList.toggle('on'); e.stopPropagation();
+    });
+    document.addEventListener('click', function () { pop.classList.remove('on'); });
+
+    /* ---------- BOOT ---------- */
+    var saved = null;
+    try { saved = localStorage.getItem('unc_ws_mode'); } catch (e) {}
+    var valid = MODES.some(function (m) { return m.id === saved; });
+    openMode(valid ? saved : 'cold-call');
+  })();
+  </script>
+
+  <script>
+  /* ============ INTEL PANEL MODULE — self-contained, additive (v1) ============
+     Reads: #stage-frame prospect card (same-origin), #ws-rep, reps.json, live worker.
+     Touches nothing inside the main workspace engine. Remove this block + the
+     #intel aside to fully revert. */
+  (function () {
+    'use strict';
+    var WORKER = 'https://unc-sales-os-sync.ricky-a17.workers.dev';
+    var WORKER_KEY = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})(); // scoped here — first IIFE's var not accessible cross-script
+
+    /* ---- Trade intel (compact mirror of trade-reference war-room data) ---- */
+    var TI = {
+      'Roofer':             { kill: 'Storm hits, homeowner Googles, an out-of-town chaser gets the roof. That is the whole problem in one sentence — and it is fixable before the next storm.', win: 'Tue–Wed 7–7:45 AM, before crews dispatch. Budget: Jan–Mar.', storm: 'DAY 4–7 RULE: days 1–3 they are buried in triage. After day 7 chasers own search. Call day 4.' },
+      'HVAC':               { kill: 'Your phone rings off the hook two weeks a year and sits quiet the rest. Marketing is how you smooth that curve.', win: 'Shoulder season (Mar–Apr, Sep–Oct), Tue–Wed 7–8 AM or 4–5 PM. Budget: Jan–Feb + Aug.' },
+      'Plumber':            { kill: 'When a basement floods at 11 PM, the homeowner calls whoever Google shows first with 200 reviews. Reviews are the fastest fix.', win: 'Tue–Wed 9–11 AM, between emergency calls. Budget: Jan–Mar.' },
+      'Electrician':        { kill: 'CATEGORY SELL — most electricians here do zero marketing. Do not agency-compare. The category is wide open and the first one in owns it.', win: 'Tue–Wed 7–8 AM before scheduled jobs, or lunch. Budget: Jan–Mar.' },
+      'Landscaper':         { kill: 'Spring rush is coming whether you are ready or not. The guys booked out by April started marketing in January.', win: 'Nov–Feb planning season they answer. In-season: before 7 AM / after 6 PM. Budget: Dec–Feb.' },
+      'Painter':            { kill: 'A hundred painters in this market and not one doing real marketing. That is the biggest opening any trade has.', win: 'Tue–Wed early AM. Winter = interior season = receptive. Budget: Jan–Mar.' },
+      'General Contractor': { kill: 'Your sales cycle is 90 days and your follow-up is a sticky note. How many deals died in that window last year?', win: 'Tue–Thu, lunch or after 5 PM. Budget: Jan–Mar.' },
+      'Concrete':           { kill: 'CATEGORY SELL — homeowners pick in two weeks, off reviews, and nobody in this trade manages theirs. First one who does gets the driveway.', win: 'Tue–Wed 7–8 AM before pours. Rainy day = office day = best cold-call weather. Budget: Jan–Mar.' },
+      'Remodeler':          { kill: 'A $60K kitchen client studies your portfolio for three weeks before calling. Stock photos on the site = they already called someone else.', win: 'Tue–Thu mid-morning, office-based. Budget: Jan–Mar + Aug–Sep.' },
+      'Masonry':            { kill: 'Your brickwork is genuinely impressive and it is buried in a Facebook album from 2022. Nobody hiring a mason sees your best work.', win: 'Early AM in season. Nov–Mar downtime = long receptive calls.' },
+      'Insulation':         { kill: 'Rebate season drives most of your year and the rebate-curious traffic is landing on the utility site — not yours. Free to take.', win: 'Jul–Aug lull, Tue–Wed AM. Budget: Aug + Feb–Mar.' },
+      'Flooring':           { kill: 'You are the fourth quote every homeowner gets. The one they call back won it before the quote — reviews and site.', win: 'Tue–Thu mid-morning showroom hours. Budget: Jan–Feb.' },
+      'Pest Control':       { kill: 'Mice in fall, ants in spring, mosquitoes in summer — and your ads say the same thing in every season. A seasonal calendar alone beats what you run.', win: 'Tue–Wed 8–9 AM before routes. Winter = receptive. Budget: Jan–Feb.' },
+      'Pressure Washing':   { kill: 'Most visual trade that exists and the Instagram is empty. Before/after content is free money you are leaving on the driveway.', win: 'Evenings + weekends — solo operator on the wand all day. Budget: Feb–Mar.' },
+      'Tree Service':       { kill: 'A tree through a roof at 2 AM is the highest-panic search in local services. Whoever Google shows first gets it at full emergency rate.', win: 'Tue–Wed mornings. Budget: Jan–Feb.', storm: 'DAY 4–7 RULE: same as roofers — day 4–7 post-storm is when the conversation lands.' },
+      'Other':              { kill: 'Quick gut check — when somebody Googles what you do in this town, are you on page one? Because I looked before I called.', win: 'Default doctrine: Tue–Wed 7–8 AM, lunch, or 5 PM+. Budget: Jan–Mar.' }
+    };
+    var KEYWORDS = [
+      [/roof/i, 'Roofer'], [/hvac|heating|cooling|furnace|air condition/i, 'HVAC'],
+      [/plumb/i, 'Plumber'], [/electric/i, 'Electrician'], [/landscap|lawn/i, 'Landscaper'],
+      [/paint/i, 'Painter'], [/general contractor|\bgc\b/i, 'General Contractor'],
+      [/concrete/i, 'Concrete'], [/remodel/i, 'Remodeler'], [/mason/i, 'Masonry'],
+      [/insulat/i, 'Insulation'], [/floor/i, 'Flooring'], [/pest/i, 'Pest Control'],
+      [/pressure wash|power wash/i, 'Pressure Washing'], [/tree/i, 'Tree Service']
+    ];
+
+    var elKill   = document.getElementById('intel-kill');
+    var elWin    = document.getElementById('intel-callwin');
+    var elStorm  = document.getElementById('intel-storm');
+    var elTName  = document.getElementById('intel-trade-name');
+    var elPick   = document.getElementById('intel-trade-pick');
+    var elLtBody = document.getElementById('lt-body');
+    var elLtStat = document.getElementById('lt-status');
+    var elCbList = document.getElementById('cb-list');
+    if (!elKill) return;
+
+    Object.keys(TI).forEach(function (t) {
+      var o = document.createElement('option'); o.value = t; o.textContent = t; elPick.appendChild(o);
+    });
+
+    /* ---- Toggle (button + Alt+I, persisted) ---- */
+    var open = true;
+    try { open = localStorage.getItem('unc_ws_intel') !== '0'; } catch (e) {}
+    function setOpen(v) {
+      open = v;
+      document.body.classList.toggle('intel-open', open);
+      try { localStorage.setItem('unc_ws_intel', open ? '1' : '0'); } catch (e) {}
+    }
+    setOpen(open);
+    document.getElementById('intel-btn').addEventListener('click', function () { setOpen(!open); });
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey && !e.ctrlKey && !e.metaKey && e.key.toLowerCase() === 'i') {
+        var t = e.target, tag = (t && t.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || (t && t.isContentEditable)) return;
+        setOpen(!open); e.preventDefault();
+      }
+    });
+
+    /* ---- Trade render ---- */
+    var curTrade = '';
+    function renderTrade(trade) {
+      if (trade === curTrade) return;
+      curTrade = trade;
+      var d = TI[trade];
+      if (!d) {
+        elTName.textContent = '—';
+        elKill.className = 'intel-kill dim';
+        elKill.textContent = 'Watching the cockpit for a prospect…';
+        elWin.textContent = '';
+        elStorm.style.display = 'none';
+        return;
+      }
+      elTName.textContent = trade;
+      elKill.className = 'intel-kill';
+      elKill.textContent = '\u201C' + d.kill + '\u201D';
+      elWin.innerHTML = '<b>📞 Window:</b> ' + d.win;
+      if (d.storm) { elStorm.style.display = 'block'; elStorm.innerHTML = '<b>⛈ Storm rule</b>' + d.storm; }
+      else elStorm.style.display = 'none';
+    }
+    elPick.addEventListener('change', function () {
+      manualTrade = elPick.value;
+      renderTrade(manualTrade || detectFromFrame().trade);
+    });
+    var manualTrade = '';
+
+    /* ---- Frame scan: trade + phone ---- */
+    function detectFromFrame() {
+      var out = { trade: '', phone: '' };
+      try {
+        var fr = document.getElementById('stage-frame');
+        var doc = fr && fr.contentDocument;
+        if (!doc) return out;
+        var card = doc.getElementById('prospect-card');
+        var banner = doc.getElementById('queue-banner');
+        var txt = ((card && card.textContent) || '') + ' ' + ((banner && banner.textContent) || '');
+        if (!txt.trim()) return out;
+        for (var i = 0; i < KEYWORDS.length; i++) {
+          if (KEYWORDS[i][0].test(txt)) { out.trade = KEYWORDS[i][1]; break; }
+        }
+        if (!out.trade && /prospect|company|business/i.test(txt)) out.trade = 'Other';
+        var m = txt.match(/\(?\d{3}\)?[\s.\-]\d{3}[\s.\-]\d{4}/);
+        if (m) out.phone = m[0];
+      } catch (e) { /* frame not ready */ }
+      return out;
+    }
+
+    /* ---- Prospect search + last touch via live worker ---- */
+    var lastPhone = '', ltBusy = false, searchBusy = false;
+    function fmtDate(s) {
+      if (!s) return '';
+      var d = new Date(s); if (isNaN(d)) return s;
+      var days = Math.floor((Date.now() - d.getTime()) / 86400000);
+      var lbl = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return lbl + (days === 0 ? ' · today' : days === 1 ? ' · yesterday' : ' · ' + days + 'd ago');
+    }
+    function badgeClass(o) {
+      o = (o || '').toUpperCase();
+      if (['HOT', 'BOOKED', 'CLOSED_WON', 'SIGNED'].indexOf(o) !== -1) return 'hot';
+      if (['WARM', 'REF', 'PARK'].indexOf(o) !== -1) return 'warm';
+      if (['COLD', 'DNC', 'COLD-GK'].indexOf(o) !== -1) return 'cold';
+      return '';
+    }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+    /* -- Auto-detect: single last-touch card (triggered by cockpit phone scan) -- */
+    function lookupLastTouch(q, label) {
+      if (ltBusy || !q) return;
+      ltBusy = true;
+      elLtStat.textContent = 'checking…';
+      fetch(WORKER + '/search?q=' + encodeURIComponent(q) + '&limit=1', { cache: 'no-store', headers: { 'x-unc-key': WORKER_KEY } })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          ltBusy = false; elLtStat.textContent = label || '';
+          var c = d && d.ok && d.contacts && d.contacts[0];
+          if (!c) { elLtBody.innerHTML = '<div class="cb-empty">No HubSpot match for “' + esc(q) + '”.</div>'; return; }
+          var name = [c.first_name, c.last_name].filter(Boolean).join(' ');
+          elLtBody.innerHTML =
+            '<div class="lt-name">' + esc(c.business_name || name || 'Unknown') + (name && c.business_name ? ' <span style="color:var(--dim);font-weight:600">· ' + esc(name) + '</span>' : '') + '</div>' +
+            '<div class="lt-row">' +
+              (c.last_call_outcome ? '<span class="lt-badge ' + badgeClass(c.last_call_outcome) + '">' + esc(c.last_call_outcome) + '</span>' : '<span class="lt-badge">NO CALLS YET</span>') +
+              '<span class="lt-date">' + esc(fmtDate(c.last_call_date)) + '</span>' +
+            '</div>' +
+            (c.last_call_notes ? '<div class="lt-notes">' + esc(c.last_call_notes) + '</div>' : '');
+          if (c.contact_id) {
+            fetch(WORKER + '/contact/' + encodeURIComponent(c.contact_id) + '/history', { cache: 'no-store', headers: { 'x-unc-key': WORKER_KEY } })
+              .then(function (hr) { return hr.json(); })
+              .then(function (h) {
+                if (!h || !h.ok || !h.touches || !h.touches.length) return;
+                var rows = h.touches.map(function (t) {
+                  return '<div class="lt-touch-row">' +
+                    '<span class="lt-badge ' + badgeClass(t.outcome) + '">' + esc(t.outcome || '?') + '</span>' +
+                    '<span class="lt-date">' + esc(fmtDate(t.timestamp)) + '</span>' +
+                    (t.notes ? '<span class="lt-notes-inline">' + esc(t.notes.substring(0, 80)) + '</span>' : '') +
+                    '</div>';
+                }).join('');
+                elLtBody.innerHTML = elLtBody.innerHTML + '<div class="lt-history-head">LAST ' + h.touches.length + ' TOUCHES</div>' + rows;
+              })
+              .catch(function () {});
+          }
+        })
+        .catch(function () { ltBusy = false; elLtStat.textContent = 'worker offline'; });
+    }
+
+    /* -- Manual search: multi-result cards with Load button → fires UNC_LOAD_PROSPECT -- */
+    function searchProspects(q) {
+      if (searchBusy || !q) return;
+      searchBusy = true;
+      elLtStat.textContent = 'searching…';
+      elLtBody.innerHTML = '<div class="cb-empty">Searching…</div>';
+      fetch(WORKER + '/search?q=' + encodeURIComponent(q) + '&limit=5', { cache: 'no-store', headers: { 'x-unc-key': WORKER_KEY } })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          searchBusy = false; elLtStat.textContent = d.ok ? '' : 'error';
+          var contacts = (d && d.ok && d.contacts) || [];
+          if (!contacts.length) {
+            elLtBody.innerHTML = '<div class="cb-empty">No match for “' + esc(q) + '”. Try a different name or phone.</div>';
+            return;
+          }
+          elLtBody.innerHTML = contacts.map(function (c, i) {
+            var name = [c.first_name, c.last_name].filter(Boolean).join(' ');
+            var biz = c.business_name || name || 'Unknown';
+            var trade = c.trade || c.trade_type || '';
+            var meta = [trade, c.city || '', c.phone || ''].filter(Boolean).join(' · ');
+            return '<div class="sr-card" data-idx="' + i + '">' +
+              '<div class="sr-top">' +
+                '<span class="sr-biz">' + esc(biz) + '</span>' +
+                '<span style="display:flex;gap:5px;flex-shrink:0">' +
+                  '<button class="sr-load sr-queue" data-idx="' + i + '" title="Add to the active dial queue without leaving your current call">➕ Queue</button>' +
+                  '<button class="sr-load" data-idx="' + i + '" title="Queue it and jump to it now">Load →</button>' +
+                '</span>' +
+              '</div>' +
+              (meta ? '<div class="sr-meta">' + esc(meta) + '</div>' : '') +
+              (name && c.business_name ? '<div class="sr-meta">' + esc(name) + '</div>' : '') +
+              (c.last_call_outcome ? '<span class="lt-badge ' + badgeClass(c.last_call_outcome) + '" style="margin-top:4px;display:inline-block">' + esc(c.last_call_outcome) + '</span>' : '') +
+              (c.last_call_date ? '<span class="lt-date"> ' + esc(fmtDate(c.last_call_date)) + '</span>' : '') +
+            '</div>';
+          }).join('');
+          /* Attach Load + Queue button listeners */
+          contacts.forEach(function (c, i) {
+            var qbtn = elLtBody.querySelector('.sr-queue[data-idx="' + i + '"]');
+            var btn = elLtBody.querySelector('.sr-load[data-idx="' + i + '"]:not(.sr-queue)');
+            var frame = document.getElementById('stage-frame');
+            if (qbtn) qbtn.addEventListener('click', function () {
+              if (frame && frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'UNC_ADD_TO_QUEUE', prospect: c }, location.origin);
+              }
+              qbtn.textContent = '✓ Queued';
+              qbtn.classList.add('sr-loaded');
+              qbtn.disabled = true;
+            });
+            if (btn) btn.addEventListener('click', function () {
+              if (frame && frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'UNC_LOAD_PROSPECT', prospect: c }, location.origin);
+              }
+              btn.textContent = '✓ Loaded';
+              btn.classList.add('sr-loaded');
+              btn.disabled = true;
+            });
+          });
+        })
+        .catch(function () { searchBusy = false; elLtStat.textContent = 'error'; elLtBody.innerHTML = '<div class="cb-empty">Worker error — try again.</div>'; });
+    }
+
+    document.getElementById('lt-go').addEventListener('click', function () {
+      var q = document.getElementById('lt-q').value.trim();
+      if (!q) { elLtBody.innerHTML = '<div class="cb-empty">Type a name, business, or phone first.</div>'; return; }
+      searchBusy = false; // always allow a fresh manual search
+      searchProspects(q);
+    });
+    document.getElementById('lt-q').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); document.getElementById('lt-go').click(); }
+      e.stopPropagation();
+    });
+
+    /* ---- Load Dials — fetch prioritized HubSpot queue → inject into cockpit ---- */
+    (function () {
+      var elLdGo = document.getElementById('ld-go');
+      var elLdCount = document.getElementById('ld-count');
+      var elLdStatus = document.getElementById('ld-status');
+      if (!elLdGo) return;
+      elLdGo.addEventListener('click', function () {
+        var owner = currentOwner();
+        if (!owner) { elLdStatus.style.display = 'block'; elLdStatus.textContent = 'Pick a rep first.'; return; }
+        var limit = parseInt(elLdCount.value, 10) || 15;
+        elLdGo.disabled = true; elLdGo.textContent = 'Loading…';
+        elLdStatus.style.display = 'none';
+        var repId = (document.getElementById('ws-rep') && document.getElementById('ws-rep').value) || '';
+        fetch(WORKER + '/queue?limit=' + limit + '&owner_id=' + encodeURIComponent(owner) + (repId ? '&rep_id=' + encodeURIComponent(repId) : ''), { cache: 'no-store', headers: { 'x-unc-key': WORKER_KEY } })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            elLdGo.disabled = false; elLdGo.textContent = 'Load Queue →';
+            // Worker may return queue, prospects, or contacts depending on version
+            var prospects = (d && (d.queue || d.prospects || (d.ok && d.contacts))) || [];
+            if (!prospects.length) {
+              elLdStatus.style.display = 'block';
+              elLdStatus.textContent = 'No prospects returned — HubSpot pipeline may be empty for this rep.';
+              return;
+            }
+            var frame = document.getElementById('stage-frame');
+            if (frame && frame.contentWindow) {
+              frame.contentWindow.postMessage({ type: 'UNC_LOAD_QUEUE', prospects: prospects }, location.origin);
+            }
+            elLdStatus.style.display = 'block';
+            elLdStatus.textContent = '✓ ' + prospects.length + ' dials loaded into cockpit.';
+            setTimeout(function () { elLdStatus.style.display = 'none'; }, 4000);
+          })
+          .catch(function () {
+            elLdGo.disabled = false; elLdGo.textContent = 'Load Queue →';
+            elLdStatus.style.display = 'block';
+            elLdStatus.textContent = 'Worker offline — check connection.';
+          });
+      });
+    })();
+
+    /* ---- Poll the stage frame every 3s ---- */
+    setInterval(function () {
+      if (!open) return;
+      var d = detectFromFrame();
+      renderTrade(manualTrade || d.trade);
+      if (d.phone && d.phone !== lastPhone) {
+        lastPhone = d.phone;
+        lookupLastTouch(d.phone, 'auto · from cockpit');
+      }
+    }, 3000);
+
+    /* ---- Callback queue via live worker /callbacks ---- */
+    var OWNER_BY_REP = {};
+    // Hardcoded fallback so callbacks work even if reps.json fetch fails
+    var REPS_FALLBACK = { ricky: '90640722', tyler: '164794304' };
+    function initCallbackQueue(repsData) {
+      (repsData || []).forEach(function (r) { OWNER_BY_REP[r.id] = r.hubspot_owner_id || ''; });
+      if (!Object.keys(OWNER_BY_REP).length) { Object.assign(OWNER_BY_REP, REPS_FALLBACK); }
+      loadCallbacks();
+    }
+    fetch('/sales-ops/shared/reps.json', { cache: 'no-cache', credentials: 'include' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) { initCallbackQueue(d.reps); })
+      .catch(function () { initCallbackQueue(null); });
+    function currentOwner() {
+      var sel = document.getElementById('ws-rep');
+      var repId = (sel && sel.value) || '';
+      if (!repId) { try { repId = localStorage.getItem('unc_ws_rep') || ''; } catch (e) {} }
+      return OWNER_BY_REP[repId] || '';
+    }
+    var cbBusy = false;
+    function loadCallbacks() {
+      if (cbBusy) return;
+      var owner = currentOwner();
+      if (!owner) { elCbList.innerHTML = '<div class="cb-empty">Pick a rep to load callbacks.</div>'; return; }
+      cbBusy = true;
+      fetch(WORKER + '/callbacks?owner_id=' + encodeURIComponent(owner), { cache: 'no-store', headers: { 'x-unc-key': WORKER_KEY } })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          cbBusy = false;
+          if (!d || !d.ok) { elCbList.innerHTML = '<div class="cb-empty">Worker error loading callbacks.</div>'; return; }
+          var list = d.callbacks || [];
+          if (!list.length) { elCbList.innerHTML = '<div class="cb-empty">No WARM callbacks waiting. Go make some. 🔨</div>'; return; }
+          elCbList.innerHTML = list.slice(0, 8).map(function (c) {
+            var name = [c.first_name, c.last_name].filter(Boolean).join(' ');
+            return '<div class="cb-item" data-phone="' + esc(c.phone) + '" title="Click to copy phone' + (c.last_call_notes ? '\n' + esc(c.last_call_notes) : '') + '">' +
+              '<div class="cb-top"><span class="cb-biz">' + esc(c.business_name || name || 'Unknown') + '</span>' +
+              (c.callback_window ? '<span class="cb-window">' + esc(c.callback_window) + '</span>' : '') + '</div>' +
+              '<div class="cb-meta">' + esc([name, c.phone, fmtDate(c.last_call_date)].filter(Boolean).join(' · ')) + '</div>' +
+            '</div>';
+          }).join('');
+        })
+        .catch(function () { cbBusy = false; elCbList.innerHTML = '<div class="cb-empty">Worker offline — callbacks unavailable.</div>'; });
+    }
+    elCbList.addEventListener('click', function (e) {
+      var it = e.target.closest('.cb-item');
+      if (!it || !it.dataset.phone) return;
+      var ph = it.dataset.phone;
+      function done() { var b = it.querySelector('.cb-window'); it.style.borderColor = 'var(--green)'; setTimeout(function () { it.style.borderColor = ''; }, 900); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ph).then(done).catch(done);
+      else done();
+    });
+    document.getElementById('cb-refresh').addEventListener('click', loadCallbacks);
+    var wsRepEl = document.getElementById('ws-rep');
+    if (wsRepEl) wsRepEl.addEventListener('change', function () { setTimeout(loadCallbacks, 100); });
+    setInterval(function () { if (open) loadCallbacks(); }, 60000);
+  })();
+  </script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

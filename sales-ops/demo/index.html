@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>The UNC Sales OS</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --d0:#0f0f0f; --d1:#1a1a1a; --orange:#e36b1e; --white:#ffffff; --light:#f5f5f5;
+      --dim:rgba(245,245,245,0.62); --border:rgba(255,255,255,0.10);
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      background:var(--d0); color:var(--light);
+      font-family:'Open Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      line-height:1.55; -webkit-font-smoothing:antialiased;
+    }
+    .wrap{max-width:1080px;margin:0 auto;padding:3.5rem 1.5rem 4rem;}
+    h1,h2,.card__name{font-family:'Montserrat',system-ui,sans-serif;font-weight:700;}
+    .hero{border-bottom:1px solid var(--border);padding-bottom:2rem;margin-bottom:2.5rem;}
+    .hero h1{font-size:2.5rem;line-height:1.08;margin:0 0 0.75rem;color:var(--white);letter-spacing:-0.01em;}
+    .hero h1 .accent{color:var(--orange);}
+    .hero p{font-size:1.1rem;color:var(--dim);margin:0;max-width:640px;}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem;}
+    @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr;}.hero h1{font-size:2rem;}}
+    .card{
+      display:flex;flex-direction:column;text-decoration:none;
+      background:var(--d1);border:1px solid var(--border);border-radius:12px;
+      padding:1.5rem 1.4rem;transition:border-color .15s ease,transform .15s ease;
+    }
+    .card:hover{border-color:var(--orange);transform:translateY(-2px);}
+    .card__emoji{font-size:1.9rem;line-height:1;margin-bottom:0.75rem;}
+    .card__name{font-size:1.15rem;color:var(--white);margin-bottom:0.4rem;}
+    .card__line{font-size:0.9rem;color:var(--dim);margin:0;}
+    .card__go{margin-top:1rem;font-size:0.8rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--orange);}
+    .why{background:var(--d1);border:1px solid var(--border);border-radius:12px;padding:2rem 2rem 1.75rem;margin-bottom:2.5rem;}
+    .why h2{font-size:1.25rem;color:var(--white);margin:0 0 1.1rem;}
+    .why ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0.85rem 1.5rem;}
+    @media(max-width:620px){.why ul{grid-template-columns:1fr;}}
+    .why li{position:relative;padding-left:1.6rem;font-size:0.95rem;color:var(--light);}
+    .why li::before{content:"→";position:absolute;left:0;top:0;color:var(--orange);font-weight:700;}
+    .foot{border-top:1px solid var(--border);padding-top:1.5rem;color:var(--dim);font-size:0.9rem;}
+    .foot b{color:var(--light);font-weight:600;}
+    .foot .ph{color:var(--orange);font-weight:700;white-space:nowrap;}
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="wrap">
+
+    <header class="hero">
+      <h1>The <span class="accent">UNC</span> Sales OS</h1>
+      <p>The cockpit our reps fly. Every call scripted, branched, logged, and synced — automatically.</p>
+    </header>
+
+    <section class="grid" aria-label="Cockpits">
+      <a class="card" href="/sales-ops/cold-call/">
+        <div class="card__emoji">📞</div>
+        <div class="card__name">Cold Call</div>
+        <p class="card__line">Pick up the phone with the whole call already mapped — opener, branches, and outcome in front of you.</p>
+        <div class="card__go">Open →</div>
+      </a>
+      <a class="card" href="/sales-ops/discovery/">
+        <div class="card__emoji">🔎</div>
+        <div class="card__name">Discovery</div>
+        <p class="card__line">Never get cornered on a call again — every objection and hard question has a rail that routes you out clean.</p>
+        <div class="card__go">Open →</div>
+      </a>
+      <a class="card" href="/sales-ops/service-pitch/">
+        <div class="card__emoji">💰</div>
+        <div class="card__name">Service Pitch</div>
+        <p class="card__line">Walk them from problem to price with a live money-anchor that shows exactly what it takes to pay for itself.</p>
+        <div class="card__go">Open →</div>
+      </a>
+      <a class="card" href="/sales-ops/map/">
+        <div class="card__emoji">🗺️</div>
+        <div class="card__name">Intel Map</div>
+        <p class="card__line">See every prospect across the territory on one map — know who to call next before you dial.</p>
+        <div class="card__go">Open →</div>
+      </a>
+      <a class="card" href="/sales-ops/tools/today/">
+        <div class="card__emoji">🎯</div>
+        <div class="card__name">Start My Day</div>
+        <p class="card__line">One button picks your next best call for you — no guessing where to start, ever.</p>
+        <div class="card__go">Open →</div>
+      </a>
+      <a class="card" href="/sales-ops/leaderboard/">
+        <div class="card__emoji">🏆</div>
+        <div class="card__name">Leaderboard</div>
+        <p class="card__line">Your numbers, live and in the open — dials, closes, and callbacks stacked against the room.</p>
+        <div class="card__go">Open →</div>
+      </a>
+    </section>
+
+    <section class="why">
+      <h2>Why reps win here</h2>
+      <ul>
+        <li>Scripts that branch in real time — the next line is always on screen.</li>
+        <li>Every outcome auto-logged to the CRM — no end-of-day data entry.</li>
+        <li>A map of every prospect in 8 states — the territory at a glance.</li>
+        <li>Your numbers on a leaderboard, not buried in a manager's spreadsheet.</li>
+      </ul>
+    </section>
+
+    <footer class="foot">
+      <b>Urban Niche Co.</b> — Marketing built for contractors. Let's build something. &nbsp;·&nbsp; <span class="ph">(515) 344-4053</span>
+    </footer>
+
+  </main>
+</body>
+</html>

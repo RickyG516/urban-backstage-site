@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Leaderboard — UNC Sales Ops</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    body{background:var(--color-dark);}
+    .lb-wrap{max-width:1100px;margin:0 auto;padding:1.25rem;}
+    .lb-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;}
+    .lb-title{font-family:var(--font-head,'Montserrat',sans-serif);font-weight:800;letter-spacing:0.18em;color:var(--color-white);font-size:1.05rem;}
+    .lb-title .live{color:var(--color-accent);font-size:0.7rem;letter-spacing:0.25em;margin-left:0.5rem;}
+    .lb-sub{font-size:0.72rem;color:var(--color-white-dim);letter-spacing:0.08em;text-transform:uppercase;}
+    .team-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0.7rem;margin-bottom:1.4rem;}
+    @media(max-width:640px){.team-strip{grid-template-columns:repeat(2,1fr);}}
+    .team-card{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.85rem 1rem;text-align:center;}
+    .team-card b{display:block;font-family:var(--font-head,'Montserrat',sans-serif);font-size:1.6rem;font-weight:800;color:var(--color-white);}
+    .team-card span{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-white-dim);}
+    .team-card.money b{color:#22c55e;}
+    .team-card.hot b{color:var(--color-accent);}
+    .panel{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1rem 1.15rem;margin-bottom:1.2rem;}
+    .panel h2{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent);margin:0 0 0.75rem;}
+    table.league{width:100%;border-collapse:collapse;font-size:0.85rem;}
+    table.league th{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-white-dim);text-align:right;padding:0.35rem 0.5rem;border-bottom:1px solid var(--color-border);}
+    table.league th:first-child,table.league th:nth-child(2){text-align:left;}
+    table.league td{padding:0.55rem 0.5rem;border-bottom:1px solid var(--color-border);color:var(--color-white);text-align:right;}
+    table.league td:first-child,table.league td:nth-child(2){text-align:left;}
+    table.league tr:last-child td{border-bottom:none;}
+    .rank{font-family:var(--font-head,'Montserrat',sans-serif);font-weight:800;color:var(--color-white-dim);}
+    tr.first .rank{color:#facc15;}
+    .rep-name{font-weight:700;}
+    .streak{color:var(--color-accent);font-weight:700;white-space:nowrap;}
+    .conv-good{color:#22c55e;font-weight:700;}
+    .conv-mid{color:#facc15;font-weight:700;}
+    .conv-low{color:var(--color-white-dim);}
+    .money{color:#22c55e;font-weight:700;}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+    @media(max-width:800px){.grid-2{grid-template-columns:1fr;}}
+    .bar-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.45rem;font-size:0.78rem;}
+    .bar-label{min-width:180px;color:var(--color-white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .bar-track{flex:1;height:10px;background:var(--color-dark);border-radius:5px;overflow:hidden;}
+    .bar-fill{height:100%;background:var(--color-accent);border-radius:5px;}
+    .bar-fill.green{background:#22c55e;}
+    .bar-val{min-width:52px;text-align:right;color:var(--color-white-dim);font-size:0.72rem;}
+    .champion{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 0.9rem;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.25);border-radius:var(--radius-sm);margin-bottom:0.8rem;font-size:0.82rem;color:#86efac;}
+    .small-note{font-size:0.68rem;color:var(--color-white-dim);margin-top:0.5rem;}
+    .feed{font-size:0.78rem;color:var(--color-white-dim);}
+    .feed div{padding:0.35rem 0;border-bottom:1px solid var(--color-border);}
+    .feed div:last-child{border-bottom:none;}
+    .feed b{color:var(--color-white);}
+    .feed .oc-HOT{color:#22c55e;font-weight:700;}
+    .feed .oc-WARM{color:#facc15;font-weight:700;}
+    .err{color:#ff6b6b;font-size:0.82rem;padding:1rem;}
+    .best-day{font-size:0.7rem;color:var(--color-white-dim);}
+  </style>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+</head>
+<body>
+<main class="cockpit">
+  <div class="lb-wrap">
+    <div class="lb-head">
+      <div>
+        <div class="lb-title">UNC — LEADERBOARD <span class="live">// LIVE</span></div>
+        <div class="lb-sub">Your numbers. Not a manager's spreadsheet.</div>
+      </div>
+      <div class="lb-sub" id="lb-updated">loading…</div>
+    </div>
+
+    <div class="team-strip">
+      <div class="team-card"><b id="t-dials">—</b><span>Team dials · week</span></div>
+      <div class="team-card hot"><b id="t-hot">—</b><span>HOT · week</span></div>
+      <div class="team-card"><b id="t-warm">—</b><span>WARM · week</span></div>
+      <div class="team-card money"><b id="t-quoted">—</b><span>$ quoted · week</span></div>
+    </div>
+
+    <div class="panel">
+      <h2>🏆 League Table — this week</h2>
+      <div id="league-host"><div class="lb-sub">Loading…</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>🎯 Opener Performance — this month</h2>
+        <div id="variant-host"><div class="lb-sub">Loading…</div></div>
+        <div class="small-note">Positive = HOT or WARM. Variants under 10 uses are still in testing — the cockpit keeps rotating them.</div>
+      </div>
+      <div class="panel">
+        <h2>👊 What's Killing Our Calls — objections this month</h2>
+        <div id="obj-host"><div class="lb-sub">Loading…</div></div>
+        <div class="small-note">Every objection branch a rep clicks is counted here. This list decides which scripts get rewritten next.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>📡 Live Feed — last 10 logged calls</h2>
+      <div class="feed" id="feed-host"><div>Loading…</div></div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var WORKER='https://unc-sales-os-sync.ricky-a17.workers.dev';
+  var KEY=(function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})();
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fmt$(n){return '$'+Math.round(n||0).toLocaleString();}
+  function convCls(p){return p>=20?'conv-good':(p>=10?'conv-mid':'conv-low');}
+
+  function render(d){
+    document.getElementById('lb-updated').textContent='updated '+new Date().toLocaleTimeString();
+    var t=d.team||{};
+    document.getElementById('t-dials').textContent=t.week_dials||0;
+    document.getElementById('t-hot').textContent=t.week_hot||0;
+    document.getElementById('t-warm').textContent=t.week_warm||0;
+    document.getElementById('t-quoted').textContent=fmt$(t.week_quoted);
+
+    var reps=d.reps||[];
+    var rows=reps.map(function(r,i){
+      var conv=r.week.conv||0;
+      return '<tr class="'+(i===0?'first':'')+'">'
+        +'<td class="rank">'+(i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1))+'</td>'
+        +'<td class="rep-name">'+esc(r.rep_name)+(r.streak_days>=3?' <span class="streak">🔥'+r.streak_days+'d</span>':'')+'</td>'
+        +'<td>'+(r.today.dials||0)+'</td>'
+        +'<td><b>'+(r.week.dials||0)+'</b></td>'
+        +'<td>'+(r.week.hot||0)+'</td>'
+        +'<td>'+(r.week.warm||0)+'</td>'
+        +'<td class="'+convCls(conv)+'">'+conv+'%</td>'
+        +'<td class="money">'+fmt$(r.week.quoted)+'</td>'
+        +'<td class="best-day">'+(r.best_day&&r.best_day.date?esc(r.best_day.dials+' on '+r.best_day.date):'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    document.getElementById('league-host').innerHTML = reps.length
+      ? '<table class="league"><thead><tr><th></th><th>Rep</th><th>Today</th><th>Week</th><th>HOT</th><th>WARM</th><th>Conv</th><th>$ Quoted</th><th>Personal best</th></tr></thead><tbody>'+rows+'</tbody></table>'
+      : '<div class="lb-sub">No calls logged yet this week. First dial takes the crown. 🔨</div>';
+
+    var vs=d.variants||[];
+    var champion=vs.filter(function(v){return v.total>=10;})[0];
+    var vHTML=(champion?'<div class="champion">👑 Best opener right now: <b>'+esc(champion.variant)+'</b> — '+champion.convPct+'% positive over '+champion.total+' calls. AUTO mode is now favoring it.</div>':'');
+    var maxV=Math.max.apply(null,[1].concat(vs.map(function(v){return v.total;})));
+    vHTML+=vs.map(function(v){
+      return '<div class="bar-row"><div class="bar-label">'+esc(v.variant)+' <span style="opacity:0.5">('+v.total+'×)</span></div>'
+        +'<div class="bar-track"><div class="bar-fill green" style="width:'+v.convPct+'%"></div></div>'
+        +'<div class="bar-val">'+v.convPct+'%</div></div>';
+    }).join('');
+    document.getElementById('variant-host').innerHTML = vs.length?vHTML:'<div class="lb-sub">No variant data yet — start dialing in AUTO mode.</div>';
+
+    var os=d.objections||[];
+    var maxO=Math.max.apply(null,[1].concat(os.map(function(o){return o.count;})));
+    document.getElementById('obj-host').innerHTML = os.length ? os.map(function(o){
+      return '<div class="bar-row"><div class="bar-label">'+esc(o.tag.replace(/_/g,' '))+'</div>'
+        +'<div class="bar-track"><div class="bar-fill" style="width:'+Math.round(o.count/maxO*100)+'%"></div></div>'
+        +'<div class="bar-val">'+o.count+'×</div></div>';
+    }).join('') : '<div class="lb-sub">No objection branches logged yet this month.</div>';
+
+    var rec=d.recent||[];
+    document.getElementById('feed-host').innerHTML = rec.length ? rec.map(function(c){
+      var when=c.timestamp?new Date(c.timestamp).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';
+      return '<div>'+esc(when)+' · <b>'+esc(c.rep_name||'')+'</b> → '+esc(c.business_name||'')+' · <span class="oc-'+esc(c.outcome_code)+'">'+esc(c.outcome_code)+'</span> <span style="opacity:0.55">('+esc(c.cockpit||'')+')</span></div>';
+    }).join('') : '<div>No synced calls yet. The feed lights up as outcomes log.</div>';
+  }
+
+  function load(){
+    fetch(WORKER+'/leaderboard',{cache:'no-store',headers:{'x-unc-key':KEY}})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+      .then(function(d){if(!d.ok)throw new Error(d.error||'bad response');render(d);})
+      .catch(function(e){
+        document.getElementById('league-host').innerHTML='<div class="err">⚠ Leaderboard offline: '+esc(e.message)+' — check the worker.</div>';
+        document.getElementById('lb-updated').textContent='offline';
+      });
+  }
+  load();
+  setInterval(load,60000);
+})();
+</script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

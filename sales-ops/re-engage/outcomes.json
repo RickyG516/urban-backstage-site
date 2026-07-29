@@ -1,0 +1,11 @@
+{
+  "_comment": "Re-Engage specific outcomes — superset of standard codes with EMAILED added.",
+  "outcomes": [
+    { "code": "EMAILED", "label": "EMAILED",  "hotkey": "e", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Follow-Up In Progress", "description": "Permission granted, email confirmed — sequence resumes" },
+    { "code": "HOT",     "label": "HOT",      "hotkey": "h", "color": "#f97316", "audio": "cha-ching", "hubspot_stage": "Call Scheduled",        "description": "Wants to move forward — book Ricky discovery call" },
+    { "code": "WARM",    "label": "WARM",     "hotkey": "w", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Interested, needs callback" },
+    { "code": "COLD",    "label": "COLD",     "hotkey": "c", "color": "#94a3b8", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Not interested" },
+    { "code": "NA",      "label": "NO ANS",   "hotkey": "n", "color": "#64748b", "audio": "click",     "hubspot_stage": "First Touch Sent",      "description": "No answer / voicemail left" },
+    { "code": "DNC",     "label": "DNC",      "hotkey": "d", "color": "#ef4444", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Do not call" }
+  ]
+}

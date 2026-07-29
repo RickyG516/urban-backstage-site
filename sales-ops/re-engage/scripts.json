@@ -1,0 +1,54 @@
+{
+  "_comment": "UNC Re-Engage Cockpit — reviving a lead who went quiet on the email sequence. Caller is whoever's on the phone (rep_name). Method: pattern-interrupt second touch, permission-based, LOW pressure. Goal: Phone → Permission → Email. Never hard-close on this call.",
+  "_version": "2.0",
+  "_last_updated": "2026-07-21",
+  "opener": {
+    "_note": "They got the email sequence, never replied. This call is the human second touch. No pitch. Curiosity + honesty.",
+    "default": "Hey {first_name} — it's {rep_name} with Urban Niche Co. I'll keep this quick, I promise. We sent a couple things your way over the last few weeks and I didn't want it to just get buried in your inbox. No pitch here — real quick: are you getting all the {trade_lower} work you want right now, or is more of the right kind of calls something you'd take?"
+  },
+  "responses": {
+    "NO_LEADS": {
+      "label": "No / could be better",
+      "script": "That's exactly why I picked up the phone instead of sending another email. When we looked at {business_name}, the one thing that stood out was {ai_hook} — and that's usually what's quietly costing you calls you never even hear about. I'm not going to pitch you on this call. Can I just send you one thing that shows what we've done for other {trade_lower} contractors in {city}? You look at it, and if it's not for you, no hard feelings."
+    },
+    "GET_THE_YES": {
+      "label": "They said yes — confirm email",
+      "script": "Perfect. I'll get that over to you today. Is {email} still the best place to reach you?",
+      "confirm_prompt": "Confirm the email → 'Great — it comes from ricky@urbannicheco.com, so keep an eye out for that name. Appreciate you, {first_name}. Talk soon.'"
+    },
+    "LEADS_ARE_FINE": {
+      "label": "Leads are fine / we're good",
+      "script": "Love hearing that — genuinely, that's the position every contractor wants to be in. I won't take up more of your day. If word-of-mouth ever slows down or you want to stop depending on it, you know where we are. Appreciate your time, {first_name}."
+    },
+    "DONT_REMEMBER": {
+      "label": "Don't remember the emails",
+      "script": "No worries at all — inbox is a warzone, happens to everyone. Quick version: we only work with {trade_lower} contractors, nobody else. When we looked at {business_name}, the thing that jumped out was {ai_hook} — that's fixable, and it's probably costing you calls right now. Want me to resend it with a little more context so you can actually see what I'm talking about?"
+    },
+    "WHAT_IS_THIS": {
+      "label": "Who is this / what do you do",
+      "script": "Fair question — we do digital marketing, and only for {trade_lower} contractors. We reached out a couple weeks back because when we pulled up {business_name}, {ai_hook} stood out. That's the whole reason for the call — nothing more. Can I send you something quick on it so it's not just me talking?"
+    },
+    "WANTS_TO_MOVE_FORWARD": {
+      "label": "They want to talk pricing / move forward",
+      "script": "Love it. That's a conversation worth doing right, so let me get you time with Ricky — he's the one who scopes the actual plan and the numbers. Fifteen minutes, I'll set it up. What's better for you, mornings or afternoons?",
+      "note": "Log HOT. Create a HubSpot task to book the discovery call. Do NOT quote pricing yourself — hand it to Ricky."
+    },
+    "BAD_TIME": {
+      "label": "Bad time / busy",
+      "script": "Totally get it — you're working, that's a good sign. When's a better window to catch you, tomorrow morning work?",
+      "note": "Get a SPECIFIC time. Log WARM with the callback window."
+    }
+  },
+  "voicemail": {
+    "script": "Hey {first_name} — it's {rep_name} with Urban Niche Co. We flagged something on {business_name} a few weeks back and I wanted to make sure it actually reached you instead of just sitting in an inbox. Give me a shout when you get a sec — {rep_phone}. Talk soon."
+  },
+  "cockpit_note": "GOAL: Phone → Permission → Email. Do NOT close on this call. Get the yes to send one thing, confirm the email, hang up — the email system takes it from there. If they want to move forward → log HOT and get Ricky on a call.",
+  "outcomes": {
+    "HOT":     "Wants to move forward — book Ricky discovery call",
+    "WARM":    "Interested, needs callback or email confirmed",
+    "EMAILED": "Got permission, email confirmed — sequence resumes",
+    "COLD":    "Not interested",
+    "NA":      "No answer / voicemail left",
+    "DNC":     "Do not call"
+  }
+}

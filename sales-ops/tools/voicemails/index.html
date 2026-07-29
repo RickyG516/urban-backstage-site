@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Voicemail Library — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .vm { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    .vm__note { background: rgba(232,101,26,0.08); border: 1px solid rgba(232,101,26,0.25); border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-family: var(--font-display); font-size: 0.82rem; color: var(--color-white-dim); margin-bottom: 1.5rem; line-height: 1.5; }
+    .vm__note b { color: var(--color-accent); }
+    .vm__card { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1rem; border-left: 4px solid var(--color-accent); }
+    .vm__cat { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
+    .vm__title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; margin-bottom: 0.85rem; }
+    .vm__script { font-family: var(--font-display); font-size: 1rem; line-height: 1.6; padding: 1rem; background: var(--color-dark-3); border-radius: var(--radius-sm); color: var(--color-white); }
+    .vm__token { color: var(--color-accent); font-weight: 700; }
+    .vm__meta { display: flex; gap: 1.5rem; margin-top: 0.85rem; font-family: var(--font-display); font-size: 0.78rem; color: var(--color-white-dim); }
+    .vm__copy { float: right; cursor: pointer; opacity: 0.7; font-size: 0.78rem; }
+    .vm__copy:hover { color: var(--color-accent); opacity: 1; }
+    .vm__text { margin-top: 0.85rem; padding: 0.85rem 1rem; background: rgba(232,101,26,0.06); border: 1px dashed rgba(232,101,26,0.35); border-radius: var(--radius-sm); font-family: var(--font-display); font-size: 0.9rem; line-height: 1.55; color: var(--color-white-dim); }
+    .vm__text-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center; }
+    .vm__text-copy { cursor: pointer; opacity: 0.7; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .vm__text-copy:hover { color: var(--color-accent); opacity: 1; }
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="vm">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Voicemail Library</h1>
+          <p class="dash__sub">Tight scripts under 20 seconds. Designed to get a callback, not to inform. Click to copy.</p>
+        </div>
+      </div>
+      <div class="vm__note">
+        <b>Rep auto-detected:</b> <b>{rep_name}</b> and <b>{rep_phone}</b> fill automatically from your active rep selection. Tokens like <b>{name}</b> and <b>{business}</b> are placeholders — fill these manually when leaving the voicemail. Keep them short — the goal is a callback, not a monologue.
+      </div>
+      <div id="rep-indicator" style="font-family:var(--font-display);font-size:0.78rem;color:var(--color-white-dim);margin-bottom:1rem;">Loading rep...</div>
+      <div id="vm-list"></div>
+    </section>
+    <div class="brand-stamp">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <script>
+    const VMS = [
+      {
+        cat: 'Cold Call',
+        title: 'Standard cold call VM',
+        meta: '15 sec · pivots to text',
+        script: "Hey {name}, this is {rep_name} from Urban Niche Co. — I won't leave a voicemail, I'll text you the 30-second reason for the call instead. Watch for a text from {rep_phone}. Talk soon.",
+        text: "Hey {name} — {rep_name} from Urban Niche Co, just left you a VM. The 30-second version: I pulled up {business} online before I called and found one thing that's probably costing you leads. Want me to send it over? Free, no pitch."
+      },
+      {
+        cat: 'Cold Call',
+        title: 'Direct cold call VM',
+        meta: '12 sec · permission ask',
+        script: "Hey {name}, {rep_name} from Urban Niche. Cold call. Quick question I want to ask {business} about your online lead flow. Text me back at {rep_phone} if you're open to a 30-second chat, otherwise no worries.",
+        text: "{name} — {rep_name} here, left you the VM just now. One question: when somebody in {city} searches for what {business} does, do you know if you're showing up? I checked. Worth 30 seconds if you want the answer."
+      },
+      {
+        cat: 'Cold Call',
+        title: 'Storm-day roofer VM',
+        meta: '18 sec · time-sensitive',
+        script: "Hey {name}, {rep_name} from Urban Niche Co. That storm that came through {city} — homeowners are Googling roofers right now, and I pulled up who's actually showing up. {business} isn't in the top three. Text me at {rep_phone} and I'll send you the screenshot. That's it.",
+        text: "{name} — screenshot attached. This is what homeowners in {city} see when they search for a roofer today. The out-of-town storm chasers are above you. That's fixable, and fast. Want the 2-minute rundown?"
+      },
+      {
+        cat: 'Inbound Callback',
+        title: 'Form-fill callback VM',
+        meta: '18 sec · references form',
+        script: "Hey {name}, this is {rep_name} from Urban Niche Co. — you filled out the form about {service_interest}. I wanted to catch you while it's fresh. Text me back at {rep_phone} with a good time today and I'll do a free 90-second audit before we even hop on a call. Talk soon.",
+        text: "Hey {name}, {rep_name} — following up on your form about {service_interest}. What's a good time today or tomorrow for a quick 15? I'll have your free audit done before we talk so it's all signal, no pitch."
+      },
+      {
+        cat: 'Follow-up',
+        title: 'Second-attempt callback',
+        meta: '12 sec · adds value',
+        script: "Hey {name}, {rep_name} again. Quick one — I dropped you a 90-second audit on {business} in your email so you can review it on your time. Reply or text me back at {rep_phone} if you want to walk through it. No pressure."
+      },
+      {
+        cat: 'Follow-up',
+        title: 'No-show recovery VM',
+        meta: '14 sec · zero guilt',
+        script: "Hey {name}, {rep_name} — we had a call on the books just now. No stress, I know how days go on a job site. Your audit's done and it's not going anywhere. Text me at {rep_phone} with a better time and we'll knock it out in 15.",
+        text: "{name} — no worries on the call, job sites don't run on calendars. Audit's ready when you are. What works better — early morning or after 5?"
+      },
+      {
+        cat: 'Referral',
+        title: 'Referral-mention VM',
+        meta: '15 sec · borrowed trust',
+        script: "Hey {name}, {rep_name} from Urban Niche Co. {referrer} said I should give you a call — we handle their marketing. I'm not going to blow up your phone. Text me at {rep_phone} if you want the same look at {business} that we did for them. Either way, tell {referrer} hi for me."
+      },
+      {
+        cat: 'Discovery Reminder',
+        title: 'Pre-call confirmation VM',
+        meta: '15 sec · day-before',
+        script: "Hey {name}, {rep_name} here — just confirming our 15-minute call tomorrow at {time}. I'll send a quick intro audit before we hop on so you walk in prepared. If anything changes, text me at {rep_phone}. Talk soon."
+      },
+      {
+        cat: 'Proposal Follow-up',
+        title: 'Proposal-sent nudge',
+        meta: '14 sec · checks in',
+        script: "Hey {name}, {rep_name} from Urban Niche. That proposal's been sitting in your inbox a couple days — any questions, or want me to walk through any piece of it? Hit me back at {rep_phone}. No pressure either way."
+      },
+      {
+        cat: 'Renewal',
+        title: 'Active client renewal reminder',
+        meta: '14 sec · friendly',
+        script: "Hey {name}, {rep_name} checking in — your renewal is coming up on {date}. Just want to make sure everything's still landing the way you wanted. Hit me back at {rep_phone} whenever you've got a minute."
+      },
+      {
+        cat: 'Win-Back',
+        title: 'Lost client re-engage',
+        meta: '20 sec · earnest',
+        script: "Hey {name}, this is {rep_name} — been a while. Wanted to reach out, no pitch, just curious how things are running for you. We've learned a lot since we stopped working together and I had some ideas. Hit me back at {rep_phone} if you're open to a 5-minute catch-up."
+      }
+    ];
+
+    // Load active rep from reps.json — keyed to localStorage current_rep_id
+    let _rep = { display_name: 'Ricky', phone: '(515) 344-4053' };
+    (async function() {
+      try {
+        const data = await fetch('/sales-ops/shared/reps.json', { cache: 'no-cache' }).then(r => r.json());
+        const savedId = (function(){ try { const v=localStorage.getItem('unc_cockpit_current_rep_id'); return v ? JSON.parse(v) : null; } catch(e){ return null; } })();
+        const match = data.reps.find(r => r.active && r.id === savedId) || data.reps.find(r => r.active);
+        if (match) {
+          _rep = match;
+          renderVMs();
+          const ind = document.getElementById('rep-indicator');
+          if (ind) ind.innerHTML = 'Scripts rendered for <b style="color:var(--color-accent)">' + match.display_name + '</b> &nbsp;·&nbsp; ' + (match.phone || '') + ' &nbsp;<span style="font-size:0.7rem;opacity:0.6;">Switch reps in the cockpit rep selector to change.</span>';
+        }
+      } catch(e) {
+        const ind = document.getElementById('rep-indicator');
+        if (ind) ind.textContent = '';
+      }
+    })();
+
+    function interp(script) {
+      return script
+        .replace(/\{rep_name\}/g, _rep.display_name || 'Ricky')
+        .replace(/\{rep_phone\}/g, _rep.phone || '(515) 344-4053');
+    }
+
+    function highlight(script) {
+      // Interpolate rep tokens first, then highlight remaining prospect tokens
+      const interpolated = interp(script);
+      return interpolated
+        .replace(/\{[^}]+\}/g, m => `<span class="vm__token">${m}</span>`);
+    }
+
+    function copyVM(el, idx, field) {
+      const raw = VMS[idx] && VMS[idx][field];
+      if (!raw) return;
+      const resolved = interp(raw);
+      const done = () => { const orig = el.dataset.label || 'copy'; el.textContent = '✓ copied'; setTimeout(() => el.textContent = orig, 1500); };
+      navigator.clipboard.writeText(resolved).then(done).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = resolved;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        done();
+      });
+    }
+
+    function renderVMs() {
+      document.getElementById('vm-list').innerHTML = VMS.map((v, i) => `
+        <div class="vm__card">
+          <div class="vm__cat">${v.cat}</div>
+          <div class="vm__title">${v.title}
+            <span class="vm__copy" data-label="📋 copy script" onclick="copyVM(this, ${i}, 'script')">📋 copy script</span>
+          </div>
+          <div class="vm__script">"${highlight(v.script)}"</div>
+          ${v.text ? `
+          <div class="vm__text">
+            <div class="vm__text-label"><span>💬 Follow-up text — send right after the VM</span><span class="vm__text-copy" data-label="📋 copy text" onclick="copyVM(this, ${i}, 'text')">📋 copy text</span></div>
+            ${highlight(v.text)}
+          </div>` : ''}
+          <div class="vm__meta">${v.meta.split('·').map(x => '<span>' + x.trim() + '</span>').join('')}</div>
+        </div>
+      `).join('');
+    }
+
+    renderVMs();
+  </script>
+</body>
+</html>

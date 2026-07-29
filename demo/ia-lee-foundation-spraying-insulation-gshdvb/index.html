@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Lee Foundation Spraying & Insulation, LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep-teal:#0f3d3e;
+    --deep-teal-light:#155c5d;
+    --amber:#d98e2b;
+    --amber-light:#f0ac4a;
+    --cream:#faf7f0;
+    --ink:#1b2b2b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Open Sans',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:.5px;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:500;
+    background:rgba(15,61,62,0.95);
+    backdrop-filter:blur(6px);
+    box-shadow:0 2px 12px rgba(0,0,0,0.25);
+  }
+  .nav-wrap{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+  }
+  .brand{
+    font-family:'Oswald',sans-serif;
+    color:var(--cream);
+    font-size:1.15rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .brand span{color:var(--amber-light);}
+  nav ul{display:flex;gap:32px;}
+  nav a{
+    color:var(--cream);
+    font-weight:600;
+    font-size:.9rem;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    transition:color .2s ease;
+    padding:4px 0;
+    border-bottom:2px solid transparent;
+  }
+  nav a:hover{color:var(--amber-light);border-bottom-color:var(--amber-light);}
+  .nav-phone{
+    background:var(--amber);
+    color:var(--ink);
+    padding:8px 16px;
+    border-radius:4px;
+    font-weight:600;
+    font-size:.9rem;
+    white-space:nowrap;
+  }
+  @media (max-width:800px){
+    nav ul{gap:16px;}
+    .nav-phone{display:none;}
+  }
+  @media (max-width:640px){
+    nav ul{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:-10%;
+    z-index:-2;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(217,142,43,0.35) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(21,92,93,0.55) 0%, transparent 50%),
+      repeating-linear-gradient(135deg, rgba(240,172,74,0.06) 0px, rgba(240,172,74,0.06) 2px, transparent 2px, transparent 40px),
+      linear-gradient(160deg, var(--deep-teal) 0%, #0a2b2c 55%, var(--deep-teal-light) 100%);
+    animation:kenburns 22s ease-in-out infinite alternate;
+  }
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:linear-gradient(180deg, rgba(10,25,25,0.35) 0%, rgba(10,25,25,0.65) 100%);
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.18) translate(-2%,-3%);}
+  }
+  .hero-content{
+    text-align:center;
+    color:var(--cream);
+    padding:0 24px;
+    max-width:820px;
+  }
+  .hero-eyebrow{
+    display:inline-block;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:.8rem;
+    font-weight:600;
+    color:var(--amber-light);
+    margin-bottom:18px;
+  }
+  .hero-content h1{
+    font-size:clamp(2.1rem, 5vw, 3.6rem);
+    line-height:1.15;
+    text-transform:uppercase;
+    margin-bottom:20px;
+    text-shadow:0 4px 24px rgba(0,0,0,0.35);
+  }
+  .hero-content h1 .accent{color:var(--amber-light);}
+  .hero-sub{
+    font-size:1.15rem;
+    font-weight:400;
+    color:#e7f2f0;
+    margin-bottom:34px;
+  }
+  .hero-sub strong{color:var(--amber-light);font-weight:600;}
+  .hero-ctas{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:15px 32px;
+    border-radius:4px;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+    border:2px solid transparent;
+  }
+  .btn-primary{
+    background:var(--amber);
+    color:var(--ink);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(217,142,43,0.4);}
+  .btn-outline{
+    border-color:var(--cream);
+    color:var(--cream);
+    background:transparent;
+  }
+  .btn-outline:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px);}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  section{
+    padding:100px 24px;
+  }
+  .section-inner{
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .section-head{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 56px;
+  }
+  .section-head .kicker{
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:.8rem;
+    font-weight:600;
+    color:var(--amber);
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+    color:var(--deep-teal);
+    margin:12px 0 14px;
+    text-transform:uppercase;
+  }
+  .section-head p{
+    color:#3f5555;
+    font-size:1.05rem;
+  }
+
+  /* ---------- SERVICES ---------- */
+  #services{background:var(--cream);}
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:28px;
+  }
+  .service-card{
+    background:#fff;
+    border-radius:10px;
+    padding:36px 28px;
+    box-shadow:0 4px 20px rgba(15,61,62,0.08);
+    border-top:4px solid var(--deep-teal);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 14px 30px rgba(15,61,62,0.15);
+  }
+  .service-icon{
+    width:56px;
+    height:56px;
+    margin-bottom:20px;
+    color:var(--amber);
+  }
+  .service-icon svg{width:100%;height:100%;}
+  .service-card h3{
+    font-size:1.15rem;
+    color:var(--deep-teal);
+    margin-bottom:10px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+  }
+  .service-card p{
+    color:#4b5f5f;
+    font-size:.95rem;
+  }
+
+  /* ---------- ABOUT / TRUST ---------- */
+  #about{
+    background:var(--deep-teal);
+    color:var(--cream);
+    position:relative;
+  }
+  #about .section-head h2{color:var(--cream);}
+  #about .section-head p{color:#cfe3e0;}
+  #about .section-head .kicker{color:var(--amber-light);}
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:24px;
+  }
+  .trust-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(240,172,74,0.25);
+    border-radius:10px;
+    padding:30px 24px;
+    text-align:center;
+  }
+  .trust-card .trust-icon{
+    width:44px;height:44px;
+    margin:0 auto 16px;
+    color:var(--amber-light);
+  }
+  .trust-card .trust-icon svg{width:100%;height:100%;}
+  .trust-card h3{
+    font-size:1.05rem;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin-bottom:8px;
+    color:var(--cream);
+  }
+  .trust-card p{
+    color:#cfe3e0;
+    font-size:.9rem;
+  }
+
+  /* ---------- SERVICE AREA ---------- */
+  #area{background:var(--cream);}
+  .area-box{
+    background:#fff;
+    border-radius:12px;
+    padding:48px;
+    box-shadow:0 4px 20px rgba(15,61,62,0.08);
+    text-align:center;
+  }
+  .area-towns{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    margin-top:28px;
+  }
+  .area-towns span{
+    background:var(--deep-teal);
+    color:var(--cream);
+    padding:10px 22px;
+    border-radius:30px;
+    font-weight:600;
+    font-size:.95rem;
+    letter-spacing:.3px;
+  }
+  .area-towns span:nth-child(odd){
+    background:var(--amber);
+    color:var(--ink);
+  }
+  .area-note{
+    margin-top:24px;
+    color:#4b5f5f;
+    font-size:.95rem;
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact{
+    background:linear-gradient(160deg, var(--deep-teal-light) 0%, var(--deep-teal) 100%);
+    color:var(--cream);
+  }
+  #contact .section-head h2{color:var(--cream);}
+  #contact .section-head p{color:#cfe3e0;}
+  #contact .section-head .kicker{color:var(--amber-light);}
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+    align-items:start;
+  }
+  @media (max-width:820px){
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  .contact-info-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(240,172,74,0.25);
+    border-radius:12px;
+    padding:36px;
+  }
+  .contact-info-card h3{
+    font-size:1.2rem;
+    text-transform:uppercase;
+    margin-bottom:20px;
+    color:var(--amber-light);
+  }
+  .contact-info-card ul li{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+    font-size:1rem;
+  }
+  .contact-info-card ul li svg{
+    width:22px;height:22px;
+    flex-shrink:0;
+    color:var(--amber-light);
+  }
+  .contact-form{
+    background:#fff;
+    border-radius:12px;
+    padding:36px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.25);
+  }
+  .contact-form h3{
+    color:var(--deep-teal);
+    font-size:1.2rem;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .contact-form .form-note{
+    color:#6b7d7d;
+    font-size:.85rem;
+    margin-bottom:24px;
+  }
+  .form-group{margin-bottom:18px;}
+  .form-group label{
+    display:block;
+    font-weight:600;
+    font-size:.85rem;
+    color:var(--deep-teal);
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  .form-group input,
+  .form-group textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid #d8e2e0;
+    border-radius:6px;
+    font-family:'Open Sans',sans-serif;
+    font-size:.95rem;
+    color:var(--ink);
+    background:#fbfbf9;
+  }
+  .form-group textarea{resize:vertical;min-height:100px;}
+  .form-group input:focus,
+  .form-group textarea:focus{
+    outline:none;
+    border-color:var(--amber);
+  }
+  .form-submit{
+    width:100%;
+    background:var(--amber);
+    color:var(--ink);
+    border:none;
+    padding:14px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:1rem;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .form-submit:hover{background:var(--amber-light);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:#0a2526;
+    color:#a9c2c0;
+    text-align:center;
+    padding:36px 24px;
+    font-size:.9rem;
+  }
+  footer strong{
+    display:block;
+    color:var(--cream);
+    font-family:'Oswald',sans-serif;
+    font-size:1.05rem;
+    letter-spacing:.5px;
+    margin-bottom:8px;
+    text-transform:uppercase;
+  }
+
+  /* ---------- FLAG ---------- */
+  .spec-flag{
+    position:fixed;
+    bottom:16px;
+    right:16px;
+    background:rgba(10,20,20,0.82);
+    color:#f5f5f0;
+    font-family:'Open Sans',sans-serif;
+    font-size:.72rem;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:20px;
+    z-index:9999;
+    letter-spacing:.2px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.3);
+    pointer-events:none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="brand">Lee Foundation <span>Spraying &amp; Insulation</span></div>
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-phone">(319) 610-3503</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Nashua, Iowa &middot; Chickasaw County</span>
+    <h1>Seal It Right. <span class="accent">Insulate</span> With Confidence.</h1>
+    <p class="hero-sub">Spray foam insulation and foundation spray coating for homes and businesses across <strong>Northeast Iowa</strong> — built to keep the heat in, the cold out, and your energy bills down.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Request a Consultation</a>
+      <a href="#services" class="btn btn-outline">View Our Services</a>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-inner reveal">
+    <div class="section-head">
+      <span class="kicker">What We Do</span>
+      <h2>Insulation &amp; Foundation Services</h2>
+      <p>From attic to crawl space to foundation wall, we spray and insulate every corner that lets energy escape.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 52 L12 30 C12 18 20 10 32 10 C44 10 52 18 52 30 L52 52" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 52 L20 32 C20 24 25 18 32 18 C39 18 44 24 44 32 L44 52" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="30" r="4" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Spray Foam Insulation</h3>
+        <p>High-performance closed and open cell spray foam application that seals air leaks and boosts R-value.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="34" width="44" height="20" rx="2" stroke="currentColor" stroke-width="4"/>
+            <path d="M10 34 L32 14 L54 34" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="18" y1="42" x2="46" y2="42" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="18" y1="48" x2="38" y2="48" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Foundation Spray Coating</h3>
+        <p>Protective foundation spray coatings that guard against moisture intrusion and temperature transfer.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 20 L32 8 L56 20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 20 L12 40 L52 40 L52 20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 40 L24 30 Q32 24 40 30 L40 40" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Attic Insulation</h3>
+        <p>Complete attic insulation upgrades that stop rising heat loss and reduce strain on your HVAC system.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="12" width="48" height="14" rx="2" stroke="currentColor" stroke-width="4"/>
+            <path d="M14 26 L14 48" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <path d="M50 26 L50 48" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <path d="M8 52 L56 52" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Crawl Space Insulation</h3>
+        <p>Moisture-resistant crawl space insulation that protects your subfloor and improves indoor air quality.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="24" r="6" stroke="currentColor" stroke-width="4"/>
+            <circle cx="38" cy="16" r="5" stroke="currentColor" stroke-width="4"/>
+            <circle cx="44" cy="34" r="6" stroke="currentColor" stroke-width="4"/>
+            <circle cx="24" cy="42" r="5" stroke="currentColor" stroke-width="4"/>
+            <circle cx="14" cy="46" r="4" stroke="currentColor" stroke-width="3.5"/>
+          </svg>
+        </div>
+        <h3>Blown-In Insulation</h3>
+        <p>Loose-fill blown-in insulation for hard-to-reach cavities, walls, and irregular framing spaces.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M34 6 L14 36 L28 36 L24 58 L50 28 L36 28 Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Energy Efficiency Upgrades</h3>
+        <p>Targeted insulation upgrades designed to cut energy waste and improve year-round comfort.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner reveal">
+    <div class="section-head">
+      <span class="kicker">Why Choose Us</span>
+      <h2>Built On Straight Answers</h2>
+      <p>A local insulation crew that shows up, does the job right, and treats your property like their own.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8 L54 20 L54 38 C54 50 44 56 32 60 C20 56 10 50 10 38 L10 20 Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M24 32 L30 38 L42 24" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Locally Owned</h3>
+        <p>A Nashua-based crew serving the surrounding Iowa communities.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="16" width="20" height="34" rx="2" stroke="currentColor" stroke-width="4"/>
+            <rect x="34" y="24" width="20" height="26" rx="2" stroke="currentColor" stroke-width="4"/>
+            <line x1="15" y1="24" x2="25" y2="24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="15" y1="32" x2="25" y2="32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Insulation and foundation spraying for houses, outbuildings, and commercial properties alike.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="4"/>
+            <path d="M32 20 L32 32 L42 38" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>On-Schedule Service</h3>
+        <p>We plan the job and show up when we say we will.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 44 L28 44 L34 34 L40 50 L46 40 L52 40" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="4"/>
+          </svg>
+        </div>
+        <h3>Straight Pricing</h3>
+        <p>Clear, honest estimates before any work begins — no surprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="area">
+  <div class="section-inner reveal">
+    <div class="section-head">
+      <span class="kicker">Where We Work</span>
+      <h2>Proudly Serving Northeast Iowa</h2>
+      <p>Based in Nashua, we spray and insulate throughout Chickasaw County and the surrounding region.</p>
+    </div>
+    <div class="area-box">
+      <div class="area-towns">
+        <span>Nashua</span>
+        <span>New Hampton</span>
+        <span>Charles City</span>
+        <span>Osage</span>
+        <span>Waverly</span>
+        <span>Plainfield</span>
+        <span>Denver</span>
+      </div>
+      <p class="area-note">Don't see your town listed? Call (319) 610-3503 — we cover much of the surrounding area.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner reveal">
+    <div class="section-head">
+      <span class="kicker">Get In Touch</span>
+      <h2>Request Your Consultation</h2>
+      <p>Reach out and let's talk about insulating your home, outbuilding, or commercial property.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info-card">
+        <h3>Contact Information</h3>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3 L9 3 L11 8 L8.5 9.5 C9.5 12 12 14.5 14.5 15.5 L16 13 L21 15 L21 18 C21 19.5 19.5 21 18 21 C10 21 3 14 3 6 C3 4.5 4.5 3 6 3 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            (319) 610-3503
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22 C12 22 5 14.5 5 9.5 C5 5.9 8.1 3 12 3 C15.9 3 19 5.9 19 9.5 C19 14.5 12 22 12 22 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            Nashua, Iowa &middot; Chickasaw County
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Serving Nashua &amp; the surrounding NE Iowa area
+          </li>
+        </ul>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <h3>Send a Message</h3>
+        <p class="form-note">Preview form — not connected to any inbox.</p>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(319) 000-0000">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Lee Foundation Spraying &amp; Insulation, LLC</strong>
+  Nashua, Iowa &middot; (319) 610-3503
+</footer>
+
+<div class="spec-flag">Speculative preview build — Urban Niche Co.</div>
+
+<script>
+  (function(){
+    var revealEls = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

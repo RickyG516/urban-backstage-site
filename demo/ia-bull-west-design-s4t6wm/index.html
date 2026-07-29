@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Bull West Design, LLC | Residential Remodeling &amp; Design-Build | Norwalk, IA</title>
+<meta name="description" content="Bull West Design, LLC is a residential remodeling and design-build contractor serving Norwalk, Iowa and the surrounding Warren County area. Kitchens, baths, additions, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark:#2e2a26;
+    --dark-2:#25211e;
+    --accent:#8fae5d;
+    --accent-dark:#75934a;
+    --light:#f6f4ef;
+    --card:#3a3530;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Open Sans', sans-serif;
+    font-weight:400;
+    background:var(--light);
+    color:var(--dark);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    letter-spacing:0.5px;
+    color:var(--dark);
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:var(--dark);
+  }
+  .hero-bg{
+    position:absolute;
+    inset:-10%;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(143,174,93,0.25) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(143,174,93,0.18) 0%, transparent 50%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
+      linear-gradient(160deg, #2e2a26 0%, #201d1a 55%, #33301f 100%);
+    animation: kenburns 24s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{
+    0%{ transform: scale(1) translate(0,0); }
+    100%{ transform: scale(1.18) translate(-2%, -1%); }
+  }
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(46,42,38,0.35) 0%, rgba(46,42,38,0.75) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    max-width:840px;
+    padding:0 24px;
+    color:var(--light);
+  }
+  .hero-eyebrow{
+    display:inline-block;
+    color:var(--accent);
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    margin-bottom:18px;
+    border:1px solid var(--accent);
+    padding:8px 18px;
+    border-radius:2px;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(2.2rem, 6vw, 4rem);
+    line-height:1.15;
+    margin-bottom:20px;
+    text-shadow:0 4px 18px rgba(0,0,0,0.4);
+  }
+  .hero h1 span{color:var(--accent);}
+  .hero p{
+    font-size:clamp(1rem, 2vw, 1.25rem);
+    color:#e7e3db;
+    max-width:600px;
+    margin:0 auto 34px;
+  }
+  .btn{
+    display:inline-block;
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-size:0.95rem;
+    padding:16px 40px;
+    background:var(--accent);
+    color:var(--dark);
+    border:2px solid var(--accent);
+    border-radius:2px;
+    cursor:pointer;
+    transition:all 0.25s ease;
+  }
+  .btn:hover{
+    background:transparent;
+    color:var(--accent);
+  }
+
+  /* ===== REVEAL ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ===== SECTION SHELL ===== */
+  section{
+    padding:90px 24px;
+  }
+  .section-inner{
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 56px;
+  }
+  .section-head .kicker{
+    display:block;
+    color:var(--accent-dark);
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    font-size:0.8rem;
+    margin-bottom:12px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom:14px;
+  }
+  .section-head p{
+    color:#5a544c;
+  }
+  .bar{
+    width:60px;
+    height:3px;
+    background:var(--accent);
+    margin:18px auto 0;
+  }
+
+  /* ===== SERVICES ===== */
+  .services-section{
+    background:#fff;
+  }
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  .service-card{
+    background:var(--light);
+    border:1px solid #e6e1d6;
+    border-top:3px solid var(--accent);
+    padding:36px 28px;
+    border-radius:4px;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 14px 30px rgba(46,42,38,0.12);
+  }
+  .service-icon{
+    width:52px;
+    height:52px;
+    margin-bottom:20px;
+    stroke:var(--accent-dark);
+  }
+  .service-card h3{
+    font-size:1.2rem;
+    margin-bottom:10px;
+  }
+  .service-card p{
+    color:#5a544c;
+    font-size:0.96rem;
+  }
+
+  /* ===== SERVICE AREA ===== */
+  .area-section{
+    background:var(--dark);
+    color:var(--light);
+  }
+  .area-section .section-head h2{color:#fff;}
+  .area-section .section-head p{color:#cfc9bd;}
+  .area-section .kicker{color:var(--accent);}
+  .area-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    justify-content:center;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .area-chip{
+    border:1px solid rgba(143,174,93,0.5);
+    color:var(--light);
+    padding:12px 22px;
+    border-radius:30px;
+    font-family:'Oswald', sans-serif;
+    font-size:0.92rem;
+    letter-spacing:0.5px;
+    background:rgba(143,174,93,0.08);
+  }
+
+  /* ===== TRUST ===== */
+  .trust-section{
+    background:#fff;
+  }
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:26px;
+  }
+  .trust-card{
+    text-align:center;
+    padding:30px 18px;
+    border:1px solid #e6e1d6;
+    border-radius:4px;
+    background:var(--light);
+  }
+  .trust-icon{
+    width:40px;
+    height:40px;
+    margin:0 auto 16px;
+    stroke:var(--accent-dark);
+  }
+  .trust-card h3{
+    font-size:1.02rem;
+    margin-bottom:8px;
+  }
+  .trust-card p{
+    color:#5a544c;
+    font-size:0.88rem;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-section{
+    background:var(--dark);
+    color:var(--light);
+  }
+  .contact-section .section-head h2{color:#fff;}
+  .contact-section .section-head p{color:#cfc9bd;}
+  .contact-section .kicker{color:var(--accent);}
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+  }
+  .contact-info{
+    background:var(--card);
+    border:1px solid rgba(143,174,93,0.25);
+    border-radius:6px;
+    padding:38px 32px;
+  }
+  .contact-info h3{
+    color:#fff;
+    font-size:1.3rem;
+    margin-bottom:16px;
+  }
+  .contact-info p{
+    color:#cfc9bd;
+    margin-bottom:24px;
+  }
+  .call-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--accent);
+    color:var(--dark);
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    padding:16px 26px;
+    border-radius:4px;
+    font-size:1.1rem;
+    letter-spacing:0.5px;
+    margin-bottom:28px;
+  }
+  .call-btn svg{width:22px;height:22px;stroke:var(--dark);}
+  .contact-meta{
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:20px;
+    font-size:0.9rem;
+    color:#b9b3a6;
+  }
+  .contact-meta div{margin-bottom:8px;}
+  .contact-meta strong{color:#e7e3db;}
+
+  form{
+    background:var(--card);
+    border:1px solid rgba(143,174,93,0.25);
+    border-radius:6px;
+    padding:38px 32px;
+  }
+  .form-group{
+    margin-bottom:20px;
+  }
+  label{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-size:0.82rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  input, textarea{
+    width:100%;
+    padding:13px 14px;
+    background:var(--dark-2);
+    border:1px solid #4b463f;
+    border-radius:4px;
+    color:#f6f4ef;
+    font-family:'Open Sans', sans-serif;
+    font-size:0.95rem;
+  }
+  input:focus, textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  textarea{
+    min-height:120px;
+    resize:vertical;
+  }
+  .submit-btn{
+    width:100%;
+    background:var(--accent);
+    color:var(--dark);
+    border:none;
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:16px;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:0.95rem;
+    transition:background 0.25s ease;
+  }
+  .submit-btn:hover{
+    background:var(--accent-dark);
+  }
+  .form-thanks{
+    display:none;
+    text-align:center;
+    padding:40px 10px;
+  }
+  .form-thanks.active{display:block;}
+  .form-thanks svg{width:48px;height:48px;stroke:var(--accent);margin:0 auto 16px;}
+  .form-thanks h3{color:#fff;margin-bottom:10px;}
+  .form-thanks p{color:#cfc9bd;font-size:0.92rem;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--dark-2);
+    color:#cfc9bd;
+    text-align:center;
+    padding:36px 24px;
+    border-top:3px solid var(--accent);
+  }
+  footer .foot-name{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    color:#fff;
+    font-size:1.15rem;
+    letter-spacing:1px;
+    margin-bottom:8px;
+  }
+  footer .foot-phone a{
+    color:var(--accent);
+    font-weight:700;
+  }
+
+  /* ===== FLAG ===== */
+  .preview-flag{
+    position:fixed;
+    bottom:14px;
+    right:14px;
+    background:rgba(46,42,38,0.92);
+    color:#e7e3db;
+    font-size:0.7rem;
+    padding:8px 12px;
+    border-radius:4px;
+    border:1px solid rgba(143,174,93,0.4);
+    z-index:999;
+    font-family:'Open Sans', sans-serif;
+    letter-spacing:0.2px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 860px){
+    .services-grid{grid-template-columns:repeat(2, 1fr);}
+    .trust-grid{grid-template-columns:repeat(2, 1fr);}
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  @media (max-width: 540px){
+    .services-grid{grid-template-columns:1fr;}
+    .trust-grid{grid-template-columns:1fr;}
+    section{padding:64px 18px;}
+    .hero{min-height:100vh;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Norwalk, Iowa</span>
+      <h1>Bull West Design, LLC<br><span>Residential Remodeling &amp; Design-Build</span></h1>
+      <p>Kitchens, bathrooms, additions, and full-home renovations built for Norwalk and the surrounding Warren County area.</p>
+      <a href="#contact" class="btn">Get Started</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section" id="services">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <span class="kicker">What We Do</span>
+        <h2>Remodeling &amp; Design-Build Services</h2>
+        <p>Full-service residential remodeling from first sketch to final walkthrough.</p>
+        <div class="bar"></div>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="10" width="36" height="28" rx="2"></rect>
+            <line x1="6" y1="20" x2="42" y2="20"></line>
+            <line x1="16" y1="20" x2="16" y2="38"></line>
+            <line x1="30" y1="20" x2="30" y2="26"></line>
+            <rect x="26" y="26" width="8" height="6"></rect>
+          </svg>
+          <h3>Kitchen Remodeling</h3>
+          <p>Full kitchen renovations, layout changes, cabinetry, and finish upgrades.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 24h32"></path>
+            <path d="M10 24v10a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V24"></path>
+            <path d="M14 24V12a4 4 0 0 1 8 0"></path>
+            <circle cx="34" cy="18" r="3"></circle>
+          </svg>
+          <h3>Bathroom Remodeling</h3>
+          <p>Tubs, showers, tile, vanities, and full bathroom layout redesigns.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22 24 8l18 14"></path>
+            <path d="M10 20v18h12V26h8v12h8V20"></path>
+            <line x1="30" y1="8" x2="38" y2="8"></line>
+            <line x1="38" y1="8" x2="38" y2="14"></line>
+          </svg>
+          <h3>Home Additions</h3>
+          <p>Room additions and structural expansions that match your home's existing style.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="8" width="32" height="32" rx="2"></rect>
+            <line x1="8" y1="28" x2="40" y2="28"></line>
+            <line x1="16" y1="28" x2="16" y2="40"></line>
+            <line x1="28" y1="28" x2="28" y2="40"></line>
+            <line x1="14" y1="16" x2="34" y2="16"></line>
+          </svg>
+          <h3>Basement Finishing</h3>
+          <p>Turn unfinished space into livable square footage built to last.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 40 20 12l8 16 6-10 6 22z"></path>
+            <line x1="8" y1="40" x2="40" y2="40"></line>
+          </svg>
+          <h3>Custom Design-Build</h3>
+          <p>One team from concept and design through construction and completion.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="16" r="6"></circle>
+            <path d="M12 40c0-8 5.4-14 12-14s12 6 12 14"></path>
+            <line x1="6" y1="40" x2="42" y2="40"></line>
+          </svg>
+          <h3>Outdoor Living Spaces</h3>
+          <p>Decks, patios, and outdoor structures designed for how you actually live.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE AREA -->
+  <section class="area-section" id="area">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <span class="kicker">Where We Work</span>
+        <h2>Proudly Serving the Norwalk Area</h2>
+        <p>Based in Norwalk, Iowa and serving homeowners throughout Warren County and the surrounding communities.</p>
+        <div class="bar"></div>
+      </div>
+      <div class="area-list reveal">
+        <span class="area-chip">Norwalk</span>
+        <span class="area-chip">Indianola</span>
+        <span class="area-chip">Carlisle</span>
+        <span class="area-chip">Cumming</span>
+        <span class="area-chip">Pleasantville</span>
+        <span class="area-chip">Martensdale</span>
+        <span class="area-chip">Prole</span>
+        <span class="area-chip">West Des Moines</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust-section" id="trust">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <span class="kicker">Why Homeowners Choose Us</span>
+        <h2>Built On Straight Answers</h2>
+        <div class="bar"></div>
+      </div>
+      <div class="trust-grid">
+
+        <div class="trust-card reveal">
+          <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6 8 14v10c0 10 7 16 16 18 9-2 16-8 16-18V14z"></path>
+          </svg>
+          <h3>Locally Owned</h3>
+          <p>An Iowa-based team rooted in the Norwalk community.</p>
+        </div>
+
+        <div class="trust-card reveal">
+          <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="10" width="32" height="30" rx="2"></rect>
+            <line x1="8" y1="18" x2="40" y2="18"></line>
+            <line x1="16" y1="6" x2="16" y2="14"></line>
+            <line x1="32" y1="6" x2="32" y2="14"></line>
+          </svg>
+          <h3>Residential &amp; Commercial</h3>
+          <p>Remodeling and design-build work for homes and commercial spaces alike.</p>
+        </div>
+
+        <div class="trust-card reveal">
+          <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="16"></circle>
+            <path d="M24 14v10l7 5"></path>
+          </svg>
+          <h3>On-Schedule Service</h3>
+          <p>Projects planned and managed to keep your timeline on track.</p>
+        </div>
+
+        <div class="trust-card reveal">
+          <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 26h24"></path>
+            <path d="M18 26a6 6 0 1 1 12 0"></path>
+            <path d="M24 14v-4"></path>
+            <path d="M24 40v-4"></path>
+          </svg>
+          <h3>Straight Pricing</h3>
+          <p>Clear proposals and honest conversations, no surprises along the way.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <span class="kicker">Let's Talk</span>
+        <h2>Start Your Remodeling Project</h2>
+        <p>Reach out and let's talk through what you have in mind for your home.</p>
+        <div class="bar"></div>
+      </div>
+
+      <div class="contact-wrap">
+
+        <div class="contact-info reveal">
+          <h3>Bull West Design, LLC</h3>
+          <p>Residential remodeling and design-build serving Norwalk, Iowa and the surrounding area.</p>
+          <a class="call-btn" href="tel:+15157072913">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.2a2 2 0 0 1 2.11-.45c.85.3 1.73.51 2.63.63A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            (515) 707-2913
+          </a>
+          <div class="contact-meta">
+            <div><strong>Phone:</strong> (515) 707-2913</div>
+            <div><strong>Location:</strong> Norwalk, Iowa</div>
+            <div><strong>Service Area:</strong> Norwalk &amp; Warren County area</div>
+          </div>
+        </div>
+
+        <div>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(515) 000-0000">
+            </div>
+            <div class="form-group">
+              <label for="message">Project Details</label>
+              <textarea id="message" name="message" placeholder="Tell us a little about your project..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+          <div class="form-thanks" id="form-thanks">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            <h3>Thanks for reaching out.</h3>
+            <p>This is a preview page and does not submit any information.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-name">Bull West Design</div>
+    <div class="foot-phone"><a href="tel:+15157072913">(515) 707-2913</a></div>
+  </footer>
+
+  <!-- FLAG -->
+  <div class="preview-flag">Speculative preview build — Urban Niche Co.</div>
+
+  <script>
+    // Scroll reveal via IntersectionObserver
+    (function(){
+      var items = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      items.forEach(function(el){ observer.observe(el); });
+    })();
+
+    // Decorative contact form — local only, no network activity
+    (function(){
+      var form = document.getElementById('contact-form');
+      var thanks = document.getElementById('form-thanks');
+      if(!form) return;
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        form.style.display = 'none';
+        thanks.classList.add('active');
+      });
+    })();
+  </script>
+
+</body>
+</html>

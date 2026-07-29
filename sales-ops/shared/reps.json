@@ -1,0 +1,44 @@
+{
+  "_comment": "Single source of truth for all reps using any cockpit. Add new reps here, set active:true, push to GitHub. New rep is live in ~60 sec.",
+  "_version": "2.2",
+  "_field_notes": {
+    "email": "Rep email — used in daily summary send and email signatures",
+    "phone": "Rep direct phone — interpolated as {rep_phone} across all script surfaces",
+    "stripe_link": "Rep-specific payment link — interpolated as {rep_stripe_link} in HOT proposal emails and email launcher",
+    "booking_url": "Rep booking URL — audit landing page. Points to /audit, /discovery, or /booking"
+  },
+  "reps": [
+    {
+      "id": "ricky",
+      "display_name": "Ricky Garner",
+      "hubspot_owner_id": "90640722",
+      "signature": "\u2014 Ricky, UNC",
+      "active": true,
+      "color": "#e8651a",
+      "role": "Founder",
+      "email": "ricky@urbannicheco.com",
+      "phone": "(515) 344-4053",
+      "stripe_link": "https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N",
+      "booking_url": "https://urbannicheco.com/audit",
+      "dial_target": 10,
+      "ramp_targets": [5, 10, 15, 20, 25],
+      "top_objections": ["not_interested", "no_budget", "already_have_agency"]
+    },
+    {
+      "id": "tyler",
+      "display_name": "Tyler Blasi",
+      "hubspot_owner_id": "164794304",
+      "signature": "\u2014 Tyler, UNC",
+      "active": true,
+      "color": "#1a6fe8",
+      "role": "Sales Rep",
+      "email": "tyler@urbannicheco.com",
+      "phone": "(563) 580-9181",
+      "stripe_link": "https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N",
+      "booking_url": "https://urbannicheco.com/audit",
+      "dial_target": 10,
+      "ramp_targets": [5, 10, 15, 20, 25],
+      "top_objections": ["not_interested", "send_me_info", "already_have_agency"]
+    }
+  ]
+}

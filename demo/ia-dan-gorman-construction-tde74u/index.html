@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="Dan Gorman Construction, Inc. — residential remodeling and home building serving Nevada, Ames, and the Story County, Iowa area. Home additions, kitchen and bathroom remodeling, basement finishing, new home construction, and garages.">
+<title>Dan Gorman Construction, Inc. | Residential Remodeling &amp; Home Building | Nevada, IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark: #24303b;
+    --dark-light: #2f3d4a;
+    --accent: #a8763e;
+    --accent-light: #c08f52;
+    --off-white: #f4f1ec;
+    --text-light: #d9dee3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Open Sans', sans-serif;
+    font-weight:400;
+    color:var(--dark);
+    background:var(--off-white);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--dark);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .container{
+    max-width:1150px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:#1b242c;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:-10%;
+    background:
+      radial-gradient(circle at 25% 30%, rgba(168,118,62,0.35) 0%, transparent 45%),
+      radial-gradient(circle at 75% 70%, rgba(168,118,62,0.25) 0%, transparent 50%),
+      linear-gradient(135deg, #1b242c 0%, #24303b 45%, #33424f 100%);
+    background-size:140% 140%, 140% 140%, 100% 100%;
+    animation:kenburns 22s ease-in-out infinite alternate;
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(36,48,59,0.55), rgba(36,48,59,0.75)),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 40px);
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.18) translate(-2%, -1.5%);}
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    padding:0 20px;
+    max-width:820px;
+  }
+  .hero-eyebrow{
+    display:inline-block;
+    color:var(--accent-light);
+    font-family:'Oswald', sans-serif;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    margin-bottom:18px;
+    border:1px solid var(--accent-light);
+    padding:6px 16px;
+    border-radius:2px;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(2.2rem, 5.5vw, 4rem);
+    line-height:1.15;
+    margin-bottom:20px;
+    text-shadow:0 3px 18px rgba(0,0,0,0.4);
+  }
+  .hero h1 span{color:var(--accent-light);}
+  .hero p{
+    font-size:clamp(1rem, 2vw, 1.25rem);
+    color:var(--text-light);
+    max-width:600px;
+    margin:0 auto 34px;
+  }
+  .btn{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    font-size:0.95rem;
+    padding:16px 38px;
+    border-radius:2px;
+    border:2px solid var(--accent);
+    cursor:pointer;
+    transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+  .btn:hover{
+    background:transparent;
+    color:var(--accent-light);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{
+    padding:90px 0;
+  }
+  .section-head{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 56px;
+  }
+  .section-head .tag{
+    color:var(--accent);
+    font-family:'Oswald', sans-serif;
+    letter-spacing:2px;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom:16px;
+  }
+  .section-head p{
+    color:#556170;
+  }
+  .divider{
+    width:60px;
+    height:3px;
+    background:var(--accent);
+    margin:0 auto 20px;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services{
+    background:#fff;
+  }
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+  }
+  .service-card{
+    background:var(--off-white);
+    border:1px solid #e4ddd2;
+    border-top:4px solid var(--accent);
+    border-radius:4px;
+    padding:38px 28px;
+    text-align:center;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 14px 30px rgba(36,48,59,0.12);
+  }
+  .service-icon{
+    width:58px;
+    height:58px;
+    margin:0 auto 22px;
+    color:var(--accent);
+  }
+  .service-icon svg{
+    width:100%;
+    height:100%;
+    stroke:var(--accent);
+    fill:none;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .service-card h3{
+    font-size:1.15rem;
+    margin-bottom:12px;
+    color:var(--dark);
+  }
+  .service-card p{
+    font-size:0.95rem;
+    color:#5c6773;
+  }
+
+  /* ---------- TRUST ---------- */
+  .trust{
+    background:var(--dark);
+    color:var(--text-light);
+  }
+  .trust .section-head h2{color:#fff;}
+  .trust .section-head p{color:var(--text-light);}
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:28px;
+  }
+  .trust-card{
+    background:var(--dark-light);
+    border:1px solid rgba(168,118,62,0.35);
+    border-radius:4px;
+    padding:32px 22px;
+    text-align:center;
+  }
+  .trust-card .mark{
+    width:40px;
+    height:40px;
+    margin:0 auto 16px;
+  }
+  .trust-card .mark svg{
+    width:100%;
+    height:100%;
+    stroke:var(--accent-light);
+    fill:none;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .trust-card h4{
+    color:#fff;
+    font-size:1rem;
+    margin-bottom:8px;
+  }
+  .trust-card p{
+    font-size:0.88rem;
+    color:#b7c0c9;
+  }
+
+  /* ---------- SERVICE AREA ---------- */
+  .area{
+    background:#fff;
+  }
+  .area-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    max-width:800px;
+    margin:0 auto;
+  }
+  .area-list span{
+    display:inline-block;
+    background:var(--off-white);
+    border:1px solid #e4ddd2;
+    color:var(--dark);
+    font-family:'Oswald', sans-serif;
+    font-size:0.9rem;
+    letter-spacing:0.5px;
+    padding:12px 22px;
+    border-radius:30px;
+  }
+  .area-list span::before{
+    content:"";
+    display:inline-block;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    margin-right:10px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--off-white);
+  }
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:48px;
+    align-items:start;
+  }
+  .contact-info{
+    background:var(--dark);
+    color:#fff;
+    padding:44px 36px;
+    border-radius:6px;
+    border-top:4px solid var(--accent);
+  }
+  .contact-info h3{
+    color:#fff;
+    font-size:1.4rem;
+    margin-bottom:18px;
+  }
+  .contact-info p{
+    color:var(--text-light);
+    margin-bottom:24px;
+    font-size:0.95rem;
+  }
+  .call-block{
+    background:var(--dark-light);
+    border:1px solid rgba(168,118,62,0.4);
+    border-radius:4px;
+    padding:22px;
+    text-align:center;
+  }
+  .call-block .label{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    color:var(--accent-light);
+    margin-bottom:10px;
+  }
+  .call-block a{
+    font-family:'Oswald', sans-serif;
+    font-size:1.6rem;
+    color:#fff;
+    letter-spacing:1px;
+    transition:color 0.2s ease;
+  }
+  .call-block a:hover{color:var(--accent-light);}
+  .biz-name{
+    margin-top:22px;
+    font-size:0.9rem;
+    color:#b7c0c9;
+    text-align:center;
+  }
+  .biz-name strong{
+    display:block;
+    color:#fff;
+    font-family:'Oswald', sans-serif;
+    font-size:1rem;
+    letter-spacing:0.5px;
+    margin-bottom:4px;
+  }
+
+  .contact-form{
+    background:#fff;
+    border:1px solid #e4ddd2;
+    border-radius:6px;
+    padding:40px;
+  }
+  .form-group{
+    margin-bottom:20px;
+  }
+  .form-group label{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-size:0.82rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--dark);
+    margin-bottom:8px;
+  }
+  .form-group input,
+  .form-group textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #d7cfc2;
+    border-radius:3px;
+    font-family:'Open Sans', sans-serif;
+    font-size:0.95rem;
+    background:var(--off-white);
+    color:var(--dark);
+  }
+  .form-group textarea{
+    min-height:120px;
+    resize:vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+    background:#fff;
+  }
+  .submit-btn{
+    width:100%;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    padding:15px;
+    font-size:0.95rem;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background 0.25s ease;
+  }
+  .submit-btn:hover{background:var(--accent-light);}
+  .form-thanks{
+    display:none;
+    background:#eef4ee;
+    border:1px solid #bcd8bc;
+    color:#2c5c2c;
+    padding:16px 18px;
+    border-radius:4px;
+    font-size:0.92rem;
+    margin-top:16px;
+  }
+  .form-thanks.show{display:block;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:#1b242c;
+    color:#9aa5af;
+    text-align:center;
+    padding:34px 20px;
+    font-size:0.88rem;
+  }
+  footer .foot-name{
+    font-family:'Oswald', sans-serif;
+    color:#fff;
+    letter-spacing:1px;
+    font-size:1.05rem;
+    margin-bottom:8px;
+  }
+  footer a{color:var(--accent-light);}
+
+  /* ---------- SPEC FLAG ---------- */
+  .spec-flag{
+    position:fixed;
+    bottom:14px;
+    right:14px;
+    background:rgba(36,48,59,0.88);
+    color:#e7e2d8;
+    font-family:'Open Sans', sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.3px;
+    padding:7px 12px;
+    border-radius:3px;
+    border:1px solid rgba(168,118,62,0.5);
+    z-index:9999;
+    pointer-events:none;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .services-grid{grid-template-columns:repeat(2, 1fr);}
+    .trust-grid{grid-template-columns:repeat(2, 1fr);}
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  @media (max-width: 560px){
+    section{padding:64px 0;}
+    .services-grid{grid-template-columns:1fr;}
+    .trust-grid{grid-template-columns:1fr;}
+    .contact-info, .contact-form{padding:28px 22px;}
+    .call-block a{font-size:1.3rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Residential Remodeling &amp; Home Building</span>
+    <h1>Dan Gorman Construction, Inc.<br><span>Built Right, In Nevada, Iowa</span></h1>
+    <p>Home additions, remodels, and new construction for homeowners across Nevada, Ames, and the surrounding Story County communities.</p>
+    <a href="#contact" class="btn">Request a Consultation</a>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">What We Build</span>
+      <div class="divider"></div>
+      <h2>Our Services</h2>
+      <p>Full-service residential remodeling and home building, handled by a local crew that knows the area.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64"><path d="M8 34 L32 14 L56 34"/><path d="M14 30 V54 H50 V30"/><path d="M26 54 V40 H38 V54"/><path d="M50 30 V18 H42 V24"/></svg>
+        </div>
+        <h3>Home Additions</h3>
+        <p>Room additions, second stories, and expansions designed to blend seamlessly with your existing home.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64"><rect x="10" y="16" width="44" height="34" rx="2"/><path d="M10 28 H54"/><path d="M22 28 V50"/><path d="M40 28 V50"/><circle cx="16" cy="22" r="1.6"/></svg>
+        </div>
+        <h3>Kitchen Remodeling</h3>
+        <p>Cabinetry, layout changes, and finishes that turn a kitchen into the center of the home.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64"><rect x="12" y="10" width="40" height="44" rx="2"/><path d="M12 24 H52"/><circle cx="32" cy="16" r="3"/><path d="M20 34 H44"/><path d="M20 42 H44"/></svg>
+        </div>
+        <h3>Bathroom Remodeling</h3>
+        <p>Tubs, showers, tile, and fixtures updated for comfort, function, and lasting durability.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64"><path d="M10 20 H54 V54 H10 Z"/><path d="M10 20 L32 8 L54 20"/><path d="M20 54 V36 H44 V54"/></svg>
+        </div>
+        <h3>Basement Finishing</h3>
+        <p>Turning unfinished lower levels into livable space — family rooms, offices, or extra bedrooms.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64"><path d="M6 30 L32 10 L58 30"/><path d="M12 28 V56 H52 V28"/><path d="M26 56 V38 H38 V56"/><path d="M20 44 H24"/><path d="M40 44 H44"/></svg>
+        </div>
+        <h3>New Home Construction</h3>
+        <p>Ground-up residential builds, from foundation to final walkthrough, on your lot or ours.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 64 64"><path d="M4 28 L32 10 L60 28"/><path d="M8 26 V54 H56 V26"/><path d="M8 40 H56"/><rect x="16" y="30" width="14" height="10"/></svg>
+        </div>
+        <h3>Garages &amp; Outbuildings</h3>
+        <p>Detached garages, workshops, and outbuildings built to match your home and your needs.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST ================= -->
+<section class="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Why Homeowners Choose Us</span>
+      <div class="divider"></div>
+      <h2>Built On Trust</h2>
+      <p>Straightforward, local, and dependable — the way residential construction should be.</p>
+    </div>
+    <div class="trust-grid">
+
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 48 48"><path d="M24 6 L40 14 V24 C40 34 33 41 24 44 C15 41 8 34 8 24 V14 Z"/><path d="M17 24 L22 29 L31 19"/></svg></div>
+        <h4>Locally Owned</h4>
+        <p>Based in Nevada, Iowa, serving homeowners throughout the local area.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 48 48"><rect x="8" y="14" width="32" height="24" rx="2"/><path d="M8 22 H40"/><path d="M16 14 V9"/><path d="M32 14 V9"/></svg></div>
+        <h4>Residential &amp; Commercial</h4>
+        <p>Experience across both home and light commercial construction projects.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M24 14 V24 L31 29"/></svg></div>
+        <h4>On-Schedule Service</h4>
+        <p>Projects planned and managed to keep your timeline on track.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 48 48"><path d="M12 34 L20 18 L28 30 L36 12"/><circle cx="20" cy="18" r="2"/><circle cx="28" cy="30" r="2"/><circle cx="36" cy="12" r="2"/></svg></div>
+        <h4>Straight Pricing</h4>
+        <p>Clear, honest project scopes with no hidden surprises along the way.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICE AREA ================= -->
+<section class="area" id="area">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Where We Work</span>
+      <div class="divider"></div>
+      <h2>Proudly Serving Story County</h2>
+      <p>Based in Nevada, Iowa, and serving homeowners throughout the surrounding communities.</p>
+    </div>
+    <div class="area-list reveal">
+      <span>Nevada</span>
+      <span>Ames</span>
+      <span>Story City</span>
+      <span>Colo</span>
+      <span>Slater</span>
+      <span>Huxley</span>
+      <span>Maxwell</span>
+      <span>Cambridge</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Get In Touch</span>
+      <div class="divider"></div>
+      <h2>Start Your Project</h2>
+      <p>Tell us a bit about your project, or give us a call directly.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <h3>Contact Details</h3>
+        <p>Reach out to discuss your remodeling or home building project. We're happy to talk through what you have in mind.</p>
+        <div class="call-block">
+          <span class="label">Call Us Directly</span>
+          <a href="tel:+15152916989">(515) 291-6989</a>
+        </div>
+        <div class="biz-name">
+          <strong>Dan Gorman Construction, Inc.</strong>
+          Nevada, Iowa
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <form id="mockForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(515) 000-0000" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+          <div class="form-thanks" id="formThanks">Thanks — this is a preview form and isn't connected yet. On the live site, your message would be sent directly to Dan Gorman Construction.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="foot-name">Dan Gorman Construction</div>
+  <div>(515) 291-6989</div>
+</footer>
+
+<!-- ================= SPEC FLAG ================= -->
+<div class="spec-flag">Speculative preview build — Urban Niche Co.</div>
+
+<script>
+  // Scroll reveal via IntersectionObserver
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(el){ observer.observe(el); });
+  })();
+
+  // Decorative form handler — local only, no network activity
+  (function(){
+    var form = document.getElementById('mockForm');
+    var thanks = document.getElementById('formThanks');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      thanks.classList.add('show');
+      form.querySelectorAll('input, textarea').forEach(function(f){ f.disabled = true; });
+    });
+  })();
+</script>
+
+</body>
+</html>

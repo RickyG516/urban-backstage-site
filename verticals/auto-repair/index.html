@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>For Auto Repair Shops | Urban Niche Co.</title>
+<meta name="description" content="Private page for auto repair shops. Website design, local SEO, and review management from Urban Niche Co.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:           #0d1117;
+      --bg-2:         #161b22;
+      --surface:      #1c2128;
+      --dark:         #f0f3f6;
+      --ink:          #e6edf3;
+      --muted:        #8b949e;
+      --muted-2:      #6e7681;
+      --accent:       #e36b1e;
+      --accent-deep:  #c25a14;
+      --accent-soft:  rgba(227,107,30,0.15);
+      --accent-glow:  rgba(227,107,30,0.35);
+      --orange:       #e8651a;
+      --orange-soft:  rgba(232,101,26,0.15);
+      --border:       rgba(240,243,246,0.10);
+      --border-a:     rgba(227,107,30,0.30);
+      --shadow:       0 6px 28px rgba(0,0,0,0.4);
+      --shadow-lg:    0 18px 56px rgba(0,0,0,0.5);
+      --font-d:       'Barlow', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --nav-h:        72px;
+      --r:            6px;
+      --r-lg:         12px;
+      --pill:         999px;
+      --ease:         0.28s ease;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-b); background:var(--bg); color:var(--ink); line-height:1.7; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    img { max-width:100%; height:auto; display:block; }
+    a { color:inherit; text-decoration:none; }
+    ul { list-style:none; }
+    h1,h2,h3,h4,h5 { font-family:var(--font-d); font-weight:700; line-height:1.08; letter-spacing:-0.02em; color:var(--ink); }
+    h1 { font-size:clamp(2.6rem,5vw,5rem); font-weight:800; }
+    h2 { font-size:clamp(1.9rem,3.8vw,3.3rem); font-weight:700; }
+    h3 { font-size:1.2rem; font-weight:700; }
+    h4 { font-size:0.92rem; font-weight:700; letter-spacing:0.01em; }
+    p { color:var(--muted); line-height:1.8; }
+    em { color:var(--accent); font-style:normal; font-weight:700; }
+    .container { width:100%; max-width:1220px; margin:0 auto; padding:0 2rem; }
+    .section { padding:7rem 0; position:relative; }
+    .eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.26em; text-transform:uppercase; color:var(--accent); display:inline-flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem; }
+    .eyebrow::before { content:''; display:block; width:28px; height:1px; background:linear-gradient(90deg, var(--accent), var(--orange)); }
+    /* BUTTONS */
+    .btn { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-b); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.95rem 2.1rem; border-radius:var(--r); transition:all var(--ease); white-space:nowrap; cursor:pointer; border:none; }
+    .btn-primary { background:var(--accent); color:#000; }
+    .btn-primary:hover { background:var(--orange); transform:translateY(-2px); box-shadow:0 8px 24px var(--accent-glow); }
+    .btn-accent { background:var(--accent); color:#000; }
+    .btn-accent:hover { background:var(--orange); transform:translateY(-2px); }
+    .btn-ghost { background:transparent; color:var(--ink); border:1px solid var(--border); }
+    .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+    .btn-lg { font-size:0.78rem; padding:1.1rem 2.4rem; }
+    .btn-sm { font-size:0.69rem; padding:0.6rem 1.3rem; }
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .d1 { transition-delay:0.1s; } .d2 { transition-delay:0.2s; } .d3 { transition-delay:0.3s; } .d4 { transition-delay:0.4s; }
+    /* NAV */
+    .nav { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-h); display:flex; align-items:center; background:transparent; transition:background var(--ease); }
+    .nav.scrolled { background:rgba(10,10,10,0.95); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1220px; margin:0 auto; padding:0 2rem; }
+    .nav__logo { display:flex; align-items:center; gap:0.65rem; font-size:1.05rem; font-weight:800; letter-spacing:-0.01em; color:var(--ink); }
+    .nav__logo img { height:32px; width:auto; }
+    .nav__logo em { color:var(--orange); font-style:normal; }
+    .nav__links { display:flex; align-items:center; gap:0; }
+    .nav__link { font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:0.5rem 0.85rem; border-radius:4px; transition:color var(--ease); }
+    .nav__link:hover, .nav__link.active { color:var(--accent); }
+    .nav__right { display:flex; align-items:center; gap:12px; }
+    .nav__phone { font-size:0.72rem; font-weight:500; color:var(--muted); white-space:nowrap; }
+    .nav__phone:hover { color:var(--accent); }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:transparent; border:none; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--ink); border-radius:2px; }
+    .mobile-nav { display:none; position:fixed; top:var(--nav-h); left:0; right:0; background:var(--bg-2); border-bottom:1px solid var(--border); padding:1.25rem 2rem; z-index:999; flex-direction:column; gap:0.2rem; }
+    .mobile-nav.open { display:flex; }
+    .mobile-link { font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:0.8rem 0; border-bottom:1px solid var(--border); }
+    .mobile-cta { margin-top:1rem; display:flex; flex-direction:column; gap:0.6rem; }
+    /* PRIVATE BADGE */
+    .private-badge { display:inline-flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border-a); border-radius:var(--pill); padding:6px 16px; font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:2rem; }
+    .private-dot { width:6px; height:6px; border-radius:50%; background:var(--orange); flex-shrink:0; animation:pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity:1;transform:scale(1); } 50% { opacity:0.4;transform:scale(0.7); } }
+    /* HERO */
+    .hero { min-height:100vh; display:flex; align-items:center; padding-top:calc(var(--nav-h) + 3rem); padding-bottom:3rem; background:var(--bg); position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; top:-80px; right:-120px; width:560px; height:560px; border-radius:50%; background:radial-gradient(circle, var(--accent-soft) 0%, transparent 65%); pointer-events:none; }
+    .hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--accent), transparent); opacity:0.4; }
+    .hero__inner { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:center; position:relative; z-index:2; width:100%; }
+    .hero h1 { margin-bottom:1.5rem; }
+    .hero__sub { font-size:1.05rem; line-height:1.8; color:var(--muted); max-width:50ch; margin-bottom:1rem; }
+    .hero__whisper { font-size:0.82rem; line-height:1.75; color:var(--muted-2); max-width:48ch; margin-bottom:2.25rem; padding-left:1rem; border-left:2px solid var(--accent); }
+    .hero__whisper strong { color:var(--ink); font-weight:700; }
+    .hero__actions { display:flex; gap:0.85rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .hero__proof { display:flex; gap:2.5rem; padding-top:2rem; border-top:1px solid var(--border); flex-wrap:wrap; }
+    .hero__proof-val { font-size:2.2rem; font-weight:800; color:var(--accent); line-height:1; }
+    .hero__proof-label { font-size:0.65rem; color:var(--muted-2); margin-top:4px; letter-spacing:0.1em; text-transform:uppercase; }
+    /* AUDIT CARD */
+    .audit-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.6rem; box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+    .audit-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--accent) 0%, var(--orange) 100%); }
+    .audit-card__header { display:flex; align-items:center; justify-content:space-between; padding-bottom:0.9rem; border-bottom:1px solid var(--border); margin-bottom:1.1rem; }
+    .audit-card__title { font-size:0.88rem; font-weight:700; letter-spacing:0.04em; color:var(--ink); }
+    .audit-card__badge { font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); background:var(--orange-soft); padding:3px 9px; border-radius:var(--pill); }
+    .audit-item { display:flex; align-items:flex-start; gap:0.85rem; padding:0.65rem 0.85rem; border:1px solid var(--border); border-radius:var(--r); background:var(--bg-2); margin-bottom:0.5rem; font-size:0.78rem; }
+    .audit-item__flag { font-weight:700; color:var(--orange); font-size:0.8rem; min-width:75px; flex-shrink:0; }
+    .audit-item__detail { color:var(--muted); line-height:1.45; }
+    .audit-card__footer { display:flex; align-items:center; justify-content:space-between; padding-top:0.85rem; border-top:1px solid var(--border); font-size:0.74rem; }
+    .audit-card__footer-note { color:var(--muted-2); }
+    .audit-card__footer-cta { color:var(--accent); font-weight:700; }
+    /* TICKER */
+    .ticker { background:var(--bg-2); padding:12px 0; overflow:hidden; white-space:nowrap; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .ticker__track { display:inline-flex; animation:ticker 50s linear infinite; }
+    @keyframes ticker { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+    .ticker__item { font-size:0.88rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); padding:0 2rem; display:inline-flex; align-items:center; gap:0.85rem; }
+    .ticker__sep { color:var(--accent); opacity:0.8; }
+    /* PROBLEM */
+    .problem { background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .problem__inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .problem__left h2 { margin:0.4rem 0 1.2rem; }
+    .problem__left > p { font-size:1rem; line-height:1.85; margin-bottom:2rem; max-width:48ch; }
+    .problem__standard { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:var(--r); padding:1.5rem 1.75rem; margin-top:2rem; }
+    .problem__standard-label { font-size:0.63rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:0.6rem; }
+    .problem__standard p { font-size:0.88rem; line-height:1.7; color:var(--muted); }
+    .problem__standard a { color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+    .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+    .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.75rem 1.5rem; transition:all var(--ease); }
+    .stat-card:hover { border-color:var(--border-a); transform:translateY(-3px); }
+    .stat-card__val { font-size:2.8rem; font-weight:800; color:var(--accent); line-height:1; margin-bottom:0.5rem; }
+    .stat-card:nth-child(2) .stat-card__val { color:var(--orange); }
+    .stat-card__label { font-size:0.82rem; color:var(--muted); line-height:1.55; }
+    /* BUILD */
+    .build { background:var(--bg); }
+    .build__header { margin-bottom:4rem; }
+    .build__header h2 { margin:0.4rem 0 1rem; }
+    .build__header p { font-size:1rem; line-height:1.85; max-width:54ch; }
+    .build__main { display:grid; grid-template-columns:1.15fr 1fr; gap:3.5rem; align-items:start; margin-bottom:3.5rem; }
+    .build__feature { background:var(--surface); border:1px solid var(--border-a); border-radius:var(--r-lg); padding:2.5rem; }
+    .build__feature-tag { font-size:0.63rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+    .build__feature h3 { font-size:1.4rem; font-weight:700; margin-bottom:0.85rem; color:var(--ink); }
+    .build__feature > p { font-size:0.9rem; line-height:1.8; margin-bottom:1.5rem; color:var(--muted); }
+    .feature-list { display:flex; flex-direction:column; gap:0.5rem; }
+    .feature-item { font-size:0.82rem; color:var(--muted); display:flex; gap:0.6rem; align-items:flex-start; line-height:1.5; }
+    .feature-item::before { content:'→'; color:var(--accent); flex-shrink:0; font-weight:700; }
+    .build__proof { background:var(--surface); border:1px solid var(--border-a); border-radius:var(--r-lg); padding:2.25rem; }
+    .build__proof-label { font-size:0.63rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:1.25rem; }
+    .build__proof h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin-bottom:0.75rem; }
+    .build__proof p { font-size:0.87rem; line-height:1.7; color:var(--muted); margin-bottom:1.5rem; }
+    .proof-links { display:flex; flex-direction:column; gap:0.65rem; }
+    .proof-link { display:flex; align-items:center; gap:0.75rem; font-size:0.82rem; font-weight:700; color:var(--accent); letter-spacing:0.04em; transition:color var(--ease); text-transform:uppercase; font-size:0.7rem; letter-spacing:0.12em; }
+    .proof-link:hover { color:var(--orange); }
+    .proof-link::before { content:'↗'; font-size:0.9rem; }
+    .build__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+    .build__card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:1.75rem 1.5rem; transition:all var(--ease); position:relative; overflow:hidden; }
+    .build__card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--accent), var(--orange)); transform:scaleX(0); transition:transform var(--ease); transform-origin:left; }
+    .build__card:hover { transform:translateY(-3px); border-color:var(--border-a); }
+    .build__card:hover::before { transform:scaleX(1); }
+    .build__card h4 { margin-bottom:0.45rem; color:var(--ink); }
+    .build__card p { font-size:0.81rem; line-height:1.65; color:var(--muted); }
+    .build__card-price { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-top:0.75rem; }
+    /* PRICING */
+    .pricing { background:var(--bg-2); border-top:1px solid var(--border); }
+    .pricing__header { margin-bottom:3.5rem; }
+    .pricing__header h2 { margin:0.4rem 0 1rem; }
+    .pricing__header p { font-size:1rem; line-height:1.85; max-width:54ch; }
+    .pricing__tiers { display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem; margin-bottom:3.5rem; }
+    .tier { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:2rem 1.6rem; transition:all var(--ease); position:relative; overflow:hidden; display:flex; flex-direction:column; }
+    .tier.highlight { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), var(--shadow-lg); }
+    .tier__badge { position:absolute; top:1rem; right:1rem; font-size:0.58rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#000; background:var(--accent); padding:3px 8px; border-radius:var(--pill); }
+    .tier__name { font-size:0.66rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted-2); margin-bottom:0.85rem; }
+    .tier__price { font-size:2.6rem; font-weight:800; color:var(--ink); line-height:1; margin-bottom:0.3rem; }
+    .tier__note { font-size:0.72rem; color:var(--muted-2); margin-bottom:1.25rem; }
+    .tier__desc { font-size:0.82rem; line-height:1.65; color:var(--muted); flex:1; margin-bottom:1.25rem; }
+    .tier__includes { font-size:0.66rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); padding-top:1rem; border-top:1px solid var(--border); }
+    .pricing__monthly-label { font-size:0.66rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted-2); text-align:center; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
+    .pricing__monthly-label::before, .pricing__monthly-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .monthly-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0.85rem; }
+    .monthly-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:1.1rem 1.25rem; }
+    .monthly-card h5 { font-size:0.78rem; font-weight:700; color:var(--ink); margin-bottom:0.25rem; }
+    .monthly-card p { font-size:0.74rem; color:var(--muted-2); }
+    .pricing__cta { text-align:center; margin-top:2.5rem; }
+    .pricing__cta a { font-size:0.78rem; color:var(--accent); text-decoration:underline; text-underline-offset:2px; }
+    /* START */
+    .start { background:var(--bg); }
+    .start__inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .start__left h2 { margin:0.4rem 0 1.2rem; }
+    .start__left > p { font-size:1rem; line-height:1.85; margin-bottom:1rem; max-width:48ch; }
+    .start__qualifier { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:var(--r); padding:1.25rem 1.5rem; margin:1.5rem 0 2rem; font-size:0.87rem; line-height:1.7; color:var(--muted); }
+    .contact-details { display:flex; flex-direction:column; gap:0.85rem; }
+    .contact-detail { display:flex; align-items:center; gap:0.9rem; font-size:0.87rem; color:var(--muted); }
+    .contact-icon { width:36px; height:36px; border-radius:50%; background:var(--accent-soft); border:1px solid var(--border-a); display:flex; align-items:center; justify-content:center; font-size:0.82rem; flex-shrink:0; color:var(--accent); }
+    .contact-detail a { color:var(--accent); font-weight:600; }
+    .contact-detail a:hover { color:var(--orange); }
+    /* FORM */
+    .form-wrap { background:var(--surface); border:1px solid var(--border-a); border-radius:var(--r-lg); padding:2.5rem; box-shadow:var(--shadow-lg); }
+    .form-wrap__title { font-size:1.4rem; font-weight:700; color:var(--ink); margin-bottom:0.35rem; }
+    .form-wrap__sub { font-size:0.82rem; color:var(--muted-2); margin-bottom:1.75rem; }
+    .form-group { margin-bottom:1rem; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; }
+    .form-label { display:block; font-size:0.61rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted-2); margin-bottom:0.4rem; }
+    .form-input, .form-textarea { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:var(--r); padding:0.8rem 1rem; font-family:var(--font-b); font-size:0.87rem; color:var(--ink); outline:none; transition:all var(--ease); }
+    .form-input::placeholder, .form-textarea::placeholder { color:var(--muted-2); opacity:0.5; }
+    .form-input:focus, .form-textarea:focus { border-color:var(--accent); background:var(--bg-2); box-shadow:0 0 0 3px var(--accent-soft); }
+    .form-textarea { resize:vertical; min-height:110px; }
+    .form-submit { width:100%; margin-top:0.4rem; justify-content:center; }
+    .form-note { text-align:center; font-size:0.7rem; color:var(--muted-2); margin-top:0.85rem; }
+    .anti-pitch { background:var(--bg-2); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:var(--r); padding:0.8rem 1rem; margin:0.85rem 0 1.1rem; font-size:0.77rem; color:var(--muted); line-height:1.55; }
+    .anti-pitch strong { color:var(--ink); }
+    /* FOOTER */
+    .footer { background:var(--bg-2); border-top:1px solid var(--border); padding:2rem 0; }
+    .footer__inner { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
+    .footer__logo { display:flex; align-items:center; gap:0.6rem; font-size:0.92rem; font-weight:700; color:var(--ink); }
+    .footer__logo img { height:24px; width:auto; opacity:0.75; }
+    .footer__logo em { color:var(--orange); font-style:normal; }
+    .footer__links { display:flex; gap:1.5rem; font-size:0.72rem; }
+    .footer__links a { color:var(--muted-2); transition:color var(--ease); }
+    .footer__links a:hover { color:var(--accent); }
+    .footer__note { font-size:0.69rem; color:var(--muted-2); }
+    /* RESPONSIVE */
+    @media (max-width:1024px) {
+      .hero__inner { grid-template-columns:1fr; gap:3rem; }
+      .problem__inner { grid-template-columns:1fr; gap:3rem; }
+      .build__main { grid-template-columns:1fr; }
+      .build__grid { grid-template-columns:1fr 1fr; }
+      .pricing__tiers { grid-template-columns:1fr 1fr; }
+      .monthly-grid { grid-template-columns:1fr 1fr; }
+      .start__inner { grid-template-columns:1fr; gap:3rem; }
+    }
+    @media (max-width:768px) {
+      .nav__links, .nav__right { display:none; }
+      .hamburger { display:flex; }
+      .stats-grid { grid-template-columns:1fr; }
+      .build__grid { grid-template-columns:1fr; }
+      .pricing__tiers { grid-template-columns:1fr; }
+      .monthly-grid { grid-template-columns:1fr 1fr; }
+      .form-row { grid-template-columns:1fr; }
+      .footer__inner { flex-direction:column; text-align:center; }
+      .section { padding:5rem 0; }
+    }
+  </style>
+<!-- HubSpot tracking -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav__inner">
+    <a href="https://urbannicheco.com" class="nav__logo" target="_blank" rel="noopener">
+      <img src="/assets/images/unc-logo-icon.webp" alt="Urban Niche Co." width="40" height="40" />
+      Urban <em>Niche</em>&nbsp;Co.
+    </a>
+    <ul class="nav__links">
+      <li><a href="#problem" class="nav__link">The Problem</a></li>
+      <li><a href="#build" class="nav__link">What We Build</a></li>
+      <li><a href="#pricing" class="nav__link">Pricing</a></li>
+      <li><a href="#start" class="nav__link">Get Started</a></li>
+    </ul>
+    <div class="nav__right">
+      <a href="sms:+15153444053" class="nav__phone">Text (515) 344-4053</a>
+      <a href="#start" class="btn btn-accent btn-sm">Let's Talk</a>
+    </div>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#problem" class="mobile-link">The Problem</a>
+  <a href="#build" class="mobile-link">What We Build</a>
+  <a href="#pricing" class="mobile-link">Pricing</a>
+  <a href="#start" class="mobile-link">Get Started</a>
+  <div class="mobile-cta">
+    <a href="#start" class="btn btn-accent">Let's Talk &rarr;</a>
+  </div>
+</div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero__inner">
+        <div>
+          <div class="private-badge reveal"><div class="private-dot"></div>Private &mdash; Not Indexed</div>
+          <h1 class="reveal d1">Your Shop Is Invisible Online.<br><em>That's Fixable.</em></h1>
+          <p class="hero__sub reveal d2">When someone's car breaks down or needs service, they Google the nearest shop with good reviews. If your site looks like it was built in 2011 or doesn't rank at all — they're driving to your competitor.</p>
+          <p class="hero__whisper reveal d2"><strong>This page isn't public.</strong> We built it after pulling your online presence. Our core is contractors — but the same fundamentals that fill roofing pipelines fill service bays too.</p>
+          <div class="hero__actions reveal d3">
+            <a href="#pricing" class="btn btn-accent btn-lg">See Pricing &rarr;</a>
+            <a href="#start" class="btn btn-ghost btn-lg">Let's Talk</a>
+          </div>
+          <div class="hero__proof reveal d4">
+        <div>
+          <div class="hero__proof-val">30</div>
+          <div class="hero__proof-label">Days to launch</div>
+        </div>
+        <div>
+          <div class="hero__proof-val">24/7</div>
+          <div class="hero__proof-label">AI lead capture</div>
+        </div>
+        <div>
+          <div class="hero__proof-val">0</div>
+          <div class="hero__proof-label">Long-term contracts</div>
+        </div>
+          </div>
+        </div>
+        <div class="reveal d2">
+          <div class="audit-card">
+            <div class="audit-card__header">
+              <div class="audit-card__title">What We Found on Your Shop</div>
+              <div class="audit-card__badge">Site Audit</div>
+            </div>
+            
+      <div class="audit-item">
+        <div class="audit-item__flag">Old design</div>
+        <div class="audit-item__detail">Site looks outdated — customers assume the shop quality matches the website</div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item__flag">Not ranking</div>
+        <div class="audit-item__detail">Not showing up for '[your city] auto repair' or '[your city] oil change'</div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item__flag">Weak reviews</div>
+        <div class="audit-item__detail">Under 50 Google reviews — shops with 200+ dominate local search</div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item__flag">No CTA</div>
+        <div class="audit-item__detail">No 'Schedule Service' or call-to-action visible on mobile</div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-item__flag">Slow load</div>
+        <div class="audit-item__detail">Site takes 5+ seconds on mobile — customers bounce fast</div>
+      </div>
+            <div class="audit-card__footer">
+              <span class="audit-card__footer-note">These are fixable. All of them.</span>
+              <span class="audit-card__footer-cta">We build the fix &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker"><div class="ticker__track"><span class="ticker__item">Auto Repair Websites <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Google Business Profile <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Local SEO <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Reputation Management <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Review Automation <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Google Ads <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Auto Repair Websites <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Google Business Profile <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Local SEO <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Reputation Management <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Review Automation <span class="ticker__sep">&sect;</span></span><span class="ticker__item">Google Ads <span class="ticker__sep">&sect;</span></span></div></div>
+
+  <section class="section problem" id="problem">
+    <div class="container">
+      <div class="problem__inner">
+        <div class="problem__left reveal">
+          <span class="eyebrow">The Real Cost</span>
+          <h2>What a Weak Website<br>Costs a Shop <em>Each Month.</em></h2>
+          <p>Most car owners don't have a 'regular mechanic' anymore — they Google it every time. If you're not the first result with solid reviews and a real website, you're losing jobs you never knew about.</p>
+          <div class="problem__standard">
+            <div class="problem__standard-label">Our Standard</div>
+            <p>Before we run any marketing for a shop — the website has to be solid and your Google presence has to be real. We don't run ads to a site that can't convert. We build it right, then market it. <a href="https://urbannicheco.com/sitemap" target="_blank" rel="noopener">See what we've built for ourselves &rarr;</a></p>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <div class="stat-card__val">85%</div>
+            <div class="stat-card__label">of people search Google before choosing an auto repair shop they've never visited</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-card__val">97%</div>
+            <div class="stat-card__label">of consumers read online reviews for local businesses — your review count is a ranking signal</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-card__val">Pg. 2</div>
+            <div class="stat-card__label">is where shops without a real digital presence live — customers almost never scroll there</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-card__val">3s</div>
+            <div class="stat-card__label">before a slow mobile site loses the customer to the shop ranked right below you</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section build" id="build">
+    <div class="container">
+      <div class="build__header reveal">
+        <span class="eyebrow">What We Build</span>
+        <h2>What We Build<br>for <em>Auto Repair Shops.</em></h2>
+        <p>Fast, trust-building shop sites, local SEO that puts you at the top of the map pack, and review systems that turn every completed job into a new 5-star rating.</p>
+      </div>
+      <div class="build__main">
+        <div class="build__feature reveal">
+          <div class="build__feature-tag">Primary Service &mdash; Website Design</div>
+          <h3>Sites That Actually Work for Your Business</h3>
+          <p>No templates. No drag-and-drop builders. Clean, hand-coded HTML that loads fast, ranks, and converts. Every site we build is engineered to bring in customers — not just look good in a screenshot.</p>
+          <div class="feature-list"><div class="feature-item">Clean HTML site with services, pricing transparency, and 'Schedule Service' CTA</div><div class="feature-item">Google Business Profile optimization — photos, services, response to reviews</div><div class="feature-item">Local SEO targeting 'oil change [city]', 'brake repair [city]', 'mechanic near me'</div><div class="feature-item">Automated review request texts and emails after every completed RO</div><div class="feature-item">Service pages for each offering — SEO value and conversion-ready copy</div><div class="feature-item">Mobile-first build — 80%+ of auto searches happen on phones</div></div>
+        </div>
+        <div class="build__proof reveal d1">
+          <div class="build__proof-label">Proof of What We Do</div>
+          <h3>We've Built This for Ourselves Too.</h3>
+          <p>Our own site has 175+ pages, ranks across Iowa and the Midwest, and drives inbound leads every week. Before we build yours — take a look at ours.</p>
+          <div class="proof-links">
+            <a href="https://urbannicheco.com" target="_blank" rel="noopener" class="proof-link">urbannicheco.com &mdash; Our Main Site</a>
+            <a href="https://urbannicheco.com/sitemap" target="_blank" rel="noopener" class="proof-link">urbannicheco.com/sitemap &mdash; Full Site Map</a>
+          </div>
+        </div>
+      </div>
+      <div class="build__grid">
+          <div class="build__card reveal">
+            <h4>Local SEO</h4>
+            <p>Own your service-area search terms and map pack position</p>
+            <div class="build__card-price"></div>
+          </div>
+          <div class="build__card reveal">
+            <h4>Google Business Profile</h4>
+            <p>Complete setup, optimization, and ongoing management</p>
+            <div class="build__card-price"></div>
+          </div>
+          <div class="build__card reveal">
+            <h4>Reputation Management</h4>
+            <p>Review requests, monitoring, and response across platforms</p>
+            <div class="build__card-price"></div>
+          </div>
+          <div class="build__card reveal">
+            <h4>Content Packs</h4>
+            <p>Monthly social and blog content built for your vertical</p>
+            <div class="build__card-price"></div>
+          </div>
+          <div class="build__card reveal">
+            <h4>Email Marketing</h4>
+            <p>Campaigns and automation sequences that stay in front of your list</p>
+            <div class="build__card-price"></div>
+          </div>
+          <div class="build__card reveal">
+            <h4>PPC / Google Ads</h4>
+            <p>Paid search campaigns targeting high-intent buyers in your market</p>
+            <div class="build__card-price"></div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pricing" id="pricing">
+    <div class="container">
+      <div class="pricing__header reveal">
+        <span class="eyebrow">Pricing</span>
+        <h2>Website First.<br><em>Everything Else Follows.</em></h2>
+        <p>Shops that invest in their online presence before running ads see dramatically better ROI. We build the site, own the map pack, and then add paid search on top. That's the right order.</p>
+      </div>
+      <div class="pricing__tiers">
+        <div class="tier reveal">
+          
+          <div class="tier__name">Landing Page</div>
+          <div class="tier__price">$1,000</div>
+          <div class="tier__note">one-time</div>
+          <div class="tier__desc">Single conversion page — fast, clean, mobile-first. The right call if you have one offer or one service to feature.</div>
+          <div class="tier__includes">1 page · Contact form · Mobile-first · Fast load</div>
+        </div>
+        <div class="tier reveal">
+          
+          <div class="tier__name">HTML Starter</div>
+          <div class="tier__price">$3,000</div>
+          <div class="tier__note">one-time</div>
+          <div class="tier__desc">5–6 page site covering your full service offering. This is our minimum for any ongoing marketing client. We won't run ads to a site below this.</div>
+          <div class="tier__includes">5–6 pages · Blog · SEO-ready · CMS-free</div>
+        </div>
+        <div class="tier highlight reveal">
+          <div class="tier__badge">Most Popular</div>
+          <div class="tier__name">HTML Standard</div>
+          <div class="tier__price">$5,500</div>
+          <div class="tier__note">one-time</div>
+          <div class="tier__desc">Full service + location pages, blog setup, SEO-ready architecture, and the programmatic foundation that compounds over time. The smart long-term play.</div>
+          <div class="tier__includes">10–15 pages · Location pages · Full SEO foundation</div>
+        </div>
+        <div class="tier reveal">
+          
+          <div class="tier__name">HTML Advanced</div>
+          <div class="tier__price">$8,500</div>
+          <div class="tier__note">one-time</div>
+          <div class="tier__desc">Expanded page count, city/service programmatic pages, deep SEO architecture. Built to own a market, not just show up in it.</div>
+          <div class="tier__includes">30+ pages · Programmatic SEO · City targeting</div>
+        </div>
+      </div>
+      <div class="pricing__monthly-label">Once your site is built — what comes next</div>
+      <div class="monthly-grid">
+        <div class="monthly-card reveal">
+          <h5>Local SEO</h5>
+          <p>from $1,500/mo</p>
+        </div>
+        <div class="monthly-card reveal">
+          <h5>GBP Management</h5>
+          <p>from $500/mo</p>
+        </div>
+        <div class="monthly-card reveal">
+          <h5>Reputation Mgmt</h5>
+          <p>from $400/mo</p>
+        </div>
+        <div class="monthly-card reveal">
+          <h5>PPC Management</h5>
+          <p>from $1,200/mo</p>
+        </div>
+        <div class="monthly-card reveal">
+          <h5>Content Pack</h5>
+          <p>from $400/mo</p>
+        </div>
+        <div class="monthly-card reveal">
+          <h5>Email Marketing</h5>
+          <p>from $500/mo</p>
+        </div>
+        <div class="monthly-card reveal">
+          <h5>AI Lead Capture</h5>
+          <p>from $750/mo</p>
+        </div>
+      </div>
+      <div class="pricing__cta">
+        <a href="https://urbannicheco.com/pricing" target="_blank" rel="noopener">See full pricing details on our main site &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section start" id="start">
+    <div class="container">
+      <div class="start__inner">
+        <div class="start__left reveal">
+          <span class="eyebrow">Get Started</span>
+          <h2>Tell Us About<br><em>Your Business.</em></h2>
+          <p>No pitch deck. No obligation. A straight conversation about your site, what we'd build, and what it costs. If we're not the right fit, we'll tell you that too.</p>
+          <div class="start__qualifier">We'll pull up your Google presence, your competitors' rankings, and your current site and walk through it live. Straight assessment, no pitch deck.</div>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="contact-icon">&#9742;</div>
+              <div>Direct line &mdash; <a href="sms:+15153444053">(515) 344-4053</a></div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">&#9993;</div>
+              <div><a href="mailto:ricky@urbannicheco.com">ricky@urbannicheco.com</a></div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">&#9889;</div>
+              <div>Same-day response guaranteed</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal d1">
+          <div class="form-wrap">
+            <div class="form-wrap__title">Send a Message</div>
+            <div class="form-wrap__sub">Goes straight to the founder &mdash; no intake team, no queue.</div>
+            <form action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="d7168473-e607-4b93-ac8b-6f91dfdfaa87">
+              <input type="hidden" name="from_name" value="UNC Ghost Page Inquiry &mdash; Auto Repair &amp; Service">
+              <input type="hidden" name="subject" value="New Lead &mdash; Auto Repair &amp; Service &middot; Urban Niche Co.">
+              <input type="hidden" name="cc" value="ricky@urbannicheco.com">
+              <input type="hidden" name="redirect" value="https://urbannicheco.com/thank-you">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="f-name">Your Name</label>
+                  <input type="text" id="f-name" name="name" placeholder="First &amp; Last" required class="form-input" autocomplete="name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-company">Shop Name</label>
+                  <input type="text" id="f-company" name="company" placeholder="River City Auto &amp; Tire" class="form-input">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-industry">Services Offered</label>
+                <input type="text" id="f-industry" name="industry" placeholder="General repair, oil change, tires, transmission, etc." class="form-input">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="f-email">Email</label>
+                  <input type="email" id="f-email" name="email" placeholder="you@email.com" required class="form-input" autocomplete="email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-phone">Phone</label>
+                  <input type="tel" id="f-phone" name="phone" placeholder="(555) 000-0000" class="form-input" autocomplete="tel">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-msg">What's broken or missing on your current site?</label>
+                <textarea id="f-msg" name="body" placeholder="Describe your current situation — existing site, what you've tried, what's not working." class="form-textarea"></textarea>
+              </div>
+              <div class="anti-pitch">
+                <strong>&#9888; Not a sales call.</strong> If you're pitching SEO services, leads, or tools — don't. Email deliverability is literally what we do. Cold pitches here get reported as spam, which hurts your sender domain. Save us both the time.
+              </div>
+              <button type="submit" class="btn btn-accent btn-lg form-submit">Send Message &rarr;</button>
+              <div class="form-note">Goes straight to the founder. Response within one business day.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">
+          <img src="/assets/images/unc-logo-icon.webp" alt="Urban Niche Co." width="38" height="38" loading="lazy" />
+          Urban <em>Niche</em>&nbsp;Co.
+        </div>
+        <div class="footer__links">
+          <a href="https://urbannicheco.com" target="_blank" rel="noopener">Main Site</a>
+          <a href="https://urbannicheco.com/sitemap" target="_blank" rel="noopener">Sitemap</a>
+          <a href="https://urbannicheco.com/pricing" target="_blank" rel="noopener">Pricing</a>
+        </div>
+        <div class="footer__note">This page is private and not indexed by search engines. &copy; 2026 Urban Niche Co. LLC</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scrolled nav
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+    // Mobile menu
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileNav').classList.toggle('open');
+    });
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+      document.getElementById('mobileNav').classList.remove('open');
+    }));
+    // Reveal on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Active nav link on scroll
+    const sections = ['problem','build','pricing','start'];
+    const navLinks = document.querySelectorAll('.nav__link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) current = id;
+      });
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+{
+  "_comment": "UNC Cold Call Scripts v4 — Ricky's voice. Direct. Human. No pitch deck language.",
+  "_version": "4.0",
+  "_last_updated": "2026-06-15",
+  "greeting": {
+    "default": "Hey — is {first_name} around?",
+    "training_note": "Confirm it's the right person before the opener. If a first name doesn't land ('who?'), you likely have a gatekeeper or a wrong contact — branch accordingly, don't burn the opener on the wrong ears."
+  },
+  "opener": {
+    "_note": "Three styles. Same goal: find out if they want to grow. Nothing else.",
+    "word_for_word": {
+      "label": "Word for Word",
+      "shortcut": "W",
+      "script": "Hey {first_name} — {rep_name} calling, Urban Niche Co. Quick cold call — I do digital marketing for contractors and I was looking at {business_name} before I called. One question: are you actively trying to grow right now, or are you pretty maxed out?",
+      "script_hooked": "Hey {first_name} — {rep_name} calling, Urban Niche Co. Straight up, this is a cold call — but I did homework before I dialed. {ai_hook} One question: are you actively trying to grow right now, or are you pretty maxed out?"
+    },
+    "guided": {
+      "label": "Guided",
+      "shortcut": "G",
+      "anchors": [
+        "Say it's a cold call — upfront, always",
+        "Name: {rep_name}, Urban Niche Co.",
+        "\"I was looking at {business_name} before I called\" — signals you did homework",
+        "ONE question: grow or maxed out? Then shut up."
+      ]
+    },
+    "freestyle": {
+      "label": "Freestyle",
+      "shortcut": "F",
+      "goal": "Get them to say yes or no to growth. That's the whole call right now.",
+      "reminders": [
+        "Lead with the cold call declaration — it builds instant trust",
+        "Keep it under 20 seconds before the question",
+        "Ask, then stop talking. Silence is your friend.",
+        "If they say no: \"Got it. Mind if I send you one thing anyway?\" Then move on."
+      ]
+    },
+    "training_note": "The cold-call declaration up front is the whole trick — it kills the defensiveness before it starts, because you did the thing telemarketers never do: told the truth. When the hook line is loaded (⚡), read it EXACTLY — it's built from their real online presence and it's the moment they realize this isn't a script. Then the growth question, then SILENCE. First one to talk loses."
+  },
+  "responses": {
+    "_note": "They said something. Now branch.",
+    "YES": {
+      "label": "Yes — trying to grow",
+      "script": "Good. So I work exclusively with contractors — {trade_lower}s, roofers, GCs, plumbers, all the trades. I pulled up {business_name} and I noticed {quick_win}. That's fixable and it's costing you calls right now. Can I take 60 seconds and show you what I'm seeing?",
+      "training_note": "They said grow — that's a door, not a sale. Resist pitching services. Name the specific thing you saw ({quick_win}) and ask for 60 seconds. Specific beats smooth every time."
+    },
+    "WHAT_DO_YOU_DO": {
+      "label": "What do you do exactly?",
+      "script": "Short version — websites and Google presence for contractors. Most of the guys I work with were running on referrals only. Now their phone rings from Google cold. I noticed something specific on {business_name} — can I show you in 60 seconds?",
+      "training_note": "Curiosity is buying temperature. Give the short version, then pull the conversation back to THEM with the thing you noticed. If they ask how it works — that routes UP to the audit, never a live explanation."
+    },
+    "BUSY_NOW": {
+      "label": "Busy / bad time",
+      "script": "No problem, I'll be fast. I noticed {quick_win} on your end — worth knowing about. Can I call you back tomorrow morning, 7:30, before the day blows up?",
+      "training_note": "A busy contractor at 2 PM is normal, not a rejection. The 7:30 AM callback offer works because it proves you know their world — nobody else offers to call BEFORE the day starts. Get a specific window, log WARM."
+    },
+    "NOT_INTERESTED": {
+      "label": "Not interested",
+      "script": "Fair. Last thing — if there's real money being left on the table with your online presence, you'd want to know, right? Takes 90 seconds. Let me send a free audit to your email — you can trash it or not. What's a good address?",
+      "training_note": "'Not interested' 5 seconds in is a reflex, not a decision — they're swatting a fly. The audit ask works because it costs them nothing and you framed it as their money, not your product. One swing, then respect the no."
+    },
+    "AT_CAPACITY": {
+      "label": "Slammed / at capacity",
+      "script": "That's the goal. Most contractors come back to us when it slows down — and it always slows down. Mind if I follow up in 90 days? I'll put it in my calendar.",
+      "training_note": "Never argue with full — congratulate it. The 90-day seed works because every contractor knows the slow season is coming. Log PARK and the system recalls them automatically."
+    }
+  },
+  "pitch_30": {
+    "_note": "30 seconds when they ask what you do. Hit the thing they care about — jobs.",
+    "default": "Urban Niche Co. — digital marketing for contractors only. Websites, Google presence, reputation, paid ads if needed. Flat monthly retainer, no markup on ad spend. Most guys start with SEO and a site build. The whole goal is to make their phone ring cold so they stop depending on referrals.",
+    "trade_specific": {
+      "Roofer": "Most roofers in {city} lose storm-season calls to out-of-town chasers who outrank them on Google. We fix that — map pack dominance, storm-response ads, review velocity. You show up first when it matters most.",
+      "HVAC": "HVAC is a same-day search business. When someone's AC quits at 2 PM in July, you need to be the first name they see. We handle GBP, emergency keywords, and off-season content so you're not living and dying by the weather.",
+      "Plumber": "Plumbing is all about being first when there's a problem. GBP dominance, emergency keywords, review velocity — so when a pipe bursts at 11 PM in {city}, you're the first call.",
+      "General Contractor": "GC work runs on trust and portfolio. We build sites that show your work properly, rank you for the right terms in {city}, and set up nurture so long-cycle leads don't go cold on you.",
+      "Electrician": "Most electricians max out on word of mouth and have nothing online. We build GBP, commercial bid SEO, residential local pack — so you're getting calls you didn't have to chase.",
+      "Landscaper": "Landscaping is visual and Instagram is your best sales tool. We handle the content, design-term SEO, and GBP — so your spring rush is pre-booked, not scrambled.",
+      "Concrete": "Concrete jobs are quick decisions — homeowner sees your work, checks reviews, calls the top 3. We put you in that top 3 with review velocity and GBP optimization.",
+      "Painter": "There are 100 painters in every market and almost none are doing real marketing. That's the opening. We build your presence so you're the obvious choice when someone searches painters in {city}.",
+      "Remodeler": "Remodeling has a long sales cycle and most leads die in the middle because there's no follow-up. We handle the portfolio site, SEO, and email sequence so long-cycle leads close instead of going cold.",
+      "Tree Service": "Tree work has two modes — emergency and planned. We make you the first call for both. GBP with emergency badge, storm-response positioning, review management."
+    },
+    "training_note": "The trade-specific line beats the default every time — it proves you know THEIR business, not 'marketing.' Speak it like a diagnosis, not a brochure. If they push on how any of it works: that's the audit's job, not yours."
+  },
+  "dm_busy": {
+    "_note": "DM on the line but distracted. Don't drag it out. Two options, respect their time.",
+    "script": "Hey {first_name} — sounds like I caught you mid-something. Two options: I give you the 30-second version right now, or we pick a specific time. Your call.",
+    "branches": {
+      "NOW": {
+        "label": "Give it to me now",
+        "script": "Perfect. So I pulled up {business_name} before I called and noticed {quick_win}. That's costing you leads right now. I help {trade_lower}s fix that. Can I send you a free 90-second audit so you can see exactly what I'm talking about?"
+      },
+      "CALLBACK": {
+        "label": "Call me back",
+        "capture_prompt": "What time works? Be specific — 'tomorrow morning' isn't a commitment.",
+        "default_outcome": "WARM"
+      },
+      "TEXT_FIRST": {
+        "label": "Text me first",
+        "script": "Done — what number do you want me to text? I'll send it right now with my name so you know it's me."
+      }
+    },
+    "training_note": "Two options, their choice — control disguised as courtesy. Whatever they pick, you win: 30 seconds gets the hook in, a callback window is a WARM log."
+  },
+  "busy_last_swing": {
+    "script": "One thing before I let you go — I was looking at {business_name} online. {quick_win}. That's fixable. Can I at least shoot you a free audit to your email? You look at it on your time.",
+    "default_outcome": "COLD",
+    "training_note": "Last swing means last swing. One sentence, the audit ask, done. If it's still no, log COLD clean — a respectful exit today is a warmer call in 90 days."
+  },
+  "busy_pivot": {
+    "script": "Hey {first_name} — {rep_name} from Urban Niche Co. Sounds like I caught you in the middle of something. Real quick — I was looking at {business_name} online before I called. Can I just leave you a 20-second thing and you tell me if it's worth a callback?",
+    "branches": {
+      "CALLBACK": {
+        "capture_prompt": "Callback window — get specific, not 'sometime this week'",
+        "default_outcome": "WARM"
+      },
+      "TEXT_FIRST": {
+        "script": "Perfect — what's your cell? I'll text you right now so you have my info.",
+        "default_outcome": "WARM"
+      }
+    },
+    "training_note": "You're asking permission for 20 seconds — the easiest yes in sales. Deliver the hook, then let THEM tell you if it's worth a callback. Their answer does your qualifying."
+  },
+  "gatekeeper": {
+    "_note": "Not the DM. Navigate without burning the contact.",
+    "types": {
+      "RECEPTIONIST": {
+        "label": "Receptionist / Office",
+        "script": "Hey — is {first_name} available? It's {rep_name} calling.",
+        "if_not_available": "No problem — what's the best time to catch him? And is this the right number or is there a direct line?"
+      },
+      "SPOUSE": {
+        "label": "Spouse / Partner",
+        "script": "Hey — is {first_name} around? Just {rep_name} calling about their business.",
+        "if_not_available": "No problem — when would be a good time to try back? I don't want to miss him."
+      },
+      "EMPLOYEE": {
+        "label": "Employee / Crew",
+        "script": "Hey — is the owner around? Just need 2 minutes.",
+        "if_not_available": "Got it — what time do they usually wrap up? I'll try back then."
+      },
+      "VOICEMAIL_SYSTEM": {
+        "label": "Hit Voicemail",
+        "vm_script": "Hey {first_name}, {rep_name} from Urban Niche Co. I was looking at {business_name} online and noticed something worth a 2-minute conversation. Call me back when you get a chance — {rep_name}, Urban Niche Co. Talk soon."
+      }
+    },
+    "training_note": "The gatekeeper can't say yes — but they can say no, and they control the callback. Goals in order: DM's name, a specific window, confirm the number, get the GATEKEEPER'S name and use it next call. 'Hey Deb, it's me again' walks through doors cold calls can't."
+  },
+  "audit_offer": {
+    "default": "Here's what I'd like to do — I'll put together a free audit on {business_name}. Shows you exactly what's missing, what it's costing you in calls, and what the fix looks like. No pitch attached. You read it, decide if it's worth a conversation. What's a good email?",
+    "training_note": "The audit is the whole close on a cold call. 'No pitch attached — you read it, you decide' removes every reason to say no. Get the email, confirm it back letter by letter, log WARM. A wrong email is a lost lead."
+  },
+  "objections": {
+    "not_interested": {
+      "label": "Not interested",
+      "say_this": "Totally fair. Quick one before I go — if there's real money slipping through your online presence right now, you'd want to know, right? Let me send the audit. You look at it on your time. What's a good email?",
+      "training_note": "This is the swat, not the verdict. Frame flips it: it's THEIR money slipping, not your product being sold. One ask, then out."
+    },
+    "no_budget": {
+      "label": "No budget / can't afford it",
+      "say_this": "Makes sense. What are you spending on marketing right now — including anything you're doing yourself? Because most guys I talk to are spending more than they think and getting less than they should. The audit would show you the gap. Free to look at.",
+      "training_note": "'No budget' usually means 'no perceived value yet.' The spend question makes them do the math out loud — most don't know their own number, and not knowing IS the gap you point at."
+    },
+    "already_have_agency": {
+      "label": "Already have someone",
+      "say_this": "Smart — who handles it? I ask because most agencies working with contractors are generalists. We only do contractors. What's your {trade_lower} rank looking like in {city} right now — are you in the map pack?",
+      "training_note": "Never trash the agency — ask what they handle. The map-pack question is the tell: if the current people were winning it, he'd say so instantly. Hesitation = your opening. Contractors-only is the differentiator; say it once and let it sit."
+    },
+    "too_busy": {
+      "label": "Too busy",
+      "say_this": "You and every contractor I talk to. Here's the thing — busy is fine until it isn't. Can I send the audit? You look at it in 90 seconds, and if it's not interesting you trash it. No callback required.",
+      "training_note": "Busy is the best objection there is — it means the business works and the money's real. 'Busy is fine until it isn't' lands because every contractor has lived the slow season. The audit asks for zero minutes of his day."
+    },
+    "dont_believe_it_works": {
+      "label": "Tried marketing before, didn't work",
+      "say_this": "What did you try? Because most of what gets sold to contractors is garbage — templated, not built for your trade or your market. I only do {trade_lower}s. That's the whole difference.",
+      "training_note": "He's not wrong — most contractor marketing IS garbage. Agree first, then ask what they tried. Diagnosing the old failure makes you the guy who armed him, not the next guy selling him. Trade-only focus is the proof point."
+    },
+    "send_me_something": {
+      "label": "Just send me something",
+      "say_this": "Done. I'll send the audit to your email — takes 90 seconds to read. What's the best address? And I'll follow up in 3 days — if it's not interesting, just say so and I'm gone.",
+      "training_note": "Convert the brush-off into a contract: audit + a named 3-day follow-up + a clean out ('say so and I'm gone'). That last clause is what makes them actually read it."
+    }
+  },
+  "trade_q2": {
+    "Roofer": {
+      "q2_line": "Quick gut check — when someone in {city} searches 'roofer near me' or 'roof repair {city}', are you showing up in the top 3 on Google Maps?",
+      "pain_hook": "Storm chasers out of state outrank local guys every season because they run a playbook most locals don't know about. You shouldn't be losing your own market to out-of-towners."
+    },
+    "HVAC": {
+      "q2_line": "When your AC call season hits and someone searches 'AC repair {city}' at 2 in the afternoon — are you one of the first names they see?",
+      "pain_hook": "The chain services are bidding on those searches year-round. If you're not actively holding that ground, they're taking calls that should be yours."
+    },
+    "Plumber": {
+      "q2_line": "If someone had a burst pipe right now and Googled '{city} plumber' — would you come up in the first 3 results?",
+      "pain_hook": "Emergency plumbing is almost entirely decided in 30 seconds on a phone. The first 3 names win. Everything else is invisible."
+    },
+    "Electrician": {
+      "q2_line": "Are you picking up commercial leads through your website, or is it still mostly referrals and repeat?",
+      "pain_hook": "Commercial electrical work gets searched heavily — most electricians have zero presence for those terms. It's wide open in most markets."
+    },
+    "Landscaper": {
+      "q2_line": "Is your Instagram showing the kind of work that makes someone call you before they call anyone else?",
+      "pain_hook": "Landscaping is the most visual trade there is. If your before/afters aren't on Instagram, you're invisible to the clients willing to spend real money."
+    },
+    "General Contractor": {
+      "q2_line": "Are you getting leads from your website, or does everything still come in through word of mouth?",
+      "pain_hook": "GC projects run 60-90 day sales cycles. The guys winning online are staying top of mind through that whole window. Everyone else is forgotten by the time the homeowner is ready."
+    },
+    "Painter": {
+      "q2_line": "If someone Googled 'painter in {city}' right now — would they find you, or one of the 50 other painters in the market?",
+      "pain_hook": "Almost no painters are doing real marketing. The one who does owns the market."
+    },
+    "Concrete": {
+      "q2_line": "When someone's shopping for a driveway or patio, they usually get 3 quotes. Are you showing up before they even start making calls?",
+      "pain_hook": "Reviews and Google Maps placement determine whether you're in those 3 calls or not. Most concrete guys have under 30 reviews — the bar is low."
+    },
+    "Remodeler": {
+      "q2_line": "Are you capturing leads online during the research phase — when people are still deciding who to even call?",
+      "pain_hook": "Remodeling clients spend weeks doing research before they contact anyone. The business that shows up during that window has a massive edge."
+    },
+    "Tree Service": {
+      "q2_line": "When a tree comes down in a storm at 2 AM in {city} — are you the first name someone finds when they grab their phone?",
+      "pain_hook": "Storm response is the highest-value call a tree service can get. It goes to whoever shows up first on Google. Usually not the local guys."
+    },
+    "Unknown": {
+      "q2_line": "Quick gut check — when someone in {city} searches for what you do, are you showing up on the first page of Google?",
+      "pain_hook": "Most local contractors are invisible online. The one that's not is picking up all the cold leads."
+    },
+    "_audit_offer_universal": "Let me put together a free audit on {business_name} — I'll show you exactly where you stand and what it would take to fix it. No pitch attached. What's a good email?"
+  },
+  "tech_deflect": {
+    "how_it_works": {
+      "say_this": "Honest answer — the how is a whole document, and winging it on the phone would do you a disservice. That's exactly what the audit shows: what's broken, what it's costing you, and what the fix looks like, in plain English. What I can tell you now is the outcome — when someone in {city} searches for a {trade_lower} at 11 at night, you're one of the first three names they see.",
+      "training_note": "Never explain mechanics on a cold call — every technical answer invites a harder question, and the call dies in the weeds. Route it to the audit and hand back an outcome. You're the diagnostician, not the parts counter."
+    },
+    "why_it_helps": {
+      "say_this": "Because the guys getting the calls you're not getting aren't better {trade_lower}s — they're just the first three names on the screen. That's the entire game. The audit shows exactly where you sit today and what moves the needle for YOUR trade in YOUR market.",
+      "training_note": "Keep the outcome about THEIR market and THEIR competitors. Abstract marketing talk loses contractors; 'the guy across town is eating your calls' does not."
+    }
+  }
+}

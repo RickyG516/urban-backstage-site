@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Midwest Pest Management & Lawn Services | Davenport, IA Pest Control</title>
+<meta name="description" content="Midwest Pest Management & Lawn Services, LLC provides residential and commercial pest control in Davenport, Iowa and surrounding Quad Cities communities. Call (563) 324-2625.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1c2a33;
+    --dark-2: #223440;
+    --accent: #f4b400;
+    --accent-dark: #c98f00;
+    --light: #f6f7f8;
+    --gray: #7f8c94;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: var(--dark);
+    background: var(--light);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Oswald', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  a { color: inherit; }
+
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--dark);
+    font-family: 'Oswald', Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 2px solid var(--accent);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn:hover {
+    background: transparent;
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .btn-outline:hover {
+    background: var(--accent);
+    color: var(--dark);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: var(--light);
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(244,180,0,0.14) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(244,180,0,0.10) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 14px),
+      linear-gradient(135deg, #0f171d 0%, #1c2a33 45%, #24363f 100%);
+    background-size: 140% 140%, 140% 140%, auto, 140% 140%;
+    animation: kenburns 22s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28,42,51,0.35) 0%, rgba(28,42,51,0.75) 100%);
+    z-index: 1;
+  }
+
+  @keyframes kenburns {
+    0% {
+      transform: scale(1) translate(0, 0);
+      background-position: 0% 0%, 100% 100%, 0 0, 0% 0%;
+    }
+    100% {
+      transform: scale(1.18) translate(-2%, -1%);
+      background-position: 10% 15%, 85% 80%, 0 0, 10% 5%;
+    }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    padding: 0 24px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    color: var(--accent);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    border: 1px solid var(--accent);
+    padding: 6px 16px;
+    border-radius: 30px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.4);
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .hero p.sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #dfe6ea;
+    max-width: 600px;
+    margin: 0 auto 34px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: 90px 24px;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 56px;
+  }
+
+  .section-head .kicker {
+    color: var(--accent-dark);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .section-head p {
+    color: var(--gray);
+    font-size: 1.05rem;
+  }
+
+  .light-bg { background: var(--light); }
+  .dark-bg {
+    background: linear-gradient(180deg, var(--dark) 0%, var(--dark-2) 100%);
+    color: var(--light);
+  }
+  .dark-bg .section-head p { color: #b9c3ca; }
+  .dark-bg .section-head h2 { color: var(--light); }
+
+  /* reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .service-card {
+    background: #fff;
+    border: 1px solid #e6e8ea;
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 32px 26px;
+    text-align: left;
+    box-shadow: 0 6px 18px rgba(28,42,51,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(28,42,51,0.12);
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    color: var(--dark);
+  }
+
+  .service-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--dark);
+    fill: none;
+    stroke-width: 1.6;
+  }
+
+  .service-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+
+  .service-card p {
+    color: var(--gray);
+    font-size: 0.96rem;
+  }
+
+  /* ---------- SERVICE AREA ---------- */
+  .area-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .area-chip {
+    border: 1px solid rgba(244,180,0,0.5);
+    color: var(--accent);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+  }
+
+  .area-note {
+    text-align: center;
+    max-width: 640px;
+    margin: 36px auto 0;
+    color: #b9c3ca;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- TRUST ---------- */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .trust-card {
+    text-align: center;
+    padding: 30px 18px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e6e8ea;
+  }
+
+  .trust-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 16px;
+  }
+
+  .trust-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--accent-dark);
+    fill: none;
+    stroke-width: 1.6;
+  }
+
+  .trust-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .trust-card p {
+    font-size: 0.9rem;
+    color: var(--gray);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    color: var(--light);
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    margin-bottom: 18px;
+  }
+
+  .contact-info p {
+    color: #b9c3ca;
+    margin-bottom: 28px;
+  }
+
+  .call-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(244,180,0,0.08);
+    border: 1px solid rgba(244,180,0,0.35);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+
+  .call-box svg {
+    width: 34px;
+    height: 34px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.6;
+    flex-shrink: 0;
+  }
+
+  .call-box a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.35rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+
+  .call-box .call-label {
+    display: block;
+    color: #b9c3ca;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .biz-name {
+    font-family: 'Oswald', sans-serif;
+    color: var(--light);
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-form {
+    background: #fff;
+    border-radius: 10px;
+    padding: 34px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  }
+
+  .contact-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+
+  .contact-form label:first-child { margin-top: 0; }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d7dbde;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark);
+    background: #fbfbfb;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .contact-form .btn {
+    width: 100%;
+    margin-top: 24px;
+    border-color: var(--dark);
+    background: var(--dark);
+    color: var(--light);
+  }
+
+  .contact-form .btn:hover {
+    background: transparent;
+    color: var(--dark);
+  }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  .thanks-box {
+    display: none;
+    text-align: center;
+    padding: 40px 10px;
+  }
+
+  .thanks-box.show { display: block; }
+  .contact-form.hide-fields { display: none; }
+
+  .thanks-box svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--accent-dark);
+    fill: none;
+    stroke-width: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .thanks-box h3 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .thanks-box p {
+    color: var(--gray);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #101a20;
+    color: #8b9aa4;
+    text-align: center;
+    padding: 34px 20px;
+    font-size: 0.9rem;
+  }
+
+  footer .footer-name {
+    font-family: 'Oswald', sans-serif;
+    color: var(--light);
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ---------- FLAG ---------- */
+  .preview-flag {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(28,42,51,0.92);
+    color: #d9dde0;
+    font-size: 0.7rem;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border: 1px solid rgba(244,180,0,0.4);
+    z-index: 999;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 0.2px;
+    pointer-events: none;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 880px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    section { padding: 60px 18px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 100vh; }
+    .preview-flag {
+      font-size: 0.62rem;
+      padding: 6px 9px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Davenport, Iowa</span>
+    <h1>Midwest Pest Management &amp; Lawn Services<span>.</span><br>Trusted Local <span>Pest Control</span></h1>
+    <p class="sub">Residential and commercial pest control for Davenport and the surrounding Quad Cities area. Straightforward service, scheduled on your time.</p>
+    <a href="#contact" class="btn">Request Service</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="light-bg" id="services">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="kicker">What We Handle</span>
+      <h2>Pest Control Services</h2>
+      <p>Full-service protection for homes and businesses throughout the Davenport area.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="26" r="9"/><line x1="24" y1="8" x2="24" y2="17"/><line x1="14" y1="12" x2="19" y2="19"/><line x1="34" y1="12" x2="29" y2="19"/><line x1="8" y1="26" x2="15" y2="26"/><line x1="40" y1="26" x2="33" y2="26"/><line x1="10" y1="38" x2="17" y2="32"/><line x1="38" y1="38" x2="31" y2="32"/></svg>
+        </div>
+        <h3>General Pest Control</h3>
+        <p>Ants, spiders, roaches, and other common household invaders identified and treated at the source.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M10 40 L24 10 L38 40 Z"/><line x1="16" y1="30" x2="32" y2="30"/><line x1="20" y1="22" x2="28" y2="22"/><line x1="24" y1="10" x2="24" y2="40"/></svg>
+        </div>
+        <h3>Termite Inspection &amp; Treatment</h3>
+        <p>Thorough inspections and targeted treatment plans to protect your property's structure.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><ellipse cx="20" cy="24" rx="12" ry="7"/><path d="M32 24 L42 18"/><path d="M32 22 L40 14"/><circle cx="14" cy="22" r="1.4" fill="#1c2a33" stroke="none"/><line x1="15" y1="30" x2="10" y2="36"/><line x1="20" y1="31" x2="18" y2="38"/><line x1="25" y1="30" x2="26" y2="37"/></svg>
+        </div>
+        <h3>Rodent Control</h3>
+        <p>Mice and rat exclusion, trapping, and prevention to keep your property rodent-free.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><ellipse cx="24" cy="22" rx="4" ry="9"/><path d="M24 13 C24 13 18 8 12 10"/><path d="M24 13 C24 13 30 8 36 10"/><line x1="24" y1="31" x2="24" y2="40"/><line x1="20" y1="35" x2="24" y2="40"/><line x1="28" y1="35" x2="24" y2="40"/></svg>
+        </div>
+        <h3>Mosquito Treatment</h3>
+        <p>Yard and property treatments to reduce mosquito populations for outdoor comfort.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M24 8 C30 8 33 14 33 20 C33 28 24 40 24 40 C24 40 15 28 15 20 C15 14 18 8 24 8 Z"/><line x1="19" y1="18" x2="29" y2="18"/><line x1="19" y1="24" x2="29" y2="24"/></svg>
+        </div>
+        <h3>Wasp &amp; Hornet Removal</h3>
+        <p>Safe removal of active nests around eaves, sheds, and outdoor living spaces.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><line x1="24" y1="24" x2="24" y2="14"/><line x1="24" y1="24" x2="31" y2="27"/><circle cx="24" cy="24" r="2" fill="#1c2a33" stroke="none"/></svg>
+        </div>
+        <h3>Quarterly Prevention Plans</h3>
+        <p>Scheduled year-round visits designed to stop pest problems before they start.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="dark-bg" id="area">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="kicker">Where We Work</span>
+      <h2>Proudly Serving the Quad Cities Area</h2>
+      <p>Based in Davenport, Iowa and serving the surrounding communities.</p>
+    </div>
+
+    <div class="area-wrap reveal">
+      <span class="area-chip">Davenport</span>
+      <span class="area-chip">Bettendorf</span>
+      <span class="area-chip">Eldridge</span>
+      <span class="area-chip">Le Claire</span>
+      <span class="area-chip">Blue Grass</span>
+      <span class="area-chip">Walcott</span>
+      <span class="area-chip">Long Grove</span>
+      <span class="area-chip">Princeton</span>
+    </div>
+    <p class="area-note reveal">Don't see your town listed? Reach out and ask — service area details are confirmed at time of scheduling.</p>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="light-bg" id="trust">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="kicker">Why Homeowners Call Us</span>
+      <h2>What You Can Expect</h2>
+    </div>
+
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><path d="M24 6 L40 12 V22 C40 32 33 40 24 43 C15 40 8 32 8 22 V12 Z"/><path d="M17 24 L22 29 L31 18"/></svg>
+        </div>
+        <h3>Locally Owned</h3>
+        <p>A Davenport-based operation serving the community we're part of.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><rect x="8" y="14" width="20" height="24" rx="2"/><path d="M28 20 H36 L40 26 V38 H28"/><circle cx="16" cy="38" r="3"/><circle cx="34" cy="38" r="3"/></svg>
+        </div>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Service plans built for homes, rental properties, and local businesses alike.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="25" r="15"/><line x1="24" y1="16" x2="24" y2="25"/><line x1="24" y1="25" x2="30" y2="29"/><rect x="18" y="4" width="12" height="5" rx="1"/></svg>
+        </div>
+        <h3>On-Schedule Service</h3>
+        <p>Appointments that show up when they're supposed to, every time.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><path d="M10 34 V14 H32 L38 20 V34 Z"/><line x1="16" y1="22" x2="28" y2="22"/><line x1="16" y1="28" x2="24" y2="28"/></svg>
+        </div>
+        <h3>Straight Pricing</h3>
+        <p>Clear, honest quotes explained up front before any work begins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="dark-bg" id="contact">
+  <div class="section-inner contact-wrap">
+    <div class="contact-info reveal">
+      <span class="kicker" style="color:var(--accent);">Get In Touch</span>
+      <h2>Ready to Handle Your Pest Problem?</h2>
+      <p>Call now or send a message and describe what's going on — we'll follow up to get you scheduled.</p>
+
+      <div class="call-box">
+        <svg viewBox="0 0 24 24"><path d="M6 3 L9 3 L11 8 L8 10 C9 13 11 15 14 16 L16 13 L21 15 L21 18 C21 20 19 21 17 21 C10 21 3 14 3 7 C3 5 4 3 6 3 Z"/></svg>
+        <div>
+          <span class="call-label">Call Us Directly</span>
+          <a href="tel:5633242625">(563) 324-2625</a>
+        </div>
+      </div>
+      <p class="biz-name">Midwest Pest Management &amp; Lawn Services, LLC</p>
+    </div>
+
+    <div class="reveal">
+      <form class="contact-form" id="contactForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="off">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(563) 555-0123" autocomplete="off">
+
+        <label for="message">What's going on?</label>
+        <textarea id="message" name="message" placeholder="Tell us a little about the pest issue..."></textarea>
+
+        <button type="submit" class="btn">Send Message</button>
+        <p class="form-note">This is a preview form and is not connected to a live inbox.</p>
+      </form>
+
+      <div class="thanks-box" id="thanksBox">
+        <svg viewBox="0 0 24 24"><path d="M4 12 L10 18 L20 6"/></svg>
+        <h3>Thanks — Message Received</h3>
+        <p>This is a preview only. No message was actually sent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Midwest Pest Management</div>
+  <div>(563) 324-2625</div>
+</footer>
+
+<div class="preview-flag">Speculative preview build — Urban Niche Co.</div>
+
+<script>
+  // Scroll reveal
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    items.forEach(function (el) { observer.observe(el); });
+  })();
+
+  // Decorative contact form — local only, no network activity
+  (function () {
+    var form = document.getElementById('contactForm');
+    var thanks = document.getElementById('thanksBox');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.classList.add('hide-fields');
+      thanks.classList.add('show');
+    });
+  })();
+</script>
+
+</body>
+</html>

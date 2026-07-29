@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Lake Park Electric | Sheboygan, WI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark:#151b26;
+    --dark2:#1e2635;
+    --accent:#d6a419;
+    --accent2:#f0cf6e;
+    --light:#f4f4f2;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Open Sans',sans-serif;color:var(--dark);background:var(--light);line-height:1.6;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px;}
+  a{text-decoration:none;color:inherit;}
+
+  .hero{position:relative;height:92vh;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--dark);}
+  .hero-bg{position:absolute;inset:-10%;background:
+      radial-gradient(circle at 22% 24%, rgba(214,164,25,0.3), transparent 55%),
+      radial-gradient(circle at 80% 74%, rgba(240,207,110,0.18), transparent 50%),
+      linear-gradient(135deg, #151b26 0%, #1e2635 55%, #262f40 100%);
+    animation: kenburns 22s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.14) translate(-2%,-3%);}
+  }
+  .hero-content{position:relative;z-index:2;text-align:center;color:var(--white);padding:0 20px;max-width:840px;}
+  .hero-content .eyebrow{color:var(--accent2);font-weight:600;letter-spacing:2px;font-size:0.85rem;margin-bottom:18px;display:block;}
+  .hero-content h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:700;margin-bottom:18px;line-height:1.1;}
+  .hero-content p{font-size:1.15rem;color:#d5d9e0;max-width:600px;margin:0 auto 32px;}
+  .btn{display:inline-block;background:var(--accent);color:var(--dark);padding:16px 38px;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:2px;transition:background 0.25s ease;font-size:0.95rem;}
+  .btn:hover{background:var(--accent2);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  section{padding:90px 24px;}
+  .section-head{text-align:center;max-width:700px;margin:0 auto 56px;}
+  .section-head .eyebrow{color:var(--accent);font-weight:700;letter-spacing:2px;font-size:0.82rem;text-transform:uppercase;}
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-top:10px;color:var(--dark);}
+
+  .services-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;}
+  .service-card{background:var(--white);border-radius:6px;padding:36px 28px;box-shadow:0 4px 18px rgba(21,27,38,0.08);border-top:4px solid var(--accent);}
+  .service-card svg{width:44px;height:44px;stroke:var(--accent);margin-bottom:18px;}
+  .service-card h3{font-size:1.15rem;margin-bottom:10px;color:var(--dark);}
+  .service-card p{font-size:0.95rem;color:#464c58;}
+
+  .trust-section{background:var(--dark);color:var(--white);}
+  .trust-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;}
+  .trust-item{text-align:center;padding:24px 12px;}
+  .trust-item svg{width:38px;height:38px;stroke:var(--accent2);margin-bottom:14px;}
+  .trust-item h3{font-size:1.05rem;color:var(--white);margin-bottom:8px;}
+  .trust-item p{font-size:0.9rem;color:#a8adb8;}
+
+  .area-section{background:var(--light);}
+  .area-list{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+  .area-chip{background:var(--white);border:2px solid var(--accent);color:var(--dark);padding:10px 22px;border-radius:30px;font-family:'Oswald',sans-serif;font-weight:500;font-size:0.95rem;}
+
+  .contact-section{background:var(--dark2);color:var(--white);}
+  .contact-wrap{max-width:640px;margin:0 auto;}
+  .demo-form{display:grid;gap:16px;margin-top:30px;}
+  .demo-form input, .demo-form textarea{width:100%;padding:14px 16px;border-radius:4px;border:1px solid #333d4f;background:#1a2230;color:var(--white);font-family:'Open Sans',sans-serif;font-size:0.95rem;}
+  .demo-form button{background:var(--accent);color:var(--dark);border:none;padding:15px;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:4px;cursor:not-allowed;}
+  .form-note{font-size:0.8rem;color:#828a99;margin-top:14px;text-align:center;}
+
+  footer{background:var(--dark);color:#9aa0ac;text-align:center;padding:40px 20px;font-size:0.9rem;}
+  footer strong{color:var(--white);font-family:'Oswald',sans-serif;font-size:1.1rem;letter-spacing:0.5px;}
+
+  .spec-flag{position:fixed;bottom:16px;right:16px;background:rgba(21,27,38,0.92);color:var(--accent2);font-size:0.72rem;padding:8px 14px;border-radius:4px;z-index:50;font-family:'Open Sans',sans-serif;letter-spacing:0.3px;border:1px solid var(--accent);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Sheboygan, Wisconsin</span>
+    <h1>Lake Park Electric</h1>
+    <p>Licensed electrical work for homes and businesses across the Sheboygan area, done safe and done right.</p>
+    <a href="#contact" class="btn">Request Service</a>
+  </div>
+</div>
+
+<section id="services">
+  <div class="section-head reveal">
+    <span class="eyebrow">What We Do</span>
+    <h2>Electrical Services</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+      <h3>Panel Upgrades</h3>
+      <p>Old fuse boxes and undersized panels replaced with safe, modern capacity.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+      <h3>Wiring &amp; Rewiring</h3>
+      <p>New construction wiring and rewiring for older homes brought up to code.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 9v11"/></svg>
+      <h3>Lighting Installation</h3>
+      <p>Indoor and outdoor lighting installed clean, wired to last.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+      <h3>Outlets &amp; Switches</h3>
+      <p>New circuits, GFCI upgrades, and switch repairs handled fast.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V9l6-5 6 5v11M10 20v-6h4v6"/></svg>
+      <h3>Generator Hookups</h3>
+      <p>Backup power wiring for reliable protection through winter outages.</p>
+    </div>
+    <div class="service-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+      <h3>Small Commercial Electrical</h3>
+      <p>Ongoing electrical work for local shops and small businesses.</p>
+    </div>
+  </div>
+</section>
+
+<section class="trust-section">
+  <div class="section-head reveal">
+    <span class="eyebrow" style="color:var(--accent2);">Why Sheboygan Calls Us</span>
+    <h2 style="color:#fff;">Built On Straight Answers</h2>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-item reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/></svg>
+      <h3>Locally Owned</h3>
+      <p>Based in Sheboygan, serving the area directly for years.</p>
+    </div>
+    <div class="trust-item reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="7" height="14" rx="1"/><path d="M14 3h7v18h-7z"/></svg>
+      <h3>Residential &amp; Commercial</h3>
+      <p>Homes and small businesses, licensed work every time.</p>
+    </div>
+    <div class="trust-item reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <h3>On-Schedule Service</h3>
+      <p>Appointments that start when they say they will.</p>
+    </div>
+    <div class="trust-item reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      <h3>Straight Pricing</h3>
+      <p>Clear scope before work starts. No surprise line items after.</p>
+    </div>
+  </div>
+</section>
+
+<section id="area" class="area-section">
+  <div class="section-head reveal">
+    <span class="eyebrow">Where We Work</span>
+    <h2>Service Area</h2>
+  </div>
+  <div class="area-list">
+    <span class="area-chip reveal">Sheboygan</span>
+    <span class="area-chip reveal">Sheboygan Falls</span>
+    <span class="area-chip reveal">Plymouth</span>
+    <span class="area-chip reveal">Kohler</span>
+    <span class="area-chip reveal">Cedar Grove</span>
+    <span class="area-chip reveal">Oostburg</span>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="contact-wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:var(--accent2);">Get In Touch</span>
+      <h2 style="color:#fff;">Request Service</h2>
+    </div>
+    <form class="demo-form reveal" onsubmit="return false;">
+      <input type="text" placeholder="Name" disabled>
+      <input type="text" placeholder="Phone" disabled>
+      <input type="text" placeholder="Address / Service Area" disabled>
+      <textarea rows="4" placeholder="Describe what you need done" disabled></textarea>
+      <button type="submit" disabled>Submit Request</button>
+    </form>
+    <p class="form-note">Preview form &mdash; not connected. For demonstration only.</p>
+  </div>
+</section>
+
+<footer>
+  <strong>Lake Park Electric</strong><br>
+  Sheboygan, Wisconsin
+</footer>
+
+<div class="spec-flag">Speculative preview build &mdash; Urban Niche Co.</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

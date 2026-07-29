@@ -1,0 +1,12 @@
+{
+  "_comment": "Discovery call outcomes — typically scheduled 15-30 min calls",
+  "_version": "1.0",
+  "outcomes": [
+    { "code": "HOT",                "label": "HOT — START",  "hotkey": "h", "color": "#e36b1e", "audio": "cha-ching", "hubspot_stage": "Proposal Out",          "description": "Verbal yes to start this week — hard close landed" },
+    { "code": "PROPOSAL_REQUESTED", "label": "PROPOSAL",   "hotkey": "p", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Pricing Sent",          "description": "They want a proposal — clear close attempt" },
+    { "code": "FOLLOW_UP_BOOKED",   "label": "FOLLOW-UP",  "hotkey": "f", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Second meeting booked" },
+    { "code": "INFO_REQUESTED",     "label": "INFO",       "hotkey": "i", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Send info package, follow up later" },
+    { "code": "NOT_FIT",            "label": "NOT A FIT",  "hotkey": "x", "color": "#ef4444", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Mismatch — wrong service, wrong budget, wrong timing" },
+    { "code": "NO_SHOW",            "label": "NO SHOW",    "hotkey": "n", "color": "#94a3b8", "audio": "click",     "hubspot_stage": "First Touch Sent",      "description": "They didn't show up — reschedule" }
+  ]
+}

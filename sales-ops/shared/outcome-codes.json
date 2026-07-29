@@ -1,0 +1,15 @@
+{
+  "_comment": "9 outcome codes shared across all cockpits. Order = display order on terminal screen buttons.",
+  "_version": "1.0",
+  "outcomes": [
+    { "code": "HOT",     "label": "HOT",       "hotkey": "h", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Call Scheduled",      "description": "Booked / qualified now" },
+    { "code": "WARM",    "label": "WARM",      "hotkey": "w", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Interested, needs callback" },
+    { "code": "PARK",    "label": "PARK",      "hotkey": "p", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Not now, follow up later" },
+    { "code": "COLD",    "label": "COLD",      "hotkey": "c", "color": "#94a3b8", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Not interested" },
+    { "code": "COLD-GK", "label": "COLD-GK",   "hotkey": "k", "color": "#64748b", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Gatekeeper wall" },
+    { "code": "DNC",     "label": "DNC",       "hotkey": "d", "color": "#ef4444", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Do not call" },
+    { "code": "WRG",     "label": "WRG",       "hotkey": "x", "color": "#a78bfa", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Wrong number" },
+    { "code": "NA",      "label": "NO ANS",    "hotkey": "n", "color": "#64748b", "audio": "click",     "hubspot_stage": "First Touch Sent",      "description": "No answer / voicemail" },
+    { "code": "REF",     "label": "REFERRAL",  "hotkey": "r", "color": "#f97316", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Referred to another DM" }
+  ]
+}

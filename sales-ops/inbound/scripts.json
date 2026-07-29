@@ -1,0 +1,68 @@
+{
+  "_comment": "Inbound lead intake. Speed is the moat. Under 5 min = they're still on the form page.",
+  "_version": "2.0",
+  "_last_updated": "2026-06-15",
+  "intro": {
+    "default": "Hey {first_name}, this is {rep_name} from Urban Niche Co. — you just filled out the form about {service_interest}. I wanted to catch you while it's fresh. Got 5 minutes?",
+    "training_note": "First to respond wins. Half these leads filled out three other forms today — the contractor marketing space answers in hours, you answer in minutes. Sound glad they reached out, not hungry. Urgent is 'I move fast for my clients.' Desperate is 'please pick me.' If they wrote a message on the form, quote it back in your first 20 seconds — their own words are your best opener."
+  },
+  "qualifier": {
+    "_note": "Three questions. Fast. Don't pitch until you know these three things.",
+    "Q1": {
+      "label": "TIMING — How urgent?",
+      "script": "Quick one — are you looking to get this moving in the next 30 days, or is this more research mode right now?",
+      "training_note": "Timing first because it decides everything downstream. 'Research mode' is not a brush-off on an inbound lead — they raised their hand for a reason. Find the reason before you grade the lead."
+    },
+    "Q2": {
+      "label": "DECISION — Is this your call?",
+      "script": "And on the decision side — is this something you're handling yourself, or is there a partner or spouse also in the conversation?",
+      "training_note": "Ask it casually. You're not disqualifying them — you're learning who needs to be on the audit call so nobody has to 'check with someone' after you've already pitched."
+    },
+    "Q3": {
+      "label": "BUDGET — Are we in the ballpark?",
+      "script": "Last quick one — most contractors we work with invest $1,500 to $7,500 a month depending on how aggressive they want to be. Does that range feel in the neighborhood for where {business_name} is at?",
+      "training_note": "Say the range flat and confident, then stop talking. The range does the qualifying for you. If they flinch, that's information, not rejection — the objection rail has the spend-reframe ready."
+    }
+  },
+  "branches": {
+    "BOOK": {
+      "label": "All three green — book the audit",
+      "script": "Awesome — sounds like we should jump on a 15-minute audit call. I'll walk you through exactly what I'd do for {business_name} and you tell me if it makes sense. What works better — today around 3 or tomorrow morning?",
+      "booking_url": "https://urbannicheco.com/audit",
+      "quick_win_line": "If quick_win is populated: add 'I already pulled up {business_name} — {quick_win}. That's the first thing we'd fix.' Shows you did the work before the call."
+    },
+    "INFO": {
+      "label": "Interested but not booking — send info",
+      "script": "No problem. I'll send you a quick look at where {business_name} stands online right now and a couple of examples of contractors in your space who are winning. What's the best email for that?"
+    },
+    "NURTURE": {
+      "label": "Not ready — drop into nurture",
+      "script": "Makes sense. I'll add you to our monthly send — shows what's working for other {trade_lower}s. No spam, no hard sell. When the timing shifts, reach back out."
+    },
+    "DISQUALIFY": {
+      "label": "Not a fit — clean exit",
+      "script": "Got it — sounds like we're not the right fit right now. Appreciate you taking the time. If anything changes down the road, you have my contact."
+    }
+  },
+  "objections": {
+    "TOO_EXPENSIVE": {
+      "trigger": "That's way more than I was thinking",
+      "response": "Fair. Quick question — what are you spending on marketing right now total? Including your website, any ads, anyone helping you. Most contractors don't actually know the number when they add it up. Once you know that, the comparison gets different."
+    },
+    "NEED_TO_THINK": {
+      "trigger": "Let me think about it",
+      "response": "Of course. What part specifically — the price, the timing, or whether this would actually work for {business_name}? I'd rather talk through whichever one it is right now than have it sit."
+    },
+    "ALREADY_HAVE_AGENCY": {
+      "trigger": "We already work with someone",
+      "response": "Smart. What specifically do they handle? I ask because most agencies doing contractor work are generalists — we only do contractors. You're at {gbp_review_count} reviews right now — is your current setup actively growing that number month over month? That's the map pack ranking signal."
+    }
+  },
+  "speed_to_lead": {
+    "_note": "Operational rules, not scripts. Follow these on every inbound.",
+    "fresh_under_5_min": "HOT — they're probably still on the thank-you page. Call now, no email first.",
+    "fresh_5_to_60_min": "WARM — still in research mode. Call now.",
+    "fresh_1_to_24_hours": "COOL — they've moved on mentally. Lead with a personal email, follow with call.",
+    "fresh_over_24_hours": "COLD — re-warm with the audit teaser email before calling cold."
+  }
+}

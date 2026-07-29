@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Energy Management Network LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#1b2027;
+    --charcoal-2:#252c36;
+    --electric:#2fb6ff;
+    --electric-dim:#1e8fd1;
+    --off-white:#f4f6f8;
+    --text-soft:#c9d2db;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Open Sans',sans-serif;
+    background:var(--off-white);
+    color:var(--charcoal);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px;}
+  a{text-decoration:none;color:inherit;}
+
+  /* NAV */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    background:rgba(27,32,39,0.95);
+    backdrop-filter:blur(6px);
+    z-index:500;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .brand{
+    color:#fff;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:1.1rem;
+    letter-spacing:0.5px;
+  }
+  .brand span{color:var(--electric);}
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+  }
+  nav a{
+    color:var(--text-soft);
+    font-weight:600;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    transition:color .2s ease;
+  }
+  nav a:hover{color:var(--electric);}
+  .nav-phone{
+    color:#fff;
+    font-weight:600;
+    font-size:0.9rem;
+    border:1px solid var(--electric);
+    padding:8px 16px;
+    border-radius:4px;
+    transition:background .2s ease, color .2s ease;
+  }
+  .nav-phone:hover{background:var(--electric);color:var(--charcoal);}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    text-align:center;
+    padding:120px 20px 80px;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:-10%;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(47,182,255,0.35), transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(47,182,255,0.25), transparent 50%),
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
+      linear-gradient(135deg, var(--charcoal) 0%, #10131a 55%, var(--charcoal-2) 100%);
+    animation:kenburns 22s ease-in-out infinite alternate;
+    z-index:0;
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.18) translate(-2%,-2%);}
+  }
+  .hero-content{position:relative;z-index:2;max-width:820px;}
+  .hero-eyebrow{
+    color:var(--electric);
+    font-weight:600;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:0.8rem;
+    margin-bottom:18px;
+    display:inline-block;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(2.2rem,5.5vw,3.6rem);
+    line-height:1.15;
+    margin-bottom:20px;
+  }
+  .hero h1 .biz{
+    display:block;
+    color:var(--electric);
+    font-size:0.5em;
+    margin-top:14px;
+    letter-spacing:1px;
+  }
+  .hero p{
+    color:var(--text-soft);
+    font-size:1.1rem;
+    max-width:640px;
+    margin:0 auto 34px;
+  }
+  .hero-buttons{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:14px 32px;
+    border-radius:4px;
+    font-weight:600;
+    font-size:0.95rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--electric);
+    color:var(--charcoal);
+    box-shadow:0 8px 24px rgba(47,182,255,0.35);
+  }
+  .btn-outline{
+    background:transparent;
+    border-color:var(--text-soft);
+    color:#fff;
+  }
+  .btn-outline:hover{border-color:var(--electric);color:var(--electric);}
+
+  /* SECTIONS GENERIC */
+  section{padding:90px 24px;}
+  .section-inner{max-width:1100px;margin:0 auto;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .section-head .eyebrow{
+    color:var(--electric-dim);
+    font-weight:600;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:0.78rem;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,3.5vw,2.5rem);
+    margin:10px 0 16px;
+    color:var(--charcoal);
+  }
+  .section-head p{color:#555;font-size:1.02rem;}
+
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* SERVICES */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:28px;
+  }
+  .service-card{
+    background:#fff;
+    border:1px solid #e6e9ed;
+    border-radius:10px;
+    padding:34px 28px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(27,32,39,0.12);
+    border-color:var(--electric);
+  }
+  .service-icon{
+    width:56px;height:56px;
+    border-radius:12px;
+    background:var(--charcoal);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;
+  }
+  .service-icon svg{width:30px;height:30px;stroke:var(--electric);fill:none;}
+  .service-card h3{
+    font-size:1.15rem;
+    margin-bottom:10px;
+    color:var(--charcoal);
+  }
+  .service-card p{color:#5a6270;font-size:0.95rem;}
+
+  /* SERVICE AREA */
+  .area-section{
+    background:var(--charcoal);
+    color:#fff;
+  }
+  .area-section .section-head h2{color:#fff;}
+  .area-section .section-head p{color:var(--text-soft);}
+  .area-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .area-chip{
+    border:1px solid rgba(255,255,255,0.18);
+    padding:12px 22px;
+    border-radius:30px;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--text-soft);
+    background:rgba(255,255,255,0.03);
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .area-chip:hover{
+    border-color:var(--electric);
+    color:var(--electric);
+  }
+
+  /* TRUST / VALUE PROPS */
+  .values-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:26px;
+  }
+  .value-card{
+    text-align:center;
+    padding:34px 20px;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid #e6e9ed;
+  }
+  .value-card .num{
+    width:48px;height:48px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    background:var(--electric);
+    color:var(--charcoal);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+  }
+  .value-card h3{
+    font-size:1.05rem;
+    margin-bottom:8px;
+    color:var(--charcoal);
+  }
+  .value-card p{color:#5a6270;font-size:0.9rem;}
+
+  /* CONTACT */
+  .contact-section{
+    background:linear-gradient(180deg,#eef1f4,var(--off-white));
+  }
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+  }
+  @media(max-width:800px){
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  .contact-info h2{
+    font-size:1.9rem;
+    margin-bottom:16px;
+    color:var(--charcoal);
+  }
+  .contact-info p{color:#555;margin-bottom:24px;}
+  .contact-detail{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:16px;
+    font-weight:600;
+    color:var(--charcoal);
+  }
+  .contact-detail svg{width:22px;height:22px;stroke:var(--electric-dim);fill:none;flex-shrink:0;}
+  .contact-form{
+    background:#fff;
+    border:1px solid #e6e9ed;
+    border-radius:12px;
+    padding:36px;
+    box-shadow:0 20px 50px rgba(27,32,39,0.08);
+  }
+  .form-group{margin-bottom:20px;}
+  .form-group label{
+    display:block;
+    font-weight:600;
+    font-size:0.85rem;
+    margin-bottom:8px;
+    color:var(--charcoal);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .form-group input,
+  .form-group textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #d5dae0;
+    border-radius:6px;
+    font-family:'Open Sans',sans-serif;
+    font-size:0.95rem;
+    background:#fafbfc;
+  }
+  .form-group textarea{resize:vertical;min-height:110px;}
+  .form-submit{
+    width:100%;
+    padding:14px;
+    background:var(--charcoal);
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:0.9rem;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .form-submit:hover{background:var(--electric-dim);}
+  .form-note{
+    font-size:0.78rem;
+    color:#8a929c;
+    margin-top:12px;
+    text-align:center;
+  }
+
+  /* FOOTER */
+  footer{
+    background:var(--charcoal);
+    color:var(--text-soft);
+    text-align:center;
+    padding:40px 20px 90px;
+    font-size:0.9rem;
+  }
+  footer .foot-brand{
+    font-family:'Oswald',sans-serif;
+    color:#fff;
+    font-size:1.15rem;
+    margin-bottom:10px;
+    letter-spacing:0.5px;
+  }
+
+  /* SPEC FLAG */
+  .spec-flag{
+    position:fixed;
+    bottom:16px;
+    right:16px;
+    background:rgba(0,0,0,0.72);
+    color:#f2f2f2;
+    font-size:0.72rem;
+    padding:8px 14px;
+    border-radius:6px;
+    z-index:9999;
+    font-family:'Open Sans',sans-serif;
+    letter-spacing:0.2px;
+    pointer-events:none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Energy Management <span>Network</span></div>
+  <nav>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#area">Service Area</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="nav-phone" href="#contact">(515) 338-0105</a>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Residential &amp; Commercial Insulation</span>
+    <h1>Seal It. Insulate It. Stop Losing Energy.
+      <span class="biz">Energy Management Network LLC</span>
+    </h1>
+    <p>Serving Williams, Iowa and the surrounding Hamilton &amp; Story County communities with straightforward, on-schedule insulation and air-sealing work.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary">Request a Visit</a>
+      <a href="#services" class="btn btn-outline">See Our Services</a>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">What We Do</span>
+      <h2>Insulation Services</h2>
+      <p>From attics to crawl spaces, we help Iowa homes and buildings hold onto the energy they pay for.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 5 6 5 10a5 5 0 0 1-10 0c0-4 2-6 5-10z"/></svg>
+        </div>
+        <h3>Spray Foam Insulation</h3>
+        <p>Expanding foam application that seals gaps and adds structural rigidity to walls, rooflines, and rim joists.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l9-15 9 15z"/><path d="M8 20v-6h8v6"/></svg>
+        </div>
+        <h3>Attic Insulation</h3>
+        <p>Proper attic coverage and ventilation balance to reduce heat loss in winter and heat gain in summer.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="6" r="1.5"/><circle cx="18" cy="6" r="1.5"/><circle cx="6" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg>
+        </div>
+        <h3>Blown-In Insulation</h3>
+        <p>Loose-fill cellulose or fiberglass blown into attics and wall cavities for even, gap-free coverage.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg>
+        </div>
+        <h3>Air Sealing</h3>
+        <p>Targeted sealing of leaks around penetrations, ductwork, and framing to stop drafts before they start.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>
+        </div>
+        <h3>Energy Audits</h3>
+        <p>A room-by-room look at where a property is losing energy, with a plan for where insulation upgrades matter most.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l9-9 9 9"/><path d="M6 13v7h12v-7"/></svg>
+        </div>
+        <h3>Crawl Space Insulation</h3>
+        <p>Moisture-aware insulation for crawl spaces that protects flooring above and framing below.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:#eef1f4;">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why Work With Us</span>
+      <h2>Built On Straight Answers</h2>
+      <p>No gimmicks — just clear scheduling and honest work on your property.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="num">1</div>
+        <h3>Locally Owned</h3>
+        <p>An Iowa-based operation working in the communities around Williams.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="num">2</div>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Insulation work scoped for homes and commercial buildings alike.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="num">3</div>
+        <h3>On-Schedule Service</h3>
+        <p>Appointments and project timelines that we plan around your availability.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="num">4</div>
+        <h3>Straight Pricing</h3>
+        <p>Clear scopes of work with no surprise line items once the job starts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="area" class="area-section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">Where We Work</span>
+      <h2>Proudly Serving Central Iowa</h2>
+      <p>Based in Williams and serving surrounding Hamilton and Story County communities.</p>
+    </div>
+    <div class="area-list reveal">
+      <span class="area-chip">Williams</span>
+      <span class="area-chip">Webster City</span>
+      <span class="area-chip">Jewell</span>
+      <span class="area-chip">Stanhope</span>
+      <span class="area-chip">Randall</span>
+      <span class="area-chip">Stratford</span>
+      <span class="area-chip">Story City</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <h2>Get In Touch</h2>
+        <p>Have a project in mind? Reach out and we'll get back to you about scheduling a visit.</p>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (515) 338-0105
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Williams, Iowa
+        </div>
+      </div>
+      <form class="contact-form reveal" onsubmit="return false;">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="(515) 000-0000">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your project"></textarea>
+        </div>
+        <button type="button" class="form-submit">Send Message</button>
+        <p class="form-note">This is a preview form and is not connected to any messaging system.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-brand">Energy Management Network LLC</div>
+  <div>Williams, Iowa &nbsp;|&nbsp; (515) 338-0105</div>
+</footer>
+
+<div class="spec-flag">Speculative preview build — Urban Niche Co.</div>
+
+<script>
+  (function(){
+    var revealEls = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

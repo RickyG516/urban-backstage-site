@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#e36b1e">
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <title>For Streamers &amp; Content Creators | Urban Niche Co.</title>
+  <meta name="description" content="Private proposal for streamers and content creators. Merch drops, brand sites, email monetization, and community systems built for the RGB generation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep:      #05000f;
+      --bg-1:         #0a0118;
+      --bg-2:         #120428;
+      --bg-3:         #1a0638;
+      --bg-card:      #14042c;
+      --purple:       #7209b7;
+      --purple-deep:  #480aa8;
+      --pink:         #ff006e;
+      --pink-glow:    rgba(255,0,110,0.55);
+      --pink-soft:    rgba(255,0,110,0.12);
+      --cyan:         #00f0ff;
+      --cyan-glow:    rgba(0,240,255,0.45);
+      --cyan-soft:    rgba(0,240,255,0.10);
+      --orange:       #ff6b0c;
+      --orange-glow:  rgba(255,107,12,0.45);
+      --lime:         #b6ff2e;
+      --text:         #f0e9ff;
+      --text-dim:     rgba(240,233,255,0.62);
+      --text-faint:   rgba(240,233,255,0.25);
+      --border:       rgba(240,233,255,0.07);
+      --border-bright:rgba(240,233,255,0.18);
+      --font-display: 'Orbitron', sans-serif;
+      --font-body:    'Space Grotesk', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+      --nav-h:        72px;
+      --r:            6px;
+      --r-lg:         12px;
+      --pill:         999px;
+      --ease:         0.3s ease;
+      --slow:         0.55s cubic-bezier(0.16,1,0.3,1);
+      --grad-hero:    linear-gradient(135deg, var(--pink) 0%, var(--orange) 30%, var(--purple) 65%, var(--cyan) 100%);
+      --grad-pink-cy: linear-gradient(90deg, var(--pink) 0%, var(--cyan) 100%);
+      --grad-bg:      radial-gradient(ellipse at 30% 0%, rgba(114,9,183,0.35) 0%, transparent 55%), radial-gradient(ellipse at 80% 100%, rgba(255,0,110,0.22) 0%, transparent 60%), linear-gradient(180deg, var(--bg-1) 0%, var(--bg-deep) 100%);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text);
+      line-height: 1.65;
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    /* Global synthwave background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: var(--grad-bg);
+      z-index: -2;
+    }
+    /* Grid floor overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,0,110,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,240,255,0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; color: var(--text); text-transform: uppercase; }
+    h1 { font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 900; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; }
+    h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.02em; }
+    h4 { font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; }
+    h5 { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; }
+    p { color: var(--text-dim); font-family: var(--font-body); }
+
+    .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 6.5rem 0; position: relative; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 0 12px var(--cyan-glow);
+    }
+    .eyebrow::before { content: '>'; color: var(--pink); font-weight: 700; text-shadow: 0 0 8px var(--pink-glow); }
+
+    .neon-text {
+      background: var(--grad-hero);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 18px rgba(255,0,110,0.35));
+    }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.95rem 1.9rem; border-radius: var(--pill); transition: all var(--ease); white-space: nowrap; cursor: pointer; border: none; position: relative; }
+    .btn-primary {
+      background: var(--pink);
+      color: #fff;
+      box-shadow: 0 0 0 1px var(--pink), 0 4px 20px var(--pink-glow), inset 0 -2px 0 rgba(0,0,0,0.25);
+    }
+    .btn-primary:hover { background: #ff2e8a; transform: translateY(-2px); box-shadow: 0 0 0 1px var(--pink), 0 8px 32px var(--pink-glow), inset 0 -2px 0 rgba(0,0,0,0.25); }
+    .btn-outline {
+      background: transparent;
+      color: var(--cyan);
+      border: 1.5px solid var(--cyan);
+      box-shadow: 0 0 16px var(--cyan-soft), inset 0 0 16px var(--cyan-soft);
+    }
+    .btn-outline:hover { color: #fff; background: var(--cyan-soft); border-color: var(--cyan); transform: translateY(-2px); box-shadow: 0 0 24px var(--cyan-glow), inset 0 0 20px var(--cyan-soft); }
+    .btn-ghost { background: rgba(240,233,255,0.04); color: var(--text); border: 1px solid var(--border-bright); }
+    .btn-ghost:hover { background: rgba(240,233,255,0.08); border-color: var(--pink); }
+    .btn-lg { font-size: 0.82rem; padding: 1.1rem 2.3rem; }
+    .btn-sm { font-size: 0.7rem; padding: 0.6rem 1.3rem; }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--nav-h); display: flex; align-items: center; background: transparent; transition: background var(--ease); }
+    .nav.scrolled { background: rgba(10,1,24,0.88); backdrop-filter: blur(22px); border-bottom: 1px solid var(--pink-soft); box-shadow: 0 4px 30px rgba(255,0,110,0.12); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+    .nav__logo { display: flex; align-items: center; gap: 0.65rem; font-family: var(--font-display); font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; color: var(--text); text-transform: uppercase; }
+    .nav__logo img { height: 32px; width: auto; display: block; filter: drop-shadow(0 0 6px var(--orange-glow)); }
+    .nav__logo span { color: var(--orange); text-shadow: 0 0 10px var(--orange-glow); }
+    .nav__links { display: flex; align-items: center; gap: 2px; }
+    .nav__link { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); padding: 0.5rem 0.85rem; border-radius: 4px; transition: all var(--ease); }
+    .nav__link:hover { color: var(--cyan); text-shadow: 0 0 10px var(--cyan-glow); }
+    .nav__cta { display: flex; align-items: center; gap: 12px; }
+    .nav__phone { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--text-dim); white-space: nowrap; }
+    .nav__phone:hover { color: var(--pink); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: transparent; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--ease); }
+    .mobile-nav { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg-2); border-bottom: 1px solid var(--pink-soft); padding: 1.5rem; z-index: 999; flex-direction: column; gap: 0.25rem; }
+    .mobile-nav.open { display: flex; }
+    .mobile-link { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); }
+    .mobile-link:hover { color: var(--cyan); }
+    .mobile-cta { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    /* ── HERO ── */
+    .hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; padding-top: calc(var(--nav-h) + 3rem); padding-bottom: 3rem; }
+    .hero__sun {
+      position: absolute;
+      bottom: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: linear-gradient(to top, var(--pink) 0%, #ff6b9c 40%, var(--orange) 75%, #ffd46b 100%);
+      box-shadow: 0 0 120px rgba(255,0,110,0.55), 0 0 240px rgba(114,9,183,0.35);
+      pointer-events: none;
+      z-index: 0;
+      animation: sunPulse 6s ease-in-out infinite alternate;
+    }
+    @keyframes sunPulse { 0% { filter: brightness(1); } 100% { filter: brightness(1.15); } }
+    .hero__grid {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 40%;
+      background-image:
+        linear-gradient(var(--cyan) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cyan) 1px, transparent 1px);
+      background-size: 44px 44px;
+      transform: perspective(400px) rotateX(60deg);
+      transform-origin: bottom;
+      opacity: 0.25;
+      mask-image: linear-gradient(to top, black, transparent);
+      -webkit-mask-image: linear-gradient(to top, black, transparent);
+      animation: gridMove 4s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 0 44px; } }
+    .hero__inner { position: relative; z-index: 2; width: 100%; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+    .hero__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink-soft);
+      border: 1px solid var(--pink);
+      border-radius: var(--pill);
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1.75rem;
+      box-shadow: 0 0 20px var(--pink-soft), inset 0 0 20px var(--pink-soft);
+    }
+    .hero__tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 10px var(--pink); animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
+    .hero h1 { margin-bottom: 1.5rem; text-transform: uppercase; }
+    .hero h1 .line-cyan { color: var(--cyan); text-shadow: 0 0 24px var(--cyan-glow), 0 0 4px var(--cyan); display: inline-block; }
+    .hero h1 .line-pink { color: var(--pink); text-shadow: 0 0 24px var(--pink-glow), 0 0 4px var(--pink); display: inline-block; }
+    .hero h1 .line-grad { background: var(--grad-hero); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+    .hero__sub { font-size: 1.05rem; line-height: 1.75; color: var(--text-dim); max-width: 48ch; margin-bottom: 1rem; }
+    .hero__whisper { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.05em; color: var(--text-faint); margin-bottom: 2.5rem; }
+    .hero__whisper strong { color: var(--cyan); font-weight: 500; }
+    .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .hero__proof { display: flex; gap: 2.5rem; flex-wrap: wrap; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    .hero__proof-item { display: flex; flex-direction: column; }
+    .hero__proof-val { font-family: var(--font-display); font-size: 2rem; font-weight: 900; line-height: 1; }
+    .hero__proof-val.pink { color: var(--pink); text-shadow: 0 0 14px var(--pink-glow); }
+    .hero__proof-val.cyan { color: var(--cyan); text-shadow: 0 0 14px var(--cyan-glow); }
+    .hero__proof-val.orange { color: var(--orange); text-shadow: 0 0 14px var(--orange-glow); }
+    .hero__proof-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-faint); margin-top: 5px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Stream overlay panel — right side */
+    .stream-panel {
+      background: rgba(20,4,44,0.78);
+      border: 1px solid var(--pink);
+      border-radius: var(--r-lg);
+      padding: 1.25rem;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 0 40px rgba(255,0,110,0.35), inset 0 0 30px rgba(114,9,183,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .stream-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--grad-pink-cy);
+      animation: scanline 2.5s linear infinite;
+    }
+    @keyframes scanline { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    .stream-panel__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-bright); }
+    .stream-panel__live { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); }
+    .stream-panel__live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 10px var(--pink); animation: blink 1.4s ease-in-out infinite; }
+    .stream-panel__viewers { font-family: var(--font-mono); font-size: 0.68rem; color: var(--cyan); letter-spacing: 0.08em; }
+    .stream-panel__title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.02em; }
+    .stream-panel__chat { display: flex; flex-direction: column; gap: 0.55rem; }
+    .chat-msg { font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.4; }
+    .chat-user { font-weight: 600; margin-right: 0.4rem; }
+    .chat-msg .cyan { color: var(--cyan); }
+    .chat-msg .pink { color: var(--pink); }
+    .chat-msg .lime { color: var(--lime); }
+    .chat-msg .orange { color: var(--orange); }
+    .chat-msg .purple { color: #c77dff; }
+    .chat-msg .text { color: var(--text-dim); }
+    .chat-msg .emoji { filter: saturate(1.3); }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: linear-gradient(90deg, var(--pink) 0%, var(--orange) 30%, var(--purple) 60%, var(--cyan) 100%);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 0 28px rgba(255,0,110,0.35);
+    }
+    .ticker__track { display: inline-flex; animation: ticker 35s linear infinite; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .ticker__item { font-family: var(--font-display); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; padding: 0 2.25rem; display: inline-flex; align-items: center; gap: 1rem; text-shadow: 0 0 10px rgba(0,0,0,0.25); }
+    .ticker__sep { opacity: 0.7; color: #fff; font-size: 1rem; }
+
+    /* ── SERVICES ── */
+    .services { background: transparent; }
+    .services__header { margin-bottom: 4rem; }
+    .services__header h2 { max-width: 18ch; margin-bottom: 1rem; }
+    .services__header p { font-size: 1rem; max-width: 54ch; line-height: 1.8; }
+    .services__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+    .svc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 2.25rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--ease);
+    }
+    .svc::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--grad-pink-cy);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--slow);
+    }
+    .svc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, var(--pink-soft) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity var(--ease);
+      pointer-events: none;
+    }
+    .svc:hover { transform: translateY(-4px); border-color: var(--pink); box-shadow: 0 12px 40px rgba(255,0,110,0.18); }
+    .svc:hover::before { transform: scaleX(1); }
+    .svc:hover::after { opacity: 1; }
+    .svc__num { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; color: var(--cyan); margin-bottom: 1.25rem; text-shadow: 0 0 8px var(--cyan-glow); }
+    .svc__icon { font-size: 1.75rem; margin-bottom: 1.1rem; display: block; filter: drop-shadow(0 0 10px var(--pink-glow)); }
+    .svc h3 { font-size: 1.05rem; margin-bottom: 0.65rem; text-transform: uppercase; color: var(--text); }
+    .svc p { font-size: 0.875rem; line-height: 1.65; margin-bottom: 1.25rem; color: var(--text-dim); }
+    .svc__list { display: flex; flex-direction: column; gap: 0.45rem; padding-top: 1rem; border-top: 1px solid var(--border-bright); position: relative; z-index: 1; }
+    .svc__item { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 0.55rem; align-items: flex-start; line-height: 1.5; }
+    .svc__item::before { content: '>'; color: var(--pink); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── PROOF ── */
+    .proof { background: linear-gradient(180deg, transparent 0%, rgba(114,9,183,0.08) 100%); border-top: 1px solid var(--border); overflow: hidden; }
+    .proof__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 580px; }
+    .proof__visual { position: relative; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem; }
+    .proof__orb {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg at 50% 50%, var(--pink) 0%, var(--purple) 33%, var(--cyan) 66%, var(--pink) 100%);
+      filter: blur(50px);
+      opacity: 0.7;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: orbSpin 18s linear infinite;
+    }
+    @keyframes orbSpin { 0% { transform: translate(-50%,-50%) rotate(0deg); } 100% { transform: translate(-50%,-50%) rotate(360deg); } }
+    .proof__card {
+      position: relative;
+      z-index: 2;
+      background: rgba(20,4,44,0.82);
+      border: 1px solid var(--pink);
+      border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 0 40px var(--pink-glow);
+      max-width: 380px;
+      text-align: center;
+    }
+    .proof__card-icon { width: 68px; height: 68px; margin: 0 auto 1rem; border-radius: 50%; background: var(--grad-pink-cy); display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 0 28px var(--pink-glow); }
+    .proof__card h4 { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+    .proof__card p { font-family: var(--font-mono); font-size: 0.82rem; color: var(--cyan); letter-spacing: 0.08em; text-transform: uppercase; }
+    .proof__content { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--border); }
+    .proof__content h2 { margin: 0.5rem 0 1.5rem; }
+    .proof__content > p { font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; max-width: 48ch; }
+    .proof__list { display: flex; flex-direction: column; gap: 1.1rem; margin: 2rem 0; }
+    .proof__item { display: flex; gap: 1rem; align-items: flex-start; }
+    .proof__item:nth-child(2) .proof__check { background: rgba(255,107,12,0.15); border-color: var(--orange); color: var(--orange); box-shadow: 0 0 12px var(--orange-glow); }
+    .proof__item:nth-child(4) .proof__check { background: rgba(255,107,12,0.15); border-color: var(--orange); color: var(--orange); box-shadow: 0 0 12px var(--orange-glow); }
+    .proof__check {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--pink-soft);
+      border: 1px solid var(--pink);
+      color: var(--pink);
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px var(--pink-glow);
+    }
+    .proof__item h5 { margin-bottom: 0.2rem; font-size: 0.95rem; text-transform: uppercase; color: var(--text); }
+    .proof__item p { font-size: 0.875rem; margin: 0; line-height: 1.65; }
+
+    /* ── STATS ── */
+    .stats { background: linear-gradient(90deg, var(--pink) 0%, var(--orange) 28%, var(--purple) 60%, var(--cyan) 100%); padding: 4.5rem 0; position: relative; overflow: hidden; }
+    .stats::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+    .stats__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; z-index: 1; }
+    .stat { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.22); }
+    .stat:last-child { border-right: none; }
+    .stat__val { font-family: var(--font-display); font-size: clamp(2.4rem, 4.5vw, 3.6rem); font-weight: 900; color: #fff; line-height: 1; display: block; text-shadow: 0 0 20px rgba(0,0,0,0.3); }
+    .stat__label { font-family: var(--font-mono); font-size: 0.72rem; color: rgba(255,255,255,0.85); margin-top: 0.6rem; display: block; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── WHO ── */
+    .who { background: transparent; }
+    .who__header { text-align: center; margin-bottom: 4rem; }
+    .who__header h2 { margin: 0.75rem auto 0; max-width: 22ch; }
+    .who__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    .who__card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--ease);
+    }
+    .who__card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--pink-soft) 0%, transparent 50%, var(--cyan-soft) 100%);
+      opacity: 0;
+      transition: opacity var(--ease);
+    }
+    .who__card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 10px 32px var(--cyan-soft); }
+    .who__card:nth-child(2):hover { border-color: var(--orange); box-shadow: 0 10px 32px var(--orange-glow); }
+    .who__card:nth-child(4):hover { border-color: var(--orange); box-shadow: 0 10px 32px var(--orange-glow); }
+    .who__card:nth-child(2) .who__icon { filter: drop-shadow(0 0 12px var(--orange-glow)); }
+    .who__card:nth-child(4) .who__icon { filter: drop-shadow(0 0 12px var(--orange-glow)); }
+    .who__card:hover::before { opacity: 1; }
+    .who__icon { font-size: 2rem; margin-bottom: 1rem; display: block; filter: drop-shadow(0 0 12px var(--cyan-glow)); position: relative; z-index: 1; }
+    .who__card h5 { margin-bottom: 0.4rem; font-size: 0.95rem; text-transform: uppercase; color: var(--text); position: relative; z-index: 1; }
+    .who__card p { font-size: 0.82rem; color: var(--text-dim); position: relative; z-index: 1; line-height: 1.55; }
+
+    /* ── PROCESS ── */
+    .process { background: transparent; }
+    .process__header { text-align: center; margin-bottom: 4rem; }
+    .process__header h2 { margin: 0.75rem auto 0; max-width: 22ch; }
+    .process__steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    .process__step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 2rem 1.6rem;
+      position: relative;
+      transition: all var(--ease);
+    }
+    .process__step:hover { border-color: var(--pink); transform: translateY(-4px); box-shadow: 0 10px 30px var(--pink-soft); }
+    .process__num { font-family: var(--font-display); font-size: 3.2rem; font-weight: 900; line-height: 1; margin-bottom: 1rem; background: var(--grad-pink-cy); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .process__step h4 { margin-bottom: 0.5rem; text-transform: uppercase; color: var(--text); font-size: 0.95rem; }
+    .process__step p { font-size: 0.85rem; line-height: 1.7; color: var(--text-dim); }
+
+    /* ── CONTACT ── */
+    .contact { background: linear-gradient(180deg, transparent 0%, rgba(255,0,110,0.04) 100%); border-top: 1px solid var(--border); }
+    .contact__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact__left h2 { margin: 0.75rem 0 1.5rem; }
+    .contact__left > p { font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; }
+    .contact__details { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
+    .contact__detail { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; color: var(--text-dim); }
+    .contact__detail-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--pink-soft); border: 1px solid var(--pink); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; box-shadow: 0 0 14px var(--pink-soft); }
+    .contact__detail a { color: var(--cyan); font-weight: 600; transition: text-shadow var(--ease); }
+    .contact__detail a:hover { text-shadow: 0 0 10px var(--cyan-glow); }
+
+    .form { background: var(--bg-card); border: 1px solid var(--pink); border-radius: var(--r-lg); padding: 2.5rem; box-shadow: 0 0 40px rgba(255,0,110,0.2), inset 0 0 40px rgba(114,9,183,0.08); }
+    .form__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.02em; }
+    .form__sub { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-faint); margin-bottom: 2rem; letter-spacing: 0.04em; }
+    .form__group { margin-bottom: 1.1rem; }
+    .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form__label { display: block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem; }
+    .form__input, .form__textarea { width: 100%; background: var(--bg-2); border: 1px solid var(--border-bright); border-radius: var(--r); padding: 0.85rem 1.1rem; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); outline: none; transition: all var(--ease); }
+    .form__input::placeholder, .form__textarea::placeholder { color: var(--text-faint); }
+    .form__input:focus, .form__textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px var(--pink-soft); }
+    .form__textarea { resize: vertical; min-height: 110px; }
+    .form__submit { width: 100%; margin-top: 0.5rem; justify-content: center; }
+    .form__note { font-family: var(--font-mono); text-align: center; font-size: 0.7rem; color: var(--text-faint); margin-top: 1rem; letter-spacing: 0.04em; }
+
+    /* ── CTA ── */
+    .cta { background: transparent; padding: 7rem 0; position: relative; overflow: hidden; text-align: center; }
+    .cta__glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, var(--pink-soft) 0%, transparent 70%); pointer-events: none; }
+    .cta__inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .cta h2 { font-size: clamp(2.4rem, 5vw, 4rem); margin-bottom: 1.5rem; }
+    .cta p { font-size: 1.05rem; line-height: 1.75; max-width: 52ch; margin: 0 auto 2.5rem; }
+    .cta__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    .footer { background: rgba(10,1,24,0.6); border-top: 1px solid var(--pink-soft); padding: 2.25rem 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .footer__logo { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; color: var(--text); text-transform: uppercase; letter-spacing: 0.02em; }
+    .footer__logo img { height: 26px; width: auto; opacity: 0.8; filter: drop-shadow(0 0 4px var(--orange-glow)); }
+    .footer__logo span { color: var(--orange); }
+    .footer__note { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-faint); letter-spacing: 0.06em; }
+    .footer__copy { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-faint); letter-spacing: 0.04em; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero__inner { grid-template-columns: 1fr; gap: 3rem; }
+      .services__grid { grid-template-columns: 1fr 1fr; }
+      .proof__inner { grid-template-columns: 1fr; min-height: auto; }
+      .proof__content { border-left: none; border-top: 1px solid var(--border); padding: 4rem 2rem; }
+      .proof__visual { min-height: 420px; }
+      .stats__grid { grid-template-columns: 1fr 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.22); }
+      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.22); }
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
+      .who__grid { grid-template-columns: 1fr 1fr; }
+      .process__steps { grid-template-columns: 1fr 1fr; }
+      .contact__inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 768px) {
+      .nav__links, .nav__cta { display: none; }
+      .hamburger { display: flex; }
+      .services__grid { grid-template-columns: 1fr; }
+      .who__grid { grid-template-columns: 1fr 1fr; }
+      .process__steps { grid-template-columns: 1fr; }
+      .form__row { grid-template-columns: 1fr; }
+      .footer__inner { flex-direction: column; text-align: center; gap: 1rem; }
+      .cta__actions { flex-direction: column; }
+    }
+  </style>
+<meta property="og:locale" content="en_US">
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+<nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <img src="/assets/images/unc-logo-icon.webp" alt="Urban Niche Co." width="45" height="45" />
+        Urban <span>Niche</span>&nbsp;Co.
+      </a>
+      <ul class="nav__links">
+        <li><a href="#services" class="nav__link">Stack</a></li>
+        <li><a href="#who" class="nav__link">Who</a></li>
+        <li><a href="#process" class="nav__link">Process</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="sms:+15153444053" class="nav__phone">Text (515) 344-4053</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Let's Talk</a>
+      </div>
+      <button type="button" class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+<main>
+
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#services" class="mobile-link">Stack</a>
+    <a href="#who" class="mobile-link">Who</a>
+    <a href="#process" class="mobile-link">Process</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <div class="mobile-cta">
+      <a href="#contact" class="btn btn-outline">Contact</a>
+      <a href="#contact" class="btn btn-primary">Let's Talk</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__sun"></div>
+    <div class="hero__grid"></div>
+    <div class="container">
+      <div class="hero__inner">
+        <div>
+          <div class="hero__tag reveal">
+            <div class="hero__tag-dot"></div>
+            For Streamers &amp; Content Creators
+          </div>
+          <h1 class="reveal d1">
+            <span class="line-cyan">You Built</span><br>
+            <span class="line-pink">the Audience.</span><br>
+            <span class="line-grad">We Build the Business.</span>
+          </h1>
+          <p class="hero__sub reveal d2">
+            Your community is real. Your reach is real. But most creators are leaving massive revenue on the table because the business infrastructure behind the content doesn't exist. That's what we fix.
+          </p>
+          <p class="hero__whisper reveal d2"><strong style="color: var(--orange);">&gt; ACCESS:</strong> Private link. If you have it, we think there's something worth building.</p>
+          <div class="hero__actions reveal d3">
+            <a href="#contact" class="btn btn-primary btn-lg">Let's Talk &rarr;</a>
+            <a href="#services" class="btn btn-outline btn-lg">See the Stack</a>
+          </div>
+          <div class="hero__proof reveal d4">
+            <div class="hero__proof-item">
+              <span class="hero__proof-val pink">30</span>
+              <span class="hero__proof-label">Days to launch</span>
+            </div>
+            <div class="hero__proof-item">
+              <span class="hero__proof-val cyan">100%</span>
+              <span class="hero__proof-label">Audience ownership</span>
+            </div>
+            <div class="hero__proof-item">
+              <span class="hero__proof-val orange">0%</span>
+              <span class="hero__proof-label">Platform cut on your list</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal d2">
+          <div class="stream-panel">
+            <div class="stream-panel__header">
+              <div class="stream-panel__live">
+                <div class="stream-panel__live-dot"></div>
+                LIVE &middot; Chat
+              </div>
+              <div class="stream-panel__viewers">2.4K watching</div>
+            </div>
+            <div class="stream-panel__title">&gt; Drop day is here</div>
+            <div class="stream-panel__chat">
+              <div class="chat-msg"><span class="chat-user cyan">ninjakai_</span><span class="text">site looks clean af bro</span></div>
+              <div class="chat-msg"><span class="chat-user pink">lvlupLex</span><span class="text">just got the email 10 min ago</span></div>
+              <div class="chat-msg"><span class="chat-user lime">moth_knight</span><span class="text">sold out already?? &#128293;</span></div>
+              <div class="chat-msg"><span class="chat-user orange">prismhunter</span><span class="text">merch drops hit different when u own the store</span></div>
+              <div class="chat-msg"><span class="chat-user purple">velvet.wolf</span><span class="text">who builds this for u</span></div>
+              <div class="chat-msg"><span class="chat-user pink">lvlupLex</span><span class="text">&gt; UNC, look them up</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span class="ticker__item">Merch Drop Systems <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Brand Sites You Own <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Email Monetization <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Sponsorship Kits <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Community Hubs <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">AI Automation <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Social Strategy <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Limited Drop Infrastructure <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Merch Drop Systems <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Brand Sites You Own <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Email Monetization <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Sponsorship Kits <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Community Hubs <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">AI Automation <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Social Strategy <span class="ticker__sep">&#10022;</span></span>
+      <span class="ticker__item">Limited Drop Infrastructure <span class="ticker__sep">&#10022;</span></span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="services__header reveal">
+        <span class="eyebrow">What We Build</span>
+        <h2>The Full Stack Your Brand Actually Needs.</h2>
+        <p>Not a single tool. Not a template. A complete digital operation built around your community &mdash; so you own it, control it, and make money from it.</p>
+      </div>
+      <div class="services__grid">
+        <div class="svc reveal">
+          <div class="svc__num">01 / MERCH</div>
+          <div class="svc__icon">&#128085;</div>
+          <h3>Merch Drop Infrastructure</h3>
+          <p>Limited drops that sell out. Complete system &mdash; storefront, drop page, pre-drop hype sequence, and fulfillment pipeline.</p>
+          <div class="svc__list">
+            <div class="svc__item">Custom drop landing page per release</div>
+            <div class="svc__item">Email + SMS hype sequence pre-drop</div>
+            <div class="svc__item">Early access tiers for community members</div>
+            <div class="svc__item">Storefront setup and product management</div>
+          </div>
+        </div>
+        <div class="svc reveal d1">
+          <div class="svc__num" style="color: var(--orange); text-shadow: 0 0 8px var(--orange-glow);">02 / SITE</div>
+          <div class="svc__icon">&#127760;</div>
+          <h3>Brand Site &amp; Community Hub</h3>
+          <p>A real home base. Fast, custom-built around your brand &mdash; not a link-in-bio tool or a platform you don't own.</p>
+          <div class="svc__list">
+            <div class="svc__item">Custom domain site built from scratch</div>
+            <div class="svc__item">Merch, links, schedule, content in one place</div>
+            <div class="svc__item">Discord and social integrations</div>
+            <div class="svc__item">You own everything &mdash; no platform risk</div>
+          </div>
+        </div>
+        <div class="svc reveal d2">
+          <div class="svc__num">03 / EMAIL</div>
+          <div class="svc__icon">&#128231;</div>
+          <h3>Email &amp; Community Monetization</h3>
+          <p>The algorithm kills reach overnight. An email list doesn't. We build the list, the sequences, and the strategy.</p>
+          <div class="svc__list">
+            <div class="svc__item">Email list building and opt-in strategy</div>
+            <div class="svc__item">Automated welcome and nurture sequences</div>
+            <div class="svc__item">Drop early access and announcement flows</div>
+            <div class="svc__item">Revenue from your list &mdash; no ad split</div>
+          </div>
+        </div>
+        <div class="svc reveal">
+          <div class="svc__num" style="color: var(--orange); text-shadow: 0 0 8px var(--orange-glow);">04 / SOCIAL</div>
+          <div class="svc__icon">&#128227;</div>
+          <h3>Social &amp; Content Strategy</h3>
+          <p>Clips don't market themselves. We build the off-platform strategy that converts viewers into buyers.</p>
+          <div class="svc__list">
+            <div class="svc__item">Cross-platform content repurposing system</div>
+            <div class="svc__item">Short-form strategy for TikTok, YT Shorts, Reels</div>
+            <div class="svc__item">Growth strategy for off-platform following</div>
+            <div class="svc__item">Paid social campaigns to amplify reach</div>
+          </div>
+        </div>
+        <div class="svc reveal d1">
+          <div class="svc__num">05 / BRAND</div>
+          <div class="svc__icon">&#127912;</div>
+          <h3>Brand Identity &amp; Sponsorship Kit</h3>
+          <p>Sponsors pay more when you look like a real business. Media kit, rate card, and pitch deck that gets you taken seriously.</p>
+          <div class="svc__list">
+            <div class="svc__item">Professional media kit with analytics</div>
+            <div class="svc__item">Brand guidelines and asset library</div>
+            <div class="svc__item">Sponsorship rate card and package tiers</div>
+            <div class="svc__item">Pitch deck for brand partnerships</div>
+          </div>
+        </div>
+        <div class="svc reveal d2">
+          <div class="svc__num" style="color: var(--orange); text-shadow: 0 0 8px var(--orange-glow);">06 / AI</div>
+          <div class="svc__icon">&#129302;</div>
+          <h3>AI &amp; Automation Systems</h3>
+          <p>You can't respond to 10,000 DMs. AI-powered systems that handle the repetitive work so you stay focused on content.</p>
+          <div class="svc__list">
+            <div class="svc__item">AI chatbot for your site and Discord</div>
+            <div class="svc__item">Automated drop alert and hype sequences</div>
+            <div class="svc__item">Fan inquiry routing and FAQ automation</div>
+            <div class="svc__item">CRM for brand deals and partner tracking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof" id="why">
+    <div class="proof__inner">
+      <div class="proof__visual">
+        <div class="proof__orb"></div>
+        <div class="proof__card reveal">
+          <div class="proof__card-icon">&#9889;</div>
+          <h4>You Built It. You Own It.</h4>
+          <p>&gt; Every system. Every list. Every dollar.</p>
+        </div>
+      </div>
+      <div class="proof__content">
+        <span class="eyebrow reveal">Why Urban Niche Co.</span>
+        <h2 class="reveal d1">We're Operators.<br>Not Order Takers.</h2>
+        <p class="reveal d1">Most agencies hand you a template and call it a brand. We build systems &mdash; ones that survive algorithm changes, grow with your audience, and generate real revenue outside platform cuts.</p>
+        <p class="reveal d1">We're selective. We don't work with everyone. If you have this link, it means we see something worth building.</p>
+        <div class="proof__list reveal d2">
+          <div class="proof__item">
+            <div class="proof__check">&#10003;</div>
+            <div>
+              <h5>You Own Everything</h5>
+              <p>Your site, your list, your store. No platform can take it from you.</p>
+            </div>
+          </div>
+          <div class="proof__item">
+            <div class="proof__check">&#10003;</div>
+            <div>
+              <h5>Built for Revenue, Not Aesthetics</h5>
+              <p>Every deliverable ties back to a monetization outcome &mdash; not just how it looks.</p>
+            </div>
+          </div>
+          <div class="proof__item">
+            <div class="proof__check">&#10003;</div>
+            <div>
+              <h5>No Long-Term Contracts</h5>
+              <p>We earn your business every month. Results keep you &mdash; not clauses.</p>
+            </div>
+          </div>
+          <div class="proof__item">
+            <div class="proof__check">&#10003;</div>
+            <div>
+              <h5>AI-Powered from Day One</h5>
+              <p>We use tools most agencies don't know exist yet. Your advantage is built in.</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal d3">
+          <a href="#contact" class="btn btn-primary btn-lg">Start the Conversation &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat reveal">
+          <span class="stat__val">30</span>
+          <span class="stat__label">Days to launch live</span>
+        </div>
+        <div class="stat reveal d1">
+          <span class="stat__val">100%</span>
+          <span class="stat__label">Owned audience &mdash; your list, your store</span>
+        </div>
+        <div class="stat reveal d2">
+          <span class="stat__val">0%</span>
+          <span class="stat__label">Platform cut on email revenue</span>
+        </div>
+        <div class="stat reveal d3">
+          <span class="stat__val">1</span>
+          <span class="stat__label">Agency &mdash; everything in one place</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section who" id="who">
+    <div class="container">
+      <div class="who__header reveal">
+        <span class="eyebrow">Who We Work With</span>
+        <h2>If You Have an Audience,<br>You Have a Business.</h2>
+      </div>
+      <div class="who__grid">
+        <div class="who__card reveal">
+          <div class="who__icon">&#127918;</div>
+          <h5>Streamers</h5>
+          <p>Twitch, Kick, YouTube Live &mdash; any platform, any size. If your chat is alive, we can build around it.</p>
+        </div>
+        <div class="who__card reveal d1">
+          <div class="who__icon">&#128250;</div>
+          <h5>Content Creators</h5>
+          <p>YouTube, TikTok, Instagram &mdash; short or long form. Audience is audience. We build the business.</p>
+        </div>
+        <div class="who__card reveal d2">
+          <div class="who__icon">&#127908;</div>
+          <h5>Podcasters</h5>
+          <p>Audio, video, or hybrid &mdash; if your audience shows up for you weekly, there's revenue we're not capturing yet.</p>
+        </div>
+        <div class="who__card reveal d3">
+          <div class="who__icon">&#127942;</div>
+          <h5>Gaming Personalities</h5>
+          <p>Players, coaches, analysts, orgs &mdash; the community is there. The brand infrastructure usually isn't.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section process" id="process">
+    <div class="container">
+      <div class="process__header reveal">
+        <span class="eyebrow">How It Works</span>
+        <h2>From First Call to First Drop. Fast.</h2>
+      </div>
+      <div class="process__steps">
+        <div class="process__step reveal">
+          <div class="process__num">01</div>
+          <h4>Strategy Call</h4>
+          <p>We learn your audience, platforms, goals, and where the biggest revenue gaps are. No fluff &mdash; just a real conversation.</p>
+        </div>
+        <div class="process__step reveal d1">
+          <div class="process__num" style="background: linear-gradient(90deg, var(--orange) 0%, var(--pink) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">02</div>
+          <h4>Infrastructure Build</h4>
+          <p>Brand site, drop system, email list, community assets. Fast. Most clients are live within 30 days.</p>
+        </div>
+        <div class="process__step reveal d2">
+          <div class="process__num">03</div>
+          <h4>First Drop Launch</h4>
+          <p>Your first limited drop goes live with a full pre-drop hype sequence. We run execution. You post the announcement.</p>
+        </div>
+        <div class="process__step reveal d3">
+          <div class="process__num" style="background: linear-gradient(90deg, var(--orange) 0%, var(--cyan) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">04</div>
+          <h4>Ongoing Growth</h4>
+          <p>Monthly drops, email campaigns, audience growth strategy &mdash; managed for you so you stay focused on content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="contact__inner">
+        <div class="contact__left reveal">
+          <span class="eyebrow">Let's Talk</span>
+          <h2>Tell Us About<br>Your Brand.</h2>
+          <p>No pitch deck. No obligation. Just a straight conversation about your audience and what we'd build. If it's not the right fit, we'll tell you that too.</p>
+          <p>We sent you this link because we think there's something worth building. The conversation costs nothing.</p>
+          <div class="contact__details">
+            <div class="contact__detail">
+              <div class="contact__detail-icon">&#9742;</div>
+              <div>Call or text anytime &mdash; <a href="sms:+15153444053">(515) 344-4053</a></div>
+            </div>
+            <div class="contact__detail">
+              <div class="contact__detail-icon">&#9993;</div>
+              <div><a href="mailto:ricky@urbannicheco.com">ricky@urbannicheco.com</a></div>
+            </div>
+            <div class="contact__detail">
+              <div class="contact__detail-icon">&#9889;</div>
+              <div>Usually respond within a few hours &mdash; same day guaranteed</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal d1">
+          <form aria-label="Contact form" class="form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="d7168473-e607-4b93-ac8b-6f91dfdfaa87">
+            <input type="hidden" name="from_name" value="UNC Streamer Inquiry">
+            <input type="hidden" name="subject" value="🔥 New Lead — Streamer/Creator Inquiry · Urban Niche Co.">
+            <input type="hidden" name="cc" value="ricky@urbannicheco.com">
+            <input type="hidden" name="redirect" value="https://urbannicheco.com/thank-you">
+            <div class="form__title"><span style="color: var(--orange); text-shadow: 0 0 8px var(--orange-glow);">&gt;</span> Send a Message</div>
+            <div class="form__sub">Fill this out and it goes straight to the founder. No middleman, no CRM queue.</div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="s-name">Your Name</label>
+                <input type="text" id="s-name" name="name" placeholder="First &amp; Last" required class="form__input" / autocomplete="name">
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="s-handle">Handle / Channel</label>
+                <input type="text" id="s-handle" name="handle" placeholder="@yourhandle" class="form__input" />
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="s-platform">Primary Platform</label>
+              <input type="text" id="s-platform" name="platform" placeholder="Twitch, YouTube, TikTok, etc." class="form__input" />
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="s-email">Email Address</label>
+              <input type="email" id="s-email" name="email" placeholder="you@youremail.com" required class="form__input" / autocomplete="email">
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="s-msg">What do you want to build?</label>
+              <textarea id="s-msg" name="body" placeholder="Tell us a bit about your audience, what you've tried before, and what you're hoping to build." class="form__textarea"></textarea>
+            </div>
+            <div class="anti-pitch-notice" style="background:rgba(245,245,240,0.04); border:1px solid rgba(245,245,240,0.15); border-left:3px solid #e8651a; padding:0.85rem 1rem; border-radius:6px; margin:1rem 0 1.25rem; font-size:0.83rem; color:rgba(245,245,240,0.72); line-height:1.55;">
+                          <strong style="color:#f5f5f0;">⚠️ Heads up.</strong> If you're pitching us SEO services, leads, AI tools, web design, "outsourcing," or any cold sales — don't bother. Cold pitches submitted through this form get reported as spam. Email deliverability is literally what we do for a living, so getting reported by us actually hurts <em>your</em> sender domain reputation. We're not buying — save us both the time.
+                        </div>
+            <button type="submit" class="btn btn-primary btn-lg form__submit">Send Message &rarr;</button>
+            <div class="form__note">Goes straight to the founder. We respond within one business day.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta__glow"></div>
+    <div class="container">
+      <div class="cta__inner reveal">
+        <span class="eyebrow">Ready to Build?</span>
+        <h2 class="neon-text">Let's Talk About What<br>Your Brand Could Be.</h2>
+        <p>No pitch deck. No obligation. Just a straight conversation about your audience and what we can build together. If it's not the right fit, we'll tell you that too.</p>
+        <div class="cta__actions">
+          <a href="#contact" class="btn btn-primary btn-lg">Start the Conversation &rarr;</a>
+          <a href="sms:+15153444053" class="btn btn-outline btn-lg">Text Us Directly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+</main>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">
+          <img src="/assets/images/unc-logo-icon.webp" alt="Urban Niche Co." width="45" height="45" loading="lazy" />
+          Urban <span>Niche</span>&nbsp;Co.
+        </div>
+        <div class="footer__note">&gt; This page is private and not indexed by search engines.</div>
+        <div class="footer__copy">&copy; 2026 Urban Niche Co. LLC &mdash; Dubuque, Iowa</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileNav').classList.toggle('open');
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{ "_version": "1.0", "outcomes": [
+  { "code": "REOPENED",        "label": "RE-OPENED",   "hotkey": "r", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Pricing Sent",          "description": "Open to coming back, sending proposal" },
+  { "code": "BOOKED_DISCO",    "label": "DISCO BOOKED","hotkey": "d", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Call Scheduled",        "description": "Booked a fresh discovery call" },
+  { "code": "STILL_PARKED",    "label": "STILL OUT",   "hotkey": "p", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Still not ready but kept the door open" },
+  { "code": "REASON_LEARNED",  "label": "INTEL",       "hotkey": "i", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Got the real reason they left (use to improve)" },
+  { "code": "HARD_NO",         "label": "HARD NO",     "hotkey": "x", "color": "#ef4444", "audio": "error",     "hubspot_stage": "Closed Lost / Not Now", "description": "Final answer no — remove from outreach" }
+] }

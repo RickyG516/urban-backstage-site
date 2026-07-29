@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Today — Sales Ops</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .today-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .today-date{font-size:0.8rem;color:var(--color-white-dim);letter-spacing:0.06em;text-transform:uppercase;}
+    .money-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin:1rem 0 1.5rem;}
+    @media(max-width:560px){.money-row{grid-template-columns:1fr;}}
+    .money-card{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1rem 1.25rem;}
+    .money-card b{display:block;font-size:1.5rem;color:var(--color-white);margin-top:0.15rem;}
+    .money-card span{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-white-dim);}
+    .money-card.hot b{color:var(--color-accent);}
+    .sec{margin-bottom:1.75rem;}
+    .sec-head{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem;}
+    .sec-head h2{font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-white);margin:0;}
+    .sec-count{font-size:0.7rem;font-weight:700;background:rgba(232,101,26,0.15);color:var(--color-accent);border:1px solid rgba(232,101,26,0.3);border-radius:var(--radius-pill);padding:0.15rem 0.55rem;}
+    .row{display:flex;align-items:center;gap:0.9rem;background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:0.7rem 1rem;margin-bottom:0.5rem;}
+    .row-num{font-size:0.8rem;font-weight:700;color:var(--color-accent);min-width:1.4rem;text-align:right;}
+    .row-main{flex:1;min-width:0;}
+    .row-name{font-size:0.92rem;font-weight:700;color:var(--color-white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .row-meta{font-size:0.75rem;color:var(--color-white-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .row-hook{font-size:0.75rem;color:var(--color-accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:0.1rem;}
+    .row-actions{display:flex;gap:0.4rem;flex-shrink:0;}
+    .overdue{border-color:rgba(255,64,64,0.5);}
+    .overdue .row-window{color:#ff6b6b;}
+    .row-window{font-size:0.78rem;font-weight:700;color:var(--color-white);}
+    .empty,.err{font-size:0.82rem;color:var(--color-white-dim);padding:0.9rem 0.2rem;}
+    .err{color:#ff6b6b;}
+    .copied{color:#22c55e!important;border-color:#22c55e!important;}
+    .chip-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.6rem;}
+    .chip{font-size:0.72rem;font-weight:700;letter-spacing:0.04em;background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-pill);padding:0.25rem 0.7rem;color:var(--color-white-dim);}
+    .chip b{color:var(--color-accent);}
+    .nba{background:var(--color-dark-2);border:2px solid var(--color-accent);border-radius:var(--radius-md);padding:2rem 2.5rem;margin:1rem 0 1.5rem;}
+    .nba__label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.5rem;}
+    .nba__name{font-size:1.6rem;font-weight:700;color:var(--color-white);line-height:1.15;margin-bottom:0.3rem;}
+    .nba__reason{font-size:0.9rem;color:var(--color-white-dim);margin-bottom:1rem;}
+    .nba__actions{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+    .nba__phone{font-size:1rem;font-weight:700;color:#22c55e;text-decoration:none;}
+    .nba__start{display:inline-block;background:var(--color-accent);color:#0f0f0f;font-weight:700;font-size:0.9rem;letter-spacing:0.04em;padding:0.7rem 1.6rem;border-radius:var(--radius-sm);text-decoration:none;}
+  </style>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+<main class="cockpit">
+  <section class="dash">
+    <div class="dash__header today-head">
+      <div>
+        <h1 class="dash__title">Start My Day</h1>
+        <p class="dash__sub">One button. The machine has already picked your next call. <span id="rep-tag"></span></p>
+        <div class="chip-row" id="progress-chips">
+          <span class="chip">Dials today: <b id="chip-dials">0</b></span>
+          <span class="chip">Callbacks cleared: <b id="chip-cleared">0 of 0</b></span>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div class="today-date" id="today-date"></div>
+        <button class="action-btn action-btn--sm" id="refresh-btn" style="margin-top:0.4rem;">Refresh</button>
+      </div>
+    </div>
+
+    <div class="money-row" id="money-row">
+      <div class="money-card"><span>Revenue This Month</span><b id="m-month">—</b></div>
+      <div class="money-card"><span>All-Time Revenue</span><b id="m-total">—</b></div>
+      <div class="money-card hot"><span>MRR · Retainers</span><b id="m-ret">—</b></div>
+    </div>
+
+    <div class="nba" id="nba-card" hidden>
+      <div class="nba__label">🎯 NEXT BEST ACTION</div>
+      <div class="nba__name" id="nba-name">—</div>
+      <div class="nba__reason" id="nba-reason"></div>
+      <div class="nba__actions">
+        <a class="nba__phone" id="nba-phone" href="#" hidden></a>
+        <a class="nba__start" href="https://urbanbackstage.com/sales-ops/workspace/">START →</a>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2>⏰ Callbacks Owed</h2><span class="sec-count" id="cb-count">…</span></div>
+      <div id="cb-list"><div class="empty">Loading callbacks…</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2>🎯 Strike List</h2><span class="sec-count" id="q-count">…</span></div>
+      <div id="q-list"><div class="empty">Loading queue…</div></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const WORKER = 'https://unc-sales-os-sync.ricky-a17.workers.dev';
+  const WORKER_KEY = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})(); // matches WORKSPACE_KEY
+  const PORTAL = '245833525';
+  const HDRS = { 'x-unc-key': WORKER_KEY };
+
+  function getCurrentRep() {
+    try {
+      const id = (function(){ try { const v=localStorage.getItem('unc_cockpit_current_rep_id'); return v ? JSON.parse(v) : 'ricky'; } catch(e){ return 'ricky'; } })();
+      const REPS = {
+        ricky: { display_name:'Ricky', hubspot_owner_id:'90640722' },
+        tyler: { display_name:'Tyler', hubspot_owner_id:'164794304' }
+      };
+      return REPS[id] || REPS.ricky;
+    } catch(e) { return { display_name:'Ricky', hubspot_owner_id:'90640722' }; }
+  }
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function money(n){ return '$' + (Number(n)||0).toLocaleString('en-US',{maximumFractionDigits:0}); }
+  function daysAgo(d){ if(!d) return null; return Math.floor((Date.now() - new Date(d).getTime())/86400000); }
+
+  function copyBtn(text,label){
+    return '<button class="action-btn action-btn--sm copy-btn" data-copy="'+esc(text)+'">'+esc(label||'Copy')+'</button>';
+  }
+  function bindCopies(root){
+    root.querySelectorAll('.copy-btn').forEach(b=>{
+      b.addEventListener('click',()=>{
+        navigator.clipboard.writeText(b.dataset.copy).then(()=>{
+          const t=b.textContent; b.textContent='✓'; b.classList.add('copied');
+          setTimeout(()=>{ b.textContent=t; b.classList.remove('copied'); },1200);
+        }).catch(()=>{});
+      });
+    });
+  }
+  function hubLink(id){ return 'https://app-na2.hubspot.com/contacts/'+PORTAL+'/contact/'+id; }
+
+  async function loadMoney(rep){
+    try{
+      const r = await fetch(WORKER+'/commissions?owner_id='+encodeURIComponent(rep.hubspot_owner_id),{cache:'no-cache',headers:HDRS});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const d = await r.json();
+      if(!d.ok) throw new Error(d.error||'commissions failed');
+      // Owner view: real revenue, not commission cuts. Worker route returns per-deal
+      // amount, revenue_type, month_num (retainer months elapsed), close_date.
+      const clients = d.clients||[];
+      const isRet = c => String(c.revenue_type||'').indexOf('retainer')===0;
+      const now = new Date(), y = now.getFullYear(), m = now.getMonth();
+      const mrr = clients.filter(isRet).reduce((s,c)=>s+(Number(c.amount)||0),0);
+      const oneTimeThisMonth = clients.filter(c=>{
+        if(isRet(c)||!c.close_date) return false;
+        const cd = new Date(c.close_date);
+        return cd.getFullYear()===y && cd.getMonth()===m;
+      }).reduce((s,c)=>s+(Number(c.amount)||0),0);
+      const oneTimeAll = clients.filter(c=>!isRet(c)).reduce((s,c)=>s+(Number(c.amount)||0),0);
+      const retainerLifetime = clients.filter(isRet).reduce((s,c)=>s+(Number(c.amount)||0)*Math.max(1,Number(c.month_num)||1),0);
+      const retCount = clients.filter(isRet).length;
+      document.getElementById('m-month').textContent = money(mrr + oneTimeThisMonth);
+      document.getElementById('m-total').textContent = money(retainerLifetime + oneTimeAll);
+      document.getElementById('m-ret').textContent   = money(mrr) + (retCount?' · '+retCount:'');
+    }catch(e){
+      document.getElementById('m-month').textContent='—';
+      document.getElementById('m-total').textContent='—';
+      document.getElementById('m-ret').textContent='—';
+    }
+  }
+
+  async function loadCallbacks(rep){
+    const list=document.getElementById('cb-list'), count=document.getElementById('cb-count');
+    try{
+      const r = await fetch(WORKER+'/callbacks?owner_id='+encodeURIComponent(rep.hubspot_owner_id),{cache:'no-cache',headers:HDRS});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const d = await r.json();
+      if(!d.ok) throw new Error(d.error||'callbacks failed');
+      const cbs=(d.callbacks||[]);
+      count.textContent = cbs.length;
+      lastCallbacks = cbs;
+      if(!cbs.length){ list.innerHTML='<div class="empty">No WARM callbacks owed. Queue is clean.</div>'; renderNBA(); renderClearedChip(); return; }
+      // Overdue (2+ days) floats to the very top, then oldest promise first — those are the ones burning
+      cbs.sort((a,b)=>{
+        const la=(daysAgo(a.last_call_date)>=2)?1:0, lb=(daysAgo(b.last_call_date)>=2)?1:0;
+        if(la!==lb) return lb-la;
+        return new Date(a.last_call_date||0) - new Date(b.last_call_date||0);
+      });
+      list.innerHTML = cbs.map(c=>{
+        const age = daysAgo(c.last_call_date);
+        const late = age!=null && age>=2;
+        return '<div class="row'+(late?' overdue':'')+'">'+
+          '<div class="row-main">'+
+            '<div class="row-name">'+esc((c.first_name+' '+c.last_name).trim()||'—')+' · '+esc(c.business_name||'')+'</div>'+
+            '<div class="row-meta">'+esc(c.trade_type||'')+(c.city?' · '+esc(c.city)+(c.state?', '+esc(c.state):''):'')+
+              (age!=null?' · called '+age+'d ago':'')+'</div>'+
+            '<div class="row-window">'+(late?'⚠ OVERDUE — ':'')+'window: '+esc(c.callback_window||'unspecified')+'</div>'+
+          '</div>'+
+          '<div class="row-actions">'+
+            (c.phone?'<a href="tel:'+esc(c.phone)+'" class="action-btn action-btn--sm" style="color:#22c55e;border-color:#22c55e;">Call</a>':'')+
+            (c.phone?copyBtn(c.phone,'#'):'')+
+            '<a href="'+hubLink(c.contact_id)+'" target="_blank" rel="noopener" class="action-btn action-btn--sm">HS</a>'+
+          '</div>'+
+        '</div>';
+      }).join('');
+      bindCopies(list);
+      renderNBA(); renderClearedChip();
+    }catch(e){
+      count.textContent='!';
+      lastCallbacks = [];
+      list.innerHTML='<div class="err">Couldn\'t load callbacks ('+esc(e.message)+').</div>';
+      renderNBA(); renderClearedChip();
+    }
+  }
+
+  async function loadQueue(rep){
+    const list=document.getElementById('q-list'), count=document.getElementById('q-count');
+    try{
+      const r = await fetch(WORKER+'/queue?owner_id='+encodeURIComponent(rep.hubspot_owner_id)+'&limit=10',{cache:'no-cache',headers:HDRS});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const d = await r.json();
+      if(!d.ok) throw new Error(d.error||'queue failed');
+      const q=(d.queue||[]);
+      count.textContent = q.length;
+      lastQueue = q;
+      if(!q.length){ list.innerHTML='<div class="empty">Queue is empty — everyone eligible has been touched or is cooling down. Run the prospector.</div>'; renderNBA(); return; }
+      list.innerHTML = q.map((c,i)=>{
+        const hook=c.ai_hook||c.company_notes||'';
+        return '<div class="row">'+
+          '<div class="row-num">'+(i+1)+'</div>'+
+          '<div class="row-main">'+
+            '<div class="row-name">'+esc((c.first_name+' '+c.last_name).trim()||'—')+' · '+esc(c.business_name||'')+'</div>'+
+            '<div class="row-meta">'+esc(c.trade_type||'')+(c.city?' · '+esc(c.city)+(c.state?', '+esc(c.state):''):'')+
+              (c.last_call_outcome?' · last: '+esc(c.last_call_outcome):' · never called')+'</div>'+
+            (hook?'<div class="row-hook">⚡ '+esc(hook.slice(0,110))+'</div>':'')+
+          '</div>'+
+          '<div class="row-actions">'+
+            (c.phone?'<a href="tel:'+esc(c.phone)+'" class="action-btn action-btn--sm" style="color:#22c55e;border-color:#22c55e;">Call</a>':'')+
+            (c.phone?copyBtn(c.phone,'#'):'')+
+            '<a href="'+hubLink(c.contact_id)+'" target="_blank" rel="noopener" class="action-btn action-btn--sm">HS</a>'+
+          '</div>'+
+        '</div>';
+      }).join('');
+      bindCopies(list);
+      renderNBA();
+    }catch(e){
+      count.textContent='!';
+      lastQueue = [];
+      list.innerHTML='<div class="err">Couldn\'t load the queue ('+esc(e.message)+').</div>';
+      renderNBA();
+    }
+  }
+
+  // ── Next Best Action + progress chips (client-side, from data already fetched) ──
+  let lastCallbacks = [], lastQueue = [];
+
+  function todayDialKey(){
+    const d=new Date(), p=n=>String(n).padStart(2,'0');
+    return 'unc_cockpit_dials_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+  }
+  function renderDialsChip(){
+    let n=0;
+    try{ const v=localStorage.getItem(todayDialKey()); if(v!=null) n=Number(JSON.parse(v))||0; }catch(e){}
+    document.getElementById('chip-dials').textContent=n;
+  }
+  function renderClearedChip(){
+    const Y=lastCallbacks.length;
+    const rendered=document.querySelectorAll('#cb-list .row').length;
+    const X=Math.max(0,Y-rendered);
+    document.getElementById('chip-cleared').textContent=X+' of '+Y;
+  }
+  function nbaName(c){ return c.business_name || ((c.first_name+' '+c.last_name).trim()) || '—'; }
+  function nbaWindow(c){ return (c.callback_window && c.callback_window!=='unspecified') ? c.callback_window : ''; }
+  function renderNBA(){
+    const card=document.getElementById('nba-card');
+    const nameEl=document.getElementById('nba-name');
+    const reasonEl=document.getElementById('nba-reason');
+    const phoneEl=document.getElementById('nba-phone');
+    let name='', reason='', phone='';
+    const overdue = lastCallbacks.filter(c=>{ const a=daysAgo(c.last_call_date); return a!=null && a>=2; });
+    if(overdue.length){
+      const c=overdue[0], w=nbaWindow(c);
+      name=nbaName(c); phone=c.phone||'';
+      reason='Callback overdue'+(w?' since '+w:' — this one is burning');
+    } else if(lastCallbacks.length){
+      const c=lastCallbacks[0], w=nbaWindow(c);
+      name=nbaName(c); phone=c.phone||'';
+      reason='Callback owed today'+(w?' · '+w:'');
+    } else if(lastQueue.length){
+      const c=lastQueue[0];
+      name=nbaName(c); phone=c.phone||'';
+      reason='Fresh dial — top of your strike list';
+    } else {
+      card.hidden=true; return;
+    }
+    nameEl.textContent=name;
+    reasonEl.textContent=reason;
+    if(phone){ phoneEl.href='tel:'+phone; phoneEl.textContent='📞 '+phone; phoneEl.hidden=false; }
+    else { phoneEl.hidden=true; }
+    card.hidden=false;
+  }
+
+  function boot(){
+    const rep=getCurrentRep();
+    document.getElementById('rep-tag').textContent='Rep: '+rep.display_name;
+    document.getElementById('today-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    renderDialsChip();
+    loadMoney(rep); loadCallbacks(rep); loadQueue(rep);
+  }
+  document.getElementById('refresh-btn').addEventListener('click',boot);
+  boot();
+})();
+</script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{ "_version": "1.0", "outcomes": [
+  { "code": "REFERRAL_GIVEN",  "label": "REFERRAL",    "hotkey": "r", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Follow-Up In Progress", "description": "Got 1+ referrals with contact info" },
+  { "code": "INTRO_OFFERED",   "label": "INTRO",       "hotkey": "i", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Follow-Up In Progress", "description": "Client will warm-intro you" },
+  { "code": "WILL_THINK",      "label": "WILL THINK",  "hotkey": "t", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Wants to think about who fits" },
+  { "code": "NO_REFERRAL",     "label": "NO",          "hotkey": "n", "color": "#94a3b8", "audio": "click",     "hubspot_stage": "Closed Won",            "description": "No referral available right now" }
+] }

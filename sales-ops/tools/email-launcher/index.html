@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Email Launcher — Sales Ops</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .template-grid{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem;}
+    .template-card{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1.25rem 1.5rem;cursor:pointer;transition:border-color 0.15s,background 0.15s;}
+    .template-card:hover{border-color:var(--color-accent);background:rgba(232,101,26,0.05);}
+    .template-card.selected{border-color:var(--color-accent);background:rgba(232,101,26,0.08);}
+    .template-card__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;}
+    .template-card__name{font-weight:700;font-size:0.95rem;color:var(--color-white);}
+    .template-card__tag{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.5rem;border-radius:var(--radius-pill);background:rgba(232,101,26,0.12);color:var(--color-accent);border:1px solid rgba(232,101,26,0.25);}
+    .template-card__desc{font-size:0.82rem;color:var(--color-white-dim);}
+    .compose-panel{background:var(--color-dark);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;}
+    .compose-panel__title{font-size:0.88rem;font-weight:700;color:var(--color-white);margin-bottom:1rem;}
+    .field{margin-bottom:0.75rem;}
+    .field label{display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-white-dim);margin-bottom:0.3rem;}
+    .field input,.field textarea{width:100%;background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-white);font-family:var(--font-body);font-size:0.9rem;padding:0.55rem 0.75rem;outline:none;transition:border-color 0.15s;box-sizing:border-box;}
+    .field input:focus,.field textarea:focus{border-color:var(--color-accent);}
+    .field textarea{resize:vertical;min-height:140px;line-height:1.6;}
+    .preview-box{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:1rem;font-size:0.88rem;line-height:1.7;color:var(--color-white);white-space:pre-wrap;margin-bottom:0.75rem;max-height:300px;overflow-y:auto;}
+    .section-header{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--color-accent);margin:1.5rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--color-border);}
+  </style>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+<main class="cockpit">
+  <section class="dash">
+    <div class="dash__header">
+      <div>
+        <h1 class="dash__title">Email Launcher</h1>
+        <p class="dash__sub">Pick a template, fill in the prospect details, launch to Gmail in one click.</p>
+      </div>
+    </div>
+
+    <div class="section-header">Pick a Template</div>
+    <div class="template-grid" id="template-list"></div>
+
+    <div class="section-header">Prospect Details</div>
+    <div class="compose-panel">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+        <div class="field"><label>First Name</label><input type="text" id="p-first" placeholder="Mike"></div>
+        <div class="field"><label>Business Name</label><input type="text" id="p-biz" placeholder="Embassy Construction"></div>
+        <div class="field"><label>Email *</label><input type="email" id="p-email" placeholder="mike@embassyconstruction.com"></div>
+        <div class="field"><label>Trade</label><input type="text" id="p-trade" placeholder="General Contractor"></div>
+        <div class="field"><label>City</label><input type="text" id="p-city" placeholder="Dubuque, Iowa"></div>
+        <div class="field"><label>Audit Finding (optional)</label><input type="text" id="p-finding" placeholder="e.g. No mobile CTA, loads slow"></div>
+      </div>
+    </div>
+
+    <div class="section-header">Preview</div>
+    <div>
+      <div style="font-size:0.78rem;color:var(--color-white-dim);margin-bottom:0.4rem;">Subject</div>
+      <div class="preview-box" id="preview-subject" style="min-height:auto;padding:0.6rem 0.75rem;font-weight:600;"></div>
+      <div style="font-size:0.78rem;color:var(--color-white-dim);margin:0.75rem 0 0.4rem;">Body</div>
+      <div class="preview-box" id="preview-body"></div>
+      <div style="display:flex;gap:0.75rem;">
+        <button class="action-btn action-btn--primary" id="launch-btn" style="padding:0.65rem 1.5rem;">Open in Gmail</button>
+        <button class="action-btn" id="copy-btn" style="padding:0.65rem 1rem;">Copy Body</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const TEMPLATES = [
+    {
+      id: 'audit_same_day',
+      name: 'Website Audit — Same Day',
+      tag: 'Cold Call Follow-Up',
+      desc: 'Send within 2 hours of a cold call. Audit finding + proposal link.',
+      subject: 'Your site audit + proposal — {biz}',
+      body: `Hey {first},
+
+Sent over the audit and proposal a couple hours ago. Quick note: the issues I flagged on your site are fixable in about two weeks.
+
+Kitsch Tree Service link is in there too so you can see the work firsthand.
+
+Let me know if you have questions or want to hop on a call — {rep_phone}.
+
+— {rep}
+Urban Niche Co.
+urbannicheco.com`
+    },
+    {
+      id: 'follow_up_d3',
+      name: 'Follow-Up — Day 3',
+      tag: 'Cold Call Follow-Up',
+      desc: 'Three days after proposal. Light touch, proof stat.',
+      subject: 'Still worth a look — {biz}',
+      body: `Hey {first},
+
+Just circling back on the proposal. I know it is busy.
+
+One thing worth knowing: ranking top 3 statewide for contractor SEO in Iowa on pages less than a month old. The contractors getting sites built now are getting ahead of the ones who wait.
+
+No pressure — just want to make sure you had a chance to look it over.
+
+Reply here or call me direct at {rep_phone}.
+
+— {rep}`
+    },
+    {
+      id: 'follow_up_d7',
+      name: 'Follow-Up — Day 7',
+      tag: 'Cold Call Follow-Up',
+      desc: 'Final follow-up. Clean exit, referral ask baked in.',
+      subject: 'Last follow-up — {biz}',
+      body: `Hey {first},
+
+Last follow-up on this, I promise. If the timing is not right I completely get it. If you want to revisit at any point the offer stands.
+
+And if you know another contractor who has been complaining about their site or not getting leads online — I would appreciate the introduction.
+
+Either way good luck out there.
+
+— {rep}`
+    },
+    {
+      id: 'proposal_hot',
+      name: 'Proposal — HOT Lead',
+      tag: 'Proposal',
+      desc: 'Full proposal email with Stripe deposit link. Fire immediately after a HOT call.',
+      subject: 'Your website proposal — {biz}',
+      body: `Hey {first},
+
+Great talking with you. As promised, here is the proposal for your new website.
+
+What I found on your site: {finding}
+
+Here is what I build: HTML Starter site, $3,000, live in 14 days from when I have your assets. Fast, clean, mobile-ready, built to rank.
+
+Optional add-on: 1 blog page + 1 service page + 1 city page (+$500-750) — shows you exactly what your site looks like when it starts ranking.
+
+Pay the $1,500 deposit to get started:
+{rep_stripe}
+
+Once the deposit lands I will send the intake form — takes about 10 minutes to fill out. From there you are live in 14 days.
+
+After launch I will walk you through the SEO retainer option — no pressure today, just want you to see what is possible.
+
+Any questions just reply here or text me at {rep_phone}.
+
+— {rep}
+Urban Niche Co.
+urbannicheco.com`
+    },
+    {
+      id: 'intake_send',
+      name: 'Intake Form — Post Deposit',
+      tag: 'Onboarding',
+      desc: 'Send after $1,500 deposit clears. Starts the 14-day clock.',
+      subject: 'Your intake form — {biz} website build',
+      body: `Hey {first},
+
+Deposit received — you are officially in the queue.
+
+Fill out the intake form below. Takes about 10 minutes. The 14-day clock starts the moment I have everything.
+
+Intake form: https://urbannicheco.com/client-intake/
+
+What I need from you: logo files, photos of your work, brand colors if you have them, the cities you want to target, and any sites you like the look of.
+
+Any questions just reply here or text me at {rep_phone}.
+
+— {rep}
+Urban Niche Co.`
+    },
+    {
+      id: 'discovery_confirm',
+      name: 'Discovery Call Confirm',
+      tag: 'Discovery',
+      desc: 'Confirm a booked discovery call. Sets expectations before the call.',
+      subject: 'Confirmed: Discovery Call — {biz}',
+      body: `Hey {first},
+
+Just confirming our discovery call — looking forward to it.
+
+Before we talk, quick heads up on what we will cover: your current online presence, where the biggest gaps are, and whether there is a fit for what we do at Urban Niche Co.
+
+No sales pressure. If we are not the right fit I will tell you straight.
+
+See you then.
+
+— {rep}
+Urban Niche Co.
+{rep_phone}`
+    }
+  ];
+
+  let selectedTemplate = TEMPLATES[0];
+
+  // Load active rep from reps.json — keyed to localStorage current_rep_id
+  let _rep = { display_name: 'Ricky', signature: '\u2014 Ricky, UNC', phone: '(515) 344-4053', stripe_link: 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N', booking_url: 'https://urbannicheco.com/audit' };
+  (async function loadRep() {
+    try {
+      const data = await fetch('/sales-ops/shared/reps.json', { cache: 'no-cache' }).then(r => r.json());
+      const savedId = (function(){ try { const v=localStorage.getItem('unc_cockpit_current_rep_id'); return v ? JSON.parse(v) : null; } catch(e){ return null; } })();
+      const match = data.reps.find(r => r.active && r.id === savedId) || data.reps.find(r => r.active);
+      if (match) _rep = match;
+      updatePreview();
+    } catch(e) {}
+  })();
+
+  function getTokens(){
+    return {
+      first: document.getElementById('p-first').value.trim() || 'there',
+      biz:   document.getElementById('p-biz').value.trim()   || 'your business',
+      email: document.getElementById('p-email').value.trim(),
+      trade: document.getElementById('p-trade').value.trim() || 'contractor',
+      city:  document.getElementById('p-city').value.trim()  || 'your area',
+      finding: document.getElementById('p-finding').value.trim() || 'slow load time, no quote form, not ranking locally',
+      rep:        _rep.signature    || ('\u2014 ' + _rep.display_name + ', UNC'),
+      rep_phone:  _rep.phone        || '(515) 344-4053',
+      rep_stripe: _rep.stripe_link  || 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N',
+      rep_booking_url: _rep.booking_url || 'https://urbannicheco.com/audit'
+    };
+  }
+
+  function interp(s, tokens){
+    return s.replace(/\{(\w+)\}/g, (m,k) => tokens[k] != null ? tokens[k] : m);
+  }
+
+  function renderTemplates(){
+    const list = document.getElementById('template-list');
+    list.innerHTML = TEMPLATES.map(t =>
+      '<div class="template-card' + (t.id===selectedTemplate.id?' selected':'') + '" data-id="'+t.id+'">' +
+        '<div class="template-card__header">' +
+          '<span class="template-card__name">'+t.name+'</span>' +
+          '<span class="template-card__tag">'+t.tag+'</span>' +
+        '</div>' +
+        '<div class="template-card__desc">'+t.desc+'</div>' +
+      '</div>'
+    ).join('');
+    list.querySelectorAll('.template-card').forEach(card => {
+      card.addEventListener('click', ()=>{
+        selectedTemplate = TEMPLATES.find(t=>t.id===card.dataset.id);
+        renderTemplates();
+        updatePreview();
+      });
+    });
+  }
+
+  function updatePreview(){
+    const tokens = getTokens();
+    document.getElementById('preview-subject').textContent = interp(selectedTemplate.subject, tokens);
+    document.getElementById('preview-body').textContent = interp(selectedTemplate.body, tokens);
+  }
+
+  // Live update on input
+  ['p-first','p-biz','p-email','p-trade','p-city','p-finding'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', updatePreview);
+  });
+
+  document.getElementById('launch-btn').addEventListener('click',()=>{
+    const tokens = getTokens();
+    if(!tokens.email){ alert('Enter the prospect email first.'); return; }
+    const subject = encodeURIComponent(interp(selectedTemplate.subject, tokens));
+    const body    = encodeURIComponent(interp(selectedTemplate.body, tokens));
+    window.open('https://mail.google.com/mail/?view=cm&to='+encodeURIComponent(tokens.email)+'&su='+subject+'&body='+body, '_blank');
+  });
+
+  document.getElementById('copy-btn').addEventListener('click',()=>{
+    const tokens = getTokens();
+    const text = interp(selectedTemplate.body, tokens);
+    navigator.clipboard.writeText(text).then(()=>{
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(()=>btn.textContent='Copy Body', 1500);
+    });
+  });
+
+  renderTemplates();
+  updatePreview();
+})();
+</script>
+</body>
+</html>

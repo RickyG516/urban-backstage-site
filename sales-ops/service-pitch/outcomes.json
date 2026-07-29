@@ -1,0 +1,14 @@
+{
+  "_version": "1.0",
+  "outcomes": [
+    { "code": "HOT",                "label": "HOT — START", "hotkey": "h", "color": "#e36b1e", "audio": "cha-ching", "hubspot_stage": "Proposal Out",         "description": "Verbal yes to start this week" },
+    { "code": "CLOSED_WON",         "label": "CLOSED",     "hotkey": "w", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Closed Won",           "description": "Signed on the call" },
+    { "code": "PROPOSAL_REQUESTED", "label": "PROPOSAL",   "hotkey": "p", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Pricing Sent",         "description": "Wants written proposal" },
+    { "code": "FOLLOW_UP_BOOKED",   "label": "FOLLOW-UP",  "hotkey": "f", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Second meeting set" },
+    { "code": "NOT_NOW",            "label": "NOT NOW",    "hotkey": "n", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Interested but timing is off" },
+    { "code": "OBJ_PRICE",          "label": "PRICE OBJ",  "hotkey": "1", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Hung up on price" },
+    { "code": "OBJ_THINK",          "label": "THINK OBJ",  "hotkey": "2", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Needs to think" },
+    { "code": "OBJ_COMPETITOR",     "label": "COMPETITOR", "hotkey": "3", "color": "#a78bfa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Talking to another agency" },
+    { "code": "LOST",               "label": "LOST",       "hotkey": "x", "color": "#ef4444", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Clear no" }
+  ]
+}

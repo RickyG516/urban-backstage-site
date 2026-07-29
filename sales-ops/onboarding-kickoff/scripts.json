@@ -1,0 +1,62 @@
+{
+  "_version": "3.0",
+  "_last_updated": "2026-06-15",
+  "intro": {
+    "default": "Hey {first_name} — welcome, seriously. Excited to get into {business_name}. The first 30 days are everything — what we set up now determines the whole trajectory. I want to lock in everything we need in the next 20 minutes so we hit the ground running tomorrow morning. Sound good?",
+    "training_note": "Energy matters here more than any other call. This is their first experience of what working with UNC actually feels like day-to-day. Be organized, warm, and specific. Contractors are used to vendors who start strong and go quiet — differentiate immediately by knowing exactly what you need and why."
+  },
+  "agenda": {
+    "items": [
+      "Logins and access — the big one, don't skip anything or we're delayed",
+      "Your brand — logo, colors, tone, and what you hate seeing from marketing agencies",
+      "Existing assets — testimonials, project photos, anything you already have",
+      "Top 3 outcomes in the first 30 days — so we're aligned before we start, not after",
+      "How we communicate — updates, urgency, what you can expect from us every week"
+    ],
+    "script": "Five things to cover — access, your brand, any assets you have, what success looks like in month one, and how we stay in touch. Let's go in order.",
+    "training_note": "Say the agenda out loud. It sounds minor but it signals you're organized and respect their time. Contractors deal with unorganized vendors constantly — being structured is an immediate differentiator."
+  },
+  "access_checklist": {
+    "items": [
+      "Google Business Profile — manager access only, NOT ownership transfer. You stay the owner.",
+      "Website backend — CMS login or FTP. WordPress: admin access.",
+      "Google Ads — manager access invite to your UNC email. Not account ownership.",
+      "Meta Business Suite — admin access on their page. For content and social clients.",
+      "Domain registrar — only if we're doing technical SEO. Not always needed.",
+      "Google Analytics + Search Console — editor or viewer access.",
+      "Any existing review platform accounts — Yelp, BBB if they have them"
+    ],
+    "script": "First thing — I need access to a few platforms. I want to be upfront: for Google Business Profile, we need manager access, not ownership. You stay the owner at all times. Same with everything else — we're in there to work, not to own anything. Can we go through these one at a time?",
+    "if_they_resist_access": "Totally understand — I'd be cautious too. Here's what I'd suggest: let's do a quick screenshare right now and I'll walk you through exactly what I'm doing when I add us as a manager. Takes 3 minutes and you'll see exactly what access we get. Want to do that?",
+    "training_note": "Some contractors will be nervous about giving logins. Address it proactively before they bring it up. The screenshare offer works almost every time — it shows you have nothing to hide.",
+    "gbp_note": "Verify the GBP category is correct for their trade before we start. Wrong category is the #1 reason GBP underperforms. Confirm this on the screenshare if they're doing one."
+  },
+  "brand_section": {
+    "script": "Next — tell me about {business_name}'s brand. What do you want people to feel when they land on your site or see one of your posts? And just as important — what do you absolutely hate seeing from marketing agencies?",
+    "what_to_capture": [
+      "Logo files — ask them to text or email the file right now while on the call",
+      "Brand colors — even 'we use a lot of blue' is enough to start",
+      "Tone — formal or casual? Corporate or real person?",
+      "Pet peeves — stock photos? Corporate language? Cliche taglines? Write these down verbatim."
+    ],
+    "training_note": "The 'what do you hate' question is more valuable than any brand brief. Write it down exactly as they say it — it tells you what not to do in every deliverable from here on."
+  },
+  "month_one_outcomes": {
+    "script": "Last thing before we talk communication — what are the 3 things you'd need to see in the first 30 days to feel like this was worth it for {business_name}? Be specific — 'more calls', 'showing up in {city} on Google', 'X more reviews'. I want us aligned on what success looks like before we start, not 30 days in.",
+    "training_note": "This sets the benchmark THEY choose, not you. If they say '5 new leads' and you get them 3, you underdelivered. If they say 'I want to rank better on Google' and you move them from page 3 to page 2, that's a documented win. Let them set the bar — it protects both of you."
+  },
+  "communication_rhythm": {
+    "script": "Here's how we communicate. You get a weekly update every Monday — short, specific, what went out, what's working, what's next. Monthly report on the first of each month with the full picture. If anything urgent comes up, you text me directly at {rep_phone} — I don't do email for urgent things, too slow. And if I need something from you, same — text first. Any questions before we get into access?",
+    "training_note": "Set the communication expectation hard in week one. Contractors ghost when they feel out of the loop. A Monday update prevents 90% of mid-month check-in calls and eliminates the 'I never hear from them' complaint that kills most client relationships."
+  },
+  "buyers_remorse_save": {
+    "trigger": "Sensing hesitation, second-guessing, or nervousness on the kickoff call",
+    "script": "Hey — I'm picking up that something's coming up for you. That's completely normal at this stage. What's the hesitation? I'd much rather address it now than have it sit.",
+    "common_concerns": {
+      "cost": "If it's cost: 'We ran the math on this — at your average ticket, two extra jobs a month covers the investment. If we get you two jobs and nothing else, we break even. Does that still work for you?'",
+      "timing": "If it's timing: 'The setup happens this week but you won't see output until week 3. There's nothing on your plate until we need access — which we can knock out in 10 minutes right now.'",
+      "trust": "If it's trust: 'That's fair — you don't know us yet. What would give you more confidence? I can walk you through exactly what month one looks like deliverable by deliverable, or put you in touch with someone who's been through the setup.'"
+    },
+    "training_note": "Don't dismiss buyer's remorse. Acknowledge it directly — 'that's completely normal' alone drops the temperature. Then get specific about the actual concern. Vague reassurance makes it worse."
+  }
+}

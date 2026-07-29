@@ -1,0 +1,170 @@
+{
+  "_comment": "Discovery call — SPIN-style. Get them talking. You're diagnosing, not pitching.",
+  "_version": "3.0",
+  "_last_updated": "2026-06-15",
+  "intro": {
+    "default": "Hey {first_name} — let's get into it. I want to see what's actually going on inside {business_name} so we can find the problems worth solving, and I'll tell you straight whether I'm the one to fix them. Fair?",
+    "training_note": "No thanking them for the call — that hands them the high ground before you've said a word. You walk in as the guy who solves the problem, not the vendor grateful for the audience. Keep the honesty hook ('I'll tell you straight') — that's what buys the whole call."
+  },
+  "agenda": {
+    "default": "I'm going to ask you 5-6 questions about where things stand — what's working, what's broken, what you actually want. Then I'll either pitch you something specific, give you a referral to someone better, or just send you the audit with my honest take. No surprise close at the end.",
+    "training_note": "Killing the surprise close expectation upfront lowers their guard. They stop waiting to get sold and start actually talking."
+  },
+  "deflections": {
+    "already_have_agency": {
+      "say_this": "Good — what do they handle for you? I'm asking because most agencies working with contractors are generalists. They do restaurants, dentists, everyone. We only do contractors. Depending on what your current setup covers, there might be a gap worth talking about.",
+      "follow_up": "What's your {trade_lower} ranking in {city} looking like right now — are you in the map pack?",
+      "training_note": "Don't fight the agency. Get curious about it. The question 'are you in the map pack' is almost always the wedge — most aren't."
+    },
+    "early_price_question": {
+      "say_this": "I'll absolutely get you numbers before we hang up. But if I quoted you right now I'd be guessing — and I'd probably either underprice myself or overkill what you actually need. Give me 15 minutes to understand {business_name} first and I'll give you a real number, not a range I pulled out of thin air.",
+      "training_note": "Never give price before value. This redirect works because it sounds reasonable and professional — not like a dodge."
+    },
+    "disengaged_short_answers": {
+      "say_this": "Hey {first_name} — am I catching you at a bad time? I'd genuinely rather call back when you have 15 minutes than waste both our time right now.",
+      "training_note": "Cutting a dead call is not failure. It's efficiency. A rescheduled call with full attention beats a forced conversation every time."
+    },
+    "time_crunch": {
+      "say_this": "Perfect — 5 is all I need to know if this is even worth a longer talk. Two quick questions, and if it's not a fit I'll tell you straight and give you the time back.",
+      "training_note": "Take the constraint and use it. Shrink the ask, don't fight it. A short call you control beats a full call they resent. Jump straight to the sharpest two Situation/Problem questions."
+    },
+    "not_the_owner": {
+      "say_this": "Totally fair — I don't want to put you in the middle of a decision that isn't yours. Best way to do this: what's the quickest way to get 15 minutes with {first_name}'s owner? I'll do the heavy lifting, you just point me the right direction.",
+      "follow_up": "If you'd rather, I can send a quick one-pager you could hand them — but a 15-minute call gets them a real answer faster.",
+      "training_note": "Don't sell the gatekeeper. Respect them, arm them, route to the owner. Never burn the relationship — today's gatekeeper is tomorrow's warm intro."
+    }
+  },
+  "tech_deflect": {
+    "_comment": "UNIVERSAL DEFLECT-UP RAIL — reachable from every screen. Diagnostician, not mechanic.",
+    "how_it_works": {
+      "say_this": "That's exactly the right question — and it's why we don't wing it on a cold call. The how gets built into your written proposal so you're reading it in plain English on your own time, not me rattling jargon at you over the phone. What I need from you right now is just —",
+      "training_note": "Compliment the question. Move the mechanics to where they belong — in writing. Hand the ball back with your next diagnostic question. You NEVER explain the engine live. The proposal is the last line of technical defense, not you."
+    },
+    "why_it_helps": {
+      "say_this": "Short version — you show up when someone in your area types '{trade_lower} near me' at 11pm and right now you don't. The exact build I scope in the proposal so I'm not overselling you on a phone call — that's how we avoid the oversell-and-underdeliver thing the last agency probably did to you.",
+      "training_note": "Answer in OUTCOMES, never methods. Then route depth to the scoping step. 'I don't quote the spec off the top of my head' reads as rigor, not ignorance. That's the more expensive, more serious operator."
+    }
+  },
+  "sections": {
+    "situation": {
+      "label": "Section 1 · SITUATION",
+      "goal": "Understand what marketing is running today — what, who, how long",
+      "training_note": "Don't judge what they say. Don't react. Just take notes. You're gathering intel, not grading them.",
+      "prompts": [
+        "Walk me through what your current marketing looks like — what's actually running right now?",
+        "Who handles each piece — you personally, someone in-house, or an agency?",
+        "How long have you been running it that way?",
+        "What's {business_name} doing revenue-wise, roughly — I want to make sure anything I recommend actually makes sense for where you are."
+      ],
+      "follow_up_prompts": [
+        "When you say [X] — what does that actually look like week to week?",
+        "Before [X], what were you doing? What changed?"
+      ]
+    },
+    "problem": {
+      "label": "Section 2 · PROBLEM",
+      "goal": "Surface what's NOT working. Specific pains, not vague complaints.",
+      "training_note": "Listen for frustration and resignation — those are buying signals. The thing they've been ignoring because they don't know how to fix it? That's your in.",
+      "prompts": [
+        "Where are leads slipping through right now that you know about but haven't fixed?",
+        "What part of your marketing situation is quietly bothering you — the thing you know isn't working?",
+        "When was the last time a customer said they almost couldn't find you?",
+        "Have you ever lost a job to a competitor and knew it was a visibility thing, not a price or quality thing?"
+      ],
+      "follow_up_prompts": [
+        "Say more about that — what happened specifically?",
+        "How long has that been going on?"
+      ]
+    },
+    "implication": {
+      "label": "Section 3 · IMPLICATION",
+      "goal": "Make the cost of doing nothing real. Get them to say the number, not you.",
+      "training_note": "This is the most important section. When they calculate their own annual leak out loud, it hits different than when you tell them the number. Shut up and let them do the math.",
+      "prompts": [
+        "If this stays exactly as-is for the next 12 months — what does that actually cost you?",
+        "How many jobs a month do you think you're missing because of these gaps?",
+        "What's your average job ticket?",
+        "Are your competitors gaining ground online while you're holding still?"
+      ],
+      "follow_up_prompts": [
+        "So if I'm doing the math — that's roughly $[X] a year in missed work. Does that sound right?",
+        "And that's just from this one gap. What about [second problem they mentioned]?"
+      ],
+      "calculator_note": "Missed jobs per month × average ticket × 12 = annual revenue leak. Say the number out loud after they give you the inputs. That number is your close."
+    },
+    "need_payoff": {
+      "label": "Section 4 · NEED-PAYOFF",
+      "goal": "Get them painting what success looks like. Their words, not yours.",
+      "training_note": "Ask one question. Then stop talking. The longer they describe what success looks like, the more committed they are before you even pitch.",
+      "prompts": [
+        "If we fixed this — say 90 days from now the phone is ringing 30% more — what does that mean for you?",
+        "What would you do with that revenue? Hire someone? New equipment? Actually pay yourself?",
+        "If I could show you a clear path to that, would you want to walk through it on a follow-up?",
+        "What would it feel like to not be guessing where the next job is coming from?"
+      ]
+    },
+    "decision": {
+      "label": "Section 5 · DECISION",
+      "goal": "Surface the investment, get a concrete next step.",
+      "training_note": "Anchor the value first. Restate exactly what they told you, then show how you fix it, then give the number. Price before value = sticker shock. Value before price = 'that's not as bad as I thought.'",
+      "prompts": [
+        "Based on what you just told me, here's what I'd actually do for {business_name} — [walk through 2-3 services specific to their trade and gaps].",
+        "The investment for that setup is typically $X to $Y per month depending on how aggressive you want to be. Does that ballpark work for where you are?",
+        "Do you want a written proposal you can look at on your time, or would you rather hop on 15 minutes together to walk through it?"
+      ]
+    }
+  },
+  "quick_win": {
+    "_comment": "Repositioned — NOT the discovery opener. Whisper at open, land it in Implication as proof, use it at close as the first concrete move.",
+    "open_whisper": "Oh — and I actually pulled up {business_name} before this call. Found a couple things. We'll get to those.",
+    "open_whisper_note": "One soft line. Plants that you did homework without spending the ammo. Only fire if quick_win is populated.",
+    "implication_overlay": "Remember I said I pulled you up before this? {quick_win}. That's not a coincidence — that gap is exactly what's costing you the jobs we just talked about.",
+    "implication_note": "This is where the quick win earns its keep — AFTER they've felt the cost of doing nothing. Now it's evidence, not a cold-open gimmick.",
+    "close_proof": "And the very first thing I'd fix is what I already spotted — {quick_win}. That's day one, not day ninety.",
+    "close_note": "Makes the next step feel real and immediate instead of abstract. The tangible first move."
+  },
+  "objections": {
+    "complacency": {
+      "say_this": "Good — that's the position you want to be in. The {trade_lower}s I help who are busy aren't looking for more work, they're looking to stop depending on referrals they can't control and start picking the better jobs. When word-of-mouth slows — and it always does a season or two — where does the next job come from?",
+      "training_note": "Don't argue that they're not busy. Reframe from VOLUME to CONTROL and QUALITY. Busy today isn't protected tomorrow. Plant the future-risk seed, then hand it back to diagnosis."
+    },
+    "burned_before": {
+      "say_this": "I'd bet I know how it went — they took your money, sent you a report full of numbers that didn't mean anything, and never got you a single call you could actually trace back to them. That's the whole industry. Here's my difference: Kutsch Tree got 25 leads their first month with us, Mark at Fuehrer Painting got a qualified lead in 24 hours. I don't ask you to trust me — I show you the work first.",
+      "training_note": "Agree with them. Most contractor marketing IS garbage. Separate yourself by naming exactly how the last guy failed them, then set the low-risk frame: proof, not promises. Lead with the real proof points."
+    },
+    "money_tight": {
+      "say_this": "I hear you — and that's exactly why this matters, not why it waits. You just told me you're leaking somewhere around $[X] a year to jobs you can't get found for. This isn't spending money you don't have — it's stopping money that's already walking out the door.",
+      "training_note": "Reframe cost as the cost of the leak they already named in Implication. The spend isn't new money out — it's plugging money already leaving. Use THEIR number."
+    },
+    "wrong_season": {
+      "say_this": "That's actually the window. Marketing has a 45-to-60-day runway — if we build during the slow stretch, you walk into your busy season with the phone already ringing instead of scrambling to catch up when you're slammed.",
+      "training_note": "Both directions close. Slow season = build now so it's ringing when it turns. Busy season = lock it before the rush. Turn the calendar into urgency either way."
+    },
+    "ask_partner": {
+      "say_this": "Smart — you should. Let's not play telephone though; the worst version of this is you trying to pitch my thing secondhand. Get them on a quick 15 with the two of us, I'll walk you both through it, everybody hears the same thing at the same time. When's good?",
+      "training_note": "Never make them your unpaid salesperson to a decision-maker who wasn't on the call. Get everyone in one room. Book the follow-up WITH the partner on it."
+    },
+    "send_info": {
+      "say_this": "Happy to — and so it doesn't just sit in your inbox, let me put together a one-pager specific to {business_name} and grab 10 minutes next week to walk you through it. Way more useful than a PDF you skim at a red light. Tuesday or Thursday better for you?",
+      "training_note": "The classic soft brush-off. Don't refuse — attach a step to it. Info alone dies in the inbox. Info + a booked 10-minute review converts. Trade the info for a calendar slot."
+    },
+    "think_it_over": {
+      "say_this": "Totally reasonable — do me one favor so I'm not chasing you: when you think it over, what's the actual thing you're weighing? Price, whether it'll work, or timing? Because whichever it is, I'd rather answer it now than have you guess at it alone tonight.",
+      "training_note": "'Think about it' is a mask for an unspoken concern. Don't push — surface it. Ask what specifically. It's almost always price, trust, or timing — all of which you can handle right now while you've got them."
+    },
+    "price_flinch": {
+      "say_this": "I get the flinch. Put it next to what you told me though — one job you're missing is worth $[ticket]. This runs less than a job or two a month, and it's built to get you more than that. It's not a cost, it's the cheapest job you'll book all year.",
+      "training_note": "Re-anchor to the leak number, not the monthly figure. Put the price next to what one saved job is worth. NEVER discount on the spot — that tells them the first number was fake."
+    }
+  },
+  "closing": {
+    "soft_close": "Based on everything you just told me, I think there's something real here. Want me to put together a proposal specific to {business_name} and walk you through it?",
+    "hard_close": "Here's what I'd do — let's start this week. I can have the setup running before the end of the month and we hit the ground running from there. You want to move forward?",
+    "hot_close": "Then let's not wait. I'll get the paperwork over today and we start the build this week. Sound good?",
+    "training_note": "Use the hard close when they described a specific pain and said a specific number. Use the soft close when they're interested but haven't fully committed emotionally. If they say yes to starting — log HOT and use the hot_close to lock the timeline. Never end without a concrete next step — date, proposal, or follow-up call. Vague endings kill deals."
+  },
+  "not_fit_exit": {
+    "script": "Honestly {first_name}, based on what you just told me, I don't think I'm the right call right now — and I'd rather say that than waste your next 20 minutes. Here's what I'd actually suggest: [referral or resource]. No hard feelings. If things change in 6 months, you know where I am.",
+    "training_note": "A clean exit is a long-term asset. Contractors talk. The guy who didn't waste their time is the one they refer to someone a year later."
+  }
+}

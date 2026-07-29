@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Guide & Training — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .guide { max-width: 1080px; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+    .guide__hero { padding: 2rem 1.5rem; background: linear-gradient(135deg, var(--color-dark-2), var(--color-dark-3)); border: 1px solid var(--color-border-bright); border-radius: var(--radius-lg); margin-bottom: 2.5rem; }
+    .guide__hero h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
+    .guide__hero p { color: var(--color-white-dim); margin: 0; max-width: 680px; line-height: 1.55; }
+    .guide__eyebrow { display: inline-block; font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.85rem; }
+
+    .guide__toc { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+    .guide__toc h3 { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-white-dim); margin: 0 0 0.85rem; }
+    .guide__toc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.4rem 1.5rem; }
+    .guide__toc-list a { color: var(--color-white); text-decoration: none; font-size: 0.92rem; display: block; padding: 0.35rem 0; border-bottom: 1px dashed transparent; transition: border-color 0.15s; }
+    .guide__toc-list a:hover { border-bottom-color: var(--color-accent); color: var(--color-accent); }
+    .guide__toc-list a span { color: var(--color-white-dim); font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; margin-right: 0.55rem; }
+
+    .guide__section { margin-bottom: 3rem; scroll-margin-top: 5rem; }
+    .guide__section h2 { font-family: var(--font-display); font-size: 1.55rem; font-weight: 800; letter-spacing: -0.015em; margin: 0 0 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: baseline; gap: 0.75rem; }
+    .guide__section h2 .num { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; color: var(--color-accent); background: rgba(232,101,26,0.12); padding: 0.35rem 0.65rem; border-radius: var(--radius-pill); }
+    .guide__section h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin: 1.5rem 0 0.6rem; color: var(--color-white); }
+    .guide__section p { color: var(--color-white-dim); line-height: 1.65; margin: 0 0 1rem; }
+    .guide__section ul, .guide__section ol { color: var(--color-white-dim); line-height: 1.7; padding-left: 1.5rem; margin: 0 0 1rem; }
+    .guide__section li { margin-bottom: 0.45rem; }
+    .guide__section li strong, .guide__section p strong { color: var(--color-white); }
+    .guide__section code { background: var(--color-dark-3); border: 1px solid var(--color-border); padding: 0.15rem 0.45rem; border-radius: var(--radius-sm); font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.85rem; color: var(--color-accent); }
+    .guide__section pre { background: var(--color-dark-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; overflow-x: auto; margin: 0 0 1rem; }
+    .guide__section pre code { background: transparent; border: 0; padding: 0; color: var(--color-white-dim); font-size: 0.85rem; line-height: 1.55; }
+    .guide__section a { color: var(--color-accent); }
+
+    .callout { padding: 1rem 1.25rem; border-radius: var(--radius-sm); margin: 1rem 0; border-left: 3px solid; }
+    .callout--info { background: rgba(50, 145, 255, 0.08); border-left-color: #3291ff; }
+    .callout--warn { background: rgba(255, 191, 0, 0.08); border-left-color: #ffbf00; }
+    .callout--win  { background: rgba(36, 197, 94, 0.08); border-left-color: #24c55e; }
+    .callout strong { display: block; margin-bottom: 0.3rem; font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .callout p { margin: 0; color: var(--color-white); }
+
+    .kbd { background: var(--color-dark-3); border: 1px solid var(--color-border-bright); border-bottom-width: 2px; padding: 0.15rem 0.55rem; border-radius: 4px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.8rem; color: var(--color-white); }
+
+    .guide__table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    .guide__table th, .guide__table td { padding: 0.65rem 0.85rem; text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+    .guide__table th { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-white-dim); background: var(--color-dark-2); }
+    .guide__table td { color: var(--color-white-dim); }
+    .guide__table td:first-child { color: var(--color-white); font-weight: 600; white-space: nowrap; }
+
+    .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .card-mini { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.1rem 1.25rem; }
+    .card-mini h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin: 0 0 0.4rem; color: var(--color-white); }
+    .card-mini p { color: var(--color-white-dim); margin: 0; font-size: 0.88rem; line-height: 1.55; }
+
+    html[data-mobile="phone"] .guide { padding: 1rem 0.85rem 3rem; }
+    html[data-mobile="phone"] .guide__hero { padding: 1.5rem 1.1rem; }
+    html[data-mobile="phone"] .guide__hero h1 { font-size: 1.5rem; }
+    html[data-mobile="phone"] .guide__toc-list { grid-template-columns: 1fr; }
+    html[data-mobile="phone"] .guide__section h2 { font-size: 1.25rem; }
+    html[data-mobile="phone"] .grid2 { grid-template-columns: 1fr; }
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="guide">
+
+      <div class="guide__hero">
+        <span class="guide__eyebrow">Operator&#39;s Manual &middot; v5 &middot; Updated July 2026</span>
+        <h1>UNC Sales OS — Start-to-Finish Guide</h1>
+        <p>Everything you need to run cold calls, manage your pipeline, track commissions, and close deals. Built for every rep who runs it. No fluff.</p>
+      </div>
+
+      <!-- YOUR TOOLKIT (Light Build 3) -->
+      <section class="guide__section" id="toolkit">
+        <h2><span class="num">★</span> Your Toolkit</h2>
+        <p>The moment you sit down, this is what you're handed. Every piece below is one click away.</p>
+        <div class="grid2">
+          <div class="card-mini"><h4>The 11 Cockpits</h4><p>Every call — cold, discovery, pitch, proposal, renewal, referral, win-back and more — fully scripted and branched. You always know the next line.</p></div>
+          <div class="card-mini"><h4><a href="/sales-ops/tools/today/">Start My Day</a></h4><p>The machine picks your next call. One button, no guessing where to start.</p></div>
+          <div class="card-mini"><h4><a href="/sales-ops/leaderboard/">Leaderboard</a></h4><p>Your numbers, live — dials, closes, and streaks out in the open.</p></div>
+          <div class="card-mini"><h4><a href="/sales-ops/academy/">Academy</a></h4><p>Pass the gauntlet, get certified. Prove you're ready before you dial.</p></div>
+          <div class="card-mini"><h4><a href="/sales-ops/map/">Intel Map</a></h4><p>Every prospect across the territory on one map.</p></div>
+          <div class="card-mini"><h4><a href="/sales-ops/workspace/">The Workspace</a></h4><p>Everything in one screen — cockpits, tools, and live intel without leaving the page.</p></div>
+        </div>
+      </section>
+
+      <div class="guide__toc">
+        <h3>Jump to section</h3>
+        <ul class="guide__toc-list">
+          <li><a href="#toolkit"><span>★</span> Your Toolkit</a></li>
+          <li><a href="#day1"><span>00</span> Your Day 1 Checklist</a></li>
+          <li><a href="#why"><span>01</span> Why this exists</a></li>
+          <li><a href="#stack"><span>02</span> The stack</a></li>
+          <li><a href="#setup"><span>03</span> Setup</a></li>
+          <li><a href="#routine"><span>04</span> Daily routine</a></li>
+          <li><a href="#dial"><span>05</span> Running a dial session</a></li>
+          <li><a href="#opener"><span>06</span> The UNC opener</a></li>
+          <li><a href="#toolbar"><span>07</span> Floating toolbar</a></li>
+          <li><a href="#cockpits"><span>08</span> All 11 cockpits</a></li>
+          <li><a href="#tools"><span>09</span> All 10 tools</a></li>
+          <li><a href="#dashboards"><span>10</span> All 5 dashboards</a></li>
+          <li><a href="#commission"><span>11</span> Your commission</a></li>
+          <li><a href="#shortcuts"><span>12</span> Keyboard shortcuts</a></li>
+          <li><a href="#rules"><span>13</span> Rules of the road</a></li>
+          <li><a href="#workspace"><span>14</span> The Workspace ⚡ NEW</a></li>
+        </ul>
+      </div>
+
+      <!-- DAY 1 CHECKLIST -->
+      <section class="guide__section" id="day1">
+        <h2><span class="num">00</span> Your Day 1 Checklist</h2>
+        <p>Do these in order. Don&#39;t skip ahead. By the end you&#39;re ready to dial.</p>
+        <div class="callout callout--win"><strong>Goal</strong><p>Be making real calls by the end of today. Not tomorrow. Today.</p></div>
+        <div class="callout callout--warn"><strong>Before your first dial</strong><p>New reps must pass the Academy gauntlet — 10 of 12 — before their first live dial session. No exceptions.</p></div>
+        <ol>
+          <li><strong>Open the Sales OS.</strong> Go to <code>urbanbackstage.com/sales-ops</code>. Bookmark it. That&#39;s your home base — it opens the <a href="#workspace">Workspace</a>, the single screen that holds every cockpit and tool. (The old link hub still lives at <code>/sales-ops/hub/</code> if you ever want it.)</li>
+          <li><strong>Bookmark your personal link.</strong> Bookmark this URL with your own rep ID: <code>urbanbackstage.com/sales-ops/cold-call/?rep=your-id</code> — it auto-selects you every time, on any device, no dropdown needed.</li>
+          <li><strong>Set your daily goal.</strong> The <code>⌘ K</code> button top-right opens the goal modal. Set it to 10. That&#39;s your target today.</li>
+          <li><strong>Read The Opener section below.</strong> Section 06. Know the three styles — Word for Word, Guided, Freestyle. Pick one to start with. Word for Word if you&#39;re new.</li>
+          <li><strong>Open Cold Call cockpit.</strong> Cockpits &rarr; Cold Call. Read the prospect card. Know what Quick Win, Hook, and Ask For mean.</li>
+          <li><strong>Click Load Dials.</strong> 10 contacts pull from HubSpot. Your queue is live.</li>
+          <li><strong>Browse before dialing.</strong> Hit Preview All 10 Dials. Look at who&#39;s in the queue. Check trades. Know what you&#39;re walking into.</li>
+          <li><strong>Open Trade Info in the toolbar.</strong> Right side, 🏗 Trade Info. See what auto-selects on the first contact. That&#39;s your cheat sheet.</li>
+          <li><strong>Dial #1.</strong> Click DM Free when they answer. Follow the script. Log the outcome. The system does the rest.</li>
+          <li><strong>After 10 dials: check Commission Tracker.</strong> Tools &rarr; Commission Tracker. This is where your earnings live.</li>
+        </ol>
+        <div class="callout callout--warn"><strong>Important</strong><p>Always set the rep selector before loading dials. Your HubSpot data, your queue, your commission — all tied to your rep ID. Wrong rep = wrong data.</p></div>
+      </section>
+
+      <!-- WHY -->
+      <section class="guide__section" id="why">
+        <h2><span class="num">01</span> Why this exists</h2>
+        <p>Most sales tools are built for enterprise teams with Salesforce budgets. This is built for two people trying to sign contractor clients faster than any agency around them. No tab switching. No copying and pasting scripts. No logging calls manually in a spreadsheet. One screen. Everything you need.</p>
+        <p>The contractor you&#39;re about to call is getting pitched by agencies every week. Most reps stumble through the call with no prep. This system gives you trade intel, a proven opener, objection handlers, and HubSpot logging — all in real time while you&#39;re on the phone.</p>
+      </section>
+
+      <!-- STACK -->
+      <section class="guide__section" id="stack">
+        <h2><span class="num">02</span> The stack underneath</h2>
+        <p>No install. No login required beyond your rep selector. Everything is a webpage.</p>
+        <table class="guide__table">
+          <thead><tr><th>Layer</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>GitHub Pages</td><td>Hosts the Sales OS. Plain HTML/JS/CSS. Zero build step.</td></tr>
+            <tr><td>Cloudflare Worker</td><td>The brain. Pulls your dial queue from HubSpot, logs call outcomes, fetches callbacks, calculates commissions. Worker URL: <code>unc-sales-os-sync.ricky-a17.workers.dev</code></td></tr>
+            <tr><td>HubSpot Starter</td><td>CRM. Every contact, every outcome, every callback window. Source of truth for everything.</td></tr>
+            <tr><td>Google Workspace</td><td>Gmail for follow-up emails. The Email Launcher fires pre-filled drafts directly to Gmail.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout--info"><strong>When it says LOCAL ONLY</strong><p>The Cloudflare worker is offline or unreachable. Calls still log locally. Outcomes save to your browser. When the worker comes back, sync manually using the 📤 button.</p></div>
+      </section>
+
+      <!-- SETUP -->
+      <section class="guide__section" id="setup">
+        <h2><span class="num">03</span> Setup — one-time</h2>
+        <ol>
+          <li>Open <code>urbanbackstage.com/sales-ops</code> in Chrome on your desktop or phone.</li>
+          <li>Bookmark it. Set it as your browser home page if you want.</li>
+          <li>Set your rep in the header dropdown — pick <strong>your own name</strong>.</li>
+          <li>Set your daily dial goal with <kbd class="kbd">⌘ K</kbd>. Start at 10.</li>
+          <li>Check your commission tracker: Tools &rarr; Commission Tracker. Your HubSpot owner ID is connected. When you close a deal in HubSpot and set <strong>UNC Revenue Type</strong> on the deal, it shows here automatically.</li>
+        </ol>
+        <div class="callout callout--warn"><strong>HubSpot Revenue Type — critical</strong><p>Every deal you close must have <strong>UNC Revenue Type</strong> set before it appears in your commission tracker. Go to the deal in HubSpot &rarr; Deal properties &rarr; UNC Revenue Type. Options: Monthly Retainer Y1, Monthly Retainer Y2+, One-Time Project Build, Branded Merchandise.</p></div>
+      </section>
+
+      <!-- ROUTINE -->
+      <section class="guide__section" id="routine">
+        <h2><span class="num">04</span> Daily morning routine</h2>
+        <ol>
+          <li><strong>Check Callback Queue first.</strong> Tools &rarr; Callback Queue. Overdue callbacks at the top. Call those before new dials.</li>
+          <li><strong>Open Cold Call cockpit.</strong> Set goal. Load dials.</li>
+          <li><strong>Preview queue.</strong> 👁 Preview All N Dials. Scan trades, cities, any familiar names.</li>
+          <li><strong>Dial session: 15 calls, break, 10 calls.</strong> That&#39;s the cap. Don&#39;t try to grind 50 in a row — quality drops hard after 15.</li>
+          <li><strong>Log every call.</strong> Every single one. Even no-answers. The data compounds over time.</li>
+          <li><strong>After session: check Activity dashboard.</strong> Today&#39;s dials, HOT+WARM rate, outcome breakdown.</li>
+        </ol>
+      </section>
+
+      <!-- DIAL SESSION -->
+      <section class="guide__section" id="dial">
+        <h2><span class="num">05</span> Running a dial session</h2>
+        <h3>The prospect card</h3>
+        <p>Before you dial, read the card. Takes 10 seconds. While the phone rings you have:</p>
+        <ul>
+          <li><strong>Quick Win</strong> (green) — the most likely gap for their trade. Mention it if they ask why you called.</li>
+          <li><strong>Hook</strong> (orange, italic) — the sharpest line for their trade. Click it to copy. Read it if they ask "what do you do?"</li>
+          <li><strong>Ask For</strong> (blue) — who answers at this type of business. Know before you ask.</li>
+          <li><strong>Best call window</strong> (yellow) — when this trade is most reachable. Don&#39;t ignore this.</li>
+          <li><strong>Last outcome</strong> — if they&#39;re WARM, this is a callback not a cold call. Treat it differently.</li>
+        </ul>
+        <h3>Branch buttons</h3>
+        <p>When they pick up, immediately click or press the keyboard shortcut:</p>
+        <table class="guide__table">
+          <thead><tr><th>Button</th><th>Key</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>DM Free</td><td><kbd class="kbd">1</kbd></td><td>Owner answered, free to talk. Deliver the opener.</td></tr>
+            <tr><td>DM Busy</td><td><kbd class="kbd">2</kbd></td><td>Owner answered but mid-something. Get a real callback time.</td></tr>
+            <tr><td>Gatekeeper</td><td><kbd class="kbd">3</kbd></td><td>Someone else answered. Identify type, get a window.</td></tr>
+            <tr><td>Wrong Number</td><td><kbd class="kbd">4</kbd></td><td>Auto-logs, instant next contact.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout--win"><strong>Use the keyboard</strong><p>Never touch the mouse mid-call. Press 1, 2, 3, or 4. Then press the next number as the screen advances. Your eyes stay on the script, your hands stay on the keyboard.</p></div>
+        <h3>No answer / voicemail</h3>
+        <p>Don&#39;t answer → use the Voicemail tool (📱 in the toolbar) to grab a script, leave the VM, log No Answer. Move on immediately. Never sit on a no-answer.</p>
+      </section>
+
+      <!-- OPENER -->
+      <section class="guide__section" id="opener">
+        <h2><span class="num">06</span> The UNC opener</h2>
+        <p>One opener. Three ways to deliver it depending on your confidence level that day.</p>
+        <div class="callout callout--win"><strong>The philosophy</strong><p>Declare the cold call immediately. Ask one qualifying question. Shut up. If they want to grow, you&#39;re in. If they don&#39;t, move on. Your time is worth more than a hard sell on someone who doesn&#39;t want it.</p></div>
+        <h3>Word for Word <kbd class="kbd">W</kbd></h3>
+        <p><em>"Hey [first name] — [your name] from Urban Niche Co., this is a cold call. I help contractors get more jobs online and keep the phone ringing. Quick question — are you trying to grow the business right now, or are you good where you&#39;re at?"</em></p>
+        <p>Read it exactly. Every word is there. Use this when you&#39;re new or on an off day.</p>
+        <h3>Guided <kbd class="kbd">G</kbd></h3>
+        <p>Four anchors shown on screen. Hit each one in your own words: declare cold call → your name and Urban Niche Co. → I help contractors get more jobs online → are you trying to grow? Use this once you have 50+ calls under you.</p>
+        <h3>Freestyle <kbd class="kbd">F</kbd></h3>
+        <p>Goal only: find out if they want to grow. Yes = go. No = next dial. Use this when you have the opener fully internalized and want to sound completely natural.</p>
+        <h3>After they answer YES</h3>
+        <p>Hit branch 1. The screen shows a trade-specific pitch. Read the hook line in the toolbar (🏗 Trade Info). Then offer the audit: <em>"I run a free audit on your online presence and send you a 90-second video of exactly what&#39;s costing you calls. No pitch. Want me to send it over?"</em></p>
+        <h3>Objections</h3>
+        <p>Hit branch 2 from the pitch screen. Pick the objection. Say the script. Come back to the close. Don&#39;t fight objections — redirect them.</p>
+      </section>
+
+      <!-- TOOLBAR -->
+      <section class="guide__section" id="toolbar">
+        <h2><span class="num">07</span> Floating toolbar</h2>
+        <p>Six buttons on the bottom-right of every cockpit. One panel open at a time. Click same button to close. ESC to close. Never leave the call screen.</p>
+        <table class="guide__table">
+          <thead><tr><th>Button</th><th>What&#39;s in it</th><th>When to use</th></tr></thead>
+          <tbody>
+            <tr><td>👊 Objections</td><td>7 objection handlers — click any to copy</td><td>Anytime they push back</td></tr>
+            <tr><td>🔎 Lookup</td><td>Live HubSpot search — type 3+ chars</td><td>They mention a different business / need a contact</td></tr>
+            <tr><td>✉ Email</td><td>6 templates — fills from prospect card, one-click Gmail</td><td>After a HOT or WARM outcome to fire the follow-up</td></tr>
+            <tr><td>💰 Pricing</td><td>Full service catalog + quote builder with per-item commission rate</td><td>When they ask what it costs</td></tr>
+            <tr><td>📱 Voicemail</td><td>8 VM scripts — click to copy, all under 20 seconds</td><td>No answer / voicemail system hit</td></tr>
+            <tr><td>🏗 Trade Info</td><td>Auto-selects to contact&#39;s trade — peak months, avg ticket, DM pattern, hook lines</td><td>Read before every dial, copy hook lines mid-call</td></tr>
+          </tbody>
+        </table>
+        <h3>Pricing quote builder</h3>
+        <p>In the Pricing panel: click any service or bundle to add it to your quote. Each line item has its own commission rate dropdown — Y1 30% / Y2 10% / Project 25% / Merch 50%. Running total and your commission cut update instantly. Build a multi-service quote on the fly while they&#39;re on the phone.</p>
+      </section>
+
+      <!-- COCKPITS -->
+      <section class="guide__section" id="cockpits">
+        <h2><span class="num">08</span> All 11 cockpits</h2>
+        <div class="grid2">
+          <div class="card-mini"><h4>Cold Call</h4><p>Your main dial session. Queue from HubSpot, 3-style opener, full response branching, gatekeeper flow, objection handlers. Run this every morning.</p></div>
+          <div class="card-mini"><h4>Niche Outreach</h4><p>Ghost-page verticals — restaurants, venues, retail, salons, auto, fitness and more. Vertical-aware scripts and intel for non-contractor prospects. Use when dialing outside the contractor niche.</p></div>
+          <div class="card-mini"><h4>Discovery</h4><p>30-minute discovery call. 5-section SPIN flow: situation, problem, implication, need-payoff, decision. Each section has clickable questions and follow-up prompts.</p></div>
+          <div class="card-mini"><h4>Service Pitch</h4><p>Standalone pitch for a specific service. Trade-specific angles. Use when a warm prospect asks you to walk them through what you offer.</p></div>
+          <div class="card-mini"><h4>Inbound</h4><p>For form fills and inbound calls. Speed-to-lead flow — qualify fast, book the call, don&#39;t let hot leads go cold.</p></div>
+          <div class="card-mini"><h4>Proposal Walkthrough</h4><p>6-section proposal walk. Progress dots. Section-level objection handler — pick the objection, handle it, return to where you were.</p></div>
+          <div class="card-mini"><h4>Referral Ask</h4><p>For happy clients. Direct referral ask + cross-vertical pivot if no names come up immediately.</p></div>
+          <div class="card-mini"><h4>Renewal / Upsell</h4><p>Month-3+ client calls. Health check, wins recap, upsell trigger, intervention if churn risk is present.</p></div>
+          <div class="card-mini"><h4>Win-Back</h4><p>Lost client re-engage. No pitch — diagnose the real reason they left, then earn round 2 or get the intel and move on.</p></div>
+          <div class="card-mini"><h4>Re-Engage</h4><p>Warm handoff calls for prospects who already received the email sequence. Phone → permission → email only. Never try to close on this call — goal is to get permission to send a personalized follow-up.</p></div>
+          <div class="card-mini"><h4>Onboarding Kickoff</h4><p>New client first call. 5-section interactive checklist: access, brand, assets, month-1 success criteria, comms rhythm. Buyers remorse save script included.</p></div>
+        </div>
+      </section>
+
+      <!-- TOOLS -->
+      <section class="guide__section" id="tools">
+        <h2><span class="num">09</span> All 10 tools</h2>
+        <table class="guide__table">
+          <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>Pricing Calculator</td><td>Full service catalog. Click any item to add to quote. Per-item commission rate. Running total.</td></tr>
+            <tr><td>Objection Library</td><td>15 objections with 2-3 tested responses each. Searchable. Click to copy.</td></tr>
+            <tr><td>Callback Queue</td><td>All WARM contacts with callback windows. Overdue / today / future. Reschedule inline. Load into cockpit.</td></tr>
+            <tr><td>Prospect Lookup</td><td>Live HubSpot search. Type 3+ characters. Results as you type. Call, email, or open in HubSpot from results.</td></tr>
+            <tr><td>Email Launcher</td><td>6 templates. Fills from current prospect. One-click Gmail launch. Audit follow-up, Day 3/7 sequences, HOT proposal, intake form, discovery confirm.</td></tr>
+            <tr><td>Commission Tracker</td><td>Live from HubSpot. This-month earnings, all-time total, active clients, clawback alerts. Month history per client. Annual projection calculator.</td></tr>
+            <tr><td>Voicemail Library</td><td>8 scripts — cold call, callback, follow-up, renewal, win-back. All under 20 seconds. Click to copy.</td></tr>
+            <tr><td>Trade Reference</td><td>16 trades. Peak months, avg ticket, decision-maker pattern, top channels, pain points, hook lines.</td></tr>
+            <tr><td>Snippet Library</td><td>Copy-ready phrases. Opening lines, bridges, closes, objection pivots.</td></tr>
+            <tr><td>Vertical Pitch Pages</td><td>11 industry-specific pitch pages for non-contractor verticals. Copy link, send to prospect.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- DASHBOARDS -->
+      <section class="guide__section" id="dashboards">
+        <h2><span class="num">10</span> All 5 dashboards</h2>
+        <table class="guide__table">
+          <thead><tr><th>Dashboard</th><th>What it shows</th></tr></thead>
+          <tbody>
+            <tr><td>Activity</td><td>Today / week / month rollups. 8 key stats. Recent calls table with outcome pills.</td></tr>
+            <tr><td>Pipeline</td><td>Funnel: dials → connections → WARM → HOT → proposals → closed won.</td></tr>
+            <tr><td>Rep Dashboard</td><td>Every rep side by side. Dials, goal progress, HOT/WARM rate, conversion. Auto-refreshes every 60 seconds.</td></tr>
+            <tr><td>Variant Performance</td><td>A/B opener results. Which style and variant produces more HOT+WARM outcomes. Sample-size caveats baked in.</td></tr>
+            <tr><td>Best Dial Windows</td><td>7-day × 13-hour heatmap. When HOT/WARM outcomes actually happen for your rep.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- COMMISSION -->
+      <section class="guide__section" id="commission">
+        <h2><span class="num">11</span> Your commission</h2>
+        <div class="callout callout--win"><strong>Commission is earned when UNC receives cleared payment.</strong><p>Unpaid invoices don&#39;t trigger commission. Partial payments trigger commission on the amount received only.</p></div>
+        <table class="guide__table">
+          <thead><tr><th>Revenue Type</th><th>Rate</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly Retainer — Year 1</td><td><strong style="color:var(--color-accent)">30%</strong></td><td>Months 1–12 per client. Of each monthly invoice paid.</td></tr>
+            <tr><td>Monthly Retainer — Year 2+</td><td><strong>10%</strong></td><td>Month 13+ per client. Residual, paid monthly while client is active.</td></tr>
+            <tr><td>One-Time Project Build</td><td><strong>25%</strong></td><td>Websites, AI builds, consulting setups.</td></tr>
+            <tr><td>Branded Merchandise</td><td><strong>50%</strong></td><td>50% of UNC net profit on the deal.</td></tr>
+          </tbody>
+        </table>
+        <h3>Key rules</h3>
+        <ul>
+          <li><strong>Clawback:</strong> If a client cancels or doesn&#39;t pay within 60 days of their first invoice, first-month commission is deducted from your next payment.</li>
+          <li><strong>Residuals:</strong> Year 2+ (10%) continue as long as the client is active AND you&#39;re under this agreement. They stop on termination.</li>
+          <li><strong>Payment timing:</strong> Paid within 15 days of UNC receiving cleared payment. Monthly statement by the 10th.</li>
+          <li><strong>Claude reimbursement:</strong> $100/mo covered by UNC when you have 1+ active retainer client. Business expense, not commission.</li>
+          <li><strong>Set UNC Revenue Type:</strong> Every deal you close in HubSpot must have this property set or it won&#39;t appear in your Commission Tracker correctly.</li>
+        </ul>
+      </section>
+
+      <!-- KEYBOARD SHORTCUTS -->
+      <section class="guide__section" id="shortcuts">
+        <h2><span class="num">12</span> Keyboard shortcuts</h2>
+        <p>Learn these. The faster you are on the keyboard, the more dials you can run.</p>
+        <table class="guide__table">
+          <thead><tr><th>Key</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd class="kbd">1</kbd></td><td>DM Free / first branch on any screen</td></tr>
+            <tr><td><kbd class="kbd">2</kbd></td><td>DM Busy / second branch on any screen</td></tr>
+            <tr><td><kbd class="kbd">3</kbd></td><td>Gatekeeper / third branch</td></tr>
+            <tr><td><kbd class="kbd">4</kbd></td><td>Wrong Number / fourth branch — auto-logs and advances</td></tr>
+            <tr><td><kbd class="kbd">W</kbd></td><td>Opener: Word for Word style</td></tr>
+            <tr><td><kbd class="kbd">G</kbd></td><td>Opener: Guided style</td></tr>
+            <tr><td><kbd class="kbd">F</kbd></td><td>Opener: Freestyle style</td></tr>
+            <tr><td><kbd class="kbd">ESC</kbd></td><td>Close floating toolbar panel</td></tr>
+            <tr><td><kbd class="kbd">← Back</kbd></td><td>Go back one screen in any cockpit</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- RULES -->
+      <section class="guide__section" id="rules">
+        <h2><span class="num">13</span> Rules of the road</h2>
+        <ul>
+          <li><strong>Declare the cold call.</strong> Always. First thing out of your mouth.</li>
+          <li><strong>Ask one qualifying question, then shut up.</strong> The first person to talk after a good question loses.</li>
+          <li><strong>Log every call.</strong> No answer, voicemail, wrong number — all of it. The data is what makes the dashboards useful.</li>
+          <li><strong>Don&#39;t fight objections — redirect.</strong> "Totally fair. Let me ask you this..." disarms 90% of pushback.</li>
+          <li><strong>One close per call.</strong> Audit offer OR the deal. Pick one and drive toward it. Never double-ask.</li>
+          <li><strong>If they don&#39;t want to grow, move on immediately.</strong> Your time is worth more than a hard sell on someone who doesn&#39;t want it.</li>
+          <li><strong>Set UNC Revenue Type on every closed deal.</strong> No exceptions. Commission Tracker won&#39;t work without it.</li>
+          <li><strong>Callbacks before new dials.</strong> Always. A WARM callback is worth 5 cold dials.</li>
+          <li><strong>Read the Quick Win before every dial.</strong> 10 seconds. Makes you sound like you did homework.</li>
+          <li><strong>Text Ricky directly for urgent issues.</strong> Not email. (515) 344-4053.</li>
+        </ul>
+      </section>
+
+      <!-- WORKSPACE -->
+      <section class="guide__section" id="workspace">
+        <h2><span class="num">14</span> The Workspace — your new home screen</h2>
+        <p>As of July 2026, <code>urbanbackstage.com/sales-ops</code> opens the <strong>Workspace</strong>: one page that contains all 11 cockpits, all 10 tools, and live intel. You never leave it during a session — cockpits load in the center stage, tools slide in from the right, and nothing opens a new tab unless it leaves the site.</p>
+
+        <h3>The layout</h3>
+        <table class="guide__table">
+          <thead><tr><th>Region</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Left rail</strong></td><td>All 11 cockpit modes grouped HUNT / CLOSE / GROW. Click or <kbd class="kbd">Alt</kbd>+<kbd class="kbd">1&ndash;9, 0, -</kbd> to switch instantly.</td></tr>
+            <tr><td><strong>Center stage</strong></td><td>The active cockpit. Same cockpits as before &mdash; nothing about dialing changed.</td></tr>
+            <tr><td><strong>Intel panel</strong> ⚡ NEW</td><td>Right column. Trade killshot for the prospect on screen, their last touch pulled live from HubSpot, and your callback queue. Toggle with <kbd class="kbd">Alt</kbd>+<kbd class="kbd">I</kbd> or the 🧠 Intel button.</td></tr>
+            <tr><td><strong>Right strip</strong></td><td>Tool drawers: Objections <kbd class="kbd">Alt+O</kbd>, Pricing <kbd class="kbd">Alt+P</kbd>, Snippets <kbd class="kbd">Alt+S</kbd>, Voicemails <kbd class="kbd">Alt+V</kbd>, Trade Ref <kbd class="kbd">Alt+T</kbd>, Email Launcher <kbd class="kbd">Alt+E</kbd>, Callbacks <kbd class="kbd">Alt+C</kbd>, Lookup <kbd class="kbd">Alt+L</kbd>, Commission <kbd class="kbd">Alt+M</kbd>, Pipeline <kbd class="kbd">Alt+B</kbd>. The ⛶ button cycles drawer size: normal &rarr; wide &rarr; max.</td></tr>
+            <tr><td><strong>Header</strong></td><td>Rep selector (pushes into every cockpit and tool at once &mdash; set it once), live pipeline stage strip for the prospect on screen, LIVE/LOCAL worker pill, <kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">K</kbd> palette to jump anywhere by typing.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The Intel panel, in 30 seconds</h3>
+        <ul>
+          <li><strong>🎯 Trade Killshot.</strong> Auto-detects the trade of the prospect on screen and shows the single strongest line to lead with, plus the best call window and budget season. Roofers and tree services also get the storm day-4&ndash;7 rule. Override the auto-detect with the dropdown if it guesses wrong.</li>
+          <li><strong>📇 Last Touch.</strong> When a prospect loads, it looks them up in HubSpot automatically and shows the last outcome, how long ago, and the call notes &mdash; so you never dial blind on a number that was already worked. The search box looks up anyone manually.</li>
+          <li><strong>☎️ Callback Queue.</strong> Your WARM callbacks, live from HubSpot, refreshed every minute. Click one to copy the phone number. <strong>Callbacks before new dials &mdash; always.</strong></li>
+        </ul>
+
+        <div class="callout callout--info"><strong>What&#39;s new in the tools (July 2026)</strong><p><strong>Trade Reference</strong> is now a war room &mdash; killshot, call window, budget window, and how-to-sell angle per trade, with the day-4&ndash;7 storm rule for roofers and tree services. Electricians and concrete are <em>category sells</em>: don&#39;t compare agencies, sell being first in a trade where nobody markets. <strong>Objections</strong> grew to 10 with category filters (Brush-off / Competitor / Money / Trust / Timing) &mdash; new entries cover &ldquo;send me some info,&rdquo; &ldquo;my nephew handles it,&rdquo; and &ldquo;word of mouth.&rdquo; <strong>Voicemails</strong> now pair each VM with the follow-up text to send right after, plus storm-day, no-show, and referral scripts.</p></div>
+
+        <div class="callout callout--warn"><strong>Old bookmarks</strong><p>Direct cockpit bookmarks like <code>/sales-ops/cold-call/?rep=your-id</code> still work exactly as before &mdash; standalone pages were not touched. The Workspace is a layer on top, not a replacement.</p></div>
+      </section>
+    </section>
+</main>
+</body>
+</html>

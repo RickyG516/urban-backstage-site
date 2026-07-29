@@ -1,0 +1,50 @@
+{
+  "_comment": "HubSpot account-level config. Used by sync command builder to construct correct URLs.",
+  "_version": "1.0",
+  "portal_id": "245833525",
+  "region": "na2",
+  "base_url": "https://app-na2.hubspot.com",
+  "url_templates": {
+    "contact":  "https://app-na2.hubspot.com/contacts/245833525/contact/{contact_id}",
+    "deal":     "https://app-na2.hubspot.com/contacts/245833525/deal/{deal_id}",
+    "company":  "https://app-na2.hubspot.com/contacts/245833525/company/{company_id}",
+    "settings": "https://app-na2.hubspot.com/settings/245833525"
+  },
+  "pipeline_stage_labels": {
+    "Prospect Identified":      "Prospect Identified",
+    "First Touch Sent":         "First Touch Sent",
+    "Follow-Up In Progress":    "Follow-Up In Progress",
+    "Call Scheduled":           "Call Scheduled",
+    "Pricing Sent":             "Pricing Sent",
+    "Proposal Out":             "Proposal Out",
+    "Closed Won":               "Closed Won",
+    "Closed Lost / Not Now":    "Closed Lost / Not Now"
+  },
+  "custom_properties": {
+    "_note": "Properties the sync command writes. Mark exists:true once confirmed in HubSpot. hubspot-hygiene skill can create any missing ones.",
+    "decision_maker_known":     { "type": "boolean", "exists": true },
+    "best_phone_verified":      { "type": "boolean", "exists": true },
+    "lead_source":              { "type": "string",  "exists": true },
+    "lead_status":              { "type": "string",  "exists": true },
+    "last_call_outcome":        { "type": "string",  "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "enumeration" },
+    "last_call_date":           { "type": "datetime", "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "datetime" },
+    "last_opener_variant":      { "type": "string",  "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "enumeration" },
+    "last_call_duration_sec":   { "type": "number",  "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "number" },
+    "last_call_branch_path":    { "type": "text",    "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "textarea" },
+    "last_call_notes":          { "type": "text",    "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "textarea" },
+    "unc_dial_count_total":     { "type": "number",  "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "number", "_note": "Created 2026-06-01 — 'dial_count_total' was restricted by HubSpot" },
+    "callback_window":          { "type": "string",  "exists": true,  "group": "Cold Call Tracking", "hubspot_field_type": "text" }
+  },
+  "task_timing": {
+    "_note": "Smart task creation timing per outcome (relative to call end).",
+    "HOT":     { "create_task": true,  "offset_minutes": 30,        "title": "Confirm audit booking — {business_name}" },
+    "WARM":    { "create_task": true,  "offset_use_callback": true, "title": "Callback — {business_name} ({callback_window})" },
+    "PARK":    { "create_task": true,  "offset_days": 30,           "title": "Recall — {business_name} (was a maybe)" },
+    "COLD":    { "create_task": false },
+    "COLD-GK": { "create_task": true,  "offset_days": 14,           "title": "Retry gatekeeper bypass — {business_name}" },
+    "DNC":     { "create_task": false, "set_property": { "lead_status": "DNC" } },
+    "WRG":     { "create_task": true,  "offset_days": 1,            "title": "Verify number — {business_name} (wrong on first attempt)" },
+    "NA":      { "create_task": true,  "offset_days": 3,            "title": "Retry — {business_name} (no answer)" },
+    "REF":     { "create_task": true,  "offset_days": 1,            "title": "Follow up on referral from {business_name}" }
+  }
+}

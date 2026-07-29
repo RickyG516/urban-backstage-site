@@ -1,0 +1,20 @@
+{
+  "_version": "3.0",
+  "_last_updated": "2026-07-10",
+  "_changelog": "v3: rewrote all rendered sections with cross-vertical referral intel from war-room trade research. Every trade knows 5+ adjacent-trade owners — the prompts now mine that network instead of asking generically. Schema unchanged — renders in existing cockpit.",
+  "intro": {
+    "default": "Hey {first_name}, before we wrap — quick ask, and it's fine either way. You've seen what we've done: {quick_win}. Here's the thing about my business — I don't run ads for myself, I grow off referrals from clients who are winning. So let me ask you straight: who's one contractor you know — doesn't have to be a {trade_lower}, could be any trade — who's great at the work but invisible online?",
+    "training_note": "Only run with visibly happy clients — results showing, relationship warm, zero open issues. If {quick_win} is stale, manually name the freshest specific number before asking: 'you went from 14 reviews to 31 and you're top 3 in {city}' gets referrals. 'Things are going well' does not. The cross-trade framing matters: asking a roofer for another roofer makes him name a competitor. Asking for ANY trade unlocks his whole network — his plumber, his electrician, the GC he subs for."
+  },
+  "specificity_prompts": [
+    "Who do you refer YOUR customers to when they ask for a trade you don't do — a plumber, an electrician, a concrete guy? Those guys already trust your name.",
+    "Any GC you sub work for — or who subs for you? They live and die on the same Google problem you had.",
+    "Anyone at your supplier's counter or in your trade association who's always saying business is slow?",
+    "Who's the best contractor you personally know that nobody can find online? The guy whose work is great but his phone isn't ringing.",
+    "Anyone you've seen advertising around {city} and thought — those guys are wasting their money?",
+    "Think about the last job site where three trades were working at once. Which of those crews could use what you just got?"
+  ],
+  "warm_intro_script": "If someone comes to mind — would you send a two-line text from your phone? Something like: 'Hey [name], been working with {rep_name} at Urban Niche — they do marketing for contractors only and they actually deliver. Worth 10 minutes.' A text from you is worth fifty cold calls from me. I'll take it from there and I won't make you look bad — that's a promise I can afford to make because it's my name on it too.",
+  "reciprocity_offer": "And here's my end of it: whoever you send, I'll run a full free audit on their business and send the results to both of you — even if they never spend a dollar with me, they walk away knowing exactly what's broken. And I take care of the people who send me work. Ask around, that part gets remembered.",
+  "close": "So — who came to mind first while I was talking? ... Perfect. When are you likely to see or talk to them next? I'll check back in a couple days to see how it landed. Easiest version: just forward them my number, {rep_phone}, and tell them to mention your name. That's it — and {first_name}, seriously, thank you. This is how I build."
+}

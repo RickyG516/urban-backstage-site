@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Superior Wood Floors &amp; Tile | Decorah, Iowa Flooring Contractor</title>
+<meta name="description" content="Superior Wood Floors &amp; Tile serves Decorah, Iowa and the surrounding Winneshiek County area with hardwood, tile, carpet, and vinyl flooring installation and refinishing for homes and businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #263238;
+    --dark-2: #1c262b;
+    --accent: #b08968;
+    --accent-light: #cba989;
+    --off-white: #f4f1ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #2c2c2c;
+    background: var(--off-white);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  a { text-decoration: none; }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(176,137,104,0.35) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(176,137,104,0.25) 0%, transparent 50%),
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
+      linear-gradient(135deg, #1c262b 0%, #263238 45%, #32424c 100%);
+    animation: kenburns 22s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  @keyframes kenburns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.18) translate(-2%, -2%); }
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(38,50,56,0.35) 0%, rgba(38,50,56,0.75) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 0 20px;
+    max-width: 780px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    color: var(--accent-light);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 span {
+    color: var(--accent-light);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: #e6e2dc;
+    margin-bottom: 34px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding: 16px 38px;
+    border-radius: 3px;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+
+  .btn:hover {
+    background: transparent;
+    color: var(--accent-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--dark);
+    border: 2px solid var(--dark);
+  }
+
+  .btn-outline:hover {
+    background: var(--dark);
+    color: #fff;
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section {
+    padding: 90px 0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+
+  .section-eyebrow {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--dark);
+    text-transform: uppercase;
+  }
+
+  .section-head p {
+    margin-top: 16px;
+    color: #555;
+    font-size: 1.05rem;
+  }
+
+  /* SERVICES */
+  .services {
+    background: #fff;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .service-card {
+    background: var(--off-white);
+    border: 1px solid #e4ded6;
+    border-top: 4px solid var(--accent);
+    padding: 36px 28px;
+    border-radius: 4px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(38,50,56,0.12);
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  .service-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .service-card h3 {
+    color: var(--dark);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .service-card p {
+    color: #5a5a5a;
+    font-size: 0.96rem;
+  }
+
+  /* SERVICE AREA */
+  .area {
+    background: var(--dark);
+    color: #fff;
+  }
+
+  .area .section-head p { color: #cfd3d5; }
+  .area .section-eyebrow { color: var(--accent-light); }
+  .area .section-head h2 { color: #fff; }
+
+  .area-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .area-list span {
+    background: rgba(176,137,104,0.15);
+    border: 1px solid var(--accent);
+    color: #f4f1ed;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .area-note {
+    text-align: center;
+    margin-top: 30px;
+    color: #b7bcbe;
+    font-size: 0.9rem;
+  }
+
+  /* TRUST */
+  .trust {
+    background: #fff;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+
+  .trust-card {
+    text-align: center;
+    padding: 34px 20px;
+    border: 1px solid #e4ded6;
+    border-radius: 4px;
+  }
+
+  .trust-icon {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 18px;
+    color: var(--accent);
+  }
+
+  .trust-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .trust-card h3 {
+    font-size: 1.05rem;
+    color: var(--dark);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .trust-card p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--off-white);
+  }
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--dark);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .contact-info p {
+    color: #555;
+    margin-bottom: 26px;
+  }
+
+  .call-box {
+    background: var(--dark);
+    color: #fff;
+    padding: 28px;
+    border-radius: 6px;
+    border-left: 5px solid var(--accent);
+  }
+
+  .call-box span {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.78rem;
+    color: var(--accent-light);
+    margin-bottom: 8px;
+  }
+
+  .call-box a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .call-box a:hover { color: var(--accent-light); }
+
+  .biz-name {
+    margin-top: 18px;
+    font-weight: 600;
+    color: #d8d3cc;
+  }
+
+  form {
+    background: #fff;
+    padding: 36px;
+    border-radius: 6px;
+    border: 1px solid #e4ded6;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d5cfc6;
+    border-radius: 3px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.98rem;
+    background: var(--off-white);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  form .btn {
+    width: 100%;
+    border: none;
+  }
+
+  .form-thanks {
+    display: none;
+    text-align: center;
+    padding: 30px 10px;
+  }
+
+  .form-thanks h3 {
+    color: var(--dark);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .form-thanks p {
+    color: #666;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark-2);
+    color: #cfd3d5;
+    padding: 34px 0;
+    text-align: center;
+  }
+
+  footer .foot-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  footer a {
+    color: var(--accent-light);
+  }
+
+  /* FLAG */
+  .flag {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(38,50,56,0.9);
+    color: #f4f1ed;
+    font-size: 0.68rem;
+    padding: 6px 12px;
+    border-radius: 4px;
+    z-index: 999;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 0.3px;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+
+  @media (max-width: 860px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .hero { min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Decorah, Iowa</span>
+    <h1>Superior Wood Floors <span>&amp; Tile</span></h1>
+    <p>Hardwood, tile, carpet &amp; vinyl flooring installed and refinished right &mdash; serving Decorah and the surrounding Winneshiek County area.</p>
+    <a href="#contact" class="btn">Get In Touch</a>
+  </div>
+</header>
+
+<section class="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">What We Do</span>
+      <h2>Flooring Services</h2>
+      <p>From new hardwood installs to tile work and refinishing, Superior Wood Floors &amp; Tile handles flooring projects for homes and businesses in the Decorah area.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><rect x="6" y="10" width="14" height="10"/><rect x="20" y="10" width="14" height="10"/><rect x="6" y="20" width="14" height="10"/><rect x="20" y="20" width="14" height="10"/><line x1="34" y1="10" x2="42" y2="10"/><line x1="34" y1="20" x2="42" y2="20"/><line x1="34" y1="30" x2="42" y2="30"/></svg>
+        </div>
+        <h3>Hardwood Flooring</h3>
+        <p>Solid and engineered hardwood installation for a lasting, natural look in any room.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M6 24h36"/><path d="M24 6a24 24 0 0 1 0 36"/><path d="M24 6a24 24 0 0 0 0 36"/></svg>
+        </div>
+        <h3>Floor Refinishing &amp; Sanding</h3>
+        <p>Bring tired, scratched, or dull hardwood back to life with professional sanding and refinishing.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><rect x="7" y="7" width="14" height="14"/><rect x="27" y="7" width="14" height="14"/><rect x="7" y="27" width="14" height="14"/><rect x="27" y="27" width="14" height="14"/></svg>
+        </div>
+        <h3>Tile Installation</h3>
+        <p>Precision tile work for kitchens, bathrooms, entryways, and commercial spaces.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M6 40c4-10 8-10 12 0"/><path d="M18 40c4-10 8-10 12 0"/><path d="M30 40c4-10 8-10 12 0"/><line x1="6" y1="42" x2="42" y2="42"/></svg>
+        </div>
+        <h3>Carpet Installation</h3>
+        <p>Comfortable, durable carpet installed cleanly and correctly for homes and offices.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M6 34l10-20 8 12 6-9 12 17z"/><line x1="6" y1="34" x2="42" y2="34"/></svg>
+        </div>
+        <h3>Vinyl &amp; Laminate</h3>
+        <p>Budget-friendly, water-resistant vinyl and laminate flooring options built to hold up.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><rect x="8" y="16" width="32" height="24"/><path d="M16 16v-6h16v6"/><line x1="8" y1="26" x2="40" y2="26"/><line x1="20" y1="26" x2="20" y2="40"/><line x1="28" y1="26" x2="28" y2="40"/></svg>
+        </div>
+        <h3>Commercial Flooring</h3>
+        <p>Durable flooring solutions for retail, office, and commercial properties.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="area">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Where We Work</span>
+      <h2>Proudly Serving the Decorah Area</h2>
+      <p>Based in Decorah, Iowa and serving surrounding Winneshiek County communities.</p>
+    </div>
+    <div class="area-list reveal">
+      <span>Decorah</span>
+      <span>Postville</span>
+      <span>Calmar</span>
+      <span>Ossian</span>
+      <span>Spillville</span>
+      <span>Freeport</span>
+      <span>Ridgeway</span>
+      <span>Fort Atkinson</span>
+    </div>
+    <p class="area-note reveal">Don't see your town listed? Reach out and ask &mdash; we're happy to discuss your project.</p>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Why Work With Us</span>
+      <h2>Built On Straightforward Service</h2>
+    </div>
+    <div class="trust-grid">
+
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><path d="M24 6l16 8v10c0 10-7 17-16 18-9-1-16-8-16-18V14z"/><path d="M24 24v-8"/><circle cx="24" cy="30" r="1"/></svg>
+        </div>
+        <h3>Locally Owned</h3>
+        <p>A locally owned flooring business rooted in the Decorah community.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><rect x="8" y="10" width="20" height="28" rx="2"/><path d="M32 18h8v20h-16v-6"/><line x1="12" y1="16" x2="24" y2="16"/><line x1="12" y1="22" x2="24" y2="22"/><line x1="12" y1="28" x2="24" y2="28"/></svg>
+        </div>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Flooring projects for both homeowners and business properties.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 14v10l7 5"/></svg>
+        </div>
+        <h3>On-Schedule Service</h3>
+        <p>Projects planned and completed on the timeline we agree to.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 48 48"><path d="M10 26l8 8 20-20"/></svg>
+        </div>
+        <h3>Straight Pricing</h3>
+        <p>Clear, honest quotes with no surprises before work begins.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+
+      <div class="contact-info reveal">
+        <h2>Let's Talk About Your Floors</h2>
+        <p>Have a hardwood, tile, carpet, or vinyl project in mind? Reach out and tell us about it.</p>
+        <div class="call-box">
+          <span>Call Us Directly</span>
+          <a href="tel:15633821111">(563) 382-1111</a>
+          <div class="biz-name">Superior Wood Floors &amp; Tile &mdash; Decorah, IA</div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about your flooring project..."></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+        <div class="form-thanks" id="formThanks">
+          <h3>Thanks!</h3>
+          <p>Your message has been noted. This is a preview page, so nothing was actually sent.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-name">Superior Wood Floors &amp; Tile</div>
+    <div><a href="tel:15633821111">(563) 382-1111</a></div>
+  </div>
+</footer>
+
+<div class="flag">Speculative preview build — Urban Niche Co.</div>
+
+<script>
+  // Scroll reveal via IntersectionObserver
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    items.forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+
+  // Decorative contact form - no backend, local only
+  (function () {
+    var form = document.getElementById('contactForm');
+    var thanks = document.getElementById('formThanks');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+    });
+  })();
+</script>
+
+</body>
+</html>

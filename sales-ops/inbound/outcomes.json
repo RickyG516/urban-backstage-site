@@ -1,0 +1,12 @@
+{
+  "_comment": "Outcome codes for Inbound cockpit. Speed-to-lead conversions.",
+  "_version": "1.0",
+  "outcomes": [
+    { "code": "BOOKED",          "label": "BOOKED",      "hotkey": "b", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Call Scheduled",        "description": "Discovery/audit booked on the spot" },
+    { "code": "INFO_SENT",       "label": "INFO SENT",   "hotkey": "i", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Info package sent, follow-up scheduled" },
+    { "code": "NURTURE_QUEUED",  "label": "NURTURE",     "hotkey": "n", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Not ready now, added to email nurture" },
+    { "code": "NO_PICKUP",       "label": "NO PICKUP",   "hotkey": "p", "color": "#94a3b8", "audio": "click",     "hubspot_stage": "First Touch Sent",      "description": "Called back inbound lead, no answer" },
+    { "code": "DISQUALIFIED",    "label": "NOT A FIT",   "hotkey": "x", "color": "#ef4444", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Not a real prospect / wrong service / out of region" },
+    { "code": "SPAM",            "label": "SPAM",        "hotkey": "s", "color": "#a78bfa", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Form spam / bot submission" }
+  ]
+}

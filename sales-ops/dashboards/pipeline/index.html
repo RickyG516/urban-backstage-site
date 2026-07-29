@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Pipeline Dashboard — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="dash">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Pipeline</h1>
+          <p class="dash__sub">Deal flow projected from cockpit outcomes. HubSpot is the source of truth — sync your calls to get live numbers. This view shows your local cockpit state.</p>
+        </div>
+      </div>
+      <div class="dash__section">
+        <div class="dash__section-title">Funnel — outcomes mapped to pipeline stages</div>
+        <div class="funnel" id="funnel"></div>
+      </div>
+      <div class="dash__section">
+        <div class="dash__section-title">Velocity</div>
+        <div class="dash__grid">
+          <div class="dash__card"><div class="dash__card-label">Calls This Week</div><div class="dash__card-value" id="vel-week">0</div></div>
+          <div class="dash__card"><div class="dash__card-label">HOT This Week</div><div class="dash__card-value" id="vel-hot">0</div><div class="dash__card-trend">Booked or closed</div></div>
+          <div class="dash__card"><div class="dash__card-label">Discovery Calls</div><div class="dash__card-value" id="vel-disc">0</div><div class="dash__card-trend">Through discovery cockpit</div></div>
+          <div class="dash__card"><div class="dash__card-label">Proposals Sent</div><div class="dash__card-value" id="vel-prop">0</div><div class="dash__card-trend">PROPOSAL_REQUESTED outcomes</div></div>
+        </div>
+      </div>
+    <div id="rep-breakdown"></div>
+    </section>
+    <div class="brand-stamp">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <script>
+    const HOT_CODES  = new Set(['HOT','BOOKED','CLOSED_WON','FOLLOW_UP_BOOKED','PROPOSAL_REQUESTED']);
+    const WARM_CODES = new Set(['WARM','INFO_SENT']);
+    const COLD_CODES = new Set(['COLD','COLD-GK','WRG','DNC','VOICEMAIL','WRONG_NUMBER','GATEKEEPER','PARK']);
+
+    function allLocalCalls() {
+      const out = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('unc_cockpit_call_log_')) {
+          try { out.push(...JSON.parse(localStorage.getItem(k))); } catch(e) {}
+        }
+      }
+      return out;
+    }
+
+    function computeStats(calls) {
+      const byRep = {};
+      for (const c of calls) {
+        const hot  = HOT_CODES.has(c.outcome_code);
+        const warm = WARM_CODES.has(c.outcome_code);
+        const conn = !COLD_CODES.has(c.outcome_code) && !!c.outcome_code;
+        const key = c.rep_name || 'unknown';
+        if (!byRep[key]) byRep[key] = {total:0,hot:0,warm:0,connected:0};
+        byRep[key].total++;
+        if (hot) byRep[key].hot++;
+        if (warm) byRep[key].warm++;
+        if (conn) byRep[key].connected++;
+      }
+      const total = calls.length;
+      const hot   = calls.filter(c => HOT_CODES.has(c.outcome_code)).length;
+      const warm  = calls.filter(c => WARM_CODES.has(c.outcome_code)).length;
+      const connected = calls.filter(c => !COLD_CODES.has(c.outcome_code) && !!c.outcome_code).length;
+      return { total, hot, warm, connected, byRep };
+    }
+
+    function load() {
+      const repId = (function(){ try { const v=localStorage.getItem('unc_cockpit_current_rep_id'); return v ? JSON.parse(v) : ''; } catch(e){ return ''; } })();
+      const allCalls = allLocalCalls();
+      const indCalls = repId ? allCalls.filter(c => c.rep_id === repId) : allCalls;
+      render({ ok:true, stats:computeStats(indCalls) }, { ok:true, stats:computeStats(allCalls) });
+    }
+
+    function render(ind, team) {
+      const s = (ind && ind.ok && ind.stats) ? ind.stats : null;
+      const t = (team && team.ok && team.stats) ? team.stats : null;
+      if (!s) { document.getElementById('funnel').innerHTML = '<div class="dash__empty"><div>No data yet — log some calls.</div></div>'; return; }
+
+      const stages = [
+        { label: 'Total Dials',               count: s.total },
+        { label: 'Connected',                  count: s.connected },
+        { label: 'WARM / Interested',          count: s.warm },
+        { label: 'HOT — Audit / Discovery',    count: s.hot },
+        { label: 'Closed Won',                 count: t ? t.byRep ? Object.values(t.byRep).reduce((a,r) => a + r.hot, 0) : 0 : 0 }
+      ];
+      const max = Math.max(1, stages[0].count);
+      document.getElementById('funnel').innerHTML = stages.map(st => {
+        const pct = Math.max(2, Math.round((st.count / max) * 100));
+        return `<div class="funnel__row"><div class="funnel__label">${st.label}</div><div class="funnel__bar"><div class="funnel__fill" style="width:${pct}%">${pct > 12 ? st.count : ''}</div></div><div class="funnel__count">${st.count}</div></div>`;
+      }).join('');
+
+      document.getElementById('vel-week').textContent = s.total;
+      document.getElementById('vel-hot').textContent = s.hot;
+      document.getElementById('vel-disc').textContent = '—';
+      document.getElementById('vel-prop').textContent = '—';
+
+      // Team rep breakdown
+      if (t && t.byRep && Object.keys(t.byRep).length) {
+        const repHost = document.getElementById('rep-breakdown');
+        if (repHost) {
+          repHost.innerHTML = '<div class="stat-block__label" style="margin-top:1.5rem">Rep breakdown — all time</div>' +
+            Object.entries(t.byRep).map(([name, rep]) =>
+              `<div class="dash__card" style="margin-top:0.5rem"><div class="dash__card-label">${name}</div><div style="display:flex;gap:1rem;margin-top:0.35rem;font-family:var(--font-display);font-size:0.85rem"><span>Total: <b>${rep.total}</b></span><span style="color:#22c55e">HOT: <b>${rep.hot}</b></span><span style="color:#facc15">WARM: <b>${rep.warm}</b></span></div></div>`
+            ).join('');
+        }
+      }
+    }
+
+    load();
+    setInterval(load, 30000);
+
+  </script>
+</body>
+</html>

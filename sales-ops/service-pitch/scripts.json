@@ -1,0 +1,307 @@
+{
+  "_version": "2.0",
+  "_last_updated": "2026-06-15",
+  "_pricing_source": "urbannicheco.com/pricing — verify live before quoting",
+  "services": {
+    "SEO": {
+      "label": "Local SEO",
+      "tagline": "Show up on Google or watch competitors take your calls",
+      "price_min": 1500,
+      "price_max": 3500,
+      "billing": "monthly — Foundation $1,500 / Growth $2,500 / Domination $3,500",
+      "features": [
+        "Keywords locked to your trade + service area — not generic terms",
+        "Every service page optimized so Google knows what you do",
+        "Google Business Profile fully built out (the #1 lead driver for contractors)",
+        "Monthly content — blog post + page updates",
+        "Local citations + directory listings",
+        "Monthly ranking report — you see exactly where you stand"
+      ],
+      "benefits": [
+        "Free traffic that compounds — every job from SEO has zero ad cost",
+        "You own it — can't be cut off like paid ads",
+        "Page-1 ranking = market leader in their eyes before they even call you",
+        "Higher intent than paid — people searching organically are ready to buy"
+      ],
+      "social_proof": "Top 3 map pack results capture 70%+ of calls — everything below that is invisible. That's the position this program is built to take, and we show you the movement in every monthly report.",
+      "ideal_for": "Contractors with solid reputation but limited online visibility",
+      "on_phone": "When someone in {city} searches '{trade_lower} near me' right now — are you one of the first 3 names they see? You've got {gbp_review_count} reviews to work with, but reviews only matter if Google is surfacing you first. That's what this fixes.",
+      "training_note": "Lead with the visibility question. Get them to say 'no I'm not showing up.' That's the close. If gbp_review_count is orange, skip that part and just go straight to the visibility question."
+    },
+    "Google Ads": {
+      "label": "PPC Management",
+      "tagline": "Calls this week, not in 6 months",
+      "price_min": 1200,
+      "price_max": 3500,
+      "billing": "flat monthly management — Standard $1,200 / Power $2,000 / Dynamic $3,500. Ad spend goes straight to Google. We never touch it, never mark it up.",
+      "features": [
+        "Full campaign build from scratch — Search + Local Service Ads if eligible",
+        "Negative keyword list management to kill wasted spend",
+        "Call tracking so you see exactly what converts",
+        "Ad copy tested every 2 weeks",
+        "Landing page edits for conversion",
+        "Weekly performance report — no hiding the numbers"
+      ],
+      "benefits": [
+        "First leads typically in 48 hours",
+        "Every dollar tracked back to a call — fully accountable",
+        "Scale up in busy season, throttle in slow season",
+        "Pairs with SEO to own the entire first page"
+      ],
+      "social_proof": "Flat-fee management means you always know what you're paying us. Your ad spend goes 100% to Google — we don't take a cut. Most agencies do. We don't.",
+      "ideal_for": "Contractors who need leads NOW and can't wait 90 days",
+      "on_phone": "If someone searched '{trade_lower} in {city}' on Google right now, would your ad show up? We can put you at the top of that page within a week.",
+      "training_note": "Speed is the entire PPC pitch. SEO takes months. Ads work in days. Keep that contrast sharp."
+    },
+    "Content Pack": {
+      "label": "Content Pack",
+      "tagline": "Look like the obvious choice before they ever call you",
+      "price_min": 400,
+      "price_max": 1200,
+      "billing": "monthly — Starter $400 / Growth $700 / Authority $1,200. We build it, you post it.",
+      "features": [
+        "Monthly content calendar — graphics + captions done",
+        "Facebook + Instagram posts built to your brand",
+        "Before/after content, project highlights, trade tips",
+        "Review spotlight graphics",
+        "Ready-to-post package every month — open it, hit post, done"
+      ],
+      "benefits": [
+        "Looks active and credible when prospects are checking you out",
+        "Captures referral traffic — first thing someone does when referred is check Instagram",
+        "Before/afters are the single best closing tool for visual trades",
+        "Zero time from you — open the file, click post"
+      ],
+      "social_proof": "Visual trades with consistent posting get 'I saw your work on Instagram' as a regular lead source. The content builds trust before the call happens.",
+      "ideal_for": "Painters, landscapers, remodelers, concrete, pressure washing — any visual trade",
+      "on_phone": "Are you posting on social at all right now? ... We handle the whole thing — every graphic, every caption, every month. You just hit post.",
+      "training_note": "Most contractors feel guilty about not posting. This removes the guilt without adding work to their plate. That's the whole pitch."
+    },
+    "Website": {
+      "label": "Website Build",
+      "tagline": "A site that actually converts — not a digital business card",
+      "price_min": 1000,
+      "price_max": 8500,
+      "billing": "one-time — Landing $1,000 / HTML Starter $3,000 / HTML Standard $5,500 / HTML Advanced $8,500",
+      "features": [
+        "Built for local search — not just looks",
+        "Mobile-first — 80%+ of contractor searches happen on a phone",
+        "Clear call-to-action on every page",
+        "Contact form with auto-response",
+        "Service pages built to rank for trade + city terms",
+        "Fast — Google penalizes slow sites"
+      ],
+      "benefits": [
+        "Converts visitors instead of letting them bounce",
+        "Ranks — built with SEO foundation from day one",
+        "Shows your work properly — gallery, before/afters, testimonials",
+        "Yours — no monthly fee, no platform dependency"
+      ],
+      "social_proof": "Most contractor websites fail the 5-second test — a visitor can't tell what you do, where you work, or how to call you. We fix all three on every page.",
+      "ideal_for": "Contractors with no site, an outdated site, or a site that doesn't show up on Google",
+      "on_phone": "If I pulled up {business_name} right now and put it next to your top competitor — which one would a homeowner call first? That's the question the site needs to answer in 5 seconds.",
+      "training_note": "Pull up their actual site during the pitch if you can. Real feedback on their real site lands harder than anything you can describe.",
+      "audit_hook": {
+        "reframe_opener": "I hear you — and you might be right that the site looks fine. But looking good and converting are two different things. Most contractor sites look acceptable and lose 80% of visitors because there's no clear reason to call. Can I show you something specific on {business_name}'s site?",
+        "three_problems": "Three things I see on most contractor sites that kill conversions: no phone number visible without scrolling, service area buried or missing, and no social proof above the fold. A homeowner who has to work to find your number calls someone else.",
+        "proof_line": "Here's a real example — [name a client or outcome]. Same trade, similar market. Before the rebuild they were invisible on Google. After — first page for their core terms in 8 weeks.",
+        "close": "I can put together the audit with the specific gaps on {business_name}'s site and a fixed-price proposal to fix them. Want me to send that over?",
+        "intake_form": "https://urbannicheco.com/start",
+        "deposit_link": "https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N",
+        "upsell_at_delivery": "Once the site is live and converting, the next move is making sure people can find it. That's when SEO becomes the obvious add-on — same foundation, now we build traffic on top of it.",
+        "objections": {
+          "too_expensive": "What were you expecting? ... [let them anchor] ... What's your average job ticket? At that number, one job from the new site pays for itself. The question is how many you're leaving because the current site loses them.",
+          "need_to_think": "What specifically do you need to think about? I'd rather talk through it now than have it sit.",
+          "already_have_someone": "How long has your current site been up and when was the last time it brought in a cold lead? I'm asking because most contractor sites are set up once and left — they're not built to rank or convert over time."
+        }
+      }
+    },
+    "Reputation": {
+      "label": "Reputation Management",
+      "tagline": "Reviews win the job before you ever pick up the phone",
+      "price_min": 400,
+      "price_max": 750,
+      "billing": "monthly — Foundation $400 / Authority $750",
+      "features": [
+        "Automated review requests after every job",
+        "Review response drafting — every review gets a reply",
+        "Negative review triage — flag and respond before damage spreads",
+        "Monthly reputation report",
+        "Review platform monitoring — Google, Yelp, BBB"
+      ],
+      "benefits": [
+        "Map pack ranking is directly tied to review velocity — more reviews, higher rank",
+        "Homeowners filter on reviews before they contact anyone",
+        "Automated — you do nothing after setup",
+        "Negative reviews addressed before they become referral killers"
+      ],
+      "social_proof": "Review count and recency are the #1 local ranking signal Google uses for map pack placement. Contractors who actively manage reviews rank above contractors who don't — regardless of how long they've been in business.",
+      "ideal_for": "Any contractor with fewer than 50 Google reviews or reviews older than 30 days",
+      "on_phone": "You're at {gbp_review_count} reviews right now. Your top local competitor — do you know how many they have? Because map pack placement is largely a review velocity game. The guy actively getting reviews every month is the guy in the top 3.",
+      "training_note": "If gbp_review_count is low, just say the number. Let it land. Most contractors don't realize how few they have until they hear it out loud."
+    },
+    "Email Marketing": {
+      "label": "Email Marketing",
+      "tagline": "Stay in front of leads who aren't ready yet — until they are",
+      "price_min": 500,
+      "price_max": 1000,
+      "billing": "monthly — Foundation $500 / Authority $1,000",
+      "features": [
+        "Welcome sequence for new leads — automatic",
+        "Monthly newsletter to your list",
+        "Re-engagement sequence for cold leads",
+        "List management and segmentation",
+        "Monthly performance report"
+      ],
+      "benefits": [
+        "Keeps {business_name} top of mind through a 60-90 day decision cycle",
+        "Owns the channel — no algorithm, no ad spend",
+        "Nurtures leads who said 'not yet' until they become 'ready now'",
+        "Works while you're on the job — fully automated once built"
+      ],
+      "social_proof": "Remodeling and GC clients see the biggest ROI from email because of the long decision cycle. A homeowner who gets 3 touches from you over 90 days remembers your name when they're finally ready to move.",
+      "ideal_for": "GCs, remodelers, or any contractor with a long sales cycle",
+      "on_phone": "What happens to a lead who fills out your form but isn't ready to start for 3 months? Right now, do you have any system that keeps {business_name} in front of them until they are?",
+      "training_note": "Most contractors lose leads not because the lead said no — but because they went cold and forgot who called them. Email solves that automatically."
+    },
+    "AI Lead Capture": {
+      "label": "AI Lead Capture",
+      "tagline": "Answer every lead instantly — even at 11 PM on a Sunday",
+      "price_min": 750,
+      "price_max": 1500,
+      "billing": "monthly — Smart Follow-Up $750 / Full AI Stack $1,500",
+      "features": [
+        "AI chatbot on your site — answers questions and captures lead info 24/7",
+        "Instant follow-up text to every new form submission",
+        "AI phone agent that handles after-hours calls (Full AI Stack)",
+        "Lead info routed straight to your CRM",
+        "Monthly performance report"
+      ],
+      "benefits": [
+        "Speed-to-lead wins — first contractor to respond gets the job 78% of the time",
+        "Never lose a lead to voicemail at 10 PM again",
+        "You're 'available' 24/7 without being available 24/7",
+        "Works while you're on the job, in the truck, or asleep"
+      ],
+      "social_proof": "Speed-to-lead is the single biggest factor in close rate for inbound leads. The first contractor to respond gets the call. This makes sure that's always you.",
+      "ideal_for": "Any contractor getting inbound leads they're losing to slow response",
+      "on_phone": "When someone fills out your contact form at 9 PM on a Friday — what happens? Do they get a response that night, or do they hear from you Monday morning after they've already booked someone else?",
+      "training_note": "This pitch works best when they've already admitted losing leads to competitors. If they haven't, ask 'what's your average response time to a new inquiry?' Then let the answer do the work."
+    },
+    "GBP Management": {
+      "label": "GBP Management",
+      "tagline": "Own the map pack — it's where 70% of local calls start",
+      "price_min": 250,
+      "price_max": 500,
+      "billing": "Setup $250 one-time / Authority $500/mo ongoing",
+      "features": [
+        "Full Google Business Profile optimization",
+        "Weekly posts to the profile",
+        "Photo uploads — before/afters, project work",
+        "Q&A management",
+        "Review monitoring and responses",
+        "Monthly GBP performance report"
+      ],
+      "benefits": [
+        "Map pack visibility — top 3 in local search",
+        "Fully active profile signals quality to Google",
+        "Photo-heavy profiles get 42% more direction requests",
+        "Weekly posting signals freshness — Google rewards active profiles"
+      ],
+      "social_proof": "Google Business Profile is the single highest-ROI thing a local contractor can do. An optimized, active GBP consistently outranks paid ads for local searches.",
+      "ideal_for": "Any contractor not showing up in the map pack for their core keywords",
+      "on_phone": "Quick question — when did you last update your Google Business Profile? Post anything, add photos, respond to a review? Because Google weights recency and activity heavily for map pack placement.",
+      "training_note": "Most contractors set up their GBP once in 2019 and never touched it again. That alone is why they're not in the map pack. The bar is low — active beats dormant every time."
+    }
+  },
+  "bundles": {
+    "local_authority": {
+      "label": "Local Authority",
+      "price": 2800,
+      "tagline": "Foundation — show up, get found, build trust",
+      "badge": null,
+      "includes": [
+        "Local SEO — Foundation tier ($1,500 value)",
+        "GBP Management — Authority tier ($500 value)",
+        "Reputation Management — Foundation tier ($400 value)"
+      ],
+      "on_phone": "The Local Authority bundle is the foundation package — it covers your Google presence, your map pack ranking, and your reviews. Everything a contractor needs to show up when someone's searching. It's $2,800 a month, saves you $200 versus buying each piece separately.",
+      "training_note": "This is the entry-level anchor. Use it if Market Growth gets price resistance. Don't lead with it — lead with Market Growth and step down if needed."
+    },
+    "market_growth": {
+      "label": "Market Growth",
+      "price": 4500,
+      "tagline": "Everything you need to dominate your local market",
+      "badge": "Most Popular",
+      "includes": [
+        "Local SEO — Foundation tier",
+        "GBP Management — Authority tier",
+        "Reputation Management — Foundation tier",
+        "Content Pack — Growth tier ($700 value)",
+        "Email Marketing — Foundation tier ($500 value)"
+      ],
+      "on_phone": "Market Growth is what most of our contractors run on. It covers your Google presence, your reviews, your social content, and keeps you in front of leads through email — all for $4,500 a month. One system where every piece works together, instead of juggling four or five different vendors who don't talk to each other.",
+      "training_note": "Lead with this. It's the most complete package at a price that's still easy to justify on 2-3 extra jobs a month. If they balk at price, step down to Local Authority. If they lean in, show them Total Domination."
+    },
+    "total_domination": {
+      "label": "Total Domination",
+      "price": 7500,
+      "tagline": "Own your market completely — every channel, every touchpoint",
+      "badge": null,
+      "includes": [
+        "Everything in Market Growth",
+        "PPC Management — Standard tier ($1,200 value)",
+        "AI Lead Capture — Full AI Stack ($1,500 value)"
+      ],
+      "on_phone": "Total Domination is for contractors who want to own the market, not just compete in it. You've got SEO, GBP, reputation, content, email, paid ads running, and an AI system that responds to every lead instantly. $7,500 a month. This is for contractors who want to own their market outright, not just show up in it.",
+      "training_note": "Only pitch this to contractors who are already doing volume and want to scale, or who've described a high-volume growth goal. Don't lead with it to someone who seems budget-conscious."
+    }
+  },
+  "objection_responses": {
+    "price_too_high": {
+      "trigger": "That's more than I want to spend",
+      "responses": [
+        "What were you expecting? [Let them anchor.] Got it. What's your average job ticket? At that number, how many extra jobs a month would it take to cover the investment? Because that's the math we need to look at.",
+        "Which part specifically feels like too much — the total, or one of the services in there? Because there's a version of this that starts smaller and scales up as results come in."
+      ]
+    },
+    "need_to_think": {
+      "trigger": "Let me think about it / I'll get back to you",
+      "responses": [
+        "Of course. What part specifically — the price, the timing, or whether this would actually work for {business_name}? I'd rather talk through it now than have it sit for 2 weeks.",
+        "Totally fair. What would make you feel confident enough to move forward? I want to answer the actual question, not just follow up in a week and ask if you've decided."
+      ]
+    },
+    "need_spouse_partner": {
+      "trigger": "Need to talk to my wife / partner",
+      "responses": [
+        "Makes total sense. When do you think you'll be able to sit down together? I'd actually love to get on a quick call with both of you — 15 minutes — so I can answer her questions directly instead of playing telephone.",
+        "Absolutely. What's her biggest concern usually going to be — the price, whether it works, or something else? I can put together something specific that addresses it."
+      ]
+    },
+    "tried_before_didnt_work": {
+      "trigger": "We tried marketing before and it didn't work",
+      "responses": [
+        "What did you try? Because most of what gets sold to contractors doesn't work — it's templated, not built for your trade or your market. I only do {trade_lower}s. That's the whole difference.",
+        "What specifically didn't work? Because 'marketing didn't work' usually means one of three things — wrong channel, wrong message, or no follow-through. I want to know which one so I don't repeat it."
+      ]
+    },
+    "too_busy_to_onboard": {
+      "trigger": "I'm too busy to deal with this right now",
+      "responses": [
+        "The onboarding is one 20-minute call. After that we handle everything. You don't need bandwidth — you just need to send me logins. That's the whole ask from your side.",
+        "I hear you — that's exactly why most contractors who are busy don't fix their marketing until they're slow. The setup happens when you're busy so the leads come in when you're not."
+      ]
+    },
+    "already_have_someone": {
+      "trigger": "We already work with an agency",
+      "responses": [
+        "Good — what specifically do they handle? Because most agencies doing contractor work are generalists. They do dentists, restaurants, everyone. We only do contractors. Depending on what they cover, there might be a gap worth talking about.",
+        "Are you happy with the results? I ask because the bar for contractor digital marketing is low and most generalist agencies don't clear it. What metric are you watching to know it's working?"
+      ]
+    }
+  },
+  "price_deflection": {
+    "when_they_ask_price": "Depends on what you actually need — I'd be guessing right now. Let me understand {business_name} first and I'll give you a real number, not a range I pulled out of thin air. Takes 10 minutes."
+  }
+}

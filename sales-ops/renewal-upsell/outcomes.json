@@ -1,0 +1,10 @@
+{
+  "_version": "1.0",
+  "outcomes": [
+    { "code": "RENEWED",          "label": "RENEWED",     "hotkey": "r", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Closed Won",            "description": "Renewed for another term" },
+    { "code": "UPSELL_BOOKED",    "label": "UPSELL",      "hotkey": "u", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Pricing Sent",          "description": "Added new service / upsell" },
+    { "code": "HEALTHY",          "label": "HEALTHY",     "hotkey": "h", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Closed Won",            "description": "Happy client check-in done, all good" },
+    { "code": "AT_RISK",          "label": "AT RISK",     "hotkey": "a", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Warning signs — needs intervention" },
+    { "code": "CHURN_FLAGGED",    "label": "CHURNING",    "hotkey": "x", "color": "#ef4444", "audio": "error",     "hubspot_stage": "Closed Lost / Not Now", "description": "Said they're canceling — fight or refer" }
+  ]
+}

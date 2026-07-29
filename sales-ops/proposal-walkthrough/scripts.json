@@ -1,0 +1,80 @@
+{
+  "_version": "3.0",
+  "_last_updated": "2026-06-15",
+  "intro": {
+    "default": "Hey {first_name}, glad we got this on the calendar. I'm going to walk through the proposal section by section — takes about 12 minutes — then I want your questions before we close out. Goal is that nothing is confusing before you make a decision. Sound good?",
+    "training_note": "Slow down. This call is not about selling anymore. They already said they were interested. Your only job is to remove doubt. Don't add pressure — remove friction."
+  },
+  "sections": {
+    "executive_summary": {
+      "label": "Executive Summary",
+      "goal": "Restate their pain in their words — prove you were listening",
+      "script": "So here's how I framed this — based on our conversation, the two or three biggest gaps for {business_name} right now are [restate their exact words]. Everything in this proposal maps to one of those. Nothing in here is filler.",
+      "talking_points": [
+        "Use their exact words. Not your interpretation — their words. This is the most important thing you can do in the first 60 seconds.",
+        "Name the 2-3 services you're proposing and which gap each one addresses specifically",
+        "60-90 seconds max — this is a summary, not a replay of the discovery call"
+      ],
+      "training_note": "If you parrot their own words back at them, they feel genuinely heard. Most people have never experienced that from a vendor. It's your biggest differentiator and it costs nothing."
+    },
+    "scope_breakdown": {
+      "label": "Scope of Work",
+      "goal": "Walk every deliverable to a pain point — no feature lists",
+      "script": "Let me walk through exactly what's included. Every piece maps to something you told me. [Service 1] — this is for [their specific pain]. [Service 2] — this handles [their next pain]. Nothing in here is because I thought it sounded good.",
+      "talking_points": [
+        "Map every line item to a pain they named. 'This is for the Google Maps problem you mentioned.'",
+        "Call out what's NOT included proactively. 'This doesn't include paid ads — that's a separate tier.'",
+        "Name the first thing they'll see go live and when. 'By end of week 2, you'll have X.'"
+      ],
+      "training_note": "Surprises after signing destroy client relationships. Call out everything upfront — what's in, what's not, when things happen. Contractors deal with contractors who overpromise and underdeliver every day. Be the exception."
+    },
+    "pricing_section": {
+      "label": "Investment",
+      "goal": "Anchor value before the number — always. Price before value = sticker shock.",
+      "script": "Before I give you the number — you told me you're missing roughly [X jobs] a month in {city}. At your average ticket, that's [$ amount] a year. What I'm about to show you is a fraction of that. The monthly investment for everything we walked through is [price].",
+      "talking_points": [
+        "Always say their revenue leak number before you give your price",
+        "Give the monthly number — not annual. Annual sounds bigger and makes it harder to say yes.",
+        "If they react to the number: 'What were you expecting?' Let them tell you their anchor.",
+        "Payment terms: monthly retainer, month-to-month unless they want the annual discount"
+      ],
+      "training_note": "The order of operations matters more than the actual number. Value first, then price. Every time."
+    },
+    "timeline_milestones": {
+      "label": "Timeline",
+      "goal": "Make the first 90 days feel real and tangible",
+      "script": "Here's what the first 90 days look like. Days 1-14, we're in setup — you'll see [specific first deliverable] by end of week 2. Days 15-45, [second deliverable] goes live. From day 45 on, the work is fully live and compounding — I'll send you a report every month showing exactly what's happening and where you stand, no hiding the numbers.",
+      "talking_points": [
+        "Day 1-14: onboarding + access + foundation build",
+        "Day 15-45: first deliverables live — name the specific thing",
+        "Day 46-90: first measurable result they can point to",
+        "Set the expectation honestly: 'Week 1 is setup, not results. This is a build that compounds over time — I'll never pretend it's instant. What I guarantee is the work gets done and you'll always see exactly where it stands.'"
+      ],
+      "training_note": "Most early cancellations happen because the client had the wrong timing expectation. Set it explicitly now. Month 1 is setup. Month 2 is first movement. Month 3 is proof. Anyone who cancels in month 1 was never given the right expectation."
+    },
+    "guarantees": {
+      "label": "Guarantees & Terms",
+      "goal": "Make saying yes feel safe — lower perceived risk",
+      "script": "Few things I want to be upfront about. First — it's month-to-month. No long-term contract unless you want the annual discount. Second — if the month-one deliverables don't match what I've outlined here, that month is on me. Third — you get my direct number, {rep_phone}. You text me, I respond. No account manager.",
+      "talking_points": [
+        "Lead with month-to-month — watch their body language change",
+        "Month-1 deliverable guarantee — if setup misses, first month is free",
+        "Direct access to owner — no account manager layer",
+        "Annual discount option — never a requirement"
+      ],
+      "training_note": "Contractors hate being locked in. They've been burned by 12-month contracts for services that stopped delivering in month 2. Lead with month-to-month and the tension drops immediately."
+    },
+    "close": {
+      "label": "Close",
+      "goal": "Ask for the business directly — no hedging",
+      "script": "That's the full picture. Any questions on anything we walked through? ... [Handle questions] ... Based on everything, I think this is a clear fit for where {business_name} is going. You want to start the setup this week?",
+      "talking_points": [
+        "'Want to start this week?' — direct, not pushy",
+        "If yes: send the agreement while still on the call. 'I'll send it right now — keep me on while you sign it. Takes 2 minutes.'",
+        "If revision: 'What specifically feels off?' Get one concrete thing to fix.",
+        "If delay: 'What needs to happen on your end before you feel comfortable?' Name the actual blocker."
+      ],
+      "training_note": "Don't end the call without a concrete next step. They sign, they give you a specific objection to fix, or they give you a specific date to follow up. Vague endings — 'I'll think about it' — kill deals. Force the decision one way or the other."
+    }
+  }
+}

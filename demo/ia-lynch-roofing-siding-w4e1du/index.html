@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Lynch Roofing & Siding, Inc. | Manchester, Iowa Roofing & Siding Contractor</title>
+<meta name="description" content="Lynch Roofing & Siding, Inc. provides roofing, siding, gutter, and storm damage services to Manchester, Iowa and the surrounding Delaware County area. Call (563) 927-2882.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #253745;
+    --accent: #f2a541;
+    --dark-alt: #1c2b37;
+    --light: #f6f4ef;
+    --text-light: #eef2f4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: var(--dark);
+    background: var(--light);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  a { color: inherit; }
+
+  img, svg { display: block; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: -10%;
+    background:
+      radial-gradient(circle at 20% 25%, rgba(242, 165, 65, 0.18), transparent 55%),
+      radial-gradient(circle at 80% 75%, rgba(242, 165, 65, 0.12), transparent 50%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 22px),
+      linear-gradient(160deg, #1c2b37 0%, #253745 45%, #30485c 100%);
+    animation: kenburns 26s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes kenburns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.18) translate(-2%, -3%); }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(37,55,69,0.35) 0%, rgba(37,55,69,0.75) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 24px;
+    color: var(--text-light);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.15;
+    margin-bottom: 22px;
+    text-shadow: 0 3px 18px rgba(0,0,0,0.35);
+  }
+
+  .hero-content p.sub {
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: #d8dfe4;
+    max-width: 620px;
+    margin: 0 auto 36px;
+    font-weight: 400;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--dark);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 38px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 2px solid var(--accent);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+  }
+
+  .btn:hover {
+    background: transparent;
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: 90px 24px;
+  }
+
+  .section-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+  }
+
+  .section-head .kicker {
+    color: var(--accent);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .section-head p {
+    color: #4a5a66;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-section {
+    background: #ffffff;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .service-card {
+    background: var(--light);
+    border: 1px solid #e3ddd1;
+    border-top: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 34px 26px;
+    text-align: left;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(37,55,69,0.12);
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    color: var(--dark);
+  }
+
+  .service-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--dark);
+    fill: none;
+  }
+
+  .service-card h3 {
+    font-size: 1.15rem;
+    color: var(--dark);
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    color: #56646e;
+  }
+
+  /* ---------- SERVICE AREA ---------- */
+  .area-section {
+    background: var(--dark);
+    color: var(--text-light);
+  }
+
+  .area-section .section-head h2 { color: #ffffff; }
+  .area-section .section-head p { color: #c3ccd1; }
+  .area-section .section-head .kicker { color: var(--accent); }
+
+  .area-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .area-pill {
+    border: 1px solid rgba(242,165,65,0.5);
+    color: var(--text-light);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .area-note {
+    text-align: center;
+    margin-top: 34px;
+    color: #b7c1c8;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- TRUST ---------- */
+  .trust-section {
+    background: #ffffff;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+
+  .trust-card {
+    text-align: center;
+    padding: 30px 18px;
+    border: 1px solid #e3ddd1;
+    border-radius: 6px;
+    background: var(--light);
+  }
+
+  .trust-card .mark {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+  }
+
+  .trust-card h3 {
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .trust-card p {
+    font-size: 0.88rem;
+    color: #5b6a74;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-section {
+    background: var(--dark-alt);
+    color: var(--text-light);
+  }
+
+  .contact-section .section-head h2 { color: #ffffff; }
+  .contact-section .section-head p { color: #c3ccd1; }
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .call-box {
+    background: var(--dark);
+    border: 1px solid rgba(242,165,65,0.35);
+    border-radius: 8px;
+    padding: 34px;
+  }
+
+  .call-box h3 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+
+  .call-box .biz-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 6px;
+  }
+
+  .call-box .phone-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .call-box .phone-link:hover {
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .call-box p.desc {
+    color: #c3ccd1;
+    font-size: 0.92rem;
+    margin-top: 14px;
+  }
+
+  form.contact-form {
+    background: var(--dark);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  form.contact-form label {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #c3ccd1;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  form.contact-form input,
+  form.contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 4px;
+    border: 1px solid #3c4f5c;
+    background: #1c2b37;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+  }
+
+  form.contact-form input:focus,
+  form.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  form.contact-form textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  form.contact-form .submit-btn {
+    align-self: flex-start;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .thanks-msg {
+    display: none;
+    background: rgba(242,165,65,0.12);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 14px 18px;
+    border-radius: 4px;
+    font-size: 0.92rem;
+  }
+
+  .thanks-msg.show {
+    display: block;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #1c2b37;
+    color: #b7c1c8;
+    text-align: center;
+    padding: 34px 24px;
+    font-size: 0.9rem;
+  }
+
+  footer .foot-name {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  footer a.foot-phone {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ---------- FLAG ---------- */
+  .preview-flag {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(37,55,69,0.92);
+    color: #f2a541;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.72rem;
+    padding: 7px 12px;
+    border-radius: 4px;
+    z-index: 999;
+    border: 1px solid rgba(242,165,65,0.4);
+    pointer-events: none;
+    letter-spacing: 0.2px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 18px; }
+    .preview-flag { font-size: 0.65rem; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Manchester, Iowa</div>
+      <h1>Lynch Roofing &amp; Siding, Inc.</h1>
+      <p class="sub">Roofing and siding built for Iowa weather — straightforward work, straight answers, from a crew based right here in Manchester.</p>
+      <a href="#contact" class="btn">Get In Touch</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div class="kicker">What We Do</div>
+        <h2>Roofing &amp; Siding Services</h2>
+        <p>From full roof replacements to a quick storm-damage look-over, our crews handle the exterior work that keeps your home or building protected.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 26 L24 8 L44 26" />
+              <path d="M10 24 V40 H38 V24" />
+              <path d="M20 40 V28 H28 V40" />
+            </svg>
+          </div>
+          <h3>Roof Replacement</h3>
+          <p>Full tear-off and replacement using durable, weather-rated roofing systems built for Iowa seasons.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 30 L24 12 L42 30" />
+              <path d="M14 28 V38" />
+              <path d="M34 28 V38" />
+              <path d="M24 8 L30 14 M24 8 L18 14" />
+              <path d="M20 22 L28 30 M28 22 L20 30" />
+            </svg>
+          </div>
+          <h3>Roof Repair &amp; Storm Damage</h3>
+          <p>Fast, thorough repairs for leaks, wind damage, and hail impact so small problems don't become big ones.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="6" width="32" height="36" rx="2" />
+              <path d="M8 16 H40 M8 26 H40 M8 36 H40" />
+              <path d="M18 6 V42 M28 6 V42" />
+            </svg>
+          </div>
+          <h3>Vinyl &amp; Steel Siding</h3>
+          <p>Long-lasting siding installation that boosts curb appeal and protects your home's exterior walls.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20 L24 6 L44 20" />
+              <path d="M8 20 L24 10 L40 20" />
+              <path d="M12 20 L24 14 L36 20" />
+              <path d="M10 20 V40 H38 V20" />
+            </svg>
+          </div>
+          <h3>Shingle Roofing</h3>
+          <p>Professional shingle installation and upgrades built to shed Iowa rain, wind, and snow season after season.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 14 H42" />
+              <path d="M10 14 V34 Q10 40 16 40 H20" />
+              <path d="M38 14 V22" />
+              <path d="M20 40 H30" />
+              <circle cx="20" cy="40" r="2" />
+              <path d="M30 22 L38 22 L38 30" />
+            </svg>
+          </div>
+          <h3>Gutters</h3>
+          <p>Gutter installation and repair that moves water away from your roofline and foundation the right way.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 48 48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="22" cy="22" r="14" />
+              <path d="M32 32 L42 42" />
+              <path d="M22 15 V22 L27 27" />
+            </svg>
+          </div>
+          <h3>Roof Inspections</h3>
+          <p>A close, honest look at your roof's condition so you know exactly where things stand.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE AREA -->
+  <section class="area-section">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div class="kicker">Where We Work</div>
+        <h2>Proudly Serving the Manchester Area</h2>
+        <p>Based in Manchester, Iowa, and serving homes and businesses throughout Delaware County and the surrounding communities.</p>
+      </div>
+      <div class="area-list reveal">
+        <span class="area-pill">Manchester</span>
+        <span class="area-pill">Delaware</span>
+        <span class="area-pill">Earlville</span>
+        <span class="area-pill">Dyersville</span>
+        <span class="area-pill">Edgewood</span>
+        <span class="area-pill">Hopkinton</span>
+        <span class="area-pill">Delhi</span>
+        <span class="area-pill">Ryan</span>
+      </div>
+      <p class="area-note reveal">Don't see your town listed? Reach out and we'll let you know if we're a fit for your area.</p>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust-section">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div class="kicker">Why Work With Us</div>
+        <h2>What You Can Expect</h2>
+        <p>No gimmicks — just a local crew that shows up, does the job right, and communicates clearly.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card reveal">
+          <div class="mark">L</div>
+          <h3>Locally Owned</h3>
+          <p>Based in Manchester, Iowa — not a call center, not a franchise.</p>
+        </div>
+        <div class="trust-card reveal">
+          <div class="mark">R</div>
+          <h3>Residential &amp; Commercial</h3>
+          <p>Roofing and siding work for homes and business properties alike.</p>
+        </div>
+        <div class="trust-card reveal">
+          <div class="mark">S</div>
+          <h3>On-Schedule Service</h3>
+          <p>We show up when we say we will and keep you posted along the way.</p>
+        </div>
+        <div class="trust-card reveal">
+          <div class="mark">P</div>
+          <h3>Straight Pricing</h3>
+          <p>Clear, honest quotes with no confusing fine print.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div class="kicker">Get A Quote</div>
+        <h2>Let's Talk About Your Roof or Siding</h2>
+        <p>Reach out and tell us a bit about your project. We'll follow up to talk through the details.</p>
+      </div>
+      <div class="contact-wrap">
+
+        <div class="call-box reveal">
+          <h3>Call Us Directly</h3>
+          <div class="biz-name">Lynch Roofing &amp; Siding, Inc.</div>
+          <p class="desc">Manchester, Iowa</p>
+          <a href="tel:+15639272882" class="phone-link">(563) 927-2882</a>
+          <p class="desc">Give us a call to talk through your roofing or siding project.</p>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your full name">
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(563) 555-0123">
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about your roofing or siding project..."></textarea>
+          </div>
+          <button type="submit" class="btn submit-btn">Send Message</button>
+          <div class="thanks-msg" id="thanksMsg">Thanks for reaching out — this is a preview page and does not send messages.</div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-name">Lynch Roofing &amp; Siding</div>
+    <a class="foot-phone" href="tel:+15639272882">(563) 927-2882</a>
+  </footer>
+
+  <!-- PREVIEW FLAG -->
+  <div class="preview-flag">Speculative preview build — Urban Niche Co.</div>
+
+  <script>
+    (function () {
+      // Scroll reveal via IntersectionObserver
+      var revealEls = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      revealEls.forEach(function (el) { observer.observe(el); });
+
+      // Decorative contact form — local only, no network activity
+      var form = document.getElementById('contactForm');
+      var thanks = document.getElementById('thanksMsg');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          thanks.classList.add('show');
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

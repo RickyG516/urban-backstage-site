@@ -1,0 +1,87 @@
+{
+  "_version": "2.0",
+  "_last_updated": "2026-06-15",
+  "intro": {
+    "default": "Hey {first_name}, quick check-in on {business_name} — 10 minutes or less. Are the results landing the way you hoped, or are there parts that feel off? Be straight with me."
+  },
+  "health_check": {
+    "_note": "Read their tone in the first 90 seconds. This sets the whole direction of the call.",
+    "GREEN_SIGNALS": [
+      "Mentions a specific win unprompted",
+      "Asks about adding services or expanding",
+      "Has referred someone without being asked",
+      "Pays without a reminder"
+    ],
+    "YELLOW_SIGNALS": [
+      "Vague about results — 'it's fine' or 'we'll see'",
+      "Asks about cancellation terms",
+      "Mentions another agency or service they're looking at",
+      "Tone shifted noticeably from previous calls"
+    ],
+    "RED_SIGNALS": [
+      "Direct complaint about ROI or value",
+      "Names a competitor agency",
+      "Asks 'when does our contract end'",
+      "Stopped opening or responding to weekly updates"
+    ]
+  },
+  "wins_recap": {
+    "script": "Before we get into anything — let me recap what we've gotten done for {business_name} since we started: [PULL FROM LAST MONTHLY REPORT / HUBSPOT NOTES]. The biggest single win was [name it specifically]. I want that on the table before we talk about what's next.",
+    "data_note": "Pull wins from the last weekly update you sent this client. Never walk into a renewal call without at least one specific, named result. 'Rankings improved' is not a result. 'You moved from position 11 to position 4 for roofing in Dubuque and got 3 calls from it' is a result."
+  },
+  "branches": {
+    "RENEWAL": {
+      "label": "Renewal conversation",
+      "script": "Your renewal is coming up on [date]. Before anything else — here's what the last stretch actually produced for {business_name}: [name the two biggest wins, with numbers]. That's the track record we're renewing on. Same terms keep rolling unless you want to look at a longer commitment — want me to put both options in front of you?",
+      "training_note": "Renewal is earned before the call, not on it. Lead with named, numbered results — never open with the contract. If you can't name two specific wins, you're not ready to make this call yet; go pull the reports first."
+    },
+    "UPSELL": {
+      "label": "Upsell pitch — add a service",
+      "script": "Here's the thing — {business_name} has outgrown the current setup. [Current service] is producing: [name the result]. The next bottleneck is [gap], and that's exactly what [recommended service] fixes. You've earned the next tier — the foundation's already built, so it compounds instead of starting from zero. Want me to show you what that looks like?",
+      "training_note": "An upsell should feel like a promotion, not a shakedown. The frame is 'you've earned the next tier' — their results created the opening. Never pitch an upsell to a client whose current service isn't visibly producing; that's how you turn a green client yellow."
+    },
+    "INTERVENTION": {
+      "label": "At-risk client — intervene now",
+      "script": "Hey — I'm picking up that something feels off. I'd rather hear it now than find out when you cancel. What's the actual frustration? Say it straight.",
+      "training_note": "Do not defend, do not explain, do not pitch. Your only job on this branch is to get the real issue in their words and write it down verbatim. The save happens on the follow-up, after you've actually fixed something."
+    },
+    "CHURN_SAVE": {
+      "label": "They're canceling — last attempt",
+      "script": "Got it. One question before we go that route — if I could fix [the specific issue] in the next 14 days, would you give it another month? And if the answer is no, that's completely fine — I'll make the offboarding clean and we part on good terms. So what's the one thing that, if it were fixed, would change your mind?",
+      "training_note": "One honest save attempt, then total respect for the answer. A clean exit today is a win-back call in six months. A grabby exit is a bad review tonight."
+    }
+  },
+  "upsell_triggers": {
+    "_note": "Current service → natural next pitch",
+    "SEO": [
+      "Add PPC to capture demand SEO can't reach fast enough",
+      "Add Reputation Management to compound the review trust signal",
+      "Add Content Pack to feed fresh content to the SEO engine"
+    ],
+    "Google Ads": [
+      "Add SEO so you stop renting traffic permanently",
+      "Add Website rebuild to improve conversion rate on the ad landing pages",
+      "Add Reputation Management to improve quality score and ad performance"
+    ],
+    "Content Pack": [
+      "Add Reputation Management for review velocity",
+      "Add Email Marketing to capture the leads the content generates",
+      "Add GBP Management to get the content working for map pack too"
+    ],
+    "Website": [
+      "Add SEO retainer — the site is built, now get people to it",
+      "Add Reputation Management to populate the review widgets on the site",
+      "Add Email Marketing to capture form fills and nurture them"
+    ]
+  },
+  "upsell_scripts": {
+    "SEO_to_PPC": {
+      "trigger": "Client on SEO, wants more volume faster",
+      "script": "Your SEO is gaining ground — you're ranking places you weren't 90 days ago. The thing is SEO compounds over time, but there's a ceiling on how fast. PPC is the flip side — you turn it on and calls come in this week. Together they own the whole first page. Want me to put together what that would look like for {business_name}?"
+    },
+    "SEO_to_Reputation": {
+      "trigger": "Ranking is improving but review count is still low",
+      "script": "You're ranking better — that's working. Here's what's holding the map pack back: your review count. You're at {gbp_review_count} right now. When a homeowner sees you at position 2 with {gbp_review_count} reviews and position 3 has 80 reviews, they click position 3. The ranking work is getting wasted without the reviews to back it up. Our reputation system fixes that automatically — review requests go out after every job, you do nothing. Adds $400 a month. Worth it?"
+    }
+  }
+}

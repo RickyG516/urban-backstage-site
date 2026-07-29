@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Callback Queue — Sales Ops</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .cb-grid { display:flex; flex-direction:column; gap:0.75rem; }
+    .cb-card { background:var(--color-dark-2); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .cb-card--overdue { border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.04); }
+    .cb-card--today { border-color:rgba(251,191,36,0.4); background:rgba(251,191,36,0.04); }
+    .cb-card--future { border-color:var(--color-border); }
+    .cb-card__header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; }
+    .cb-card__name { font-weight:700; font-size:0.95rem; color:var(--color-white); }
+    .cb-card__badge { font-size:0.68rem; font-weight:700; text-transform:uppercase; padding:0.2rem 0.5rem; border-radius:var(--radius-pill); }
+    .badge-overdue { background:rgba(239,68,68,0.15); color:#fca5a5; border:1px solid rgba(239,68,68,0.3); }
+    .badge-today { background:rgba(251,191,36,0.15); color:#fde68a; border:1px solid rgba(251,191,36,0.3); }
+    .badge-warm { background:rgba(232,101,26,0.15); color:var(--color-accent); border:1px solid rgba(232,101,26,0.3); }
+    .cb-card__meta { font-size:0.82rem; color:var(--color-white-dim); margin-bottom:0.4rem; }
+    .cb-card__window { font-size:0.82rem; color:#fbbf24; font-weight:600; margin-bottom:0.3rem; }
+    .cb-card__notes { font-size:0.78rem; color:var(--color-white-dim); font-style:italic; margin-bottom:0.5rem; }
+    .cb-card__actions { display:flex; gap:0.5rem; flex-wrap:wrap; }
+    .section-header { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-accent); margin:1.25rem 0 0.6rem; padding-bottom:0.35rem; border-bottom:1px solid var(--color-border); }
+    .empty-state { text-align:center; padding:2.5rem 1rem; color:var(--color-white-dim); font-size:0.88rem; }
+    .source-badge { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.72rem; font-weight:700; color:#22c55e; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25); padding:0.25rem 0.6rem; border-radius:var(--radius-pill); }
+    .reschedule-input { background:var(--color-dark-2); border:1px solid var(--color-accent); border-radius:var(--radius-sm); color:var(--color-white); font-size:0.82rem; padding:0.4rem 0.6rem; outline:none; width:180px; }
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+<main class="cockpit">
+  <section class="dash">
+    <div class="dash__header">
+      <div>
+        <h1 class="dash__title">Callback Queue</h1>
+        <p class="dash__sub">All WARM contacts with callback windows. Live from HubSpot. &nbsp;<span class="source-badge">&#9679; HubSpot Live</span></p>
+      </div>
+      <div class="dash__filters">
+        <button class="dash__filter-btn active" id="filter-all">All</button>
+        <button class="dash__filter-btn" id="filter-overdue">Overdue</button>
+        <button class="dash__filter-btn" id="filter-today">Today</button>
+        <button class="dash__filter-btn" id="filter-future">Future</button>
+        <button class="action-btn action-btn--primary" id="refresh-btn" style="margin-left:0.5rem;padding:0.4rem 0.85rem;">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div id="stats-bar" style="display:flex;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+      <div style="font-size:0.82rem;color:var(--color-white-dim);">Overdue: <span id="stat-overdue" style="color:#fca5a5;font-weight:700;">—</span></div>
+      <div style="font-size:0.82rem;color:var(--color-white-dim);">Due today: <span id="stat-today" style="color:#fde68a;font-weight:700;">—</span></div>
+      <div style="font-size:0.82rem;color:var(--color-white-dim);">Future: <span id="stat-future" style="color:var(--color-white-dim);font-weight:700;">—</span></div>
+      <div style="font-size:0.82rem;color:var(--color-white-dim);">Total: <span id="stat-total" style="color:var(--color-white);font-weight:700;">—</span></div>
+    </div>
+
+    <div id="cb-loading" style="text-align:center;padding:2rem;color:var(--color-white-dim);">Loading callbacks from HubSpot...</div>
+    <div id="cb-error" style="display:none;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:var(--radius-sm);padding:1rem;color:#fca5a5;font-size:0.85rem;margin-bottom:1rem;"></div>
+    <div id="cb-content" style="display:none;">
+      <div id="overdue-section"></div>
+      <div id="today-section"></div>
+      <div id="future-section"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function() {
+  const WORKER = 'https://unc-sales-os-sync.ricky-a17.workers.dev';
+  const WORKER_KEY = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})(); // matches WORKSPACE_KEY
+  const PORTAL = '245833525';
+  let allCallbacks = [];
+  let activeFilter = 'all';
+
+  function getCurrentRep() {
+    try {
+      const id = (function(){ try { const v=localStorage.getItem('unc_cockpit_current_rep_id'); return v ? JSON.parse(v) : 'ricky'; } catch(e){ return 'ricky'; } })();
+      // Hardcoded fallback
+      const REPS = {
+        ricky: { display_name:'Ricky', hubspot_owner_id:'90640722' },
+        tyler: { display_name:'Tyler', hubspot_owner_id:'164794304' }
+      };
+      return REPS[id] || REPS.ricky;
+    } catch(e) { return { display_name:'Ricky', hubspot_owner_id:'90640722' }; }
+  }
+
+  function classifyCallback(cb) {
+    const window_str = (cb.callback_window || '').toLowerCase();
+    const lastDate = cb.last_call_date ? new Date(cb.last_call_date) : null;
+    const now = new Date();
+    const today = now.toDateString();
+
+    // Try to parse date from window string
+    // Words like "tomorrow", "monday", "today", "8 am", etc.
+    if (window_str.includes('today') || window_str.includes('this morning') || window_str.includes('this afternoon')) {
+      return 'today';
+    }
+    if (window_str.includes('tomorrow')) {
+      return 'future';
+    }
+
+    // If last call was more than 3 days ago and no specific future date, treat as overdue
+    if (lastDate) {
+      const daysSince = (now - lastDate) / (1000 * 60 * 60 * 24);
+      if (daysSince > 3 && !window_str.match(/\b(next|monday|tuesday|wednesday|thursday|friday|saturday|sunday|week|month)\b/i)) {
+        return 'overdue';
+      }
+      if (daysSince > 7) return 'overdue';
+    }
+
+    return window_str ? 'future' : 'overdue';
+  }
+
+  function esc(s) { return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function renderCard(cb, classification) {
+    const name = cb.business_name || ((cb.first_name||'') + ' ' + (cb.last_name||'')).trim() || 'Unknown';
+    const hubURL = 'https://app-na2.hubspot.com/contacts/' + PORTAL + '/contact/' + cb.contact_id;
+    const lastDate = cb.last_call_date ? new Date(cb.last_call_date).toLocaleDateString() : '';
+    const badgeClass = classification === 'overdue' ? 'badge-overdue' : classification === 'today' ? 'badge-today' : 'badge-warm';
+    const badgeLabel = classification === 'overdue' ? 'Overdue' : classification === 'today' ? 'Due Today' : 'Scheduled';
+    const cardClass = classification === 'overdue' ? 'cb-card--overdue' : classification === 'today' ? 'cb-card--today' : 'cb-card--future';
+
+    return '<div class="cb-card ' + cardClass + '" data-contact-id="' + esc(cb.contact_id) + '">' +
+      '<div class="cb-card__header">' +
+        '<div>' +
+          '<div class="cb-card__name">' + esc(name) + '</div>' +
+          '<div class="cb-card__meta">' + esc(cb.trade_type||'') + (cb.city?' · '+esc(cb.city):'') + (lastDate?' · Last called: '+lastDate:'') + '</div>' +
+          (cb.callback_window ? '<div class="cb-card__window">⏰ ' + esc(cb.callback_window) + '</div>' : '<div class="cb-card__window" style="color:#ef4444;">⚠ No window set</div>') +
+          (cb.last_call_notes ? '<div class="cb-card__notes">"' + esc(cb.last_call_notes.slice(0,120)) + (cb.last_call_notes.length>120?'...':'') + '"</div>' : '') +
+        '</div>' +
+        '<span class="cb-card__badge ' + badgeClass + '">' + badgeLabel + '</span>' +
+      '</div>' +
+      '<div class="cb-card__actions">' +
+        (cb.phone ? '<a href="tel:' + esc(cb.phone) + '" class="action-btn action-btn--sm" style="color:#22c55e;border-color:#22c55e;">📞 Call ' + esc(cb.phone) + '</a>' : '') +
+        '<a href="' + hubURL + '" target="_blank" rel="noopener" class="action-btn action-btn--sm">↗ HubSpot</a>' +
+        '<button class="action-btn action-btn--sm reschedule-btn" data-id="' + esc(cb.contact_id) + '" title="Update the callback window">Reschedule</button>' +
+        '<button class="action-btn action-btn--sm complete-btn" data-id="' + esc(cb.contact_id) + '" style="color:#a78bfa;border-color:rgba(167,139,250,0.4);" title="Mark as called — removes from queue">✓ Called</button>' +
+        '<a href="/sales-ops/cold-call/" class="action-btn action-btn--sm" style="color:var(--color-accent);border-color:rgba(232,101,26,0.4);" onclick="loadFromCallback(\'' + esc(JSON.stringify(cb).replace(/'/g, '&apos;')) + '\')">Load in Cockpit →</a>' +
+      '</div>' +
+      '<div class="reschedule-panel" id="rsp-' + esc(cb.contact_id) + '" style="display:none;margin-top:0.6rem;display:none;gap:0.4rem;align-items:center;">' +
+        '<input class="reschedule-input" id="ri-' + esc(cb.contact_id) + '" type="text" placeholder="New window: e.g. Thursday 8 AM">' +
+        '<button class="action-btn action-btn--sm save-reschedule-btn" data-id="' + esc(cb.contact_id) + '" style="color:#22c55e;border-color:#22c55e;">Save</button>' +
+        '<button class="action-btn action-btn--sm cancel-reschedule-btn" data-id="' + esc(cb.contact_id) + '">Cancel</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function render(filter) {
+    activeFilter = filter;
+    document.querySelectorAll('.dash__filter-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('filter-' + filter).classList.add('active');
+
+    const overdue = allCallbacks.filter(c => c._class === 'overdue');
+    const today   = allCallbacks.filter(c => c._class === 'today');
+    const future  = allCallbacks.filter(c => c._class === 'future');
+
+    document.getElementById('stat-overdue').textContent = overdue.length;
+    document.getElementById('stat-today').textContent   = today.length;
+    document.getElementById('stat-future').textContent  = future.length;
+    document.getElementById('stat-total').textContent   = allCallbacks.length;
+
+    const show = filter === 'all' ? allCallbacks :
+                 filter === 'overdue' ? overdue :
+                 filter === 'today'   ? today   : future;
+
+    const overdueHtml = (filter === 'all' || filter === 'overdue') && overdue.length
+      ? '<div class="section-header">⚠ Overdue (' + overdue.length + ')</div><div class="cb-grid">' + overdue.map(c => renderCard(c, 'overdue')).join('') + '</div>' : '';
+    const todayHtml = (filter === 'all' || filter === 'today') && today.length
+      ? '<div class="section-header">📅 Due Today (' + today.length + ')</div><div class="cb-grid">' + today.map(c => renderCard(c, 'today')).join('') + '</div>' : '';
+    const futureHtml = (filter === 'all' || filter === 'future') && future.length
+      ? '<div class="section-header">🗓 Scheduled (' + future.length + ')</div><div class="cb-grid">' + future.map(c => renderCard(c, 'future')).join('') + '</div>' : '';
+
+    document.getElementById('overdue-section').innerHTML = overdueHtml;
+    document.getElementById('today-section').innerHTML   = todayHtml;
+    document.getElementById('future-section').innerHTML  = futureHtml;
+
+    if (!show.length) {
+      document.getElementById('future-section').innerHTML = '<div class="empty-state">No callbacks in this category. Clean board.</div>';
+    }
+
+    bindActions();
+  }
+
+  function bindActions() {
+    // Reschedule toggle
+    document.querySelectorAll('.reschedule-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        const panel = document.getElementById('rsp-' + b.dataset.id);
+        if (panel) { panel.style.display = panel.style.display === 'none' ? 'flex' : 'none'; }
+      });
+    });
+    document.querySelectorAll('.cancel-reschedule-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        const panel = document.getElementById('rsp-' + b.dataset.id);
+        if (panel) panel.style.display = 'none';
+      });
+    });
+
+    // Save reschedule — updates HubSpot via worker
+    document.querySelectorAll('.save-reschedule-btn').forEach(b => {
+      b.addEventListener('click', async () => {
+        const id = b.dataset.id;
+        const input = document.getElementById('ri-' + id);
+        const newWindow = input ? input.value.trim() : '';
+        if (!newWindow) { alert('Enter a new callback window.'); return; }
+        b.textContent = 'Saving...'; b.disabled = true;
+        try {
+          const r = await fetch(WORKER + '/sync', {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json', 'x-unc-key': WORKER_KEY },
+            body: JSON.stringify({
+              call: {
+                contact_id: id,
+                outcome_code: 'WARM',
+                callback_window: newWindow,
+                notes: 'Callback window updated from Callback Queue tool',
+                timestamp: new Date().toISOString(),
+                hubspot_owner_id: getCurrentRep().hubspot_owner_id
+              }
+            })
+          });
+          const data = await r.json();
+          if (data.ok) {
+            // Update local data
+            const cb = allCallbacks.find(c => c.contact_id === id);
+            if (cb) { cb.callback_window = newWindow; cb._class = classifyCallback(cb); }
+            render(activeFilter);
+          } else {
+            b.textContent = '✗ Failed'; b.disabled = false;
+          }
+        } catch(e) { b.textContent = '✗ Error'; b.disabled = false; }
+      });
+    });
+
+    // Mark as called — removes from queue view (not from HubSpot, just from this session)
+    document.querySelectorAll('.complete-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        allCallbacks = allCallbacks.filter(c => c.contact_id !== b.dataset.id);
+        render(activeFilter);
+      });
+    });
+  }
+
+  window.loadFromCallback = function(cbJson) {
+    try {
+      const cb = JSON.parse(cbJson);
+      sessionStorage.setItem('unc_load_callback', JSON.stringify(cb));
+    } catch(e) {}
+  };
+
+  async function loadCallbacks() {
+    document.getElementById('cb-loading').style.display = 'block';
+    document.getElementById('cb-content').style.display = 'none';
+    document.getElementById('cb-error').style.display   = 'none';
+    document.getElementById('refresh-btn').textContent = 'Loading...';
+    document.getElementById('refresh-btn').disabled = true;
+
+    try {
+      const rep = getCurrentRep();
+      const r = await fetch(WORKER + '/callbacks?owner_id=' + encodeURIComponent(rep.hubspot_owner_id), { cache:'no-cache', headers:{ 'x-unc-key': WORKER_KEY } });
+      if (!r.ok) throw new Error('Worker returned ' + r.status);
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.error || 'Unknown error');
+
+      allCallbacks = (data.callbacks || []).map(c => ({ ...c, _class: classifyCallback(c) }));
+      // Sort: overdue first, then today, then future
+      const order = { overdue:0, today:1, future:2 };
+      allCallbacks.sort((a,b) => (order[a._class]||2) - (order[b._class]||2));
+
+      document.getElementById('cb-loading').style.display = 'none';
+      document.getElementById('cb-content').style.display = 'block';
+      render(activeFilter);
+    } catch(e) {
+      document.getElementById('cb-loading').style.display = 'none';
+      const errEl = document.getElementById('cb-error');
+      errEl.style.display = 'block';
+      errEl.textContent = 'Could not load callbacks: ' + e.message;
+    } finally {
+      document.getElementById('refresh-btn').textContent = '↻ Refresh';
+      document.getElementById('refresh-btn').disabled = false;
+    }
+  }
+
+  // Filter buttons
+  ['all','overdue','today','future'].forEach(f => {
+    document.getElementById('filter-' + f).addEventListener('click', () => render(f));
+  });
+  document.getElementById('refresh-btn').addEventListener('click', loadCallbacks);
+
+  loadCallbacks();
+})();
+</script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

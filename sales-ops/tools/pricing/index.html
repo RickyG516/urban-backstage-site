@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Pricing Calculator â Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .pcalc { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+    .pcalc__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 860px) { .pcalc__grid { grid-template-columns: 1fr; } }
+    .pcalc__panel { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; }
+    .pcalc__section-label { font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 1.5rem 0 0.75rem; }
+    .pcalc__section-label:first-child { margin-top: 0; }
+    .pcalc__service { background: var(--color-dark-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; margin-bottom: 0.5rem; transition: all 0.15s; }
+    .pcalc__service.selected { border-color: var(--color-accent); background: var(--color-accent-glow); }
+    .pcalc__service-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+    .pcalc__service-name { font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; }
+    .pcalc__service-range { font-family: var(--font-display); font-size: 0.72rem; opacity: 0.55; margin-top: 0.15rem; }
+    .pcalc__tiers { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .pcalc__tier-btn { padding: 0.3rem 0.65rem; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-dark-2); cursor: pointer; font-family: var(--font-display); font-size: 0.68rem; font-weight: 700; transition: all 0.15s; line-height: 1.4; text-align: center; }
+    .pcalc__tier-btn:hover { border-color: var(--color-border-bright); }
+    .pcalc__tier-btn.active { background: var(--color-accent); color: #000; border-color: var(--color-accent); }
+    .pcalc__tier-price { display: block; font-size: 0.6rem; opacity: 0.8; font-weight: 400; }
+    /* Bundle quick-select */
+    .pcalc__bundle { border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.15s; background: var(--color-dark-3); }
+    .pcalc__bundle:hover { border-color: var(--color-border-bright); }
+    .pcalc__bundle.active { border-color: var(--color-accent); background: var(--color-accent-glow); }
+    .pcalc__bundle-row { display: flex; justify-content: space-between; align-items: center; }
+    .pcalc__bundle-name { font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; }
+    .pcalc__bundle-price { font-family: var(--font-display); font-weight: 800; color: var(--color-accent); font-size: 1rem; }
+    .pcalc__bundle-includes { font-family: var(--font-display); font-size: 0.72rem; opacity: 0.55; margin-top: 0.25rem; }
+    /* Summary panel */
+    .pcalc__line { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px dashed var(--color-border); font-family: var(--font-display); font-size: 0.88rem; gap: 0.5rem; }
+    .pcalc__line-name { opacity: 0.85; }
+    .pcalc__line-price { font-weight: 700; flex-shrink: 0; }
+    .pcalc__total { display: flex; justify-content: space-between; padding-top: 1rem; margin-top: 0.5rem; border-top: 2px solid var(--color-accent); font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: var(--color-accent); }
+    .pcalc__annual { display: flex; justify-content: space-between; padding: 0.5rem 0; font-family: var(--font-display); font-size: 0.85rem; opacity: 0.6; }
+    .pcalc__empty { padding: 2rem 0; text-align: center; font-family: var(--font-display); opacity: 0.45; font-size: 0.9rem; }
+    .pcalc__cta { margin-top: 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .pcalc__note { font-family: var(--font-display); font-size: 0.72rem; opacity: 0.5; margin-top: 0.75rem; line-height: 1.5; }
+    .pcalc__badge { display: inline-block; font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--color-accent); color: #000; padding: 0.1rem 0.4rem; border-radius: var(--radius-pill); margin-left: 0.4rem; vertical-align: middle; }
+    /* Prospect fields + quote meta */
+    .pcalc__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.85rem; }
+    .pcalc__fields .full { grid-column: 1 / -1; }
+    .pcalc__field { width: 100%; background: var(--color-dark-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.55rem 0.75rem; color: inherit; font-family: var(--font-display); font-size: 0.85rem; }
+    .pcalc__field:focus { outline: none; border-color: var(--color-accent); }
+    .pcalc__field::placeholder { opacity: 0.4; }
+    .pcalc__meta { font-family: var(--font-display); font-size: 0.72rem; opacity: 0.6; margin-bottom: 0.75rem; line-height: 1.6; }
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="pcalc">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Pricing Calculator</h1>
+          <p class="dash__sub">Build a quote in 30 seconds. Pick a bundle or build custom. Prices match urbannicheco.com/pricing exactly.</p>
+        </div>
+      </div>
+      <div class="pcalc__grid">
+        <div class="pcalc__panel">
+
+          <div class="pcalc__section-label">Quick-select a bundle</div>
+          <div id="bundles"></div>
+
+          <div class="pcalc__section-label">Monthly retainer services</div>
+          <div id="services"></div>
+
+          <div class="pcalc__section-label">One-time projects</div>
+          <div id="onetime"></div>
+
+        </div>
+        <div class="pcalc__panel">
+          <h3 style="font-family:var(--font-display); margin-bottom:1rem; font-size:1rem">Quote summary</h3>
+          <div class="pcalc__fields">
+            <input class="pcalc__field full" id="q-business" placeholder="Business name (e.g. Mike's Roofing)" autocomplete="off" />
+            <input class="pcalc__field" id="q-contact" placeholder="Contact name" autocomplete="off" />
+            <input class="pcalc__field" id="q-email" type="email" placeholder="Contact email" autocomplete="off" />
+          </div>
+          <div class="pcalc__meta" id="quote-meta"></div>
+          <div id="hs-confirm" style="font-family:var(--font-display);font-size:0.68rem;color:#4ade80;min-height:1rem;margin-bottom:0.25rem;"></div>
+          <div id="summary"></div>
+          <div class="pcalc__cta">
+            <button class="action-btn action-btn--primary" id="email-quote">ð§ Email quote</button>
+            <button class="action-btn" id="copy-summary">ð Copy quote</button>
+            <button class="action-btn" id="copy-sms">ð¬ Copy SMS</button>
+            <button class="action-btn" id="reset">â» Reset</button>
+          </div>
+          <div class="pcalc__note">All prices match live pricing page. Ad spend for PPC goes directly to Google â never marked up. Quote this tool, not memory.</div>
+        </div>
+      </div>
+    </section>
+    <div class="brand-stamp">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <script>
+
+    // ── WORKER CONFIG (v4.4) ────────────────────────────────────
+    const WORKER_BASE = 'https://unc-sales-os-sync.ricky-a17.workers.dev';
+    const WORKER_KEY  = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})();
+
+    // ââ CANONICAL PRICING DATA âââââââââââââââââââââââââââââââââââââââââââââ
+    // Source: urbannicheco.com/pricing | Updated: 2026-05-21
+    // NEVER quote from memory â use this tool.
+
+    const BUNDLES = [
+      {
+        id: 'local_authority',
+        name: 'Local Authority',
+        price: 2800,
+        includes: ['SEO Foundation', 'GBP Authority', 'Reputation Foundation'],
+        // Full deliverable list per urbannicheco.com/pricing â used in written quotes
+        fullIncludes: ['SEO Foundation', 'GBP Authority management', 'Reputation Foundation', 'Monthly performance report', 'Direct line to Ricky'],
+        services: { seo: 0, gbp: 1, rep: 0 }  // tier indices
+      },
+      {
+        id: 'market_growth',
+        name: 'Market Growth',
+        badge: 'MOST POPULAR',
+        price: 4500,
+        includes: ['Everything in Local Authority', 'Content Pack Growth', 'Email Foundation'],
+        fullIncludes: ['Everything in Local Authority', 'Content Pack Growth â 12 posts/mo FB + IG', 'Email Marketing Foundation â 2 campaigns/mo', 'Bi-weekly strategy check-ins'],
+        services: { seo: 0, gbp: 1, rep: 0, content: 1, email: 0 }
+      },
+      {
+        id: 'total_domination',
+        name: 'Total Domination',
+        price: 7500,
+        includes: ['Everything in Market Growth', 'PPC Standard', 'AI Lead Capture Full Stack'],
+        fullIncludes: ['Everything in Market Growth', 'PPC Standard â up to $5K ad spend managed', 'AI Lead Capture Full Stack', 'Weekly strategy calls', 'Priority support'],
+        services: { seo: 0, gbp: 1, rep: 0, content: 1, email: 0, ppc: 0, ai: 1 }
+      }
+    ];
+
+    const SERVICES = [
+      {
+        id: 'seo',
+        name: 'Local SEO',
+        billing: 'mo',
+        tiers: [
+          { label: 'Foundation', price: 1500 },
+          { label: 'Growth',     price: 2500 },
+          { label: 'Domination', price: 3500 }
+        ]
+      },
+      {
+        id: 'gbp',
+        name: 'GBP Management',
+        billing: 'mo',
+        tiers: [
+          { label: 'Authority', price: 500 }
+        ],
+        note: 'Setup $250 one-time (billed separately)'
+      },
+      {
+        id: 'rep',
+        name: 'Reputation Management',
+        billing: 'mo',
+        tiers: [
+          { label: 'Foundation', price: 400 },
+          { label: 'Authority',  price: 750 }
+        ]
+      },
+      {
+        id: 'content',
+        name: 'Content Pack',
+        billing: 'mo',
+        note: '"We build it, you post it"',
+        tiers: [
+          { label: 'Starter',   price: 400 },
+          { label: 'Growth',    price: 700 },
+          { label: 'Authority', price: 1200 }
+        ]
+      },
+      {
+        id: 'email',
+        name: 'Email Marketing',
+        billing: 'mo',
+        tiers: [
+          { label: 'Foundation', price: 500 },
+          { label: 'Authority',  price: 1000 }
+        ]
+      },
+      {
+        id: 'ppc',
+        name: 'PPC Management',
+        billing: 'mo',
+        note: 'Flat mgmt fee â ad spend goes direct to Google, never marked up',
+        tiers: [
+          { label: 'Standard', price: 1200 },
+          { label: 'Power',    price: 2000 },
+          { label: 'Dynamic',  price: 3500 }
+        ]
+      },
+      {
+        id: 'ai',
+        name: 'AI Lead Capture',
+        billing: 'mo',
+        tiers: [
+          { label: 'Smart Follow-Up', price: 750 },
+          { label: 'Full AI Stack',   price: 1500 }
+        ]
+      }
+    ];
+
+    const ONETIME = [
+      {
+        id: 'website',
+        name: 'Website Design',
+        billing: 'one-time',
+        tiers: [
+          { label: 'Landing',       price: 1000 },
+          { label: 'HTML Starter',  price: 3000 },
+          { label: 'HTML Standard', price: 5500 },
+          { label: 'HTML Advanced', price: 8500 }
+        ]
+      },
+      {
+        id: 'gbp_setup',
+        name: 'GBP Setup',
+        billing: 'one-time',
+        tiers: [
+          { label: 'Setup', price: 250 }
+        ]
+      },
+      {
+        id: 'ai_consulting',
+        name: 'AI Strategy / Custom Build',
+        billing: 'one-time',
+        note: 'Discovery call is free â custom builds scoped individually',
+        tiers: [
+          { label: 'Consulting Hour', price: 500 },
+          { label: 'Custom Build',    price: 2500 }
+        ]
+      }
+    ];
+
+    // ââ STATE ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    const state = {
+      selected: {},   // id -> tier index (0,1,2...)
+      oneTime: {},    // id -> tier index
+      activeBundle: null,
+      quoteNo: null   // generated once per quote, cleared on reset
+    };
+
+    // ââ QUOTE NUMBER + DATES âââââââââââââââââââââââââââââââââââââââââââââââ
+    // Date-based number: unique + sortable, no backend needed.
+    // Sequential numbering (Q-0001...) requires a worker/KV endpoint â v4.4 ask.
+    function getQuoteNo() {
+      if (!state.quoteNo) {
+        const d = new Date(), p = n => String(n).padStart(2, '0');
+        state.quoteNo = 'UNC-Q-' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes());
+      }
+      return state.quoteNo;
+    }
+    function fmtDate(d) {
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    function quoteDates() {
+      const now = new Date();
+      const valid = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+      return { issued: fmtDate(now), validUntil: fmtDate(valid) };
+    }
+
+    // ââ HELPERS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function fmt(n) { return n.toLocaleString(); }
+
+    // ── WORKER HELPERS (v4.4) ──────────────────────────────────
+    async function maybeInitQuoteNo() {
+      if (state.quoteNo || !WORKER_KEY) return;
+      if (!computeQuote().lines.length) return;
+      try {
+        const r = await fetch(WORKER_BASE + '/quote/next', { headers: { 'x-unc-key': WORKER_KEY } });
+        if (r.ok) {
+          const d = await r.json();
+          if (d.ok && d.quoteNo) { state.quoteNo = d.quoteNo; renderSummary(); }
+        }
+      } catch (e) { /* fail silently — date-based fallback active */ }
+    }
+
+    function logQuote() {
+      if (!WORKER_KEY) return;
+      const q = computeQuote(), p = prospect();
+      if (!q.lines.length) return;
+      const payload = {
+        quoteNo:  getQuoteNo(),
+        email:    p.email,
+        business: p.business,
+        contact:  p.contact || '',
+        monthly:  q.monthly,
+        oneTime:  q.oneTime,
+        annual:   q.annual,
+        lines:    q.lines.map(l => l.name + ': $' + fmt(l.price) + (l.type === 'mo' ? '/mo' : '')),
+        bundle:   q.bundle ? q.bundle.name : '',
+        sentVia:  ''
+      };
+      fetch(WORKER_BASE + '/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-unc-key': WORKER_KEY },
+        body: JSON.stringify(payload)
+      }).then(r => r.json()).then(d => { if (d.ok) showHubSpotConfirm(d); }).catch(() => {});
+    }
+
+    function showHubSpotConfirm(d) {
+      const el = document.getElementById('hs-confirm');
+      if (!el) return;
+      el.textContent = d.stageAdvanced ? '✓ Logged — deal moved to Pricing Sent' : '✓ Logged to HubSpot';
+      setTimeout(() => { el.textContent = ''; }, 6000);
+    }
+    // ââ RENDER BUNDLES âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    function renderBundles() {
+      document.getElementById('bundles').innerHTML = BUNDLES.map(b => `
+        <div class="pcalc__bundle ${state.activeBundle === b.id ? 'active' : ''}" data-bundle="${b.id}">
+          <div class="pcalc__bundle-row">
+            <div class="pcalc__bundle-name">${esc(b.name)}${b.badge ? `<span class="pcalc__badge">${esc(b.badge)}</span>` : ''}</div>
+            <div class="pcalc__bundle-price">$${fmt(b.price)}/mo</div>
+          </div>
+          <div class="pcalc__bundle-includes">${b.includes.join(' Â· ')}</div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('[data-bundle]').forEach(el => {
+        el.addEventListener('click', () => {
+          const bid = el.dataset.bundle;
+          const bundle = BUNDLES.find(b => b.id === bid);
+          if (!bundle) return;
+          if (state.activeBundle === bid) {
+            // Deselect
+            state.activeBundle = null;
+            state.selected = {};
+          } else {
+            state.activeBundle = bid;
+            state.selected = {};
+            // Select the right tier per service per bundle definition
+            SERVICES.forEach(svc => {
+              const tierIdx = bundle.services[svc.id];
+              if (tierIdx !== undefined) {
+                state.selected[svc.id] = tierIdx;
+              }
+            });
+          }
+          renderAll();
+          maybeInitQuoteNo();
+        });
+      });
+    }
+
+    // ââ RENDER SERVICES ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    function renderServices() {
+      document.getElementById('services').innerHTML = SERVICES.map(svc => {
+        const selIdx = state.selected[svc.id];
+        const selected = selIdx !== undefined && selIdx !== null;
+        const range = svc.tiers.length > 1
+          ? `$${fmt(svc.tiers[0].price)}â$${fmt(svc.tiers[svc.tiers.length-1].price)}/mo`
+          : `$${fmt(svc.tiers[0].price)}/mo`;
+        return `
+          <div class="pcalc__service ${selected ? 'selected' : ''}">
+            <div class="pcalc__service-row">
+              <div>
+                <div class="pcalc__service-name">${esc(svc.name)}</div>
+                <div class="pcalc__service-range">${range}${svc.note ? ' Â· ' + esc(svc.note) : ''}</div>
+              </div>
+              <div class="pcalc__tiers">
+                ${svc.tiers.map((t, i) => `
+                  <button class="pcalc__tier-btn ${selIdx === i ? 'active' : ''}"
+                    data-svc="${esc(svc.id)}" data-idx="${i}">
+                    ${esc(t.label)}
+                    <span class="pcalc__tier-price">$${fmt(t.price)}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('onetime').innerHTML = ONETIME.map(svc => {
+        const selIdx = state.oneTime[svc.id];
+        const selected = selIdx !== undefined && selIdx !== null;
+        const range = svc.tiers.length > 1
+          ? `$${fmt(svc.tiers[0].price)}â$${fmt(svc.tiers[svc.tiers.length-1].price)}`
+          : `$${fmt(svc.tiers[0].price)}`;
+        return `
+          <div class="pcalc__service ${selected ? 'selected' : ''}">
+            <div class="pcalc__service-row">
+              <div>
+                <div class="pcalc__service-name">${esc(svc.name)}</div>
+                <div class="pcalc__service-range">${range} one-time${svc.note ? ' Â· ' + esc(svc.note) : ''}</div>
+              </div>
+              <div class="pcalc__tiers">
+                ${svc.tiers.map((t, i) => `
+                  <button class="pcalc__tier-btn ${selIdx === i ? 'active' : ''}"
+                    data-ot="${esc(svc.id)}" data-idx="${i}">
+                    ${esc(t.label)}
+                    <span class="pcalc__tier-price">$${fmt(t.price)}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Tier button events
+      document.querySelectorAll('[data-svc][data-idx]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const id = btn.dataset.svc, idx = parseInt(btn.dataset.idx);
+          state.selected[id] = (state.selected[id] === idx) ? undefined : idx;
+          state.activeBundle = null; // deselect bundle on manual edit
+          renderAll();
+          maybeInitQuoteNo();
+        });
+      });
+      document.querySelectorAll('[data-ot][data-idx]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const id = btn.dataset.ot, idx = parseInt(btn.dataset.idx);
+          state.oneTime[id] = (state.oneTime[id] === idx) ? undefined : idx;
+          renderAll();
+          maybeInitQuoteNo();
+        });
+      });
+    }
+
+    // ââ COMPUTE QUOTE (single source of truth for summary/copy/email/SMS) ââ
+    function computeQuote() {
+      let monthly = 0, oneTime = 0;
+      const lines = [];
+      let bundle = null;
+
+      if (state.activeBundle) {
+        bundle = BUNDLES.find(b => b.id === state.activeBundle) || null;
+        if (bundle) {
+          lines.push({ name: bundle.name + ' bundle', price: bundle.price, type: 'mo', bundle: true });
+          monthly = bundle.price;
+          // Extra manually selected services not in the bundle
+          SERVICES.forEach(svc => {
+            const idx = state.selected[svc.id];
+            if (idx !== undefined && idx !== null && bundle.services[svc.id] === undefined) {
+              const t = svc.tiers[idx];
+              if (t) { monthly += t.price; lines.push({ name: svc.name + ' Â· ' + t.label, price: t.price, type: 'mo', extra: true }); }
+            }
+          });
+        }
+      } else {
+        SERVICES.forEach(svc => {
+          const idx = state.selected[svc.id];
+          if (idx !== undefined && idx !== null) {
+            const t = svc.tiers[idx];
+            if (t) { monthly += t.price; lines.push({ name: svc.name + ' Â· ' + t.label, price: t.price, type: 'mo' }); }
+          }
+        });
+      }
+
+      ONETIME.forEach(svc => {
+        const idx = state.oneTime[svc.id];
+        if (idx !== undefined && idx !== null) {
+          const t = svc.tiers[idx];
+          if (t) { oneTime += t.price; lines.push({ name: svc.name + ' Â· ' + t.label, price: t.price, type: 'one' }); }
+        }
+      });
+
+      return { lines, monthly, oneTime, annual: monthly * 12 + oneTime, bundle };
+    }
+
+    function prospect() {
+      return {
+        business: (document.getElementById('q-business').value || '').trim(),
+        contact:  (document.getElementById('q-contact').value || '').trim(),
+        email:    (document.getElementById('q-email').value || '').trim()
+      };
+    }
+
+    // ââ RENDER SUMMARY âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    function renderSummary() {
+      const q = computeQuote();
+      const { lines, monthly, oneTime, annual } = q;
+      const el = document.getElementById('summary');
+      const meta = document.getElementById('quote-meta');
+
+      if (!lines.length) {
+        el.innerHTML = '<div class="pcalc__empty">Pick a bundle or select services to build a quote.</div>';
+        meta.textContent = '';
+        return;
+      }
+
+      const d = quoteDates();
+      meta.textContent = getQuoteNo() + ' Â· ' + d.issued + ' Â· Valid until ' + d.validUntil;
+
+      el.innerHTML = `
+        ${lines.map(l => `
+          <div class="pcalc__line">
+            <span class="pcalc__line-name">${esc(l.name)}${l.extra ? ' <span style="opacity:0.5;font-size:0.7rem">add-on</span>' : ''}</span>
+            <span class="pcalc__line-price">$${fmt(l.price)}${l.type === 'mo' ? '/mo' : ''}</span>
+          </div>
+        `).join('')}
+        <div class="pcalc__total">
+          <span>Monthly retainer</span>
+          <span>$${fmt(monthly)}/mo</span>
+        </div>
+        ${oneTime > 0 ? `<div class="pcalc__line"><span class="pcalc__line-name">One-time</span><span class="pcalc__line-price">$${fmt(oneTime)}</span></div>` : ''}
+        <div class="pcalc__annual">
+          <span>12-month value</span>
+          <span>$${fmt(annual)}</span>
+        </div>
+      `;
+    }
+
+    function renderAll() {
+      renderBundles();
+      renderServices();
+      renderSummary();
+    }
+
+    // ââ QUOTE TEXT BUILDERS (all pull from computeQuote â numbers can't drift)
+    function quoteTextLines(q) {
+      const out = [];
+      q.lines.forEach(l => {
+        if (l.bundle && q.bundle) {
+          out.push(`${q.bundle.name} bundle: $${fmt(l.price)}/mo`);
+          (q.bundle.fullIncludes || q.bundle.includes).forEach(inc => out.push(`  â¢ ${inc}`));
+        } else if (l.extra) {
+          out.push(`+ ${l.name}: $${fmt(l.price)}/mo (add-on)`);
+        } else {
+          out.push(`${l.name}: $${fmt(l.price)}${l.type === 'mo' ? '/mo' : ' one-time'}`);
+        }
+      });
+      return out;
+    }
+
+    function fullQuoteText() {
+      const q = computeQuote();
+      const p = prospect();
+      const d = quoteDates();
+      return [
+        'URBAN NICHE CO. â QUOTE ' + getQuoteNo(),
+        p.business ? 'Prepared for: ' + p.business + (p.contact ? ' (Attn: ' + p.contact + ')' : '') : null,
+        'Date: ' + d.issued + ' Â· Valid until ' + d.validUntil,
+        'âââââââââââââââââââââââââââââ',
+        ...quoteTextLines(q),
+        'âââââââââââââââââââââââââââââ',
+        `Monthly retainer: $${fmt(q.monthly)}/mo`,
+        q.oneTime > 0 ? `One-time total: $${fmt(q.oneTime)}` : null,
+        `12-month value: $${fmt(q.annual)}`,
+        '',
+        'Ad spend for PPC goes directly to Google â never marked up.',
+        'Prices per urbannicheco.com/pricing',
+        '',
+        'Urban Niche Co. | urbannicheco.com | (515) 344-4053',
+        "Marketing built for contractors. Let's build something."
+      ].filter(l => l !== null).join('\n');
+    }
+
+    function emailBodyText() {
+      const p = prospect();
+      const d = quoteDates();
+      const greet = p.contact ? 'Hi ' + p.contact.split(' ')[0] + ',' : 'Hi,';
+      return [
+        greet,
+        '',
+        "Good talking with you" + (p.business ? ' about ' + p.business : '') + ". Here's your quote â everything itemized, no surprises.",
+        '',
+        fullQuoteText(),
+        '',
+        'This quote is good through ' + d.validUntil + '. Ready to move? Reply here or call me at (515) 344-4053.',
+        '',
+        'Ricky Garner',
+        'Urban Niche Co.'
+      ].join('\n');
+    }
+
+    function smsText() {
+      const q = computeQuote();
+      const p = prospect();
+      const d = quoteDates();
+      const lead = q.bundle ? q.bundle.name + ' bundle' : q.lines.filter(l => l.type === 'mo').length + ' services';
+      return (p.contact ? p.contact.split(' ')[0] + ' â ' : '') +
+        'your Urban Niche Co quote (' + getQuoteNo() + '): ' + lead +
+        ' at $' + fmt(q.monthly) + '/mo' +
+        (q.oneTime > 0 ? ' + $' + fmt(q.oneTime) + ' one-time' : '') +
+        '. Good until ' + d.validUntil + '. Full breakdown in your email. â Ricky, (515) 344-4053';
+    }
+
+    // ââ BUTTON HELPERS âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    function flashBtn(id, msg) {
+      const btn = document.getElementById(id);
+      const orig = btn.textContent;
+      btn.textContent = msg;
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    }
+    function requireLines(btnId) {
+      if (!computeQuote().lines.length) { flashBtn(btnId, 'â  Add services first'); return false; }
+      return true;
+    }
+    async function copyToClipboard(text, btnId) {
+      try {
+        await navigator.clipboard.writeText(text);
+        flashBtn(btnId, 'â Copied to clipboard');
+      } catch(e) {
+        alert('Copy failed â select the summary manually');
+      }
+    }
+
+    // ââ COPY QUOTE âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    document.getElementById('copy-summary').addEventListener('click', () => {
+      if (!requireLines('copy-summary')) return;
+      logQuote();
+      copyToClipboard(fullQuoteText(), 'copy-summary');
+    });
+
+    // ââ COPY SMS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    document.getElementById('copy-sms').addEventListener('click', () => {
+      if (!requireLines('copy-sms')) return;
+      logQuote();
+      copyToClipboard(smsText(), 'copy-sms');
+    });
+
+    // ââ EMAIL QUOTE (Gmail compose â Workspace stack) ââââââââââââââââââââââ
+    document.getElementById('email-quote').addEventListener('click', () => {
+      if (!requireLines('email-quote')) return;
+      logQuote();
+      const p = prospect();
+      const url = 'https://mail.google.com/mail/?view=cm&fs=1' +
+        (p.email ? '&to=' + encodeURIComponent(p.email) : '') +
+        '&su=' + encodeURIComponent('Your Quote â ' + getQuoteNo() + ' â Urban Niche Co.') +
+        '&body=' + encodeURIComponent(emailBodyText());
+      window.open(url, '_blank', 'noopener');
+      flashBtn('email-quote', 'â Draft opened in Gmail');
+    });
+
+    document.getElementById('reset').addEventListener('click', () => {
+      state.selected = {}; state.oneTime = {}; state.activeBundle = null; state.quoteNo = null;
+      ['q-business', 'q-contact', 'q-email'].forEach(id => { document.getElementById(id).value = ''; });
+      renderAll();
+    });
+
+    renderAll();
+  </script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="Kuehl Painting & Decorating is a locally owned painting contractor serving Sioux City, Iowa and the surrounding Siouxland area. Interior, exterior, cabinet, and wallpaper services.">
+<title>Kuehl Painting & Decorating | Sioux City, Iowa Painting Contractor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#2b2b33;
+    --charcoal-light:#3a3a44;
+    --blue:#5b7fbd;
+    --blue-dark:#4a6aa5;
+    --white:#f7f8fa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Open Sans', sans-serif;
+    font-weight:400;
+    color:var(--charcoal);
+    background:var(--white);
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    letter-spacing:0.5px;
+    color:var(--charcoal);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:var(--charcoal);
+  }
+  .hero-bg{
+    position:absolute;
+    inset:-10%;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(91,127,189,0.35), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(91,127,189,0.25), transparent 50%),
+      linear-gradient(135deg, #2b2b33 0%, #34343e 45%, #2b2b33 100%);
+    background-size:140% 140%, 140% 140%, 100% 100%;
+    animation:kenburns 22s ease-in-out infinite alternate;
+    z-index:0;
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 12px);
+  }
+  @keyframes kenburns{
+    0%{transform:scale(1) translate(0,0);}
+    100%{transform:scale(1.18) translate(-2%, -1.5%);}
+  }
+  .hero-content{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    max-width:840px;
+    padding:0 24px;
+    color:var(--white);
+  }
+  .hero-content .eyebrow{
+    display:inline-block;
+    font-family:'Oswald', sans-serif;
+    font-size:0.85rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:18px;
+  }
+  .hero-content h1{
+    font-size:clamp(2.2rem, 5.5vw, 4rem);
+    line-height:1.15;
+    color:var(--white);
+    margin-bottom:20px;
+  }
+  .hero-content h1 span{color:var(--blue);}
+  .hero-content p{
+    font-size:1.15rem;
+    color:#d7dae1;
+    max-width:600px;
+    margin:0 auto 34px auto;
+  }
+  .btn{
+    display:inline-block;
+    background:var(--blue);
+    color:#fff;
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:16px 38px;
+    border:2px solid var(--blue);
+    border-radius:3px;
+    cursor:pointer;
+    font-size:0.95rem;
+    transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+  .btn:hover{
+    background:transparent;
+    color:var(--blue);
+    transform:translateY(-2px);
+  }
+  .btn-outline{
+    background:transparent;
+    color:var(--white);
+    border:2px solid var(--white);
+  }
+  .btn-outline:hover{
+    background:var(--white);
+    color:var(--charcoal);
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{
+    padding:90px 24px;
+  }
+  .section-inner{
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .section-header{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 56px auto;
+  }
+  .section-header .tag{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-size:0.8rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:12px;
+  }
+  .section-header h2{
+    font-size:clamp(1.8rem, 3.5vw, 2.6rem);
+    margin-bottom:14px;
+  }
+  .section-header p{
+    color:#555;
+  }
+
+  /* reveal animation */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services{
+    background:#fff;
+  }
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+  }
+  .service-card{
+    background:var(--white);
+    border:1px solid #e4e6ea;
+    border-top:4px solid var(--blue);
+    border-radius:6px;
+    padding:34px 26px;
+    text-align:left;
+    transition:box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .service-card:hover{
+    box-shadow:0 12px 28px rgba(43,43,51,0.12);
+    transform:translateY(-4px);
+  }
+  .service-card .icon{
+    width:52px;
+    height:52px;
+    margin-bottom:18px;
+    color:var(--blue);
+  }
+  .service-card .icon svg{
+    width:100%;
+    height:100%;
+    stroke:var(--blue);
+    fill:none;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .service-card h3{
+    font-size:1.15rem;
+    margin-bottom:10px;
+  }
+  .service-card p{
+    color:#5a5d66;
+    font-size:0.95rem;
+  }
+
+  /* ---------- SERVICE AREA ---------- */
+  .area{
+    background:var(--charcoal);
+    color:var(--white);
+  }
+  .area .section-header h2{color:var(--white);}
+  .area .section-header p{color:#c6c9d1;}
+  .area-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .area-list span{
+    background:var(--charcoal-light);
+    border:1px solid rgba(91,127,189,0.5);
+    color:var(--white);
+    padding:10px 20px;
+    border-radius:30px;
+    font-family:'Oswald', sans-serif;
+    font-size:0.9rem;
+    letter-spacing:0.5px;
+  }
+
+  /* ---------- TRUST ---------- */
+  .trust{
+    background:#fff;
+  }
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:26px;
+    text-align:center;
+  }
+  .trust-item{
+    padding:30px 16px;
+    border:1px solid #e4e6ea;
+    border-radius:6px;
+  }
+  .trust-item .glyph{
+    width:44px;
+    height:44px;
+    margin:0 auto 16px auto;
+    color:var(--blue);
+  }
+  .trust-item .glyph svg{
+    width:100%;
+    height:100%;
+    stroke:var(--blue);
+    fill:none;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .trust-item h3{
+    font-size:1rem;
+    margin-bottom:6px;
+  }
+  .trust-item p{
+    font-size:0.88rem;
+    color:#5a5d66;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--charcoal);
+    color:var(--white);
+  }
+  .contact .section-header h2{color:var(--white);}
+  .contact .section-header p{color:#c6c9d1;}
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+  }
+  .contact-info{
+    background:var(--charcoal-light);
+    border:1px solid rgba(91,127,189,0.35);
+    border-radius:8px;
+    padding:36px 30px;
+  }
+  .contact-info h3{
+    color:var(--white);
+    font-size:1.3rem;
+    margin-bottom:8px;
+  }
+  .contact-info .phone-link{
+    display:inline-block;
+    margin-top:18px;
+    font-family:'Oswald', sans-serif;
+    font-size:1.6rem;
+    color:var(--blue);
+    letter-spacing:0.5px;
+  }
+  .contact-info .phone-link:hover{
+    text-decoration:underline;
+  }
+  .contact-info p.desc{
+    color:#c6c9d1;
+    margin-top:14px;
+    font-size:0.95rem;
+  }
+  form{
+    background:#fff;
+    border-radius:8px;
+    padding:34px 30px;
+    color:var(--charcoal);
+  }
+  .field{
+    margin-bottom:18px;
+  }
+  .field label{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-size:0.8rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    color:var(--charcoal);
+  }
+  .field input,
+  .field textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #d4d6db;
+    border-radius:4px;
+    font-family:'Open Sans', sans-serif;
+    font-size:0.95rem;
+    color:var(--charcoal);
+    background:var(--white);
+  }
+  .field textarea{
+    resize:vertical;
+    min-height:110px;
+  }
+  form .btn{
+    width:100%;
+    border:none;
+    margin-top:6px;
+  }
+  .form-thanks{
+    display:none;
+    background:#eef2fa;
+    border:1px solid var(--blue);
+    color:var(--charcoal);
+    padding:20px;
+    border-radius:6px;
+    text-align:center;
+    font-family:'Oswald', sans-serif;
+  }
+  .form-thanks.show{display:block;}
+  form.hide{display:none;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:#212127;
+    color:#c6c9d1;
+    text-align:center;
+    padding:34px 24px;
+    font-size:0.9rem;
+  }
+  footer .biz-name{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    color:var(--white);
+    font-size:1.1rem;
+    display:block;
+    margin-bottom:6px;
+  }
+  footer a{
+    color:var(--blue);
+  }
+
+  /* ---------- FLAG ---------- */
+  .preview-flag{
+    position:fixed;
+    bottom:12px;
+    right:12px;
+    background:rgba(43,43,51,0.88);
+    color:#e7e9ee;
+    font-size:0.72rem;
+    padding:7px 12px;
+    border-radius:4px;
+    z-index:999;
+    font-family:'Open Sans', sans-serif;
+    letter-spacing:0.2px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.25);
+    pointer-events:none;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .services-grid{grid-template-columns:repeat(2, 1fr);}
+    .trust-grid{grid-template-columns:repeat(2, 1fr);}
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+  @media (max-width: 540px){
+    .services-grid{grid-template-columns:1fr;}
+    .trust-grid{grid-template-columns:1fr;}
+    section{padding:64px 18px;}
+    .hero{min-height:88vh;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Sioux City, Iowa</span>
+    <h1>Kuehl Painting &amp; <span>Decorating</span></h1>
+    <p>Professional interior &amp; exterior painting for homes and businesses across the Siouxland area. Clean work, careful prep, and a finish that holds up.</p>
+    <a href="#contact" class="btn">Get In Touch</a>
+  </div>
+</header>
+
+<section class="services">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="tag">What We Do</span>
+      <h2>Painting &amp; Decorating Services</h2>
+      <p>From single rooms to full exteriors, Kuehl Painting &amp; Decorating handles the details that make a paint job last.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 48 48"><rect x="10" y="8" width="22" height="30" rx="1"/><path d="M32 14 L40 14 L40 40 L18 40 L18 38"/><line x1="10" y1="16" x2="32" y2="16"/><line x1="10" y1="24" x2="32" y2="24"/></svg>
+        </div>
+        <h3>Interior Painting</h3>
+        <p>Walls, ceilings, trim, and doors painted with clean lines and even coverage throughout every room.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 48 48"><path d="M8 40 L8 24 L24 10 L40 24 L40 40 Z"/><line x1="18" y1="40" x2="18" y2="26"/><line x1="30" y1="40" x2="30" y2="26"/><line x1="12" y1="18" x2="36" y2="18"/></svg>
+        </div>
+        <h3>Exterior Painting</h3>
+        <p>Siding, trim, and fascia protected and refreshed with coatings built for Iowa weather.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="14" rx="1"/><rect x="8" y="24" width="32" height="14" rx="1"/><circle cx="16" cy="17" r="1.6"/><circle cx="16" cy="31" r="1.6"/></svg>
+        </div>
+        <h3>Cabinet Refinishing</h3>
+        <p>Kitchen and bath cabinets sprayed and refinished for a smooth, factory-style result.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="1"/><path d="M8 8 Q 18 16 8 24 Q 18 32 8 40"/><path d="M22 8 Q 32 16 22 24 Q 32 32 22 40"/></svg>
+        </div>
+        <h3>Wallpaper &amp; Wall Covering</h3>
+        <p>Removal, prep, and installation of wallpaper and decorative wall coverings, done cleanly.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="1"/><path d="M14 30 L20 22 L26 27 L34 16"/><circle cx="34" cy="16" r="1.6"/></svg>
+        </div>
+        <h3>Drywall Repair</h3>
+        <p>Holes, cracks, and water damage patched and smoothed before paint ever goes on.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M24 8 A16 16 0 0 1 40 24 A16 16 0 0 1 24 40 Z"/><line x1="24" y1="8" x2="24" y2="40"/></svg>
+        </div>
+        <h3>Color Consultation</h3>
+        <p>Guidance on color selection and finishes so the final result matches your vision.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="area">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="tag">Where We Work</span>
+      <h2>Proudly Serving the Siouxland Area</h2>
+      <p>Based in Sioux City, Iowa and serving the surrounding communities.</p>
+    </div>
+    <div class="area-list reveal">
+      <span>Sioux City</span>
+      <span>South Sioux City</span>
+      <span>Sergeant Bluff</span>
+      <span>Le Mars</span>
+      <span>Hinton</span>
+      <span>Moville</span>
+      <span>Sloan</span>
+      <span>Bronson</span>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="tag">Why Kuehl</span>
+      <h2>Built On Straightforward Service</h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <div class="glyph"><svg viewBox="0 0 48 48"><path d="M24 6 L42 18 L42 42 L6 42 L6 18 Z"/><path d="M18 42 L18 28 L30 28 L30 42"/></svg></div>
+        <h3>Locally Owned</h3>
+        <p>A Sioux City-based painting business serving the community directly.</p>
+      </div>
+      <div class="trust-item reveal">
+        <div class="glyph"><svg viewBox="0 0 48 48"><rect x="6" y="14" width="36" height="26" rx="1"/><path d="M6 20 L42 20"/><rect x="14" y="6" width="6" height="10"/><rect x="28" y="6" width="6" height="10"/></svg></div>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Homes and business properties, interior and exterior work alike.</p>
+      </div>
+      <div class="trust-item reveal">
+        <div class="glyph"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 14 L24 24 L32 28"/></svg></div>
+        <h3>On-Schedule Service</h3>
+        <p>Jobs planned and completed on the timeline discussed up front.</p>
+      </div>
+      <div class="trust-item reveal">
+        <div class="glyph"><svg viewBox="0 0 48 48"><path d="M8 24 L18 34 L40 12"/></svg></div>
+        <h3>Straight Pricing</h3>
+        <p>Clear estimates with no surprise add-ons once work begins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="tag">Get In Touch</span>
+      <h2>Request Your Estimate</h2>
+      <p>Reach out about an upcoming interior, exterior, or decorating project.</p>
+    </div>
+    <div class="contact-wrap">
+
+      <div class="contact-info reveal">
+        <h3>Kuehl Painting &amp; Decorating</h3>
+        <p class="desc">Serving Sioux City, Iowa and the surrounding Siouxland communities. Call directly to talk through your project.</p>
+        <a class="phone-link" href="tel:+17122539553">(712) 253-9553</a>
+      </div>
+
+      <div class="reveal">
+        <form id="contactForm">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(712) 555-0100">
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about your project"></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+        <div class="form-thanks" id="formThanks">
+          Thanks — your message has been noted.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="biz-name">Kuehl Painting &amp; Decorating</span>
+  <a href="tel:+17122539553">(712) 253-9553</a>
+</footer>
+
+<div class="preview-flag">Speculative preview build — Urban Niche Co.</div>
+
+<script>
+  // Scroll reveal via IntersectionObserver
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(item){ observer.observe(item); });
+  })();
+
+  // Decorative contact form — local only, no network activity
+  (function(){
+    var form = document.getElementById('contactForm');
+    var thanks = document.getElementById('formThanks');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      form.classList.add('hide');
+      thanks.classList.add('show');
+    });
+  })();
+</script>
+
+</body>
+</html>

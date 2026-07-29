@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Conner Cuts Lawn Care &amp; Exterior Maintenance | Racine, WI</title>
+<meta name="description" content="Locally owned lawn care and exterior maintenance in Racine, WI. Weekly mowing, seasonal cleanups, aeration &amp; overseeding, mulch &amp; landscape beds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grass-dark:#14301c;
+    --grass:#2d7a3f;
+    --grass-mid:#409c55;
+    --gold:#dba13c;
+    --gold-light:#f0c169;
+    --cream:#f8f6ef;
+    --white:#ffffff;
+    --ink:#182018;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Open Sans',sans-serif;color:var(--ink);background:var(--cream);line-height:1.55;overflow-x:hidden;}
+  h1,h2,h3,.brand{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.03em;}
+  a{text-decoration:none;color:inherit;}
+  .container{max-width:1140px;margin:0 auto;padding:0 24px;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,48,28,0.94);backdrop-filter:blur(6px);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1140px;margin:0 auto;}
+  .brand{color:var(--white);font-size:21px;font-weight:700;}
+  .brand span{color:var(--gold-light);}
+  .nav-links{display:flex;gap:26px;list-style:none;}
+  .nav-links a{color:var(--cream);font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+  .nav-cta{background:var(--gold);color:var(--grass-dark)!important;padding:10px 20px;border-radius:3px;font-weight:700;}
+  @media(max-width:780px){.nav-links{display:none;}}
+
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:
+      radial-gradient(circle at 78% 18%, rgba(219,161,60,0.18), transparent 45%),
+      linear-gradient(155deg, var(--grass-dark) 0%, var(--grass) 55%, var(--grass-mid) 100%);
+      animation:kenburns 24s ease-in-out infinite alternate;}
+  .hero-bg::before{content:"";position:absolute;inset:0;opacity:.09;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.5) 0 2px, transparent 2px 36px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.3) 0 2px, transparent 2px 56px);}
+  @keyframes kenburns{0%{transform:scale(1) translate(0,0);}100%{transform:scale(1.13) translate(-1.5%,-1%);}}
+  .hero-content{position:relative;z-index:2;color:var(--white);padding-top:90px;}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--grass-dark);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:9px 16px;border-radius:3px;margin-bottom:22px;}
+  .hero h1{font-size:clamp(34px,6vw,60px);line-height:1.08;max-width:800px;}
+  .hero h1 em{font-style:normal;color:var(--gold-light);}
+  .hero p{margin-top:20px;font-size:19px;max-width:560px;color:#e9f1e9;}
+  .hero-actions{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:16px 30px;border-radius:3px;font-weight:700;font-size:15px;letter-spacing:.03em;text-transform:uppercase;transition:transform .2s ease;cursor:pointer;border:none;font-family:'Open Sans',sans-serif;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--gold);color:var(--grass-dark);}
+  .btn-secondary{border:2px solid rgba(255,255,255,.6);color:var(--white);background:transparent;}
+  .hero-stats{position:relative;z-index:2;display:flex;gap:0;margin-top:66px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap;}
+  .hero-stat{flex:1;min-width:150px;padding:22px 0;border-right:1px solid rgba(255,255,255,.18);}
+  .hero-stat:last-child{border-right:none;}
+  .hero-stat b{display:block;font-family:'Oswald',sans-serif;font-size:21px;color:var(--gold-light);}
+  .hero-stat span{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#d6e4d6;}
+
+  section{padding:96px 0;}
+  .eyebrow{color:var(--grass);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin-bottom:12px;display:block;}
+  h2{font-size:clamp(28px,4vw,42px);color:var(--grass-dark);margin-bottom:20px;}
+
+  .about{background:var(--white);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .about p{margin-bottom:16px;color:#3a4a3a;font-size:16.5px;}
+  .about-photo{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,var(--grass-dark),var(--grass-mid));display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;}
+  .about-photo .ph-inner{padding:30px;}
+  .about-photo svg{width:60px;height:60px;margin-bottom:14px;opacity:.85;}
+  .about-photo p{color:#dcefdc;font-size:13.5px;margin:0;max-width:260px;}
+  @media(max-width:800px){.about-grid{grid-template-columns:1fr;}}
+
+  .services{background:var(--cream);}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
+  .svc-card{background:var(--white);border-radius:6px;padding:30px 26px;border-top:4px solid var(--grass);transition:transform .25s ease,box-shadow .25s ease;}
+  .svc-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(20,48,28,.12);border-top-color:var(--gold);}
+  .svc-icon{width:46px;height:46px;margin-bottom:16px;}
+  .svc-card h3{font-family:'Oswald',sans-serif;font-size:18px;text-transform:none;letter-spacing:0;margin-bottom:10px;color:var(--grass-dark);}
+  .svc-card p{font-size:14.5px;color:#5a655c;}
+  @media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.svc-grid{grid-template-columns:1fr;}}
+
+  .season{background:linear-gradient(120deg,var(--gold) 0%,#bd812c 100%);color:var(--grass-dark);}
+  .season .container{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+  .season h2{color:var(--grass-dark);margin-bottom:6px;font-size:30px;}
+  .season p{font-size:16px;max-width:520px;color:#3a2c0f;}
+  .season .btn-primary{background:var(--grass-dark);color:#fff;}
+
+  .area{background:var(--white);}
+  .area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px;}
+  .area-tile{background:var(--cream);border-radius:6px;padding:18px;text-align:center;font-weight:700;color:var(--grass-dark);font-size:14.5px;border:1px solid #e6e0cf;}
+  @media(max-width:760px){.area-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .trust{background:var(--grass-dark);color:var(--white);}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .trust-card{text-align:center;padding:10px;}
+  .trust-card svg{width:38px;height:38px;margin-bottom:14px;color:var(--gold-light);}
+  .trust-card h3{font-family:'Oswald',sans-serif;font-size:15px;text-transform:none;letter-spacing:0;margin-bottom:6px;}
+  .trust-card p{font-size:13px;color:#cfe0cf;}
+  @media(max-width:760px){.trust-grid{grid-template-columns:1fr 1fr;row-gap:34px;}}
+
+  .cta{background:var(--cream);}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  .cta-info h2{margin-bottom:14px;}
+  .cta-info p{color:#3a4a3a;font-size:16px;margin-bottom:22px;max-width:440px;}
+  .contact-line{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--grass-dark);margin-bottom:10px;font-size:16px;}
+  .contact-line a{color:var(--grass-dark);}
+  .contact-line a:hover{color:var(--grass);}
+  .contact-card{background:var(--white);border-radius:8px;padding:32px;box-shadow:0 10px 30px rgba(20,48,28,.08);}
+  .contact-card h3{font-family:'Oswald',sans-serif;font-size:18px;text-transform:none;margin-bottom:18px;color:var(--grass-dark);}
+  .contact-card p{color:#5a655c;font-size:14.5px;margin-bottom:20px;}
+  @media(max-width:860px){.cta-grid{grid-template-columns:1fr;}}
+
+  footer{background:var(--grass-dark);color:#a9c0a9;padding:36px 0;text-align:center;font-size:13.5px;}
+  footer b{color:var(--white);}
+</style>
+</head>
+<body>
+
+<div style="position:fixed;bottom:14px;right:14px;z-index:200;background:rgba(23,51,24,.92);color:#fff;font-size:11px;padding:8px 12px;border-radius:4px;">Speculative preview build &mdash; Urban Niche Co.</div>
+
+<header>
+  <nav>
+    <div class="brand">Conner <span>Cuts</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#area">Service Area</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:12628220496" class="nav-cta">Call Now</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <span class="badge">Now Booking &mdash; Racine, WI</span>
+    <h1>Racine's <em>Trusted</em> Lawn Care &amp; Exterior Maintenance</h1>
+    <p>Weekly mowing, seasonal cleanups, and exterior property upkeep done right. Locally owned, dependable crew, no runaround.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get A Free Quote</a>
+      <a href="#services" class="btn btn-secondary">See Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>Locally Owned</b><span>Racine, WI</span></div>
+      <div class="hero-stat"><b>Res. &amp; Comm.</b><span>Properties Served</span></div>
+      <div class="hero-stat"><b>Full-Season</b><span>Mowing Plans</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <span class="eyebrow">Who We Are</span>
+      <h2>Local, Reliable, Straightforward</h2>
+      <p>Conner Cuts Lawn Care &amp; Exterior Maintenance is a locally owned crew serving homeowners and businesses in and around Racine, WI. No call centers, no runaround &mdash; just a crew that shows up on schedule and does the work right.</p>
+      <p>From weekly mowing to full seasonal cleanups and exterior property maintenance, we treat every property like it's the one next to ours.</p>
+    </div>
+    <div class="about-photo reveal">
+      <div class="ph-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f0c169" stroke-width="1.4"><rect x="2" y="9" width="14" height="7" rx="1"/><path d="M16 12h3.5l2.5 3v1h-6z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+        <p>Crew &amp; property photo goes here &mdash; swapping in the real branded shot once we've got it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <span class="eyebrow">What We Do</span>
+    <h2>Full-Service Lawn &amp; Exterior Maintenance</h2>
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="#2d7a3f" stroke-width="1.6"><path d="M4 20h16M6 20l2-9M18 20l-2-9M8 11a4 4 0 018 0"/></svg>
+        <h3>Weekly Mowing</h3>
+        <p>Consistent, on-schedule mowing all season long &mdash; residential and commercial.</p>
+      </div>
+      <div class="svc-card reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="#2d7a3f" stroke-width="1.6"><path d="M12 21c4-3 7-6.5 7-11a7 7 0 10-14 0c0 4.5 3 8 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <h3>Spring &amp; Fall Cleanup</h3>
+        <p>Beds cleared, leaves gone, property reset for the season ahead.</p>
+      </div>
+      <div class="svc-card reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="#2d7a3f" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+        <h3>Aeration &amp; Overseeding</h3>
+        <p>Healthier grass, thicker lawns &mdash; done at the right time of year.</p>
+      </div>
+      <div class="svc-card reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="#2d7a3f" stroke-width="1.6"><rect x="4" y="14" width="16" height="6" rx="1"/><path d="M8 14V8a4 4 0 018 0v6"/></svg>
+        <h3>Mulch &amp; Landscape Beds</h3>
+        <p>Fresh mulch and clean bed lines that hold up all season.</p>
+      </div>
+      <div class="svc-card reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="#2d7a3f" stroke-width="1.6"><path d="M4 4h16v6H4zM4 14h7v6H4zM13 14h7v6h-7z"/></svg>
+        <h3>Landscape Design</h3>
+        <p>Beds, borders, and clean layouts planned and installed right.</p>
+      </div>
+      <div class="svc-card reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="#dba13c" stroke-width="1.6"><path d="M12 3v4M12 17v4M4.2 6.2l2.8 2.8M17 15l2.8 2.8M3 12h4M17 12h4M4.2 17.8L7 15M17 9l2.8-2.8"/></svg>
+        <h3>Seasonal Maintenance Plans</h3>
+        <p>Set it once &mdash; we handle the schedule and exterior upkeep all season long.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="season">
+  <div class="container">
+    <div>
+      <h2>Lock In Your Season</h2>
+      <p>Weekly mowing and fall cleanup spots fill up fast. Get on the schedule now with Racine's dependable lawn crew.</p>
+    </div>
+    <a href="#contact" class="btn btn-primary">Get On The Schedule</a>
+  </div>
+</section>
+
+<section class="area" id="area">
+  <div class="container">
+    <span class="eyebrow">Where We Work</span>
+    <h2>Serving Racine &amp; The Surrounding Area</h2>
+    <div class="area-grid">
+      <div class="area-tile reveal">Racine, WI</div>
+      <div class="area-tile reveal">Mount Pleasant</div>
+      <div class="area-tile reveal">Sturtevant</div>
+      <div class="area-tile reveal">Caledonia</div>
+      <div class="area-tile reveal">Franksville</div>
+      <div class="area-tile reveal">Union Grove</div>
+      <div class="area-tile reveal">Wind Point</div>
+      <div class="area-tile reveal">Surrounding Racine County</div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+        <h3>Locally Owned</h3>
+        <p>Based right here in Racine</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18v13H3zM3 7l9-4 9 4"/></svg>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Homes and businesses, same standard</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>On-Schedule Service</h3>
+        <p>We show up when we say we will</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13l4 4L19 7"/></svg>
+        <h3>Straight Pricing</h3>
+        <p>No surprise charges, no games</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container cta-grid">
+    <div class="cta-info reveal">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Get A Free Quote</h2>
+      <p>Give us a call and tell us about your property and what you need &mdash; we'll get back to you with a straight number, no pressure.</p>
+      <div class="contact-line">&#9742; <a href="tel:12628220496">(262) 822-0496</a></div>
+      <div class="contact-line" style="font-weight:400;color:#5a655c;">Racine, WI &amp; Surrounding Area</div>
+    </div>
+    <div class="contact-card reveal">
+      <h3>Conner Cuts Lawn Care &amp; Exterior Maintenance</h3>
+      <p>Ready to get on the schedule? Call now and speak directly with the crew &mdash; no call centers, no automated runaround.</p>
+      <a href="tel:12628220496" class="btn btn-primary" style="width:100%;text-align:center;">Call (262) 822-0496</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><b>Conner Cuts Lawn Care &amp; Exterior Maintenance</b> &mdash; Racine, WI</p>
+    <p>Locally Owned &amp; Operated &nbsp;&bull;&nbsp; Residential &amp; Commercial</p>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

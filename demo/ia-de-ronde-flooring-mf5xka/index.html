@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="De Ronde Flooring, Inc. is a locally owned flooring contractor serving Pella, Iowa and the surrounding area with hardwood, carpet, tile, vinyl, and floor refinishing for homes and businesses.">
+<title>De Ronde Flooring, Inc. | Pella, Iowa Flooring Contractor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #2c211a;
+    --accent: #c9a15a;
+    --accent-soft: #e4c98a;
+    --cream: #f6f1e8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: var(--dark);
+    background: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--dark);
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  img, svg { display: block; }
+
+  .container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: -10%;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(201,161,90,0.28), transparent 55%),
+      repeating-linear-gradient(115deg, #3a2c20 0px, #3a2c20 42px, #34281e 42px, #34281e 84px),
+      linear-gradient(160deg, #241a13 0%, #2c211a 45%, #3a2c1f 100%);
+    background-size: 160% 160%, 300px 300px, 100% 100%;
+    animation: kenburns 26s ease-in-out infinite alternate;
+    opacity: 0.95;
+  }
+
+  @keyframes kenburns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.18) translate(-2%, -2%); }
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(44,33,26,0.35) 0%, rgba(44,33,26,0.75) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--cream);
+    padding: 0 20px;
+    max-width: 800px;
+  }
+
+  .hero-eyebrow {
+    color: var(--accent);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: #fff;
+    line-height: 1.12;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .hero h1 span { color: var(--accent-soft); }
+
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #e9e0d3;
+    max-width: 560px;
+    margin: 0 auto 34px;
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    padding: 16px 38px;
+    background: var(--accent);
+    color: var(--dark);
+    border: 2px solid var(--accent);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn-outline:hover {
+    background: var(--accent);
+    color: var(--dark);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section {
+    padding: 90px 0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+
+  .section-tag {
+    color: var(--accent);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: 16px;
+  }
+
+  .section-head p {
+    color: #5a4d40;
+    font-size: 1.05rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services {
+    background: #fff;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .service-card {
+    background: var(--cream);
+    border: 1px solid #e6dcc8;
+    border-radius: 6px;
+    padding: 36px 28px;
+    text-align: left;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 34px rgba(44,33,26,0.14);
+    border-color: var(--accent);
+  }
+
+  .service-icon {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  .service-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+
+  .service-card p {
+    color: #5a4d40;
+    font-size: 0.96rem;
+  }
+
+  /* ---------- SERVICE AREA ---------- */
+  .area {
+    background: var(--dark);
+    color: var(--cream);
+  }
+
+  .area .section-tag { color: var(--accent-soft); }
+  .area .section-head h2 { color: #fff; }
+  .area .section-head p { color: #cabfae; }
+
+  .area-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .area-chip {
+    border: 1px solid var(--accent);
+    color: var(--accent-soft);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: rgba(201,161,90,0.06);
+  }
+
+  .area-note {
+    text-align: center;
+    margin-top: 30px;
+    color: #cabfae;
+    font-size: 0.92rem;
+  }
+
+  /* ---------- TRUST ---------- */
+  .trust {
+    background: #fff;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+
+  .trust-card {
+    text-align: center;
+    padding: 30px 18px;
+    border: 1px solid #e6dcc8;
+    border-radius: 6px;
+    background: var(--cream);
+  }
+
+  .trust-card .mark {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .trust-card .mark svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .trust-card h4 {
+    font-size: 1.02rem;
+    margin-bottom: 8px;
+  }
+
+  .trust-card p {
+    font-size: 0.88rem;
+    color: #5a4d40;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact {
+    background: var(--dark);
+    color: var(--cream);
+  }
+
+  .contact .section-tag { color: var(--accent-soft); }
+  .contact .section-head h2 { color: #fff; }
+  .contact .section-head p { color: #cabfae; }
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .contact-info {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,161,90,0.35);
+    border-radius: 8px;
+    padding: 34px;
+  }
+
+  .contact-info h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+
+  .contact-info p {
+    color: #cabfae;
+    margin-bottom: 22px;
+    font-size: 0.96rem;
+  }
+
+  .call-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: rgba(201,161,90,0.08);
+  }
+
+  .call-block svg {
+    width: 30px;
+    height: 30px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.8;
+    flex-shrink: 0;
+  }
+
+  .call-block a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    color: var(--accent-soft);
+    letter-spacing: 0.5px;
+  }
+
+  .call-block .call-label {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.78rem;
+    color: #cabfae;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .biz-name-note {
+    margin-top: 22px;
+    font-size: 0.88rem;
+    color: #a99a83;
+  }
+
+  form {
+    background: #fff;
+    color: var(--dark);
+    border-radius: 8px;
+    padding: 36px;
+  }
+
+  .form-row {
+    margin-bottom: 20px;
+  }
+
+  .form-row label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .form-row input,
+  .form-row textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d8cbae;
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.98rem;
+    background: var(--cream);
+    color: var(--dark);
+  }
+
+  .form-row textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .form-row input:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  form .btn {
+    width: 100%;
+    border: none;
+  }
+
+  .form-thanks {
+    display: none;
+    text-align: center;
+    padding: 30px 10px;
+  }
+
+  .form-thanks.show {
+    display: block;
+  }
+
+  .form-thanks h3 {
+    margin-bottom: 10px;
+  }
+
+  .form-fields.hide {
+    display: none;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #201811;
+    color: #cabfae;
+    text-align: center;
+    padding: 34px 20px;
+    font-size: 0.9rem;
+  }
+
+  footer .foot-name {
+    font-family: 'Oswald', sans-serif;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  footer a {
+    color: var(--accent-soft);
+  }
+
+  /* ---------- FLAG ---------- */
+  .preview-flag {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 999;
+    background: rgba(44,33,26,0.92);
+    color: #d8c69a;
+    font-size: 0.72rem;
+    letter-spacing: 0.3px;
+    padding: 7px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(201,161,90,0.5);
+    font-family: 'Open Sans', sans-serif;
+    pointer-events: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .hero { min-height: 82vh; }
+    form { padding: 26px; }
+    .contact-info { padding: 26px; }
+    .preview-flag { font-size: 0.64rem; padding: 6px 9px; right: 8px; bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Pella, Iowa Flooring Contractor</div>
+    <h1>De Ronde Flooring, Inc.<br><span>Flooring Done Right, Room by Room</span></h1>
+    <p>Hardwood, carpet, tile, and vinyl installation and refinishing for homes and businesses across the Pella area.</p>
+    <a href="#contact" class="btn">Request a Consultation</a>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">What We Do</div>
+      <h2>Flooring Services</h2>
+      <p>From new installation to refinishing existing floors, De Ronde Flooring handles residential and commercial projects throughout Pella and the surrounding communities.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48">
+            <rect x="6" y="8" width="14" height="14"></rect>
+            <rect x="20" y="8" width="14" height="14"></rect>
+            <rect x="6" y="22" width="14" height="14"></rect>
+            <rect x="20" y="22" width="14" height="14"></rect>
+            <line x1="34" y1="8" x2="42" y2="8"></line>
+            <line x1="34" y1="22" x2="42" y2="22"></line>
+            <line x1="34" y1="36" x2="42" y2="36"></line>
+          </svg>
+        </div>
+        <h3>Hardwood Flooring</h3>
+        <p>Solid and engineered hardwood installation built to handle everyday life in your home.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M6 34 Q12 20 18 34 Q24 20 30 34 Q36 20 42 34"></path>
+            <line x1="4" y1="40" x2="44" y2="40"></line>
+          </svg>
+        </div>
+        <h3>Carpet Installation</h3>
+        <p>Wall-to-wall carpet for bedrooms, living rooms, offices, and stairways, fit and installed with care.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48">
+            <rect x="7" y="7" width="12" height="12"></rect>
+            <rect x="29" y="7" width="12" height="12"></rect>
+            <rect x="7" y="29" width="12" height="12"></rect>
+            <rect x="29" y="29" width="12" height="12"></rect>
+          </svg>
+        </div>
+        <h3>Tile &amp; Stone</h3>
+        <p>Ceramic, porcelain, and natural stone tile for kitchens, bathrooms, and entryways.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M6 12 L42 12 L36 36 L12 36 Z"></path>
+            <line x1="6" y1="20" x2="42" y2="20"></line>
+            <line x1="6" y1="28" x2="42" y2="28"></line>
+          </svg>
+        </div>
+        <h3>Vinyl &amp; Laminate</h3>
+        <p>Durable, water-resistant vinyl and laminate flooring for busy households and high-traffic areas.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M8 40 L20 12 L28 12 L40 40"></path>
+            <line x1="14" y1="40" x2="34" y2="40"></line>
+            <line x1="16" y1="30" x2="32" y2="30"></line>
+          </svg>
+        </div>
+        <h3>Floor Refinishing</h3>
+        <p>Sanding, staining, and refinishing to bring worn hardwood floors back to life.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48">
+            <rect x="6" y="16" width="36" height="24"></rect>
+            <line x1="6" y1="16" x2="24" y2="6"></line>
+            <line x1="42" y1="16" x2="24" y2="6"></line>
+            <line x1="18" y1="40" x2="18" y2="26"></line>
+            <line x1="30" y1="40" x2="30" y2="26"></line>
+          </svg>
+        </div>
+        <h3>Commercial Flooring</h3>
+        <p>Flooring installation and upgrades for offices, retail spaces, and commercial buildings.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="area" id="area">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Where We Work</div>
+      <h2>Proudly Serving Pella &amp; Nearby Communities</h2>
+      <p>Based in Pella, Iowa, De Ronde Flooring also serves surrounding towns in the region.</p>
+    </div>
+    <div class="area-list reveal">
+      <span class="area-chip">Pella</span>
+      <span class="area-chip">Oskaloosa</span>
+      <span class="area-chip">Knoxville</span>
+      <span class="area-chip">Newton</span>
+      <span class="area-chip">Prairie City</span>
+      <span class="area-chip">Otley</span>
+      <span class="area-chip">Bussey</span>
+      <span class="area-chip">Monroe</span>
+    </div>
+    <p class="area-note reveal">Don't see your town listed? Reach out and we'll let you know if we cover your area.</p>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" id="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Why De Ronde Flooring</div>
+      <h2>Built On Trust &amp; Craftsmanship</h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 3 L20 7 L20 13 C20 18 16.5 21 12 22 C7.5 21 4 18 4 13 L4 7 Z"></path></svg></div>
+        <h4>Locally Owned</h4>
+        <p>A locally owned flooring business rooted in the Pella community.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="1"></rect><line x1="4" y1="10" x2="20" y2="10"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="16" y1="3" x2="16" y2="7"></line></svg></div>
+        <h4>Residential &amp; Commercial</h4>
+        <p>Flooring solutions for homes and businesses alike.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 16 14"></polyline></svg></div>
+        <h4>On-Schedule Service</h4>
+        <p>Projects planned and completed on the timeline you're told upfront.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="mark"><svg viewBox="0 0 24 24"><path d="M4 12 L10 18 L20 6"></path></svg></div>
+        <h4>Straight Pricing</h4>
+        <p>Clear, honest quotes with no surprises along the way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Get In Touch</div>
+      <h2>Start Your Flooring Project</h2>
+      <p>Tell us a bit about your space and we'll follow up to talk through the details.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <h3>De Ronde Flooring, Inc.</h3>
+        <p>Serving Pella, Iowa and the surrounding area for all things flooring — installation, refinishing, and everything in between.</p>
+        <div class="call-block">
+          <svg viewBox="0 0 24 24"><path d="M6 2 L9 2 L11 7 L8.5 9 C9.5 12 12 14.5 15 15.5 L17 13 L22 15 L22 18 C22 20 20 21.5 18 21 C10 19 4 13 2 5 C1.5 3 3.5 2 6 2 Z"></path></svg>
+          <div>
+            <span class="call-label">Call Us</span>
+            <a href="tel:16416608060">(641) 660-8060</a>
+          </div>
+        </div>
+        <p class="biz-name-note">De Ronde Flooring, Inc. &mdash; Pella, Iowa</p>
+      </div>
+
+      <div class="reveal">
+        <form id="contactForm">
+          <div class="form-fields" id="formFields">
+            <div class="form-row">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name">
+            </div>
+            <div class="form-row">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(641) 555-0123">
+            </div>
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your flooring project..."></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </div>
+          <div class="form-thanks" id="formThanks">
+            <h3>Thanks!</h3>
+            <p>Your message has been noted. This preview form isn't connected to anything yet.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-name">De Ronde Flooring</div>
+  <div><a href="tel:16416608060">(641) 660-8060</a></div>
+</footer>
+
+<!-- FLAG -->
+<div class="preview-flag">Speculative preview build &mdash; Urban Niche Co.</div>
+
+<script>
+  // Scroll reveal via IntersectionObserver
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    items.forEach(function (el) { observer.observe(el); });
+  })();
+
+  // Decorative contact form — local only, no network activity
+  (function () {
+    var form = document.getElementById('contactForm');
+    var fields = document.getElementById('formFields');
+    var thanks = document.getElementById('formThanks');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      fields.classList.add('hide');
+      thanks.classList.add('show');
+    });
+  })();
+</script>
+
+</body>
+</html>

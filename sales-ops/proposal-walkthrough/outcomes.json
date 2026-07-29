@@ -1,0 +1,7 @@
+{ "_version": "1.0", "outcomes": [
+  { "code": "SIGNED",          "label": "SIGNED",      "hotkey": "s", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Closed Won",            "description": "Signed contract on the call" },
+  { "code": "VERBAL_YES",      "label": "VERBAL YES",  "hotkey": "v", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Closed Won",            "description": "Verbal yes — paperwork incoming" },
+  { "code": "NEEDS_REVISION",  "label": "REVISION",    "hotkey": "r", "color": "#facc15", "audio": "click",     "hubspot_stage": "Pricing Sent",          "description": "Wants adjustments to proposal" },
+  { "code": "DELAYED",         "label": "DELAYED",     "hotkey": "d", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Decision delayed — specific reason captured" },
+  { "code": "LOST",            "label": "LOST",        "hotkey": "x", "color": "#ef4444", "audio": "error",     "hubspot_stage": "Closed Lost / Not Now", "description": "Proposal lost" }
+] }

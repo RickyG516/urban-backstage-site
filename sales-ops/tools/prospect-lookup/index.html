@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Prospect Lookup — Sales Ops</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .search-bar{display:flex;gap:0.75rem;margin-bottom:1.5rem;}
+    .search-bar input{flex:1;background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-white);font-family:var(--font-body);font-size:1rem;padding:0.75rem 1rem;outline:none;transition:border-color 0.15s;}
+    .search-bar input:focus{border-color:var(--color-accent);}
+    .result-card{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:0.75rem;}
+    .result-card__name{font-size:1.1rem;font-weight:700;color:var(--color-white);margin-bottom:0.2rem;}
+    .result-card__biz{font-size:0.95rem;color:var(--color-accent);margin-bottom:0.75rem;}
+    .result-card__grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 1.5rem;margin-bottom:0.75rem;}
+    @media(max-width:500px){.result-card__grid{grid-template-columns:1fr;}}
+    .result-card__field{font-size:0.82rem;}
+    .result-card__field span{color:var(--color-white-dim);}
+    .result-card__field strong{color:var(--color-white);}
+    .outcome-badge{display:inline-block;font-size:0.7rem;font-weight:700;text-transform:uppercase;padding:0.2rem 0.5rem;border-radius:var(--radius-pill);margin-right:0.35rem;}
+    .badge-hot{background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid rgba(34,197,94,0.3);}
+    .badge-warm{background:rgba(232,101,26,0.15);color:var(--color-accent);border:1px solid rgba(232,101,26,0.3);}
+    .badge-cold{background:rgba(100,100,100,0.1);color:#666;border:1px solid #333;}
+    .badge-none{background:rgba(100,100,100,0.1);color:#555;border:1px solid #2a2a2a;}
+    .result-card__actions{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .empty-state{text-align:center;padding:3rem 1rem;color:var(--color-white-dim);font-size:0.88rem;}
+    .loading{text-align:center;padding:2rem;color:var(--color-white-dim);font-size:0.88rem;}
+  </style>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+<main class="cockpit">
+  <section class="dash">
+    <div class="dash__header">
+      <div>
+        <h1 class="dash__title">Prospect Lookup</h1>
+        <p class="dash__sub">Search HubSpot contacts by name or business. See their card without leaving the cockpit.</p>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search by name or business name..." autocomplete="off">
+      <button class="action-btn action-btn--primary" id="search-btn" style="padding:0.75rem 1.5rem;">Search</button>
+    </div>
+
+    <div id="results"></div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const PORTAL = '245833525';
+  const WORKER = 'https://unc-sales-os-sync.ricky-a17.workers.dev';
+  const WORKER_KEY = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})(); // matches WORKSPACE_KEY
+
+  const input  = document.getElementById('search-input');
+  const btn    = document.getElementById('search-btn');
+  const results= document.getElementById('results');
+
+  function fmt(s){ return s || '—'; }
+  function outcomeClass(code){
+    if(!code) return 'badge-none';
+    if(code==='HOT') return 'badge-hot';
+    if(code==='WARM') return 'badge-warm';
+    return 'badge-cold';
+  }
+
+  async function search(){
+    const q = input.value.trim();
+    if(!q){ results.innerHTML='<div class="empty-state">Type a name or business name to search.</div>'; return; }
+
+    results.innerHTML='<div class="loading">Searching HubSpot...</div>';
+    btn.disabled=true; btn.textContent='Searching...';
+
+    try {
+      // Use worker to proxy HubSpot search
+      const r = await fetch(WORKER + '/search?q=' + encodeURIComponent(q) + '&limit=8', { cache:'no-cache', headers:{ 'x-unc-key': WORKER_KEY } });
+      if(!r.ok) throw new Error('Search failed: ' + r.status);
+      const data = await r.json();
+
+      if(!data.ok || !data.contacts || !data.contacts.length){
+        results.innerHTML = '<div class="empty-state">' +
+          'No exact match for &quot;' + q + '&quot;.<br>' +
+          '<span style="font-size:0.8rem;margin-top:0.5rem;display:block;opacity:0.7;">Tips: try first name only &middot; partial business name &middot; phone number &middot; city &middot; check spelling</span>' +
+          '</div>';
+        return;
+      }
+
+      results.innerHTML = data.contacts.map(c => {
+        const hubURL = 'https://app-na2.hubspot.com/contacts/'+PORTAL+'/contact/'+c.contact_id;
+        const outcode = c.last_call_outcome || '';
+        return '<div class="result-card">'+
+          '<div class="result-card__name">'+fmt(c.first_name)+' '+fmt(c.last_name)+'</div>'+
+          '<div class="result-card__biz">'+fmt(c.business_name)+'</div>'+
+          '<div class="result-card__grid">'+
+            '<div class="result-card__field"><span>Phone: </span><strong>'+(c.phone?'<a href="tel:'+c.phone+'" style="color:var(--color-accent);">'+c.phone+'</a>':'—')+'</strong></div>'+
+            '<div class="result-card__field"><span>Email: </span><strong>'+fmt(c.email)+'</strong></div>'+
+            '<div class="result-card__field"><span>Trade: </span><strong>'+fmt(c.trade_type)+'</strong></div>'+
+            '<div class="result-card__field"><span>City: </span><strong>'+fmt(c.city)+(c.state?', '+c.state:'')+'</strong></div>'+
+            '<div class="result-card__field"><span>Last outcome: </span><strong>'+
+              (outcode?'<span class="outcome-badge '+outcomeClass(outcode)+'">'+outcode+'</span>':'—')+
+            '</strong></div>'+
+            '<div class="result-card__field"><span>Last call: </span><strong>'+fmt(c.last_call_date?new Date(c.last_call_date).toLocaleDateString():'')+'</strong></div>'+
+          '</div>'+
+          (c.last_call_notes?'<div style="font-size:0.8rem;color:var(--color-white-dim);margin-bottom:0.75rem;border-top:1px solid var(--color-border);padding-top:0.5rem;">'+c.last_call_notes.slice(0,150)+(c.last_call_notes.length>150?'...':'')+'</div>':'')+
+          '<div class="result-card__actions">'+
+            '<a href="'+hubURL+'" target="_blank" rel="noopener" class="action-btn action-btn--sm">Open in HubSpot</a>'+
+            (c.phone?'<a href="tel:'+c.phone+'" class="action-btn action-btn--sm" style="color:#22c55e;border-color:#22c55e;">Call Now</a>':'')+
+            (c.email?'<button class="action-btn action-btn--sm email-btn" data-email="'+c.email+'" data-name="'+c.first_name+'" data-biz="'+c.business_name+'" style="color:var(--color-accent);border-color:var(--color-accent);">Draft Email</button>':'')+
+            '<button class="action-btn action-btn--sm hist-btn" data-id="'+c.contact_id+'">History</button>'+
+          '</div>'+
+          '<div class="hist-box" id="hist-'+c.contact_id+'" style="display:none;font-size:0.78rem;color:var(--color-white-dim);border-top:1px solid var(--color-border);margin-top:0.75rem;padding-top:0.6rem;"></div>'+
+        '</div>';
+      }).join('');
+
+      // Bind email buttons
+      results.querySelectorAll('.email-btn').forEach(b=>{
+        b.addEventListener('click',()=>{
+          const subject = encodeURIComponent('Following up — ' + b.dataset.biz);
+          const body = encodeURIComponent('Hey ' + (b.dataset.name||'there') + ',\n\n');
+          window.open('https://mail.google.com/mail/?view=cm&to='+encodeURIComponent(b.dataset.email)+'&su='+subject+'&body='+body, '_blank');
+        });
+      });
+
+      // Bind history buttons — last 3 call touches from the KV call log
+      results.querySelectorAll('.hist-btn').forEach(b=>{
+        b.addEventListener('click', async ()=>{
+          const box = document.getElementById('hist-' + b.dataset.id);
+          if(!box) return;
+          if(box.style.display !== 'none'){ box.style.display='none'; b.textContent='History'; return; }
+          box.style.display='block'; box.textContent='Loading call history...'; b.textContent='Hide';
+          try{
+            const hr = await fetch(WORKER + '/contact/' + encodeURIComponent(b.dataset.id) + '/history', { cache:'no-cache', headers:{ 'x-unc-key': WORKER_KEY } });
+            if(!hr.ok) throw new Error('HTTP ' + hr.status);
+            const hd = await hr.json();
+            if(!hd.ok) throw new Error(hd.error || 'history failed');
+            if(!hd.touches || !hd.touches.length){ box.textContent = 'No logged calls yet — this one is fresh.'; return; }
+            box.innerHTML = hd.touches.map(t=>{
+              const when = t.timestamp ? new Date(t.timestamp).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
+              const dur  = t.duration_seconds ? Math.round(t.duration_seconds/60*10)/10 + 'm' : '';
+              return '<div style="margin-bottom:0.35rem;">'+
+                '<strong style="color:var(--color-white);">'+when+'</strong> · '+
+                '<span class="outcome-badge '+outcomeClass(t.outcome)+'">'+(t.outcome||'—')+'</span>'+
+                (dur?' · '+dur:'')+
+                (t.notes?'<div style="opacity:0.8;margin-top:0.1rem;">'+String(t.notes).slice(0,160)+'</div>':'')+
+              '</div>';
+            }).join('');
+          }catch(e){ box.textContent = 'History unavailable (' + e.message + ').'; }
+        });
+      });
+
+    } catch(e) {
+      results.innerHTML='<div class="empty-state">Search failed. Make sure you are connected and try again.<br><small style="opacity:0.5;">'+e.message+'</small></div>';
+    } finally {
+      btn.disabled=false; btn.textContent='Search';
+    }
+  }
+
+  btn.addEventListener('click', search);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') search(); });
+
+  // Live search after 3+ chars with 400ms debounce
+  let debounceTimer = null;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const val = input.value.trim();
+    if (val.length < 3) {
+      if (val.length === 0) results.innerHTML = '<div class="empty-state">Search for a prospect above to see their HubSpot card.</div>';
+      return;
+    }
+    debounceTimer = setTimeout(search, 400);
+  });
+
+  results.innerHTML='<div class="empty-state">Type at least 3 characters — results appear as you type.</div>';
+})();
+</script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

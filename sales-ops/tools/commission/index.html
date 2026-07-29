@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Commission Tracker — Sales Ops</title>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .comm-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;}
+    @media(max-width:640px){.comm-grid{grid-template-columns:1fr;}}
+    .comm-card{background:var(--color-dark);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:1.5rem;}
+    .comm-card--accent{border-color:rgba(232,101,26,0.4);background:rgba(232,101,26,0.06);}
+    .comm-card--green{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.04);}
+    .comm-card__label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-white-dim);margin-bottom:0.4rem;}
+    .comm-card__value{font-size:2rem;font-weight:800;font-family:var(--font-display);}
+    .comm-card__value.orange{color:var(--color-accent);}
+    .comm-card__value.green{color:#22c55e;}
+    .comm-card__value.white{color:var(--color-white);}
+    .comm-card__sub{font-size:0.78rem;color:var(--color-white-dim);margin-top:0.3rem;}
+    .rate-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;}
+    .rate-table th{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-white-dim);padding:0.5rem 0.75rem;text-align:left;border-bottom:1px solid var(--color-border);}
+    .rate-table td{padding:0.65rem 0.75rem;font-size:0.88rem;border-bottom:1px solid var(--color-border);color:var(--color-white);}
+    .rate-table tr:last-child td{border-bottom:none;}
+    .rate-badge{display:inline-block;background:rgba(232,101,26,0.15);border:1px solid rgba(232,101,26,0.3);color:var(--color-accent);font-weight:700;font-size:0.82rem;padding:0.2rem 0.6rem;border-radius:var(--radius-pill);}
+    .client-log{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem;}
+    .client-row{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1rem 1.25rem;}
+    .client-row--clawback{border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.04);}
+    .client-row__header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;}
+    .client-row__name{font-weight:700;font-size:0.95rem;color:var(--color-white);}
+    .client-row__badge{font-size:0.7rem;font-weight:700;text-transform:uppercase;padding:0.2rem 0.5rem;border-radius:var(--radius-pill);margin-top:0.2rem;}
+    .badge-y1{background:rgba(232,101,26,0.15);color:var(--color-accent);border:1px solid rgba(232,101,26,0.3);}
+    .badge-y2{background:rgba(100,100,100,0.15);color:#888;border:1px solid #333;}
+    .badge-proj{background:rgba(96,165,250,0.15);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);}
+    .badge-merch{background:rgba(167,139,250,0.15);color:#a78bfa;border:1px solid rgba(167,139,250,0.3);}
+    .client-row__stats{display:flex;gap:1.5rem;font-size:0.82rem;color:var(--color-white-dim);flex-wrap:wrap;}
+    .client-row__stat-val{color:var(--color-white);font-weight:600;}
+    .client-row__comm{font-size:1.1rem;font-weight:800;color:#22c55e;white-space:nowrap;}
+    .clawback-alert{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:var(--radius-sm);padding:0.75rem 1rem;font-size:0.82rem;color:#fca5a5;margin-bottom:1rem;}
+    .section-header{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--color-accent);margin:1.5rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--color-border);}
+    .source-badge{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.72rem;font-weight:700;color:#22c55e;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);padding:0.25rem 0.6rem;border-radius:var(--radius-pill);}
+    .loading-msg{text-align:center;padding:2rem;color:var(--color-white-dim);font-size:0.88rem;}
+    .error-msg{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:var(--radius-sm);padding:1rem;color:#fca5a5;font-size:0.85rem;margin-bottom:1rem;}
+    /* Commission tracker is a scrolling dashboard, not a fixed-height cockpit — override clip */
+    .cockpit{overflow-y:auto!important;}
+    .calc-panel{background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1.25rem;margin-bottom:1.5rem;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;}
+    @media(max-width:540px){.form-row{grid-template-columns:1fr;}}
+    .field label{display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-white-dim);margin-bottom:0.3rem;}
+    .field input,.field select{width:100%;background:var(--color-dark);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-white);font-family:var(--font-body);font-size:0.9rem;padding:0.55rem 0.75rem;outline:none;transition:border-color 0.15s;box-sizing:border-box;}
+    .field input:focus,.field select:focus{border-color:var(--color-accent);}
+    .field select option{background:#1a1a1a;}
+    .last-updated{font-size:0.72rem;color:var(--color-white-dim);text-align:right;margin-top:0.5rem;}
+  </style>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+<main class="cockpit" style="overflow-y:auto">
+  <section class="dash">
+    <div class="dash__header">
+      <div>
+        <h1 class="dash__title">Commission Tracker</h1>
+        <p class="dash__sub">Live from HubSpot &nbsp;<span class="source-badge">&#9679; HubSpot Live</span></p>
+      </div>
+      <div class="dash__filters">
+        <button class="dash__filter-btn active" id="view-summary-btn">Summary</button>
+        <button class="dash__filter-btn" id="view-clients-btn">Clients</button>
+        <button class="dash__filter-btn" id="view-calc-btn">Calculator</button>
+      </div>
+    </div>
+
+    <div id="error-banner" class="error-msg" style="display:none;"></div>
+
+    <div id="view-summary">
+      <div id="summary-loading" class="loading-msg">Loading commission data from HubSpot...</div>
+      <div id="summary-content" style="display:none;">
+        <div class="comm-grid">
+          <div class="comm-card comm-card--accent">
+            <div class="comm-card__label">This Month</div>
+            <div class="comm-card__value orange" id="month-earned">—</div>
+            <div class="comm-card__sub">Deals closed this month</div>
+          </div>
+          <div class="comm-card comm-card--green">
+            <div class="comm-card__label">Total All Time</div>
+            <div class="comm-card__value green" id="total-earned">—</div>
+            <div class="comm-card__sub">All closed-won deals</div>
+          </div>
+          <div class="comm-card">
+            <div class="comm-card__label">Closed Clients</div>
+            <div class="comm-card__value white" id="active-count">—</div>
+            <div class="comm-card__sub">Total in HubSpot</div>
+          </div>
+          <div class="comm-card">
+            <div class="comm-card__label">Claude Reimbursement</div>
+            <div class="comm-card__value" id="claude-reimb">—</div>
+            <div class="comm-card__sub" id="claude-sub">$100/mo with 1+ retainer</div>
+          </div>
+        </div>
+        <div id="clawback-container"></div>
+        <div class="section-header">Rate Reference</div>
+        <table class="rate-table">
+          <thead><tr><th>Type</th><th>Rate</th><th>Term</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly Retainer Y1</td><td><span class="rate-badge">30%</span></td><td>Months 1-12</td><td>Per invoice collected</td></tr>
+            <tr><td>Monthly Retainer Y2+</td><td><span class="rate-badge">10%</span></td><td>Month 13+</td><td>Residual while active</td></tr>
+            <tr><td>Project Build</td><td><span class="rate-badge">25%</span></td><td>One-time</td><td>Websites, AI, consulting</td></tr>
+            <tr><td>Merchandise</td><td><span class="rate-badge">50%</span></td><td>Per deal</td><td>50% of UNC net profit</td></tr>
+          </tbody>
+        </table>
+        <div class="section-header">Key Rules</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.85rem;color:var(--color-white-dim);">
+          <div>💰 <b style="color:var(--color-white)">Payment trigger:</b> Earned when UNC receives cleared payment. Unpaid = no commission.</div>
+          <div>⏱ <b style="color:var(--color-white)">Paid within 15 days</b> of cleared payment. Monthly statement by the 10th.</div>
+          <div>⚠ <b style="color:var(--color-white)">Clawback:</b> Client cancels or does not pay within 60 days — first-month commission reversed.</div>
+          <div>🖥 <b style="color:var(--color-white)">Claude reimbursement:</b> $100/mo when 1+ active retainer client. Business expense.</div>
+          <div>📋 <b style="color:var(--color-white)">Important:</b> Set <b>UNC Revenue Type</b> on every deal you close in HubSpot or it will not appear here correctly.</div>
+        </div>
+      </div>
+      <div class="last-updated" id="last-updated"></div>
+    </div>
+
+    <div id="view-clients" style="display:none;">
+      <div id="clients-loading" class="loading-msg">Loading from HubSpot...</div>
+      <div id="client-log" class="client-log" style="display:none;"></div>
+      <div id="no-clients" style="display:none;text-align:center;padding:2rem;color:var(--color-white-dim);font-size:0.88rem;">
+        No closed-won deals in HubSpot yet.<br>
+        <span style="font-size:0.8rem;margin-top:0.4rem;display:block;opacity:0.6;">Close a deal and set UNC Revenue Type to see it here.</span>
+      </div>
+    </div>
+
+    <div id="view-calc" style="display:none;">
+      <div class="section-header">Quick Calculator</div>
+      <div class="calc-panel">
+        <div style="font-size:0.82rem;color:var(--color-white-dim);margin-bottom:0.75rem;">See what you would earn on any deal.</div>
+        <div class="form-row">
+          <div class="field"><label id="calc-amount-label">Amount ($)</label><input type="number" id="calc-amount" placeholder="2800" min="0"></div>
+          <div class="field"><label>Type</label>
+            <select id="calc-type">
+              <option value="0.30">Retainer Y1 (30%)</option>
+              <option value="0.10">Retainer Y2+ (10%)</option>
+              <option value="0.25">Project (25%)</option>
+              <option value="merch">Merch (50% of profit)</option>
+            </select>
+          </div>
+          <div class="field"><label>Your Cut</label><input type="text" id="calc-result" readonly placeholder="$0.00" style="font-weight:700;color:#22c55e;font-size:1.1rem;"></div>
+        </div>
+        <div id="merch-cogs-row" style="display:none;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--color-border);">
+          <div class="form-row">
+            <div class="field"><label>Total COGS ($)</label><input type="number" id="calc-cogs" placeholder="0" min="0"></div>
+            <div class="field"><label>Net Profit</label><input type="text" id="calc-profit" readonly placeholder="$0.00" style="font-weight:700;color:#fbbf24;font-size:1.1rem;"></div>
+            <div class="field" style="display:flex;align-items:flex-end;"><div style="font-size:0.78rem;color:var(--color-white-dim);padding-bottom:0.6rem;">Commission = 50% of net profit (Revenue − Total COGS).</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">Annual Projection</div>
+      <div class="calc-panel">
+        <div style="font-size:0.82rem;color:var(--color-white-dim);margin-bottom:0.75rem;">If you close X retainer clients per month at a given bundle price, here is what you earn.</div>
+        <div class="form-row">
+          <div class="field"><label>Clients / Month</label><input type="number" id="proj-clients" placeholder="2" min="1" value="2"></div>
+          <div class="field"><label>Avg Bundle ($)</label><input type="number" id="proj-amount" placeholder="2800" min="0" value="2800"></div>
+          <div class="field"><label>Monthly @ 30%</label><input type="text" id="proj-monthly" readonly style="font-weight:700;color:var(--color-accent);"></div>
+        </div>
+        <div id="proj-breakdown" style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;"></div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(function() {
+  const WORKER = 'https://unc-sales-os-sync.ricky-a17.workers.dev';
+  const WORKER_KEY = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})(); // matches WORKSPACE_KEY
+  const PORTAL = '245833525';
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function fmt(n){ return '$'+parseFloat(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  async function getCurrentRep() {
+    try {
+      const d = await fetch('/sales-ops/shared/reps.json',{cache:'no-cache'}).then(r=>r.json());
+      const savedId = (function(){ try { const v=localStorage.getItem('unc_cockpit_current_rep_id'); return v ? JSON.parse(v) : 'ricky'; } catch(e){ return 'ricky'; } })();
+      return (d.reps||[]).find(r=>r.id===savedId)||d.reps[0];
+    } catch(e){ return {id:'ricky',hubspot_owner_id:'90640722'}; }
+  }
+
+  const VIEWS = {summary:'view-summary',clients:'view-clients',calc:'view-calc'};
+  const BTNS  = {summary:'view-summary-btn',clients:'view-clients-btn',calc:'view-calc-btn'};
+  function showView(v){
+    Object.keys(VIEWS).forEach(k=>{
+      document.getElementById(VIEWS[k]).style.display=k===v?'block':'none';
+      document.getElementById(BTNS[k]).classList.toggle('active',k===v);
+    });
+    if(v==='clients') loadClients();
+    if(v==='summary') loadSummary();
+  }
+  Object.keys(BTNS).forEach(k=>document.getElementById(BTNS[k]).addEventListener('click',()=>showView(k)));
+
+  async function fetchComm(ownerId){
+    const r = await fetch(WORKER+'/commissions?owner_id='+encodeURIComponent(ownerId),{cache:'no-cache',headers:{'x-unc-key':WORKER_KEY}});
+    if(!r.ok) throw new Error('Worker returned '+r.status+'. Deploy the updated worker to Cloudflare.');
+    return r.json();
+  }
+
+  function showError(msg){
+    const el=document.getElementById('error-banner');
+    el.style.display='block'; el.textContent=msg;
+  }
+
+  async function loadSummary(){
+    const loadEl=document.getElementById('summary-loading');
+    const contentEl=document.getElementById('summary-content');
+    loadEl.style.display='block'; contentEl.style.display='none';
+    try {
+      const rep=await getCurrentRep();
+      const data=await fetchComm(rep.hubspot_owner_id);
+      if(!data.ok) throw new Error(data.error);
+      const s=data.summary;
+      document.getElementById('month-earned').textContent=fmt(s.month_earned);
+      document.getElementById('total-earned').textContent=fmt(s.total_earned);
+      document.getElementById('active-count').textContent=s.active_clients;
+      const cEl=document.getElementById('claude-reimb');
+      const cSub=document.getElementById('claude-sub');
+      if(s.claude_eligible){
+        cEl.textContent='$100.00'; cEl.className='comm-card__value green';
+        cSub.textContent='Eligible — '+s.active_retainers+' retainer client'+(s.active_retainers>1?'s':'');
+      } else {
+        cEl.textContent='$0'; cEl.className='comm-card__value white';
+        cSub.textContent='Need 1+ active retainer to qualify';
+      }
+      const clEl=document.getElementById('clawback-container');
+      if(s.clawback_risk&&s.clawback_risk.length){
+        clEl.innerHTML='<div class="clawback-alert"><b>Clawback risk:</b> '+s.clawback_risk.map(c=>c.name+' ('+fmt(c.amount)+')').join(', ')+' — first-month commission at risk until second invoice paid.</div>';
+      } else { clEl.innerHTML=''; }
+      document.getElementById('last-updated').textContent='Live from HubSpot · '+new Date().toLocaleTimeString();
+      loadEl.style.display='none'; contentEl.style.display='block';
+    } catch(e){ loadEl.style.display='none'; showError('Could not load: '+e.message); }
+  }
+
+  async function loadClients(){
+    const loadEl=document.getElementById('clients-loading');
+    const logEl=document.getElementById('client-log');
+    const emptyEl=document.getElementById('no-clients');
+    loadEl.style.display='block'; logEl.style.display='none'; emptyEl.style.display='none';
+    try {
+      const rep=await getCurrentRep();
+      const data=await fetchComm(rep.hubspot_owner_id);
+      if(!data.ok) throw new Error(data.error);
+      loadEl.style.display='none';
+      if(!data.clients||!data.clients.length){ emptyEl.style.display='block'; return; }
+      logEl.style.display='flex';
+      logEl.innerHTML=data.clients.map(c=>{
+        const hubURL='https://app.hubspot.com/contacts/'+PORTAL+'/record/0-3/'+c.deal_id;
+        const bc=c.revenue_type==='retainer_y1'?'badge-y1':c.revenue_type==='retainer_y2'?'badge-y2':c.revenue_type==='merch'?'badge-merch':'badge-proj';
+        const isR=c.revenue_type==='retainer_y1'||c.revenue_type==='retainer_y2';
+        return '<div class="client-row'+(c.clawback_risk?' client-row--clawback':'')+'">'+
+          '<div class="client-row__header">'+
+            '<div>'+
+              '<div class="client-row__name">'+c.name+'</div>'+
+              '<span class="client-row__badge '+bc+'">'+c.type_label+'</span>'+
+              (c.clawback_risk?' <span class="client-row__badge" style="background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);">Clawback Risk</span>':'')+
+            '</div>'+
+            '<div class="client-row__comm">'+fmt(c.commission)+(isR?'/mo':'')+'</div>'+
+          '</div>'+
+          '<div class="client-row__stats">'+
+            '<span>Deal: <span class="client-row__stat-val">'+fmt(c.amount)+'</span></span>'+
+            '<span>Rate: <span class="client-row__stat-val">'+(c.rate*100)+'%</span></span>'+
+            (c.month_num?'<span>Month: <span class="client-row__stat-val">#'+c.month_num+'</span></span>':'')+
+            (c.close_date?'<span>Closed: <span class="client-row__stat-val">'+new Date(c.close_date).toLocaleDateString()+'</span></span>':'')+
+          '</div>'+
+          '<div style="margin-top:0.6rem;display:flex;gap:0.4rem;flex-wrap:wrap;">'+
+          '<a href="'+hubURL+'" target="_blank" rel="noopener" class="action-btn action-btn--sm">Open in HubSpot</a>'+
+          (isR?'<button class="action-btn action-btn--sm history-btn" data-name="'+esc(c.name)+'" data-amount="'+c.amount+'" data-rate="'+c.rate+'" data-month="'+(c.month_num||1)+'" data-date="'+(c.close_date||'')+'" style="color:#a78bfa;border-color:rgba(167,139,250,0.4);">Month History</button>':'<span style="font-size:0.75rem;color:var(--color-white-dim);padding:0.35rem;">One-time project</span>')+
+        '</div>'+
+        '</div>';
+      }).join('');
+      // Bind month history
+      document.querySelectorAll('.history-btn').forEach(b=>{
+        b.addEventListener('click',()=>{
+          const name=b.dataset.name;
+          const amount=parseFloat(b.dataset.amount)||0;
+          const rate=parseFloat(b.dataset.rate)||0.30;
+          const currentMonth=parseInt(b.dataset.month)||1;
+          const closeDate=b.dataset.date?new Date(b.dataset.date).toLocaleDateString():'Unknown';
+          let html='<div style="padding:1rem;">';
+          html+='<div style="font-size:0.88rem;font-weight:700;color:var(--color-white);margin-bottom:0.75rem;">'+esc(name)+' — Monthly History</div>';
+          html+='<div style="font-size:0.78rem;color:var(--color-white-dim);margin-bottom:0.75rem;">Closed: '+closeDate+' · Invoice: '+fmt(amount)+'</div>';
+          html+='<table style="width:100%;border-collapse:collapse;font-size:0.82rem;">';
+          html+='<thead><tr style="border-bottom:1px solid var(--color-border);"><th style="text-align:left;padding:0.4rem;color:var(--color-white-dim);">Month</th><th style="text-align:left;padding:0.4rem;color:var(--color-white-dim);">Rate</th><th style="text-align:right;padding:0.4rem;color:var(--color-white-dim);">Your Cut</th></tr></thead>';
+          html+='<tbody>';
+          for(let m=1;m<=Math.max(currentMonth,13);m++){
+            const r=m<=12?0.30:0.10;
+            const comm=amount*r;
+            const isCurrent=m===currentMonth;
+            const isFuture=m>currentMonth;
+            html+='<tr style="border-bottom:1px solid var(--color-border);background:'+(isCurrent?'rgba(232,101,26,0.08)':isFuture?'rgba(255,255,255,0.02)':'')+';">';
+            html+='<td style="padding:0.4rem;color:'+(isCurrent?'var(--color-accent)':isFuture?'#444':'var(--color-white)')+';">Month '+m+(isCurrent?' ← current':isFuture?' (projected)':'')+' '+(m===13?'(Y2 rate starts)':'')+' </td>';
+            html+='<td style="padding:0.4rem;color:var(--color-white-dim);">'+(r*100)+'%</td>';
+            html+='<td style="padding:0.4rem;text-align:right;color:'+(isFuture?'#555':'#22c55e')+';">'+fmt(comm)+'</td>';
+            html+='</tr>';
+          }
+          html+='</tbody></table></div>';
+          // Show in a simple modal overlay
+          const modal=document.createElement('div');
+          modal.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;padding:1rem;';
+          modal.innerHTML='<div style="background:var(--color-dark);border:1px solid var(--color-border);border-radius:var(--radius-lg);max-width:480px;width:100%;max-height:80vh;overflow-y:auto;">'+html+'<div style="padding:0 1rem 1rem;"><button id="close-history-modal" class="action-btn action-btn--primary" style="width:100%;">Close</button></div></div>';
+          document.body.appendChild(modal);
+          document.getElementById('close-history-modal').addEventListener('click',()=>modal.remove());
+          modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+        });
+      });
+    } catch(e){ loadEl.style.display='none'; showError('Could not load clients: '+e.message); }
+  }
+
+  function updateCalc(){
+    const a=parseFloat(document.getElementById('calc-amount').value)||0;
+    const typeVal=document.getElementById('calc-type').value;
+    const isMerch=typeVal==='merch';
+    const cogsRow=document.getElementById('merch-cogs-row');
+    const amtLabel=document.getElementById('calc-amount-label');
+    cogsRow.style.display=isMerch?'block':'none';
+    amtLabel.textContent=isMerch?'Revenue / Sale ($)':'Amount ($)';
+    if(isMerch){
+      const cogs=parseFloat(document.getElementById('calc-cogs').value)||0;
+      const profit=Math.max(0,a-cogs);
+      document.getElementById('calc-profit').value=fmt(profit);
+      document.getElementById('calc-result').value=fmt(profit*0.50);
+    } else {
+      const r=parseFloat(typeVal)||0;
+      document.getElementById('calc-result').value=fmt(a*r);
+    }
+  }
+  document.getElementById('calc-amount').addEventListener('input',updateCalc);
+  document.getElementById('calc-type').addEventListener('change',updateCalc);
+  document.getElementById('calc-cogs').addEventListener('input',updateCalc);
+
+  function updateProjection(){
+    const cl=parseInt(document.getElementById('proj-clients').value)||0;
+    const am=parseFloat(document.getElementById('proj-amount').value)||0;
+    const mo=cl*am*0.30;
+    document.getElementById('proj-monthly').value=fmt(mo);
+    const el=document.getElementById('proj-breakdown');
+    el.innerHTML=
+      '<div style="background:var(--color-dark-3);padding:0.6rem 0.75rem;border-radius:var(--radius-sm);"><div style="font-size:0.7rem;color:var(--color-white-dim);margin-bottom:0.2rem;">Year 1 Annual</div><div style="font-weight:700;color:var(--color-accent);">'+fmt(mo*12)+'</div></div>'+
+      '<div style="background:var(--color-dark-3);padding:0.6rem 0.75rem;border-radius:var(--radius-sm);"><div style="font-size:0.7rem;color:var(--color-white-dim);margin-bottom:0.2rem;">Year 2 Monthly (10% residuals)</div><div style="font-weight:700;color:#888;">'+fmt(cl*am*0.10)+'/mo</div></div>'+
+      '<div style="background:var(--color-dark-3);padding:0.6rem 0.75rem;border-radius:var(--radius-sm);"><div style="font-size:0.7rem;color:var(--color-white-dim);margin-bottom:0.2rem;">Claude Reimbursement</div><div style="font-weight:700;color:#22c55e;">'+(cl>0?'$100/mo':'$0')+'</div></div>'+
+      '<div style="background:var(--color-dark-3);padding:0.6rem 0.75rem;border-radius:var(--radius-sm);"><div style="font-size:0.7rem;color:var(--color-white-dim);margin-bottom:0.2rem;">Yr 1 + Yr 2 Combined</div><div style="font-weight:700;color:#22c55e;">'+fmt(mo*12+(cl*am*0.10*12))+'</div></div>';
+  }
+  document.getElementById('proj-clients').addEventListener('input',updateProjection);
+  document.getElementById('proj-amount').addEventListener('input',updateProjection);
+  updateProjection();
+
+  loadSummary();
+})();
+</script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>

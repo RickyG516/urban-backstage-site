@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Roadmap & Changelog — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .road { max-width: 1080px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    .road__section { margin-bottom: 3rem; }
+    .road__head { display: flex; align-items: baseline; gap: 0.85rem; margin-bottom: 1.25rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--color-border); }
+    .road__version { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: var(--radius-pill); }
+    .road__version--shipped { background: var(--color-green); color: var(--color-black); }
+    .road__version--current { background: var(--color-accent); color: var(--color-black); }
+    .road__version--next { background: var(--color-white-faint); color: var(--color-white-dim); border: 1px solid var(--color-border-bright); }
+    .road__title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.015em; }
+    .road__date { color: var(--color-white-dim); font-size: 0.85rem; }
+    .road__items { list-style: none; padding: 0; }
+    .road__item { padding: 0.75rem 0; border-bottom: 1px dashed var(--color-border); font-family: var(--font-display); font-size: 0.95rem; }
+    .road__item:last-child { border-bottom: 0; }
+    .road__item-emoji { display: inline-block; width: 1.5rem; }
+    .road__notes { background: var(--color-dark-2); border-left: 3px solid var(--color-accent); padding: 1rem 1.25rem; border-radius: var(--radius-sm); margin-top: 0.85rem; font-style: italic; color: var(--color-white-dim); }
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="road">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Roadmap & Changelog</h1>
+          <p class="dash__sub">What's shipped, what's coming. Built one night at a time.</p>
+        </div>
+      </div>
+
+      <!-- ═══ CURRENT-STATE SUMMARY (Light Build 3) ═══ -->
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--current">⚡ THE OS TODAY</span>
+          <div>
+            <div class="road__title">What the Sales OS does right now</div>
+            <div class="road__date">Single source of truth — current capabilities</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🎯</span> 11 call cockpits — Cold Call · Niche Outreach · Inbound · Discovery · Service Pitch · Proposal Walkthrough · Renewal/Upsell · Referral Ask · Win-Back · Re-Engage · Onboarding Kickoff</li>
+          <li class="road__item"><span class="road__item-emoji">🗺️</span> Live Intel Map — 931+ companies across 8 states</li>
+          <li class="road__item"><span class="road__item-emoji">🏆</span> Leaderboard — streaks, opener analytics, and objection intel</li>
+          <li class="road__item"><span class="road__item-emoji">🎓</span> Academy certification gauntlet</li>
+          <li class="road__item"><span class="road__item-emoji">🌅</span> Start My Day priority queue — the machine picks your next call</li>
+          <li class="road__item"><span class="road__item-emoji">🩺</span> Nightly self-monitoring health check</li>
+          <li class="road__item"><span class="road__item-emoji">🔄</span> Auto-sync of every call outcome to HubSpot with merge-safe notes</li>
+        </ul>
+      </div>
+
+      <!-- ═══ LAST 3 MAJOR UPDATES ═══ -->
+      <div style="margin:0 0 1.25rem;">
+        <div class="road__title">Last 3 Major Updates</div>
+        <div class="road__date">Newest first</div>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">JUL 21, 2026</span>
+          <div>
+            <div class="road__title">The 10/10 Push</div>
+            <div class="road__date">July 21, 2026</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🚀</span> Leaderboard, Academy, and Start My Day shipped live</li>
+          <li class="road__item"><span class="road__item-emoji">🧲</span> Recruiting Demo Hub + live speed-to-lead countdown</li>
+          <li class="road__item"><span class="road__item-emoji">🥇</span> Champion-opener auto-select</li>
+          <li class="road__item"><span class="road__item-emoji">🔐</span> Worker source now version-controlled with a locked deploy pipeline</li>
+          <li class="road__item"><span class="road__item-emoji">🩺</span> Nightly health watchdog + worker key centralized per-device</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">JUL 21, 2026</span>
+          <div>
+            <div class="road__title">Deep Pass + Worker Rebuild</div>
+            <div class="road__date">July 21, 2026</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🧊</span> Freeze bug eliminated across all cockpits</li>
+          <li class="road__item"><span class="road__item-emoji">🛠</span> Broken outcome codes fixed</li>
+          <li class="road__item"><span class="road__item-emoji">💬</span> 5 cockpits elevated to Discovery-grade language</li>
+          <li class="road__item"><span class="road__item-emoji">🔄</span> /sync now persists all 8 discovery/anchor fields with merge-not-overwrite notes</li>
+          <li class="road__item"><span class="road__item-emoji">🗺️</span> Intel Map rebuilt on live CRM data</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">JUL 2026</span>
+          <div>
+            <div class="road__title">Executive Reporting System live</div>
+            <div class="road__date">July 2026</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🧑‍💼</span> 6 weekly department agents</li>
+          <li class="road__item"><span class="road__item-emoji">📋</span> Monthly board meeting</li>
+          <li class="road__item"><span class="road__item-emoji">📁</span> Reports auto-filed to Drive</li>
+        </ul>
+      </div>
+
+      <!-- ═══ UP NEXT ═══ -->
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--next">UP NEXT</span>
+          <div>
+            <div class="road__title">In the build queue</div>
+            <div class="road__date">Order over dates</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🧾</span> Quote-aware pitch scripts — pull the actual proposal from Drive into the service-pitch cockpit</li>
+          <li class="road__item"><span class="road__item-emoji">👥</span> Per-rep logins</li>
+          <li class="road__item"><span class="road__item-emoji">💰</span> Commission engine wired to live deal data</li>
+        </ul>
+      </div>
+
+      <!-- ═══ ARCHIVE — full prior history, collapsed, unchanged ═══ -->
+      <details class="road__archive" style="margin-top:1.5rem;">
+        <summary style="cursor:pointer;font-family:var(--font-display);font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-white-dim);padding:0.9rem 0;border-top:1px solid var(--color-border);">Archive — full history</summary>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--current">⚡ V5 · CURRENT</span>
+          <div>
+            <div class="road__title">Sales OS — full system architecture</div>
+            <div class="road__date">Shipped 2026-05-13 (overnight build)</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🎯</span> 9 cockpits: Cold Call · Inbound · Discovery · Service Pitch · Renewal/Upsell · Proposal Walkthrough · Referral Ask · Win-Back · Onboarding Kickoff</li>
+          <li class="road__item"><span class="road__item-emoji">📊</span> 4 dashboards: Activity · Pipeline · Variant Performance · Best Dial Windows</li>
+          <li class="road__item"><span class="road__item-emoji">🛠</span> 5 tools: Pricing Calculator · Objection Library · Voicemail Library · Trade Reference · Snippet Library</li>
+          <li class="road__item"><span class="road__item-emoji">🧭</span> Unified global navigation with Ctrl+K command palette</li>
+          <li class="road__item"><span class="road__item-emoji">⚙</span> Settings page with audio toggle, rep picker, keyboard reference, data export, local cache clear</li>
+          <li class="road__item"><span class="road__item-emoji">🏠</span> Product-grade hub homepage with live stats + recent activity feed</li>
+        </ul>
+        <div class="road__notes">All ghost-page protected. All free-tier compatible. ~6,500 lines of vanilla HTML/CSS/JS. Zero external dependencies.</div>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">V4 · SHIPPED</span>
+          <div>
+            <div class="road__title">phone-qualifier integration</div>
+            <div class="road__date">Shipped 2026-05-12</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">📞</span> phone-qualifier skill v2 — auto-pushes queue.json to GitHub, flags HubSpot contacts as queued</li>
+          <li class="road__item"><span class="road__item-emoji">🌅</span> Morning-trigger workflow: fire at 7 AM, queue ready by 10 AM dial block</li>
+          <li class="road__item"><span class="road__item-emoji">🔄</span> Auto-scale batch size by ramp week (5 → 10 → 15 → 20 → 25)</li>
+          <li class="road__item"><span class="road__item-emoji">🗓</span> 10 HubSpot custom properties (Cowork setup command delivered)</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">V3 · SHIPPED</span>
+          <div>
+            <div class="road__title">Trade coverage + timezone hardening</div>
+            <div class="road__date">Shipped 2026-05-12</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🏗</span> trade_q2 extended to all 16 HubSpot trades + Unknown fallback</li>
+          <li class="road__item"><span class="road__item-emoji">🌐</span> Timezone fix — todayKey() uses local components instead of UTC</li>
+          <li class="road__item"><span class="road__item-emoji">🏢</span> HubSpot config baked (Portal 245833525, na2, Owner 90640722)</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">V2 · SHIPPED</span>
+          <div>
+            <div class="road__title">Queue mode + sync + follow-up</div>
+            <div class="road__date">Shipped 2026-05-12</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">📋</span> Queue-driven cold-call cockpit with prospect cards</li>
+          <li class="road__item"><span class="road__item-emoji">⏱</span> Cool-down enforcement (7-day window) with override</li>
+          <li class="road__item"><span class="road__item-emoji">🎲</span> Auto-rotating opener variants (O1/O2/O3, G1/G2)</li>
+          <li class="road__item"><span class="road__item-emoji">📤</span> Cowork sync command — every captured field bakes into per-call HubSpot updates</li>
+          <li class="road__item"><span class="road__item-emoji">💌</span> Follow-up panel — HubSpot link, Gmail compose, booking link copy</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--shipped">V1 · SHIPPED</span>
+          <div>
+            <div class="road__title">Cold Call Cockpit (the foundation)</div>
+            <div class="road__date">Shipped 2026-05-12</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">📞</span> Branching cold-call state machine (DM Free / Busy / Gatekeeper / Wrong)</li>
+          <li class="road__item"><span class="road__item-emoji">🔊</span> Web Audio synthesized click, cha-ching, swipe cues</li>
+          <li class="road__item"><span class="road__item-emoji">⌨️</span> Full keyboard navigation</li>
+          <li class="road__item"><span class="road__item-emoji">📝</span> Auto-saving notes panel</li>
+          <li class="road__item"><span class="road__item-emoji">📊</span> Session stats drawer with variant performance</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--next">V6 · NEXT</span>
+          <div>
+            <div class="road__title">Intelligence layer</div>
+            <div class="road__date">Coming when usage data supports it</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🤖</span> Pre-call AI brief — Haiku summarizes prospect's website + GBP + last contact note in 60 words (~$0.001/prospect)</li>
+          <li class="road__item"><span class="road__item-emoji">🎙</span> Voice-to-text post-call summary via Whisper API → auto-posted to HubSpot record</li>
+          <li class="road__item"><span class="road__item-emoji">🧠</span> AI live coach — real-time objection suggestions based on transcribed call (requires 200+ training calls first)</li>
+          <li class="road__item"><span class="road__item-emoji">📅</span> Best-time-to-call learned recommendations (auto-suggested dial windows by trade)</li>
+          <li class="road__item"><span class="road__item-emoji">🔗</span> Real HubSpot API sync via Railway endpoint flip (one-line config change)</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--next">V7 · LATER</span>
+          <div>
+            <div class="road__title">Multi-rep + client portal</div>
+            <div class="road__date">When the first hire happens</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">👥</span> Multi-rep leaderboard with per-rep performance</li>
+          <li class="road__item"><span class="road__item-emoji">🎓</span> Manager coaching mode — replay rep call paths step-by-step</li>
+          <li class="road__item"><span class="road__item-emoji">🌐</span> Custom domain for Sales OS (currently lives on urbannicheco.com ghost pages)</li>
+          <li class="road__item"><span class="road__item-emoji">📈</span> Client-facing audit viewer (share results with prospects via unique URL)</li>
+          <li class="road__item"><span class="road__item-emoji">📞</span> Click-to-dial via Twilio or OpenPhone integration</li>
+          <li class="road__item"><span class="road__item-emoji">🎬</span> Inbound call detection — phone forwards through and cockpit auto-opens with the contact</li>
+        </ul>
+      </div>
+
+      <div class="road__section">
+        <div class="road__head">
+          <span class="road__version road__version--next">V8 · VISION</span>
+          <div>
+            <div class="road__title">Product spin-off</div>
+            <div class="road__date">When the system has proven itself</div>
+          </div>
+        </div>
+        <ul class="road__items">
+          <li class="road__item"><span class="road__item-emoji">🚀</span> Sales OS as a productized offering for contractor-focused agencies + sales teams</li>
+          <li class="road__item"><span class="road__item-emoji">💎</span> Tiered pricing — solo operator / team / agency</li>
+          <li class="road__item"><span class="road__item-emoji">🏢</span> White-label option for agencies that want to brand it themselves</li>
+          <li class="road__item"><span class="road__item-emoji">🔌</span> Integrations marketplace (HubSpot, Salesforce, Aircall, OpenPhone, etc.)</li>
+        </ul>
+      </div>
+
+      </details>
+    </section>
+    <!-- removed brand-stamp --><div class="brand-stamp" style="display:none">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{ "_version": "1.0", "outcomes": [
+  { "code": "KICKED_OFF",      "label": "KICKED OFF",  "hotkey": "k", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Closed Won",            "description": "Onboarding launched, deliverables scheduled" },
+  { "code": "INFO_PENDING",    "label": "INFO PENDING","hotkey": "i", "color": "#facc15", "audio": "click",     "hubspot_stage": "Closed Won",            "description": "Need missing info before launch" },
+  { "code": "ACCESS_BLOCKED",  "label": "ACCESS",      "hotkey": "a", "color": "#facc15", "audio": "click",     "hubspot_stage": "Closed Won",            "description": "Waiting on GBP/website/Google Ads access" },
+  { "code": "BUYERS_REMORSE",  "label": "REMORSE",     "hotkey": "x", "color": "#ef4444", "audio": "error",     "hubspot_stage": "Follow-Up In Progress", "description": "Showing buyer’s remorse - intervene" }
+] }

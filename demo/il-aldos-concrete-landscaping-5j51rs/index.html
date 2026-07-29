@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Aldo's Concrete &amp; Landscaping | Belvidere, IL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark:#221d1a;
+    --dark2:#161210;
+    --accent:#6b8c4a;
+    --accent2:#86a865;
+    --light:#f5f5f2;
+    --gray:#585650;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Open Sans',sans-serif;color:var(--dark);background:var(--light);overflow-x:hidden;}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px;}
+  a{color:inherit;text-decoration:none;}
+
+  .hero{position:relative;height:92vh;min-height:560px;display:flex;align-items:center;overflow:hidden;background:var(--dark2);}
+  .hero-bg{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(135deg, rgba(22,18,16,0.93), rgba(34,29,26,0.76)),
+      repeating-linear-gradient(45deg, #2c2622 0px, #2c2622 2px, #221d1a 2px, #221d1a 34px);
+    animation:kenburns 18s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{0%{transform:scale(1) translate(0,0);}100%{transform:scale(1.12) translate(-1%, -1.5%);}}
+  .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 32px;color:#fff;}
+  .hero-eyebrow{color:var(--accent2);font-family:'Oswald',sans-serif;letter-spacing:2px;font-size:14px;font-weight:600;margin-bottom:14px;}
+  .hero h1{font-size:clamp(2.2rem, 5vw, 3.6rem);line-height:1.1;margin-bottom:18px;}
+  .hero p{max-width:560px;font-size:1.15rem;color:#ddd9d3;margin-bottom:30px;}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-weight:700;padding:16px 34px;border-radius:3px;transition:background 0.2s ease, transform 0.2s ease;}
+  .btn:hover{background:var(--accent2);transform:translateY(-2px);}
+
+  .topbar{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:26px 40px;}
+  .brand{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.25rem;color:#fff;letter-spacing:1px;}
+  .brand span{color:var(--accent2);}
+  .topbar .phone{color:#fff;font-family:'Oswald',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.5px;}
+
+  section{padding:90px 24px;}
+  .section-inner{max-width:1080px;margin:0 auto;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 50px;}
+  .section-head .kicker{color:#516b38;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:2px;font-size:13px;margin-bottom:10px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.4rem);color:var(--dark);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  .services-section{background:#fff;}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;}
+  .service-card{background:var(--light);border:1px solid #e5e4df;border-radius:6px;padding:32px 26px;text-align:left;transition:transform 0.25s ease, box-shadow 0.25s ease;}
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(34,29,26,0.12);}
+  .service-icon{width:52px;height:52px;margin-bottom:18px;color:#516b38;}
+  .service-card h3{font-size:1.15rem;margin-bottom:10px;color:var(--dark);}
+  .service-card p{color:var(--gray);font-size:0.95rem;line-height:1.5;}
+
+  .trust-section{background:var(--dark2);color:#fff;}
+  .trust-section .section-head h2{color:#fff;}
+  .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px;}
+  .trust-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:6px;padding:28px 22px;text-align:center;}
+  .trust-card svg{width:40px;height:40px;color:var(--accent2);margin-bottom:14px;}
+  .trust-card h3{font-size:1rem;color:#fff;margin-bottom:6px;letter-spacing:0.5px;}
+  .trust-card p{color:#c7c4bd;font-size:0.88rem;}
+
+  .area-section{background:#fff;}
+  .area-list{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:760px;margin:0 auto;}
+  .area-pill{background:var(--light);border:1px solid #e5e4df;padding:10px 20px;border-radius:30px;font-family:'Oswald',sans-serif;font-size:0.9rem;color:var(--dark);letter-spacing:0.4px;}
+
+  .contact-section{background:var(--light);}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  .contact-info h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:16px;}
+  .contact-info p{color:var(--gray);margin-bottom:24px;line-height:1.6;}
+  .contact-detail{margin-bottom:14px;font-family:'Oswald',sans-serif;font-weight:600;}
+  .contact-detail span{color:#516b38;}
+  form{background:#fff;border:1px solid #e5e4df;border-radius:8px;padding:34px;box-shadow:0 20px 40px rgba(34,29,26,0.06);}
+  form label{display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;color:var(--dark);}
+  form input, form textarea{width:100%;padding:12px 14px;margin-bottom:18px;border:1px solid #dcdad3;border-radius:4px;font-family:'Open Sans',sans-serif;font-size:0.95rem;}
+  form textarea{resize:vertical;min-height:90px;}
+  form button{width:100%;border:none;cursor:pointer;font-family:'Oswald',sans-serif;}
+
+  footer{background:var(--dark2);color:#a09c95;text-align:center;padding:36px 20px;font-size:0.85rem;}
+  footer .footer-brand{color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:1px;font-size:1.1rem;margin-bottom:8px;}
+
+  .flag{position:fixed;bottom:16px;right:16px;background:rgba(22,18,16,0.92);color:#fff;font-family:'Open Sans',sans-serif;font-size:12px;padding:9px 14px;border-radius:5px;z-index:999;box-shadow:0 4px 14px rgba(0,0,0,0.25);}
+
+  @media (max-width:760px){.contact-wrap{grid-template-columns:1fr;}.topbar{padding:20px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="topbar">
+    <div class="brand">ALDO'S <span>CONCRETE</span></div>
+    <div class="phone">(815) 505-8739</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Belvidere, Illinois &middot; Concrete &amp; Landscaping</div>
+    <h1>Concrete &amp; Landscaping Done Right</h1>
+    <p>Aldo's Concrete &amp; Landscaping pours driveways, patios, and walkways and handles the landscaping around them &mdash; one crew, one call, done right the first time.</p>
+    <a href="#contact" class="btn">Get A Free Estimate</a>
+  </div>
+</div>
+
+<section class="services-section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="kicker">What We Do</div>
+      <h2>Concrete &amp; Landscaping Services</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="10" width="18" height="8" rx="1"/><path d="M3 10l9-6 9 6"/></svg>
+        <h3>Driveways</h3>
+        <p>New concrete driveways poured flat, level, and built to handle Illinois winters.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>
+        <h3>Patios &amp; Walkways</h3>
+        <p>Concrete patios, sidewalks, and walkways designed and poured to last.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v6M12 2c-3 3-5 6-5 10a5 5 0 0010 0c0-4-2-7-5-10z"/></svg>
+        <h3>Landscaping</h3>
+        <p>Mulch, plantings, edging, and landscape design work around your new concrete.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l6-16 4 10 3-6 3 12"/></svg>
+        <h3>Retaining Walls</h3>
+        <p>Retaining walls and grading work to manage water and shape your yard.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6"/></svg>
+        <h3>Concrete Repair</h3>
+        <p>Cracked or sunken concrete repaired or replaced before it gets worse.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2 5 5 .5-3.8 3.5 1 5-4.2-2.5-4.2 2.5 1-5L5 7.5 10 7z"/></svg>
+        <h3>Stamped &amp; Decorative Concrete</h3>
+        <p>Stamped and decorative concrete finishes for patios and entryways.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="trust-section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="kicker">Why Belvidere Calls Aldo's</div>
+      <h2>Reliable Work, Backed By Reviews</h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+        <h3>Locally Owned</h3>
+        <p>Based in Belvidere, working the community directly.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        <h3>Residential &amp; Commercial</h3>
+        <p>Concrete and landscaping work for homes and businesses alike.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>On-Schedule Service</h3>
+        <p>We set the appointment and we're there.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M4 6h16M4 18h10"/></svg>
+        <h3>Straight Pricing</h3>
+        <p>Clear estimates before work starts &mdash; no surprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="area-section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="kicker">Service Area</div>
+      <h2>Proudly Serving Boone &amp; Winnebago Counties</h2>
+    </div>
+    <div class="area-list reveal">
+      <span class="area-pill">Belvidere</span>
+      <span class="area-pill">Rockford</span>
+      <span class="area-pill">Cherry Valley</span>
+      <span class="area-pill">Loves Park</span>
+      <span class="area-pill">Poplar Grove</span>
+      <span class="area-pill">Caledonia</span>
+      <span class="area-pill">Roscoe</span>
+      <span class="area-pill">Capron</span>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-inner contact-wrap">
+    <div class="contact-info reveal">
+      <h2>Get A Free Estimate</h2>
+      <p>Tell us about your project and Aldo's Concrete &amp; Landscaping will follow up to schedule a visit.</p>
+      <div class="contact-detail">Phone: <span>(815) 505-8739</span></div>
+      <div class="contact-detail">Service Area: <span>Belvidere &amp; Greater Rockford</span></div>
+    </div>
+    <form onsubmit="return false;" class="reveal">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your name">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" placeholder="(xxx) xxx-xxxx">
+      <label for="message">What do you need done?</label>
+      <textarea id="message" placeholder="Driveway, patio, landscaping..."></textarea>
+      <button type="submit" class="btn">Request Estimate</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Aldo's Concrete &amp; Landscaping</div>
+  <p>Belvidere, Illinois</p>
+</footer>
+
+<div class="flag">Speculative preview build &mdash; Urban Niche Co.</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

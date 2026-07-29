@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Trade Reference — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    .tref { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    .tref__nav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .tref__chip { font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; padding: 0.45rem 0.8rem; background: var(--color-white-faint); border: 1px solid var(--color-border-bright); border-radius: var(--radius-pill); cursor: pointer; color: var(--color-white); }
+    .tref__chip.active { background: var(--color-accent); color: var(--color-black); border-color: var(--color-accent); }
+    .tref__card { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.75rem; }
+    .tref__section { margin-bottom: 1.5rem; }
+    .tref__heading { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.6rem; }
+    .tref__row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px dashed var(--color-border); font-family: var(--font-display); font-size: 0.92rem; }
+    .tref__row span:last-child { color: var(--color-white); font-weight: 700; }
+    .tref__row span:first-child { color: var(--color-white-dim); }
+    .tref__list { list-style: none; padding: 0; }
+    .tref__list li { padding: 0.5rem 0; border-bottom: 1px dashed var(--color-border); font-family: var(--font-display); font-size: 0.92rem; }
+    .tref__list li:last-child { border-bottom: 0; }
+
+    /* v2 intel layout */
+    .tref__killshot { background: linear-gradient(135deg, rgba(232,101,26,0.14) 0%, var(--color-dark-2) 65%); border: 1px solid var(--color-accent); border-radius: var(--radius-md); padding: 1.35rem 1.5rem; margin-bottom: 1rem; }
+    .tref__killshot-label { font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.45rem; }
+    .tref__killshot-line { font-family: var(--font-display); font-size: 1.18rem; font-weight: 800; line-height: 1.4; color: var(--color-white); }
+    .tref__timing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+    .tref__tile { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.9rem 1rem; }
+    .tref__tile-label { font-family: var(--font-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-white-dim); margin-bottom: 0.35rem; }
+    .tref__tile-value { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--color-white); line-height: 1.4; }
+    .tref__tile--hot .tref__tile-label { color: var(--color-accent); }
+    .tref__tile--hot { border-color: rgba(232,101,26,0.4); }
+    .tref__storm { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.35); border-left: 4px solid #ef4444; border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 1rem; font-family: var(--font-display); font-size: 0.9rem; line-height: 1.55; color: var(--color-white); }
+    .tref__storm b { color: #ef4444; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; display: block; margin-bottom: 0.3rem; }
+    .tref__angle { background: var(--color-dark-3); border-left: 4px solid var(--color-accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 0.85rem 1.1rem; margin-bottom: 1rem; font-family: var(--font-display); font-size: 0.9rem; line-height: 1.55; color: var(--color-white-dim); }
+    .tref__angle b { color: var(--color-accent); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; display: block; margin-bottom: 0.3rem; }
+    .tref__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .tref__col-card { background: var(--color-dark-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem 1.4rem; }
+    @media (max-width: 760px) { .tref__timing { grid-template-columns: repeat(2, 1fr); } .tref__cols { grid-template-columns: 1fr; } }
+  </style>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="tref">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Trade Reference</h1>
+          <p class="dash__sub">Quick cheat sheet per contractor trade — peak seasons, decision-maker patterns, ticket sizes, key channels. Pull it up mid-call.</p>
+        </div>
+      </div>
+      <div class="tref__nav" id="tref-nav"></div>
+      <div class="tref__card" id="tref-card"></div>
+    </section>
+    <div class="brand-stamp">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <script>
+    const TRADES = {
+      'Roofer': { peakMonths: 'Apr–Oct (storm-driven)', avgTicket: '$8K–$25K', urgency: 'High (leaks + storm damage)', dm: 'Owner usually; partner/wife on larger residential', topChannels: ['Google Ads (storm-chase $40-90 CPC)', 'GBP + map pack', 'SEO for storm-damage terms', 'Insurance referrals'], keyMetrics: ['Cost per qualified lead', 'Job-to-call conversion', 'Storm-season market share', 'Insurance vs retail mix'], commonPains: ['Storm chasers from out-of-town eat their lunch', 'Insurance paperwork bottleneck', 'Lead overflow in busy season, dry in slow'], hookLines: ['Are you actually showing up first when hail hits?', 'Storm-chaser agencies are outranking you in your own town. Want me to show you?'] },
+      'HVAC': { peakMonths: 'Jun–Aug (AC), Nov–Feb (heat)', avgTicket: '$5K–$15K install / $200-800 repair', urgency: 'Extreme (no AC/heat = same-day search)', dm: 'Owner; sometimes ops manager', topChannels: ['Google Local Service Ads', 'GBP with same-day booking', 'Emergency-keyword Google Ads', 'Maintenance plan email/SMS'], keyMetrics: ['Same-day booking rate', 'Maintenance plan attach rate', 'Emergency response time', 'Off-season pipeline filler'], commonPains: ['Brutal seasonality — flooded in summer, dead in spring/fall', 'Customer acquisition cost spikes during heat waves', 'No process for off-season demand creation'], hookLines: ['When it hits 95° next month, who shows up first on Google — you or the chain?', 'Off-season is where the war is won. Most HVAC guys don\'t fight it.'] },
+      'Plumber': { peakMonths: 'Year-round (emergency-driven)', avgTicket: '$300–$2,500 service / $5K-15K replacement', urgency: 'Extreme (flooding = panic search)', dm: 'Owner', topChannels: ['Google Local Service Ads', 'GBP with 24/7 badge', 'Emergency keywords in Google Ads', 'Review velocity'], keyMetrics: ['Off-hours call capture', 'Review count vs competition', '5-mile radius dominance', 'Service vs repair mix'], commonPains: ['Reviews can\'t keep up with volume', 'Lose late-night calls to chains with answering services', 'Hard to differentiate beyond "we answer"'], hookLines: ['When a basement floods at 11 PM in {city}, are you the first call?', 'You have 20 reviews. The chain has 200. Want to fix that?'] },
+      'Electrician': { peakMonths: 'Spring + commercial bid season', avgTicket: '$200–$2,500 residential / $5K-100K+ commercial', urgency: 'Medium (planned work mostly)', dm: 'Owner; project manager on commercial', topChannels: ['SEO for commercial bid terms', 'LinkedIn for commercial', 'GBP for residential', 'Builder/GC referrals'], keyMetrics: ['Commercial lead volume', 'GC referral velocity', 'Residential vs commercial mix', 'Quote-to-book ratio'], commonPains: ['Commercial bid leakage to incumbent rivals', 'Word-of-mouth maxed out, no online flow', 'Slow website kills bid form conversion'], hookLines: ['Getting commercial RFPs through your website, or just the same 5 GCs?', 'Your residential side could double if your maps presence wasn\'t a ghost town.'] },
+      'Landscaper': { peakMonths: 'Mar–Oct (spring rush kills you if not prepped)', avgTicket: '$3K-15K design/install / $100-300 maintenance', urgency: 'Medium (research-driven)', dm: 'Owner; design lead on larger projects', topChannels: ['Instagram (visual proof)', 'Pinterest', 'SEO for design terms', 'GBP'], keyMetrics: ['Before/after engagement', 'Spring rush pre-bookings', 'Maintenance contract retention', 'Avg job ticket trend'], commonPains: ['Spring rush hits unprepared every year', 'Underpriced maintenance contracts', 'No social/visual presence for high-ticket design work'], hookLines: ['Spring rush hits in 8 weeks — do you have a plan or is it $4K of Google Ads again?', 'Your work looks 10x better in person than on your website. Want to fix that?'] },
+      'Painter': { peakMonths: 'May–Sep (exterior), Year-round (interior)', avgTicket: '$2K-12K residential', urgency: 'Medium', dm: 'Owner', topChannels: ['Before/after Instagram', 'Local SEO', 'Google Ads (interior peaks fall/winter)', 'Houzz for high-end residential'], keyMetrics: ['Job booking rate', 'Interior vs exterior mix', 'Avg ticket trend', 'Referral velocity'], commonPains: ['Most fragmented trade — 100s of local competitors', 'Lowballed by handyman crews', 'No portfolio visibility online'], hookLines: ['100 painters in {city} — none of them are doing real marketing. That\'s the opening.', 'When was the last time you Googled \'house painter near me\' in your own town? Try it now.'] },
+      'General Contractor': { peakMonths: 'Year-round; weather affects schedule', avgTicket: '$25K-$500K+', urgency: 'Low (60-90 day sales cycle)', dm: 'Owner; spouse often co-DM on residential', topChannels: ['SEO + content marketing', 'Houzz + Angi for residential', 'LinkedIn for commercial', 'Email nurture critical'], keyMetrics: ['Pipeline value at any moment', 'Email open + click rates', 'Sales cycle length', 'Avg ticket trend'], commonPains: ['Long cycle = lots of lost-to-forgetfulness deals', 'Project galleries weak', 'Trust signals missing on website'], hookLines: ['GC cycles run 60-90 days. Are you actively staying top of mind in that window?', 'Your website portfolio is doing 20% of the closing work. Could be doing 80%.'] },
+      'Concrete': { peakMonths: 'Apr–Oct (weather-dependent)', avgTicket: '$3K-25K residential / $50K+ commercial', urgency: 'Medium', dm: 'Owner', topChannels: ['GBP heavy', 'Before/after photos on Instagram', 'Google Ads driveway/patio', 'Review velocity'], keyMetrics: ['Review count + star rating', 'Avg job ticket', 'Driveway vs patio vs commercial mix'], commonPains: ['Short consideration window — homeowner picks fast', 'Reviews are the deciding factor and most concrete contractors don\'t manage them', 'Hard to differentiate from competitor'], hookLines: ['Driveways and patios are 2-week decisions. Are you in the first 3 names called?', 'You have 4.4 stars / 28 reviews. The top 3 in your market have 4.8 / 100+.'] },
+      'Remodeler': { peakMonths: 'Year-round; kitchen/bath peaks spring + fall', avgTicket: '$15K-150K+', urgency: 'Low (60-120 day cycle, very visual)', dm: 'Owner; spouse usually co-DM', topChannels: ['Houzz', 'Pinterest', 'Instagram', 'SEO + content', 'Email nurture'], keyMetrics: ['Portfolio engagement', 'Houzz inquiry volume', 'Sales cycle length', 'Avg ticket size'], commonPains: ['Portfolio is everything — most sites have stock photos', 'Long sales cycle dies in middle from no nurture', 'Pricing transparency vs competition'], hookLines: ['Remodelers live and die on portfolio. Is yours doing the selling?', 'Most remodeler sites lose the sale before the form fills. Want to see your conversion rate?'] },
+      'Masonry': { peakMonths: 'Apr–Oct', avgTicket: '$5K-50K', urgency: 'Low', dm: 'Owner', topChannels: ['Portfolio-heavy site', 'GBP', 'Pinterest', 'Houzz'], keyMetrics: ['Job size trend', 'Past 3 years portfolio quality', 'Lead source mix'], commonPains: ['Portfolio scattered on FB posts only', 'No SEO presence', 'Word-of-mouth ceiling hit'], hookLines: ['Your brick work is incredible. Nobody can find it online. Want to fix that?'] },
+      'Insulation': { peakMonths: 'Sep–Feb (cold prep), Apr–Jun (rebate season)', avgTicket: '$2K-8K residential', urgency: 'Medium', dm: 'Owner', topChannels: ['SEO for rebate terms', 'Utility partner referrals', 'Google Ads seasonal', 'GBP'], keyMetrics: ['Rebate-driven lead volume', 'Utility partner pipeline', 'Seasonality smoothing'], commonPains: ['Rebate dependency creates feast-or-famine cycles', 'Most insulation companies don\'t target rebate intent online'], hookLines: ['Rebate season drives 60% of insulation jobs. Are you capturing the rebate-curious traffic?'] },
+      'Flooring': { peakMonths: 'Year-round; spring peak', avgTicket: '$3K-20K', urgency: 'Low (4-quote consideration)', dm: 'Owner; homeowner often gets 4 quotes', topChannels: ['SEO room-by-room (kitchen flooring, bathroom flooring, etc.)', 'Reviews', 'Instagram', 'Google Ads'], keyMetrics: ['Quote-to-book ratio', 'Avg job ticket', 'Material attach rates'], commonPains: ['Most price-shopped trade', 'Differentiation requires room-by-room SEO most don\'t do', 'Lose to big-box stores on perception'], hookLines: ['You\'re the 4th quote they got. What makes you the one they call back?'] },
+      'Pest Control': { peakMonths: 'Mar–Oct (seasonal pest cycles)', avgTicket: '$200-500 single / $400-1200 annual plan', urgency: 'High (active infestations)', dm: 'Owner; sometimes office manager', topChannels: ['Seasonal Google Ads', 'GBP', 'Recurring contract email', 'Yard signs'], keyMetrics: ['Recurring contract conversion', 'Seasonal ad ROI', 'Cost per qualified lead'], commonPains: ['Generic "pest control near me" PPC burns budget', 'No seasonal ad calendar', 'Recurring contracts underemphasized'], hookLines: ['Mice in fall, ants in spring, mosquitoes in summer. Are your ads firing for the right pest in the right week?'] },
+      'Pressure Washing': { peakMonths: 'Apr–Oct', avgTicket: '$200-2,500', urgency: 'Low (visible-need driven)', dm: 'Owner; sometimes solo operator', topChannels: ['Instagram (highest visual-to-conversion ratio)', 'TikTok before/afters', 'GBP', 'Door hangers + neighborhood marketing'], keyMetrics: ['Instagram engagement', 'Booking velocity', 'Add-on services rate'], commonPains: ['No social presence wastes the visual edge', 'Underpricing vs competitors', 'No add-on motion (gutter cleaning, soft wash)'], hookLines: ['Pressure washing is 100% visual. If your Instagram isn\'t on point, you\'re losing decision traffic in the first 3 seconds.'] },
+      'Tree Service': { peakMonths: 'Mar–Nov; storm-spike anytime', avgTicket: '$300-5,000', urgency: 'Extreme (emergency post-storm)', dm: 'Owner', topChannels: ['Google Local Service Ads', 'GBP with 24/7 emergency badge', 'Storm-response Google Ads', 'Insurance partnerships'], keyMetrics: ['Emergency response time', 'Storm-day call volume', 'Insurance pre-approval pipeline'], commonPains: ['Storm-day chaos = lost calls', 'No proactive seasonal marketing', 'Lose to chain franchises on Google'], hookLines: ['When a tree comes down at 2 AM in {city}, are you the first call?'] },
+      'Other': { peakMonths: 'Varies', avgTicket: 'Varies', urgency: 'Varies', dm: 'Owner typically', topChannels: ['Discovery first — ask them where their leads come from', 'GBP almost always under-leveraged', 'Reviews universally weak'], keyMetrics: ['Lead source mix', 'Customer acquisition cost', 'Avg job ticket'], commonPains: ['Generic pain — need to discover via questioning'], hookLines: ['Quick gut check — when somebody Googles what you do, are you on page one?'] }
+    };
+
+    // War-room intel layer — additive, keyed to TRADES. Pricing/ticket data lives in TRADES only.
+    const INTEL = {
+      'Roofer': {
+        callWindow: 'Tue–Wed, 7–7:45 AM — before crews dispatch. Day 4–7 post-storm beats everything.',
+        budgetWindow: 'Jan–Mar — pre-storm-season marketing spend gets set here.',
+        killshot: 'Storm hits, homeowner Googles, an out-of-town chaser gets the roof. That is the entire problem in one sentence — and it is fixable before the next storm.',
+        sellAngle: 'Sell URGENCY + territory defense. Every storm season they lose roofs to chasers who out-market them in their own zip code. You are the home-field advantage.',
+        stormRule: 'DAY 4–7 RULE: Days 1–3 post-storm they are buried in triage — do not call. After day 7, chasers own the search results. Day 4 is the call.'
+      },
+      'HVAC': {
+        callWindow: 'Shoulder season gold: Mar–Apr + Sep–Oct. Tue–Wed 7–8 AM or 4–5 PM. Never during the first heat wave or cold snap.',
+        budgetWindow: 'Jan–Feb (before cooling season) and Aug (before heating season).',
+        killshot: 'Your phone rings off the hook two weeks a year and sits quiet the rest. Marketing is how you smooth that curve — maintenance plans sold in the slow months.',
+        sellAngle: 'Sell SEASONALITY SMOOTHING. They know the feast-famine cycle hurts — pitch recurring maintenance-plan lead flow, not generic leads.'
+      },
+      'Plumber': {
+        callWindow: 'Tue–Wed, 9–11 AM — between morning emergency calls. Lunch works too.',
+        budgetWindow: 'Jan–Mar annual planning; also right after they lose a big month to a competitor.',
+        killshot: 'When a basement floods at 11 PM, the homeowner calls whoever Google shows first with 200 reviews. Right now that is not you — and reviews are the fastest thing to fix.',
+        sellAngle: 'Sell REVIEW VELOCITY + emergency capture. The math is simple: more reviews = first call at panic hour = highest-margin jobs.'
+      },
+      'Electrician': {
+        callWindow: 'Tue–Wed, 7–8 AM before scheduled jobs, or lunch. Predictable schedules = predictable windows.',
+        budgetWindow: 'Jan–Mar, and commercial bid season ramp-up (late winter).',
+        killshot: 'Most electricians around here do zero marketing. I am not asking you to switch agencies — I am telling you the category is wide open and the first one in owns it.',
+        sellAngle: 'CATEGORY SELL — do NOT agency-compare. Nobody in this trade markets. Sell being FIRST in an empty category, not being better than a competitor they do not have.'
+      },
+      'Landscaper': {
+        callWindow: 'Nov–Feb planning season they actually answer. In-season: before 7 AM or after 6 PM only.',
+        budgetWindow: 'Dec–Feb — spring rush budgets get locked before March.',
+        killshot: 'Spring rush is coming whether you are ready or not. The guys who booked out by April started marketing in January. Which one are you this year?',
+        sellAngle: 'Sell PRE-BOOKING the spring rush. Their pain is an annual, predictable panic — position marketing as the thing that ends it.'
+      },
+      'Painter': {
+        callWindow: 'Tue–Wed early morning. Winter = interior season = more phone time and more receptive.',
+        budgetWindow: 'Jan–Mar, when exterior season planning happens.',
+        killshot: 'There are a hundred painters in this market and not one of them is doing real marketing. That is not a threat — that is the single biggest opening any trade around here has.',
+        sellAngle: 'Sell STANDING OUT in the most fragmented trade. First painter with a real portfolio site + reviews engine wins the whole zip code.'
+      },
+      'General Contractor': {
+        callWindow: 'Tue–Thu, lunch or after 5 PM. GCs live on the phone — catch them between fires.',
+        budgetWindow: 'Jan–Mar annual planning; also immediately after landing a big project (cash confidence).',
+        killshot: 'Your sales cycle is 90 days and your follow-up is a sticky note. How many deals died in that window last year because somebody forgot to stay in front of them?',
+        sellAngle: 'Sell NURTURE + trust signals. Long cycle = deals lost to silence. Email nurture and portfolio proof carry the 90-day window for them.'
+      },
+      'Concrete': {
+        callWindow: 'Tue–Wed, 7–8 AM before pours. Rainy days = full office day = best cold-call weather in the trade.',
+        budgetWindow: 'Jan–Mar, before the Apr–Oct pour season.',
+        killshot: 'Homeowners pick a concrete guy in two weeks flat, and they pick off reviews. Almost nobody in this trade manages theirs — first one who does gets the driveway.',
+        sellAngle: 'CATEGORY SELL — do NOT agency-compare. Like electricians, this trade barely markets. Sell being the first name in an empty category. Reviews + GBP = the whole game.'
+      },
+      'Remodeler': {
+        callWindow: 'Tue–Thu mid-morning — more office-based than field trades.',
+        budgetWindow: 'Jan–Mar and Aug–Sep (ahead of the spring + fall kitchen/bath peaks).',
+        killshot: 'A $60K kitchen client will study your portfolio for three weeks before calling. If your site runs on stock photos, they already called someone else.',
+        sellAngle: 'Sell PORTFOLIO + nurture. High ticket, long visual sales cycle — their website is either their best closer or their silent deal-killer.'
+      },
+      'Masonry': {
+        callWindow: 'Early AM in season. Nov–Mar downtime = long, receptive conversations.',
+        budgetWindow: 'Winter (Nov–Mar) — planning the Apr–Oct season.',
+        killshot: 'Your brickwork is genuinely impressive and it is buried in a Facebook album from 2022. Nobody hiring a mason ever sees your best work. That is the whole fix.',
+        sellAngle: 'Sell VISIBILITY for craft-proud work. The product sells itself — it just is not online. Easy, gratifying win.'
+      },
+      'Insulation': {
+        callWindow: 'Jul–Aug lull between rebate season and cold prep. Tue–Wed mornings.',
+        budgetWindow: 'Aug (before Sep–Feb cold prep) and Feb–Mar (before rebate season).',
+        killshot: 'Rebate season drives most of your year, and the homeowners Googling rebates right now are landing on the utility website — not yours. That traffic is free to take.',
+        sellAngle: 'Sell REBATE-INTENT capture. They know the feast-famine rebate cycle — nobody in the trade targets rebate keywords. Specific, provable, empty lane.'
+      },
+      'Flooring': {
+        callWindow: 'Tue–Thu mid-morning showroom hours.',
+        budgetWindow: 'Jan–Feb, before the spring peak.',
+        killshot: 'You are the fourth quote every homeowner gets. The one they call back is the one whose reviews and site made the decision before you ever walked in.',
+        sellAngle: 'Sell DIFFERENTIATION in the most price-shopped trade. Room-by-room SEO + review edge = winning before the quote stage.'
+      },
+      'Pest Control': {
+        callWindow: 'Tue–Wed, 8–9 AM before routes roll. Winter = slow season = receptive.',
+        budgetWindow: 'Jan–Feb, before the Mar–Oct pest cycle spins up.',
+        killshot: 'Mice in fall, ants in spring, mosquitoes in summer — and your ads say the same thing in every season. A seasonal ad calendar alone would beat what you are running.',
+        sellAngle: 'Sell RECURRING REVENUE — annual plans are their best economics and their weakest marketing. Seasonal ads feed the plan funnel.'
+      },
+      'Pressure Washing': {
+        callWindow: 'Evenings + weekends — usually a solo operator on the wand all day.',
+        budgetWindow: 'Feb–Mar, before the Apr–Oct season.',
+        killshot: 'Yours is the most visual trade that exists and your Instagram is empty. Before/after content is free money in this business — you are leaving it on the driveway.',
+        sellAngle: 'Sell the VISUAL EDGE. Lowest-cost content, highest visual payoff of any trade. Social + GBP photos do the selling.'
+      },
+      'Tree Service': {
+        callWindow: 'Tue–Wed mornings. Post-storm: same day 4–7 window as roofers.',
+        budgetWindow: 'Jan–Feb, before Mar–Nov season.',
+        killshot: 'A tree through a roof at 2 AM is the highest-panic search in local services. Whoever Google shows first gets the job at full emergency rate. Is that you?',
+        sellAngle: 'Sell EMERGENCY CAPTURE — LSA + 24/7 GBP badge + storm-response ads. Panic searches pay premium rates.',
+        stormRule: 'DAY 4–7 RULE: Same as roofers. Days 1–3 they are slammed with emergency drops. Day 4–7, the adrenaline fades and the marketing conversation lands.'
+      },
+      'Other': {
+        callWindow: 'Default doctrine: Tue–Wed, 7–8 AM, lunch, or after 5 PM.',
+        budgetWindow: 'Jan–Mar — annual budget season across nearly every trade.',
+        killshot: 'Quick gut check — when somebody Googles what you do in this town, are you on page one? Because I looked before I called, and I want to show you what I found.',
+        sellAngle: 'DISCOVER FIRST. Ask where leads come from today. GBP is almost always under-leveraged and reviews are almost always weak — start there.'
+      }
+    };
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function render(trade) {
+      const t = TRADES[trade];
+      if (!t) return;
+      const x = INTEL[trade] || {};
+      document.getElementById('tref-card').innerHTML = `
+        ${x.killshot ? `
+        <div class="tref__killshot">
+          <div class="tref__killshot-label">🎯 Killshot — lead with this</div>
+          <div class="tref__killshot-line">"${esc(x.killshot)}"</div>
+        </div>` : ''}
+        <div class="tref__timing">
+          <div class="tref__tile tref__tile--hot">
+            <div class="tref__tile-label">📞 Best call window</div>
+            <div class="tref__tile-value">${esc(x.callWindow || 'Tue–Wed, 7–8 AM / lunch / 5 PM+')}</div>
+          </div>
+          <div class="tref__tile tref__tile--hot">
+            <div class="tref__tile-label">💰 Budget window</div>
+            <div class="tref__tile-value">${esc(x.budgetWindow || 'Jan–Mar')}</div>
+          </div>
+          <div class="tref__tile">
+            <div class="tref__tile-label">Peak months</div>
+            <div class="tref__tile-value">${esc(t.peakMonths)}</div>
+          </div>
+          <div class="tref__tile">
+            <div class="tref__tile-label">Urgency</div>
+            <div class="tref__tile-value">${esc(t.urgency)}</div>
+          </div>
+        </div>
+        ${x.stormRule ? `<div class="tref__storm"><b>⛈ Storm rule</b>${esc(x.stormRule)}</div>` : ''}
+        ${x.sellAngle ? `<div class="tref__angle"><b>How to sell this trade</b>${esc(x.sellAngle)}</div>` : ''}
+        <div class="tref__cols">
+          <div class="tref__col-card">
+            <div class="tref__section">
+              <div class="tref__heading">Quick facts</div>
+              <div class="tref__row"><span>Avg ticket</span><span>${t.avgTicket}</span></div>
+              <div class="tref__row"><span>Decision maker</span><span>${t.dm}</span></div>
+            </div>
+            <div class="tref__section" style="margin-bottom:0">
+              <div class="tref__heading">Top channels that work</div>
+              <ul class="tref__list">${t.topChannels.map(c => '<li>' + esc(c) + '</li>').join('')}</ul>
+            </div>
+          </div>
+          <div class="tref__col-card">
+            <div class="tref__section">
+              <div class="tref__heading">Key metrics they care about</div>
+              <ul class="tref__list">${t.keyMetrics.map(m => '<li>' + esc(m) + '</li>').join('')}</ul>
+            </div>
+            <div class="tref__section" style="margin-bottom:0">
+              <div class="tref__heading">Common pains</div>
+              <ul class="tref__list">${t.commonPains.map(p => '<li>' + esc(p) + '</li>').join('')}</ul>
+            </div>
+          </div>
+        </div>
+        <div class="tref__section" style="margin-bottom:0">
+          <div class="tref__heading">Hook lines on a cold call</div>
+          <ul class="tref__list">${t.hookLines.map(h => '<li style="color:var(--color-accent)">"' + esc(h) + '"</li>').join('')}</ul>
+        </div>
+      `;
+    }
+    const nav = document.getElementById('tref-nav');
+    nav.innerHTML = Object.keys(TRADES).map((t, i) => `<button class="tref__chip ${i === 0 ? 'active' : ''}" data-trade="${t}">${t}</button>`).join('');
+    nav.addEventListener('click', e => {
+      const b = e.target.closest('[data-trade]');
+      if (!b) return;
+      document.querySelectorAll('.tref__chip').forEach(c => c.classList.remove('active'));
+      b.classList.add('active');
+      render(b.dataset.trade);
+    });
+    render(Object.keys(TRADES)[0]);
+  </script>
+</body>
+</html>

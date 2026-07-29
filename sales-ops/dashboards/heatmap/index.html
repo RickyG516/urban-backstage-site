@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <script>
+    (function() {
+      var w = (window.screen && window.screen.width) || window.innerWidth;
+      if (w < 600 || /iPhone|Android.*Mobile|iPod/i.test(navigator.userAgent)) document.documentElement.setAttribute('data-mobile', 'phone');
+      else if (w < 900) document.documentElement.setAttribute('data-mobile', 'tablet');
+    })();
+  </script>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Best Dial Windows — Sales Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/sales-ops/shared/cockpit-shell.css?v=43" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/245833525.js"></script>
+</head>
+<body>
+  <main class="cockpit">
+    <section class="dash">
+      <div class="dash__header">
+        <div>
+          <h1 class="dash__title">Best Dial Windows</h1>
+          <p class="dash__sub">When you actually get HOT/WARM outcomes by day-of-week × hour. Darker = better. Needs ~50+ calls to be meaningful.</p>
+        </div>
+      </div>
+      <div id="heatmap-host"></div>
+      <div class="dash__section">
+        <div class="dash__section-title">Best windows surfaced (top 5)</div>
+        <div id="top-windows"></div>
+      </div>
+    </section>
+    <div class="brand-stamp">
+      <div class="brand-stamp__top">Urban Niche Co. | urbannicheco.com | (515) 344-4053</div>
+      <div class="brand-stamp__tag">Marketing built for contractors. Let's build something.</div>
+    </div>
+  </main>
+  <script src="/sales-ops/shared/nav-shell.js?v=40" defer></script>
+  <script>
+    function allLocalCalls() {
+      const out = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('unc_cockpit_call_log_')) {
+          try { out.push(...JSON.parse(localStorage.getItem(k))); } catch(e) {}
+        }
+      }
+      return out;
+    }
+
+    function load() {
+      render(allLocalCalls());
+    }
+
+    function render(calls) {
+      const matrix = Array.from({length: 7}, () => Array(13).fill(0));
+      const totals = Array.from({length: 7}, () => Array(13).fill(0));
+      calls.forEach(c => {
+        const d = new Date(c.timestamp);
+        const dow = d.getDay(), h = d.getHours();
+        if (h >= 7 && h <= 19) {
+          totals[dow][h-7]++;
+          if (['HOT','BOOKED','WARM','CLOSED_WON','PROPOSAL_REQUESTED','FOLLOW_UP_BOOKED','INFO_SENT'].includes(c.outcome_code)) matrix[dow][h-7]++;
+        }
+      });
+      const maxVal = Math.max(1, ...matrix.flat());
+      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const host = document.getElementById('heatmap-host');
+      let html = '<div class="big-heatmap"><div></div>';
+      for (let h = 7; h <= 19; h++) html += `<div class="big-heatmap__label-y" style="justify-content:center;padding:0;font-size:0.65rem">${h}</div>`;
+      for (let dow = 0; dow < 7; dow++) {
+        html += `<div class="big-heatmap__label-y">${days[dow]}</div>`;
+        for (let h = 0; h < 13; h++) {
+          const v = matrix[dow][h];
+          const intensity = v === 0 ? 0 : Math.min(5, Math.ceil((v / maxVal) * 5));
+          html += `<div class="big-heatmap__cell" data-intensity="${intensity}" title="${days[dow]} ${h+7}:00 — ${v} positive (${totals[dow][h]} total)"></div>`;
+        }
+      }
+      html += '</div>';
+      host.innerHTML = html;
+
+      const flat = [];
+      for (let dow = 0; dow < 7; dow++) for (let h = 0; h < 13; h++) if (matrix[dow][h] > 0) flat.push({dow, h:h+7, conv:matrix[dow][h], total:totals[dow][h]});
+      flat.sort((a,b) => b.conv - a.conv);
+      const topHost = document.getElementById('top-windows');
+      if (!flat.length) {
+        topHost.innerHTML = '<div class="dash__empty"><div class="dash__empty-icon">🔥</div><div class="dash__empty-title">No data yet</div><div>Log calls and best windows will surface here.</div></div>';
+      } else {
+        topHost.innerHTML = '<div class="dash__grid">' + flat.slice(0,5).map((w,i) =>
+          `<div class="dash__card"><div class="dash__card-label">#${i+1} BEST WINDOW</div><div class="dash__card-value" style="font-size:1.6rem">${days[w.dow]} ${w.h}:00</div><div class="dash__card-trend dash__card-trend--up">${w.conv} positive / ${w.total} total (${Math.round((w.conv/w.total)*100)}%)</div></div>`
+        ).join('') + '</div>';
+      }
+    }
+
+    load();
+    setInterval(load, 60000);
+
+  </script>
+</body>
+</html>

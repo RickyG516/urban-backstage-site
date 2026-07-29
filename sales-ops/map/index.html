@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UNC — Prospect Intelligence</title>
+<script src="/sales-ops/shared/d3.min.js"></script>
+<script src="/sales-ops/shared/topojson.min.js"></script>
+<style>
+:root {
+  --orange:#e36b1e; --hot:#ff4040; --warm:#e36b1e; --cold:#38bdf8;
+  --bg:#030712; --panel:rgba(3,7,18,0.94); --border:rgba(56,189,248,0.15);
+  --cyan:#38bdf8; --purple:#a78bfa;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Courier New',monospace;color:#fff;}
+
+/* ── CURSOR ── */
+*{cursor:none!important;}
+#crosshair{
+  position:fixed;width:32px;height:32px;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+}
+#crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(56,189,248,0.8);}
+#crosshair::before{width:1px;height:100%;left:50%;top:0;}
+#crosshair::after{width:100%;height:1px;top:50%;left:0;}
+.ch-ring{
+  position:absolute;inset:4px;border:1px solid rgba(56,189,248,0.4);
+  border-radius:50%;animation:chpulse 2s ease-in-out infinite;
+}
+@keyframes chpulse{0%,100%{transform:scale(1);opacity:0.4;}50%{transform:scale(1.15);opacity:0.8;}}
+
+/* ── SCANLINES ── */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:800;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);
+}
+
+/* ── GRID BG ── */
+#grid-bg{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(56,189,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.03) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+
+/* ── MAP SVG ── */
+#map{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+
+/* ── HEADER ── */
+#header{
+  position:absolute;top:0;left:0;right:0;height:52px;z-index:50;
+  background:linear-gradient(180deg,rgba(3,7,18,0.98),transparent);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 20px;
+}
+.brand-block .brand{font-size:0.65rem;font-weight:700;letter-spacing:0.28em;color:var(--orange);text-transform:uppercase;}
+.brand-block .sub{font-size:0.42rem;letter-spacing:0.18em;color:rgba(56,189,248,0.4);text-transform:uppercase;margin-top:2px;}
+#clock{font-size:0.58rem;letter-spacing:0.1em;color:rgba(56,189,248,0.5);}
+
+/* ── STAT BAR ── */
+#stat-bar{
+  position:absolute;top:52px;left:0;right:0;z-index:50;
+  display:flex;border-bottom:1px solid var(--border);
+  background:rgba(3,7,18,0.88);backdrop-filter:blur(10px);
+}
+.st{
+  flex:1;padding:9px 0 7px;text-align:center;border-right:1px solid var(--border);
+  position:relative;overflow:hidden;transition:background 0.2s;
+}
+.st:last-child{border-right:none;}
+.st:hover{background:rgba(56,189,248,0.03);}
+.st-val{font-size:1.35rem;font-weight:700;letter-spacing:0.03em;line-height:1;}
+.st-lbl{font-size:0.4rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:3px;}
+.st-bar{position:absolute;bottom:0;left:0;height:2px;width:0%;transition:width 1.4s cubic-bezier(0.4,0,0.2,1);}
+
+/* ── FILTER BAR ── */
+#filter-bar{
+  position:absolute;right:0;top:52px;z-index:60;
+  display:flex;flex-direction:column;gap:3px;align-items:stretch;
+  padding:8px 6px;width:72px;
+  background:rgba(3,7,18,1);border-left:1px solid var(--border);
+}
+.ftag{
+  padding:4px 4px;border-radius:3px;font-size:0.38rem;font-weight:700;
+  letter-spacing:0.10em;text-transform:uppercase;cursor:none;
+  border:1px solid rgba(56,189,248,0.2);color:rgba(56,189,248,0.5);
+  background:transparent;transition:all 0.15s;text-align:center;
+}
+.ftag:hover,.ftag.on{border-color:var(--cyan);color:var(--cyan);background:rgba(56,189,248,0.08);}
+.ftag.all.on{border-color:var(--orange);color:var(--orange);background:rgba(227,107,30,0.08);}
+#conquest-btn{
+  padding:3px 10px;border-radius:3px;font-size:0.42rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;cursor:none;
+  border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);
+  background:transparent;transition:all 0.15s;white-space:nowrap;margin-left:4px;
+}
+#conquest-btn.on{border-color:#a78bfa;color:#a78bfa;background:rgba(167,139,250,0.08);}
+
+/* ── MAP ELEMENTS ── */
+.state-fill{fill:#07101f;stroke:#0c1e38;stroke-width:0.5;transition:fill 0.4s,stroke 0.4s,opacity 0.3s;}
+.state-fill.heat1{fill:#081525;}
+.state-fill.heat2{fill:#0a1c30;}
+.state-fill.heat3{fill:#0d2240;}
+.state-fill.heat4{fill:#102850;}
+.state-fill.heat5{fill:#143060;}
+.state-fill{vector-effect:non-scaling-stroke;}
+.state-border{vector-effect:non-scaling-stroke;}
+.state-fill.selected{fill:#12233f!important;stroke:rgba(56,189,248,0.9)!important;stroke-width:1.5;filter:drop-shadow(0 0 6px rgba(56,189,248,0.55));}
+.state-fill:hover:not(.selected){fill:#0f2030;cursor:none;}
+.state-border{fill:none;stroke:rgba(56,189,248,0.1);stroke-width:0.5;pointer-events:none;}
+
+/* ── DOTS ── */
+.dot-g{pointer-events:all;}
+/* rings driven by JS rAF — no CSS animation */
+.ring{fill:none;stroke-width:0.7;opacity:0;}
+@keyframes dotin{0%{transform:scale(0);opacity:0;}60%{transform:scale(1.3);}100%{transform:scale(1);opacity:1;}}
+.dot-core{animation:dotin 0.4s ease-out forwards;}
+
+/* ── SIGNAL LINES ── */
+.signal-line{stroke-width:0.4;opacity:0;pointer-events:none;stroke-dasharray:4 4;}
+@keyframes signalin{0%{opacity:0;stroke-dashoffset:100;}50%{opacity:0.4;}100%{opacity:0;stroke-dashoffset:0;}}
+
+/* ── STATE PINS (floating stat cards) ── */
+.state-pin-group{pointer-events:none;}
+.pin-bg{fill:rgba(3,7,18,0.88);stroke:rgba(56,189,248,0.3);stroke-width:0.5;rx:3;}
+.pin-hot{fill:#ff4040;}
+.pin-warm{fill:#e36b1e;}
+.pin-unt{fill:rgba(255,255,255,0.2);}
+.pin-label{font-size:3.8px;fill:rgba(56,189,248,0.8);font-family:'Courier New',monospace;font-weight:700;letter-spacing:0.08em;}
+.pin-stem{stroke:rgba(56,189,248,0.3);stroke-width:0.4;}
+
+/* ── CITY LAYER ── */
+.city-g{pointer-events:all;}
+/* City hover name tag */
+.city-hover-tag{
+  pointer-events:none;
+  font-family:'Courier New',monospace;font-size:0px;font-weight:700;
+  fill:#fff;text-anchor:middle;
+  filter:drop-shadow(0 0 4px rgba(0,0,0,0.9));
+  transition:font-size 0.1s;
+}
+/* Nearby-cities popover */
+#city-popover{
+  position:fixed;z-index:200;display:none;
+  background:rgba(3,7,18,0.97);border:1px solid rgba(56,189,248,0.35);
+  border-radius:7px;padding:8px 0;min-width:180px;max-width:240px;
+  box-shadow:0 0 30px rgba(56,189,248,0.08),0 8px 40px rgba(0,0,0,0.85);
+}
+#city-popover .pop-title{
+  font-size:0.38rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(56,189,248,0.4);padding:0 12px 6px;border-bottom:1px solid rgba(56,189,248,0.1);
+  margin-bottom:4px;
+}
+.pop-city{
+  padding:6px 12px;font-size:0.52rem;letter-spacing:0.04em;cursor:none;
+  display:flex;align-items:center;gap:8px;transition:background 0.1s;
+}
+.pop-city:hover{background:rgba(56,189,248,0.08);}
+.pop-city .pc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.pop-city .pc-name{color:#fff;font-weight:700;}
+.pop-city .pc-meta{font-size:0.42rem;color:rgba(255,255,255,0.35);margin-left:auto;}
+.city-label{font-family:'Courier New',monospace;fill:rgba(255,255,255,0.45);pointer-events:none;}
+@keyframes citypin{0%{transform:scale(0);opacity:0;}70%{transform:scale(1.2);}100%{transform:scale(1);opacity:1;}}
+.city-core{animation:citypin 0.35s ease-out forwards;}
+
+/* ── BAR CHART ── */
+#city-chart{
+  position:absolute;bottom:36px;right:220px;z-index:55;
+  background:var(--panel);border:1px solid var(--border);border-radius:6px;
+  padding:12px 14px;width:200px;display:none;
+}
+#city-chart h5{font-size:0.45rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+.bar-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.bar-city{font-size:0.42rem;color:rgba(255,255,255,0.4);width:70px;letter-spacing:0.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bar-track{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:2px;background:var(--cyan);transition:width 0.6s ease;}
+.bar-n{font-size:0.38rem;color:rgba(56,189,248,0.6);min-width:14px;text-align:right;}
+
+/* ── SIDE PANEL ── */
+#side-panel{
+  position:absolute;top:89px;left:0;bottom:28px;width:210px;z-index:55;
+  background:var(--panel);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateX(-215px);transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);
+}
+#side-panel.open{transform:translateX(0);}
+#panel-hd{
+  padding:10px 12px 8px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+}
+#panel-title{font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--cyan);}
+#panel-close{background:none;border:none;color:rgba(255,255,255,0.25);font-size:1rem;cursor:none;line-height:1;padding:0;}
+#panel-close:hover{color:#fff;}
+#panel-body{flex:1;overflow-y:auto;padding:10px 12px;}
+#panel-body::-webkit-scrollbar{width:2px;}
+#panel-body::-webkit-scrollbar-thumb{background:rgba(56,189,248,0.15);border-radius:2px;}
+.p-section{font-size:0.38rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(56,189,248,0.4);margin:8px 0 5px;}
+.c-row{padding:6px 0;border-bottom:1px solid rgba(56,189,248,0.05);}
+.c-row:last-child{border-bottom:none;}
+.c-name{font-size:0.52rem;font-weight:700;color:#fff;letter-spacing:0.03em;margin-bottom:2px;}
+.c-meta{font-size:0.42rem;color:rgba(255,255,255,0.32);letter-spacing:0.05em;}
+.c-hook{font-size:0.42rem;color:rgba(227,107,30,0.65);margin-top:2px;letter-spacing:0.03em;}
+.badge{display:inline-block;padding:1px 6px;border-radius:2px;font-size:0.38rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1px solid;margin-top:3px;}
+.pill-row{display:flex;gap:5px;flex-wrap:wrap;margin:4px 0 6px;}
+
+/* ── ZOOM BTNS ── */
+#zoom-btns{position:absolute;right:80px;bottom:40px;display:flex;flex-direction:column;gap:5px;z-index:50;}
+.zbtn{
+  width:30px;height:30px;background:rgba(3,7,18,0.85);
+  border:1px solid var(--border);border-radius:4px;
+  color:rgba(56,189,248,0.6);font-size:1rem;cursor:none;
+  display:flex;align-items:center;justify-content:center;transition:all 0.15s;
+}
+.zbtn:hover{background:rgba(56,189,248,0.08);border-color:rgba(56,189,248,0.4);color:var(--cyan);}
+.zbtn.sm{font-size:0.42rem;letter-spacing:0.06em;}
+
+/* ── TOOLTIP ── */
+#tip{
+  position:fixed;z-index:300;pointer-events:none;display:none;
+  background:var(--panel);border:1px solid var(--border);border-radius:6px;
+  padding:9px 12px;min-width:145px;box-shadow:0 0 30px rgba(56,189,248,0.06),0 8px 40px rgba(0,0,0,0.8);
+}
+#tip h4{font-size:0.58rem;color:var(--cyan);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;}
+#tip .tr{font-size:0.5rem;color:rgba(255,255,255,0.38);margin-bottom:3px;letter-spacing:0.04em;}
+#tip .tr b{color:#fff;}
+#tip .tbadges{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+#tip .tbadge{font-size:0.36rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:1px solid;}
+
+/* ── TICKER ── */
+#ticker-wrap{
+  position:absolute;bottom:0;left:0;right:0;height:28px;z-index:50;
+  background:rgba(3,7,18,0.92);border-top:1px solid var(--border);
+  display:flex;align-items:center;overflow:hidden;
+}
+#ticker-lbl{padding:0 12px;font-size:0.42rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);border-right:1px solid var(--border);height:100%;display:flex;align-items:center;white-space:nowrap;flex-shrink:0;}
+#ticker{white-space:nowrap;font-size:0.45rem;letter-spacing:0.08em;color:rgba(56,189,248,0.5);padding-left:20px;display:inline-block;animation:ticker 80s linear infinite;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;background:var(--bg);z-index:999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  transition:opacity 0.6s;
+}
+.l-brand{font-size:0.62rem;letter-spacing:0.3em;color:var(--orange);text-transform:uppercase;}
+.l-sub{font-size:0.4rem;letter-spacing:0.2em;color:rgba(56,189,248,0.4);text-transform:uppercase;}
+.l-bar{width:180px;height:1px;background:rgba(56,189,248,0.1);border-radius:1px;overflow:hidden;}
+.l-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--cyan));width:0%;transition:width 0.5s ease;}
+.l-msg{font-size:0.4rem;letter-spacing:0.14em;color:rgba(56,189,248,0.3);text-transform:uppercase;}
+
+/* corner brackets on side panel */
+.cbr{position:absolute;width:10px;height:10px;pointer-events:none;}
+.cbr.tl{top:0;left:0;border-top:1px solid rgba(56,189,248,0.35);border-left:1px solid rgba(56,189,248,0.35);}
+.cbr.tr{top:0;right:0;border-top:1px solid rgba(56,189,248,0.35);border-right:1px solid rgba(56,189,248,0.35);}
+.cbr.bl{bottom:0;left:0;border-bottom:1px solid rgba(56,189,248,0.35);border-left:1px solid rgba(56,189,248,0.35);}
+.cbr.br{bottom:0;right:0;border-bottom:1px solid rgba(56,189,248,0.35);border-right:1px solid rgba(56,189,248,0.35);}
+</style>
+</head>
+<body>
+<div id="grid-bg"></div>
+<div id="crosshair"><div class="ch-ring"></div></div>
+
+<div id="loader">
+  <div class="l-brand">Urban Niche Co.</div>
+  <div class="l-sub">Prospect Intelligence Network</div>
+  <div class="l-bar"><div class="l-fill" id="lbar"></div></div>
+  <div class="l-msg" id="lmsg">INITIALIZING SYSTEMS...</div>
+</div>
+
+<!-- Header -->
+<div id="header">
+  <div class="brand-block">
+    <div class="brand">UNC — Intel Map <span style="color:rgba(56,189,248,0.3);font-size:0.5rem;letter-spacing:0.1em">// LIVE</span></div>
+    <div class="sub">Contractor Prospect Intelligence Network — Powered by Urban Niche Co.</div>
+  </div>
+  <div id="clock"></div>
+</div>
+
+<!-- Stat bar -->
+<div id="stat-bar">
+  <div class="st"><div class="st-val" id="s-co" style="color:var(--cyan)">—</div><div class="st-lbl">Companies</div><div class="st-bar" style="background:var(--cyan)" id="b-co"></div></div>
+  <div class="st"><div class="st-val" id="s-ct" style="color:var(--cyan)">—</div><div class="st-lbl">Contacts</div><div class="st-bar" style="background:rgba(56,189,248,0.5)" id="b-ct"></div></div>
+  <div class="st"><div class="st-val" id="s-st" style="color:var(--purple)">—</div><div class="st-lbl">States</div><div class="st-bar" style="background:var(--purple)" id="b-st"></div></div>
+  <div class="st"><div class="st-val" id="s-hot" style="color:var(--hot)">—</div><div class="st-lbl">🔥 Hot</div><div class="st-bar" style="background:var(--hot)" id="b-hot"></div></div>
+  <div class="st"><div class="st-val" id="s-warm" style="color:var(--orange)">—</div><div class="st-lbl">Warm</div><div class="st-bar" style="background:var(--orange)" id="b-warm"></div></div>
+  <div class="st"><div class="st-val" id="s-unt" style="color:rgba(255,255,255,0.3)">—</div><div class="st-lbl">Untouched</div><div class="st-bar" style="background:rgba(255,255,255,0.15)" id="b-unt"></div></div>
+</div>
+
+<!-- Filter bar -->
+<div id="filter-bar">
+  <button class="ftag all on" data-trade="ALL">ALL</button>
+  <button class="ftag" data-trade="Roofer">ROOF</button>
+  <button class="ftag" data-trade="HVAC">HVAC</button>
+  <button class="ftag" data-trade="Plumber">PLUMB</button>
+  <button class="ftag" data-trade="Electrician">ELEC</button>
+  <button class="ftag" data-trade="Concrete">CONC</button>
+  <button class="ftag" data-trade="Painter">PAINT</button>
+  <button class="ftag" data-trade="Landscaper">LAND</button>
+  <button class="ftag" data-trade="General Contractor">GC</button>
+  <button class="ftag" data-trade="Remodeler">REMOD</button>
+  <button class="ftag" data-trade="Pressure Washing">P-WASH</button>
+  <button id="conquest-btn">⚔ CONQUEST</button>
+</div>
+
+<svg id="map"></svg>
+
+<!-- Side panel -->
+<div id="side-panel">
+  <div class="cbr tl"></div><div class="cbr tr"></div><div class="cbr bl"></div><div class="cbr br"></div>
+  <div id="panel-hd">
+    <span id="panel-title">SELECT A STATE</span>
+    <button id="panel-close">×</button>
+  </div>
+  <div id="panel-body"></div>
+</div>
+
+<!-- City bar chart -->
+<div id="city-chart"><h5 id="chart-title">contacts by city</h5><div id="chart-rows"></div></div>
+
+<!-- Zoom -->
+<div id="zoom-btns">
+  <button class="zbtn" id="zi">+</button>
+  <button class="zbtn" id="zo">−</button>
+  <button class="zbtn sm" id="zr">RST</button>
+</div>
+
+<div id="city-popover"><div class="pop-title" id="pop-title">Nearby Cities</div><div id="pop-list"></div></div>
+<div id="tip"></div>
+
+<div id="ticker-wrap">
+  <div id="ticker-lbl">LIVE INTEL</div>
+  <div id="ticker">—</div>
+</div>
+
+<script>
+const CITIES = [
+  {c:"Dubuque",s:"IA",lat:42.5,lng:-90.66},
+  {c:"Cedar Rapids",s:"IA",lat:41.98,lng:-91.66},
+  {c:"Des Moines",s:"IA",lat:41.59,lng:-93.62},
+  {c:"Davenport",s:"IA",lat:41.52,lng:-90.58},
+  {c:"Iowa City",s:"IA",lat:41.66,lng:-91.53},
+  {c:"Sioux City",s:"IA",lat:42.5,lng:-96.4},
+  {c:"Waterloo",s:"IA",lat:42.49,lng:-92.34},
+  {c:"Council Bluffs",s:"IA",lat:41.26,lng:-95.86},
+  {c:"Ames",s:"IA",lat:42.03,lng:-93.62},
+  {c:"Ankeny",s:"IA",lat:41.73,lng:-93.6},
+  {c:"West Des Moines",s:"IA",lat:41.57,lng:-93.71},
+  {c:"Urbandale",s:"IA",lat:41.63,lng:-93.72},
+  {c:"Marion",s:"IA",lat:42.03,lng:-91.6},
+  {c:"Bettendorf",s:"IA",lat:41.52,lng:-90.5},
+  {c:"Mason City",s:"IA",lat:43.15,lng:-93.2},
+  {c:"Fort Dodge",s:"IA",lat:42.5,lng:-94.17},
+  {c:"Burlington",s:"IA",lat:40.81,lng:-91.11},
+  {c:"Clinton",s:"IA",lat:41.84,lng:-90.19},
+  {c:"Ottumwa",s:"IA",lat:41.02,lng:-92.41},
+  {c:"Muscatine",s:"IA",lat:41.42,lng:-91.04},
+  {c:"Coralville",s:"IA",lat:41.68,lng:-91.58},
+  {c:"Marshalltown",s:"IA",lat:42.05,lng:-92.91},
+  {c:"Indianola",s:"IA",lat:41.36,lng:-93.56},
+  {c:"Altoona",s:"IA",lat:41.65,lng:-93.47},
+  {c:"Waukee",s:"IA",lat:41.61,lng:-93.89},
+  {c:"Johnston",s:"IA",lat:41.67,lng:-93.72},
+  {c:"Clive",s:"IA",lat:41.6,lng:-93.73},
+  {c:"Boone",s:"IA",lat:42.06,lng:-93.88},
+  {c:"Newton",s:"IA",lat:41.7,lng:-93.05},
+  {c:"Spencer",s:"IA",lat:43.14,lng:-95.15},
+  {c:"Oskaloosa",s:"IA",lat:41.3,lng:-92.65},
+  {c:"Keokuk",s:"IA",lat:40.4,lng:-91.39},
+  {c:"Fairfield",s:"IA",lat:41.01,lng:-91.96},
+  {c:"Carroll",s:"IA",lat:42.07,lng:-94.87},
+  {c:"Storm Lake",s:"IA",lat:42.64,lng:-95.21},
+  {c:"Decorah",s:"IA",lat:43.3,lng:-91.79},
+  {c:"Webster City",s:"IA",lat:42.47,lng:-93.82},
+  {c:"Grinnell",s:"IA",lat:41.74,lng:-92.72},
+  {c:"Pella",s:"IA",lat:41.41,lng:-92.92},
+  {c:"Mount Pleasant",s:"IA",lat:40.96,lng:-91.54},
+  {c:"Charles City",s:"IA",lat:43.07,lng:-92.67},
+  {c:"Denison",s:"IA",lat:42.02,lng:-95.35},
+  {c:"Creston",s:"IA",lat:41.06,lng:-94.36},
+  {c:"Centerville",s:"IA",lat:40.73,lng:-92.87},
+  {c:"Vinton",s:"IA",lat:42.17,lng:-92.03},
+  {c:"Atlantic",s:"IA",lat:41.4,lng:-95.01},
+  {c:"Clarinda",s:"IA",lat:40.74,lng:-95.04},
+  {c:"Oelwein",s:"IA",lat:42.67,lng:-91.91},
+  {c:"Tama",s:"IA",lat:41.97,lng:-92.58},
+  {c:"Waverly",s:"IA",lat:42.73,lng:-92.47},
+  {c:"Osceola",s:"IA",lat:41.03,lng:-93.77},
+  {c:"Emmetsburg",s:"IA",lat:43.11,lng:-94.68},
+  {c:"Fort Madison",s:"IA",lat:40.63,lng:-91.45},
+  {c:"Algona",s:"IA",lat:43.07,lng:-94.23},
+  {c:"Chicago",s:"IL",lat:41.88,lng:-87.63},
+  {c:"Aurora",s:"IL",lat:41.76,lng:-88.32},
+  {c:"Rockford",s:"IL",lat:42.27,lng:-89.09},
+  {c:"Joliet",s:"IL",lat:41.52,lng:-88.08},
+  {c:"Naperville",s:"IL",lat:41.79,lng:-88.15},
+  {c:"Springfield",s:"IL",lat:39.8,lng:-89.64},
+  {c:"Peoria",s:"IL",lat:40.69,lng:-89.59},
+  {c:"Elgin",s:"IL",lat:42.04,lng:-88.28},
+  {c:"Waukegan",s:"IL",lat:42.36,lng:-87.84},
+  {c:"Champaign",s:"IL",lat:40.12,lng:-88.24},
+  {c:"Bloomington",s:"IL",lat:40.48,lng:-88.99},
+  {c:"Decatur",s:"IL",lat:39.84,lng:-88.95},
+  {c:"Evanston",s:"IL",lat:42.05,lng:-87.69},
+  {c:"Schaumburg",s:"IL",lat:42.03,lng:-88.08},
+  {c:"Bolingbrook",s:"IL",lat:41.7,lng:-88.07},
+  {c:"Quincy",s:"IL",lat:39.93,lng:-91.41},
+  {c:"Galesburg",s:"IL",lat:40.95,lng:-90.37},
+  {c:"Kankakee",s:"IL",lat:41.12,lng:-87.86},
+  {c:"Moline",s:"IL",lat:41.51,lng:-90.52},
+  {c:"Rock Island",s:"IL",lat:41.51,lng:-90.58},
+  {c:"East St Louis",s:"IL",lat:38.62,lng:-90.15},
+  {c:"Cicero",s:"IL",lat:41.84,lng:-87.75},
+  {c:"Arlington Heights",s:"IL",lat:42.09,lng:-87.98},
+  {c:"Pekin",s:"IL",lat:40.57,lng:-89.64},
+  {c:"Carbondale",s:"IL",lat:37.73,lng:-89.22},
+  {c:"Danville",s:"IL",lat:40.12,lng:-87.63},
+  {c:"Alton",s:"IL",lat:38.89,lng:-90.18},
+  {c:"Milwaukee",s:"WI",lat:43.04,lng:-87.91},
+  {c:"Madison",s:"WI",lat:43.07,lng:-89.4},
+  {c:"Green Bay",s:"WI",lat:44.52,lng:-88.02},
+  {c:"Kenosha",s:"WI",lat:42.58,lng:-87.82},
+  {c:"Racine",s:"WI",lat:42.73,lng:-87.78},
+  {c:"Appleton",s:"WI",lat:44.26,lng:-88.41},
+  {c:"Waukesha",s:"WI",lat:43.01,lng:-88.23},
+  {c:"Oshkosh",s:"WI",lat:44.02,lng:-88.54},
+  {c:"Eau Claire",s:"WI",lat:44.81,lng:-91.49},
+  {c:"Janesville",s:"WI",lat:42.68,lng:-89.02},
+  {c:"West Allis",s:"WI",lat:43.01,lng:-88.0},
+  {c:"La Crosse",s:"WI",lat:43.8,lng:-91.24},
+  {c:"Sheboygan",s:"WI",lat:43.75,lng:-87.71},
+  {c:"Wausau",s:"WI",lat:44.96,lng:-89.63},
+  {c:"Fond du Lac",s:"WI",lat:43.77,lng:-88.44},
+  {c:"Brookfield",s:"WI",lat:43.06,lng:-88.11},
+  {c:"New Berlin",s:"WI",lat:42.98,lng:-88.11},
+  {c:"Manitowoc",s:"WI",lat:44.09,lng:-87.66},
+  {c:"Superior",s:"WI",lat:46.72,lng:-92.1},
+  {c:"Stevens Point",s:"WI",lat:44.52,lng:-89.57},
+  {c:"Beloit",s:"WI",lat:42.51,lng:-89.03},
+  {c:"Minneapolis",s:"MN",lat:44.98,lng:-93.27},
+  {c:"St Paul",s:"MN",lat:44.95,lng:-93.09},
+  {c:"Rochester",s:"MN",lat:44.02,lng:-92.47},
+  {c:"Duluth",s:"MN",lat:46.79,lng:-92.1},
+  {c:"Bloomington",s:"MN",lat:44.84,lng:-93.38},
+  {c:"Brooklyn Park",s:"MN",lat:45.09,lng:-93.37},
+  {c:"Plymouth",s:"MN",lat:45.01,lng:-93.45},
+  {c:"St Cloud",s:"MN",lat:45.56,lng:-94.16},
+  {c:"Eagan",s:"MN",lat:44.8,lng:-93.17},
+  {c:"Woodbury",s:"MN",lat:44.92,lng:-92.96},
+  {c:"Maple Grove",s:"MN",lat:45.07,lng:-93.46},
+  {c:"Eden Prairie",s:"MN",lat:44.85,lng:-93.47},
+  {c:"Coon Rapids",s:"MN",lat:45.12,lng:-93.31},
+  {c:"Burnsville",s:"MN",lat:44.77,lng:-93.28},
+  {c:"Mankato",s:"MN",lat:44.16,lng:-94.0},
+  {c:"Moorhead",s:"MN",lat:46.87,lng:-96.77},
+  {c:"Apple Valley",s:"MN",lat:44.73,lng:-93.22},
+  {c:"Edina",s:"MN",lat:44.88,lng:-93.35},
+  {c:"Winona",s:"MN",lat:44.05,lng:-91.64},
+  {c:"Fargo MN",s:"MN",lat:46.88,lng:-96.79},
+  {c:"Brainerd",s:"MN",lat:46.36,lng:-94.2},
+  {c:"Lakeville",s:"MN",lat:44.65,lng:-93.24},
+  {c:"Blaine",s:"MN",lat:45.16,lng:-93.24},
+  {c:"Stillwater",s:"MN",lat:45.06,lng:-92.81},
+  {c:"Kansas City",s:"MO",lat:39.1,lng:-94.58},
+  {c:"St Louis",s:"MO",lat:38.63,lng:-90.2},
+  {c:"Springfield",s:"MO",lat:37.21,lng:-93.29},
+  {c:"Columbia",s:"MO",lat:38.95,lng:-92.33},
+  {c:"Independence",s:"MO",lat:39.09,lng:-94.42},
+  {c:"Lee Summit",s:"MO",lat:38.91,lng:-94.38},
+  {c:"Olathe",s:"MO",lat:38.88,lng:-94.82},
+  {c:"St Joseph",s:"MO",lat:39.77,lng:-94.85},
+  {c:"St Charles",s:"MO",lat:38.78,lng:-90.48},
+  {c:"Blue Springs",s:"MO",lat:39.02,lng:-94.28},
+  {c:"Florissant",s:"MO",lat:38.79,lng:-90.32},
+  {c:"Joplin",s:"MO",lat:37.08,lng:-94.51},
+  {c:"Chesterfield",s:"MO",lat:38.66,lng:-90.58},
+  {c:"Jefferson City",s:"MO",lat:38.58,lng:-92.17},
+  {c:"Cape Girardeau",s:"MO",lat:37.31,lng:-89.52},
+  {c:"Lees Summit",s:"MO",lat:38.91,lng:-94.38},
+  {c:"Raytown",s:"MO",lat:38.99,lng:-94.46},
+  {c:"Kirkwood",s:"MO",lat:38.58,lng:-90.41},
+  {c:"Rolla",s:"MO",lat:37.95,lng:-91.77},
+  {c:"Sedalia",s:"MO",lat:38.7,lng:-93.23},
+  {c:"Omaha",s:"NE",lat:41.26,lng:-95.94},
+  {c:"Lincoln",s:"NE",lat:40.81,lng:-96.68},
+  {c:"Bellevue",s:"NE",lat:41.14,lng:-95.91},
+  {c:"Grand Island",s:"NE",lat:40.92,lng:-98.34},
+  {c:"Kearney",s:"NE",lat:40.7,lng:-99.08},
+  {c:"Fremont",s:"NE",lat:41.43,lng:-96.5},
+  {c:"Norfolk",s:"NE",lat:42.03,lng:-97.42},
+  {c:"Columbus",s:"NE",lat:41.43,lng:-97.37},
+  {c:"North Platte",s:"NE",lat:41.12,lng:-100.77},
+  {c:"Hastings",s:"NE",lat:40.59,lng:-98.39},
+  {c:"Scottsbluff",s:"NE",lat:41.87,lng:-103.66},
+  {c:"Papillion",s:"NE",lat:41.16,lng:-96.04},
+  {c:"Wichita",s:"KS",lat:37.69,lng:-97.34},
+  {c:"Overland Park",s:"KS",lat:38.98,lng:-94.67},
+  {c:"Kansas City KS",s:"KS",lat:39.11,lng:-94.63},
+  {c:"Olathe KS",s:"KS",lat:38.88,lng:-94.82},
+  {c:"Topeka",s:"KS",lat:39.05,lng:-95.68},
+  {c:"Lawrence",s:"KS",lat:38.97,lng:-95.24},
+  {c:"Manhattan KS",s:"KS",lat:39.18,lng:-96.57},
+  {c:"Salina",s:"KS",lat:38.84,lng:-97.61},
+  {c:"Hutchinson",s:"KS",lat:38.06,lng:-97.93},
+  {c:"Lenexa",s:"KS",lat:38.95,lng:-94.73},
+  {c:"Shawnee KS",s:"KS",lat:39.02,lng:-94.71},
+  {c:"Dodge City",s:"KS",lat:37.75,lng:-100.02},
+  {c:"Columbus",s:"OH",lat:39.96,lng:-82.99},
+  {c:"Cleveland",s:"OH",lat:41.5,lng:-81.69},
+  {c:"Cincinnati",s:"OH",lat:39.1,lng:-84.51},
+  {c:"Toledo",s:"OH",lat:41.66,lng:-83.56},
+  {c:"Akron",s:"OH",lat:41.08,lng:-81.52},
+  {c:"Dayton",s:"OH",lat:39.76,lng:-84.19},
+  {c:"Parma",s:"OH",lat:41.38,lng:-81.73},
+  {c:"Canton",s:"OH",lat:40.8,lng:-81.38},
+  {c:"Youngstown",s:"OH",lat:41.1,lng:-80.65},
+  {c:"Lorain",s:"OH",lat:41.45,lng:-82.18},
+  {c:"Hamilton",s:"OH",lat:39.4,lng:-84.56},
+  {c:"Springfield OH",s:"OH",lat:39.92,lng:-83.81},
+  {c:"Kettering",s:"OH",lat:39.69,lng:-84.17},
+  {c:"Elyria",s:"OH",lat:41.37,lng:-82.11},
+  {c:"Lakewood",s:"OH",lat:41.48,lng:-81.8},
+  {c:"Cuyahoga Falls",s:"OH",lat:41.13,lng:-81.48},
+  {c:"Middletown OH",s:"OH",lat:39.52,lng:-84.4},
+  {c:"Newark OH",s:"OH",lat:40.06,lng:-82.4},
+  {c:"Mansfield",s:"OH",lat:40.76,lng:-82.52},
+  {c:"Sandusky",s:"OH",lat:41.45,lng:-82.71},
+  {c:"Lima OH",s:"OH",lat:40.74,lng:-84.1},
+  {c:"Detroit",s:"MI",lat:42.33,lng:-83.05},
+  {c:"Grand Rapids",s:"MI",lat:42.96,lng:-85.67},
+  {c:"Warren",s:"MI",lat:42.49,lng:-83.03},
+  {c:"Sterling Heights",s:"MI",lat:42.58,lng:-83.03},
+  {c:"Lansing",s:"MI",lat:42.73,lng:-84.55},
+  {c:"Ann Arbor",s:"MI",lat:42.28,lng:-83.75},
+  {c:"Flint",s:"MI",lat:43.01,lng:-83.69},
+  {c:"Dearborn",s:"MI",lat:42.32,lng:-83.18},
+  {c:"Livonia",s:"MI",lat:42.4,lng:-83.35},
+  {c:"Westland",s:"MI",lat:42.32,lng:-83.4},
+  {c:"Troy",s:"MI",lat:42.6,lng:-83.15},
+  {c:"Farmington Hills",s:"MI",lat:42.49,lng:-83.37},
+  {c:"Kalamazoo",s:"MI",lat:42.29,lng:-85.59},
+  {c:"Wyoming MI",s:"MI",lat:42.91,lng:-85.71},
+  {c:"Rochester Hills",s:"MI",lat:42.66,lng:-83.15},
+  {c:"Pontiac",s:"MI",lat:42.64,lng:-83.29},
+  {c:"Southfield",s:"MI",lat:42.47,lng:-83.22},
+  {c:"Muskegon",s:"MI",lat:43.23,lng:-86.25},
+  {c:"Battle Creek",s:"MI",lat:42.32,lng:-85.18},
+  {c:"Saginaw",s:"MI",lat:43.42,lng:-83.95},
+  {c:"Bay City",s:"MI",lat:43.59,lng:-83.89},
+  {c:"Indianapolis",s:"IN",lat:39.77,lng:-86.16},
+  {c:"Fort Wayne",s:"IN",lat:41.13,lng:-85.13},
+  {c:"Evansville",s:"IN",lat:37.97,lng:-87.57},
+  {c:"South Bend",s:"IN",lat:41.68,lng:-86.25},
+  {c:"Carmel",s:"IN",lat:39.98,lng:-86.12},
+  {c:"Fishers",s:"IN",lat:39.96,lng:-85.97},
+  {c:"Bloomington IN",s:"IN",lat:39.17,lng:-86.53},
+  {c:"Hammond",s:"IN",lat:41.58,lng:-87.5},
+  {c:"Gary",s:"IN",lat:41.59,lng:-87.35},
+  {c:"Muncie",s:"IN",lat:40.19,lng:-85.39},
+  {c:"Lafayette IN",s:"IN",lat:40.42,lng:-86.88},
+  {c:"Terre Haute",s:"IN",lat:39.47,lng:-87.41},
+  {c:"Anderson IN",s:"IN",lat:40.1,lng:-85.68},
+  {c:"Kokomo",s:"IN",lat:40.49,lng:-86.13},
+  {c:"Noblesville",s:"IN",lat:40.05,lng:-85.98},
+  {c:"Greenwood IN",s:"IN",lat:39.61,lng:-86.11},
+  {c:"Jeffersonville",s:"IN",lat:38.28,lng:-85.74},
+  {c:"Louisville",s:"KY",lat:38.25,lng:-85.76},
+  {c:"Lexington",s:"KY",lat:38.05,lng:-84.5},
+  {c:"Bowling Green",s:"KY",lat:36.99,lng:-86.44},
+  {c:"Owensboro",s:"KY",lat:37.77,lng:-87.11},
+  {c:"Covington KY",s:"KY",lat:39.08,lng:-84.51},
+  {c:"Richmond KY",s:"KY",lat:37.75,lng:-84.29},
+  {c:"Georgetown KY",s:"KY",lat:38.21,lng:-84.56},
+  {c:"Florence KY",s:"KY",lat:38.99,lng:-84.63},
+  {c:"Hopkinsville",s:"KY",lat:36.87,lng:-87.49},
+  {c:"Nicholasville",s:"KY",lat:37.88,lng:-84.57},
+  {c:"Elizabethtown",s:"KY",lat:37.7,lng:-85.86},
+  {c:"Nashville",s:"TN",lat:36.17,lng:-86.78},
+  {c:"Memphis",s:"TN",lat:35.15,lng:-90.05},
+  {c:"Knoxville",s:"TN",lat:35.96,lng:-83.92},
+  {c:"Chattanooga",s:"TN",lat:35.05,lng:-85.31},
+  {c:"Clarksville",s:"TN",lat:36.53,lng:-87.36},
+  {c:"Murfreesboro",s:"TN",lat:35.85,lng:-86.39},
+  {c:"Franklin TN",s:"TN",lat:35.92,lng:-86.87},
+  {c:"Jackson TN",s:"TN",lat:35.61,lng:-88.81},
+  {c:"Johnson City",s:"TN",lat:36.32,lng:-82.35},
+  {c:"Bartlett",s:"TN",lat:35.2,lng:-89.87},
+  {c:"Hendersonville TN",s:"TN",lat:36.3,lng:-86.62},
+  {c:"Kingsport",s:"TN",lat:36.55,lng:-82.56},
+  {c:"Smyrna TN",s:"TN",lat:35.98,lng:-86.52},
+  {c:"Germantown",s:"TN",lat:35.09,lng:-89.81},
+  {c:"Denver",s:"CO",lat:39.74,lng:-104.98},
+  {c:"Colorado Springs",s:"CO",lat:38.83,lng:-104.82},
+  {c:"Aurora CO",s:"CO",lat:39.73,lng:-104.83},
+  {c:"Fort Collins",s:"CO",lat:40.59,lng:-105.08},
+  {c:"Lakewood CO",s:"CO",lat:39.71,lng:-105.09},
+  {c:"Thornton",s:"CO",lat:39.87,lng:-104.97},
+  {c:"Arvada",s:"CO",lat:39.8,lng:-105.09},
+  {c:"Westminster CO",s:"CO",lat:39.84,lng:-105.04},
+  {c:"Pueblo",s:"CO",lat:38.25,lng:-104.61},
+  {c:"Centennial CO",s:"CO",lat:39.58,lng:-104.88},
+  {c:"Boulder",s:"CO",lat:40.01,lng:-105.27},
+  {c:"Highlands Ranch",s:"CO",lat:39.55,lng:-104.97},
+  {c:"Greeley",s:"CO",lat:40.42,lng:-104.71},
+  {c:"Longmont",s:"CO",lat:40.17,lng:-105.1},
+  {c:"Loveland CO",s:"CO",lat:40.4,lng:-105.07},
+  {c:"Broomfield",s:"CO",lat:39.92,lng:-105.09},
+  {c:"Castle Rock CO",s:"CO",lat:39.37,lng:-104.86},
+  {c:"Commerce City",s:"CO",lat:39.81,lng:-104.93},
+  {c:"Houston",s:"TX",lat:29.76,lng:-95.37},
+  {c:"San Antonio",s:"TX",lat:29.42,lng:-98.49},
+  {c:"Dallas",s:"TX",lat:32.78,lng:-96.8},
+  {c:"Austin",s:"TX",lat:30.27,lng:-97.74},
+  {c:"Fort Worth",s:"TX",lat:32.75,lng:-97.33},
+  {c:"El Paso",s:"TX",lat:31.76,lng:-106.49},
+  {c:"Arlington TX",s:"TX",lat:32.74,lng:-97.11},
+  {c:"Corpus Christi",s:"TX",lat:27.8,lng:-97.4},
+  {c:"Plano",s:"TX",lat:33.02,lng:-96.7},
+  {c:"Laredo",s:"TX",lat:27.51,lng:-99.49},
+  {c:"Lubbock",s:"TX",lat:33.58,lng:-101.86},
+  {c:"Garland",s:"TX",lat:32.91,lng:-96.63},
+  {c:"Irving",s:"TX",lat:32.81,lng:-96.95},
+  {c:"Frisco",s:"TX",lat:33.15,lng:-96.82},
+  {c:"McKinney",s:"TX",lat:33.2,lng:-96.64},
+  {c:"Amarillo",s:"TX",lat:35.22,lng:-101.83},
+  {c:"Grand Prairie",s:"TX",lat:32.75,lng:-97.0},
+  {c:"Brownsville",s:"TX",lat:25.9,lng:-97.5},
+  {c:"Pasadena TX",s:"TX",lat:29.69,lng:-95.21},
+  {c:"Mesquite",s:"TX",lat:32.76,lng:-96.6},
+  {c:"Killeen",s:"TX",lat:31.12,lng:-97.73},
+  {c:"McAllen",s:"TX",lat:26.2,lng:-98.23},
+  {c:"Waco",s:"TX",lat:31.55,lng:-97.15},
+  {c:"Denton",s:"TX",lat:33.21,lng:-97.13},
+  {c:"Midland TX",s:"TX",lat:31.99,lng:-102.08},
+  {c:"Carrollton TX",s:"TX",lat:32.95,lng:-96.89},
+  {c:"Round Rock",s:"TX",lat:30.51,lng:-97.68},
+  {c:"Lewisville",s:"TX",lat:33.05,lng:-96.99},
+  {c:"Tyler",s:"TX",lat:32.35,lng:-95.3},
+  {c:"League City",s:"TX",lat:29.51,lng:-95.09},
+  {c:"Allen TX",s:"TX",lat:33.1,lng:-96.67},
+  {c:"Beaumont",s:"TX",lat:30.08,lng:-94.1},
+  {c:"Odessa",s:"TX",lat:31.84,lng:-102.37},
+  {c:"Atlanta",s:"GA",lat:33.75,lng:-84.39},
+  {c:"Columbus GA",s:"GA",lat:32.46,lng:-84.99},
+  {c:"Augusta",s:"GA",lat:33.47,lng:-82.01},
+  {c:"Macon",s:"GA",lat:32.84,lng:-83.63},
+  {c:"Savannah",s:"GA",lat:32.08,lng:-81.1},
+  {c:"Athens GA",s:"GA",lat:33.96,lng:-83.38},
+  {c:"Sandy Springs",s:"GA",lat:33.92,lng:-84.37},
+  {c:"Roswell GA",s:"GA",lat:34.02,lng:-84.36},
+  {c:"Albany GA",s:"GA",lat:31.58,lng:-84.16},
+  {c:"Warner Robins",s:"GA",lat:32.61,lng:-83.6},
+  {c:"Johns Creek",s:"GA",lat:34.03,lng:-84.2},
+  {c:"Alpharetta",s:"GA",lat:34.07,lng:-84.29},
+  {c:"Marietta",s:"GA",lat:33.95,lng:-84.55},
+  {c:"Gainesville GA",s:"GA",lat:34.3,lng:-83.83},
+  {c:"Charlotte",s:"NC",lat:35.23,lng:-80.84},
+  {c:"Raleigh",s:"NC",lat:35.78,lng:-78.64},
+  {c:"Greensboro",s:"NC",lat:36.07,lng:-79.79},
+  {c:"Durham",s:"NC",lat:35.99,lng:-78.9},
+  {c:"Winston-Salem",s:"NC",lat:36.1,lng:-80.24},
+  {c:"Fayetteville",s:"NC",lat:35.05,lng:-78.88},
+  {c:"Cary",s:"NC",lat:35.79,lng:-78.78},
+  {c:"Wilmington NC",s:"NC",lat:34.23,lng:-77.95},
+  {c:"High Point",s:"NC",lat:35.96,lng:-80.01},
+  {c:"Concord NC",s:"NC",lat:35.41,lng:-80.58},
+  {c:"Asheville",s:"NC",lat:35.57,lng:-82.55},
+  {c:"Gastonia",s:"NC",lat:35.26,lng:-81.19},
+  {c:"Jacksonville NC",s:"NC",lat:34.75,lng:-77.43},
+  {c:"Chapel Hill",s:"NC",lat:35.91,lng:-79.06},
+  {c:"Virginia Beach",s:"VA",lat:36.85,lng:-75.98},
+  {c:"Norfolk",s:"VA",lat:36.85,lng:-76.29},
+  {c:"Chesapeake",s:"VA",lat:36.82,lng:-76.28},
+  {c:"Richmond",s:"VA",lat:37.54,lng:-77.43},
+  {c:"Newport News",s:"VA",lat:37.09,lng:-76.47},
+  {c:"Alexandria",s:"VA",lat:38.8,lng:-77.05},
+  {c:"Hampton",s:"VA",lat:37.03,lng:-76.35},
+  {c:"Roanoke",s:"VA",lat:37.27,lng:-79.94},
+  {c:"Portsmouth VA",s:"VA",lat:36.84,lng:-76.3},
+  {c:"Suffolk",s:"VA",lat:36.73,lng:-76.58},
+  {c:"Lynchburg",s:"VA",lat:37.41,lng:-79.14},
+  {c:"Harrisonburg",s:"VA",lat:38.45,lng:-78.87},
+  {c:"Philadelphia",s:"PA",lat:39.95,lng:-75.17},
+  {c:"Pittsburgh",s:"PA",lat:40.44,lng:-79.99},
+  {c:"Allentown",s:"PA",lat:40.61,lng:-75.49},
+  {c:"Erie",s:"PA",lat:42.13,lng:-80.09},
+  {c:"Reading PA",s:"PA",lat:40.34,lng:-75.93},
+  {c:"Scranton",s:"PA",lat:41.41,lng:-75.66},
+  {c:"Bethlehem PA",s:"PA",lat:40.63,lng:-75.37},
+  {c:"Lancaster PA",s:"PA",lat:40.04,lng:-76.31},
+  {c:"Harrisburg",s:"PA",lat:40.27,lng:-76.88},
+  {c:"York PA",s:"PA",lat:39.96,lng:-76.73},
+  {c:"Wilkes-Barre",s:"PA",lat:41.25,lng:-75.88},
+  {c:"Altoona",s:"PA",lat:40.52,lng:-78.39},
+  {c:"New York",s:"NY",lat:40.71,lng:-74.01},
+  {c:"Buffalo",s:"NY",lat:42.89,lng:-78.88},
+  {c:"Rochester NY",s:"NY",lat:43.16,lng:-77.61},
+  {c:"Yonkers",s:"NY",lat:40.94,lng:-73.9},
+  {c:"Syracuse",s:"NY",lat:43.05,lng:-76.15},
+  {c:"Albany NY",s:"NY",lat:42.65,lng:-73.75},
+  {c:"New Rochelle",s:"NY",lat:40.91,lng:-73.78},
+  {c:"Mount Vernon NY",s:"NY",lat:40.91,lng:-73.84},
+  {c:"Schenectady",s:"NY",lat:42.81,lng:-73.94},
+  {c:"Utica",s:"NY",lat:43.1,lng:-75.23},
+  {c:"Troy NY",s:"NY",lat:42.73,lng:-73.69},
+  {c:"White Plains",s:"NY",lat:41.03,lng:-73.76},
+  {c:"Jacksonville FL",s:"FL",lat:30.33,lng:-81.66},
+  {c:"Miami",s:"FL",lat:25.77,lng:-80.19},
+  {c:"Tampa",s:"FL",lat:27.95,lng:-82.46},
+  {c:"Orlando",s:"FL",lat:28.54,lng:-81.38},
+  {c:"St Petersburg",s:"FL",lat:27.77,lng:-82.68},
+  {c:"Hialeah",s:"FL",lat:25.86,lng:-80.28},
+  {c:"Tallahassee",s:"FL",lat:30.44,lng:-84.28},
+  {c:"Fort Lauderdale",s:"FL",lat:26.12,lng:-80.14},
+  {c:"Port St Lucie",s:"FL",lat:27.29,lng:-80.35},
+  {c:"Cape Coral",s:"FL",lat:26.56,lng:-81.95},
+  {c:"Pembroke Pines",s:"FL",lat:26.01,lng:-86.3},
+  {c:"Hollywood FL",s:"FL",lat:26.01,lng:-80.15},
+  {c:"Gainesville FL",s:"FL",lat:29.65,lng:-82.33},
+  {c:"Miramar",s:"FL",lat:25.99,lng:-80.23},
+  {c:"Coral Springs",s:"FL",lat:26.27,lng:-80.27},
+  {c:"Clearwater",s:"FL",lat:27.97,lng:-82.8},
+  {c:"Palm Bay",s:"FL",lat:28.03,lng:-80.59},
+  {c:"Pompano Beach",s:"FL",lat:26.24,lng:-80.12},
+  {c:"Mentor",s:"OH",lat:41.67,lng:-81.34},
+  {c:"Lorain",s:"OH",lat:41.45,lng:-82.18},
+  {c:"Sioux Falls",s:"SD",lat:43.55,lng:-96.73},
+  {c:"Rapid City",s:"SD",lat:44.08,lng:-103.23},
+  {c:"Aberdeen SD",s:"SD",lat:45.46,lng:-98.49},
+  {c:"Fargo",s:"ND",lat:46.88,lng:-96.79},
+  {c:"Bismarck",s:"ND",lat:46.81,lng:-100.78},
+  {c:"Grand Forks",s:"ND",lat:47.93,lng:-97.03},
+  {c:"Minot",s:"ND",lat:48.23,lng:-101.3},
+  {c:"Billings",s:"MT",lat:45.78,lng:-108.5},
+  {c:"Missoula",s:"MT",lat:46.87,lng:-114.01},
+  {c:"Great Falls",s:"MT",lat:47.5,lng:-111.3},
+  {c:"Bozeman",s:"MT",lat:45.68,lng:-111.04},
+  {c:"Boise",s:"ID",lat:43.61,lng:-116.2},
+  {c:"Nampa",s:"ID",lat:43.58,lng:-116.56},
+  {c:"Meridian",s:"ID",lat:43.61,lng:-116.39},
+  {c:"Idaho Falls",s:"ID",lat:43.49,lng:-112.03},
+  {c:"Pocatello",s:"ID",lat:42.87,lng:-112.44},
+  {c:"Cheyenne",s:"WY",lat:41.14,lng:-104.82},
+  {c:"Casper",s:"WY",lat:42.87,lng:-106.31},
+  {c:"Laramie",s:"WY",lat:41.31,lng:-105.59},
+  {c:"Salt Lake City",s:"UT",lat:40.76,lng:-111.89},
+  {c:"West Valley City",s:"UT",lat:40.69,lng:-112.0},
+  {c:"Provo",s:"UT",lat:40.23,lng:-111.66},
+  {c:"West Jordan",s:"UT",lat:40.61,lng:-111.94},
+  {c:"Ogden",s:"UT",lat:41.22,lng:-111.97},
+  {c:"St George",s:"UT",lat:37.1,lng:-113.58},
+  {c:"Layton",s:"UT",lat:41.06,lng:-111.97},
+  {c:"Las Vegas",s:"NV",lat:36.17,lng:-115.14},
+  {c:"Henderson NV",s:"NV",lat:36.03,lng:-114.98},
+  {c:"Reno",s:"NV",lat:39.53,lng:-119.81},
+  {c:"North Las Vegas",s:"NV",lat:36.2,lng:-115.12},
+  {c:"Sparks",s:"NV",lat:39.53,lng:-119.75},
+  {c:"Phoenix",s:"AZ",lat:33.45,lng:-112.07},
+  {c:"Tucson",s:"AZ",lat:32.22,lng:-110.97},
+  {c:"Mesa",s:"AZ",lat:33.42,lng:-111.83},
+  {c:"Chandler",s:"AZ",lat:33.31,lng:-111.84},
+  {c:"Glendale AZ",s:"AZ",lat:33.54,lng:-112.19},
+  {c:"Scottsdale",s:"AZ",lat:33.49,lng:-111.93},
+  {c:"Gilbert",s:"AZ",lat:33.35,lng:-111.79},
+  {c:"Tempe",s:"AZ",lat:33.43,lng:-111.94},
+  {c:"Peoria AZ",s:"AZ",lat:33.58,lng:-112.24},
+  {c:"Surprise AZ",s:"AZ",lat:33.63,lng:-112.37},
+  {c:"Yuma",s:"AZ",lat:32.69,lng:-114.62},
+  {c:"Avondale",s:"AZ",lat:33.43,lng:-112.35},
+  {c:"Flagstaff",s:"AZ",lat:35.2,lng:-111.65},
+  {c:"Goodyear AZ",s:"AZ",lat:33.44,lng:-112.36},
+  {c:"Albuquerque",s:"NM",lat:35.08,lng:-106.65},
+  {c:"Las Cruces",s:"NM",lat:32.32,lng:-106.77},
+  {c:"Rio Rancho",s:"NM",lat:35.23,lng:-106.67},
+  {c:"Santa Fe",s:"NM",lat:35.69,lng:-105.94},
+  {c:"Roswell NM",s:"NM",lat:33.39,lng:-104.52},
+  {c:"Los Angeles",s:"CA",lat:34.05,lng:-118.24},
+  {c:"San Diego",s:"CA",lat:32.72,lng:-117.15},
+  {c:"San Jose",s:"CA",lat:37.34,lng:-121.89},
+  {c:"San Francisco",s:"CA",lat:37.77,lng:-122.42},
+  {c:"Fresno",s:"CA",lat:36.74,lng:-119.79},
+  {c:"Sacramento",s:"CA",lat:38.58,lng:-121.49},
+  {c:"Long Beach",s:"CA",lat:33.77,lng:-118.19},
+  {c:"Oakland",s:"CA",lat:37.8,lng:-122.27},
+  {c:"Bakersfield",s:"CA",lat:35.37,lng:-119.02},
+  {c:"Anaheim",s:"CA",lat:33.84,lng:-117.91},
+  {c:"Riverside CA",s:"CA",lat:33.95,lng:-117.4},
+  {c:"Stockton",s:"CA",lat:37.96,lng:-121.29},
+  {c:"Irvine",s:"CA",lat:33.68,lng:-117.77},
+  {c:"Chula Vista",s:"CA",lat:32.64,lng:-117.08},
+  {c:"Santa Ana",s:"CA",lat:33.75,lng:-117.87},
+  {c:"Fremont",s:"CA",lat:37.55,lng:-121.98},
+  {c:"San Bernardino",s:"CA",lat:34.11,lng:-117.29},
+  {c:"Modesto",s:"CA",lat:37.64,lng:-120.99},
+  {c:"Fontana",s:"CA",lat:34.09,lng:-117.43},
+  {c:"Moreno Valley",s:"CA",lat:33.93,lng:-117.23},
+  {c:"Glendale CA",s:"CA",lat:34.14,lng:-118.26},
+  {c:"Huntington Beach",s:"CA",lat:33.66,lng:-117.99},
+  {c:"Santa Clarita",s:"CA",lat:34.39,lng:-118.54},
+  {c:"Garden Grove",s:"CA",lat:33.77,lng:-117.94},
+  {c:"Oceanside",s:"CA",lat:33.22,lng:-117.31},
+  {c:"Oxnard",s:"CA",lat:34.2,lng:-119.18},
+  {c:"Lancaster CA",s:"CA",lat:34.7,lng:-118.15},
+  {c:"Salinas",s:"CA",lat:36.68,lng:-121.65},
+  {c:"Pomona",s:"CA",lat:34.06,lng:-117.75},
+  {c:"Seattle",s:"WA",lat:47.61,lng:-122.33},
+  {c:"Spokane",s:"WA",lat:47.66,lng:-117.43},
+  {c:"Tacoma",s:"WA",lat:47.25,lng:-122.44},
+  {c:"Vancouver WA",s:"WA",lat:45.64,lng:-122.66},
+  {c:"Bellevue WA",s:"WA",lat:47.61,lng:-122.2},
+  {c:"Kent WA",s:"WA",lat:47.38,lng:-122.23},
+  {c:"Everett",s:"WA",lat:47.98,lng:-122.2},
+  {c:"Renton",s:"WA",lat:47.48,lng:-122.21},
+  {c:"Kirkland WA",s:"WA",lat:47.68,lng:-122.21},
+  {c:"Federal Way",s:"WA",lat:47.32,lng:-122.32},
+  {c:"Bellingham",s:"WA",lat:48.75,lng:-122.48},
+  {c:"Yakima",s:"WA",lat:46.6,lng:-120.51},
+  {c:"Portland",s:"OR",lat:45.52,lng:-122.68},
+  {c:"Salem",s:"OR",lat:44.94,lng:-123.03},
+  {c:"Eugene",s:"OR",lat:44.05,lng:-123.09},
+  {c:"Gresham",s:"OR",lat:45.5,lng:-122.43},
+  {c:"Hillsboro",s:"OR",lat:45.52,lng:-122.99},
+  {c:"Bend",s:"OR",lat:44.06,lng:-121.31},
+  {c:"Medford",s:"OR",lat:42.33,lng:-122.87},
+  {c:"Springfield OR",s:"OR",lat:44.05,lng:-123.02},
+  {c:"Boston",s:"MA",lat:42.36,lng:-71.06},
+  {c:"Worcester",s:"MA",lat:42.26,lng:-71.8},
+  {c:"Springfield MA",s:"MA",lat:42.1,lng:-72.59},
+  {c:"Lowell",s:"MA",lat:42.63,lng:-71.31},
+  {c:"Cambridge",s:"MA",lat:42.37,lng:-71.12},
+  {c:"New Bedford",s:"MA",lat:41.63,lng:-70.93},
+  {c:"Brockton",s:"MA",lat:42.08,lng:-71.02},
+  {c:"Quincy MA",s:"MA",lat:42.25,lng:-71.0},
+  {c:"Lynn",s:"MA",lat:42.47,lng:-70.95},
+  {c:"Baltimore",s:"MD",lat:39.29,lng:-76.61},
+  {c:"Frederick MD",s:"MD",lat:39.41,lng:-77.41},
+  {c:"Gaithersburg",s:"MD",lat:39.14,lng:-77.21},
+  {c:"Bowie",s:"MD",lat:38.94,lng:-76.73},
+  {c:"Rockville",s:"MD",lat:39.08,lng:-77.15},
+  {c:"Hagerstown",s:"MD",lat:39.64,lng:-77.72},
+  {c:"Newark NJ",s:"NJ",lat:40.74,lng:-74.17},
+  {c:"Jersey City",s:"NJ",lat:40.72,lng:-74.04},
+  {c:"Paterson",s:"NJ",lat:40.91,lng:-74.17},
+  {c:"Elizabeth NJ",s:"NJ",lat:40.66,lng:-74.21},
+  {c:"Edison",s:"NJ",lat:40.52,lng:-74.41},
+  {c:"Woodbridge NJ",s:"NJ",lat:40.56,lng:-74.28},
+  {c:"Lakewood NJ",s:"NJ",lat:40.1,lng:-74.22},
+  {c:"Toms River",s:"NJ",lat:39.95,lng:-74.2},
+  {c:"Hamilton NJ",s:"NJ",lat:40.22,lng:-74.72},
+  {c:"Trenton",s:"NJ",lat:40.22,lng:-74.76},
+  {c:"Midland MI",s:"MI",lat:43.62,lng:-84.25},
+  {c:"Traverse City",s:"MI",lat:44.76,lng:-85.62},
+  {c:"New Orleans",s:"LA",lat:29.95,lng:-90.07},
+  {c:"Baton Rouge",s:"LA",lat:30.45,lng:-91.15},
+  {c:"Shreveport",s:"LA",lat:32.53,lng:-93.75},
+  {c:"Metairie",s:"LA",lat:29.98,lng:-90.16},
+  {c:"Lafayette LA",s:"LA",lat:30.22,lng:-92.02},
+  {c:"Lake Charles",s:"LA",lat:30.23,lng:-93.21},
+  {c:"Kenner",s:"LA",lat:29.99,lng:-90.24},
+  {c:"Little Rock",s:"AR",lat:34.75,lng:-92.29},
+  {c:"Fort Smith",s:"AR",lat:35.39,lng:-94.42},
+  {c:"Fayetteville AR",s:"AR",lat:36.06,lng:-94.16},
+  {c:"Springdale",s:"AR",lat:36.19,lng:-94.13},
+  {c:"Jonesboro",s:"AR",lat:35.84,lng:-90.7},
+  {c:"Jackson MS",s:"MS",lat:32.3,lng:-90.18},
+  {c:"Gulfport",s:"MS",lat:30.37,lng:-89.09},
+  {c:"Southaven",s:"MS",lat:34.99,lng:-90.02},
+  {c:"Hattiesburg",s:"MS",lat:31.33,lng:-89.29},
+  {c:"Birmingham",s:"AL",lat:33.52,lng:-86.8},
+  {c:"Montgomery",s:"AL",lat:32.36,lng:-86.3},
+  {c:"Huntsville",s:"AL",lat:34.73,lng:-86.59},
+  {c:"Mobile",s:"AL",lat:30.69,lng:-88.04},
+  {c:"Tuscaloosa",s:"AL",lat:33.21,lng:-87.57},
+  {c:"Hoover",s:"AL",lat:33.4,lng:-86.81},
+  {c:"Columbia SC",s:"SC",lat:34.0,lng:-81.03},
+  {c:"Charleston SC",s:"SC",lat:32.78,lng:-79.94},
+  {c:"North Charleston",s:"SC",lat:32.85,lng:-79.97},
+  {c:"Mount Pleasant SC",s:"SC",lat:32.83,lng:-79.83},
+  {c:"Rock Hill",s:"SC",lat:34.92,lng:-81.02},
+  {c:"Greenville SC",s:"SC",lat:34.85,lng:-82.4},
+  {c:"Oklahoma City",s:"OK",lat:35.47,lng:-97.52},
+  {c:"Tulsa",s:"OK",lat:36.15,lng:-95.99},
+  {c:"Norman",s:"OK",lat:35.22,lng:-97.44},
+  {c:"Broken Arrow",s:"OK",lat:36.06,lng:-95.79},
+  {c:"Lawton",s:"OK",lat:34.61,lng:-98.39},
+  {c:"Edmond",s:"OK",lat:35.65,lng:-97.48},
+  {c:"Anchorage",s:"AK",lat:61.22,lng:-149.9},
+  {c:"Fairbanks",s:"AK",lat:64.84,lng:-147.72},
+  {c:"Juneau",s:"AK",lat:58.3,lng:-134.42},
+  {c:"Honolulu",s:"HI",lat:21.31,lng:-157.86},
+  {c:"Pearl City",s:"HI",lat:21.4,lng:-157.97},
+  {c:"Hilo",s:"HI",lat:19.72,lng:-155.09},
+  {c:"Providence",s:"RI",lat:41.82,lng:-71.42},
+  {c:"Warwick",s:"RI",lat:41.7,lng:-71.42},
+  {c:"Cranston",s:"RI",lat:41.78,lng:-71.44},
+  {c:"Bridgeport",s:"CT",lat:41.19,lng:-73.2},
+  {c:"New Haven",s:"CT",lat:41.31,lng:-72.93},
+  {c:"Stamford",s:"CT",lat:41.05,lng:-73.54},
+  {c:"Hartford",s:"CT",lat:41.76,lng:-72.68},
+  {c:"Waterbury",s:"CT",lat:41.56,lng:-73.04},
+  {c:"Charleston WV",s:"WV",lat:38.35,lng:-81.63},
+  {c:"Huntington WV",s:"WV",lat:38.42,lng:-82.44},
+  {c:"Morgantown",s:"WV",lat:39.63,lng:-79.96},
+  {c:"Portland ME",s:"ME",lat:43.66,lng:-70.26},
+  {c:"Lewiston",s:"ME",lat:44.1,lng:-70.22},
+  {c:"Bangor",s:"ME",lat:44.8,lng:-68.78},
+  {c:"Manchester NH",s:"NH",lat:42.99,lng:-71.46},
+  {c:"Nashua",s:"NH",lat:42.76,lng:-71.47},
+  {c:"Concord NH",s:"NH",lat:43.21,lng:-71.54},
+  {c:"Burlington VT",s:"VT",lat:44.48,lng:-73.21},
+  {c:"South Burlington",s:"VT",lat:44.47,lng:-73.17},
+  {c:"Wilmington DE",s:"DE",lat:39.74,lng:-75.55},
+  {c:"Dover DE",s:"DE",lat:39.16,lng:-75.52}
+];
+
+
+const FIPS={'01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'CT','10':'DE','11':'DC','12':'FL','13':'GA','15':'HI','16':'ID','17':'IL','18':'IN','19':'IA','20':'KS','21':'KY','22':'LA','23':'ME','24':'MD','25':'MA','26':'MI','27':'MN','28':'MS','29':'MO','30':'MT','31':'NE','32':'NV','33':'NH','34':'NJ','35':'NM','36':'NY','37':'NC','38':'ND','39':'OH','40':'OK','41':'OR','42':'PA','44':'RI','45':'SC','46':'SD','47':'TN','48':'TX','49':'UT','50':'VT','51':'VA','53':'WA','54':'WV','55':'WI','56':'WY'};
+const COL={HOT:'#ff4040',WARM:'#e36b1e',COLD:'#38bdf8',NA:'rgba(56,189,248,0.55)'};
+const WORKER='https://unc-sales-os-sync.ricky-a17.workers.dev';
+const WORKER_KEY=(function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})(); // matches WORKSPACE_KEY (same pattern as cockpit-shell.js)
+const REFRESH=30000;
+
+let allCompanies=[], allContacts=[], stats={};
+let selectedState=null, activeTrade='ALL', conquestMode=false;
+let projection, path, zoomBehavior, gScene, gStates, gDots, gPins, gCities, gSignals;
+let currentScale=1;
+let soundEnabled=true;
+
+// ── Audio ─────────────────────────────────────────────────────────────────
+const AudioCtx=window.AudioContext||window.webkitAudioContext;
+let actx=null;
+function getACtx(){if(!actx)actx=new AudioCtx();return actx;}
+function beep(freq=440,dur=0.08,vol=0.06,type='sine'){
+  try{const a=getACtx(),o=a.createOscillator(),g=a.createGain();
+  o.connect(g);g.connect(a.destination);o.type=type;o.frequency.value=freq;
+  g.gain.setValueAtTime(vol,a.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+dur);
+  o.start(a.currentTime);o.stop(a.currentTime+dur);}catch(e){}
+}
+function pingDot(){beep(880,0.06,0.04,'sine');}
+function pingState(){beep(440,0.12,0.08,'sine');beep(660,0.1,0.04,'sine');}
+function pingFilter(){beep(1200,0.05,0.03,'square');}
+
+// ── Crosshair cursor ──────────────────────────────────────────────────────
+const ch=document.getElementById('crosshair');
+document.addEventListener('mousemove',e=>{ch.style.left=e.clientX+'px';ch.style.top=e.clientY+'px';});
+
+// ── Clock ─────────────────────────────────────────────────────────────────
+function tick(){
+  const n=new Date();
+  document.getElementById('clock').textContent=
+    n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+
+    '  '+n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+setInterval(tick,1000);tick();
+
+// ── Loader ────────────────────────────────────────────────────────────────
+function lp(pct,msg){
+  var b=document.getElementById('lbar'),m=document.getElementById('lmsg');
+  if(b)b.style.width=pct+'%';
+  if(m)m.textContent=msg;
+}
+
+// ── Data source badge + fullscreen (v2) ───────────────────────────────────
+function setSrcBadge(live,msg){
+  let b=document.getElementById('src-badge');
+  if(!b){b=document.createElement('div');b.id='src-badge';
+    b.style.cssText='position:fixed;bottom:14px;right:158px;z-index:9000;font-size:0.58rem;letter-spacing:0.15em;padding:5px 12px;border:1px solid;cursor:default;user-select:none;background:rgba(15,15,15,0.6);';
+    document.body.appendChild(b);}
+  if(live){b.textContent='\u25CF LIVE CRM';b.style.color='#e36b1e';b.style.borderColor='rgba(227,107,30,0.7)';b.style.textShadow='0 0 8px rgba(227,107,30,0.8)';b.title='Live HubSpot data via worker';}
+  else{b.textContent='\u25B2 DEMO DATA';b.style.color='rgba(148,163,184,0.7)';b.style.borderColor='rgba(148,163,184,0.35)';b.style.textShadow='none';b.title='Worker unreachable \u2014 simulated data. '+(msg||'');}
+}
+(function(){
+  const f=document.createElement('div');f.id='fs-btn';f.textContent='\u26F6 FULLSCREEN';
+  f.style.cssText='position:fixed;bottom:14px;right:14px;z-index:9000;font-size:0.58rem;letter-spacing:0.15em;padding:5px 12px;border:1px solid rgba(56,189,248,0.6);color:rgba(56,189,248,0.9);cursor:pointer;user-select:none;background:rgba(15,15,15,0.6);text-shadow:0 0 8px rgba(56,189,248,0.5);';
+  f.addEventListener('click',async()=>{
+    try{
+      if(document.fullscreenElement){await document.exitFullscreen();return;}
+      await document.documentElement.requestFullscreen();
+    }catch(e){window.open(location.href,'_blank');}
+  });
+  document.addEventListener('fullscreenchange',()=>{f.textContent=document.fullscreenElement?'\u26F6 EXIT':'\u26F6 FULLSCREEN';});
+  document.body.appendChild(f);
+})();
+
+// ── Fetch ─────────────────────────────────────────────────────────────────
+async function fetchCRM(){
+  try{
+    const r=await fetch(WORKER+'/map',{cache:'no-store',headers:{'x-unc-key':WORKER_KEY}});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    if(!d.ok)throw new Error(d.error);
+    setSrcBadge(true);
+    return d;
+  }catch(e){
+    console.error('[MAP] Worker request FAILED \u2014 no demo fallback:',e.message);
+    setSrcBadge(false,e.message);
+    showWorkerError(e.message);
+    return {ok:false,companies:[]};
+  }
+}
+
+// Hard-fail banner. Never silently substitute fake companies — that hid a dead key for days.
+function showWorkerError(msg){
+  if(document.getElementById('uncWorkerErr'))return;
+  var noKey=!WORKER_KEY;
+  var d=document.createElement('div');
+  d.id='uncWorkerErr';
+  d.style.cssText='position:fixed;z-index:99999;left:50%;top:22px;transform:translateX(-50%);max-width:min(560px,92vw);'+
+    'background:#0f0f0f;border:2px solid #e36b1e;border-radius:10px;padding:16px 20px;'+
+    'font-family:\'Open Sans\',system-ui,sans-serif;color:#f5f5f5;box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:left';
+  d.innerHTML='<div style="font-family:\'Montserrat\',sans-serif;font-weight:700;color:#e36b1e;font-size:15px;letter-spacing:.02em;margin-bottom:6px">'+
+    (noKey?'NO WORKER KEY ON THIS DEVICE':'LIVE CRM UNREACHABLE')+'</div>'+
+    '<div style="font-size:13.5px;line-height:1.5">'+
+    (noKey
+      ? 'This browser has no access key saved, so the map is showing <b>nothing</b> rather than fake data.<br><a href="/sales-ops/settings/" style="color:#e36b1e;font-weight:700">Open Settings \u2192</a> paste your worker access key, then reload.'
+      : 'The worker returned: <b>'+String(msg).replace(/</g,'&lt;')+'</b><br>Real company data is not loaded. This map is empty on purpose.')+
+    '</div>'+
+    '<button style="margin-top:12px;background:#e36b1e;color:#0f0f0f;border:0;border-radius:6px;'+
+    'padding:7px 14px;font-weight:700;cursor:pointer;font-family:\'Montserrat\',sans-serif">DISMISS</button>';
+  d.querySelector('button').onclick=function(){d.remove();};
+  document.body.appendChild(d);
+}
+
+function demoData(){ console.log('[MAP] Using demo data');
+  const TR=['Roofing','HVAC','Plumbing','Electrical','Concrete','Painting','Landscaping','GC','Remodeling'];
+  const OUT=['HOT','HOT','WARM','WARM','WARM','COLD','COLD','COLD','NA','NA','NA','NA','NA','NA'];
+  const IA=[['Dubuque','IA',42.50,-90.66,9],['Cedar Rapids','IA',41.98,-91.66,7],['Des Moines','IA',41.59,-93.62,6],
+    ['Davenport','IA',41.52,-90.58,5],['Iowa City','IA',41.66,-91.53,4],['Sioux City','IA',42.50,-96.40,4],
+    ['Waterloo','IA',42.49,-92.34,3],['Council Bluffs','IA',41.26,-95.86,3],['Ames','IA',42.03,-93.62,2],
+    ['Ankeny','IA',41.73,-93.60,3],['West Des Moines','IA',41.57,-93.71,3],['Marion','IA',42.03,-91.60,2],
+    ['Bettendorf','IA',41.52,-90.50,3],['Mason City','IA',43.15,-93.20,2],['Fort Dodge','IA',42.50,-94.17,2],
+    ['Burlington','IA',40.81,-91.11,2],['Clinton','IA',41.84,-90.19,2],['Ottumwa','IA',41.02,-92.41,2],
+    ['Muscatine','IA',41.42,-91.04,2],['Urbandale','IA',41.63,-93.72,2]];
+  const OT=[['Chicago','IL',41.88,-87.63,4],['Milwaukee','WI',43.04,-87.91,3],['Minneapolis','MN',44.98,-93.27,3],
+    ['Kansas City','MO',39.10,-94.58,3],['Omaha','NE',41.26,-95.94,3],['St Louis','MO',38.63,-90.20,2],
+    ['Indianapolis','IN',39.77,-86.16,2],['Columbus','OH',39.96,-82.99,2],['Detroit','MI',42.33,-83.05,2],
+    ['Louisville','KY',38.25,-85.76,2],['Nashville','TN',36.17,-86.78,2],['Denver','CO',39.74,-104.98,2],
+    ['Dallas','TX',32.78,-96.80,3],['Houston','TX',29.76,-95.37,2],['Phoenix','AZ',33.45,-112.07,2],
+    ['Atlanta','GA',33.75,-84.39,2],['Charlotte','NC',35.23,-80.84,2],['Seattle','WA',47.61,-122.33,2],
+    ['Portland','OR',45.52,-122.68,1],['Salt Lake City','UT',40.76,-111.89,1],['Rockford','IL',42.27,-89.09,2],
+    ['Madison','WI',43.07,-89.40,2],['Peoria','IL',40.69,-89.59,1],['Springfield','MO',37.21,-93.29,1],
+    ['Wichita','KS',37.69,-97.34,2],['Lincoln','NE',40.81,-96.68,1],['Sioux Falls','SD',43.55,-96.73,1],
+    ['Fargo','ND',46.88,-96.79,1],['Rochester','MN',44.02,-92.47,1],['Green Bay','WI',44.52,-88.02,1]];
+  let id=1,cos=[],cts=[];
+  [...IA,...OT].forEach(([city,state,,, n])=>{
+    for(let i=0;i<n;i++){
+      const trade=TR[Math.floor(Math.random()*TR.length)];
+      const outcome=OUT[Math.floor(Math.random()*OUT.length)];
+      const co={id:'c'+id,type:'company',name:city+' '+trade+' Co '+(i+1),city,state,trade,outcome,ai_hook:outcome==='NA'?'':outcome==='HOT'?'8 reviews, no website':''};
+      cos.push(co);
+      if(Math.random()>0.4){cts.push({id:'p'+id,type:'contact',name:'Contact '+id,company:co.name,city,state,trade,outcome,ai_hook:''});}
+      id++;
+    }
+  });
+  const states=new Set(cos.map(c=>c.state)).size;
+  const hot=cos.filter(c=>c.outcome==='HOT').length;
+  const warm=cos.filter(c=>c.outcome==='WARM').length;
+  const untouched=cos.filter(c=>!c.outcome||c.outcome==='NA').length;
+  return{ok:true,companies:cos,contacts:cts,stats:{companies:cos.length,contacts:cts.length,states,hot,warm,untouched}};
+}
+
+// ── HUD ───────────────────────────────────────────────────────────────────
+function animN(id,target){
+  const el=document.getElementById(id);let cur=0;
+  const step=Math.max(1,Math.ceil(target/40));
+  const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur.toLocaleString();if(cur>=target)clearInterval(t);},35);
+}
+function updateHUD(s){
+  animN('s-co',s.companies||0);
+  animN('s-ct',s.contacts||0);
+  animN('s-st',s.states||0);
+  animN('s-hot',s.hot||0);
+  animN('s-warm',s.warm||0);
+  animN('s-unt',s.untouched||0);
+  const total=Math.max(s.companies||1,1);
+  setTimeout(()=>{
+    document.getElementById('b-co').style.width='100%';
+    document.getElementById('b-ct').style.width=Math.min(100,(s.contacts||0)/total*100)+'%';
+    document.getElementById('b-st').style.width=Math.min(100,(s.states||0)/50*100)+'%';
+    document.getElementById('b-hot').style.width=Math.min(100,(s.hot||0)/total*300)+'%';
+    document.getElementById('b-warm').style.width=Math.min(100,(s.warm||0)/total*200)+'%';
+    document.getElementById('b-unt').style.width=Math.min(100,(s.untouched||0)/total*100)+'%';
+  },700);
+}
+
+// ── Ticker ────────────────────────────────────────────────────────────────
+function buildTicker(cos){
+  const items=cos.filter(c=>c.outcome&&c.outcome!=='NA').slice(0,50)
+    .map(c=>`[ ${c.state} ] ${c.name||c.company} — ${c.trade} — ${c.outcome}`);
+  const s=items.join('   ·   ');
+  const el=document.getElementById('ticker');
+  el.textContent=s+'   ·   '+s;
+}
+
+// ── City coords ───────────────────────────────────────────────────────────
+// ── STATE CENTROIDS (geographic center fallback for unknown cities) ────────
+const SC={
+  AL:{lat:32.80,lng:-86.79},AK:{lat:64.20,lng:-153.37},AZ:{lat:34.39,lng:-111.58},
+  AR:{lat:34.90,lng:-92.44},CA:{lat:36.78,lng:-119.42},CO:{lat:39.11,lng:-105.31},
+  CT:{lat:41.60,lng:-72.69},DE:{lat:39.32,lng:-75.51},FL:{lat:27.99,lng:-81.76},
+  GA:{lat:32.68,lng:-83.22},HI:{lat:20.80,lng:-156.33},ID:{lat:44.07,lng:-114.74},
+  IL:{lat:40.63,lng:-89.40},IN:{lat:39.77,lng:-86.15},IA:{lat:42.03,lng:-93.58},
+  KS:{lat:38.53,lng:-96.73},KY:{lat:37.67,lng:-84.67},LA:{lat:30.98,lng:-91.96},
+  ME:{lat:45.25,lng:-69.00},MD:{lat:39.04,lng:-76.64},MA:{lat:42.41,lng:-71.38},
+  MI:{lat:44.31,lng:-85.60},MN:{lat:46.39,lng:-94.64},MS:{lat:32.74,lng:-89.67},
+  MO:{lat:38.46,lng:-92.29},MT:{lat:46.88,lng:-110.36},NE:{lat:41.49,lng:-99.90},
+  NV:{lat:38.80,lng:-116.42},NH:{lat:43.19,lng:-71.57},NJ:{lat:40.06,lng:-74.41},
+  NM:{lat:34.31,lng:-106.02},NY:{lat:43.00,lng:-75.50},NC:{lat:35.63,lng:-79.81},
+  ND:{lat:47.53,lng:-99.78},OH:{lat:40.39,lng:-82.76},OK:{lat:35.47,lng:-97.52},
+  OR:{lat:43.94,lng:-120.56},PA:{lat:40.59,lng:-77.21},RI:{lat:41.70,lng:-71.51},
+  SC:{lat:33.84,lng:-80.94},SD:{lat:44.37,lng:-100.35},TN:{lat:35.86,lng:-86.66},
+  TX:{lat:31.05,lng:-97.56},UT:{lat:39.32,lng:-111.09},VT:{lat:44.05,lng:-72.71},
+  VA:{lat:37.77,lng:-78.17},WA:{lat:47.40,lng:-121.49},WV:{lat:38.49,lng:-80.95},
+  WI:{lat:44.27,lng:-89.62},WY:{lat:43.08,lng:-107.29},DC:{lat:38.91,lng:-77.04}
+};
+function cityLL(city,state){
+  const st=(state||"").toUpperCase();
+  const centroid=SC[st]?{lat:SC[st].lat,lng:SC[st].lng,s:st}:null;
+  if(!city) return centroid||CITIES.find(c=>c.s===st)||null;
+  const k=city.toLowerCase().trim();
+  const exact=CITIES.find(c=>c.c.toLowerCase()===k&&c.s===st);
+  if(exact) return exact;
+  // fallback to state geographic center, never the first city in the array
+  return centroid||CITIES.find(c=>c.s===st)||null;
+}
+
+// ── Filter helpers ────────────────────────────────────────────────────────
+function visibleCompanies(){
+  let cs=allCompanies;
+  if(activeTrade!=='ALL')cs=cs.filter(c=>c.trade===activeTrade);
+  if(conquestMode)cs=cs.filter(c=>!c.outcome||c.outcome==='NA');
+  return cs;
+}
+
+// ── Map init ──────────────────────────────────────────────────────────────
+function initMap(){
+  const svg=d3.select('#map');
+  // Guard: if booted inside a hidden/collapsed drawer, use a sane fallback; refit() corrects on resize
+  const W=Math.max(window.innerWidth,320),H=Math.max(window.innerHeight,240);
+  // Fit entire US (incl Alaska/Hawaii insets) in the visible area below the nav bar
+  const NAV=96, fitScale=Math.min(W/960,(H-NAV)/600)*1070*0.9;
+  projection=d3.geoAlbersUsa().scale(fitScale).translate([W/2,(H+NAV)/2]);
+  path=d3.geoPath().projection(projection);
+
+  let zoomRAF=null;
+  function applyCounterScale(){
+    const k=currentScale, inv=1/k;
+    // One transform per dot group — covers core, rings, and glow in a single GPU-friendly op
+    gDots.selectAll('.dot-g').each(function(){
+      const el=d3.select(this);
+      el.attr('transform',`translate(${el.attr('data-x')},${el.attr('data-y')}) scale(${inv})`);
+    });
+    gPins.selectAll('.state-pin-group').each(function(){
+      const el=d3.select(this);
+      const pinScale=Math.min(1,Math.max(0.55,inv));
+      el.attr('transform',`translate(${+el.attr('data-x')},${+el.attr('data-y')}) scale(${pinScale})`);
+    });
+    gCities.selectAll('.city-core').each(function(){
+      const n=+d3.select(this).attr('data-n')||1;
+      d3.select(this).attr('r',Math.min(2.5+n*0.7,7)*inv);
+    });
+    gCities.selectAll('.city-label').each(function(){
+      const base=+d3.select(this).attr('data-fs')||9;
+      d3.select(this).style('font-size',base*inv+'px');
+    });
+  }
+  zoomBehavior=d3.zoom().scaleExtent([1,16]).translateExtent([[-100,-60],[W+100,H+60]]).on('zoom',e=>{
+    gScene.attr('transform',e.transform);
+    currentScale=e.transform.k;
+    // Throttle per-element counter-scaling to animation frames — smooth at any prospect count
+    if(!zoomRAF){zoomRAF=requestAnimationFrame(()=>{zoomRAF=null;applyCounterScale();});}
+  });
+  svg.call(zoomBehavior);
+
+  gScene =svg.append('g');
+  gStates=gScene.append('g').attr('id','gstates');
+  gSignals=gScene.append('g').attr('id','gsignals');
+  gDots  =gScene.append('g').attr('id','gdots');
+  gPins  =gScene.append('g').attr('id','gpins');
+  gCities=gScene.append('g').attr('id','gcities');
+
+  document.getElementById('zi').onclick=()=>svg.transition().duration(280).call(zoomBehavior.scaleBy,1.5);
+  document.getElementById('zo').onclick=()=>svg.transition().duration(280).call(zoomBehavior.scaleBy,0.67);
+  document.getElementById('zr').onclick=()=>{clearState();svg.transition().duration(450).call(zoomBehavior.transform,d3.zoomIdentity);};
+
+  function refit(){
+    const W=window.innerWidth,H=window.innerHeight;
+    if(W<50||H<50)return; // drawer hidden — wait for a real viewport
+    const NAV=96, fitScale=Math.min(W/960,(H-NAV)/600)*1070*0.9;
+    projection.scale(fitScale).translate([W/2,(H+NAV)/2]);
+    zoomBehavior.translateExtent([[-100,-60],[W+100,H+60]]);
+    gStates.selectAll('.state-fill').attr('d',path);
+    gStates.select('.state-border').attr('d',path);
+    redrawDots();redrawPins();
+    if(selectedState)clearState();
+  }
+  window.addEventListener('resize',refit);
+}
+
+// ── Render states with heat ───────────────────────────────────────────────
+function renderStates(us,byState){
+  if(typeof topojson === 'undefined'){ console.error('[MAP] topojson missing in renderStates'); return; }
+  const feats=topojson.feature(us,us.objects.states);
+  const mesh =topojson.mesh(us,us.objects.states,(a,b)=>a!==b);
+  const counts=Object.fromEntries(Object.entries(byState).map(([k,v])=>[k,v.length]));
+  const max=Math.max(...Object.values(counts),1);
+
+  gStates.selectAll('.state-fill')
+    .data(feats.features).enter().append('path')
+    .attr('class',d=>{
+      const abbr=FIPS[d.id.toString().padStart(2,'0')]||'';
+      const n=counts[abbr]||0;
+      const heat=n===0?'':n/max<0.1?'heat1':n/max<0.25?'heat2':n/max<0.5?'heat3':n/max<0.75?'heat4':'heat5';
+      return 'state-fill'+(heat?' '+heat:'');
+    })
+    .attr('d',path)
+    .attr('data-abbr',d=>FIPS[d.id.toString().padStart(2,'0')]||'')
+    .on('click',function(event,d){
+      const abbr=FIPS[d.id.toString().padStart(2,'0')];
+      if(!abbr)return;
+      if(selectedState===abbr){clearState();return;}
+      pingState();
+      selectState(abbr,d,byState[abbr]||[]);
+    });
+
+  gStates.append('path').datum(mesh).attr('class','state-border').attr('d',path);
+}
+
+// ── Redraw dots (with radar sweep animation on first render) ──────────────
+let firstRender=true;
+function redrawDots(){
+  gDots.selectAll('*').remove();
+  gSignals.selectAll('*').remove();
+  const cos=visibleCompanies();
+
+  // Sort by lng so radar sweep goes left→right
+  const sorted=[...cos].sort((a,b)=>{
+    const la=cityLL(a.city,a.state),lb=cityLL(b.city,b.state);
+    return ((la?la.lng:-180)-(lb?lb.lng:-180));
+  });
+
+  sorted.forEach((c,i)=>{
+    const ll=cityLL(c.city,c.state);
+    if(!ll)return;
+    const proj=projection([ll.lng,ll.lat]);
+    if(!proj)return;
+
+    const col=COL[c.outcome]||COL.NA;
+    const isActive=c.outcome&&c.outcome!=='NA';
+    const r=c.type==='contact'?(isActive?4:2.5):(isActive?5:3);
+    const delay=firstRender?(i*18):0; // staggered ms on first render
+
+    const jx=Math.sin(i*2.39996)*4+Math.cos(i*1.618)*2, jy=Math.cos(i*2.39996)*4+Math.sin(i*1.618)*2;
+    const dx=proj[0]+jx, dy=proj[1]+jy;
+    const g=gDots.append('g').attr('class',isActive?'dot-g dot-active':'dot-g')
+      .attr('data-x',dx).attr('data-y',dy)
+      .attr('transform',`translate(${dx},${dy}) scale(${1/currentScale})`);
+
+    if(isActive){
+      const rd=(i*0.09)%3.2;
+      addRing(g, col, 0);
+      addRing(g, col, 0.33);
+      addRing(g, col, 0.66);
+    }
+
+    const baseOpacity=c.type==='contact'?0.75:1;
+    const core=g.append('circle').attr('class','dot-core').attr('r',r).attr('fill',col)
+      .style('opacity',0)
+      .style('filter',isActive?`drop-shadow(0 0 5px ${col}) drop-shadow(0 0 2px ${col})`:'none');
+
+    if(firstRender){
+      setTimeout(()=>{
+        core.style('opacity',baseOpacity);
+      },delay);
+    } else {
+      core.style('opacity',baseOpacity);
+    }
+
+    g.on('mouseenter',function(event){pingDot();showTip(event,c);drawSignals(proj,c.state);})
+     .on('mousemove',moveTip)
+     .on('mouseleave',function(){hideTip();gSignals.selectAll('*').remove();});
+  });
+
+  if(firstRender)firstRender=false;
+}
+
+// ── Signal lines on hover ─────────────────────────────────────────────────
+function drawSignals(origin,state){
+  gSignals.selectAll('*').remove();
+  const nearby=allCompanies.filter(c=>c.state===state).slice(0,8);
+  nearby.forEach((c,i)=>{
+    const ll=cityLL(c.city,c.state);
+    if(!ll)return;
+    const proj=projection([ll.lng,ll.lat]);
+    if(!proj)return;
+    const col=COL[c.outcome]||COL.NA;
+    const line=gSignals.append('line').attr('class','signal-line')
+      .attr('x1',origin[0]).attr('y1',origin[1])
+      .attr('x2',proj[0]).attr('y2',proj[1])
+      .attr('stroke',col)
+      .style('animation','signalin 0.8s ease-out '+(i*0.06)+'s forwards');
+  });
+}
+
+// ── State pins (floating stat cards on high-density states) ───────────────
+const PIN_STATES=['IA','IL','WI','MN','MO','OH','MI','IN'];
+function redrawPins(){
+  return; // COD-mode: pins disabled — individual dots only
+  gPins.selectAll('*').remove();
+  if(selectedState)return;
+  const byState={};
+  allCompanies.forEach(c=>{if(!byState[c.state])byState[c.state]=[];byState[c.state].push(c);});
+
+  PIN_STATES.forEach(abbr=>{
+    const cs=byState[abbr];
+    if(!cs||!cs.length)return;
+    const anchor=CITIES.find(c=>c.s===abbr);
+    if(!anchor)return;
+    const proj=projection([anchor.lng,anchor.lat]);
+    if(!proj)return;
+
+    const hot=cs.filter(c=>c.outcome==='HOT').length;
+    const warm=cs.filter(c=>c.outcome==='WARM').length;
+    const unt=cs.filter(c=>!c.outcome||c.outcome==='NA').length;
+
+    const g=gPins.append('g').attr('class','state-pin-group')
+      .attr('data-x', proj[0]).attr('data-y', proj[1]-14)
+      .attr('transform',`translate(${proj[0]},${proj[1]-14}) scale(${Math.min(1,Math.max(0.55,1/currentScale))})`);
+
+    const w=52,h=18,ox=-w/2;
+    g.append('line').attr('class','pin-stem').attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',14);
+    g.append('rect').attr('class','pin-bg').attr('x',ox).attr('y',-h).attr('width',w).attr('height',h).attr('rx',2);
+    g.append('text').attr('class','pin-label').attr('x',ox+4).attr('y',-h+6)
+      .text(abbr+' '+cs.length);
+    // mini color bars
+    const barW=w-8,barH=3,barY=-h+10;
+    const total=cs.length||1;
+    g.append('rect').attr('x',ox+4).attr('y',barY).attr('width',barW).attr('height',barH).attr('fill','rgba(255,255,255,0.06)').attr('rx',1);
+    if(hot) g.append('rect').attr('x',ox+4).attr('y',barY).attr('width',barW*hot/total).attr('height',barH).attr('fill','#ff4040').attr('rx',1);
+    if(warm) g.append('rect').attr('x',ox+4+barW*hot/total).attr('y',barY).attr('width',barW*warm/total).attr('height',barH).attr('fill','#e36b1e').attr('rx',0);
+  });
+}
+
+// ── State select ──────────────────────────────────────────────────────────
+function selectState(abbr,feature,contacts){
+  selectedState=abbr;
+  d3.selectAll('.state-fill').classed('selected',false);
+  d3.selectAll(`.state-fill[data-abbr="${abbr}"]`).classed('selected',true);
+  gPins.selectAll('*').remove();
+  gDots.transition().duration(400).style('opacity',0.12);
+
+  const [[x0,y0],[x1,y1]]=path.bounds(feature);
+  const W=window.innerWidth,H=window.innerHeight;
+  const sc=Math.min(10,0.85/Math.max((x1-x0)/(W-240),(y1-y0)/(H-160)));
+  const tx=(W-(x0+x1)*sc)/2+100, ty=((H+90)-(y0+y1)*sc)/2;
+  d3.select('#map').transition().duration(650).ease(d3.easeCubicInOut)
+    .call(zoomBehavior.transform,d3.zoomIdentity.translate(tx,ty).scale(sc));
+
+  setTimeout(()=>{stopRings();showCityLayer(abbr,contacts,sc);startRings();},700);
+  openPanel(abbr,contacts);
+  showCityChart(abbr,contacts);
+}
+
+function clearState(){
+  selectedState=null;
+  gDots.transition().duration(400).style('opacity',1);
+  d3.selectAll('.state-fill').classed('selected',false);
+  gCities.selectAll('*').remove();
+  closePanel();
+  hideCityChart();
+  redrawPins();
+  d3.select('#map').transition().duration(500).call(zoomBehavior.transform,d3.zoomIdentity);
+}
+
+// ── City layer on drill-down ──────────────────────────────────────────────
+function showCityLayer(stateAbbr,contacts,sc){
+  gCities.selectAll('*').remove();
+  _cityLayerData = []; // reset for proximity lookup
+  hideCityPopover();
+
+  const byCity={};
+  contacts.forEach(c=>{if(!byCity[c.city])byCity[c.city]=[];byCity[c.city].push(c);});
+  const stateCities=CITIES.filter(c=>c.s===stateAbbr);
+
+  stateCities.forEach((city,ci)=>{
+    const proj=projection([city.lng,city.lat]);
+    if(!proj)return;
+    const cts=byCity[city.c]||[];
+    const has=cts.length>0;
+    const hot=cts.filter(c=>c.outcome==='HOT').length;
+    const warm=cts.filter(c=>c.outcome==='WARM').length;
+    const col=hot?COL.HOT:warm?COL.WARM:has?COL.COLD:'rgba(56,189,248,0.15)';
+    const r=(has?Math.min(2.5+cts.length*0.7,7):1.2)/currentScale;
+    const fs=9;
+
+    // Store for proximity lookup
+    _cityLayerData.push({ city:city.c, stateAbbr, cts, px:proj[0], py:proj[1] });
+
+    const g=gCities.append('g').attr('class','city-g')
+      .attr('transform',`translate(${proj[0]},${proj[1]})`);
+
+    if(has&&cts.some(c=>c.outcome&&c.outcome!=='NA')){
+      addRing(g, col, (ci*0.08)%1);
+    }
+
+    // Hit area — bigger invisible circle for easier clicking
+    g.append('circle').attr('r', Math.max(r*2, 8/currentScale))
+      .attr('fill','transparent').attr('stroke','none');
+
+    g.append('circle').attr('class','city-core').attr('r',r).attr('data-n',cts.length).attr('fill',col)
+      .style('opacity',0).style('filter',has?`drop-shadow(0 0 4px ${col})`:'none')
+      .style('animation-delay',ci*0.05+'s');
+
+    // Label — shows on hover with bigger size
+    const label = g.append('text').attr('class','city-label').attr('y',-(r+3.5)).attr('data-fs',fs)
+      .attr('text-anchor','middle').style('font-size',fs/currentScale+'px')
+      .style('font-weight',has?'700':'400').style('letter-spacing','0.04em')
+      .style('fill',has?'rgba(255,255,255,0.65)':'rgba(255,255,255,0.18)')
+      .text(city.c);
+
+    if(has){
+      g.on('mouseenter',function(event){
+        pingDot();
+        // Brighten label on hover
+        label.style('fill','#fff').style('font-size',(fs*1.3)/currentScale+'px');
+        showTip(event,cts[0],cts.length);
+        // Check for nearby cities and hint via cursor
+        const nearby = citiesNear(event.clientX, event.clientY, 28);
+        if(nearby.length > 1) {
+          // Show mini count badge next to cursor
+          tip.querySelector && null; // handled by tip
+        }
+      })
+      .on('mousemove',function(event){ moveTip(event); })
+      .on('mouseleave',function(){
+        label.style('fill',has?'rgba(255,255,255,0.65)':'rgba(255,255,255,0.18)')
+             .style('font-size',fs/currentScale+'px');
+        hideTip();
+      })
+      .on('click',function(event){
+        event.stopPropagation();
+        hideCityPopover();
+        // Check if other cities are very close — if so show popover
+        const nearby = citiesNear(event.clientX, event.clientY, 28);
+        if(nearby.length > 1) {
+          showCityPopover(nearby, event.clientX, event.clientY);
+        } else {
+          pingState();
+          openCityPanel(city.c, stateAbbr, cts);
+        }
+      });
+    } else {
+      // No contacts — still show popover if nearby cities exist
+      g.on('click',function(event){
+        event.stopPropagation();
+        const nearby = citiesNear(event.clientX, event.clientY, 28).filter(d=>d.cts.length>0);
+        if(nearby.length) showCityPopover(nearby, event.clientX, event.clientY);
+      });
+    }
+  });
+}
+
+// ── City bar chart ────────────────────────────────────────────────────────
+function showCityChart(stateAbbr,contacts){
+  const byCity={};
+  contacts.forEach(c=>{byCity[c.city]=(byCity[c.city]||0)+1;});
+  const sorted=Object.entries(byCity).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max=sorted[0]?sorted[0][1]:1;
+  document.getElementById('chart-title').textContent=stateAbbr+' — contacts by city';
+  document.getElementById('chart-rows').innerHTML=sorted.map(([city,n])=>
+    `<div class="bar-row">
+      <div class="bar-city">${city}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;transition:width 0.7s ease" data-w="${n/max*100}"></div></div>
+      <div class="bar-n">${n}</div>
+    </div>`
+  ).join('');
+  document.getElementById('city-chart').style.display='block';
+  setTimeout(()=>{
+    document.querySelectorAll('.bar-fill').forEach(el=>{el.style.width=el.dataset.w+'%';});
+  },80);
+}
+function hideCityChart(){document.getElementById('city-chart').style.display='none';}
+
+// ── Side panel ────────────────────────────────────────────────────────────
+function openPanel(abbr,contacts){
+  const hot=contacts.filter(c=>c.outcome==='HOT').length;
+  const warm=contacts.filter(c=>c.outcome==='WARM').length;
+  const cold=contacts.filter(c=>c.outcome==='COLD').length;
+  const unt=contacts.filter(c=>!c.outcome||c.outcome==='NA').length;
+  const trades=[...new Set(contacts.map(c=>c.trade).filter(Boolean))];
+
+  document.getElementById('panel-title').textContent=abbr+' — '+contacts.length;
+
+  let html=`
+    <div class="pill-row">
+      ${hot?`<span class="badge" style="color:#ff4040;border-color:#ff404040;background:#ff404012">🔥 ${hot} hot</span>`:''}
+      ${warm?`<span class="badge" style="color:#e36b1e;border-color:#e36b1e40;background:#e36b1e12">● ${warm} warm</span>`:''}
+      ${cold?`<span class="badge" style="color:#38bdf8;border-color:#38bdf840;background:#38bdf812">● ${cold} cold</span>`:''}
+      ${unt?`<span class="badge" style="color:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.1)">○ ${unt} untouched</span>`:''}
+    </div>
+    ${trades.length?`<div class="p-section">trades</div><div style="font-size:0.42rem;color:rgba(255,255,255,0.35);letter-spacing:0.06em;margin-bottom:8px">${trades.join(' · ')}</div>`:''}
+    <div class="p-section">companies</div>`;
+
+  contacts.slice(0,40).forEach(c=>{
+    const col=COL[c.outcome]||COL.NA;
+    html+=`<div class="c-row">
+      <div class="c-name">${c.name||c.company||'—'}</div>
+      <div class="c-meta">${[c.city,c.trade].filter(Boolean).join(' · ')}</div>
+      ${c.ai_hook?`<div class="c-hook">${c.ai_hook}</div>`:''}
+      <span class="badge" style="color:${col};border-color:${col}40;background:${col}12">${c.outcome||'NA'}</span>
+    </div>`;
+  });
+
+  document.getElementById('panel-body').innerHTML=html;
+  document.getElementById('side-panel').classList.add('open');
+}
+function closePanel(){document.getElementById('side-panel').classList.remove('open');}
+document.getElementById('panel-close').onclick=()=>clearState();
+
+// ── Tooltip ───────────────────────────────────────────────────────────────
+const tip=document.getElementById('tip');
+function showTip(event,c,n){
+  const col=COL[c.outcome]||COL.NA;
+  tip.innerHTML=`
+    <h4>${c.city}, ${c.state}</h4>
+    ${n>1?`<div class="tr">${n} companies in this cluster</div>`:''}
+    <div class="tr">Company: <b>${c.name||c.company||'—'}</b></div>
+    <div class="tr">Trade: <b>${c.trade||'—'}</b></div>
+    ${c.ai_hook?`<div class="tr">Intel: <b style="color:#e36b1e">${c.ai_hook}</b></div>`:''}
+    <div class="tbadges"><span class="tbadge" style="color:${col};border-color:${col}40;background:${col}12">${c.outcome||'NA'}</span></div>`;
+  tip.style.display='block';moveTip(event);
+}
+function moveTip(e){tip.style.left=(e.clientX+18)+'px';tip.style.top=(e.clientY-18)+'px';}
+function hideTip(){tip.style.display='none';}
+
+// ── Filter bar ────────────────────────────────────────────────────────────
+document.querySelectorAll('.ftag').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    pingFilter();
+    document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    activeTrade=btn.dataset.trade;
+    stopRings();
+    redrawDots();
+    startRings();
+    if(selectedState){
+      const cs=allCompanies.filter(c=>c.state===selectedState&&(activeTrade==='ALL'||c.trade===activeTrade));
+      openPanel(selectedState,cs);
+      showCityChart(selectedState,cs);
+    }
+  });
+});
+
+document.getElementById('conquest-btn').addEventListener('click',function(){
+  pingFilter();
+  conquestMode=!conquestMode;
+  this.classList.toggle('on',conquestMode);
+  stopRings();
+  redrawDots();
+  startRings();
+});
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+// ── City drill-down panel ─────────────────────────────────────────────────
+function openCityPanel(cityName, stateAbbr, contacts){
+  const hot  = contacts.filter(c=>c.outcome==='HOT').length;
+  const warm = contacts.filter(c=>c.outcome==='WARM').length;
+  const cold = contacts.filter(c=>c.outcome==='COLD').length;
+  const unt  = contacts.filter(c=>!c.outcome||c.outcome==='NA').length;
+  const trades = [...new Set(contacts.map(c=>c.trade).filter(Boolean))];
+
+  document.getElementById('panel-title').textContent = cityName+', '+stateAbbr+' — '+contacts.length;
+
+  // Also show linked contacts from allContacts
+  const linkedContacts = allContacts.filter(c =>
+    c.city && c.city.toLowerCase()===cityName.toLowerCase() && c.state===stateAbbr
+  );
+
+  let html = `
+    <div onclick="reopenStatePanel('${stateAbbr}')"
+      style="font-size:0.38rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(56,189,248,0.5);margin-bottom:8px;cursor:none;padding:4px 0;border-bottom:1px solid rgba(56,189,248,0.1)">
+      ← BACK TO ${stateAbbr}
+    </div>
+    <div class="pill-row">
+      ${hot ?`<span class="badge" style="color:#ff4040;border-color:#ff404040;background:#ff404012">🔥 ${hot} hot</span>`:''}
+      ${warm?`<span class="badge" style="color:#e36b1e;border-color:#e36b1e40;background:#e36b1e12">● ${warm} warm</span>`:''}
+      ${cold?`<span class="badge" style="color:#38bdf8;border-color:#38bdf840;background:#38bdf812">● ${cold} cold</span>`:''}
+      ${unt ?`<span class="badge" style="color:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.1)">○ ${unt} untouched</span>`:''}
+    </div>
+    ${trades.length?`<div class="p-section">trades</div><div style="font-size:0.42rem;color:rgba(255,255,255,0.35);letter-spacing:0.06em;margin-bottom:8px">${trades.join(' · ')}</div>`:''}
+    <div class="p-section">companies (${contacts.length})</div>`;
+
+  contacts.forEach(c=>{
+    const col=COL[c.outcome]||COL.NA;
+    html+=`<div class="c-row">
+      <div class="c-name">${c.name||c.company||'—'}</div>
+      <div class="c-meta">${c.trade||'—'}</div>
+      ${c.ai_hook?`<div class="c-hook">${c.ai_hook}</div>`:''}
+      <span class="badge" style="color:${col};border-color:${col}40;background:${col}12">${c.outcome||'NA'}</span>
+    </div>`;
+  });
+
+  if(linkedContacts.length){
+    html+=`<div class="p-section" style="margin-top:10px">contacts (${linkedContacts.length})</div>`;
+    linkedContacts.forEach(c=>{
+      const col=COL[c.outcome]||COL.NA;
+      html+=`<div class="c-row">
+        <div class="c-name">${c.name||'—'}</div>
+        <div class="c-meta">${c.company||''} ${c.trade?'· '+c.trade:''}</div>
+        ${c.ai_hook?`<div class="c-hook">${c.ai_hook}</div>`:''}
+        <span class="badge" style="color:${col};border-color:${col}40;background:${col}12">${c.outcome||'NA'}</span>
+      </div>`;
+    });
+  }
+
+  document.getElementById('panel-body').innerHTML = html;
+  document.getElementById('side-panel').classList.add('open');
+}
+
+function reopenStatePanel(stateAbbr){
+  const cs = allCompanies.filter(c=>c.state===stateAbbr&&(activeTrade==='ALL'||c.trade===activeTrade));
+  openPanel(stateAbbr, cs);
+}
+
+// ── JS Ring Animator ─────────────────────────────────────────────────────
+// Replaces CSS keyframes so rings always scale with currentScale.
+// Each ring stores: { el, phase, delay, speed, color }
+const activeRings = [];
+let rafRunning = false;
+
+function addRing(parentG, color, delayFrac) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  el.setAttribute('fill','none');
+  el.setAttribute('stroke', color);
+  el.setAttribute('r', '0');
+  el.setAttribute('stroke-width', '0.7');
+  el.setAttribute('opacity','0');
+  parentG.node().appendChild(el);
+  const CYCLE_MS = 2800;
+  // startTime in the past so each ring starts at a different phase offset
+  const startTime = performance.now() - delayFrac * CYCLE_MS;
+  activeRings.push({ el, startTime, color });
+  return el;
+}
+
+function tickRings() {
+  if(!rafRunning) return;
+  const k    = currentScale || 1;
+  const BASE = 1;
+  const MAX  = 16;
+  const CYCLE_MS = 2800; // one full ring cycle = 2.8 seconds, always
+
+  // Wall-clock time — immune to zoom frame bursts
+  const now = performance.now();
+
+  activeRings.forEach(ring => {
+    // phase = (time offset by delay) / cycle length, always 0→1 in real time
+    const elapsed = now - ring.startTime;
+    if(elapsed < 0) { ring.el.setAttribute('opacity','0'); return; }
+    const p = (elapsed % CYCLE_MS) / CYCLE_MS;
+
+    const r  = BASE + (MAX - BASE) * p;
+    const op = Math.max(0, 0.9 * (1 - p * p));
+    ring.el.setAttribute('r',            (r / k).toFixed(3));
+    ring.el.setAttribute('stroke-width', (0.7 / k).toFixed(3));
+    ring.el.setAttribute('opacity',      op.toFixed(3));
+  });
+  requestAnimationFrame(tickRings);
+}
+
+function startRings() {
+  if(rafRunning) return;
+  rafRunning = true;
+  requestAnimationFrame(tickRings);
+}
+
+function stopRings() {
+  rafRunning = false;
+  activeRings.length = 0;
+}
+
+
+// ── FEATURE 1: Hover shows city name prominently ─────────────────────────
+// Done inline in showCityLayer via mouseenter/leave on the label
+
+// ── FEATURE 2: Nearest-city snap on click ────────────────────────────────
+// Store city data for proximity lookup
+let _cityLayerData = []; // [{city, stateAbbr, cts, px, py}]
+
+function nearestCity(mx, my, maxScreenPx) {
+  // mx/my are screen coords — convert to map coords
+  const t  = d3.zoomTransform(d3.select('#map').node());
+  const mk = t.k, mtx = t.x, mty = t.y;
+  // map px = (screen - translate) / scale
+  const mapX = (mx - mtx) / mk;
+  const mapY = (my - mty) / mk;
+  const threshold = maxScreenPx / mk; // in map units
+
+  let best = null, bestD = Infinity;
+  _cityLayerData.forEach(d => {
+    const dx = d.px - mapX, dy = d.py - mapY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if(dist < threshold && dist < bestD) { bestD = dist; best = d; }
+  });
+  return best;
+}
+
+function citiesNear(mx, my, maxScreenPx) {
+  const t  = d3.zoomTransform(d3.select('#map').node());
+  const mk = t.k, mtx = t.x, mty = t.y;
+  const mapX = (mx - mtx) / mk;
+  const mapY = (my - mty) / mk;
+  const threshold = maxScreenPx / mk;
+
+  return _cityLayerData
+    .filter(d => {
+      const dx = d.px - mapX, dy = d.py - mapY;
+      return Math.sqrt(dx*dx + dy*dy) < threshold;
+    })
+    .sort((a,b) => {
+      const da = Math.sqrt((a.px-mapX)**2+(a.py-mapY)**2);
+      const db = Math.sqrt((b.px-mapX)**2+(b.py-mapY)**2);
+      return da - db;
+    });
+}
+
+// ── FEATURE 3: Popover for dense areas ───────────────────────────────────
+const cityPopover = document.getElementById('city-popover');
+let popoverOpen = false;
+
+function showCityPopover(cities, screenX, screenY) {
+  const list = document.getElementById('pop-list');
+  document.getElementById('pop-title').textContent = cities.length + ' cities nearby';
+  list.innerHTML = cities.slice(0,8).map(d => {
+    const col = d.cts.length === 0 ? 'rgba(56,189,248,0.3)'
+      : d.cts.some(c=>c.outcome==='HOT') ? '#ff4040'
+      : d.cts.some(c=>c.outcome==='WARM') ? '#e36b1e' : '#38bdf8';
+    const n = d.cts.length;
+    return `<div class="pop-city" data-city="${d.city}" data-state="${d.stateAbbr}">
+      <div class="pc-dot" style="background:${col}"></div>
+      <div class="pc-name">${d.city}</div>
+      <div class="pc-meta">${n ? n+' co.' : 'no data'}</div>
+    </div>`;
+  }).join('');
+
+  // Position — keep on screen
+  const pw = 240, ph = Math.min(cities.length, 8) * 36 + 40;
+  const W = window.innerWidth, H = window.innerHeight;
+  cityPopover.style.left = Math.min(screenX + 12, W - pw - 8) + 'px';
+  cityPopover.style.top  = Math.min(screenY - 20, H - ph - 8) + 'px';
+  cityPopover.style.display = 'block';
+  popoverOpen = true;
+
+  // Wire clicks
+  cityPopover.querySelectorAll('.pop-city').forEach(el => {
+    el.addEventListener('click', () => {
+      const city = el.dataset.city;
+      const state = el.dataset.state;
+      const d = _cityLayerData.find(x => x.city === city && x.stateAbbr === state);
+      if(d && d.cts.length) {
+        pingState();
+        openCityPanel(city, state, d.cts);
+      }
+      hideCityPopover();
+    });
+  });
+}
+
+function hideCityPopover() {
+  cityPopover.style.display = 'none';
+  popoverOpen = false;
+}
+
+// Click on map background (not a dot) — show nearby popover
+d3.select('#map').on('click.citymap', function(event) {
+  if(!selectedState || !_cityLayerData.length) return;
+  if(event.target.closest('.city-g')) return; // let city dots handle their own click
+  if(popoverOpen) { hideCityPopover(); return; }
+
+  const nearby = citiesNear(event.clientX, event.clientY, 40);
+  if(nearby.length > 1) {
+    showCityPopover(nearby, event.clientX, event.clientY);
+  } else if(nearby.length === 1 && nearby[0].cts.length) {
+    pingState();
+    openCityPanel(nearby[0].city, nearby[0].stateAbbr, nearby[0].cts);
+  }
+});
+
+// Close popover on outside click
+document.addEventListener('click', e => {
+  if(popoverOpen && !e.target.closest('#city-popover')) hideCityPopover();
+});
+
+async function boot(){
+  console.log('[MAP] boot started, d3:', typeof d3, 'topojson:', typeof topojson);
+  lp(10,'CONNECTING TO CRM NETWORK...');
+  const [usData,crmData]=await Promise.all([
+    fetch('/sales-ops/shared/states-10m.json').then(r=>r.json()),
+    fetchCRM()
+  ]);
+
+  console.log('[MAP] data loaded, companies:', (crmData.companies||[]).length, 'contacts:', (crmData.contacts||[]).length);
+  lp(55,'PROCESSING '+( (crmData.companies||[]).length)+' COMPANIES...');
+  allCompanies=crmData.companies||[];
+  allContacts=crmData.contacts||[];
+  stats=crmData.stats||{};
+
+  const byState={};
+  allCompanies.forEach(c=>{if(!byState[c.state])byState[c.state]=[];byState[c.state].push(c);});
+
+  console.log('[MAP] rendering map, byState keys:', Object.keys(byState).length);
+  lp(75,'RENDERING MAP...');
+  initMap();
+  renderStates(usData,byState);
+
+  lp(88,'PLOTTING '+allCompanies.length+' CONTACTS...');
+  stopRings();
+  redrawDots();
+  startRings();
+  redrawPins();
+  updateHUD(stats);
+  buildTicker(allCompanies);
+
+  console.log('[MAP] systems online — done');
+  lp(100,'SYSTEMS ONLINE');
+  await new Promise(r=>setTimeout(r,350));
+  var loader=document.getElementById('loader');
+  if(loader){loader.style.opacity='0';setTimeout(()=>{loader.style.display='none';},600);}
+
+  // Auto-refresh
+  setInterval(async()=>{
+    const d=await fetchCRM();
+    if(!d.ok)return;
+    allCompanies=d.companies||[];
+    allContacts=d.contacts||[];
+    stats=d.stats||{};
+    const bs={};
+    allCompanies.forEach(c=>{if(!bs[c.state])bs[c.state]=[];bs[c.state].push(c);});
+    stopRings();
+    redrawDots();
+    startRings();
+    if(!selectedState)redrawPins();
+    updateHUD(stats);
+    buildTicker(allCompanies);
+  },REFRESH);
+}
+
+// Ensure DOM is ready before boot
+if(document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    boot().catch(function(e){ console.error('[MAP] boot failed:', e); });
+  });
+} else {
+  boot().catch(function(e){ console.error('[MAP] boot failed:', e); });
+}
+</script>
+  <script src="/sales-ops/shared/unc-key.js"></script>
+</body>
+</html>
