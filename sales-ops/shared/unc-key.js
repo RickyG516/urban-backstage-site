@@ -55,7 +55,10 @@
         'background:#0f0f0f;color:#f5f5f5;border:1px solid #444;border-radius:6px;font-size:14px">' +
           '<option value="ricky">Ricky</option><option value="tyler">Tyler</option>' +
         '</select>' +
-        '<input id="uncKeyPin" type="password" inputmode="numeric" autocomplete="off" ' +
+        // inputmode was "numeric" — that forces a digits-only keypad on mobile, which makes
+        // an alphanumeric PIN impossible to type on a phone. "text" allows letters everywhere.
+        // The worker hashes whatever string it receives; it never required digits.
+        '<input id="uncKeyPin" type="password" inputmode="text" autocomplete="off" ' +
         'placeholder="PIN" style="width:100%;padding:11px;background:#0f0f0f;color:#f5f5f5;' +
         'border:1px solid #444;border-radius:6px;font-size:17px;letter-spacing:.3em;' +
         'text-align:center;margin-bottom:12px">' +
