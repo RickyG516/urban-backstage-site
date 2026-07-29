@@ -83,6 +83,10 @@
 
   function navHTML() {
     const path = window.location.pathname;
+    // The cockpit is served from two domains. Only urbanbackstage.com has a hub
+    // and playbook to go back to — on urbannicheco.com "/" is the public client
+    // site, so the link stays hidden there. Same file, correct behaviour on each.
+    const IS_BACKSTAGE = /(^|\.)urbanbackstage\.com$/.test(window.location.hostname);
     return `
       <nav class="global-nav" role="navigation" aria-label="Sales Ops global nav">
         <div class="global-nav__inner">
@@ -113,6 +117,10 @@
             `).join('')}
           </div>
           <div class="global-nav__right">
+            ${IS_BACKSTAGE ? `
+            <a href="/" title="Back to Urban Backstage — hub, playbook, demos" style="display:inline-flex;align-items:center;gap:6px;margin-right:8px;padding:6px 11px;border:1px solid rgba(227,107,30,.42);border-radius:7px;color:#e36b1e;text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;line-height:1;">
+              <span style="font-size:13px">&larr;</span><span>Backstage</span>
+            </a>` : ''}
             <button class="global-nav__cmd" id="cmd-palette-trigger" title="Open command palette (Ctrl+K)" aria-label="Command palette">
               <span>⌘</span>
               <kbd>K</kbd>
@@ -139,6 +147,9 @@
               </div>
             `).join('')}
             <button class="mobile-drawer__cmd" id="mobile-cmd-trigger">⌘ Search / Command palette</button>
+            ${IS_BACKSTAGE ? `
+            <a href="/" class="mobile-drawer__item" style="color:#e36b1e;margin-top:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.09);">&larr; Back to Backstage</a>
+            <a href="/playbook/" class="mobile-drawer__item" style="color:#e36b1e;">Playbook</a>` : ''}
           </div>
         </aside>
       </div>
