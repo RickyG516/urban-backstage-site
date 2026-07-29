@@ -1853,5 +1853,16 @@ if(document.readyState === 'loading') {
 }
 </script>
   <script src="/sales-ops/shared/unc-key.js"></script>
+
+<!-- Route back to the Backstage hub. Injected only on urbanbackstage.com;
+     on urbannicheco.com "/" is the public client site, so it stays hidden. -->
+<a id="ub-backstage-return" href="/" title="Back to Urban Backstage"
+   style="display:none;position:fixed;top:66px;left:14px;z-index:9998;align-items:center;gap:6px;padding:7px 12px;border:1px solid rgba(227,107,30,.45);border-radius:8px;background:rgba(15,15,15,.92);color:#e36b1e;text-decoration:none;font-size:11.5px;font-weight:700;font-family:Montserrat,system-ui,sans-serif;white-space:nowrap;backdrop-filter:blur(4px);">&#8592; Backstage</a>
+<script>
+  if (/(^|\.)urbanbackstage\.com$/.test(location.hostname)) {
+    var _ubr = document.getElementById('ub-backstage-return');
+    if (_ubr) _ubr.style.display = 'inline-flex';
+  }
+</script>
 </body>
 </html>

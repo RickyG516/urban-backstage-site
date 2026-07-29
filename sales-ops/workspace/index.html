@@ -309,6 +309,16 @@
 
   <header>
     <div class="brand">Urban Niche<span>.</span><small>Workspace</small></div>
+    <!-- Route back to the Backstage hub. Hidden unless served from urbanbackstage.com,
+         since on urbannicheco.com "/" is the public client site. -->
+    <a id="ws-backstage" href="/" title="Back to Urban Backstage — hub, playbook, demos"
+       style="display:none;align-items:center;gap:5px;padding:5px 10px;border:1px solid rgba(227,107,30,.42);border-radius:7px;color:var(--accent);text-decoration:none;font-size:11.5px;font-weight:700;white-space:nowrap;font-family:var(--font-head)">&larr; Backstage</a>
+    <script>
+      if (/(^|\.)urbanbackstage\.com$/.test(location.hostname)) {
+        var _wsb = document.getElementById('ws-backstage');
+        if (_wsb) _wsb.style.display = 'inline-flex';
+      }
+    </script>
     <div id="mode-name">Cold Call</div>
     <select id="ws-rep" title="Active rep — applies to every cockpit and tool"
       style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:12px;cursor:pointer"></select>
