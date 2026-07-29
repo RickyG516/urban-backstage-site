@@ -23,6 +23,79 @@
   const stage = () => document.querySelector('#screen-stage');
 
   // ============================================================
+  // MOCKUP REVEAL MODE
+  // Additive toggle for the 71-prospect "ghost page" batch (2026-07-29).
+  // Does not touch the standard opener/responses flow — only swaps the
+  // data source when active AND the current prospect has a mockup_url.
+  // ============================================================
+  let mockupMode = false;
+
+  function mockupActive() {
+    const c = (Shell.getContact && Shell.getContact()) || {};
+    return !!(mockupMode && c.mockup_url);
+  }
+
+  function setMockupMode(on, opts) {
+    mockupMode = !!on;
+    const cockpitEl = document.querySelector('.cockpit');
+    if (cockpitEl) cockpitEl.setAttribute('data-pitch-mode', mockupMode ? 'mockup_reveal' : 'standard');
+    const btn = document.getElementById('mockup-mode-toggle');
+    if (btn) {
+      btn.dataset.mode = mockupMode ? 'on' : 'off';
+      btn.textContent = mockupMode ? 'MOCKUP ✓' : 'MOCKUP';
+      btn.style.cssText = mockupMode ? 'background:rgba(34,197,94,0.15);border-color:#22c55e;color:#22c55e' : '';
+    }
+    renderMockupIndicator();
+    if (!opts || !opts.silent) {
+      // Manual click — re-render current live card + screen so the change takes effect immediately
+      if (liveQueue.length && liveQueue[liveIndex]) renderLiveCard(liveQueue[liveIndex]);
+    }
+  }
+
+  // Small non-blocking indicator near the prospect card: shown when the
+  // toggle is ON but the loaded prospect has no mockup_url (auto-fallback).
+  function renderMockupIndicator() {
+    let el = document.getElementById('mockup-fallback-note');
+    const c = (Shell.getContact && Shell.getContact()) || {};
+    const showFallback = mockupMode && !c.mockup_url;
+    if (showFallback) {
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'mockup-fallback-note';
+        el.style.cssText = 'font-size:0.7rem;color:#fbbf24;padding:0.3rem 0.5rem;margin-top:0.35rem;border:1px solid rgba(251,191,36,0.35);border-radius:var(--radius-sm);background:rgba(251,191,36,0.08);';
+        const card = document.getElementById('prospect-card');
+        if (card && card.parentNode) card.parentNode.insertBefore(el, card.nextSibling);
+      }
+      el.textContent = 'No mockup for this contact — using standard script.';
+      el.hidden = false;
+    } else if (el) {
+      el.hidden = true;
+    }
+  }
+
+  function injectMockupToggle() {
+    // Static button lives in index.html (mirrors the #variant-mode pattern) —
+    // just wire the click handler and reflect initial state. Falls back to
+    // creating the button if an older cached index.html doesn't have it yet.
+    let btn = document.getElementById('mockup-mode-toggle');
+    if (!btn) {
+      const hud = document.querySelector('.hud__center');
+      if (!hud) return;
+      btn = document.createElement('button');
+      btn.id = 'mockup-mode-toggle';
+      btn.className = 'variant-mode-btn';
+      btn.dataset.mode = 'off';
+      btn.textContent = 'MOCKUP';
+      const variantBtn = document.getElementById('variant-mode');
+      if (variantBtn) variantBtn.insertAdjacentElement('afterend', btn);
+      else hud.appendChild(btn);
+    }
+    if (btn._mockupBound) return;
+    btn._mockupBound = true;
+    btn.addEventListener('click', () => setMockupMode(!mockupMode));
+  }
+
+  // ============================================================
   // MODULE-LEVEL CONSTANTS — single source of truth
   // Both renderLiveCard() and renderDialPreview() read from here.
   // Update in one place, both surfaces stay in sync.
@@ -87,6 +160,7 @@
     };
     trainMode = localStorage.getItem('unc_train_mode') === 'true';
     injectTrainToggle();
+    injectMockupToggle();
     renderStart();
   }
 
@@ -183,6 +257,7 @@
       city: c.city || 'your area',
       ai_hook: c.ai_hook || '',
       quick_win: c.quick_win || c.ai_hook || c.notes_preview || 'a gap in your online presence',
+      mockup_url: c.mockup_url || '',
       trade_q2_line: (tradeBlock.q2_line || 'something specific about your online presence').replace(/\{(first_name|business_name|trade|trade_lower|city)\}/g, (m, k) => {
         const innerC = Shell.getContact() || {};
         if (k === 'first_name') return innerC.first_name || 'there';
@@ -198,7 +273,7 @@
   function interpolate(str) {
     if (!str) return '';
     const t = tokens();
-    let result = str.replace(/\{(first_name|business_name|rep_name|trade|trade_lower|city|trade_q2_line|quick_win|ai_hook)\}/g, (m, k) => t[k] != null ? t[k] : m);
+    let result = str.replace(/\{(first_name|business_name|rep_name|trade|trade_lower|city|trade_q2_line|quick_win|ai_hook|mockup_url)\}/g, (m, k) => t[k] != null ? t[k] : m);
     // Clean whitespace; only strip "Hey —" opener when first_name resolved empty
     result = result.replace(/\s{2,}/g, ' ').replace(/\s+—/g, ' —');
     if (!t.first_name) result = result.replace(/Hey —/g, 'Hey');
@@ -763,9 +838,16 @@
         gbp_review_count:     prospect.gbp_review_count   || '',
         website_gaps:         prospect.website_gaps        || '',
         decision_maker_known: prospect.decision_maker_known || '',
-        best_phone_verified:  prospect.best_phone_verified  || ''
+        best_phone_verified:  prospect.best_phone_verified  || '',
+        mockup_url:           prospect.mockup_url           || '',
+        pitch_mode:           prospect.pitch_mode           || ''
       };
     }
+
+    // Mockup Reveal mode — auto-engage per prospect record (pitch_mode:
+    // "mockup_reveal" on the queue record), but Ricky's manual toggle click
+    // always wins for the rest of the current call.
+    setMockupMode(prospect.pitch_mode === 'mockup_reveal', { silent: true });
 
     const card = document.getElementById('prospect-card');
     if (!card) return;
@@ -883,6 +965,11 @@
             : '<a href="' + hubURL + '" target="_blank" rel="noopener" class="missing-link">⚠ Missing — add in HubSpot ↗</a>'
           ) + '</span>' +
         '</div>' +
+        (prospect.mockup_url ?
+          '<div class="drow">' +
+            '<span class="dkey">Mockup:</span>' +
+            '<span class="dval"><a href="' + escapeHTML(prospect.mockup_url) + '" target="_blank" rel="noopener" style="color:#22c55e;">👁 View mockup ↗</a></span>' +
+          '</div>' : '') +
         // ── ANGLE — our prep. Useful ammo, clearly labeled as homework not gospel ──
         '<div style="font-size:0.58rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent);margin:0.55rem 0 0.3rem;border-top:1px solid var(--color-border);padding-top:0.5rem;opacity:0.85;">Angle — our prep</div>' +
         '<div class="irow">' +
@@ -904,6 +991,7 @@
     card.hidden = false;
     const cnPanel = document.getElementById('call-notes-panel');
     if (cnPanel) cnPanel.hidden = false;
+    renderMockupIndicator();
 
     // Wire hook copy button
     const hookCopyBtn = document.getElementById('hook-copy-btn');
@@ -1219,7 +1307,12 @@
 
   // ── OPENER STYLES — Word for Word / Guided / Freestyle ─────────
   SCREENS.opener_styles = () => {
-    const o = scripts.opener;
+    // Mockup Reveal mode: if the toggle is ON and this prospect has a
+    // mockup_url, pull the opener from scripts.mockup_reveal instead of
+    // the standard scripts.opener. Same shape (word_for_word/guided/
+    // freestyle), so the rest of this function is untouched.
+    const usingMockup = mockupActive();
+    const o = usingMockup && scripts.mockup_reveal ? scripts.mockup_reveal.opener : scripts.opener;
     const contact = Shell.getContact() || {};
     const trade = contact.trade || '';
 
@@ -1269,7 +1362,7 @@
       activeStyle = style;
       renderScreen(html`
         ${trainingNote(o.training_note)}
-        <div class="screen__eyebrow">DM is free — deliver the opener</div>
+        <div class="screen__eyebrow">DM is free — deliver the opener${usingMockup ? ' · 🖥 MOCKUP REVEAL' : ''}</div>
         <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
           <button class="action-btn ${style==='word_for_word'?'action-btn--primary':''}" data-style="word_for_word" style="flex:1;font-size:0.78rem;" title="Full script — read word for word">W · Word for Word</button>
           <button class="action-btn ${style==='guided'?'action-btn--primary':''}" data-style="guided" style="flex:1;font-size:0.78rem;" title="Key anchors — say it in your own words">G · Guided</button>
@@ -1279,8 +1372,8 @@
         <div class="branches" style="margin-top:0.75rem;">
           <button class="branch-btn branch-btn--green" data-hotkey="1" data-resp="YES">
             <span class="branch-btn__hotkey">1</span>
-            <span class="branch-btn__label">🟢 Yes — trying to grow</span>
-            <span class="branch-btn__sub">They want to grow → pitch</span>
+            <span class="branch-btn__label">${usingMockup ? '🟢 Yes — send it over' : '🟢 Yes — trying to grow'}</span>
+            <span class="branch-btn__sub">${usingMockup ? 'They want the link → send it' : 'They want to grow → pitch'}</span>
           </button>
           <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-resp="WHAT_DO_YOU_DO">
             <span class="branch-btn__hotkey">2</span>
@@ -1302,6 +1395,16 @@
             <span class="branch-btn__label">⚪ At capacity</span>
             <span class="branch-btn__sub">→ 90-day follow-up</span>
           </button>
+          ${usingMockup ? html`
+          <button class="branch-btn" data-resp="WHY_FREE">
+            <span class="branch-btn__label">🟡 "Why would you do this for free?"</span>
+            <span class="branch-btn__sub">Mockup Reveal objection</span>
+          </button>
+          <button class="branch-btn" data-resp="ALREADY_HAVE_SITE">
+            <span class="branch-btn__label">🟡 "I already have a website"</span>
+            <span class="branch-btn__sub">Mockup Reveal objection</span>
+          </button>
+          ` : ''}
         </div>
         ${renderNotesBlock()}
       `);
@@ -1330,6 +1433,8 @@
           else if (resp === 'BUSY_NOW')   goTo('busy_pivot');
           else if (resp === 'NOT_INTERESTED') goTo('response_not_interested');
           else if (resp === 'AT_CAPACITY')    goTo('response_capacity');
+          else if (resp === 'WHY_FREE')        goTo('mockup_why_free');
+          else if (resp === 'ALREADY_HAVE_SITE') goTo('mockup_already_have_site');
         });
       });
     }
@@ -1337,18 +1442,80 @@
   };
   SCREENS.openers = SCREENS.opener_styles; // backward compat
 
+  // ── MOCKUP REVEAL — objection screens (only reachable in Mockup mode) ──
+  SCREENS.mockup_why_free = () => {
+    const r = (scripts.mockup_reveal && scripts.mockup_reveal.responses.WHY_FREE) || {};
+    renderScreen(html`
+      <div class="screen__eyebrow">🖥 Mockup Reveal — "Why free?"</div>
+      ${ammoStrip()}
+      <div class="script-panel">
+        <div class="script-panel__line">${tokenizeHTML(r.script || '')}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches" style="margin-top:0.75rem;">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-back="1">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 HANDLED — back to the opener</span>
+          <span class="branch-btn__sub">→ Returns to Mockup Reveal opener</span>
+        </button>
+      </div>
+    `);
+    stage().querySelectorAll('[data-back]').forEach(el => el.addEventListener('click', () => {
+      Shell.pushBranch('mockup_why_free:back');
+      playClick();
+      goBack();
+    }));
+  };
+
+  SCREENS.mockup_already_have_site = () => {
+    const r = (scripts.mockup_reveal && scripts.mockup_reveal.responses.ALREADY_HAVE_SITE) || {};
+    renderScreen(html`
+      <div class="screen__eyebrow">🖥 Mockup Reveal — "I already have a website"</div>
+      ${ammoStrip()}
+      <div class="script-panel">
+        <div class="script-panel__line">${tokenizeHTML(r.script || '')}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches" style="margin-top:0.75rem;">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-next="opener_styles">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 Still want to see it — back to opener</span>
+          <span class="branch-btn__sub">→ Mockup Reveal opener</span>
+        </button>
+        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-next="pitch_what">
+          <span class="branch-btn__hotkey">2</span>
+          <span class="branch-btn__label">🟡 They have a real site — route to standard pitch</span>
+          <span class="branch-btn__sub">→ Standard "what do you do" flow</span>
+        </button>
+      </div>
+    `);
+    stage().querySelectorAll('[data-next]').forEach(b => {
+      b.addEventListener('click', () => {
+        Shell.pushBranch('mockup_already_have_site:' + b.dataset.next);
+        playClick();
+        goTo(b.dataset.next);
+      });
+    });
+  };
+
   // ── YES — pitch to someone who wants to grow ─────────────────
   SCREENS.pitch_yes = () => {
     const contact = Shell.getContact() || {};
     const trade = contact.trade || '';
     const pitchLines = scripts.pitch_30 && scripts.pitch_30.trade_specific;
     const pitch = (pitchLines && pitchLines[trade]) ? pitchLines[trade] : (scripts.pitch_30 ? scripts.pitch_30.default : '');
+    // Mockup Reveal mode: swap the top script line to the "send the link" script
+    // when active + this prospect has a mockup_url. Everything below (pitch box,
+    // audit-offer/objection branches) stays the standard flow — sending the
+    // mockup naturally leads straight into the same next steps.
+    const usingMockup = mockupActive() && scripts.mockup_reveal;
+    const topResponse = usingMockup ? scripts.mockup_reveal.responses.YES_SEND_IT : scripts.responses.YES;
     renderScreen(html`
-      <div class="screen__eyebrow">They want to grow — pitch it</div>
+      <div class="screen__eyebrow">${usingMockup ? 'They want the mockup — send it' : 'They want to grow — pitch it'}</div>
       ${ammoStrip()}
       <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.responses.YES.script)}</div>
-        ${trainingNote(scripts.responses.YES.training_note)}
+        <div class="script-panel__line">${tokenizeHTML(topResponse.script)}</div>
+        ${trainingNote(topResponse.training_note)}
         ${trainingNote(scripts.pitch_30.training_note)}
       </div>
       <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(232,101,26,0.08);border:1px solid rgba(232,101,26,0.25);border-radius:var(--radius-sm);">
@@ -1449,12 +1616,16 @@
 
   // ── NOT INTERESTED — audit offer exit ────────────────────────
   SCREENS.response_not_interested = () => {
+    // Mockup Reveal mode: swap in the mockup-specific "not interested" line
+    // (offers the link with zero pressure) when active + mockup_url present.
+    const usingMockup = mockupActive() && scripts.mockup_reveal;
+    const notInterested = usingMockup ? scripts.mockup_reveal.responses.NOT_INTERESTED : scripts.responses.NOT_INTERESTED;
     renderScreen(html`
       <div class="screen__eyebrow">Not interested — graceful exit</div>
       ${ammoStrip()}
       <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.responses.NOT_INTERESTED.script)}</div>
-        ${trainingNote(scripts.responses.NOT_INTERESTED.training_note)}
+        <div class="script-panel__line">${tokenizeHTML(notInterested.script)}</div>
+        ${trainingNote(notInterested.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
         <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="WARM">
