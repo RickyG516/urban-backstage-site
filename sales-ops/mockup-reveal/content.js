@@ -1,14 +1,22 @@
 /* ===================================================================
    UNC SALES COCKPIT — Mockup Reveal Content Logic
-   v1.0 — 2026-07-29
-   Standalone cockpit for prospects we already built a free "ghost page"
+   v2.0 — 2026-07-30
+   Standalone cockpit for prospects we already built a free-to-PREVIEW
    homepage mockup for. Every prospect loaded here has a mockup_url —
    the entire script IS the mockup pitch. No mode toggle, no standard
    cold-call flow: this is its own dedicated tool.
 
+   v2 adds: honest "free to look, paid to finish/host/launch" framing
+   (matches scripts.json v2), a light qualify step after they say yes,
+   dedicated objection screens (price, "is this my real site?", "just
+   send it"), a real soft/hard/hot closing progression, capture chips
+   for structured intel (mirrors discovery/content.js's logAnswer
+   pattern), and its own outcomes.json instead of falling back to the
+   generic shared outcome codes.
+
    Flow: load prospect -> "First time or Follow-up?" -> First Time goes
-   into the opener/responses script (reveal the mockup), Follow-Up goes
-   into post_reveal_pitch (they already saw it, move to proposal).
+   into the opener/responses/qualify script (reveal the mockup), Follow-
+   Up goes into post_reveal_pitch -> closing (soft/hard/hot).
 
    Rendering/state-machine approach, token interpolation, live-queue
    loading, prospect-card rendering, and outcome-logging/sync mechanism
@@ -89,6 +97,7 @@
     window._liveAdvance = function(outcomeCode) {
       if (liveQueue.length) advanceAfterOutcome(outcomeCode);
     };
+    injectCaptureChips();
     renderStart();
   }
 
@@ -237,6 +246,88 @@
     let out = strings[0];
     for (let i = 0; i < values.length; i++) out += String(values[i]) + strings[i + 1];
     return out;
+  }
+
+  // ============================================================
+  // CAPTURE CHIPS — stamp structured intel into the synced call-notes
+  // field with one click, same mechanism as discovery/content.js's
+  // SPIN-prompt logging (logAnswer / q-clickable), adapted for this
+  // cockpit's lighter qualify flow.
+  // ============================================================
+  function ensureNotesVisible() {
+    const panel = document.querySelector('#call-notes-panel');
+    if (panel) panel.hidden = false;
+  }
+
+  // Stamp a labeled stub into the synced #call-notes field and focus it,
+  // ready for the rep to type the actual answer after the arrow.
+  function stampNoteLine(tag, el, activeClass) {
+    ensureNotesVisible();
+    const ta = document.querySelector('#call-notes');
+    if (!ta) return;
+    if (!ta.value.includes(tag)) {
+      const stub = tag + ' → ';
+      const sep = ta.value.replace(/\s+$/, '').length ? '\n' : '';
+      ta.value = ta.value.replace(/\s+$/, '') + sep + stub;
+      ta.dispatchEvent(new Event('input', { bubbles: true })); // triggers Shell autosave
+    }
+    if (el) { el.classList.add(activeClass || 'chip-answered'); }
+    ta.focus();
+    ta.selectionStart = ta.selectionEnd = ta.value.length;
+    ta.scrollTop = ta.scrollHeight;
+  }
+
+  // Quick capture chips — Decision maker name, Email captured, Sent via,
+  // Wants full build, Objection type. One click stamps the label, rep
+  // fills in the specifics.
+  const CAPTURE_CHIPS = [
+    { key: 'dm_name',    label: 'DM Name',      tag: '[Decision maker name]' },
+    { key: 'email',      label: 'Email',        tag: '[Email captured]' },
+    { key: 'sent_via',   label: 'Sent via',     tag: '[Sent via (Text/Email)]' },
+    { key: 'wants_build',label: 'Wants Build?', tag: '[Wants full build (Y/N/Maybe)]' },
+    { key: 'objection',  label: 'Objection',    tag: '[Objection type]' }
+  ];
+
+  function logChip(chip, el) { stampNoteLine(chip.tag, el, 'chip-answered'); }
+
+  // Qualify prompts (scripts.qualify.prompts) — click-to-log the same way
+  // discovery's SPIN questions do, tagged by prompt key.
+  function logQualify(key, qtext, el) { stampNoteLine('[QUALIFY:' + key + '] ' + qtext, el, 'q-answered'); }
+
+  function injectCaptureChips() {
+    if (document.getElementById('capture-chip-style')) return;
+    const st = document.createElement('style');
+    st.id = 'capture-chip-style';
+    st.textContent = [
+      '.chip-row{display:flex;flex-wrap:wrap;gap:0.35rem;padding:0.5rem 0.75rem 0;}',
+      '.capture-chip{font-size:0.68rem;font-weight:700;letter-spacing:0.02em;padding:0.28rem 0.55rem;border-radius:999px;border:1px solid var(--color-border-bright);background:var(--color-dark-2);color:var(--color-white-dim);cursor:pointer;transition:all 0.12s;}',
+      '.capture-chip:hover{border-color:var(--color-accent);color:var(--color-accent);}',
+      '.capture-chip.chip-answered{border-color:#22c55e;color:#22c55e;background:rgba(34,197,94,0.08);}',
+      '.q-clickable{cursor:pointer;transition:background .12s;border-radius:6px;padding:.15rem .4rem;margin:.05rem -.4rem;}',
+      '.q-clickable:hover{background:rgba(232,107,30,.10);}',
+      '.q-log-hint{font-size:.68rem;color:#e36b1e;opacity:0;margin-left:.45rem;white-space:nowrap;font-weight:600;}',
+      '.q-clickable:hover .q-log-hint{opacity:.9;}',
+      '.q-answered{background:rgba(46,160,67,.08);}',
+      '.q-answered .q-log-hint{opacity:.85;color:#22c55e;}'
+    ].join('');
+    document.head.appendChild(st);
+
+    const panel = document.querySelector('#call-notes-panel');
+    const lbl = panel && panel.querySelector('.call-notes-panel__lbl');
+    if (!panel || document.getElementById('capture-chip-row')) return;
+    const row = document.createElement('div');
+    row.id = 'capture-chip-row';
+    row.className = 'chip-row';
+    row.innerHTML = CAPTURE_CHIPS.map(c => '<button type="button" class="capture-chip" data-chip-key="' + c.key + '">+ ' + escapeHTML(c.label) + '</button>').join('');
+    if (lbl) lbl.insertAdjacentElement('afterend', row);
+    else panel.insertBefore(row, panel.firstChild);
+    row.querySelectorAll('[data-chip-key]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const chip = CAPTURE_CHIPS.find(c => c.key === btn.dataset.chipKey);
+        if (chip) logChip(chip, btn);
+      });
+    });
+    if (lbl) lbl.textContent = 'Call Notes — tap a chip or a qualify question to log it';
   }
 
   function renderNotesBlock() {
@@ -435,7 +526,7 @@
   // ── Win flash ─────────────────────────────────────────────────
   function flashWin(type) {
     const el = document.createElement('div');
-    const isHot = type === 'HOT';
+    const isHot = type === 'HOT' || type === 'WANTS_BUILD';
     el.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;background:' + (isHot ? 'rgba(34,197,94,0.15)' : 'rgba(232,101,26,0.12)') + ';';
     el.innerHTML = '<div style="font-size:4rem;animation:flashPop 0.6s ease forwards;">' + (isHot ? '🔥' : '🟡') + '</div>';
     if (!document.getElementById('flash-style')) {
@@ -454,8 +545,8 @@
     const goal = dailyGoal || getStoredGoal() || 10;
     // Pull HOT/WARM from CallLog.today() so a page refresh mid-session doesn't undercount
     const todayCalls = window.CockpitLog ? window.CockpitLog.today() : [];
-    const hotCount  = todayCalls.filter(c => c.outcome_code === 'HOT').length  || sessionHot;
-    const warmCount = todayCalls.filter(c => c.outcome_code === 'WARM').length || sessionWarm;
+    const hotCount  = todayCalls.filter(c => c.outcome_code === 'HOT' || c.outcome_code === 'WANTS_BUILD').length  || sessionHot;
+    const warmCount = todayCalls.filter(c => c.outcome_code === 'MOCKUP_SENT' || c.outcome_code === 'FOLLOW_UP_BOOKED').length || sessionWarm;
     const totalLogged = todayCalls.length || sessionDialCount;
     const convRate = totalLogged > 0 ? Math.round(((hotCount + warmCount) / totalLogged) * 100) : 0;
     const rep = Shell._currentRep ? Shell._currentRep() : {};
@@ -485,8 +576,8 @@
     // Update session stats
     sessionDialCount++;
     bumpDialsToday();
-    if (outcomeCode === 'HOT') { sessionHot++; sessionStreak++; flashWin('HOT'); }
-    else if (outcomeCode === 'WARM') { sessionWarm++; sessionStreak++; flashWin('WARM'); }
+    if (outcomeCode === 'HOT' || outcomeCode === 'WANTS_BUILD') { sessionHot++; sessionStreak++; flashWin(outcomeCode); }
+    else if (outcomeCode === 'MOCKUP_SENT' || outcomeCode === 'FOLLOW_UP_BOOKED') { sessionWarm++; sessionStreak++; flashWin(outcomeCode); }
     else { sessionStreak = 0; }
     renderSessionHUD();
 
@@ -524,7 +615,7 @@
         <div style="text-align:center;padding:2rem 1rem;">
           <div style="font-size:3rem;margin-bottom:1rem;">🎯</div>
           <div style="font-size:1.4rem;font-weight:700;color:var(--color-white);margin-bottom:0.5rem;">Goal hit. ${getDialsToday()} dials.</div>
-          <div style="color:var(--color-white-dim);margin-bottom:1.5rem;">${sessionHot} HOT · ${sessionWarm} WARM · ${Math.round(((sessionHot+sessionWarm)/Math.max(sessionDialCount,1))*100)}% conversion</div>
+          <div style="color:var(--color-white-dim);margin-bottom:1.5rem;">${sessionHot} Hot/Wants-Build · ${sessionWarm} Sent/Follow-up · ${Math.round(((sessionHot+sessionWarm)/Math.max(sessionDialCount,1))*100)}% conversion</div>
           <button class="action-btn action-btn--primary" id="keep-going-btn" style="margin-right:0.5rem;">Keep going</button>
           <button class="action-btn" id="wrap-up-btn">Wrap up session</button>
         </div>
@@ -647,7 +738,7 @@
           const cb = window._callbackQueue[parseInt(b.dataset.idx)];
           if (!cb) return;
           // Convert callback to queue-compatible format and render
-          liveQueue = [{ ...cb, contact_id: cb.contact_id, last_call_outcome: 'WARM' }];
+          liveQueue = [{ ...cb, contact_id: cb.contact_id, last_call_outcome: 'FOLLOW_UP_BOOKED' }];
           liveIndex = 0;
           renderLiveCard(liveQueue[0]);
           renderStart();
@@ -786,7 +877,7 @@
 
     const lastOutcome = prospect.last_call_outcome || '';
     const lastDate    = prospect.last_call_date ? new Date(prospect.last_call_date).toLocaleDateString() : '';
-    const outcomeColor = lastOutcome === 'HOT' ? '#22c55e' : lastOutcome === 'WARM' ? 'var(--color-accent)' : '#666';
+    const outcomeColor = (lastOutcome === 'HOT' || lastOutcome === 'WANTS_BUILD') ? '#22c55e' : (lastOutcome === 'MOCKUP_SENT' || lastOutcome === 'FOLLOW_UP_BOOKED') ? 'var(--color-accent)' : '#666';
     const lastTouchHTML = lastOutcome
       ? '<span style="font-size:0.68rem;font-weight:700;padding:0.15rem 0.4rem;border-radius:3px;background:rgba(100,100,100,0.15);color:' + outcomeColor + ';border:1px solid ' + outcomeColor + ';">' + escapeHTML(lastOutcome) + '</span>' + (lastDate ? '<span style="font-size:0.68rem;color:var(--color-white-dim);margin-left:0.25rem;">' + lastDate + '</span>' : '')
       : '<span style="font-size:0.68rem;color:var(--color-white-dim);">First contact</span>';
@@ -833,7 +924,7 @@
         b += dmKnown ? '<span class="badge bg">✓ DM known</span>'       : '<span class="badge ba">DM unknown</span>';
         if (gbpCount !== null) b += '<span class="badge bb">⭐ ' + gbpCount + ' reviews</span>';
         if (siteGap) b += '<span class="badge br" title="' + escapeHTML(siteGap) + '">⚠ ' + escapeHTML(siteGap.length > 20 ? siteGap.slice(0,20)+'…' : siteGap) + '</span>';
-        if (lifecycle && lifecycle !== 'COLD') b += '<span class="badge ba">' + escapeHTML(lifecycle) + '</span>';
+        if (lifecycle && lifecycle !== 'NOT_INTERESTED') b += '<span class="badge ba">' + escapeHTML(lifecycle) + '</span>';
         return '<div class="card-badges">' + b + '</div>';
       })() +
       // ── card-intel (scrollable) — KNOWN facts first, ANGLE (our prep) below ──
@@ -1185,8 +1276,8 @@
       Shell.startCall();
       Shell.pushBranch('no_answer_or_wrong');
       playClick();
-      Shell.recordOutcome('NA');
-      advanceAfterOutcome('NA');
+      Shell.recordOutcome('NO_ANSWER');
+      advanceAfterOutcome('NO_ANSWER');
     });
   }
 
@@ -1228,6 +1319,28 @@
       return '';
     }
 
+    // Secondary quick-objection row — reachable from here AND from mockup_sent.
+    // These are one-off deflections, not part of the main response grid.
+    function quickObjectionsRow() {
+      return html`
+        <div style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;">
+          <button class="action-btn" data-quickobj="is_this_my_real_site" style="font-size:0.72rem;padding:0.3rem 0.55rem;color:var(--color-white-dim);">🖥 "Is this my real site?"</button>
+          <button class="action-btn" data-quickobj="send_me_something_instead" style="font-size:0.72rem;padding:0.3rem 0.55rem;color:var(--color-white-dim);">✉ "Just send me something"</button>
+        </div>
+      `;
+    }
+    function bindQuickObjections() {
+      stage().querySelectorAll('[data-quickobj]').forEach(b => {
+        b.addEventListener('click', () => {
+          const key = b.dataset.quickobj;
+          Shell.pushBranch('quick_obj:' + key);
+          playClick();
+          if (key === 'is_this_my_real_site') goTo('mockup_is_real_site');
+          else if (key === 'send_me_something_instead') goTo('mockup_send_something');
+        });
+      });
+    }
+
     function render(style) {
       activeStyle = style;
       renderScreen(html`
@@ -1250,22 +1363,28 @@
             <span class="branch-btn__label">🟡 "Why would you do this for free?"</span>
             <span class="branch-btn__sub">Handle the objection, come back here</span>
           </button>
-          <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-resp="ALREADY_HAVE_SITE">
+          <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-resp="PRICE_UPFRONT">
             <span class="branch-btn__hotkey">3</span>
+            <span class="branch-btn__label">🟡 "What's this going to cost me?"</span>
+            <span class="branch-btn__sub">Redirect to "see it first"</span>
+          </button>
+          <button class="branch-btn branch-btn--yellow" data-hotkey="4" data-resp="ALREADY_HAVE_SITE">
+            <span class="branch-btn__hotkey">4</span>
             <span class="branch-btn__label">🟡 "I already have a website"</span>
             <span class="branch-btn__sub">Confirm or route to not interested</span>
           </button>
-          <button class="branch-btn branch-btn--yellow" data-hotkey="4" data-resp="BUSY_NOW">
-            <span class="branch-btn__hotkey">4</span>
+          <button class="branch-btn branch-btn--yellow" data-hotkey="5" data-resp="BUSY_NOW">
+            <span class="branch-btn__hotkey">5</span>
             <span class="branch-btn__label">🟡 Busy right now</span>
             <span class="branch-btn__sub">Bad time → quick close</span>
           </button>
-          <button class="branch-btn branch-btn--red" data-hotkey="5" data-resp="NOT_INTERESTED">
-            <span class="branch-btn__hotkey">5</span>
+          <button class="branch-btn branch-btn--red" data-hotkey="6" data-resp="NOT_INTERESTED">
+            <span class="branch-btn__hotkey">6</span>
             <span class="branch-btn__label">🔴 Not interested</span>
             <span class="branch-btn__sub">→ Graceful exit</span>
           </button>
         </div>
+        ${quickObjectionsRow()}
         ${renderNotesBlock()}
       `);
       Shell.bindNotes();
@@ -1287,48 +1406,79 @@
           playClick();
           if (resp === 'YES_SEND_IT')            goTo('mockup_sent');
           else if (resp === 'WHY_FREE')           goTo('mockup_why_free');
+          else if (resp === 'PRICE_UPFRONT')      goTo('mockup_price_upfront');
           else if (resp === 'ALREADY_HAVE_SITE')  goTo('mockup_already_have_site');
           else if (resp === 'BUSY_NOW')           goTo('mockup_busy_now');
           else if (resp === 'NOT_INTERESTED')     goTo('mockup_not_interested');
         });
       });
+      bindQuickObjections();
     }
     render(activeStyle);
   };
   SCREENS.openers = SCREENS.opener_styles; // backward compat
 
-  // ── YES, SEND IT — mockup link confirmed, wrap the call ──────
+  // ── YES, SEND IT — mockup link confirmed, qualify, then log ──
   SCREENS.mockup_sent = () => {
     const r = scripts.responses.YES_SEND_IT;
+    const qualify = scripts.qualify || { prompts: [] };
+    const qualifyHTML = qualify.prompts.map(p => html`
+      <div class="script-panel__line q-clickable" data-qkey="${p.key}" data-qtext="${escapeHTML(interpolate(p.q))}">
+        → ${tokenizeHTML(p.q)}<span class="q-log-hint">＋ log answer</span>
+      </div>
+    `).join('');
     renderScreen(html`
-      <div class="screen__eyebrow">They want it — send the link</div>
+      <div class="screen__eyebrow">They want it — send the link, then qualify</div>
       ${ammoStrip()}
       <div class="script-panel">
         <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
         ${trainingNote(r.training_note)}
       </div>
+      <div class="screen__heading" style="margin-top:0.75rem;font-size:0.8rem;opacity:0.65">TAP TO LOG AS YOU GO:</div>
+      <div class="script-panel">
+        ${qualifyHTML}
+        ${trainingNote(qualify.training_note)}
+      </div>
       <div class="branches" style="margin-top:0.75rem;">
         <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="HOT">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🔥 Loved it live — booking now</span>
-          <span class="branch-btn__sub">Log HOT</span>
+          <span class="branch-btn__label">🔥 Ready to move now</span>
+          <span class="branch-btn__sub">Verbal yes → Log HOT</span>
         </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-outcome="WARM">
+        <button class="branch-btn branch-btn--green" data-hotkey="2" data-outcome="WANTS_BUILD">
           <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟡 Sent — following up in a few days</span>
-          <span class="branch-btn__sub">Log WARM</span>
+          <span class="branch-btn__label">🟢 Wants it built — send pricing</span>
+          <span class="branch-btn__sub">Log WANTS_BUILD</span>
         </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="3" data-outcome="COLD">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-outcome="MOCKUP_SENT">
           <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🔴 Sent, but they went cold</span>
-          <span class="branch-btn__sub">Log COLD</span>
+          <span class="branch-btn__label">🟡 Just curious for now — sent, following up</span>
+          <span class="branch-btn__sub">Log MOCKUP_SENT</span>
         </button>
+        <button class="branch-btn branch-btn--red" data-hotkey="4" data-outcome="NOT_INTERESTED">
+          <span class="branch-btn__hotkey">4</span>
+          <span class="branch-btn__label">🔴 Sent, but they went cold</span>
+          <span class="branch-btn__sub">Log NOT_INTERESTED</span>
+        </button>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
+        <button class="action-btn" data-quickobj="is_this_my_real_site" style="font-size:0.72rem;padding:0.3rem 0.55rem;color:var(--color-white-dim);">🖥 "Is this my real site?"</button>
       </div>
       ${renderNotesBlock()}
     `);
     Shell.bindNotes();
     stage().querySelectorAll('[data-outcome]').forEach(b => {
       b.addEventListener('click', () => { Shell.pushBranch('mockup_sent:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+    });
+    stage().querySelectorAll('[data-qkey]').forEach(el => el.addEventListener('click', () => {
+      logQualify(el.dataset.qkey, el.dataset.qtext, el);
+    }));
+    stage().querySelectorAll('[data-quickobj]').forEach(b => {
+      b.addEventListener('click', () => {
+        Shell.pushBranch('quick_obj:' + b.dataset.quickobj);
+        playClick();
+        goTo('mockup_is_real_site');
+      });
     });
   };
 
@@ -1357,6 +1507,86 @@
     }));
   };
 
+  // ── PRICE UPFRONT — never quote before they've seen it ───────
+  SCREENS.mockup_price_upfront = () => {
+    const r = scripts.responses.PRICE_UPFRONT;
+    renderScreen(html`
+      <div class="screen__eyebrow" style="color:#f0985a">🟡 "What's this going to cost me?"</div>
+      ${ammoStrip()}
+      <div class="script-panel" style="border-color:rgba(232,101,26,0.35)">
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-back="1">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 HANDLED — back to the opener</span>
+          <span class="branch-btn__sub">→ Returns exactly where you were</span>
+        </button>
+      </div>
+    `);
+    stage().querySelectorAll('[data-back]').forEach(el => el.addEventListener('click', () => {
+      Shell.pushBranch('mockup_price_upfront:back');
+      playClick();
+      goBack();
+    }));
+  };
+
+  // ── "IS THIS MY REAL SITE?" — clear up preview vs live confusion ──
+  SCREENS.mockup_is_real_site = () => {
+    const r = scripts.objections.is_this_my_real_site;
+    renderScreen(html`
+      <div class="screen__eyebrow" style="color:#f0985a">🖥 "Wait, is this live? Is this my actual site now?"</div>
+      ${ammoStrip()}
+      <div class="script-panel" style="border-color:rgba(232,101,26,0.35)">
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-back="1">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 HANDLED — back to where you were</span>
+          <span class="branch-btn__sub">→ Returns exactly where you were</span>
+        </button>
+      </div>
+    `);
+    stage().querySelectorAll('[data-back]').forEach(el => el.addEventListener('click', () => {
+      Shell.pushBranch('mockup_is_real_site:back');
+      playClick();
+      goBack();
+    }));
+  };
+
+  // ── "JUST SEND ME SOMETHING" — quick path, but always get a follow-up window ──
+  SCREENS.mockup_send_something = () => {
+    const r = scripts.objections.send_me_something_instead;
+    renderScreen(html`
+      <div class="screen__eyebrow">✉ "Just send me something / email only"</div>
+      ${ammoStrip()}
+      <div class="script-panel">
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches" style="margin-top:0.75rem;">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="FOLLOW_UP_BOOKED">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 Got a follow-up window</span>
+          <span class="branch-btn__sub">Log FOLLOW_UP_BOOKED</span>
+        </button>
+        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-outcome="MOCKUP_SENT">
+          <span class="branch-btn__hotkey">2</span>
+          <span class="branch-btn__label">🟡 Sent, no window pinned down</span>
+          <span class="branch-btn__sub">Log MOCKUP_SENT</span>
+        </button>
+      </div>
+      ${renderNotesBlock()}
+    `);
+    Shell.bindNotes();
+    stage().querySelectorAll('[data-outcome]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_send_something:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+    });
+  };
+
   // ── ALREADY HAVE A WEBSITE — confirm/deny, route accordingly ──
   SCREENS.mockup_already_have_site = () => {
     const r = scripts.responses.ALREADY_HAVE_SITE;
@@ -1373,10 +1603,10 @@
           <span class="branch-btn__label">🟢 Still want to see it — back to opener</span>
           <span class="branch-btn__sub">→ Mockup opener</span>
         </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="2" data-next="mockup_not_interested">
+        <button class="branch-btn branch-btn--red" data-hotkey="2" data-outcome="ALREADY_HAS_SITE">
           <span class="branch-btn__hotkey">2</span>
           <span class="branch-btn__label">🔴 Real site, not interested</span>
-          <span class="branch-btn__sub">→ Graceful exit</span>
+          <span class="branch-btn__sub">Log ALREADY_HAS_SITE — bad data, route back to cold-call</span>
         </button>
       </div>
     `);
@@ -1386,6 +1616,9 @@
         playClick();
         goTo(b.dataset.next);
       });
+    });
+    stage().querySelectorAll('[data-outcome]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_already_have_site:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
     });
   };
 
@@ -1400,10 +1633,10 @@
         ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="WARM">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="MOCKUP_SENT">
           <span class="branch-btn__hotkey">1</span>
           <span class="branch-btn__label">🟡 Said yes — texting the link</span>
-          <span class="branch-btn__sub">Log WARM</span>
+          <span class="branch-btn__sub">Log MOCKUP_SENT</span>
         </button>
         <button class="branch-btn branch-btn--red" data-hotkey="2" data-next="mockup_not_interested">
           <span class="branch-btn__hotkey">2</span>
@@ -1433,15 +1666,15 @@
         ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="WARM">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="MOCKUP_SENT">
           <span class="branch-btn__hotkey">1</span>
           <span class="branch-btn__label">🟢 Took the link anyway</span>
-          <span class="branch-btn__sub">Log WARM</span>
+          <span class="branch-btn__sub">Log MOCKUP_SENT</span>
         </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="2" data-outcome="COLD">
+        <button class="branch-btn branch-btn--red" data-hotkey="2" data-outcome="NOT_INTERESTED">
           <span class="branch-btn__hotkey">2</span>
           <span class="branch-btn__label">🔴 Hard no — move on</span>
-          <span class="branch-btn__sub">Log COLD</span>
+          <span class="branch-btn__sub">Log NOT_INTERESTED</span>
         </button>
       </div>
       ${renderNotesBlock()}
@@ -1452,7 +1685,37 @@
     });
   };
 
-  // ── FOLLOW-UP — they already saw the mockup, move to proposal ──
+  // ── (FOLLOW-UP CALL) NOT INTERESTED AFTER SEEING IT ───────────
+  SCREENS.mockup_not_interested_after_seeing = () => {
+    const r = scripts.objections.not_interested_after_seeing;
+    renderScreen(html`
+      <div class="screen__eyebrow">Saw it, not interested — find out why</div>
+      ${ammoStrip()}
+      <div class="script-panel">
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches" style="margin-top:0.75rem;">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="1" data-outcome="FOLLOW_UP_BOOKED">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟡 Timing issue — follow up later</span>
+          <span class="branch-btn__sub">Log FOLLOW_UP_BOOKED</span>
+        </button>
+        <button class="branch-btn branch-btn--red" data-hotkey="2" data-outcome="NOT_INTERESTED">
+          <span class="branch-btn__hotkey">2</span>
+          <span class="branch-btn__label">🔴 Not needed — closed</span>
+          <span class="branch-btn__sub">Log NOT_INTERESTED</span>
+        </button>
+      </div>
+      ${renderNotesBlock()}
+    `);
+    Shell.bindNotes();
+    stage().querySelectorAll('[data-outcome]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_not_interested_after_seeing:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+    });
+  };
+
+  // ── FOLLOW-UP — they already saw the mockup ───────────────────
   SCREENS.follow_up = () => {
     const r = scripts.post_reveal_pitch;
     renderScreen(html`
@@ -1463,27 +1726,86 @@
         ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="HOT">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-next="closing">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🔥 Ready to move — book it</span>
-          <span class="branch-btn__sub">Log HOT</span>
+          <span class="branch-btn__label">🟢 Liked it — ready to talk</span>
+          <span class="branch-btn__sub">→ Closing progression</span>
         </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-outcome="WARM">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-outcome="FOLLOW_UP_BOOKED">
           <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟡 Still deciding — follow up again</span>
-          <span class="branch-btn__sub">Log WARM</span>
+          <span class="branch-btn__label">🟡 Hasn't looked yet</span>
+          <span class="branch-btn__sub">Get a specific time → Log FOLLOW_UP_BOOKED</span>
         </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="3" data-outcome="COLD">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-next="mockup_sent">
           <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🔴 Passed</span>
-          <span class="branch-btn__sub">Log COLD</span>
+          <span class="branch-btn__label">🟡 Lost the link — resend it</span>
+          <span class="branch-btn__sub">→ Resend + re-qualify</span>
+        </button>
+        <button class="branch-btn branch-btn--red" data-hotkey="4" data-next="mockup_not_interested_after_seeing">
+          <span class="branch-btn__hotkey">4</span>
+          <span class="branch-btn__label">🔴 Not interested</span>
+          <span class="branch-btn__sub">→ Find out why</span>
+        </button>
+      </div>
+      ${renderNotesBlock()}
+    `);
+    Shell.bindNotes();
+    stage().querySelectorAll('[data-next]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('follow_up:' + b.dataset.next); playClick(); goTo(b.dataset.next); });
+    });
+    stage().querySelectorAll('[data-outcome]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('follow_up:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+    });
+  };
+
+  // ── CLOSING — soft / hard / hot, all visible, pick the read on the room ──
+  SCREENS.closing = () => {
+    const c = scripts.closing;
+    renderScreen(html`
+      <div class="screen__eyebrow">Closing — read the room, pick one</div>
+      ${ammoStrip()}
+      ${trainingNote(c.training_note)}
+      <div class="script-panel">
+        <div class="script-panel__line" style="border-left:3px solid var(--color-white-dim);padding-left:0.6rem;">
+          <b style="color:var(--color-white-dim);">SOFT</b> — ${tokenizeHTML(c.soft_close)}
+        </div>
+      </div>
+      <div class="branches" style="margin-top:0.4rem;">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="1" data-outcome="FOLLOW_UP_BOOKED">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟡 Used SOFT close</span>
+          <span class="branch-btn__sub">Log FOLLOW_UP_BOOKED</span>
+        </button>
+      </div>
+      <div class="script-panel" style="margin-top:0.75rem;">
+        <div class="script-panel__line" style="border-left:3px solid #22c55e;padding-left:0.6rem;">
+          <b style="color:#22c55e;">HARD</b> — ${tokenizeHTML(c.hard_close)}
+        </div>
+      </div>
+      <div class="branches" style="margin-top:0.4rem;">
+        <button class="branch-btn branch-btn--green" data-hotkey="2" data-outcome="WANTS_BUILD">
+          <span class="branch-btn__hotkey">2</span>
+          <span class="branch-btn__label">🟢 Used HARD close</span>
+          <span class="branch-btn__sub">Log WANTS_BUILD</span>
+        </button>
+      </div>
+      <div class="script-panel" style="margin-top:0.75rem;">
+        <div class="script-panel__line" style="border-left:3px solid var(--color-accent);padding-left:0.6rem;">
+          <b style="color:var(--color-accent);">HOT</b> — ${tokenizeHTML(c.hot_close)}
+        </div>
+      </div>
+      <div class="branches" style="margin-top:0.4rem;">
+        <button class="branch-btn branch-btn--green" data-hotkey="3" data-outcome="HOT">
+          <span class="branch-btn__hotkey">3</span>
+          <span class="branch-btn__label">🔥 Used HOT close</span>
+          <span class="branch-btn__sub">Log HOT</span>
         </button>
       </div>
       ${renderNotesBlock()}
     `);
     Shell.bindNotes();
     stage().querySelectorAll('[data-outcome]').forEach(b => {
-      b.addEventListener('click', () => { Shell.pushBranch('follow_up:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+      b.addEventListener('click', () => { Shell.pushBranch('closing:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
     });
   };
 

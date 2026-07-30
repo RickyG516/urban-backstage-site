@@ -1,0 +1,14 @@
+{
+  "_comment": "Mockup Reveal outcomes — captures where the prospect actually is in the mockup-preview to full-build pipeline",
+  "_version": "1.0",
+  "outcomes": [
+    { "code": "MOCKUP_SENT",      "label": "SENT MOCKUP",   "hotkey": "s", "color": "#60a5fa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "They agreed to receive/view the link" },
+    { "code": "WANTS_BUILD",      "label": "WANTS IT LIVE", "hotkey": "w", "color": "#22c55e", "audio": "cha-ching", "hubspot_stage": "Pricing Sent",          "description": "Confirmed they want the real site built and live — send pricing" },
+    { "code": "HOT",              "label": "HOT — CLOSE",   "hotkey": "h", "color": "#e36b1e", "audio": "cha-ching", "hubspot_stage": "Proposal Out",          "description": "Verbal yes to move forward now — hard close landed" },
+    { "code": "FOLLOW_UP_BOOKED", "label": "FOLLOW-UP",     "hotkey": "f", "color": "#facc15", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Specific callback window set" },
+    { "code": "NOT_INTERESTED",   "label": "NOT INTERESTED","hotkey": "n", "color": "#94a3b8", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Passed after seeing or hearing about it" },
+    { "code": "ALREADY_HAS_SITE", "label": "HAS A SITE",    "hotkey": "a", "color": "#a78bfa", "audio": "click",     "hubspot_stage": "Follow-Up In Progress", "description": "Bad data — they already have a real site, route back to standard cold-call queue" },
+    { "code": "NO_ANSWER",        "label": "NO ANSWER",     "hotkey": "z", "color": "#64748b", "audio": "click",     "hubspot_stage": "First Touch Sent",      "description": "No answer / voicemail left" },
+    { "code": "DNC",              "label": "DNC",           "hotkey": "d", "color": "#ef4444", "audio": "click",     "hubspot_stage": "Closed Lost / Not Now", "description": "Do not call" }
+  ]
+}

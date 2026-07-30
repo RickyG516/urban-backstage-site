@@ -1,7 +1,7 @@
 {
-  "_comment": "UNC Mockup Reveal Scripts v1 — for prospects we already built a free working homepage mockup for. Every prospect loaded into this cockpit has a mockup_url; the entire script IS the mockup pitch.",
-  "_version": "1.0",
-  "_last_updated": "2026-07-29",
+  "_comment": "Mockup Reveal Scripts v2 — for prospects we already built a free working homepage mockup for. v2: reframed 'free' (the PREVIEW is free to look at, not a permanent free asset — the finished, hosted, live build is still the paid product), added light qualifying so real intel gets captured instead of just a yes/no on a link, and a real closing progression instead of a passive 'call me back.'",
+  "_version": "2.0",
+  "_last_updated": "2026-07-30",
   "greeting": {
     "default": "Hey — is {first_name} around?",
     "no_contact_default": "Hey — is the owner around? Quick call about {business_name}."
@@ -10,7 +10,7 @@
     "word_for_word": {
       "label": "Word for Word",
       "shortcut": "W",
-      "script": "Hey {first_name} — {rep_name} calling, Urban Niche Co. Straight up, this is a cold call — but I did more than homework. I actually built {business_name} a free, working homepage. No charge, no catch. Want me to send you the link right now so you can see it?"
+      "script": "Hey {first_name} — {rep_name} calling, Urban Niche Co. Straight up, this is a cold call — but I did more than homework. I actually built {business_name} a working homepage. It's live right now, you can see it today. Costs you nothing to look. Want the link?"
     },
     "guided": {
       "label": "Guided",
@@ -18,8 +18,8 @@
       "anchors": [
         "Say it's a cold call — upfront, always",
         "Name: {rep_name}, Urban Niche Co.",
-        "\"I built {business_name} a free working homepage\" — this is proof, not a promise",
-        "Ask permission to send the link. That's the whole ask."
+        "\"I built {business_name} a working homepage, it's live right now\" — proof, not a promise",
+        "Ask permission to send the link. That's the whole ask — don't oversell the free part."
       ]
     },
     "freestyle": {
@@ -32,40 +32,79 @@
         "Ask for the best way to send it (text or email), then stop talking"
       ]
     },
-    "training_note": "This is the strongest opener in the playbook — you're not selling an idea, you're handing over a finished thing. Say 'I built' not 'I designed a concept' — built means done. Send the link fast, while they're still curious."
+    "training_note": "This is the strongest opener in the playbook — you're not selling an idea, you're handing over a finished thing. Say 'I built' not 'I designed a concept.' Don't say 'free' more than once and never say 'no catch' — it undersells what comes next. The preview is free to look at. Getting it finished, hosted on their own domain, and actually live is the paid part — that's where the real conversation goes once they're hooked."
+  },
+  "qualify": {
+    "_note": "Two or three questions, max — only after they've agreed to look. This isn't a full discovery call, it's intel-gathering disguised as normal conversation. Use the capture chips in the notes panel to log answers fast.",
+    "prompts": [
+      { "key": "current_marketing", "q": "Real quick — is anybody handling your marketing right now, or has it mostly been word of mouth?" },
+      { "key": "decision_maker", "q": "And I'm guessing you're the one who'd make the call on something like this?" },
+      { "key": "interest_level", "q": "If I got this fully finished — live on your own domain, actually working — is that something you'd want, or were you just curious to see it?" }
+    ],
+    "training_note": "Ask these AFTER they engage, not before — you already earned the conversation with the build. Q1 tells you if there's a current vendor to work around. Q2 confirms you're not pitching a non-decision-maker. Q3 is the real one — their answer decides whether this becomes a close-now call or a nurture."
   },
   "responses": {
     "YES_SEND_IT": {
       "label": "Yes — send it over",
-      "script": "Perfect. Best number to text it to, or you want it by email? {mockup_url} — take a look when you get a sec, no pressure. If you like what you see, call me back, or I'll follow up in a couple days.",
-      "default_outcome": "WARM",
-      "training_note": "Get the send method confirmed out loud, then get off the phone. The mockup does the selling from here — don't over-talk it."
+      "script": "Perfect. Best number to text it to, or you want it by email? {mockup_url} — and while I've got you, quick one: is that something you'd actually want live and finished if I built it out for real, or were you just curious to see it?",
+      "default_outcome": "MOCKUP_SENT",
+      "training_note": "Confirm the send method out loud first, then ask the real-interest question immediately — you have their attention right now, don't wait for a callback that might not come. Their answer decides whether you push toward WANTS_BUILD/HOT or log MOCKUP_SENT and nurture."
     },
     "WHY_FREE": {
       "label": "Why would you do this for free?",
-      "script": "Because I only work with contractors, and most of you don't have a real website to show people — I'd rather hand you something than describe it. Costs you nothing to look. If you hate it, you've lost 30 seconds.",
-      "training_note": "This objection means they're interested but suspicious — normal. Answer it once, plainly, then get back to sending the link."
+      "script": "Because showing beats telling — I'd rather you see it than take my word for it. This part's free. If you want it finished — hosted on your own domain, actually live and working — that's the part that costs something, same as any of my other clients. But looking costs you nothing.",
+      "training_note": "Say the quiet part out loud before they wonder about it — 'this part's free, the finished version isn't' builds more trust than dodging it. Contractors respect a straight answer about money."
+    },
+    "PRICE_UPFRONT": {
+      "label": "What's this going to cost me?",
+      "script": "Fair question — the preview costs nothing, that part's already done. Getting it finished and live runs like any of our builds, and I'll give you a real number once I know what you actually want built out. Want to see it first, then we talk numbers?",
+      "training_note": "Never quote a price before they've seen the mockup and said they want it live. Redirect to 'see it first' every time."
     },
     "ALREADY_HAVE_SITE": {
       "label": "I already have a website",
       "script": "Didn't think so when I built this — I do this for guys who don't have one yet. If I've got bad info, tell me your site and I'll take a real look instead. Otherwise, want to see what I built?",
-      "training_note": "Confirm/deny fast, don't get defensive. If they do have a real site, quietly route the rest of this call back to the standard cold-call flow."
+      "default_outcome": "ALREADY_HAS_SITE",
+      "training_note": "Confirm/deny fast, don't get defensive. If they do have a real site, log ALREADY_HAS_SITE — that routes them back to the standard cold-call queue instead of staying here."
     },
     "NOT_INTERESTED": {
       "label": "Not interested",
       "script": "Fair enough. It's already built and sitting there either way — want the link so it's in your pocket if you change your mind? Zero effort on your end.",
+      "default_outcome": "NOT_INTERESTED",
       "training_note": "The ask costs them nothing, so 'not interested' rarely survives a second, lower-pressure offer of the same thing."
     },
     "BUSY_NOW": {
       "label": "Busy / bad time",
-      "script": "No problem — ten seconds: I built {business_name} a free website mockup, already done. Want me to text you the link so you can look whenever?",
-      "default_outcome": "WARM",
+      "script": "No problem — ten seconds: I built {business_name} a working homepage, already done, live right now. Want me to text you the link so you can look whenever?",
+      "default_outcome": "MOCKUP_SENT",
       "training_note": "Busy is not a no. The ask is small enough to survive almost any 'not now.'"
     }
   },
+  "objections": {
+    "is_this_my_real_site": {
+      "label": "Wait, is this live? Is this my actual site now?",
+      "script": "No — this is a private preview, not indexed, nobody can find it searching your name. It's a real working demo of what your actual site could look like. If you want it live for real — hosted, your domain, findable on Google — that's the next step.",
+      "training_note": "Clear this up fast if asked. You never want them thinking they already have a free live site, or confused later when you ask them to pay for the real build."
+    },
+    "send_me_something_instead": {
+      "label": "Just send me something / email only",
+      "script": "Done — I'll text/email the link right now. One thing though — when's good for me to follow up once you've had a look? Even a rough day works.",
+      "training_note": "Never let 'send it' be the end of the call. Get a follow-up window before you hang up — that's what turns MOCKUP_SENT into a booked next step instead of a dead link. Log FOLLOW_UP_BOOKED with the window."
+    },
+    "not_interested_after_seeing": {
+      "label": "(Follow-up call) Saw it, not interested",
+      "script": "No worries — can I ask what didn't land? Wrong look, timing, or just not something you need right now? Helps me not waste your time again.",
+      "training_note": "Cheap, valuable question. The answer tells you whether to nurture (timing), drop clean (not needed), or flag a design-quality pattern if you hear it more than once across prospects."
+    }
+  },
+  "closing": {
+    "soft_close": "Take a real look at it when you get a chance. If you like what you see, let's talk about getting it finished and live — no pressure either way.",
+    "hard_close": "Since you're into it — I can have the real version finished, hosted on your own domain, and live in about 14 days. Want me to send you the numbers?",
+    "hot_close": "Then let's not sit on it — I'll get you a proposal today and we can have this live inside two weeks. Sound good?",
+    "training_note": "Same rule as every other cockpit: never hang up without a concrete next step — a callback window, a proposal, or a booked follow-up. 'Call me if you're interested' is not a next step, it's a hope. Use hard_close/hot_close when qualify.interest_level came back strongly positive; use soft_close when they're lukewarm-but-not-a-no."
+  },
   "post_reveal_pitch": {
-    "_note": "Use on the FOLLOW-UP call after they've already seen the mockup — this is where 'calling' turns into 'pitching.'",
-    "script": "Hey {first_name} — did you get a chance to look at the mockup I built for {business_name}? That's a preview, not the finished product — I can have the real thing live in about 14 days. Want me to walk you through what that looks like?",
-    "training_note": "If yes, route straight into pitch_30 / trade_specific — the audit_offer becomes a proposal ask instead, since they've already seen proof. Move fast, don't re-sell what already sold them."
+    "_note": "Use on the FOLLOW-UP call after they've already seen the mockup — this is where 'calling' turns into 'pitching.' This is where closing.* gets used.",
+    "script": "Hey {first_name} — did you get a chance to look at the homepage I built for {business_name}?",
+    "training_note": "If they liked it, go straight into closing.hard_close or closing.hot_close depending on temperature. If they haven't looked yet, get a specific time they will and log FOLLOW_UP_BOOKED. If they lost the link, resend it right now while you're on the phone and log MOCKUP_SENT again."
   }
 }
