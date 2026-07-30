@@ -29,6 +29,7 @@
   // data source when active AND the current prospect has a mockup_url.
   // ============================================================
   let mockupMode = false;
+  let mockupLastContactId = null; // tracks whose call we're on — resets mockupMode when it changes
 
   function mockupActive() {
     const c = (Shell.getContact && Shell.getContact()) || {};
@@ -47,8 +48,14 @@
     }
     renderMockupIndicator();
     if (!opts || !opts.silent) {
-      // Manual click — re-render current live card + screen so the change takes effect immediately
-      if (liveQueue.length && liveQueue[liveIndex]) renderLiveCard(liveQueue[liveIndex]);
+      // Manual click — re-render whichever script screen is CURRENTLY on
+      // stage so the opener/response text switches immediately, without
+      // touching the prospect card. Deliberately does NOT call
+      // renderLiveCard() here: that used to re-run the pitch_mode
+      // auto-engage check on every click and instantly flip the mode back
+      // on, which is why the toggle-off click looked "stuck".
+      const currentScreen = stage() && stage().getAttribute('data-screen');
+      if (currentScreen && SCREENS[currentScreen]) SCREENS[currentScreen]();
     }
   }
 
@@ -844,10 +851,19 @@
       };
     }
 
-    // Mockup Reveal mode — auto-engage per prospect record (pitch_mode:
-    // "mockup_reveal" on the queue record), but Ricky's manual toggle click
-    // always wins for the rest of the current call.
-    setMockupMode(prospect.pitch_mode === 'mockup_reveal', { silent: true });
+    // Mockup Reveal mode is NEVER auto-engaged from prospect.pitch_mode.
+    // It always starts OFF ("standard") for every prospect and only turns
+    // on when Ricky manually clicks the MOCKUP toggle mid-call. pitch_mode
+    // stays in the queue JSON as inert metadata — nothing reads it here.
+    // We do reset the toggle back to OFF whenever the loaded prospect
+    // actually changes (new call, skip, prev/next, callback load) so a
+    // manual toggle from one call never leaks into the next prospect —
+    // but re-renders of the SAME prospect (e.g. Back navigation mid-call)
+    // leave whatever Ricky manually set alone.
+    if (prospect.contact_id !== mockupLastContactId) {
+      mockupLastContactId = prospect.contact_id;
+      setMockupMode(false, { silent: true });
+    }
 
     const card = document.getElementById('prospect-card');
     if (!card) return;
