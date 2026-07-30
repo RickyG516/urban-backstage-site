@@ -1190,6 +1190,19 @@ const BS_DEAL_PROPS = [
   'unc_revenue_type', 'hs_date_entered_current_stage'
 ];
 
+// HubSpot burst-limits a portal to a handful of searches per second. The
+// backstage pages each call /brief plus one data endpoint at once, so four
+// concurrent page loads reliably trip it. Retry 429s with backoff instead of
+// treating a rate-limit as "no data".
+async function bsHs(path, method, body, token) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const r = await hs(path, method, body, token);
+    if (r.status !== 429) return r;
+    await new Promise(res => setTimeout(res, 400 * (attempt + 1)));
+  }
+  return { ok: false, status: 429, data: null };
+}
+
 // Pull every deal in the portal, paginated. Uses the same `hs()` helper and the
 // same {ok,status,data} contract as the rest of this worker — never call
 // .json() on its return value, it is a plain object.
@@ -1204,7 +1217,7 @@ async function bsAllDeals(token, maxPages) {
       limit: 100
     };
     if (after) body.after = after;
-    const r = await hs('/crm/v3/objects/deals/search', 'POST', body, token);
+    const r = await bsHs('/crm/v3/objects/deals/search', 'POST', body, token);
     if (!r.ok || !r.data) break;
     out.push.apply(out, r.data.results || []);
     after = r.data.paging && r.data.paging.next && r.data.paging.next.after;
@@ -1262,7 +1275,7 @@ async function bsAllCompanies(token, maxPages) {
       limit: 100
     };
     if (after) body.after = after;
-    const r = await hs('/crm/v3/objects/companies/search', 'POST', body, token);
+    const r = await bsHs('/crm/v3/objects/companies/search', 'POST', body, token);
     if (!r.ok || !r.data) break;
     out.push.apply(out, r.data.results || []);
     after = r.data.paging && r.data.paging.next && r.data.paging.next.after;
@@ -1384,8 +1397,14 @@ async function bsOpenTasks(token, maxPages) {
       limit: 100
     };
     if (after) body.after = after;
-    const r = await hs('/crm/v3/objects/tasks/search', 'POST', body, token);
-    if (!r.ok || !r.data) break;
+    const r = await bsHs('/crm/v3/objects/tasks/search', 'POST', body, token);
+    // Distinguish "there are no tasks" from "we could not read the tasks".
+    // Silently returning [] on a failed first page makes /brief announce that
+    // delivery is all clear while work sits overdue.
+    if (!r.ok || !r.data) {
+      if (i === 0) throw new Error('HubSpot task search failed (HTTP ' + r.status + ')');
+      break;
+    }
     out.push.apply(out, r.data.results || []);
     after = r.data.paging && r.data.paging.next && r.data.paging.next.after;
     if (!after) break;
@@ -1504,7 +1523,7 @@ export default {
           sorts: [{ propertyName: 'closedate', direction: 'DESCENDING' }],
           limit: 100
         };
-        const r = await hs('/crm/v3/objects/deals/search', 'POST', body, token);
+        const r = await bsHs('/crm/v3/objects/deals/search', 'POST', body, token);
         if (!r.ok) return jsonResp({ ok: false, error: 'HubSpot deals search failed: ' + r.status }, 502, cors);
         const now = new Date();
         const thisMonth = now.getUTCFullYear() + '-' + String(now.getUTCMonth() + 1).padStart(2, '0');
@@ -1989,8 +2008,9 @@ export default {
           bsAllDeals(token, 6),
           bsAllCompanies(token, 3)
         ]);
-        let tasks = [];
-        try { tasks = (await bsOpenTasks(token, 3)).map(bsShapeTask); } catch (e) { tasks = []; }
+        let tasks = [], tasksOk = true;
+        try { tasks = (await bsOpenTasks(token, 3)).map(bsShapeTask); }
+        catch (e) { tasks = []; tasksOk = false; }
 
         const flagged = bsClassifyDeals(rawDeals);
         const real    = flagged.filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
@@ -2073,6 +2093,12 @@ export default {
             overdue.length + ' [DELIVERY] task' + (overdue.length === 1 ? ' is' : 's are') + ' past due. Late delivery is the cheapest way to lose the only recurring revenue you have.',
             overdue.length + ' overdue',
             'Clear these before any new outreach. Retention beats acquisition every time.');
+        } else if (!tasksOk) {
+          S('warn', 'delivery', 'Delivery status could not be read',
+            'HubSpot did not return the task list for this request, most likely a burst rate-limit. ' +
+            'This is NOT a report that delivery is clear — it is a report that delivery is unknown. Reload in a few seconds.',
+            'unknown',
+            'Reload the page. If it persists, check the HubSpot private app token has tasks read scope.');
         } else {
           const dOpen = tasks.filter(t => t.is_delivery).length;
           S('good', 'delivery', dOpen ? 'Delivery on schedule' : 'No delivery work queued',
