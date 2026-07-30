@@ -655,7 +655,13 @@
       if (!data || !data.ok || !data.queue || !data.queue.length) {
         try {
           const currentRepId = Shell._currentRep ? Shell._currentRep().id : null;
-          const staticResp = await fetch('/sales-ops/mockup-reveal/queue/' + todayKey() + '.json', { cache: 'no-cache' });
+          let staticResp = await fetch('/sales-ops/mockup-reveal/queue/' + todayKey() + '.json', { cache: 'no-cache' });
+          if (!staticResp.ok) {
+            // No file for today's exact date — fall back to the standing curated batch.
+            // This cockpit is a fixed list (companies we built mockups for), not a
+            // daily-generated dial queue, so it should never depend on remembering a date.
+            staticResp = await fetch('/sales-ops/mockup-reveal/queue/latest.json', { cache: 'no-cache' });
+          }
           if (staticResp.ok) {
             const staticQueue = await staticResp.json();
             const fileRep = staticQueue && staticQueue._generated_for_rep_id;
@@ -764,11 +770,15 @@
       let usedFallback = false;
 
       if (!data || !data.ok || !data.queue || !data.queue.length) {
-        // Worker down or no eligible contacts — try static queue file for today
+        // Worker down or no eligible contacts — try today's static queue file, then the
+        // standing curated batch (latest.json) so this never depends on remembering a date.
         const todayStr = todayKey();
         const staticPath = '/sales-ops/mockup-reveal/queue/' + todayStr + '.json';
         try {
-          const staticResp = await fetch(staticPath, { cache: 'no-cache' });
+          let staticResp = await fetch(staticPath, { cache: 'no-cache' });
+          if (!staticResp.ok) {
+            staticResp = await fetch('/sales-ops/mockup-reveal/queue/latest.json', { cache: 'no-cache' });
+          }
           if (staticResp.ok) {
             const staticQueue = await staticResp.json();
             if (staticQueue && staticQueue.prospects && staticQueue.prospects.length) {
