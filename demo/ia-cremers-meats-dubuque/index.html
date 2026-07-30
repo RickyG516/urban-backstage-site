@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cremer's Meats — Dubuque's Family Butcher Since 1950</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#C41E1E;--red-dk:#9B1212;
+  --gold:#C8960C;--gold-lt:#E8B420;
+  --black:#111111;--charcoal:#222222;
+  --white:#FFFFFF;--offwhite:#F8F8F8;--lightgray:#EEEEEE;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--offwhite);color:var(--charcoal);font-size:17px;line-height:1.65}
+
+/* NAV */
+nav{background:var(--black);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--red)}
+.nav-brand{font-family:'Libre Baskerville',serif;color:var(--white);font-size:1.15rem;letter-spacing:.04em;text-decoration:none}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.88rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--red)!important;color:#fff!important;padding:.45rem 1.1rem;border-radius:2px}
+
+/* HERO */
+.hero{background:var(--black);min-height:88vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 5vw 5rem}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,.03) 59px,rgba(255,255,255,.03) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.02) 59px,rgba(255,255,255,.02) 60px);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:800px}
+.est-stamp{display:inline-flex;flex-direction:column;align-items:center;border:3px solid var(--gold);border-radius:50%;width:108px;height:108px;justify-content:center;position:absolute;top:-14px;right:-70px;transform:rotate(-8deg);opacity:.9}
+.stamp-est{font-size:.58rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
+.stamp-year{font-family:'Libre Baskerville',serif;font-size:1.6rem;color:var(--white);line-height:1.1}
+.stamp-dubuque{font-size:.52rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+.hero-eyebrow{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem}
+.hero h1{font-family:'Libre Baskerville',serif;font-size:clamp(2.6rem,6vw,4.2rem);color:var(--white);line-height:1.14;margin-bottom:1.4rem}
+.hero h1 em{font-style:italic;color:var(--red)}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto 2.4rem}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;padding:.85rem 2rem;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;letter-spacing:.04em;transition:background .2s;display:inline-block}
+.btn-primary:hover{background:var(--red-dk)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);padding:.85rem 2rem;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;letter-spacing:.04em;transition:all .2s;display:inline-block}
+.btn-ghost:hover{border-color:var(--white);color:var(--white)}
+.btn-outline-dark{border:1.5px solid rgba(0,0,0,.22);color:var(--charcoal);padding:.85rem 2rem;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .2s;display:inline-block}
+.btn-outline-dark:hover{border-color:var(--red);color:var(--red)}
+.hero-hours{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.hours-block{text-align:center}
+.hours-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold)}
+.hours-val{font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--white);margin-top:.25rem}
+
+/* TRUST BAR */
+.trust-bar{background:var(--red);padding:.9rem 5vw;display:flex;justify-content:center;gap:clamp(1.5rem,4vw,4rem);flex-wrap:wrap}
+.trust-item{color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem}
+.trust-item::before{content:'✦';font-size:.55rem;color:var(--gold-lt)}
+
+/* SECTIONS */
+section{padding:5rem 5vw}
+.section-label{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;display:block;font-weight:600}
+h2{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.5rem);color:var(--black);line-height:1.2;margin-bottom:1.2rem}
+.gold-rule{border:none;border-top:2px solid var(--gold);width:48px;margin:0 0 1.5rem 0}
+.gold-rule.centered{margin:0 auto 1.5rem}
+
+/* CATERING */
+.catering{background:var(--white)}
+.catering-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto}
+.catering-text p{color:#444;margin-bottom:1.1rem}
+.catering-features{list-style:none;margin:1.5rem 0 2rem;display:flex;flex-direction:column;gap:.65rem}
+.catering-features li{display:flex;align-items:flex-start;gap:.7rem;font-size:.95rem;color:#333}
+.catering-features li::before{content:'—';color:var(--red);font-weight:700;flex-shrink:0}
+.catering-card{background:var(--black);border-radius:3px;padding:2.5rem;color:var(--white);position:relative;overflow:hidden}
+.catering-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold)}
+.catering-card h3{font-family:'Libre Baskerville',serif;font-size:1.35rem;margin-bottom:1rem;color:var(--white)}
+.catering-card p{font-size:.92rem;color:rgba(255,255,255,.65);margin-bottom:1.6rem}
+.price-note{font-size:.78rem;color:var(--gold);margin-top:1rem;display:block;line-height:1.5}
+
+/* PRODUCTS */
+.products{background:var(--offwhite)}
+.products-inner{max-width:1100px;margin:0 auto}
+.products-header{text-align:center;margin-bottom:3rem}
+.products-header p{color:#555;max-width:520px;margin:.8rem auto 0}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.product-card{background:var(--white);border:1px solid var(--lightgray);border-top:3px solid var(--red);border-radius:2px;padding:1.8rem 1.5rem;transition:box-shadow .2s,transform .2s}
+.product-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1);transform:translateY(-3px)}
+.product-icon{font-size:1.9rem;margin-bottom:.9rem;display:block}
+.product-card h3{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:var(--black);margin-bottom:.45rem}
+.product-card p{font-size:.87rem;color:#555;line-height:1.6}
+
+/* ABOUT */
+.about-strip{background:var(--black);color:var(--white);text-align:center;padding:5.5rem 5vw;position:relative;overflow:hidden}
+.about-strip::after{content:'"75 YEARS"';position:absolute;font-family:'Libre Baskerville',serif;font-size:clamp(6rem,18vw,16rem);color:rgba(255,255,255,.03);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;font-weight:700}
+.about-inner{position:relative;z-index:1}
+.about-strip .section-label{color:var(--gold)}
+.about-strip h2{color:var(--white);margin-bottom:1.2rem}
+.about-strip p{max-width:600px;margin:0 auto 1rem;color:rgba(255,255,255,.65);font-size:1.02rem}
+.about-strip p:last-of-type{margin-bottom:2.2rem}
+
+/* CONTACT */
+.contact{background:var(--white)}
+.contact-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info h2{margin-bottom:1.5rem}
+.contact-detail{display:flex;flex-direction:column;gap:1.4rem;margin-bottom:2rem}
+.detail-row{display:flex;flex-direction:column;gap:.2rem}
+.detail-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.16em;color:var(--red);font-weight:600}
+.detail-val{font-size:1.05rem;color:var(--black);font-weight:600}
+.detail-sub{font-size:.87rem;color:#777}
+.contact-form-wrap{background:var(--offwhite);border:1px solid var(--lightgray);border-top:4px solid var(--red);border-radius:2px;padding:2.2rem}
+.contact-form-wrap h3{font-family:'Libre Baskerville',serif;font-size:1.2rem;color:var(--black);margin-bottom:1.4rem}
+.form-row{margin-bottom:1rem}
+.form-row label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#555;margin-bottom:.35rem}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:.65rem .85rem;border:1.5px solid #DDD;border-radius:2px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;background:var(--white);color:var(--charcoal);transition:border-color .2s;-webkit-appearance:none}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{outline:none;border-color:var(--red)}
+.form-row textarea{height:100px;resize:vertical}
+.form-submit{width:100%;background:var(--red);color:#fff;border:none;padding:.85rem;border-radius:2px;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.05em;cursor:pointer;margin-top:.5rem;transition:background .2s;text-transform:uppercase}
+.form-submit:hover{background:var(--red-dk)}
+
+/* FOOTER */
+footer{background:var(--black);border-top:3px solid var(--red);color:rgba(255,255,255,.4);text-align:center;padding:2.2rem 5vw;font-size:.82rem}
+footer strong{color:rgba(255,255,255,.7)}
+footer a{color:rgba(255,255,255,.4);text-decoration:none}
+footer a:hover{color:var(--gold)}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:0 1.2rem}.nav-links{display:none}
+  .hero{min-height:auto;padding:4rem 1.5rem 3.5rem}.est-stamp{display:none}
+  .hero-hours{gap:1.5rem}
+  .catering-grid,.contact-inner{grid-template-columns:1fr;gap:2rem}
+  .products-grid{grid-template-columns:1fr 1fr}
+  section{padding:3.5rem 1.5rem}
+}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr}.trust-bar{gap:.8rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">Cremer's<span>'</span> Meats</a>
+  <ul class="nav-links">
+    <li><a href="#products">What We Sell</a></li>
+    <li><a href="#catering">Catering</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#contact" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="est-stamp">
+      <span class="stamp-est">Est.</span>
+      <span class="stamp-year">1950</span>
+      <span class="stamp-dubuque">Dubuque</span>
+    </div>
+    <p class="hero-eyebrow">Dubuque's Last Family-Owned Butcher</p>
+    <h1>Hand-cut meats.<br><em>Homemade everything.</em><br>75 years running.</h1>
+    <p class="hero-sub">From the full-service meat counter to the Famous Turkey 'N' Dressing sandwich — made the right way, the same way, since before your parents were born.</p>
+    <div class="hero-actions">
+      <a href="#catering" class="btn-primary">Plan Your Event →</a>
+      <a href="tel:5635836589" class="btn-ghost">Call (563) 583-6589</a>
+    </div>
+    <div class="hero-hours">
+      <div class="hours-block"><div class="hours-label">Open</div><div class="hours-val">Tue – Sat</div></div>
+      <div class="hours-block"><div class="hours-label">Hours</div><div class="hours-val">11 AM – 5 PM</div></div>
+      <div class="hours-block"><div class="hours-label">Find Us</div><div class="hours-val">731 Rhomberg Ave</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <span class="trust-item">75+ Years in Dubuque</span>
+  <span class="trust-item">Hand-Cut Choice Meats</span>
+  <span class="trust-item">Homemade Sausages</span>
+  <span class="trust-item">Full-Service Catering</span>
+  <span class="trust-item">Tri-State Institution</span>
+</div>
+
+<section class="catering" id="catering">
+  <div class="catering-grid">
+    <div class="catering-text">
+      <span class="section-label">Catering & Events</span>
+      <hr class="gold-rule">
+      <h2>Feed your crowd the way Dubuque does it.</h2>
+      <p>Graduations, company cookouts, weddings, holiday parties — we've been feeding Dubuque's biggest moments for 75 years. When you need it done right without the stress, this is the call to make.</p>
+      <ul class="catering-features">
+        <li>Custom meat selections — whole hogs, roasts, smoked brisket</li>
+        <li>Ready-to-serve trays for pickup or on-site events</li>
+        <li>Famous Turkey 'N' Dressing — crowd favorite for decades</li>
+        <li>Homemade sausages and specialty meats, made in-house</li>
+        <li>Flexible quantities — small gatherings to 500+ guests</li>
+      </ul>
+      <a href="#contact" class="btn-primary">Get a Catering Quote</a>
+    </div>
+    <div class="catering-card">
+      <h3>2026 Party Planner</h3>
+      <p>Planning ahead? Download the 2026 Party Planner or call us directly to lock in your date. Summer fills up fast — don't wait until June to ask about July.</p>
+      <a href="https://cremersmeats.com/party-planner" class="btn-primary">View Party Planner</a>
+      <span class="price-note">Call (563) 583-6589 to discuss your event — no forms, no wait, just a conversation.</span>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="products-inner">
+    <div class="products-header">
+      <span class="section-label">What We Carry</span>
+      <hr class="gold-rule centered">
+      <h2>The counter. The counter. The counter.</h2>
+      <p>Walk in, tell us what you need, and we cut it right. That's the whole model — and it's worked for 75 years.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card"><span class="product-icon">🥩</span><h3>Full-Service Meat Counter</h3><p>Hand-cut choice steaks, roasts, pork, and poultry. Tell us the cut, the weight, the occasion — we handle the rest.</p></div>
+      <div class="product-card"><span class="product-icon">🌭</span><h3>Homemade Sausages</h3><p>Made in-house, same recipes for decades. Bratwurst, breakfast links, Polish sausage, summer sausage — you name it.</p></div>
+      <div class="product-card"><span class="product-icon">🥪</span><h3>Famous Sandwiches</h3><p>The Turkey 'N' Dressing sandwich has its own reputation in this city. Ready-to-eat, made fresh. Come hungry.</p></div>
+      <div class="product-card"><span class="product-icon">🥬</span><h3>Fresh Produce & Grocery</h3><p>Fresh produce and grocery staples alongside the meat counter. One stop, not five.</p></div>
+      <div class="product-card"><span class="product-icon">🍞</span><h3>Baked Goods</h3><p>Fresh-baked items made with the same care as everything else in the store. Worth the detour on their own.</p></div>
+      <div class="product-card"><span class="product-icon">🎉</span><h3>Event & Party Orders</h3><p>Call ahead for bulk orders, party trays, and event quantities. We make it easy to feed a crowd without the hassle.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="about-strip" id="about">
+  <div class="about-inner">
+    <span class="section-label">Our Story</span>
+    <hr class="gold-rule centered">
+    <h2>Dubuque's last family-owned grocery.</h2>
+    <p>Cremer's has been a fixture on Rhomberg Avenue since 1950. Three generations. One standard: if it doesn't meet our bar, it doesn't go on the counter.</p>
+    <p>We're not a chain. We don't have a corporate office. Every cut, every sausage, every sandwich comes from people who've been doing this their whole lives — and who live in the same neighborhoods as the people they feed.</p>
+    <a href="https://cremersmeats.com/about-us" class="btn-ghost">Read the Full Story</a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <span class="section-label">Find Us</span>
+      <hr class="gold-rule">
+      <h2>Come in. Call us.<br>We'll get it sorted.</h2>
+      <div class="contact-detail">
+        <div class="detail-row"><span class="detail-label">Phone</span><span class="detail-val">(563) 583-6589</span><span class="detail-sub">Best way to reach us for orders and events</span></div>
+        <div class="detail-row"><span class="detail-label">Address</span><span class="detail-val">731 Rhomberg Avenue</span><span class="detail-sub">Dubuque, IA 52001 — North End</span></div>
+        <div class="detail-row"><span class="detail-label">Hours</span><span class="detail-val">Tuesday – Saturday, 11 AM – 5 PM</span><span class="detail-sub">Closed Sunday & Monday</span></div>
+      </div>
+      <a href="https://maps.google.com/?q=731+Rhomberg+Ave,+Dubuque,+IA+52001" class="btn-primary" target="_blank" rel="noopener">Get Directions →</a>
+    </div>
+    <div class="contact-form-wrap">
+      <h3>Send us a message</h3>
+      <div class="form-row"><label for="name">Your Name</label><input type="text" id="name" placeholder="Jane Smith"></div>
+      <div class="form-row"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="(563) 555-0000"></div>
+      <div class="form-row"><label for="reason">What do you need?</label>
+        <select id="reason">
+          <option value="">— Select one —</option>
+          <option>Catering / Event Quote</option>
+          <option>Large or Custom Meat Order</option>
+          <option>General Question</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row"><label for="msg">Details</label><textarea id="msg" placeholder="Tell us about your event, order size, or question…"></textarea></div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Cremer's Meats</strong> — 731 Rhomberg Avenue, Dubuque, Iowa 52001</p>
+  <p style="margin-top:.4rem">(563) 583-6589 &nbsp;·&nbsp; Tuesday–Saturday 11 AM–5 PM &nbsp;·&nbsp; <a href="https://www.facebook.com/pages/Cremers-Grocery/108125889155">Facebook</a></p>
+  <p style="margin-top:.9rem;font-size:.74rem;opacity:.5">© Cremer's Meats. Dubuque, Iowa. Est. 1950.</p>
+</footer>
+
+</body>
+</html>
