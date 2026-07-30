@@ -1261,7 +1261,7 @@ function bsNameMatch(a, b) {
 
 const BS_COMPANY_PROPS = [
   'name', 'domain', 'website', 'phone', 'city', 'state', 'trade_type',
-  'lifecyclestage', 'facebook_company_page', 'linkedin_company_page',
+  'lifecyclestage', 'hs_lastmodifieddate', 'facebook_company_page', 'linkedin_company_page',
   'twitterhandle', 'instagram_page', 'google_business_url', 'description'
 ];
 
@@ -1359,15 +1359,43 @@ function bsWonClientNames(dealsShaped) {
   return seen;
 }
 
+// When a client name matches more than one company record — and in a portal
+// with 1,348 companies and known duplicate problems, it will — picking the
+// first match is arbitrary and silently wrong. Kutsch Tree Service existed
+// twice; first-match returned the older, emptier record and the dashboard
+// showed no Facebook for a client that had one. Prefer the record carrying the
+// most real information, tie-breaking on most recently modified.
+const BS_RICHNESS_FIELDS = ['website','domain','phone','city','state','trade_type',
+  'facebook_company_page','instagram_page','google_business_url',
+  'linkedin_company_page','twitterhandle','description'];
+function bsCompanyScore(co) {
+  const p = (co && co.properties) || {};
+  let n = 0;
+  for (const f of BS_RICHNESS_FIELDS) if (p[f] && String(p[f]).trim()) n++;
+  return n;
+}
+function bsBetterCompany(a, b) {
+  if (!a) return b;
+  if (!b) return a;
+  const sa = bsCompanyScore(a), sb = bsCompanyScore(b);
+  if (sa !== sb) return sa > sb ? a : b;
+  const ma = new Date(((a.properties||{}).hs_lastmodifieddate) || 0).getTime() || 0;
+  const mb = new Date(((b.properties||{}).hs_lastmodifieddate) || 0).getTime() || 0;
+  return mb > ma ? b : a;
+}
+
 // ── ROSTER BUILDER ──────────────────────────────────────────────────────────
 // Groups closed-won deals into one row per client and attaches the matching
 // company record (matched on a punctuation/suffix-stripped name) for socials.
 function bsBuildRoster(dealsShaped, companies) {
   const byNorm = {};
+  const dupes  = {};
   for (const c of companies) {
     const p = c.properties || {};
     const k = bsNorm(p.name);
-    if (k && !byNorm[k]) byNorm[k] = c;
+    if (!k) continue;
+    if (byNorm[k]) dupes[k] = (dupes[k] || 1) + 1;
+    byNorm[k] = bsBetterCompany(byNorm[k], c);
   }
 
   const map = {};
@@ -1414,6 +1442,7 @@ function bsBuildRoster(dealsShaped, companies) {
       c.city = ''; c.state = ''; c.trade = ''; c.phone = '';
       c.social = bsSocial({});
     }
+    c.duplicate_companies = dupes[k] || 0;
     c.social_missing = Object.keys(c.social).filter(x => !c.social[x]);
     c.active_retainer = c.mrr > 0;
     c.tenure_days = c.first_close ? bsDays(c.first_close) : null;
