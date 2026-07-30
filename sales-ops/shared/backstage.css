@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   URBAN BACKSTAGE — shared design system
+   Single source of truth for every department page (/sales/, /clients/,
+   /delivery/, /finance/, /team/). Before this file each page carried its own
+   ~40-line copy of the same CSS, which is how five pages drift into five
+   slightly different products.
+
+   Brand standards per UNC globals — globals win, this file follows:
+     dark #0f0f0f · orange #e36b1e · white #fff · charcoal #1a1a1a · light #f5f5f5
+     Montserrat 700 headings/nav · Open Sans 400/600 body
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --dark:#0f0f0f; --orange:#e36b1e; --white:#fff; --charcoal:#1a1a1a; --light:#f5f5f5;
+  --line:#262626; --line-soft:#1e1e1e; --muted:#7a7a7a; --dim:#555;
+  --crit:#e2494a; --warn:#e0a72e; --good:#4bbf72;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--dark);color:var(--light);
+     font-family:'Open Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* ── nav ─────────────────────────────────────────────────────────────── */
+.ub-nav{display:flex;align-items:center;gap:8px;padding:0 28px;height:56px;
+  background:var(--dark);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60;
+  overflow-x:auto;scrollbar-width:none}
+.ub-nav::-webkit-scrollbar{display:none}
+.ub-brand{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.14em;color:var(--white);white-space:nowrap;margin-right:16px}
+.ub-brand span{color:var(--orange)}
+.ub-links{display:flex;gap:4px}
+.ub-links a{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:13px;
+  color:#9a9a9a;padding:8px 14px;border-radius:6px;white-space:nowrap;
+  transition:color .12s,background .12s}
+.ub-links a:hover{color:var(--white);background:var(--charcoal)}
+.ub-links a.active{color:var(--orange);background:rgba(227,107,30,.12)}
+
+/* ── layout ──────────────────────────────────────────────────────────── */
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px 72px}
+.page-head{padding:40px 0 28px;border-bottom:1px solid var(--line-soft);margin-bottom:32px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.page-head h1{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:26px;
+  margin:0 0 6px;color:var(--white)}
+.page-head h1 span{color:var(--orange)}
+.page-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:640px}
+.section-label{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;color:#5a5a5a;margin:0 0 10px;
+  display:flex;align-items:center;gap:10px}
+.section-label .note{font-weight:400;letter-spacing:0;text-transform:none;
+  font-family:'Open Sans',sans-serif;font-size:11px;color:#4a4a4a}
+
+/* ── stat cards ──────────────────────────────────────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+.card{background:var(--charcoal);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.card .label{font-size:11px;color:#666;margin-bottom:6px;font-family:'Montserrat',Arial,sans-serif;
+  font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.card .val{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:28px;
+  color:var(--white);line-height:1.1}
+.card .sub{font-size:11px;color:var(--dim);margin-top:4px}
+.card.orange{border-color:rgba(227,107,30,.35);
+  background:linear-gradient(180deg,rgba(227,107,30,.1),rgba(227,107,30,.04))}
+.card.orange .val{color:var(--orange)}
+.card.crit{border-color:rgba(226,73,74,.4);
+  background:linear-gradient(180deg,rgba(226,73,74,.1),rgba(226,73,74,.03))}
+.card.crit .val{color:var(--crit)}
+.card.good .val{color:var(--good)}
+
+/* ── generic surfaces ────────────────────────────────────────────────── */
+.panel{background:var(--charcoal);border:1px solid var(--line);border-radius:10px;
+  padding:20px 22px;margin-bottom:32px}
+.placeholder{background:var(--charcoal);border:1px dashed #2a2a2a;border-radius:10px;
+  padding:40px 28px;text-align:center;color:#3a3a3a;font-size:13px;margin-bottom:32px}
+.placeholder strong{display:block;color:#4a4a4a;font-family:'Montserrat',Arial,sans-serif;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.empty{padding:34px 20px;text-align:center;color:#4a4a4a;font-size:13px}
+.loading{padding:34px 20px;text-align:center;color:#4a4a4a;font-size:13px}
+.loading::after{content:'';display:inline-block;width:11px;height:11px;margin-left:9px;
+  vertical-align:-1px;border:2px solid #333;border-top-color:var(--orange);border-radius:50%;
+  animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{background:rgba(226,73,74,.08);border:1px solid rgba(226,73,74,.35);border-radius:10px;
+  padding:18px 20px;color:#f0b4b4;font-size:13px;margin-bottom:24px;line-height:1.6}
+.err b{color:var(--crit);font-family:'Montserrat',sans-serif;display:block;margin-bottom:4px}
+
+/* ── tables ──────────────────────────────────────────────────────────── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:#5a5a5a;text-align:left;
+  padding:0 14px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--line-soft);color:#c9c9c9;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr:hover td{background:rgba(255,255,255,.02)}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl .name{color:var(--white);font-weight:600}
+.tbl a.name:hover{color:var(--orange)}
+.tbl-scroll{overflow-x:auto}
+
+/* ── badges ──────────────────────────────────────────────────────────── */
+.badge{display:inline-block;font-family:'Montserrat',Arial,sans-serif;font-weight:700;
+  font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;
+  border-radius:4px;background:#242424;color:#8a8a8a;white-space:nowrap}
+.badge.orange{background:rgba(227,107,30,.16);color:var(--orange)}
+.badge.crit  {background:rgba(226,73,74,.16);color:var(--crit)}
+.badge.warn  {background:rgba(224,167,46,.16);color:var(--warn)}
+.badge.good  {background:rgba(75,191,114,.16);color:var(--good)}
+
+/* ── signals (the brains panel) ──────────────────────────────────────── */
+.signals{display:grid;gap:10px;margin-bottom:32px}
+.sig{background:var(--charcoal);border:1px solid var(--line);border-left:3px solid #333;
+  border-radius:8px;padding:16px 20px}
+.sig.critical{border-left-color:var(--crit)}
+.sig.warn    {border-left-color:var(--warn)}
+.sig.good    {border-left-color:var(--good)}
+.sig-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.sig-title{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13.5px;color:var(--white)}
+.sig-metric{font-family:var(--mono);font-size:11px;color:#7a7a7a;margin-left:auto;
+  background:#202020;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.sig-detail{font-size:12.5px;color:#9a9a9a;line-height:1.65;margin-bottom:8px}
+.sig-action{font-size:12.5px;color:#cfcfcf;line-height:1.55;
+  padding-left:14px;border-left:2px solid #2c2c2c}
+.sig-action b{color:var(--orange);font-family:'Montserrat',sans-serif;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+/* ── client cards + social row ───────────────────────────────────────── */
+.client-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:12px;margin-bottom:32px}
+.client{background:var(--charcoal);border:1px solid var(--line);border-radius:10px;
+  padding:20px 22px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .15s}
+.client:hover{border-color:rgba(227,107,30,.4);transform:translateY(-1px)}
+.client.retainer{border-color:rgba(227,107,30,.3);
+  background:linear-gradient(180deg,rgba(227,107,30,.06),rgba(227,107,30,.015))}
+.client-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.client-name{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:15.5px;
+  color:var(--white);line-height:1.25}
+.client-meta{font-size:11.5px;color:#6a6a6a;margin-top:3px}
+.client-figs{display:flex;gap:22px;flex-wrap:wrap}
+.client-fig .k{font-size:9.5px;font-family:'Montserrat',sans-serif;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:#5a5a5a;margin-bottom:2px}
+.client-fig .v{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:17px;color:var(--white)}
+.client-fig .v.mrr{color:var(--orange)}
+.client-svc{font-size:11.5px;color:#7a7a7a;line-height:1.55}
+
+/* Social row — muted by default so it reads as metadata, not decoration.
+   Colour only arrives on hover, one platform at a time. A client with a gap
+   shows a dimmed slot rather than hiding it: absence is information. */
+.social{display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+  padding-top:12px;border-top:1px solid var(--line-soft)}
+.soc{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;
+  justify-content:center;background:#202020;border:1px solid #2b2b2b;
+  transition:background .14s,border-color .14s,transform .14s}
+.soc svg{width:14px;height:14px;fill:#7a7a7a;transition:fill .14s}
+.soc:hover{transform:translateY(-1px)}
+.soc:hover svg{fill:#fff}
+.soc.fb:hover     {background:#1877f2;border-color:#1877f2}
+.soc.ig:hover     {background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);border-color:#dc2743}
+.soc.li:hover     {background:#0a66c2;border-color:#0a66c2}
+.soc.x:hover      {background:#000;border-color:#444}
+.soc.gbp:hover    {background:#4285f4;border-color:#4285f4}
+.soc.web:hover    {background:var(--orange);border-color:var(--orange)}
+.soc.hs:hover     {background:#ff7a59;border-color:#ff7a59}
+.soc.off{opacity:.28;cursor:default;pointer-events:none}
+.soc.off svg{fill:#555}
+.social-gap{font-size:10.5px;color:#5a5a5a;margin-left:auto;font-family:'Montserrat',sans-serif;
+  font-weight:600;letter-spacing:.06em}
+
+/* ── misc ────────────────────────────────────────────────────────────── */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:8px;margin-bottom:32px}
+.lnk{background:var(--charcoal);border:1px solid var(--line);border-radius:7px;
+  padding:12px 16px;color:#aaa;font-size:13px;transition:border-color .15s,color .15s;display:block}
+.lnk:hover{border-color:var(--orange);color:var(--white)}
+.lnk .lnk-name{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;
+  color:var(--white);display:block;margin-bottom:2px}
+.lnk .lnk-sub{font-size:11px;color:#666}
+.bar{height:6px;border-radius:3px;background:#222;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--orange);border-radius:3px}
+.stamp{font-size:11px;color:#3f3f3f;text-align:right;margin:-18px 0 30px;font-family:var(--mono)}
+.back{font-size:12px;color:#6a6a6a;display:inline-block;margin-bottom:6px}
+.back:hover{color:var(--orange)}
+.srcnote{font-size:11.5px;color:#5f5f5f;line-height:1.6;background:#161616;
+  border:1px solid #232323;border-radius:7px;padding:11px 14px;margin-bottom:24px}
+.srcnote b{color:#8a8a8a}
+@media(max-width:640px){
+  .wrap{padding:0 16px 60px}.ub-nav{padding:0 16px}
+  .page-head{padding:28px 0 20px;margin-bottom:24px}
+  .card .val{font-size:24px}
+}

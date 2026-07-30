@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Client — Urban Backstage</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sales-ops/shared/backstage.css">
+</head>
+<body>
+<nav class="ub-nav">
+  <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
+  <div class="ub-links">
+    <a href="/">Home</a>
+    <a href="/sales-ops/workspace/">Cockpit</a>
+    <a href="/sales/">Sales</a>
+    <a href="/clients/" class="active">Clients</a>
+    <a href="/delivery/">Delivery</a>
+    <a href="/finance/">Finance</a>
+    <a href="/team/">Team</a>
+    <a href="/playbook/">Playbook</a>
+    <a href="/demo/">Demos</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-head">
+    <div>
+      <a class="back" href="/clients/">&larr; All clients</a>
+      <h1 id="cname">Loading<span>…</span></h1>
+      <p id="cmeta"></p>
+    </div>
+    <div id="csocial"></div>
+  </div>
+
+  <div id="body"><div class="loading">Loading client record</div></div>
+</div>
+
+<script src="/sales-ops/shared/unc-key.js"></script>
+<script src="/sales-ops/shared/backstage-data.js"></script>
+<script>
+(function(){
+  var E = BS.esc;
+
+  // Static hosting note: GitHub Pages cannot serve a real /clients/:slug/ route
+  // without pre-generating a folder per client, which would go stale the moment
+  // a new client closes. A query param keeps the roster fully dynamic —
+  //   /clients/detail/?slug=fuehrer-painting
+  // and the worker looks the client up live by slug.
+  var slug = new URLSearchParams(location.search).get('slug') || '';
+  if (!slug) {
+    document.getElementById('cname').innerHTML = 'No client <span>selected</span>';
+    BS.empty('body','Open a client from the roster.');
+    return;
+  }
+
+  BS.api('/clients?slug=' + encodeURIComponent(slug)).then(function(d){
+    var c = d.client;
+    document.getElementById('cname').innerHTML = E(c.name) + (c.active_retainer ? ' <span>· retainer</span>' : '');
+    document.getElementById('cmeta').textContent =
+      [c.trade, [c.city, c.state].filter(Boolean).join(', '), c.phone].filter(Boolean).join('  ·  ') ||
+      'No company record linked in HubSpot.';
+    document.getElementById('csocial').innerHTML =
+      BS.socialRow(c.social, c.hubspot_url).replace('class="social"','class="social" style="border-top:0;padding-top:0"');
+
+    var tasks   = c.tasks || [];
+    var overdue = tasks.filter(function(t){ return t.overdue; });
+
+    var html =
+      '<div class="cards">' +
+        card(c.mrr ? 'orange' : '', 'MRR', c.mrr ? BS.money(c.mrr) : '—', c.mrr ? 'per month' : 'no active retainer') +
+        card('', 'Lifetime', BS.money(c.lifetime), c.deals.length + ' closed-won deal' + (c.deals.length===1?'':'s')) +
+        card('', 'One-Time', BS.money(c.one_time), 'projects + merch') +
+        card(overdue.length ? 'crit' : '', 'Open Work', BS.num(tasks.length),
+             overdue.length ? overdue.length + ' overdue' : 'none overdue') +
+      '</div>';
+
+    // ── services bought ─────────────────────────────────────────────────
+    html += '<p class="section-label">What They Bought</p><div class="panel">' +
+      '<div class="tbl-scroll"><table class="tbl"><thead><tr>' +
+      '<th>Deal</th><th>Type</th><th class="num">Amount</th><th class="num">Closed</th>' +
+      '</tr></thead><tbody>' +
+      c.deals.sort(function(a,b){ return (b.close_date||'').localeCompare(a.close_date||''); })
+        .map(function(dl){
+          return '<tr><td><a class="name" href="' + E(dl.hubspot_url) + '" target="_blank" rel="noopener">' +
+            E(dl.name) + '</a></td>' +
+            '<td><span class="badge' + (/retainer/.test(dl.revenue_type) ? ' orange' : '') + '">' +
+              E(typeLabel(dl.revenue_type)) + '</span></td>' +
+            '<td class="num">' + (dl.amount ? BS.money(dl.amount) :
+              '<span class="badge warn">unpriced</span>') + '</td>' +
+            '<td class="num">' + BS.dateShort(dl.close_date) + '</td></tr>';
+        }).join('') +
+      '</tbody></table></div></div>';
+
+    // ── delivery work ───────────────────────────────────────────────────
+    html += '<p class="section-label">Delivery Work</p><div class="panel">';
+    if (!tasks.length) {
+      html += '<div class="empty">No open HubSpot tasks matched to this client.<br>' +
+              '<span style="color:#3f3f3f;font-size:12px">Tasks are matched on the text after the dash in the subject, e.g. ' +
+              '“[DELIVERY] Monthly SEO — ' + E(c.name) + '”.</span></div>';
+    } else {
+      html += '<div class="tbl-scroll"><table class="tbl"><thead><tr>' +
+        '<th>Task</th><th>Priority</th><th class="num">Due</th></tr></thead><tbody>' +
+        tasks.sort(function(a,b){ return (a.days_until===null?9e9:a.days_until) - (b.days_until===null?9e9:b.days_until); })
+          .map(function(t){
+            var b = t.overdue ? 'crit' : t.due_soon ? 'warn' : '';
+            return '<tr><td class="name">' + E(t.subject) + '</td>' +
+              '<td><span class="badge">' + E((t.priority||'—').toLowerCase()) + '</span></td>' +
+              '<td class="num"><span class="badge ' + b + '">' + E(BS.dueLabel(t.days_until)) + '</span></td></tr>';
+          }).join('') + '</tbody></table></div>';
+    }
+    html += '</div>';
+
+    // ── profile completeness ────────────────────────────────────────────
+    // A retainer that needs Facebook and Instagram cannot start if nobody
+    // recorded them. Naming the exact HubSpot field removes the guesswork.
+    var FIELD = { website:'website', facebook:'facebook_company_page', instagram:'instagram_page',
+                  linkedin:'linkedin_company_page', twitter:'twitterhandle', gbp:'google_business_url' };
+    html += '<p class="section-label">Profile Completeness</p><div class="panel">';
+    if (!c.company_id) {
+      html += '<div class="err"><b>No HubSpot company record</b>This client exists only as deals. ' +
+              'Create a company record named “' + E(c.name) + '” so social profiles, trade and location have somewhere to live.</div>';
+    } else if (!c.social_missing.length) {
+      html += '<div class="empty" style="color:#4bbf72">Every profile field is filled. Nothing to chase.</div>';
+    } else {
+      html += '<div class="srcnote">Missing on the HubSpot company record — fill these before any Content Pack or ' +
+              'Reputation work starts:</div><div class="tbl-scroll"><table class="tbl"><thead><tr>' +
+              '<th>Missing</th><th>HubSpot field</th></tr></thead><tbody>' +
+        c.social_missing.map(function(k){
+          return '<tr><td class="name">' + E(k) + '</td><td style="font-family:var(--mono);font-size:12px;color:#8a8a8a">' +
+                 E(FIELD[k] || k) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+    html += (c.hubspot_url ? '<div style="padding:12px 14px 0"><a class="name" href="' + E(c.hubspot_url) +
+             '" target="_blank" rel="noopener" style="color:#e36b1e;font-size:12.5px">Edit in HubSpot →</a></div>' : '') +
+            '</div>';
+
+    BS.el('body').innerHTML = html;
+  }).catch(function(e){
+    document.getElementById('cname').innerHTML = 'Client <span>not found</span>';
+    BS.fail('body', e);
+  });
+
+  function typeLabel(t){
+    return { retainer_y1:'Retainer Y1', retainer_y2:'Retainer Y2+',
+             project:'Project', merch:'Merch' }[t] || 'unclassified';
+  }
+  function card(cls,label,val,sub){
+    return '<div class="card ' + cls + '"><div class="label">' + E(label) + '</div>' +
+           '<div class="val">' + E(val) + '</div><div class="sub">' + E(sub) + '</div></div>';
+  }
+})();
+</script>
+</body>
+</html>
