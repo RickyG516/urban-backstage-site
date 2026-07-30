@@ -143,7 +143,7 @@
 
 <header>
   <h1>Demo Mockup Library</h1>
-  <p class="sub">Cold-outreach homepage mockups &mdash; <span class="count" id="visibleCount">71</span> of 71 live. Internal only, never indexed.</p>
+  <p class="sub">Cold-outreach homepage mockups &mdash; <span class="count" id="visibleCount">0</span> of <span id="totalCount">0</span> active. <button id="toggleArchived" style="background:none;border:none;color:#666;font-size:.78rem;cursor:pointer;text-decoration:underline;padding:0;margin-left:.5rem;">Show archived</button> Internal only, never indexed.</p>
 </header>
 <div class="controls">
   <input type="search" id="searchBox" placeholder="Search business, trade, city, state...">
@@ -185,6 +185,7 @@
         <th>Location</th>
         <th>HubSpot</th>
         <th>Mockup</th>
+      <th></th>
       </tr>
     </thead>
     <tbody>
@@ -202,28 +203,78 @@
   const stateFilter = document.getElementById('stateFilter');
   const rows = Array.from(document.querySelectorAll('#demoTable tbody tr'));
   const visibleCount = document.getElementById('visibleCount');
+  const totalCount = document.getElementById('totalCount');
+  const toggleBtn = document.getElementById('toggleArchived');
   const emptyState = document.getElementById('emptyState');
+  const ARCHIVE_KEY = 'unc_demo_archived';
+  let showArchived = false;
+
+  function getArchived() {
+    try { return JSON.parse(localStorage.getItem(ARCHIVE_KEY) || '[]'); } catch(e) { return []; }
+  }
+  function saveArchived(arr) { localStorage.setItem(ARCHIVE_KEY, JSON.stringify(arr)); }
+
+  // Inject archive button into every row
+  rows.forEach(row => {
+    const mockLink = row.querySelector('a.mock-link');
+    row.dataset.slug = mockLink ? mockLink.getAttribute('href') : row.dataset.search.slice(0,40);
+    const td = document.createElement('td');
+    const btn = document.createElement('button');
+    btn.className = 'arch-btn';
+    btn.style.cssText = 'background:none;border:1px solid #333;color:#666;font-size:.7rem;padding:.2rem .5rem;border-radius:2px;cursor:pointer;white-space:nowrap;';
+    btn.addEventListener('click', e => { e.stopPropagation(); toggleArchive(row); });
+    td.appendChild(btn);
+    row.appendChild(td);
+  });
+
+  function toggleArchive(row) {
+    const archived = getArchived();
+    const slug = row.dataset.slug;
+    const idx = archived.indexOf(slug);
+    if (idx === -1) archived.push(slug); else archived.splice(idx, 1);
+    saveArchived(archived);
+    applyFilters();
+  }
 
   function applyFilters() {
+    const archived = getArchived();
     const q = searchBox.value.trim().toLowerCase();
     const trade = tradeFilter.value;
     const state = stateFilter.value;
-    let shown = 0;
+    let shown = 0, active = 0;
+
     rows.forEach(row => {
+      const isArchived = archived.includes(row.dataset.slug);
+      const btn = row.querySelector('.arch-btn');
+      if (btn) {
+        btn.textContent = isArchived ? 'Unarchive' : 'Archive';
+        btn.style.color = isArchived ? '#888' : '#666';
+      }
+      row.style.opacity = isArchived ? '0.4' : '';
+
       const matchesQ = !q || row.dataset.search.includes(q);
       const matchesTrade = !trade || row.dataset.trade === trade;
       const matchesState = !state || row.dataset.state === state;
-      const show = matchesQ && matchesTrade && matchesState;
-      row.style.display = show ? '' : 'none';
-      if (show) shown++;
+      const matchesFilter = matchesQ && matchesTrade && matchesState;
+      const visible = matchesFilter && (!isArchived || showArchived);
+
+      row.style.display = visible ? '' : 'none';
+      if (!isArchived) active++;
+      if (visible && !isArchived) shown++;
     });
+
     visibleCount.textContent = shown;
+    totalCount.textContent = active;
+    toggleBtn.textContent = showArchived ? 'Hide archived' : 'Show archived';
     emptyState.style.display = shown === 0 ? 'block' : 'none';
   }
 
+  toggleBtn.addEventListener('click', () => { showArchived = !showArchived; applyFilters(); });
   searchBox.addEventListener('input', applyFilters);
   tradeFilter.addEventListener('change', applyFilters);
   stateFilter.addEventListener('change', applyFilters);
+
+  applyFilters();
 </script>
 </body>
 </html>
