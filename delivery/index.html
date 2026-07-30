@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Delivery — Urban Backstage</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#0f0f0f;--orange:#e36b1e;--white:#fff;--charcoal:#1a1a1a;--light:#f5f5f5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--dark);color:var(--light);font-family:'Open Sans',Arial,sans-serif}
+  a{text-decoration:none}
+  .ub-nav{display:flex;align-items:center;gap:8px;padding:0 28px;height:56px;background:var(--dark);border-bottom:1px solid #262626;position:sticky;top:0;z-index:60}
+  .ub-brand{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--white);white-space:nowrap;margin-right:16px}
+  .ub-brand span{color:var(--orange)}
+  .ub-links{display:flex;gap:4px}
+  .ub-links a{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:13px;color:#9a9a9a;padding:8px 14px;border-radius:6px;transition:color .12s,background .12s}
+  .ub-links a:hover{color:var(--white);background:var(--charcoal)}
+  .ub-links a.active{color:var(--orange);background:rgba(227,107,30,.12)}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+  .page-head{padding:40px 0 28px;border-bottom:1px solid #1e1e1e;margin-bottom:32px}
+  .page-head h1{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:26px;margin:0 0 6px;color:var(--white)}
+  .page-head h1 span{color:var(--orange)}
+  .page-head p{margin:0;color:#7a7a7a;font-size:13.5px}
+  .section-label{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5a5a5a;margin:0 0 10px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+  .card{background:var(--charcoal);border:1px solid #262626;border-radius:10px;padding:20px 22px}
+  .card .label{font-size:11px;color:#666;margin-bottom:6px;font-family:'Montserrat',Arial,sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .card .val{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:28px;color:var(--white)}
+  .card .sub{font-size:11px;color:#555;margin-top:4px}
+  .card.warn{border-color:rgba(234,179,8,.3)}
+  .card.warn .val{color:#facc15}
+  .card.ok{border-color:rgba(34,197,94,.25)}
+  .card.ok .val{color:#4ade80}
+  .placeholder{background:var(--charcoal);border:1px dashed #2a2a2a;border-radius:10px;padding:40px 28px;text-align:center;color:#3a3a3a;font-size:13px;margin-bottom:32px}
+  .placeholder strong{display:block;color:#4a4a4a;font-family:'Montserrat',Arial,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:32px}
+  .lnk{background:var(--charcoal);border:1px solid #262626;border-radius:7px;padding:12px 16px;color:#aaa;font-size:13px;transition:border-color .15s,color .15s}
+  .lnk:hover{border-color:var(--orange);color:var(--white)}
+  .lnk .lnk-name{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;color:var(--white);display:block;margin-bottom:2px}
+  .lnk .lnk-sub{font-size:11px;color:#666}
+</style>
+</head>
+<body>
+<nav class="ub-nav">
+  <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
+  <div class="ub-links">
+    <a href="/">Home</a>
+    <a href="/sales-ops/workspace/">Cockpit</a>
+    <a href="/sales/">Sales</a>
+    <a href="/clients/">Clients</a>
+    <a href="/delivery/" class="active">Delivery</a>
+    <a href="/finance/">Finance</a>
+    <a href="/team/">Team</a>
+    <a href="/playbook/">Playbook</a>
+    <a href="/demo/">Demos</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-head">
+    <h1>Delivery <span>Dashboard</span></h1>
+    <p>All active client deliverables in one view. What's due, what's overdue, who hasn't been touched this month.</p>
+  </div>
+
+  <p class="section-label">Machine Health</p>
+  <div class="cards">
+    <div class="card ok">
+      <div class="label">Active Clients</div>
+      <div class="val">2</div>
+      <div class="sub">Kutsch + Fuehrer</div>
+    </div>
+    <div class="card">
+      <div class="label">Deliverables Due</div>
+      <div class="val">—</div>
+      <div class="sub">This week</div>
+    </div>
+    <div class="card warn">
+      <div class="label">Overdue</div>
+      <div class="val">—</div>
+      <div class="sub">Need attention</div>
+    </div>
+    <div class="card">
+      <div class="label">Reports Sent</div>
+      <div class="val">—</div>
+      <div class="sub">This month</div>
+    </div>
+  </div>
+
+  <p class="section-label">Deliverable Queue — Coming Soon</p>
+  <div class="placeholder">
+    <strong>Live Task Board</strong>
+    Pulls open HubSpot tasks tagged [DELIVERY] across all clients. Groups by client, sorts by due date. Red = overdue, yellow = due this week, green = on track. One view, whole operation.
+  </div>
+
+  <p class="section-label">Monthly Checklist — Coming Soon</p>
+  <div class="placeholder">
+    <strong>Per-Service Monthly Checklist</strong>
+    SEO, GBP, Content, Reputation — each service has a checklist that resets monthly. Check off as you go. Know at a glance what's done and what's not for every client.
+  </div>
+
+  <p class="section-label">Quick Access</p>
+  <div class="links-grid">
+    <a class="lnk" href="https://app.netlify.com/" target="_blank" rel="noopener"><span class="lnk-name">Netlify</span><span class="lnk-sub">Client sites</span></a>
+    <a class="lnk" href="https://business.google.com/" target="_blank" rel="noopener"><span class="lnk-name">Google Business</span><span class="lnk-sub">GBP management</span></a>
+    <a class="lnk" href="https://search.google.com/search-console" target="_blank" rel="noopener"><span class="lnk-name">Search Console</span><span class="lnk-sub">SEO data</span></a>
+    <a class="lnk" href="https://drive.google.com/drive/folders/1PvAc7zCYmkBEoPCa8an-P8H46EglXpoX" target="_blank" rel="noopener"><span class="lnk-name">Client Drive</span><span class="lnk-sub">All client folders</span></a>
+    <a class="lnk" href="/playbook/"><span class="lnk-name">Playbook & SOPs</span><span class="lnk-sub">Delivery process docs</span></a>
+  </div>
+</div>
+</body>
+</html>
