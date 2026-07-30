@@ -1236,6 +1236,16 @@ function bsNorm(s) {
     .replace(/[^a-z0-9]/g, '');
 }
 
+// Task subjects abbreviate. A deal is "Fuehrer Painting — Retainer" but its
+// delivery tasks just say "Fuehrer", so exact normalised equality matches
+// nothing. Prefix matching in either direction links them, with a 4-character
+// floor so short fragments cannot collide two unrelated clients together.
+function bsNameMatch(a, b) {
+  const x = bsNorm(a), y = bsNorm(b);
+  if (!x || !y || x.length < 4 || y.length < 4) return false;
+  return x === y || x.indexOf(y) === 0 || y.indexOf(x) === 0;
+}
+
 const BS_COMPANY_PROPS = [
   'name', 'domain', 'website', 'phone', 'city', 'state', 'trade_type',
   'lifecyclestage', 'facebook_company_page', 'linkedin_company_page',
@@ -1388,11 +1398,24 @@ function bsShapeTask(t) {
   const subj = p.hs_task_subject || '(untitled task)';
   const due  = p.hs_timestamp ? new Date(p.hs_timestamp).getTime() : null;
   const days = due ? Math.floor((due - Date.now()) / BS_DAY) : null;
-  // "[DELIVERY] Build homepage — Fuehrer Painting" → client is after the dash.
+  // Two different subject conventions live in this portal, and they put the
+  // client on OPPOSITE sides of the dash:
+  //   delivery-scheduler writes  "[DELIVERY] Fuehrer — SEO: Write 4 blog posts"
+  //                               ^ client FIRST
+  //   the call cockpit writes    "Callback — Fuehrer Painting (morning)"
+  //                               ^ client LAST
+  // Reading the wrong end silently yields "SEO: Write 4 blog posts" as a client
+  // name, which matches nothing and makes every client look like it has zero
+  // open work while dozens of tasks sit there. Verified against live subjects.
   const isDelivery = /^\s*\[DELIVERY\]/i.test(subj);
   let client = '';
-  const m = subj.split(/\s[—–-]\s/);
-  if (m.length > 1) client = m[m.length - 1].replace(/\s*\(.*?\)\s*$/, '').trim();
+  if (isDelivery) {
+    const after = subj.replace(/^\s*\[DELIVERY\]\s*/i, '');
+    client = after.split(/\s[—–-]\s|:/)[0].replace(/\s*\(.*?\)\s*$/, '').trim();
+  } else {
+    const m = subj.split(/\s[—–-]\s/);
+    if (m.length > 1) client = m[m.length - 1].replace(/\s*\(.*?\)\s*$/, '').trim();
+  }
   return {
     id: t.id, subject: subj, client,
     is_delivery: isDelivery,
@@ -1819,7 +1842,7 @@ export default {
         try { tasks = (await bsOpenTasks(token, 2)).map(bsShapeTask); } catch (e) { tasks = []; }
         for (const c of roster) {
           const key = bsNorm(c.name);
-          const mine = tasks.filter(t => t.client && bsNorm(t.client) === key);
+          const mine = tasks.filter(t => t.client && bsNameMatch(t.client, c.name));
           c.open_tasks     = mine.length;
           c.overdue_tasks  = mine.filter(t => t.overdue).length;
         }
@@ -1828,7 +1851,7 @@ export default {
         if (slug) {
           const one = roster.filter(c => c.slug === slug)[0];
           if (!one) return jsonResp({ ok:false, error:'client not found', slug }, 404, cors);
-          one.tasks = tasks.filter(t => t.client && bsNorm(t.client) === bsNorm(one.name));
+          one.tasks = tasks.filter(t => t.client && bsNameMatch(t.client, one.name));
           return jsonResp({ ok:true, client: one, fetched_at:new Date().toISOString() }, 200, cors);
         }
 
