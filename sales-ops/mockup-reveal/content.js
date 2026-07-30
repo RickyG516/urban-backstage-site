@@ -1,13 +1,18 @@
 /* ===================================================================
-   UNC SALES COCKPIT — Cold Call Content Logic
-   v2.0 — 2026-05-12
-   Screen state machine. Loads scripts.json. Hands outcomes to Shell.
+   UNC SALES COCKPIT — Mockup Reveal Content Logic
+   v1.0 — 2026-07-29
+   Standalone cockpit for prospects we already built a free "ghost page"
+   homepage mockup for. Every prospect loaded here has a mockup_url —
+   the entire script IS the mockup pitch. No mode toggle, no standard
+   cold-call flow: this is its own dedicated tool.
 
-   V2 adds:
-   - Trade-aware Q2 surfacing (reads contact.trade)
-   - Token interpolation for {first_name}, {business_name}, {trade_lower}, {city}
-   - Variant auto-assign mode (round-robin via Shell.autoAssignVariant)
-   - Section 02 replaced with real trade_q2 screen
+   Flow: load prospect -> "First time or Follow-up?" -> First Time goes
+   into the opener/responses script (reveal the mockup), Follow-Up goes
+   into post_reveal_pitch (they already saw it, move to proposal).
+
+   Rendering/state-machine approach, token interpolation, live-queue
+   loading, prospect-card rendering, and outcome-logging/sync mechanism
+   are adapted directly from sales-ops/cold-call/content.js.
    =================================================================== */
 
 (function() {
@@ -19,7 +24,6 @@
   const Shell = window.CockpitShell;
   let scripts = null;
   const history = [];
-  let trainMode = false;
   const stage = () => document.querySelector('#screen-stage');
 
   // ============================================================
@@ -70,14 +74,14 @@
   // ============================================================
   async function boot() {
     try {
-      const r = await fetch('/sales-ops/cold-call/scripts.json', { cache: 'no-cache' });
+      const r = await fetch('/sales-ops/mockup-reveal/scripts.json', { cache: 'no-cache' });
       scripts = await r.json();
     } catch(e) {
-      console.error('[cold-call] scripts.json load failed', e);
+      console.error('[mockup-reveal] scripts.json load failed', e);
       stage().innerHTML = '<div class="script-panel"><div class="script-panel__line">Scripts failed to load. Check console.</div></div>';
       return;
     }
-    await Shell.init({ cockpit: 'cold-call' });
+    await Shell.init({ cockpit: 'mockup-reveal' });
     Shell.bindNotes();
     Shell.onReset(renderStart);
     Shell.onBack(goBack);
@@ -85,30 +89,7 @@
     window._liveAdvance = function(outcomeCode) {
       if (liveQueue.length) advanceAfterOutcome(outcomeCode);
     };
-    trainMode = localStorage.getItem('unc_train_mode') === 'true';
-    injectTrainToggle();
     renderStart();
-  }
-
-  // ============================================================
-  // TRAINING MODE TOGGLE
-  // ============================================================
-  function injectTrainToggle() {
-    const hud = document.querySelector('.hud__center');
-    if (!hud || document.getElementById('train-toggle')) return;
-    const btn = document.createElement('button');
-    btn.id = 'train-toggle';
-    btn.className = 'variant-mode-btn';
-    btn.title = 'Toggle Training Mode — shows coaching notes under script lines';
-    btn.textContent = trainMode ? 'TRAIN' : 'LIVE';
-    btn.style.cssText = trainMode ? 'background:rgba(96,165,250,0.15);border-color:#60a5fa;color:#60a5fa' : '';
-    btn.addEventListener('click', () => {
-      trainMode = !trainMode;
-      localStorage.setItem('unc_train_mode', trainMode);
-      btn.textContent = trainMode ? 'TRAIN' : 'LIVE';
-      btn.style.cssText = trainMode ? 'background:rgba(96,165,250,0.15);border-color:#60a5fa;color:#60a5fa' : '';
-    });
-    hud.appendChild(btn);
   }
 
   function trainingNote(text) {
@@ -183,6 +164,7 @@
       city: c.city || 'your area',
       ai_hook: c.ai_hook || '',
       quick_win: c.quick_win || c.ai_hook || c.notes_preview || 'a gap in your online presence',
+      mockup_url: c.mockup_url || '',
       trade_q2_line: (tradeBlock.q2_line || 'something specific about your online presence').replace(/\{(first_name|business_name|trade|trade_lower|city)\}/g, (m, k) => {
         const innerC = Shell.getContact() || {};
         if (k === 'first_name') return innerC.first_name || 'there';
@@ -198,7 +180,7 @@
   function interpolate(str) {
     if (!str) return '';
     const t = tokens();
-    let result = str.replace(/\{(first_name|business_name|rep_name|trade|trade_lower|city|trade_q2_line|quick_win|ai_hook)\}/g, (m, k) => t[k] != null ? t[k] : m);
+    let result = str.replace(/\{(first_name|business_name|rep_name|trade|trade_lower|city|trade_q2_line|quick_win|ai_hook|mockup_url)\}/g, (m, k) => t[k] != null ? t[k] : m);
     // Clean whitespace; only strip "Hey —" opener when first_name resolved empty
     result = result.replace(/\s{2,}/g, ' ').replace(/\s+—/g, ' —');
     if (!t.first_name) result = result.replace(/Hey —/g, 'Hey');
@@ -221,7 +203,7 @@
   // ============================================================
   function goTo(screenId, opts) {
     const renderer = SCREENS[screenId];
-    if (!renderer) { console.error('[cold-call] Unknown screen:', screenId); return; }
+    if (!renderer) { console.error('[mockup-reveal] Unknown screen:', screenId); return; }
     if (!opts || !opts.isBack) {
       const current = stage().getAttribute('data-screen');
       if (current && current !== 'start') history.push(current);
@@ -423,8 +405,8 @@
       convStat.id = 'hud-conv-stat';
       convStat.className = 'hud__stat';
       convStat.title = 'HOT + WARM conversion rate this session';
-      const variantBtn = document.getElementById('variant-mode');
-      if (variantBtn) variantBtn.insertAdjacentElement('beforebegin', convStat);
+      const hudCenter = document.querySelector('.hud__center');
+      if (hudCenter) hudCenter.appendChild(convStat);
     }
     const rateColor = convRate >= 20 ? '#22c55e' : convRate >= 10 ? 'var(--color-accent)' : '';
     convStat.innerHTML =
@@ -582,7 +564,7 @@
       if (!data || !data.ok || !data.queue || !data.queue.length) {
         try {
           const currentRepId = Shell._currentRep ? Shell._currentRep().id : null;
-          const staticResp = await fetch('/sales-ops/cold-call/queue/' + todayKey() + '.json', { cache: 'no-cache' });
+          const staticResp = await fetch('/sales-ops/mockup-reveal/queue/' + todayKey() + '.json', { cache: 'no-cache' });
           if (staticResp.ok) {
             const staticQueue = await staticResp.json();
             const fileRep = staticQueue && staticQueue._generated_for_rep_id;
@@ -693,7 +675,7 @@
       if (!data || !data.ok || !data.queue || !data.queue.length) {
         // Worker down or no eligible contacts — try static queue file for today
         const todayStr = todayKey();
-        const staticPath = '/sales-ops/cold-call/queue/' + todayStr + '.json';
+        const staticPath = '/sales-ops/mockup-reveal/queue/' + todayStr + '.json';
         try {
           const staticResp = await fetch(staticPath, { cache: 'no-cache' });
           if (staticResp.ok) {
@@ -763,7 +745,8 @@
         gbp_review_count:     prospect.gbp_review_count   || '',
         website_gaps:         prospect.website_gaps        || '',
         decision_maker_known: prospect.decision_maker_known || '',
-        best_phone_verified:  prospect.best_phone_verified  || ''
+        best_phone_verified:  prospect.best_phone_verified  || '',
+        mockup_url:           prospect.mockup_url           || ''
       };
     }
 
@@ -833,6 +816,11 @@
           '<a href="' + hubURL + '" target="_blank" rel="noopener" class="card-hs-btn" style="margin-left:auto;">↗ HubSpot</a>' +
         '</div>' +
       '</div>' +
+      // ── mockup banner — the whole point of this cockpit, so it's front and center ──
+      (prospect.mockup_url ?
+        '<a href="' + escapeHTML(prospect.mockup_url) + '" target="_blank" rel="noopener" class="action-btn action-btn--primary" style="display:flex;align-items:center;justify-content:center;gap:0.4rem;width:100%;margin:0.5rem 0 0.6rem;padding:0.6rem;font-size:0.85rem;font-weight:700;text-decoration:none;background:rgba(34,197,94,0.12);border-color:#22c55e;color:#22c55e;">🖥 View the mockup we built →</a>'
+        : '<div style="font-size:0.72rem;color:#fbbf24;padding:0.4rem 0.6rem;margin:0.5rem 0 0.6rem;border:1px solid rgba(251,191,36,0.35);border-radius:var(--radius-sm);background:rgba(251,191,36,0.08);">⚠ No mockup_url on this record — check the queue file before dialing.</div>'
+      ) +
       // ── badges ──
       (function() {
         const phoneOk = (prospect.best_phone_verified || '').toLowerCase() === 'true' || (prospect.best_phone_verified || '') === '1';
@@ -1143,10 +1131,9 @@
   function renderStart() {
     history.length = 0;
     renderScreen(html`
-      <div class="screen__eyebrow">Ready to dial</div>
+      <div class="screen__eyebrow">Ready to dial — Mockup Reveal</div>
       <div class="script-panel">
         <div class="script-panel__line">${tokenizeHTML(scripts.greeting.default)}</div>
-        ${trainingNote(scripts.greeting.training_note)}
       </div>
       ${liveQueue.length ? html`
         <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;">
@@ -1156,40 +1143,25 @@
         </div>
       ` : ''}
       <div id="live-history" style="display:none;margin-top:0.5rem;margin-bottom:0.75rem;background:var(--color-dark-3);border-radius:var(--radius-sm);padding:0.5rem 0.75rem"></div>
-      ${liveQueue.length && liveQueue[liveIndex] ? (() => {
-        const _t = liveQueue[liveIndex];
-        const _trade = (_t.trade_type || _t.trade || '').trim();
-        const _intel = TRADE_INTEL[_trade] || TRADE_INTEL_DEFAULT;
-        return html`<div class="trade-box" style="margin-bottom:0.5rem;"><div class="trade-box__lbl">Trade Pitch — ${_trade || 'Contractor'}</div><div class="trade-box__txt">${_intel.hook}</div></div>`;
-      })() : ''}
       <div class="branches">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-branch="dm_free" title="Keyboard: press 1">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-branch="first_time" title="Keyboard: press 1">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 DM Free</span>
-          <span class="branch-btn__sub">Decision-maker on the line, free to talk</span>
+          <span class="branch-btn__label">🟢 First Time</span>
+          <span class="branch-btn__sub">Reaching out about the mockup for the first time</span>
         </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-branch="dm_busy" title="Keyboard: press 2">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-branch="follow_up" title="Keyboard: press 2">
           <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟡 DM Busy</span>
-          <span class="branch-btn__sub">DM on the line but mid-something</span>
-        </button>
-        <button class="branch-btn branch-btn--grey" data-hotkey="3" data-branch="gatekeeper" title="Keyboard: press 3">
-          <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">⚪ Gatekeeper</span>
-          <span class="branch-btn__sub">Someone else answered, not the DM</span>
-        </button>
-        <button class="branch-btn" data-hotkey="4" data-branch="wrong" title="Keyboard: press 4">
-          <span class="branch-btn__hotkey">4</span>
-          <span class="branch-btn__label">⚫ Wrong Number</span>
-          <span class="branch-btn__sub">Auto-logs WRG, instant next</span>
+          <span class="branch-btn__label">🟡 Follow-Up</span>
+          <span class="branch-btn__sub">They already saw the mockup — this is the callback</span>
         </button>
       </div>
       <div style="text-align:center;font-size:0.7rem;color:var(--color-white-dim);margin-top:0.4rem;letter-spacing:0.05em;">
         Press <kbd style="background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:3px;padding:0.1rem 0.35rem;font-size:0.7rem;">1</kbd>
         <kbd style="background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:3px;padding:0.1rem 0.35rem;font-size:0.7rem;">2</kbd>
-        <kbd style="background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:3px;padding:0.1rem 0.35rem;font-size:0.7rem;">3</kbd>
-        <kbd style="background:var(--color-dark-2);border:1px solid var(--color-border);border-radius:3px;padding:0.1rem 0.35rem;font-size:0.7rem;">4</kbd>
         on your keyboard — no clicking needed
+      </div>
+      <div style="text-align:center;margin-top:0.6rem;">
+        <button id="na-quick-log" class="action-btn" style="font-size:0.72rem;padding:0.3rem 0.6rem;color:var(--color-white-dim);">No answer / wrong number — log &amp; skip →</button>
       </div>
     `);
     bindBranchClicks();
@@ -1204,43 +1176,34 @@
         Shell.startCall();
         const where = btn.dataset.branch;
         Shell.pushBranch(where);
-        if (where === 'wrong') {
-          playClick();
-          Shell.recordOutcome('WRG');
-          advanceAfterOutcome('WRG');
-          return;
-        }
-        if (where === 'dm_free') goTo('opener_styles');
-        else if (where === 'dm_busy') goTo('busy_pivot');
-        else if (where === 'gatekeeper') goTo('gatekeeper');
+        if (where === 'first_time') goTo('opener_styles');
+        else if (where === 'follow_up') goTo('follow_up');
       });
+    });
+    const naBtn = document.getElementById('na-quick-log');
+    if (naBtn) naBtn.addEventListener('click', () => {
+      Shell.startCall();
+      Shell.pushBranch('no_answer_or_wrong');
+      playClick();
+      Shell.recordOutcome('NA');
+      advanceAfterOutcome('NA');
     });
   }
 
   // ── OPENER STYLES — Word for Word / Guided / Freestyle ─────────
+  // The mockup reveal opener. There's only one script here (no standard-
+  // flow fallback, no mode swap) — every prospect in this queue has a
+  // mockup_url, so this IS the opener.
   SCREENS.opener_styles = () => {
     const o = scripts.opener;
-    const contact = Shell.getContact() || {};
-    const trade = contact.trade || '';
-
-    // Trade-specific pitch line
-    const pitchLines = scripts.pitch_30 && scripts.pitch_30.trade_specific;
-    const tradePitch = pitchLines && pitchLines[trade]
-      ? tokenizeHTML(pitchLines[trade])
-      : tokenizeHTML(scripts.pitch_30 ? scripts.pitch_30.default : '');
-
     let activeStyle = 'word_for_word';
 
     function renderStyleContent(style) {
       Shell.pushBranch('opener_style:' + style);
-      Shell.setOpenerVariant(style, Shell.getVariantMode());
       if (style === 'word_for_word') {
-        const hooked = (contact.ai_hook || '').trim() && o.word_for_word.script_hooked;
-        const scriptText = hooked ? o.word_for_word.script_hooked : o.word_for_word.script;
         return html`
-          ${hooked ? '<div style="font-size:0.62rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#ffd9a8;margin-bottom:0.35rem;">⚡ Personalized — built from their actual online presence</div>' : ''}
           <div class="script-panel">
-            <div class="script-panel__line" style="font-size:1.05rem;line-height:1.65;">${tokenizeHTML(scriptText)}</div>
+            <div class="script-panel__line" style="font-size:1.05rem;line-height:1.65;">${tokenizeHTML(o.word_for_word.script)}</div>
           </div>
           <div style="margin-top:0.5rem;font-size:0.75rem;color:var(--color-white-dim);text-align:center;">Read it exactly. Every word is there.</div>
         `;
@@ -1269,7 +1232,7 @@
       activeStyle = style;
       renderScreen(html`
         ${trainingNote(o.training_note)}
-        <div class="screen__eyebrow">DM is free — deliver the opener</div>
+        <div class="screen__eyebrow">🖥 Mockup Reveal opener</div>
         <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
           <button class="action-btn ${style==='word_for_word'?'action-btn--primary':''}" data-style="word_for_word" style="flex:1;font-size:0.78rem;" title="Full script — read word for word">W · Word for Word</button>
           <button class="action-btn ${style==='guided'?'action-btn--primary':''}" data-style="guided" style="flex:1;font-size:0.78rem;" title="Key anchors — say it in your own words">G · Guided</button>
@@ -1277,59 +1240,56 @@
         </div>
         ${renderStyleContent(style)}
         <div class="branches" style="margin-top:0.75rem;">
-          <button class="branch-btn branch-btn--green" data-hotkey="1" data-resp="YES">
+          <button class="branch-btn branch-btn--green" data-hotkey="1" data-resp="YES_SEND_IT">
             <span class="branch-btn__hotkey">1</span>
-            <span class="branch-btn__label">🟢 Yes — trying to grow</span>
-            <span class="branch-btn__sub">They want to grow → pitch</span>
+            <span class="branch-btn__label">🟢 Yes — send it over</span>
+            <span class="branch-btn__sub">They want the link</span>
           </button>
-          <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-resp="WHAT_DO_YOU_DO">
+          <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-resp="WHY_FREE">
             <span class="branch-btn__hotkey">2</span>
-            <span class="branch-btn__label">🟡 What do you do exactly?</span>
-            <span class="branch-btn__sub">Curious but not committed → 30-sec pitch</span>
+            <span class="branch-btn__label">🟡 "Why would you do this for free?"</span>
+            <span class="branch-btn__sub">Handle the objection, come back here</span>
           </button>
-          <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-resp="BUSY_NOW">
+          <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-resp="ALREADY_HAVE_SITE">
             <span class="branch-btn__hotkey">3</span>
-            <span class="branch-btn__label">🟡 Busy right now</span>
-            <span class="branch-btn__sub">Bad time → get callback</span>
+            <span class="branch-btn__label">🟡 "I already have a website"</span>
+            <span class="branch-btn__sub">Confirm or route to not interested</span>
           </button>
-          <button class="branch-btn branch-btn--red" data-hotkey="4" data-resp="NOT_INTERESTED">
+          <button class="branch-btn branch-btn--yellow" data-hotkey="4" data-resp="BUSY_NOW">
             <span class="branch-btn__hotkey">4</span>
-            <span class="branch-btn__label">🔴 Not interested</span>
-            <span class="branch-btn__sub">→ Audit offer exit</span>
+            <span class="branch-btn__label">🟡 Busy right now</span>
+            <span class="branch-btn__sub">Bad time → quick close</span>
           </button>
-          <button class="branch-btn" data-hotkey="5" data-resp="AT_CAPACITY">
+          <button class="branch-btn branch-btn--red" data-hotkey="5" data-resp="NOT_INTERESTED">
             <span class="branch-btn__hotkey">5</span>
-            <span class="branch-btn__label">⚪ At capacity</span>
-            <span class="branch-btn__sub">→ 90-day follow-up</span>
+            <span class="branch-btn__label">🔴 Not interested</span>
+            <span class="branch-btn__sub">→ Graceful exit</span>
           </button>
         </div>
         ${renderNotesBlock()}
       `);
       Shell.bindNotes();
-      // Style switcher buttons
       const _sp = stage().querySelector('.script-panel');
       if (_sp) _sp.scrollTop = 0;
       stage().querySelectorAll('[data-style]').forEach(b => {
         b.addEventListener('click', () => render(b.dataset.style));
       });
-      // Keyboard style shortcuts
       document.addEventListener('keydown', function _styleKey(e) {
         if (e.target.matches('input,textarea,select')) return;
         if (e.key === 'w' || e.key === 'W') { render('word_for_word'); }
         if (e.key === 'g' || e.key === 'G') { render('guided'); }
         if (e.key === 'f' || e.key === 'F') { render('freestyle'); }
       }, { once: false });
-      // Response branches
       stage().querySelectorAll('[data-resp]').forEach(b => {
         b.addEventListener('click', () => {
           const resp = b.dataset.resp;
           Shell.pushBranch('opener_resp:' + resp + ' (' + activeStyle + ')');
           playClick();
-          if (resp === 'YES')            goTo('pitch_yes');
-          else if (resp === 'WHAT_DO_YOU_DO') goTo('pitch_what');
-          else if (resp === 'BUSY_NOW')   goTo('busy_pivot');
-          else if (resp === 'NOT_INTERESTED') goTo('response_not_interested');
-          else if (resp === 'AT_CAPACITY')    goTo('response_capacity');
+          if (resp === 'YES_SEND_IT')            goTo('mockup_sent');
+          else if (resp === 'WHY_FREE')           goTo('mockup_why_free');
+          else if (resp === 'ALREADY_HAVE_SITE')  goTo('mockup_already_have_site');
+          else if (resp === 'BUSY_NOW')           goTo('mockup_busy_now');
+          else if (resp === 'NOT_INTERESTED')     goTo('mockup_not_interested');
         });
       });
     }
@@ -1337,129 +1297,145 @@
   };
   SCREENS.openers = SCREENS.opener_styles; // backward compat
 
-  // ── YES — pitch to someone who wants to grow ─────────────────
-  SCREENS.pitch_yes = () => {
-    const contact = Shell.getContact() || {};
-    const trade = contact.trade || '';
-    const pitchLines = scripts.pitch_30 && scripts.pitch_30.trade_specific;
-    const pitch = (pitchLines && pitchLines[trade]) ? pitchLines[trade] : (scripts.pitch_30 ? scripts.pitch_30.default : '');
+  // ── YES, SEND IT — mockup link confirmed, wrap the call ──────
+  SCREENS.mockup_sent = () => {
+    const r = scripts.responses.YES_SEND_IT;
     renderScreen(html`
-      <div class="screen__eyebrow">They want to grow — pitch it</div>
+      <div class="screen__eyebrow">They want it — send the link</div>
       ${ammoStrip()}
       <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.responses.YES.script)}</div>
-        ${trainingNote(scripts.responses.YES.training_note)}
-        ${trainingNote(scripts.pitch_30.training_note)}
-      </div>
-      <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(232,101,26,0.08);border:1px solid rgba(232,101,26,0.25);border-radius:var(--radius-sm);">
-        <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-accent);margin-bottom:0.35rem;">Trade Pitch — ${escapeHTML(trade||'Contractor')}</div>
-        <div style="font-size:0.88rem;line-height:1.6;color:var(--color-white);">${tokenizeHTML(pitch)}</div>
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-next="audit_offer">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="HOT">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 They're in — offer the audit</span>
-          <span class="branch-btn__sub">→ Book the call</span>
+          <span class="branch-btn__label">🔥 Loved it live — booking now</span>
+          <span class="branch-btn__sub">Log HOT</span>
         </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-next="objections">
+        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-outcome="WARM">
           <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟡 Objection came up</span>
-          <span class="branch-btn__sub">→ Handle it</span>
+          <span class="branch-btn__label">🟡 Sent — following up in a few days</span>
+          <span class="branch-btn__sub">Log WARM</span>
         </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="q" data-next="tech_deflect" style="border-color:rgba(232,101,26,0.4)">
-          <span class="branch-btn__hotkey">Q</span>
-          <span class="branch-btn__label">⚡ "How's it work?" — deflect up</span>
-          <span class="branch-btn__sub">→ Route to the audit, return here</span>
-        </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="3" data-next="response_not_interested">
+        <button class="branch-btn branch-btn--red" data-hotkey="3" data-outcome="COLD">
           <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🔴 Lost them</span>
-          <span class="branch-btn__sub">→ Audit offer exit</span>
+          <span class="branch-btn__label">🔴 Sent, but they went cold</span>
+          <span class="branch-btn__sub">Log COLD</span>
         </button>
       </div>
       ${renderNotesBlock()}
     `);
     Shell.bindNotes();
+    stage().querySelectorAll('[data-outcome]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_sent:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+    });
+  };
+
+  // ── WHY FREE objection — handle, then back to the opener ─────
+  SCREENS.mockup_why_free = () => {
+    const r = scripts.responses.WHY_FREE;
+    renderScreen(html`
+      <div class="screen__eyebrow" style="color:#f0985a">🟡 "Why would you do this for free?"</div>
+      ${ammoStrip()}
+      <div class="script-panel" style="border-color:rgba(232,101,26,0.35)">
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-back="1">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 HANDLED — back to the opener</span>
+          <span class="branch-btn__sub">→ Returns exactly where you were</span>
+        </button>
+      </div>
+    `);
+    stage().querySelectorAll('[data-back]').forEach(el => el.addEventListener('click', () => {
+      Shell.pushBranch('mockup_why_free:back');
+      playClick();
+      goBack();
+    }));
+  };
+
+  // ── ALREADY HAVE A WEBSITE — confirm/deny, route accordingly ──
+  SCREENS.mockup_already_have_site = () => {
+    const r = scripts.responses.ALREADY_HAVE_SITE;
+    renderScreen(html`
+      <div class="screen__eyebrow" style="color:#f0985a">🟡 "I already have a website"</div>
+      ${ammoStrip()}
+      <div class="script-panel" style="border-color:rgba(232,101,26,0.35)">
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
+      </div>
+      <div class="branches" style="margin-top:0.75rem;">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-next="opener_styles">
+          <span class="branch-btn__hotkey">1</span>
+          <span class="branch-btn__label">🟢 Still want to see it — back to opener</span>
+          <span class="branch-btn__sub">→ Mockup opener</span>
+        </button>
+        <button class="branch-btn branch-btn--red" data-hotkey="2" data-next="mockup_not_interested">
+          <span class="branch-btn__hotkey">2</span>
+          <span class="branch-btn__label">🔴 Real site, not interested</span>
+          <span class="branch-btn__sub">→ Graceful exit</span>
+        </button>
+      </div>
+    `);
     stage().querySelectorAll('[data-next]').forEach(b => {
       b.addEventListener('click', () => {
-        Shell.pushBranch('pitch_result:' + b.dataset.next);
+        Shell.pushBranch('mockup_already_have_site:' + b.dataset.next);
         playClick();
         goTo(b.dataset.next);
       });
     });
   };
 
-  // ── TECH DEFLECT RAIL — never explain mechanics on a cold call ──
-  SCREENS.tech_deflect = () => {
-    const td = scripts.tech_deflect || {};
-    const tdA = td.how_it_works || {};
-    const tdB = td.why_it_helps || {};
+  // ── BUSY RIGHT NOW — quick close, don't lose the ask ─────────
+  SCREENS.mockup_busy_now = () => {
+    const r = scripts.responses.BUSY_NOW;
     renderScreen(html`
-      <div class="screen__eyebrow" style="color:#f0985a">⚡ Tech question — deflect UP, never explain live</div>
+      <div class="screen__eyebrow">🟡 Busy right now — quick close</div>
       ${ammoStrip()}
-      <div class="script-panel" style="border-color:rgba(232,101,26,0.35)">
-        <div class="script-panel__line"><b>"How does it actually work?"</b> → "${tokenizeHTML(tdA.say_this || '')}"</div>
-        ${trainingNote(tdA.training_note)}
-        <div class="script-panel__line" style="margin-top:0.85rem;padding-top:0.75rem;border-top:1px solid rgba(255,255,255,0.08)"><b>"Why would that get ME more calls?"</b> → "${tokenizeHTML(tdB.say_this || '')}"</div>
-        ${trainingNote(tdB.training_note)}
-      </div>
-      <div class="branches">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-back="1">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 HANDLED — back to the call</span>
-          <span class="branch-btn__sub">→ Returns exactly where you were</span>
-        </button>
-      </div>
-    `);
-    stage().querySelectorAll('[data-back]').forEach(el => el.addEventListener('click', () => {
-      Shell.pushBranch('tech_deflect:back');
-      playClick();
-      goBack();
-    }));
-  };
-
-  // ── WHAT DO YOU DO — quick pitch for curious/skeptical ───────
-  SCREENS.pitch_what = () => {
-    renderScreen(html`
-      <div class="screen__eyebrow">They asked what you do — tell them fast</div>
-      ${ammoStrip()}
-      ${trainingNote(scripts.responses.WHAT_DO_YOU_DO.training_note)}
       <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.responses.WHAT_DO_YOU_DO.script)}</div>
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-next="pitch_yes">
+        <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="WARM">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 Now they're interested</span>
-          <span class="branch-btn__sub">→ Full pitch</span>
+          <span class="branch-btn__label">🟡 Said yes — texting the link</span>
+          <span class="branch-btn__sub">Log WARM</span>
         </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="2" data-next="response_not_interested">
+        <button class="branch-btn branch-btn--red" data-hotkey="2" data-next="mockup_not_interested">
           <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🔴 Still not interested</span>
-          <span class="branch-btn__sub">→ Audit offer exit</span>
+          <span class="branch-btn__label">🔴 Not interested</span>
+          <span class="branch-btn__sub">→ Graceful exit</span>
         </button>
       </div>
       ${renderNotesBlock()}
     `);
     Shell.bindNotes();
+    stage().querySelectorAll('[data-outcome]').forEach(b => {
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_busy_now:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+    });
     stage().querySelectorAll('[data-next]').forEach(b => {
-      b.addEventListener('click', () => { Shell.pushBranch('what_result:' + b.dataset.next); playClick(); goTo(b.dataset.next); });
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_busy_now:' + b.dataset.next); playClick(); goTo(b.dataset.next); });
     });
   };
 
-  // ── NOT INTERESTED — audit offer exit ────────────────────────
-  SCREENS.response_not_interested = () => {
+  // ── NOT INTERESTED — graceful exit, zero-effort re-offer ─────
+  SCREENS.mockup_not_interested = () => {
+    const r = scripts.responses.NOT_INTERESTED;
     renderScreen(html`
       <div class="screen__eyebrow">Not interested — graceful exit</div>
       ${ammoStrip()}
       <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.responses.NOT_INTERESTED.script)}</div>
-        ${trainingNote(scripts.responses.NOT_INTERESTED.training_note)}
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
         <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="WARM">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 Got email — sending audit</span>
+          <span class="branch-btn__label">🟢 Took the link anyway</span>
           <span class="branch-btn__sub">Log WARM</span>
         </button>
         <button class="branch-btn branch-btn--red" data-hotkey="2" data-outcome="COLD">
@@ -1472,63 +1448,34 @@
     `);
     Shell.bindNotes();
     stage().querySelectorAll('[data-outcome]').forEach(b => {
-      b.addEventListener('click', () => { Shell.pushBranch('exit:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
-    });
-  };
-  SCREENS.response_red = SCREENS.response_not_interested;
-
-  // ── AT CAPACITY — 90-day follow-up ───────────────────────────
-  SCREENS.response_capacity = () => {
-    renderScreen(html`
-      <div class="screen__eyebrow">At capacity — plant the seed</div>
-      ${ammoStrip()}
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.responses.AT_CAPACITY.script)}</div>
-        ${trainingNote(scripts.responses.AT_CAPACITY.training_note)}
-      </div>
-      <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--yellow" data-hotkey="1" data-outcome="PARK">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟡 Follow up in 90 days</span>
-          <span class="branch-btn__sub">Log PARK — recall in 90 days</span>
-        </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="2" data-outcome="COLD">
-          <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🔴 Not interested at all</span>
-          <span class="branch-btn__sub">Log COLD</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-outcome]').forEach(b => {
-      b.addEventListener('click', () => { Shell.pushBranch('capacity:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+      b.addEventListener('click', () => { Shell.pushBranch('mockup_not_interested:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
     });
   };
 
-  // ── AUDIT OFFER ───────────────────────────────────────────────
-  SCREENS.audit_offer = () => {
+  // ── FOLLOW-UP — they already saw the mockup, move to proposal ──
+  SCREENS.follow_up = () => {
+    const r = scripts.post_reveal_pitch;
     renderScreen(html`
-      <div class="screen__eyebrow">Offer the free audit — close the call</div>
+      <div class="screen__eyebrow">Follow-up — they already saw the mockup</div>
       ${ammoStrip()}
       <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.audit_offer.default)}</div>
-        ${trainingNote(scripts.audit_offer.training_note)}
+        <div class="script-panel__line">${tokenizeHTML(r.script)}</div>
+        ${trainingNote(r.training_note)}
       </div>
       <div class="branches" style="margin-top:0.75rem;">
         <button class="branch-btn branch-btn--green" data-hotkey="1" data-outcome="HOT">
           <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🔥 YES — send the audit</span>
-          <span class="branch-btn__sub">Log HOT — capture email</span>
+          <span class="branch-btn__label">🔥 Ready to move — book it</span>
+          <span class="branch-btn__sub">Log HOT</span>
         </button>
         <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-outcome="WARM">
           <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟡 Maybe — follow up</span>
+          <span class="branch-btn__label">🟡 Still deciding — follow up again</span>
           <span class="branch-btn__sub">Log WARM</span>
         </button>
         <button class="branch-btn branch-btn--red" data-hotkey="3" data-outcome="COLD">
           <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🔴 No thanks</span>
+          <span class="branch-btn__label">🔴 Passed</span>
           <span class="branch-btn__sub">Log COLD</span>
         </button>
       </div>
@@ -1536,408 +1483,9 @@
     `);
     Shell.bindNotes();
     stage().querySelectorAll('[data-outcome]').forEach(b => {
-      b.addEventListener('click', () => { Shell.pushBranch('audit:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
+      b.addEventListener('click', () => { Shell.pushBranch('follow_up:' + b.dataset.outcome); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
     });
   };
-
-  // ── OBJECTIONS ────────────────────────────────────────────────
-  SCREENS.objections = () => {
-    const objs = scripts.objections;
-    const objKeys = Object.keys(objs);
-    renderScreen(html`
-      <div class="screen__eyebrow">Objection — pick the one they hit you with</div>
-      ${ammoStrip()}
-      ${objKeys.map((k, i) => html`
-        <button class="branch-btn" data-hotkey="${i+1}" data-obj="${k}" style="margin-bottom:0.4rem;">
-          <span class="branch-btn__hotkey">${i+1}</span>
-          <span class="branch-btn__label">${escapeHTML(objs[k].label)}</span>
-        </button>
-      `).join('')}
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-obj]').forEach(b => {
-      b.addEventListener('click', () => {
-        const k = b.dataset.obj;
-        Shell.pushBranch('objection:' + k);
-        playClick();
-        goTo('objection_handle', { key: k });
-      });
-    });
-  };
-
-  // Return to wherever the rep was BEFORE the objection detour (skips the picker screen)
-  function returnFromObjection() {
-    goBack();
-    if (stage().getAttribute('data-screen') === 'objections') goBack();
-  }
-
-  SCREENS.objection_handle = (opts) => {
-    const k = opts && opts.key;
-    const obj = scripts.objections[k];
-    if (!obj) { goTo('pitch_yes'); return; }
-    renderScreen(html`
-      <div class="screen__eyebrow">Handle: ${escapeHTML(obj.label)}</div>
-      ${ammoStrip()}
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(obj.say_this)}</div>
-        ${trainingNote(obj.training_note)}
-      </div>
-      <div class="branches" style="margin-top:0.75rem;">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-act="return">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 Handled — back to the call</span>
-          <span class="branch-btn__sub">→ Returns where you left off</span>
-        </button>
-        <button class="branch-btn branch-btn--green" data-hotkey="2" data-act="audit">
-          <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟢 They're warming — go for the audit</span>
-          <span class="branch-btn__sub">→ Close the call</span>
-        </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="q" data-act="tech" style="border-color:rgba(232,101,26,0.4)">
-          <span class="branch-btn__hotkey">Q</span>
-          <span class="branch-btn__label">⚡ Turned into a tech question</span>
-          <span class="branch-btn__sub">→ Deflect up</span>
-        </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="3" data-act="exit">
-          <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🔴 Still no</span>
-          <span class="branch-btn__sub">→ Exit</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-act]').forEach(b => {
-      b.addEventListener('click', () => {
-        const a = b.dataset.act;
-        Shell.pushBranch('obj_result:' + k + ':' + a);
-        playClick();
-        if (a === 'return') returnFromObjection();
-        else if (a === 'audit') goTo('audit_offer');
-        else if (a === 'tech') goTo('tech_deflect');
-        else goTo('response_not_interested');
-      });
-    });
-  };
-
-  // ── BACKWARD COMPAT ────────────────────────────────────────────
-  SCREENS.trade_q2      = SCREENS.pitch_yes;
-  SCREENS.response      = SCREENS.opener_styles;
-  SCREENS.response_yellow = SCREENS.pitch_what;
-  SCREENS.opener_auto_card = SCREENS.opener_styles;
-
-  // ── BUSY PIVOT — rebuilt with 5 branches ──────────────────────
-  // ── BUSY pivot --------
-  SCREENS.busy_pivot = () => {
-    const bp = scripts.dm_busy;
-    renderScreen(html`
-      <div class="screen__eyebrow">DM is busy — get a real commitment</div>
-      ${ammoStrip()}
-      ${trainingNote(scripts.busy_pivot.training_note)}
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(bp.script)}</div>
-      </div>
-      <div class="branches">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-busy="NOW">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 Give it to me now</span>
-          <span class="branch-btn__sub">→ Deliver opener</span>
-        </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="2" data-busy="MORNING">
-          <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟡 Call me tomorrow morning</span>
-          <span class="branch-btn__sub">→ Lock in a time</span>
-        </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="3" data-busy="SPECIFIC">
-          <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🟡 Specific time / day</span>
-          <span class="branch-btn__sub">→ Capture exact window</span>
-        </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="4" data-busy="TEXT">
-          <span class="branch-btn__hotkey">4</span>
-          <span class="branch-btn__label">🟡 Text me first</span>
-          <span class="branch-btn__sub">→ Send text, lock window</span>
-        </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="5" data-busy="NO">
-          <span class="branch-btn__hotkey">5</span>
-          <span class="branch-btn__label">🔴 Not interested</span>
-          <span class="branch-btn__sub">→ Audit offer exit</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-busy]').forEach(b => {
-      b.addEventListener('click', () => {
-        const k = b.dataset.busy;
-        Shell.pushBranch('busy:' + k);
-        playClick();
-        if (k === 'NOW') goTo('opener_styles');
-        else if (k === 'MORNING' || k === 'SPECIFIC') goTo('busy_callback');
-        else if (k === 'TEXT') goTo('busy_text');
-        else goTo('busy_last_swing');
-      });
-    });
-  };
-
-  SCREENS.busy_text = () => {
-    renderScreen(html`
-      <div class="screen__eyebrow">Send a text first — lock the window</div>
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(scripts.dm_busy.branches.TEXT_FIRST.script)}</div>
-      </div>
-      <div class="capture">
-        <label class="capture__label" for="cb-window-text">Callback window they confirmed</label>
-        <input id="cb-window-text" class="capture__input" type="text" placeholder="e.g. Thursday 8 AM" autocomplete="off">
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    const inp = document.querySelector('#cb-window-text');
-    if (inp) { inp.focus(); inp.addEventListener('input', () => Shell.setCallbackWindow(inp.value)); }
-    Shell.showOutcomes('WARM');
-  };
-
-  SCREENS.busy_callback = () => {
-    const cb = scripts.busy_pivot.branches.CALLBACK;
-    renderScreen(html`
-      <div class="screen__eyebrow">Capture the callback</div>
-      <div class="script-panel">
-        <div class="script-panel__line">Get the window. Lock it down. Log WARM and move on.</div>
-      </div>
-      <div class="capture">
-        <label class="capture__label" for="cb-window">${escapeHTML(cb.capture_prompt)}</label>
-        <input id="cb-window" class="capture__input" type="text" placeholder="e.g. 8 AM tomorrow" autocomplete="off">
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    const inp = document.querySelector('#cb-window');
-    inp.focus();
-    inp.addEventListener('input', () => Shell.setCallbackWindow(inp.value));
-    Shell.showOutcomes(cb.default_outcome);
-  };
-
-  SCREENS.busy_last_swing = () => {
-    const ls2 = scripts.busy_last_swing;
-    renderScreen(html`
-      <div class="screen__eyebrow">Last swing</div>
-      ${trainingNote(scripts.busy_last_swing.training_note)}
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(ls2.script)}</div>
-      </div>
-      <div class="screen__heading">Log the outcome below.</div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    Shell.showOutcomes(ls2.default_outcome);
-  };
-
-  // -------- GATEKEEPER --------
-  SCREENS.gatekeeper = () => {
-    const gk = scripts.gatekeeper;
-    renderScreen(html`
-      <div class="screen__eyebrow">Gatekeeper — identify who answered</div>
-      ${trainingNote(scripts.gatekeeper.training_note)}
-      <div class="script-panel">
-        <div class="script-panel__line" style="font-size:0.95rem;">Hey — is the owner around?</div>
-        <div class="script-panel__line" style="font-size:0.8rem;color:var(--color-white-dim);">Then pick what you're dealing with below.</div>
-      </div>
-      <div class="branches">
-        <button class="branch-btn" data-hotkey="1" data-gk="RECEPTIONIST">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">📋 Receptionist / Office</span>
-          <span class="branch-btn__sub">Professional gatekeeper — get a window</span>
-        </button>
-        <button class="branch-btn" data-hotkey="2" data-gk="SPOUSE">
-          <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">👤 Spouse / Partner</span>
-          <span class="branch-btn__sub">Soft approach — get a callback</span>
-        </button>
-        <button class="branch-btn" data-hotkey="3" data-gk="EMPLOYEE">
-          <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🪖 Employee / Crew</span>
-          <span class="branch-btn__sub">Simple — ask for owner, get window</span>
-        </button>
-        <button class="branch-btn" data-hotkey="4" data-gk="VOICEMAIL">
-          <span class="branch-btn__hotkey">4</span>
-          <span class="branch-btn__label">📵 Hit Voicemail System</span>
-          <span class="branch-btn__sub">Leave VM or hang up</span>
-        </button>
-        <button class="branch-btn branch-btn--green" data-hotkey="5" data-gk="HANDED_TO_DM">
-          <span class="branch-btn__hotkey">5</span>
-          <span class="branch-btn__label">🟢 They Put DM On</span>
-          <span class="branch-btn__sub">→ Deliver opener</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-gk]').forEach(b => {
-      b.addEventListener('click', () => {
-        const k = b.dataset.gk;
-        Shell.pushBranch('gk_type:' + k);
-        playClick();
-        if (k === 'HANDED_TO_DM') goTo('opener_styles');
-        else if (k === 'VOICEMAIL')   goTo('gatekeeper_voicemail');
-        else goTo('gatekeeper_script', { type: k });
-      });
-    });
-  };
-
-  SCREENS.gatekeeper_script = (opts) => {
-    const type = opts && opts.type || 'RECEPTIONIST';
-    const gk = scripts.gatekeeper;
-    const typeData = gk.types[type];
-    if (!typeData) { goTo('gatekeeper_window'); return; }
-    renderScreen(html`
-      <div class="screen__eyebrow">Gatekeeper — ${escapeHTML(typeData.label)}</div>
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(typeData.script)}</div>
-        <div class="script-panel__line" style="margin-top:0.5rem;color:var(--color-white-dim);font-size:0.85rem;">
-          If not available: "${escapeHTML(typeData.if_not_available || 'Ask for best time.')}"
-        </div>
-      </div>
-      <div class="branches">
-        <button class="branch-btn branch-btn--green" data-hotkey="1" data-gk-result="WINDOW">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">🟢 Got a callback window</span>
-          <span class="branch-btn__sub">→ Capture it — log WARM</span>
-        </button>
-        <button class="branch-btn branch-btn--green" data-hotkey="2" data-gk-result="DM_ON">
-          <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">🟢 They put DM on</span>
-          <span class="branch-btn__sub">→ Deliver opener</span>
-        </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="3" data-gk-result="WALL">
-          <span class="branch-btn__hotkey">3</span>
-          <span class="branch-btn__label">🔴 Won't help — wall</span>
-          <span class="branch-btn__sub">→ Log COLD</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-gk-result]').forEach(b => {
-      b.addEventListener('click', () => {
-        const r = b.dataset.gkResult;
-        Shell.pushBranch('gk_result:' + r);
-        playClick();
-        if (r === 'WINDOW') goTo('gatekeeper_window');
-        else if (r === 'DM_ON') goTo('opener_styles');
-        else goTo('gatekeeper_wall');
-      });
-    });
-  };
-
-  SCREENS.gatekeeper_voicemail = () => {
-    const vms = scripts.gatekeeper.types.VOICEMAIL_SYSTEM;
-    renderScreen(html`
-      <div class="screen__eyebrow">Hit voicemail system — leave VM or skip</div>
-      <div class="script-panel">
-        <div class="script-panel__line">${tokenizeHTML(vms.vm_script)}</div>
-      </div>
-      <div class="branches">
-        <button class="branch-btn branch-btn--yellow" data-hotkey="1" data-outcome="NA" data-vm="1">
-          <span class="branch-btn__hotkey">1</span>
-          <span class="branch-btn__label">📱 Left voicemail</span>
-          <span class="branch-btn__sub">Log NA — VM noted in path</span>
-        </button>
-        <button class="branch-btn" data-hotkey="2" data-outcome="NA">
-          <span class="branch-btn__hotkey">2</span>
-          <span class="branch-btn__label">⚫ Hung up — no VM</span>
-          <span class="branch-btn__sub">Log NA</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-outcome]').forEach(b => {
-      b.addEventListener('click', () => { Shell.pushBranch(b.dataset.vm ? 'vm:LEFT_VM' : 'vm:NO_VM'); playClick(); Shell.recordOutcome(b.dataset.outcome); advanceAfterOutcome(b.dataset.outcome); });
-    });
-  };
-
-  SCREENS.gatekeeper_window = () => {
-    renderScreen(html`
-      <div class="screen__eyebrow">Capture the callback window</div>
-      <div class="script-panel">
-        <div class="script-panel__line">Lock it down. Get specific. "Tomorrow at 8" beats "sometime this week".</div>
-      </div>
-      <div class="capture">
-        <label class="capture__label" for="gk-window">Callback window they gave you</label>
-        <input id="gk-window" class="capture__input" type="text" placeholder="e.g. Tomorrow 8 AM" autocomplete="off">
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    const inp = document.querySelector('#gk-window');
-    if (inp) { inp.focus(); inp.addEventListener('input', () => Shell.setCallbackWindow(inp.value)); }
-    Shell.showOutcomes('WARM');
-  };
-
-  SCREENS.gatekeeper_wall = () => {
-    renderScreen(html`
-      <div class="screen__eyebrow">Wall — disengage clean</div>
-      <div class="script-panel">
-        <div class="script-panel__line">"No worries at all. I'll try him another time. Have a good one."</div>
-        <div class="script-panel__line" style="color:var(--color-white-dim);font-size:0.82rem;margin-top:0.5rem;">Move on. Different angle next time — call earlier, or try a text first.</div>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    Shell.showOutcomes('COLD');
-  };
-
-  // -------- TRADE Q2 — the real Section 02 (V2) --------
-  SCREENS.trade_q2 = () => {
-    const trade = Shell.getCurrentTrade();
-    const tq2 = scripts.trade_q2;
-    const block = tq2[trade] || tq2['Unknown'];
-    const universalOffer = tq2._audit_offer_universal || 'Want me to send you a free audit?';
-
-    Shell.pushBranch('trade_q2:' + trade);
-
-    renderScreen(html`
-      <div class="screen__eyebrow">Trade Q2 + Audit Offer · ${escapeHTML(trade)} ${block.notes ? '· <span style="opacity:0.6">' + escapeHTML(block.notes) + '</span>' : ''}</div>
-      <div class="script-panel">
-        <div class="script-panel__line"><b>Q2:</b> ${tokenizeHTML(block.q2_line)}</div>
-        ${block.pain_hook ? `<div class="script-panel__line" style="opacity:0.85"><b>Pain hook (only if they ask why):</b> ${tokenizeHTML(block.pain_hook)}</div>` : ''}
-        <div class="script-panel__line"><b>Audit offer:</b> ${tokenizeHTML(universalOffer)}</div>
-      </div>
-      <div class="screen__heading">How did they respond to the offer?</div>
-      <div class="branches">
-        <button class="branch-btn branch-btn--green" data-hotkey="h" data-q2="HOT">
-          <span class="branch-btn__hotkey">H</span>
-          <span class="branch-btn__label">🟢 YES — Send the audit</span>
-          <span class="branch-btn__sub">They want it. Logs HOT.</span>
-        </button>
-        <button class="branch-btn branch-btn--yellow" data-hotkey="w" data-q2="WARM">
-          <span class="branch-btn__hotkey">W</span>
-          <span class="branch-btn__label">🟡 MAYBE — Want to think</span>
-          <span class="branch-btn__sub">Capture callback / send anyway. Logs WARM.</span>
-        </button>
-        <button class="branch-btn branch-btn--red" data-hotkey="c" data-q2="COLD">
-          <span class="branch-btn__hotkey">C</span>
-          <span class="branch-btn__label">🔴 NO — Not interested</span>
-          <span class="branch-btn__sub">Graceful out. Logs COLD.</span>
-        </button>
-      </div>
-      ${renderNotesBlock()}
-    `);
-    Shell.bindNotes();
-    stage().querySelectorAll('[data-q2]').forEach(b => {
-      b.addEventListener('click', () => {
-        const o = b.dataset.q2;
-        Shell.pushBranch('q2_resp:' + o);
-        playClick();
-        Shell.recordOutcome(o);
-      });
-    });
-  };
-
-  // Legacy fallback (in case someone references old screen id)
-  SCREENS.section_02_placeholder = SCREENS.trade_q2;
 
   // ============================================================
   // WORKSPACE → COCKPIT EVENT BRIDGE

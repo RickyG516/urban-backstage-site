@@ -1,0 +1,71 @@
+{
+  "_comment": "UNC Mockup Reveal Scripts v1 — for prospects we already built a free working homepage mockup for. Every prospect loaded into this cockpit has a mockup_url; the entire script IS the mockup pitch.",
+  "_version": "1.0",
+  "_last_updated": "2026-07-29",
+  "greeting": {
+    "default": "Hey — is {first_name} around?",
+    "no_contact_default": "Hey — is the owner around? Quick call about {business_name}."
+  },
+  "opener": {
+    "word_for_word": {
+      "label": "Word for Word",
+      "shortcut": "W",
+      "script": "Hey {first_name} — {rep_name} calling, Urban Niche Co. Straight up, this is a cold call — but I did more than homework. I actually built {business_name} a free, working homepage. No charge, no catch. Want me to send you the link right now so you can see it?"
+    },
+    "guided": {
+      "label": "Guided",
+      "shortcut": "G",
+      "anchors": [
+        "Say it's a cold call — upfront, always",
+        "Name: {rep_name}, Urban Niche Co.",
+        "\"I built {business_name} a free working homepage\" — this is proof, not a promise",
+        "Ask permission to send the link. That's the whole ask."
+      ]
+    },
+    "freestyle": {
+      "label": "Freestyle",
+      "shortcut": "F",
+      "goal": "Get them to look at the mockup. That's the entire call.",
+      "reminders": [
+        "Lead with the cold call declaration",
+        "The mockup is the hook — you already did the work, that's rare and it lands",
+        "Ask for the best way to send it (text or email), then stop talking"
+      ]
+    },
+    "training_note": "This is the strongest opener in the playbook — you're not selling an idea, you're handing over a finished thing. Say 'I built' not 'I designed a concept' — built means done. Send the link fast, while they're still curious."
+  },
+  "responses": {
+    "YES_SEND_IT": {
+      "label": "Yes — send it over",
+      "script": "Perfect. Best number to text it to, or you want it by email? {mockup_url} — take a look when you get a sec, no pressure. If you like what you see, call me back, or I'll follow up in a couple days.",
+      "default_outcome": "WARM",
+      "training_note": "Get the send method confirmed out loud, then get off the phone. The mockup does the selling from here — don't over-talk it."
+    },
+    "WHY_FREE": {
+      "label": "Why would you do this for free?",
+      "script": "Because I only work with contractors, and most of you don't have a real website to show people — I'd rather hand you something than describe it. Costs you nothing to look. If you hate it, you've lost 30 seconds.",
+      "training_note": "This objection means they're interested but suspicious — normal. Answer it once, plainly, then get back to sending the link."
+    },
+    "ALREADY_HAVE_SITE": {
+      "label": "I already have a website",
+      "script": "Didn't think so when I built this — I do this for guys who don't have one yet. If I've got bad info, tell me your site and I'll take a real look instead. Otherwise, want to see what I built?",
+      "training_note": "Confirm/deny fast, don't get defensive. If they do have a real site, quietly route the rest of this call back to the standard cold-call flow."
+    },
+    "NOT_INTERESTED": {
+      "label": "Not interested",
+      "script": "Fair enough. It's already built and sitting there either way — want the link so it's in your pocket if you change your mind? Zero effort on your end.",
+      "training_note": "The ask costs them nothing, so 'not interested' rarely survives a second, lower-pressure offer of the same thing."
+    },
+    "BUSY_NOW": {
+      "label": "Busy / bad time",
+      "script": "No problem — ten seconds: I built {business_name} a free website mockup, already done. Want me to text you the link so you can look whenever?",
+      "default_outcome": "WARM",
+      "training_note": "Busy is not a no. The ask is small enough to survive almost any 'not now.'"
+    }
+  },
+  "post_reveal_pitch": {
+    "_note": "Use on the FOLLOW-UP call after they've already seen the mockup — this is where 'calling' turns into 'pitching.'",
+    "script": "Hey {first_name} — did you get a chance to look at the mockup I built for {business_name}? That's a preview, not the finished product — I can have the real thing live in about 14 days. Want me to walk you through what that looks like?",
+    "training_note": "If yes, route straight into pitch_30 / trade_specific — the audit_offer becomes a proposal ask instead, since they've already seen proof. Move fast, don't re-sell what already sold them."
+  }
+}

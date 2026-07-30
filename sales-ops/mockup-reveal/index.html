@@ -17,7 +17,7 @@
   <meta name="googlebot" content="noindex, nofollow, noarchive" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <title>Cold Call Cockpit — UNC Sales Ops</title>
+  <title>Mockup Reveal Cockpit — UNC Sales Ops</title>
   <meta name="description" content="Internal sales operations cockpit. Not for public use." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,13 +30,13 @@
 </head>
 <body>
 
-  <main class="cockpit" data-cockpit="cold-call" role="application" aria-label="Cold Call Cockpit">
+  <main class="cockpit" data-cockpit="mockup-reveal" role="application" aria-label="Mockup Reveal Cockpit">
 
     <!-- ===== HUD ===== -->
     <header class="hud" role="banner">
       <div class="hud__brand">
         <a href="/sales-ops/" class="hud__logo" style="text-decoration:none">Urban Niche<span>.</span></a>
-        <div class="hud__cockpit-name">Cold Call · v2</div>
+        <div class="hud__cockpit-name">Mockup Reveal · v1</div>
       </div>
 
       <div class="hud__center">
@@ -53,7 +53,6 @@
           <span id="dial-count" class="hud__stat-value hud__stat-value--accent">0</span>
           <span id="dial-cap"></span>
         </div>
-        <button id="variant-mode" class="variant-mode-btn" data-mode="auto" title="AUTO: opener variants rotate automatically via round-robin&#10;MANUAL: you pick which opener to use each call&#10;Click to toggle">AUTO</button>
       </div>
 
       <div class="hud__right">
@@ -74,7 +73,7 @@
     <!-- ===== STAGE ===== -->
     <div class="main">
       <div class="col-script">
-        <div class="screen-lbl" id="screen-lbl-el">Cold Call</div>
+        <div class="screen-lbl" id="screen-lbl-el">Mockup Reveal</div>
         <section id="screen-stage" class="screen active" data-screen="start" aria-live="polite">
           <div class="script-panel"><div class="script-panel__line">Loading cockpit…</div></div>
         </section>
@@ -123,7 +122,7 @@
           <div class="sync-modal__instructions">
             <b>1.</b> Click <b>Copy to clipboard</b>. &nbsp; <b>2.</b> Open the Cowork browser extension. &nbsp; <b>3.</b> Paste and run. &nbsp; <b>4.</b> When Cowork finishes, come back and click <b>Mark all synced</b> to clear the queue.
             <br><br>
-            Every captured field is in the command: outcome, duration, branch path, opener variant, notes verbatim, callback window, follow-up task timing, custom property updates, pipeline stage move. Nothing dropped.
+            Every captured field is in the command: outcome, duration, branch path, notes verbatim, callback window, follow-up task timing, custom property updates, pipeline stage move. Nothing dropped.
           </div>
           <textarea id="sync-text" class="sync-modal__text" readonly aria-label="Cowork command"></textarea>
         </div>
@@ -142,7 +141,7 @@
 
   <script src="/sales-ops/shared/nav-shell.js?v=39" defer></script>
   <script src="/sales-ops/shared/cockpit-shell.js?v=50" defer></script>
-  <script src="/sales-ops/cold-call/content.js?v=52" defer></script>
+  <script src="/sales-ops/mockup-reveal/content.js?v=1" defer></script>
   <script src="/sales-ops/shared/unc-key.js"></script>
 </body>
 </html>
