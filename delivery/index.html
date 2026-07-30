@@ -33,9 +33,9 @@
   </div>
 
   <div class="cards" id="score">
-    <div class="card crit"><div class="label">Overdue</div><div class="val">·</div></div>
+    <div class="card crit"><div class="label">Overdue — Delivery</div><div class="val">·</div></div>
+    <div class="card crit"><div class="label">Overdue — Everything</div><div class="val">·</div></div>
     <div class="card orange"><div class="label">Due ≤ 2 Days</div><div class="val">·</div></div>
-    <div class="card"><div class="label">Open Delivery</div><div class="val">·</div></div>
     <div class="card"><div class="label">All Open Tasks</div><div class="val">·</div></div>
   </div>
   <div class="stamp" id="stamp"></div>
@@ -45,6 +45,9 @@
 
   <p class="section-label">Queue by Client <span class="note">most at-risk first</span></p>
   <div id="queue"><div class="loading">Loading delivery queue</div></div>
+
+  <p class="section-label">Overdue Everywhere Else <span class="note">open tasks past due that are not tagged [DELIVERY]</span></p>
+  <div id="other"><div class="loading">Loading</div></div>
 </div>
 
 <script src="/sales-ops/shared/unc-key.js"></script>
@@ -62,13 +65,35 @@
 
   BS.api('/delivery').then(function(d){
     var t = d.totals;
+    // Show BOTH overdue numbers. Reporting only the [DELIVERY]-tagged count is
+    // technically correct and practically a lie — it said "3" when 24 tasks
+    // were past due, and the other 21 were nowhere on the page.
     BS.el('score').innerHTML =
-      card(t.delivery_overdue ? 'crit' : 'good','Overdue', BS.num(t.delivery_overdue),
-           t.delivery_overdue ? 'clear these first' : 'nothing late') +
+      card(t.delivery_overdue ? 'crit' : 'good','Overdue — Delivery', BS.num(t.delivery_overdue),
+           t.delivery_overdue ? 'client-facing work, clear first' : 'nothing late') +
+      card(t.all_overdue ? 'crit' : 'good','Overdue — Everything', BS.num(t.all_overdue),
+           t.other_overdue + ' of these are not delivery work') +
       card('orange','Due ≤ 2 Days', BS.num(t.delivery_soon), 'closing window') +
-      card('','Open Delivery', BS.num(t.delivery_open), 'tagged [DELIVERY]') +
-      card('','All Open Tasks', BS.num(t.all_open_tasks), t.all_overdue + ' overdue overall');
+      card('','All Open Tasks', BS.num(t.all_open_tasks), t.delivery_open + ' tagged [DELIVERY]');
     BS.stamp('stamp', d.fetched_at);
+
+    // ── everything else that is overdue ─────────────────────────────────
+    var other = d.other_overdue || [];
+    if (!other.length) {
+      BS.empty('other','No overdue tasks outside delivery work.');
+    } else {
+      BS.el('other').innerHTML =
+        '<div class="panel"><div class="tbl-scroll"><table class="tbl"><thead><tr>' +
+        '<th>Task</th><th>Type</th><th class="num">Overdue by</th></tr></thead><tbody>' +
+        other.map(function(tk){
+          return '<tr><td class="name">' + E(tk.subject) + '</td>' +
+            '<td><span class="badge">' + E((tk.type||'task').toLowerCase()) + '</span></td>' +
+            '<td class="num"><span class="badge crit">' + Math.abs(tk.days_until) + 'd</span></td></tr>';
+        }).join('') + '</tbody></table></div>' +
+        (t.other_overdue > other.length
+          ? '<div style="padding:10px 14px;font-size:11.5px;color:#555">Showing ' + other.length +
+            ' of ' + t.other_overdue + '.</div>' : '') + '</div>';
+    }
 
     if (!d.groups.length) {
       BS.empty('queue',
@@ -99,7 +124,7 @@
             '<td class="num"><span class="badge ' + b + '">' + E(BS.dueLabel(tk.days_until)) + '</span></td></tr>';
         }).join('') + '</tbody></table></div></div>';
     }).join('');
-  }).catch(function(e){ BS.fail('queue', e); });
+  }).catch(function(e){ BS.fail('queue', e); BS.fail('other', e); });
 
   function card(cls,label,val,sub){
     return '<div class="card ' + cls + '"><div class="label">' + E(label) + '</div>' +
