@@ -1180,6 +1180,11 @@ function bsShapeDeal(d) {
     modified:      p.hs_lastmodifieddate || '',
     days_idle:     bsDays(p.hs_lastmodifieddate),
     days_in_stage: bsDays(p.hs_date_entered_current_stage || p.hs_lastmodifieddate),
+    contract_end:  p.contract_end_date || '',
+    term_months:   p.contract_term_months || '',
+    // Negative = days remaining. bsDays() counts elapsed time, so a future
+    // contract end returns a negative number; flip it for readability.
+    days_to_renewal: p.contract_end_date ? -bsDays(p.contract_end_date) : null,
     hubspot_url:   bsDealUrl(d.id)
   };
 }
@@ -1187,7 +1192,8 @@ function bsShapeDeal(d) {
 const BS_DEAL_PROPS = [
   'dealname', 'dealstage', 'pipeline', 'amount', 'deal_currency_code',
   'closedate', 'createdate', 'hs_lastmodifieddate', 'hubspot_owner_id',
-  'unc_revenue_type', 'hs_date_entered_current_stage'
+  'unc_revenue_type', 'hs_date_entered_current_stage',
+  'contract_end_date', 'contract_term_months'
 ];
 
 // HubSpot burst-limits a portal to a handful of searches per second. The
@@ -1978,15 +1984,20 @@ export default {
         const groups = Object.keys(byClient).map(k => byClient[k])
           .sort((a, b) => (b.overdue - a.overdue) || (b.due_soon - a.due_soon) || (b.tasks.length - a.tasks.length));
 
+        const otherOverdue = all.filter(t => !t.is_delivery && t.overdue)
+          .sort((a, b) => (a.days_until || 0) - (b.days_until || 0));
+
         return jsonResp({
           ok: true,
           groups,
+          other_overdue: otherOverdue.slice(0, 60),
           totals: {
             delivery_open:    delivery.length,
             delivery_overdue: delivery.filter(t => t.overdue).length,
             delivery_soon:    delivery.filter(t => t.due_soon).length,
             all_open_tasks:   all.length,
-            all_overdue:      all.filter(t => t.overdue).length
+            all_overdue:      all.filter(t => t.overdue).length,
+            other_overdue:    otherOverdue.length
           },
           fetched_at: new Date().toISOString()
         }, 200, cors);
@@ -2176,6 +2187,46 @@ export default {
                   : 'No [DELIVERY] tasks in HubSpot. Either work is done or it was never scheduled.',
             dOpen + ' open',
             dOpen ? 'Stay ahead of it.' : 'Run delivery-scheduler for active clients so the work is tracked.');
+        }
+
+        // 5b. RENEWAL CLIFF — the most consequential date in the business.
+        // Concentration tells you the risk exists. This tells you when it lands.
+        // A retainer with no recorded end date is itself the finding: the date
+        // 100% of recurring revenue stops exists only in someone's memory.
+        const retainers = real.filter(d => d.stage_id === 'closedwon' &&
+          (d.revenue_type === 'retainer_y1' || d.revenue_type === 'retainer_y2'));
+        const dated   = retainers.filter(d => d.days_to_renewal !== null);
+        const undated = retainers.filter(d => d.days_to_renewal === null);
+
+        if (dated.length) {
+          const soonest = dated.sort((a, b) => a.days_to_renewal - b.days_to_renewal)[0];
+          const dleft   = soonest.days_to_renewal;
+          const share   = mrr > 0 ? Math.round((soonest.amount / mrr) * 100) : 0;
+          if (dleft < 0) {
+            S('critical', 'renewal', 'A retainer term has already ended',
+              bsClientName(soonest.name) + ' passed its contract end date ' + Math.abs(dleft) +
+              ' days ago and nothing has been recorded since. That is ' + share + '% of MRR in limbo.',
+              Math.abs(dleft) + 'd past', 'Confirm renewal in writing today, or move it to Closed Lost and stop counting the revenue.');
+          } else if (dleft <= 45) {
+            S('critical', 'renewal', 'Revenue cliff in ' + dleft + ' days',
+              bsClientName(soonest.name) + ' — ' + share + '% of MRR — reaches contract end on ' +
+              String(soonest.contract_end).slice(0, 10) + '. Renewal conversations that start in the final ' +
+              'two weeks are negotiations from weakness. Start now, while the work is still fresh.',
+              dleft + 'd left', 'Book the renewal conversation this week. Bring the results, not the invoice.');
+          } else {
+            S('good', 'renewal', 'Renewal runway is healthy',
+              'Nearest contract end is ' + dleft + ' days out (' + bsClientName(soonest.name) + ').',
+              dleft + 'd left', 'Diarise the conversation for 45 days out.');
+          }
+        }
+        if (undated.length) {
+          S('warn', 'renewal_unknown', 'Retainer has no recorded end date',
+            undated.length + ' active retainer' + (undated.length === 1 ? '' : 's') + ' (' +
+            undated.map(d => bsClientName(d.name)).join(', ') + ') carry no contract_end_date. ' +
+            'The date your recurring revenue stops is not in any system this dashboard can read — ' +
+            'it exists only in a document or in your head, which means nothing can warn you as it approaches.',
+            undated.length + ' undated',
+            'Set contract_end_date and contract_term_months on the deal. Then this page counts down for you.');
         }
 
         // 6. Unpriced wins — $0 Closed Won deals make MRR and lifetime value lie.
