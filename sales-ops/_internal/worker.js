@@ -1316,6 +1316,49 @@ function bsSocial(p) {
   return out;
 }
 
+
+// Look up ONLY the companies matching the client names we actually care about.
+// Bulk-pulling and matching locally does not scale — this portal has 1,348
+// company records, so any fixed page window silently misses real clients and
+// every card reads "no company record". Cost here scales with client count
+// (one search per 5 clients), not with portal size.
+function bsSearchToken(name) {
+  const parts = String(name || '').split(/[^A-Za-z0-9]+/).filter(Boolean);
+  for (const w of parts) if (w.length >= 3) return w;
+  return parts[0] || '';
+}
+async function bsCompaniesForNames(names, token) {
+  const toks = [];
+  for (const n of names) {
+    const t = bsSearchToken(n);
+    if (t && t.length >= 3 && toks.indexOf(t) === -1) toks.push(t);
+  }
+  const out = [];
+  for (let i = 0; i < toks.length; i += 5) {          // HubSpot caps filterGroups at 5
+    const chunk = toks.slice(i, i + 5);
+    const r = await bsHs('/crm/v3/objects/companies/search', 'POST', {
+      filterGroups: chunk.map(t => ({ filters: [
+        { propertyName: 'name', operator: 'CONTAINS_TOKEN', value: t }
+      ]})),
+      properties: BS_COMPANY_PROPS,
+      limit: 100
+    }, token);
+    if (r.ok && r.data) out.push.apply(out, r.data.results || []);
+  }
+  return out;
+}
+
+// Names of every client that has actually paid — the only companies worth fetching.
+function bsWonClientNames(dealsShaped) {
+  const seen = [];
+  for (const d of dealsShaped) {
+    if (d.stage_id !== 'closedwon') continue;
+    const n = bsClientName(d.name);
+    if (n && seen.indexOf(n) === -1) seen.push(n);
+  }
+  return seen;
+}
+
 // ── ROSTER BUILDER ──────────────────────────────────────────────────────────
 // Groups closed-won deals into one row per client and attaches the matching
 // company record (matched on a punctuation/suffix-stripped name) for socials.
@@ -1848,12 +1891,10 @@ export default {
     if (request.method === 'GET' && url.pathname === '/clients') {
       try {
         if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
-        const [rawDeals, companies] = await Promise.all([
-          bsAllDeals(token, 6),
-          bsAllCompanies(token, 3)
-        ]);
-        const real   = bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
-        const roster = bsBuildRoster(real, companies);
+        const rawDeals = await bsAllDeals(token, 6);
+        const real      = bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
+        const companies = await bsCompaniesForNames(bsWonClientNames(real), token);
+        const roster    = bsBuildRoster(real, companies);
 
         // Attach open delivery work per client so a card can show live status
         // without the page having to cross-reference two endpoints itself.
@@ -2004,10 +2045,10 @@ export default {
       try {
         if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
 
-        const [rawDeals, companies] = await Promise.all([
-          bsAllDeals(token, 6),
-          bsAllCompanies(token, 3)
-        ]);
+        const rawDeals  = await bsAllDeals(token, 6);
+        const companies = await bsCompaniesForNames(
+          bsWonClientNames(bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal))),
+          token);
         let tasks = [], tasksOk = true;
         try { tasks = (await bsOpenTasks(token, 3)).map(bsShapeTask); }
         catch (e) { tasks = []; tasksOk = false; }
