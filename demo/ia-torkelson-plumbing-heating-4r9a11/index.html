@@ -1,3 +1,4 @@
+<!-- style-pack: P15 | trade: hvac | accent: #37afd2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +7,14 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Torkelson Plumbing &amp; Heating | Forest City, Iowa Plumbing &amp; HVAC</title>
 <meta name="description" content="Torkelson Plumbing &amp; Heating provides residential and commercial plumbing and HVAC service to Forest City, Iowa and the surrounding Winnebago County area.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
 <style>
   :root{
-    --dark:#1b2a3d;
+    --dark:#1b2026;
     --dark-2:#233a54;
-    --accent:#3fae6a;
-    --accent-dark:#2f8a52;
+    --accent:#37afd2;
+    --accent-dark:#37afd2;
     --light:#f4f7f6;
     --white:#ffffff;
   }
@@ -23,7 +24,7 @@
   html{scroll-behavior:smooth;}
 
   body{
-    font-family:'Open Sans', sans-serif;
+    font-family:'Inter',sans-serif;
     font-weight:400;
     color:var(--dark);
     background:var(--light);
@@ -31,7 +32,7 @@
   }
 
   h1,h2,h3,h4{
-    font-family:'Oswald', sans-serif;
+    font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     letter-spacing:0.5px;
     color:var(--dark);
@@ -116,7 +117,7 @@
     display:inline-block;
     background:var(--accent);
     color:var(--white);
-    font-family:'Oswald', sans-serif;
+    font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:1px;
@@ -251,7 +252,7 @@
     color:var(--white);
     padding:10px 22px;
     border-radius:30px;
-    font-family:'Oswald', sans-serif;
+    font-family:'Space Grotesk',sans-serif;
     font-size:0.95rem;
     letter-spacing:0.5px;
   }
@@ -345,7 +346,7 @@
     padding:16px 26px;
     border-radius:6px;
     text-decoration:none;
-    font-family:'Oswald', sans-serif;
+    font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     font-size:1.15rem;
     letter-spacing:0.5px;
@@ -383,7 +384,7 @@
     margin-bottom:20px;
     border:1px solid #cfd8de;
     border-radius:5px;
-    font-family:'Open Sans', sans-serif;
+    font-family:'Inter',sans-serif;
     font-size:0.95rem;
     background:var(--light);
     color:var(--dark);
@@ -423,7 +424,7 @@
   }
 
   footer .biz{
-    font-family:'Oswald', sans-serif;
+    font-family:'Space Grotesk',sans-serif;
     color:var(--white);
     font-size:1.1rem;
     letter-spacing:0.5px;
@@ -446,7 +447,7 @@
     padding:7px 12px;
     border-radius:5px;
     z-index:9999;
-    font-family:'Open Sans', sans-serif;
+    font-family:'Inter',sans-serif;
     letter-spacing:0.2px;
     pointer-events:none;
     box-shadow:0 2px 8px rgba(0,0,0,0.25);
@@ -466,8 +467,63 @@
     .contact-info, .contact-form{padding:26px;}
   }
 </style>
-</head>
-<body>
+<style>
+.unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
+gap:1rem;padding:.7rem 1.4rem;background:#1b2026;border-bottom:2px solid #37afd2}
+.unc-mark{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;letter-spacing:.02em;color:#fff;text-decoration:none}
+.unc-navlinks{display:flex;align-items:center;gap:1.3rem}
+.unc-navlinks a{color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:.95rem}
+.unc-navcall{background:#37afd2;color:#1b2026!important;padding:.5rem .95rem;border-radius:4px;font-weight:700}
+.unc-faq{padding:4rem 1.4rem;background:#1b2026;color:#fff}
+.unc-faq h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;margin-bottom:1.6rem}
+.unc-wrap{max-width:820px;margin:0 auto}
+.unc-q{border-bottom:1px solid rgba(255,255,255,.16);padding:1rem 0}
+.unc-q summary{cursor:pointer;font-weight:700;font-family:'Inter',sans-serif;font-size:1.03rem}
+.unc-q p{margin:.7rem 0 0;opacity:.85;line-height:1.6}
+.unc-formsec{padding:4rem 1.4rem;background:#a5e4ef}
+.unc-formsec h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;margin-bottom:1.3rem;color:#1b2026}
+.unc-form{display:grid;gap:.8rem;max-width:520px}
+.unc-form input,.unc-form textarea{padding:.85rem;border:1px solid rgba(0,0,0,.25);border-radius:4px;
+font-family:'Inter',sans-serif;font-size:1rem}
+.unc-form button{background:#1b2026;color:#fff;border:0;padding:.95rem;border-radius:4px;
+font-family:'Space Grotesk',sans-serif;font-size:1.1rem;cursor:pointer}
+.unc-sticky{display:none}
+#unc-kobe{position:fixed;right:18px;bottom:18px;z-index:950;font-family:'Inter',sans-serif}
+#unc-kobe-btn{background:#37afd2;color:#1b2026;border:0;border-radius:30px;padding:.8rem 1.4rem;
+font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+#unc-kobe-panel{position:absolute;right:0;bottom:56px;width:290px;background:#fff;border-radius:10px;
+overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
+#unc-kobe-head{background:#1b2026;color:#fff;padding:.75rem 1rem;font-weight:700}
+#unc-kobe-body{padding:.85rem;max-height:230px;overflow-y:auto}
+.unc-kobe-msg{background:#eef0f2;padding:.6rem .8rem;border-radius:8px;margin:0 0 .55rem;font-size:.9rem}
+.unc-kobe-you{background:#a5e4ef;text-align:right}
+#unc-kobe-form{display:flex;border-top:1px solid #e2e5e8}
+#unc-kobe-form input{flex:1;border:0;padding:.7rem;font-size:.9rem}
+#unc-kobe-form button{border:0;background:#37afd2;color:#1b2026;padding:0 1rem;font-weight:700;cursor:pointer}
+@media(max-width:768px){
+ .unc-navlinks a:not(.unc-navcall){display:none}
+ .unc-sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:940;background:#37afd2;
+ color:#1b2026;text-align:center;padding:.95rem;font-weight:800;text-decoration:none;
+ font-family:'Space Grotesk',sans-serif;font-size:1.1rem}
+ body{padding-bottom:3.4rem}
+ #unc-kobe{bottom:64px}
+}
+@media print{
+ .unc-nav{position:static} .unc-sticky,#unc-kobe{display:none!important}
+ section,.unc-q,img,.card{break-inside:avoid}
+}
+</style><style>
+@media print{[class*=reveal]{opacity:1!important;transform:none!important;filter:none!important}}
+.unc-forced{opacity:1!important;transform:none!important;filter:none!important}
+</style>
+<script>(function(){
+ function showAll(){document.querySelectorAll('[class*=reveal]').forEach(function(e){e.classList.add('unc-forced')});}
+ window.addEventListener('beforeprint',showAll);
+ if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
+ setTimeout(showAll,2500);
+ document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style></head>
+<body><nav class="unc-nav"><a href="#" class="unc-mark">Torkelson Plumbing & Heating</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+16415855445" class="unc-navcall">(641) 585-5445</a></div></nav>
 
   <!-- HERO -->
   <header class="hero">
@@ -561,7 +617,7 @@
   <section class="service-area">
     <div class="container">
       <div class="section-heading reveal">
-        <h2>Proudly Serving North-Central Iowa</h2>
+        <h2>We Cover North-Central Iowa</h2>
         <div class="rule"></div>
         <p>Based in Forest City, serving Winnebago County and the surrounding communities.</p>
       </div>
@@ -628,7 +684,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="contact" id="contact">
+  <section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>How often should I service my system?</summary><p>Once a year for heating, once for cooling. Catching a small problem in the fall beats a no-heat call in January.</p></details><details class="unc-q"><summary>Do you handle emergency calls?</summary><p>Yes. If your heat is out in the middle of winter, call us — we'll get to you.</p></details><details class="unc-q"><summary>How long does a system last?</summary><p>Most furnaces run 15-20 years, AC units 12-15. If yours is in that range and needing repairs, it's worth pricing a replacement.</p></details><details class="unc-q"><summary>Do you offer financing?</summary><p>Ask us — we'll walk you through the options on a full system replacement.</p></details></div></section><section class="contact" id="contact">
     <div class="container">
       <div class="section-heading reveal">
         <h2>Get In Touch</h2>
@@ -704,5 +760,5 @@
     })();
   </script>
 
-</body>
+<a class="unc-sticky" href="tel:+16415855445">Call (641) 585-5445</a><div id="unc-kobe"><button id="unc-kobe-btn" aria-label="Chat with us">Chat</button><div id="unc-kobe-panel" hidden><div id="unc-kobe-head">Chat with us</div><div id="unc-kobe-body"><p class="unc-kobe-msg">Hi — thanks for stopping by Torkelson Plumbing & Heating. What can we help you with?</p></div><form id="unc-kobe-form"><input placeholder="Type a message" aria-label="Message"><button>Send</button></form></div></div><script>(function(){var b=document.getElementById("unc-kobe-btn"),p=document.getElementById("unc-kobe-panel");b.onclick=function(){p.hidden=!p.hidden};document.getElementById("unc-kobe-form").onsubmit=function(e){e.preventDefault();var i=this.querySelector("input"),d=document.getElementById("unc-kobe-body");if(!i.value.trim())return;var u=document.createElement("p");u.className="unc-kobe-msg unc-kobe-you";u.textContent=i.value;d.appendChild(u);i.value="";var r=document.createElement("p");r.className="unc-kobe-msg";r.textContent="Thanks — we'll get right back to you. For anything urgent, give us a call.";setTimeout(function(){d.appendChild(r);d.scrollTop=d.scrollHeight},600)}})();</script></body>
 </html>
