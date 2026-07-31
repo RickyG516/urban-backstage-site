@@ -35,6 +35,12 @@ a{text-decoration:none;color:inherit}
   transition:color .12s,background .12s}
 .ub-links a:hover{color:var(--white);background:var(--charcoal)}
 .ub-links a.active{color:var(--orange);background:rgba(227,107,30,.12)}
+/* Carried over from the original playbook/demo nav so every page reads the same.
+   Worth keeping: this domain IS publicly reachable, just noindexed — the badge
+   is the reminder not to put anything here you'd mind a competitor reading. */
+.ub-flag{margin-left:auto;font-size:10px;letter-spacing:.12em;color:#5a5a5a;
+  border:1px solid #2a2a2a;padding:4px 10px;border-radius:99px;white-space:nowrap}
+@media(max-width:900px){.ub-flag{display:none}}
 
 /* ── layout ──────────────────────────────────────────────────────────── */
 .wrap{max-width:1240px;margin:0 auto;padding:0 28px 72px}
