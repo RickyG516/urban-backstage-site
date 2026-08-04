@@ -233,10 +233,26 @@
   const toggleBtn = document.getElementById('toggleArchived');
   const emptyState = document.getElementById('emptyState');
   const ARCHIVE_KEY = 'unc_demo_archived';
+  const UNARCHIVE_KEY = 'unc_demo_unarchived';
   let showArchived = false;
 
+  /* Archived in the repo, not just in one browser's localStorage. These are off the
+     active list on every device and survive a cache wipe. Reason for each is recorded
+     in demo/status.json. Hitting Unarchive still works and is remembered per browser. */
+  const DEFAULT_ARCHIVED = [
+    "/demo/il-blondell-plumbing-moline/",
+    "/demo/ia-vogel-irrigation-waterloo/",
+    "/demo/ia-lewis-electric-sioux-city/",
+    "/demo/wi-midwest-home-improvements-eau-claire/",
+    "/demo/il-toonco-painting-collinsville/"
+  ];
+
+  window.DEMO_ARCHIVED_SLUGS = DEFAULT_ARCHIVED.map(function(s){ return s.replace(/^\/demo\/|\/$/g,''); });
+  function readList(k) { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch(e) { return []; } }
   function getArchived() {
-    try { return JSON.parse(localStorage.getItem(ARCHIVE_KEY) || '[]'); } catch(e) { return []; }
+    var local = readList(ARCHIVE_KEY), un = readList(UNARCHIVE_KEY), out = local.slice();
+    DEFAULT_ARCHIVED.forEach(function(s){ if (un.indexOf(s) === -1 && out.indexOf(s) === -1) out.push(s); });
+    return out;
   }
   function saveArchived(arr) { localStorage.setItem(ARCHIVE_KEY, JSON.stringify(arr)); }
 
@@ -254,11 +270,17 @@
   });
 
   function toggleArchive(row) {
-    const archived = getArchived();
     const slug = row.dataset.slug;
-    const idx = archived.indexOf(slug);
-    if (idx === -1) archived.push(slug); else archived.splice(idx, 1);
-    saveArchived(archived);
+    var local = readList(ARCHIVE_KEY), un = readList(UNARCHIVE_KEY);
+    if (getArchived().indexOf(slug) !== -1) {
+      local = local.filter(function(s){ return s !== slug; });
+      if (DEFAULT_ARCHIVED.indexOf(slug) !== -1 && un.indexOf(slug) === -1) un.push(slug);
+    } else {
+      if (local.indexOf(slug) === -1) local.push(slug);
+      un = un.filter(function(s){ return s !== slug; });
+    }
+    localStorage.setItem(ARCHIVE_KEY, JSON.stringify(local));
+    localStorage.setItem(UNARCHIVE_KEY, JSON.stringify(un));
     applyFilters();
   }
 
@@ -367,7 +389,9 @@
     /* live tally next to the key */
     var tally = document.createElement('div');
     tally.style.cssText='margin-top:6px;color:#9a9a9a;font-size:.76rem';
-    var vals = Object.keys(ST).map(function(k){return ST[k]});
+    var vals = Object.keys(ST).filter(function(k){
+      return (window.DEMO_ARCHIVED_SLUGS||[]).indexOf(k) === -1;
+    }).map(function(k){return ST[k]});
     tally.innerHTML = '<b style="color:#e36b1e">'+vals.filter(function(v){return v.ready}).length+'</b> ready · '
       + vals.filter(function(v){return !v.ready}).length+' need work · '
       + vals.filter(function(v){return v.channel==='fb'}).length+' with Facebook · '
