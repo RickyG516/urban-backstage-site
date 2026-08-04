@@ -63,9 +63,7 @@
     position: absolute;
     inset: -10%;
     background:
-      radial-gradient(circle at 30% 20%, rgba(201,161,90,0.28), transparent 55%),
-      repeating-linear-gradient(115deg, #3a2c20 0px, #3a2c20 42px, #34281e 42px, #34281e 84px),
-      linear-gradient(160deg, #241a13 0%, #2c211a 45%, #3a2c1f 100%);
+      radial-gradient(circle at 30% 20%, rgba(201,161,90,0.28), transparent 55%);
     background-size: 160% 160%, 300px 300px, 100% 100%;
     animation: kenburns 26s ease-in-out infinite alternate;
     opacity: 0.95;
@@ -530,6 +528,12 @@
     .contact-info { padding: 26px; }
     .preview-flag { font-size: 0.64rem; padding: 6px 9px; right: 8px; bottom: 8px; }
   }
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -586,11 +590,24 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav):not(.hero),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav):not(.hero),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#241d17}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#241d17;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #be7148;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(255,255,255,.04)}
+.unc-galnote strong{color:#be7148}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body><nav class="unc-nav"><a href="#" class="unc-mark">De Ronde Flooring Inc</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+16416608060" class="unc-navcall">(641) 660-8060</a></div></nav>
 
 <!-- HERO -->
 <header class="hero">
+  <img class="hero-photo" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn9APdBtIkf3W5jtJH3VlETHFqaUcz9rxlDJpOB3U0jdbnpwEUFm7biIKVaSotJWqTHFtAgReDmJ50jHQP9RGKxboPWL474rE7w4YC5yh5ARb6zaGc1BJ0mR88g5hHV0BhoJZ39=w1600-h1200" alt="Job photo from De Ronde Flooring, Inc.">
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Pella, Iowa Flooring Contractor</div>
@@ -748,7 +765,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
 </section>
 
 <!-- CONTACT -->
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn9APdBtIkf3W5jtJH3VlETHFqaUcz9rxlDJpOB3U0jdbnpwEUFm7biIKVaSotJWqTHFtAgReDmJ50jHQP9RGKxboPWL474rE7w4YC5yh5ARb6zaGc1BJ0mR88g5hHV0BhoJZ39=w1600-h1200" loading="lazy" alt="flooring work"></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnYyLyk1CIJy94nfR-iJb3xPmJ2Q6fZ7DZAnFjv6pcfomONko6tAqoitTENw1lONdmyZhl7fM3rUSYibFu9CJDaZUv7K6fKBIB-5d3f0BAT62LJesJjYvQrHhSmF128Hr0FiHE=w1600-h1200" loading="lazy" alt="flooring work"></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk_WxgIH7QEJ73N8Hb6Hk77JVtRJ-4ji0yM45nOPzmQ9mnSy__Srtst2lVSNDCw0Toi8KLsxbfvBKsaRmUgXfjZTKvdKzv2g0ZE6DzegQMdbhJApC5hWQpbA__UBmOBlnm5DAGs-0k3hhxe=w1600-h1200" loading="lazy" alt="flooring work"></figure><figure><img src="https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="flooring work"></figure></div><p class="unc-galnote">3 photos from your Google Business Profile — the rest is placeholder layout. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What flooring holds up best with pets and kids?</summary><p>Luxury vinyl plank, usually. We'll walk you through the tradeoffs on each material.</p></details><details class="unc-q"><summary>Do you move the furniture?</summary><p>Yes, that's part of the job. We'll talk through anything oversized ahead of time.</p></details><details class="unc-q"><summary>How long does an install take?</summary><p>Most rooms are a one to two day job. Full-house runs about a week.</p></details><details class="unc-q"><summary>Do you remove the old flooring?</summary><p>Yes — tear-out and disposal are included in the quote.</p></details></div></section><section class="contact" id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnYyLyk1CIJy94nfR-iJb3xPmJ2Q6fZ7DZAnFjv6pcfomONko6tAqoitTENw1lONdmyZhl7fM3rUSYibFu9CJDaZUv7K6fKBIB-5d3f0BAT62LJesJjYvQrHhSmF128Hr0FiHE=w1600-h1200" loading="lazy" alt="Job photo from de ronde flooring mf5xka"><figcaption><strong>From their own profile</strong>Pulled off their Google listing.</figcaption></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk_WxgIH7QEJ73N8Hb6Hk77JVtRJ-4ji0yM45nOPzmQ9mnSy__Srtst2lVSNDCw0Toi8KLsxbfvBKsaRmUgXfjZTKvdKzv2g0ZE6DzegQMdbhJApC5hWQpbA__UBmOBlnm5DAGs-0k3hhxe=w1600-h1200" loading="lazy" alt="Job photo from de ronde flooring mf5xka"><figcaption><strong>From their own profile</strong>Pulled off their Google listing.</figcaption></figure><figure><img src="motion.svg" loading="lazy" alt="flooring process animation"><figcaption><strong>Laid to a stagger</strong>Joints offset row to row so the floor reads as one piece.</figcaption></figure></div><p class="unc-galnote"><strong>This is where your job photos go.</strong> Send whatever you&rsquo;ve got &mdash; trucks, crews, before and afters &mdash; and they&rsquo;re on the page the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What flooring holds up best with pets and kids?</summary><p>Luxury vinyl plank, usually. We'll walk you through the tradeoffs on each material.</p></details><details class="unc-q"><summary>Do you move the furniture?</summary><p>Yes, that's part of the job. We'll talk through anything oversized ahead of time.</p></details><details class="unc-q"><summary>How long does an install take?</summary><p>Most rooms are a one to two day job. Full-house runs about a week.</p></details><details class="unc-q"><summary>Do you remove the old flooring?</summary><p>Yes — tear-out and disposal are included in the quote.</p></details></div></section><section class="contact" id="contact">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-tag">Get In Touch</div>

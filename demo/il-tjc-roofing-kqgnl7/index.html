@@ -43,8 +43,7 @@
     position:absolute;
     inset:0;
     background:
-      linear-gradient(135deg, rgba(15,21,28,0.88), rgba(27,37,48,0.72)),
-      repeating-linear-gradient(45deg, #232f3b 0px, #232f3b 40px, #1b2530 40px, #1b2530 80px);
+      linear-gradient(135deg, rgba(15,21,28,0.88), rgba(27,37,48,0.72));
     animation:kenburns 18s ease-in-out infinite alternate;
   }
   @keyframes kenburns{
@@ -258,6 +257,12 @@
     .contact-wrap{grid-template-columns:1fr;}
     .topbar{padding:20px;}
   }
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -314,10 +319,23 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#141518}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#141518;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #c34231;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(255,255,255,.04)}
+.unc-galnote strong{color:#c34231}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body><nav class="unc-nav"><a href="#" class="unc-mark">TJC Roofing</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+17087721604" class="unc-navcall">(708) 772-1604</a></div></nav>
 
 <div class="hero">
+  <img class="hero-photo" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmoAOyDKUnadEylWIP6USTth36NwXaJ1jlWcaHR09MaLWkKRrIcwNkjxFU2qBV4ZYjdw6H38Loc2qcltQLC_HwFwXMczITH9Cbr9deBHhWjA-Cs5vguW04ZDpGmYQYv5h1lt76jFlagmV35=w1600-h1200" alt="Job photo from TJC Roofing">
   <div class="hero-bg"></div>
   <div class="topbar">
     <div class="brand">TJC <span>ROOFING</span></div>
@@ -430,7 +448,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </div>
 </section>
 
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>Recent work</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmoAOyDKUnadEylWIP6USTth36NwXaJ1jlWcaHR09MaLWkKRrIcwNkjxFU2qBV4ZYjdw6H38Loc2qcltQLC_HwFwXMczITH9Cbr9deBHhWjA-Cs5vguW04ZDpGmYQYv5h1lt76jFlagmV35=w1600-h1200" loading="lazy" alt="roofing work"></figure><figure><img src="https://images.unsplash.com/photo-1633759593085-1eaeb724fc88?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="roofing work"></figure><figure><img src="https://images.unsplash.com/photo-1635424709845-3a85ad5e1f5e?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="roofing work"></figure><figure><img src="https://images.unsplash.com/photo-1635424824849-1b09bdcc55b1?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="roofing work"></figure></div><p class="unc-galnote">Preview layout — GBP photos. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>How do I know if I need a full replacement or just a repair?</summary><p>We'll get up there and tell you straight. Plenty of roofs we look at need a repair, not a replacement — we'll say so.</p></details><details class="unc-q"><summary>Do you work with insurance claims?</summary><p>Yes. Storm damage claims are a big part of what we do, and we'll walk the adjuster through it with you.</p></details><details class="unc-q"><summary>How long does a typical roof take?</summary><p>Most residential roofs are a one to two day job once materials are on site.</p></details><details class="unc-q"><summary>Do you offer a warranty?</summary><p>Yes — on both materials and our workmanship. We'll put the terms in writing before we start.</p></details></div></section><section class="contact-section" id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>Recent work</h2><div class="unc-grid"><figure><img src="motion.svg" loading="lazy" alt="roofing process animation"><figcaption><strong>Every roof, same order</strong>Deck, underlayment, courses up, ridge cap last.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service area radius"><figcaption><strong>Based in Homewood</strong>IL and the surrounding towns.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Service pattern"><figcaption><strong>Tear-off and re-roof</strong>Old layers off before anything new goes down.</figcaption></figure></div><p class="unc-galnote"><strong>This is where your job photos go.</strong> Send whatever you&rsquo;ve got &mdash; trucks, crews, before and afters &mdash; and they&rsquo;re on the page the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>How do I know if I need a full replacement or just a repair?</summary><p>We'll get up there and tell you straight. Plenty of roofs we look at need a repair, not a replacement — we'll say so.</p></details><details class="unc-q"><summary>Do you work with insurance claims?</summary><p>Yes. Storm damage claims are a big part of what we do, and we'll walk the adjuster through it with you.</p></details><details class="unc-q"><summary>How long does a typical roof take?</summary><p>Most residential roofs are a one to two day job once materials are on site.</p></details><details class="unc-q"><summary>Do you offer a warranty?</summary><p>Yes — on both materials and our workmanship. We'll put the terms in writing before we start.</p></details></div></section><section class="contact-section" id="contact">
   <div class="section-inner contact-wrap">
     <div class="contact-info reveal">
       <h2>Get A Free Roofing Estimate</h2>

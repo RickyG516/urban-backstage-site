@@ -34,7 +34,7 @@ def patch(cfg):
     # ---- 1. hero image -------------------------------------------------
     if 'class="hero-photo"' not in s:
         img = (f'\n  <img class="hero-photo" src="{cfg["hero"]}" alt="{cfg["heroAlt"]}">')
-        m = re.search(r'<(section|header) class="hero"[^>]*>', s)
+        m = re.search(r'<(section|header|div) class="hero"[^>]*>', s)
         assert m, "no hero element"
         s = s[:m.end()] + img + s[m.end():]
 
