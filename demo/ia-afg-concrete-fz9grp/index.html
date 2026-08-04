@@ -67,10 +67,26 @@
     background:
       radial-gradient(circle at 20% 30%, rgba(224,161,28,0.18) 0%, transparent 45%),
       radial-gradient(circle at 80% 70%, rgba(224,161,28,0.12) 0%, transparent 50%),
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
-      linear-gradient(160deg, #16262a 0%, #1a2b2f 45%, #24393e 100%);
-    animation: kenburns 22s ease-in-out infinite alternate;
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px);
+    z-index: 1;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: 0;
+    animation: kenburns 22s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-photo { animation: none; }
+  }
+
+  @media print {
+    .hero-photo { animation: none; break-inside: avoid; }
   }
 
   .hero::after {
@@ -579,6 +595,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
 
   <!-- HERO -->
   <section class="hero">
+    <img class="hero-photo" src="https://lh3.googleusercontent.com/grass-cs/ACvplmNwPbb7CHi3_CX2RmYPS8gTQ5j7iX4w2b_a81yCGZ7qker44OVMukCJG6gOXdbIZrCHL_W9ZI-8UKMRMilmMfjGpTXAqnbeJdBGanJ46aEK8QB5zv_oTwioOfsXbBh8Pf0VV7-vGELesKoS=w1600-h1200" alt="Finished concrete patio poured by AFG Concrete in Des Moines, Iowa">
     <div class="hero-content">
       <div class="hero-eyebrow">Des Moines, Iowa</div>
       <h1>AFG Concrete LLC<br><span>Concrete Contractor</span></h1>
@@ -702,7 +719,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </section>
 
   <!-- CONTACT -->
-  <section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="concrete work"></figure><figure><img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="concrete work"></figure><figure><img src="https://images.unsplash.com/photo-1579724175242-0204ecac28cb?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="concrete work"></figure></div><p class="unc-galnote">Preview layout — representative imagery. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What finishes do you offer?</summary><p>Broom, smooth trowel, exposed aggregate, and stamped. We'll show you samples before you pick.</p></details><details class="unc-q"><summary>How long before I can drive on new concrete?</summary><p>Foot traffic in about 24-48 hours, vehicles in about a week. We'll give you the exact timeline for your pour.</p></details><details class="unc-q"><summary>Can you pour in cold weather?</summary><p>Yes, with the right mix and blankets. We'll tell you honestly if the forecast means we should wait.</p></details><details class="unc-q"><summary>Do you remove the old slab?</summary><p>Yes — tear-out and haul-off are part of the quote.</p></details></div></section><section class="contact-section" id="contact">
+  <section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkYqvEECqB5jD_25d2GToBZOEFNRdG0uN56ICDGPytS8LCQmMy09GbTDtIxNDEGmyuDxdBqNImrSA37YdxV5mq4nFtmcWSooQFp7IiHq54cBMMf48tUZ-QB3YP_2Oep7FSlWyoRsGhVtRA=w1600-h1200" loading="lazy" alt="New residential driveway slab poured and finished by AFG Concrete"></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWni-m33minahv88D0PAmylgG7GukrK0DqT7nNeF1CuB7F5FJrXR8A37A86mAGRdT3RKe-G7EL-3V0Rgv9l3xuzmIprYT-nmt0I6DieG9tYQeSP_Dc-x2glyCQrnMRmnxeq0TGkdG6uXG4w1=w1600-h1200" loading="lazy" alt="Poured concrete pool deck surround by AFG Concrete"></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnLsF2ahmoYJl0uB4O3QIY-3Um3HsI1gy7ExYoTXIKF-sMy2TByxG-eY2wO-1JD2WSwM_T0pBMata-kRkSA1yHC6T2ukmdV3CYOwX3K011IGBsWMbKSSQoFxdnrsXu1JqlRb5Rt=w1600-h1200" loading="lazy" alt="AFG Concrete crew screeding and finishing a fresh pour"></figure></div><p class="unc-galnote">Real job photos from AFG Concrete.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What finishes do you offer?</summary><p>Broom, smooth trowel, exposed aggregate, and stamped. We'll show you samples before you pick.</p></details><details class="unc-q"><summary>How long before I can drive on new concrete?</summary><p>Foot traffic in about 24-48 hours, vehicles in about a week. We'll give you the exact timeline for your pour.</p></details><details class="unc-q"><summary>Can you pour in cold weather?</summary><p>Yes, with the right mix and blankets. We'll tell you honestly if the forecast means we should wait.</p></details><details class="unc-q"><summary>Do you remove the old slab?</summary><p>Yes — tear-out and haul-off are part of the quote.</p></details></div></section><section class="contact-section" id="contact">
     <div class="container">
       <span class="section-label reveal">Get A Quote</span>
       <h2 class="section-title reveal">Contact AFG Concrete</h2>
