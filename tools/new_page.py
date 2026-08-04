@@ -25,7 +25,7 @@ def build(d):
     open(f"/root/ubs/demo/{slug}/motion.svg","w").write(svg)
     open(f"/root/ubs/demo/{slug}/motion-hero.svg","w").write(
         svg.replace('viewBox="0 0 1200 900" width="1200" height="900"',
-                    'viewBox="60 235 1200 445" width="1200" height="445" preserveAspectRatio="xMidYMid slice"',1))
+                    'viewBox="-390 235 1330 445" width="1330" height="445" preserveAspectRatio="xMidYMid slice"',1))
     open(f"/root/ubs/demo/{slug}/radius.svg","w").write(G.radius(DK,A,OFF,d["seed"]))
     open(f"/root/ubs/demo/{slug}/texture.svg","w").write(G.texture(DK,A,OFF,d["seed"]))
 
