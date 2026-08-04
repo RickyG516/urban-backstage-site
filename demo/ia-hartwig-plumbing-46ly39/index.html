@@ -64,8 +64,7 @@
     background:
       radial-gradient(circle at 20% 30%, rgba(239,125,46,0.35) 0%, rgba(239,125,46,0) 45%),
       radial-gradient(circle at 80% 70%, rgba(23,50,76,0.9) 0%, rgba(16,38,58,0) 55%),
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
-      linear-gradient(160deg, #0c1c2c 0%, #10263a 45%, #173a52 100%);
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px);
     animation: kenburns 26s ease-in-out infinite alternate;
     z-index: 0;
   }
@@ -541,6 +540,12 @@
     .contact-form { padding: 26px; }
     .build-flag { font-size: 0.6rem; padding: 6px 9px; }
   }
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -597,11 +602,24 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#10263a}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#10263a;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #256e8c;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(37,110,140,.07)}
+.unc-galnote strong{color:#256e8c}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body><nav class="unc-nav"><a href="#" class="unc-mark">Hartwig Plumbing & Heating Inc</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+16417525707" class="unc-navcall">(641) 752-5707</a></div></nav>
 
 <!-- HERO -->
 <section class="hero">
+  <img class="hero-photo" src="motion.svg" alt="Animated pipe run with flow, valve and pressure gauge">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-content">
     <span class="hero-eyebrow">Marshalltown, Iowa</span>
@@ -782,7 +800,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
 </section>
 
 <!-- CONTACT -->
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://images.unsplash.com/photo-1642749776312-aa42ce20c9f5?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="plumbing work"></figure><figure><img src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="plumbing work"></figure><figure><img src="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="plumbing work"></figure></div><p class="unc-galnote">Preview layout — representative imagery. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>Do you handle emergency calls?</summary><p>Yes. Burst pipes and backed-up mains don't wait for business hours, and neither do we.</p></details><details class="unc-q"><summary>How do I know if I have a slab leak?</summary><p>Unexplained jump in your water bill, warm spots on the floor, or the sound of running water with everything off.</p></details><details class="unc-q"><summary>Do you do drain cleaning?</summary><p>Yes — camera inspection and clearing on mains, kitchen lines, and floor drains.</p></details><details class="unc-q"><summary>Are you licensed and insured?</summary><p>Yes, fully. Happy to show you the paperwork.</p></details></div></section><section class="contact" id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="radius.svg" loading="lazy" alt="Marshalltown service area radius"><figcaption><strong>Based in Marshalltown</strong>Marshall County and the surrounding towns.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Layered service pattern"><figcaption><strong>Plumbing and heating</strong>One call covers the water side and the heat side.</figcaption></figure><figure><img src="shield.svg" loading="lazy" alt="Trust mark"><figcaption><strong>Straight quotes</strong>Price before the work starts, not after.</figcaption></figure></div><p class="unc-galnote"><strong>This page is built and waiting on your photos.</strong> Send over job shots &mdash; the truck, a finished bathroom, a boiler swap &mdash; and they drop straight in.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>Do you handle emergency calls?</summary><p>Yes. Burst pipes and backed-up mains don't wait for business hours, and neither do we.</p></details><details class="unc-q"><summary>How do I know if I have a slab leak?</summary><p>Unexplained jump in your water bill, warm spots on the floor, or the sound of running water with everything off.</p></details><details class="unc-q"><summary>Do you do drain cleaning?</summary><p>Yes — camera inspection and clearing on mains, kitchen lines, and floor drains.</p></details><details class="unc-q"><summary>Are you licensed and insured?</summary><p>Yes, fully. Happy to show you the paperwork.</p></details></div></section><section class="contact" id="contact">
   <div class="container contact-wrap">
 
     <div class="contact-info reveal">

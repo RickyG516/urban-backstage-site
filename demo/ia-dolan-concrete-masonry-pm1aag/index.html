@@ -603,6 +603,12 @@
       right: 8px;
     }
   }
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -659,11 +665,24 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#212326}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#212326;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #c46f28;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(196,111,40,.06)}
+.unc-galnote strong{color:#c46f28}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body><nav class="unc-nav"><a href="#" class="unc-mark">Mike Dolan Concrete &amp; Masonry</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+13192329658" class="unc-navcall">(319) 232-9658</a></div></nav>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
+  <img class="hero-photo" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnlX26n7g7aQryP3-5unlRiyAD3el3lNZR_Ruu1516_7eA9mUZmVK0op6yBapxtnvPqdcXUqov0jzm4LGwMTR62tT7CNrx4E9IkgLtyjU9IFceGG7x5CfQudr8bCzRruhMU64CP=w1600-h1200" alt="Fresh concrete pour by Mike Dolan Concrete &amp; Masonry in Waterloo, Iowa">
   <div class="hero-content">
     <span class="hero-eyebrow">Waterloo, Iowa</span>
     <h1>Mike Dolan Concrete <span>&amp;</span> Masonry</h1>
@@ -813,7 +832,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
 </section>
 
 <!-- ================= CONTACT ================= -->
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="concrete work"></figure><figure><img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="concrete work"></figure><figure><img src="https://images.unsplash.com/photo-1579724175242-0204ecac28cb?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="concrete work"></figure></div><p class="unc-galnote">Preview layout — representative imagery. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What finishes do you offer?</summary><p>Broom, smooth trowel, exposed aggregate, and stamped. We'll show you samples before you pick.</p></details><details class="unc-q"><summary>How long before I can drive on new concrete?</summary><p>Foot traffic in about 24-48 hours, vehicles in about a week. We'll give you the exact timeline for your pour.</p></details><details class="unc-q"><summary>Can you pour in cold weather?</summary><p>Yes, with the right mix and blankets. We'll tell you honestly if the forecast means we should wait.</p></details><details class="unc-q"><summary>Do you remove the old slab?</summary><p>Yes — tear-out and haul-off are part of the quote.</p></details></div></section><section class="contact" id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkbNXKMXjcStCxsHkbl1k_OBvV_m3pqF-p1VpI0Xol2pkhM0mmqNv9m_hTSQ5g3GAETrE0JbiNmDWSYPkgtQES7GipxRsTGTZhmvj3sT0A3Jz5aRykHKlvl31LMcdzaCGMPTys7dw=w1600-h1200" loading="lazy" alt="Pool retaining wall and masonry by Mike Dolan"><figcaption><strong>Masonry &amp; retaining wall</strong>Block, stone and hardscape around a pool.</figcaption></figure><figure><img src="motion.svg" loading="lazy" alt="Concrete pour, screed and cure sequence"><figcaption><strong>Form, pour, screed, cure</strong>Same order every slab. The finish is decided before the truck shows up.</figcaption></figure><figure><img src="shield.svg" loading="lazy" alt="5.0 star rating"><figcaption><strong>5.0&#9733; &middot; 4 Google reviews</strong>Waterloo and the Cedar Valley.</figcaption></figure></div><p class="unc-galnote"><strong>Got slab photos?</strong> Flatwork, stamped, block, foundations &mdash; send them over and they go straight on the page.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What finishes do you offer?</summary><p>Broom, smooth trowel, exposed aggregate, and stamped. We'll show you samples before you pick.</p></details><details class="unc-q"><summary>How long before I can drive on new concrete?</summary><p>Foot traffic in about 24-48 hours, vehicles in about a week. We'll give you the exact timeline for your pour.</p></details><details class="unc-q"><summary>Can you pour in cold weather?</summary><p>Yes, with the right mix and blankets. We'll tell you honestly if the forecast means we should wait.</p></details><details class="unc-q"><summary>Do you remove the old slab?</summary><p>Yes — tear-out and haul-off are part of the quote.</p></details></div></section><section class="contact" id="contact">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-tag">Get A Quote</div>
