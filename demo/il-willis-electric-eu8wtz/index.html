@@ -28,8 +28,7 @@
   .hero-bg{
     position:absolute;inset:0;
     background:
-      linear-gradient(135deg, rgba(11,15,20,0.93), rgba(18,24,31,0.76)),
-      repeating-linear-gradient(45deg, #1a222c 0px, #1a222c 2px, #12181f 2px, #12181f 34px);
+      linear-gradient(135deg, rgba(11,15,20,0.93), rgba(18,24,31,0.76));
     animation:kenburns 18s ease-in-out infinite alternate;
   }
   @keyframes kenburns{0%{transform:scale(1) translate(0,0);}100%{transform:scale(1.12) translate(-1.5%, 1%);}}
@@ -92,6 +91,12 @@
   .flag{position:fixed;bottom:16px;right:16px;background:rgba(11,15,20,0.92);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:9px 14px;border-radius:5px;z-index:999;box-shadow:0 4px 14px rgba(0,0,0,0.25);}
 
   @media (max-width:760px){.contact-wrap{grid-template-columns:1fr;}.topbar{padding:20px;}}
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -148,10 +153,23 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#16181c}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#16181c;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #c7d72f;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(255,255,255,.04)}
+.unc-galnote strong{color:#c7d72f}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body><nav class="unc-nav"><a href="#" class="unc-mark">Willis Electric, Inc.</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+13095792926" class="unc-navcall">(309) 579-2926</a></div></nav>
 
 <div class="hero">
+  <img class="hero-photo" src="motion-hero.svg" alt="Animated electrical graphic for Willis Electric">
   <div class="hero-bg"></div>
   <div class="topbar">
     <div class="brand">WILLIS <span>ELECTRIC</span></div>
@@ -263,7 +281,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </div>
 </section>
 
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://images.unsplash.com/photo-1682345262055-8f95f3c513ea?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="electrical work"></figure><figure><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="electrical work"></figure><figure><img src="https://images.unsplash.com/photo-1635335874521-7987db781153?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="electrical work"></figure></div><p class="unc-galnote">Preview layout — representative imagery. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>Do I need a panel upgrade?</summary><p>If you've got a fuse box, breakers that trip often, or you're adding a big load like an EV charger, probably yes.</p></details><details class="unc-q"><summary>Do you install EV chargers?</summary><p>Yes — we'll check your panel capacity first and tell you what it actually needs.</p></details><details class="unc-q"><summary>Do you handle emergency calls?</summary><p>Yes. Anything involving burning smells, sparking, or a dead panel gets treated as urgent.</p></details><details class="unc-q"><summary>Are you licensed and insured?</summary><p>Yes, fully licensed and insured. We pull permits on everything that needs one.</p></details></div></section><section class="contact-section" id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="motion.svg" loading="lazy" alt="electrical process animation"><figcaption><strong>How the work goes</strong>Same order every job.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service area radius"><figcaption><strong>Based in Chillicothe</strong>IL and the surrounding towns.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Service pattern"><figcaption><strong>What we cover</strong>Straight scope, straight price.</figcaption></figure></div><p class="unc-galnote"><strong>This is where your job photos go.</strong> Send whatever you&rsquo;ve got &mdash; trucks, crews, before and afters &mdash; and they&rsquo;re on the page the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>Do I need a panel upgrade?</summary><p>If you've got a fuse box, breakers that trip often, or you're adding a big load like an EV charger, probably yes.</p></details><details class="unc-q"><summary>Do you install EV chargers?</summary><p>Yes — we'll check your panel capacity first and tell you what it actually needs.</p></details><details class="unc-q"><summary>Do you handle emergency calls?</summary><p>Yes. Anything involving burning smells, sparking, or a dead panel gets treated as urgent.</p></details><details class="unc-q"><summary>Are you licensed and insured?</summary><p>Yes, fully licensed and insured. We pull permits on everything that needs one.</p></details></div></section><section class="contact-section" id="contact">
   <div class="section-inner contact-wrap">
     <div class="contact-info reveal">
       <h2>Get An Electrical Estimate</h2>

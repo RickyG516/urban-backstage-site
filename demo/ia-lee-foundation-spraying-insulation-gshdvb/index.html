@@ -103,8 +103,7 @@
     background:
       radial-gradient(circle at 20% 30%, rgba(217,142,43,0.35) 0%, transparent 45%),
       radial-gradient(circle at 80% 70%, rgba(21,92,93,0.55) 0%, transparent 50%),
-      repeating-linear-gradient(135deg, rgba(240,172,74,0.06) 0px, rgba(240,172,74,0.06) 2px, transparent 2px, transparent 40px),
-      linear-gradient(160deg, var(--deep-teal) 0%, #0a2b2c 55%, var(--deep-teal-light) 100%);
+      repeating-linear-gradient(135deg, rgba(240,172,74,0.06) 0px, rgba(240,172,74,0.06) 2px, transparent 2px, transparent 40px);
     animation:kenburns 22s ease-in-out infinite alternate;
   }
   .hero-overlay{
@@ -465,6 +464,12 @@
     box-shadow:0 2px 10px rgba(0,0,0,0.3);
     pointer-events:none;
   }
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -521,7 +526,19 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style>body>header:not(.unc-nav){display:none!important}</style><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style>body>header:not(.unc-nav){display:none!important}</style><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#1b2b2b}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#1b2b2b;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #ce6373;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(255,255,255,.04)}
+.unc-galnote strong{color:#ce6373}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body>
 
 <header>
@@ -540,6 +557,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
 </header>
 
 <section class="hero" id="top">
+  <img class="hero-photo" src="motion-hero.svg" alt="Animated insulation graphic for Lee Foundation Spraying &amp; Insulation, LLC">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -716,7 +734,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </div>
 </section>
 
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="insulation work"></figure><figure><img src="https://images.unsplash.com/photo-1591684080176-bb2b73f9ec68?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="insulation work"></figure><figure><img src="https://images.unsplash.com/photo-1711375201123-61eddb7804d7?auto=format&fit=crop&w=1100&q=70" loading="lazy" alt="insulation work"></figure></div><p class="unc-galnote">Preview layout — representative imagery. Swap in your own job photos any time.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>How much can I actually save?</summary><p>Depends on what's there now. We'll measure your current R-value and give you a real number, not a guess.</p></details><details class="unc-q"><summary>Spray foam or blown-in?</summary><p>Both have a place. Foam seals better, blown-in costs less. We'll tell you which fits your project.</p></details><details class="unc-q"><summary>Do you do existing homes or just new builds?</summary><p>Both. Retrofitting an attic is one of the most common jobs we do.</p></details><details class="unc-q"><summary>Are there rebates available?</summary><p>Often, yes. We'll point you to what's available in your area.</p></details></div></section><section id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="motion.svg" loading="lazy" alt="insulation process animation"><figcaption><strong>How the work goes</strong>Same order every job.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service area radius"><figcaption><strong>Based in Nashua</strong>IA and the surrounding towns.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Service pattern"><figcaption><strong>What we cover</strong>Straight scope, straight price.</figcaption></figure></div><p class="unc-galnote"><strong>This is where your job photos go.</strong> Send whatever you&rsquo;ve got &mdash; trucks, crews, before and afters &mdash; and they&rsquo;re on the page the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>How much can I actually save?</summary><p>Depends on what's there now. We'll measure your current R-value and give you a real number, not a guess.</p></details><details class="unc-q"><summary>Spray foam or blown-in?</summary><p>Both have a place. Foam seals better, blown-in costs less. We'll tell you which fits your project.</p></details><details class="unc-q"><summary>Do you do existing homes or just new builds?</summary><p>Both. Retrofitting an attic is one of the most common jobs we do.</p></details><details class="unc-q"><summary>Are there rebates available?</summary><p>Often, yes. We'll point you to what's available in your area.</p></details></div></section><section id="contact">
   <div class="section-inner reveal">
     <div class="section-head">
       <span class="kicker">Get In Touch</span>

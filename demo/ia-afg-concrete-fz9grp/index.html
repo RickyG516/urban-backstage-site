@@ -536,6 +536,12 @@
     .contact-info, .contact-form { padding: 26px; }
     .preview-flag { font-size: 0.65rem; padding: 6px 9px; right: 8px; bottom: 8px; }
   }
+
+  /* Hero visual — real photo or generated asset. Never stock. */
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    animation:kenburns 24s ease-in-out infinite alternate;}
+  @media (prefers-reduced-motion: reduce){.hero-photo{animation:none}}
+  @media print{.hero-photo{animation:none;break-inside:avoid}}
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
@@ -592,7 +598,19 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
  if(window.matchMedia){var m=window.matchMedia('print');m.addEventListener&&m.addEventListener('change',function(e){if(e.matches)showAll()});}
  setTimeout(showAll,2500);
  document.addEventListener('DOMContentLoaded',function(){setTimeout(showAll,2500)});
-})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}</style></head>
+})();</script><style data-unc="unc-badgefix">.flag,.spec-flag{left:14px!important;right:auto!important;bottom:14px!important;z-index:930!important;}@media(max-width:768px){.flag,.spec-flag{bottom:60px!important}}body header:not(.unc-nav),.hero>header,.hero .site-header{display:none!important}@media print{.flag,.spec-flag{display:none!important}}</style><style>.unc-gallery{padding:4rem 1.4rem;background:#f4f4f2}.unc-gallery h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}.unc-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.unc-grid figure{margin:0;overflow:hidden;border-radius:6px;aspect-ratio:4/3}.unc-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}.unc-grid figure:hover img{transform:scale(1.06)}.unc-galnote{text-align:center;margin-top:1.1rem;font-size:.82rem;opacity:.6}@media print{.unc-grid figure{break-inside:avoid}}
+
+/* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
+.unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#2b2a28}
+.unc-grid figure:hover img{transform:none}
+.unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
+.unc-grid figcaption strong{display:block;color:#2b2a28;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #c86022;border-radius:8px;
+  opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(255,255,255,.04)}
+.unc-galnote strong{color:#c86022}
+@media print{.unc-galnote{border-style:solid}}
+</style></head>
 <body><nav class="unc-nav"><a href="#" class="unc-mark">AFG Concrete LLC</a><div class="unc-navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a href="#faq">FAQ</a><a href="tel:+15152100000" class="unc-navcall">(515) 210-0000</a></div></nav>
 
   <!-- HERO -->
@@ -721,7 +739,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </section>
 
   <!-- CONTACT -->
-  <section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkYqvEECqB5jD_25d2GToBZOEFNRdG0uN56ICDGPytS8LCQmMy09GbTDtIxNDEGmyuDxdBqNImrSA37YdxV5mq4nFtmcWSooQFp7IiHq54cBMMf48tUZ-QB3YP_2Oep7FSlWyoRsGhVtRA=w1600-h1200" loading="lazy" alt="New residential driveway slab poured and finished by AFG Concrete"></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWni-m33minahv88D0PAmylgG7GukrK0DqT7nNeF1CuB7F5FJrXR8A37A86mAGRdT3RKe-G7EL-3V0Rgv9l3xuzmIprYT-nmt0I6DieG9tYQeSP_Dc-x2glyCQrnMRmnxeq0TGkdG6uXG4w1=w1600-h1200" loading="lazy" alt="Poured concrete pool deck surround by AFG Concrete"></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnLsF2ahmoYJl0uB4O3QIY-3Um3HsI1gy7ExYoTXIKF-sMy2TByxG-eY2wO-1JD2WSwM_T0pBMata-kRkSA1yHC6T2ukmdV3CYOwX3K011IGBsWMbKSSQoFxdnrsXu1JqlRb5Rt=w1600-h1200" loading="lazy" alt="AFG Concrete crew screeding and finishing a fresh pour"></figure></div><p class="unc-galnote">Real job photos from AFG Concrete.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What finishes do you offer?</summary><p>Broom, smooth trowel, exposed aggregate, and stamped. We'll show you samples before you pick.</p></details><details class="unc-q"><summary>How long before I can drive on new concrete?</summary><p>Foot traffic in about 24-48 hours, vehicles in about a week. We'll give you the exact timeline for your pour.</p></details><details class="unc-q"><summary>Can you pour in cold weather?</summary><p>Yes, with the right mix and blankets. We'll tell you honestly if the forecast means we should wait.</p></details><details class="unc-q"><summary>Do you remove the old slab?</summary><p>Yes — tear-out and haul-off are part of the quote.</p></details></div></section><section class="contact-section" id="contact">
+  <section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkYqvEECqB5jD_25d2GToBZOEFNRdG0uN56ICDGPytS8LCQmMy09GbTDtIxNDEGmyuDxdBqNImrSA37YdxV5mq4nFtmcWSooQFp7IiHq54cBMMf48tUZ-QB3YP_2Oep7FSlWyoRsGhVtRA=w1600-h1200" loading="lazy" alt="Job photo from afg concrete fz9grp"><figcaption><strong>From their own profile</strong>Pulled off their Google listing.</figcaption></figure><figure><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWni-m33minahv88D0PAmylgG7GukrK0DqT7nNeF1CuB7F5FJrXR8A37A86mAGRdT3RKe-G7EL-3V0Rgv9l3xuzmIprYT-nmt0I6DieG9tYQeSP_Dc-x2glyCQrnMRmnxeq0TGkdG6uXG4w1=w1600-h1200" loading="lazy" alt="Job photo from afg concrete fz9grp"><figcaption><strong>From their own profile</strong>Pulled off their Google listing.</figcaption></figure><figure><img src="motion.svg" loading="lazy" alt="concrete process animation"><figcaption><strong>How the work goes</strong>Same order every job.</figcaption></figure></div><p class="unc-galnote"><strong>This is where your job photos go.</strong> Send whatever you&rsquo;ve got &mdash; trucks, crews, before and afters &mdash; and they&rsquo;re on the page the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>What finishes do you offer?</summary><p>Broom, smooth trowel, exposed aggregate, and stamped. We'll show you samples before you pick.</p></details><details class="unc-q"><summary>How long before I can drive on new concrete?</summary><p>Foot traffic in about 24-48 hours, vehicles in about a week. We'll give you the exact timeline for your pour.</p></details><details class="unc-q"><summary>Can you pour in cold weather?</summary><p>Yes, with the right mix and blankets. We'll tell you honestly if the forecast means we should wait.</p></details><details class="unc-q"><summary>Do you remove the old slab?</summary><p>Yes — tear-out and haul-off are part of the quote.</p></details></div></section><section class="contact-section" id="contact">
     <div class="container">
       <span class="section-label reveal">Get A Quote</span>
       <h2 class="section-title reveal">Contact AFG Concrete</h2>
