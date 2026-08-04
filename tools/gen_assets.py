@@ -123,30 +123,33 @@ def electrical(dark, acc, off, seed):
 
 # ---------------------------------------------------------------- PLUMBING
 def plumbing(dark, acc, off, seed):
-    """Pipe run with flow, valve, and pressure sweep."""
-    d="M130,700 L330,700 L330,420 L620,420 L620,240 L900,240 L900,560 L1070,560"
+    """Pipe run with flow, valve, and pressure sweep.
+    Geometry confined to the y 250-650 safe band: a 1200x900 canvas
+    cover-cropped into a ~2.4:1 hero only keeps the middle. The first version
+    put the valve at y=240 and the gauge at y=720 — one clipped, one gone."""
+    d = "M120,600 L300,600 L300,420 L560,420 L560,300 L840,300 L840,560 L1080,560"
     body=[f'<rect width="{W}" height="{H}" fill="{dark}"/>', _grid(dark, off)]
-    body.append(_p(d, 0.0, 20, off, .16))
-    body.append(_p(d, 0.3, 11, acc, .30))
-    body.append(f'<path class="flow" d="{d}" fill="none" stroke="{acc}" stroke-width="8" '
-                'stroke-dasharray="26 74" stroke-linecap="round"/>')
-    for jx,jy in [(330,700),(330,420),(620,420),(620,240),(900,240),(900,560)]:
-        body.append(f'<circle cx="{jx}" cy="{jy}" r="16" fill="none" stroke="{off}" stroke-width="3" opacity=".32"/>')
-    # valve wheel
-    body.append('<g class="valve" transform="translate(620,240)">'
-                + f'<circle r="42" fill="none" stroke="{off}" stroke-width="4" opacity=".55"/>'
-                + "".join(f'<line x1="0" y1="0" x2="{42*math.cos(a):.1f}" y2="{42*math.sin(a):.1f}" stroke="{off}" stroke-width="3.5" opacity=".55"/>'
+    body.append(_p(d, 0.0, 22, off, .30))          # pipe body, readable
+    body.append(_p(d, 0.25, 13, acc, .42))         # bore
+    body.append(f'<path class="flow" d="{d}" fill="none" stroke="{acc}" stroke-width="9" '
+                'stroke-dasharray="30 70" stroke-linecap="round" opacity=".95"/>')
+    for jx,jy in [(300,600),(300,420),(560,420),(560,300),(840,300),(840,560)]:
+        body.append(f'<circle cx="{jx}" cy="{jy}" r="18" fill="{dark}" stroke="{off}" stroke-width="3.5" opacity=".55"/>')
+    body.append('<g class="valve" transform="translate(560,300)">'
+                + f'<circle r="46" fill="{dark}" opacity=".8"/>'
+                + f'<circle r="46" fill="none" stroke="{off}" stroke-width="4.5" opacity=".8"/>'
+                + "".join(f'<line x1="0" y1="0" x2="{46*math.cos(a):.1f}" y2="{46*math.sin(a):.1f}" stroke="{off}" stroke-width="4" opacity=".8"/>'
                           for a in [i*math.pi/3 for i in range(6)]) + '</g>')
-    # gauge
-    body.append(f'<circle cx="1000" cy="720" r="72" fill="none" stroke="{off}" stroke-width="3" opacity=".30"/>')
-    body.append(f'<g class="needle" transform="translate(1000,720)"><line x1="0" y1="0" x2="0" y2="-56" stroke="{acc}" stroke-width="5" stroke-linecap="round"/></g>')
+    body.append(f'<circle cx="1010" cy="640" r="62" fill="{dark}" opacity=".75"/>')
+    body.append(f'<circle cx="1010" cy="640" r="62" fill="none" stroke="{off}" stroke-width="3.5" opacity=".5"/>')
+    body.append(f'<g class="needle" transform="translate(1010,640)"><line x1="0" y1="0" x2="0" y2="-48" stroke="{acc}" stroke-width="5.5" stroke-linecap="round"/></g>')
     css=(DRAW_CSS+
          ".flow{animation:fl 2.2s linear infinite}@keyframes fl{0%{stroke-dashoffset:100}100%{stroke-dashoffset:0}}"
-         ".valve{animation:vv 11s ease-in-out infinite;transform-origin:620px 240px}"
-         "@keyframes vv{0%,20%{transform:translate(620px,240px) rotate(0deg)}45%{transform:translate(620px,240px) rotate(150deg)}100%{transform:translate(620px,240px) rotate(150deg)}}"
-         ".needle{animation:nd 11s ease-in-out infinite;transform-origin:1000px 720px}"
-         "@keyframes nd{0%,20%{transform:translate(1000px,720px) rotate(-115deg)}55%{transform:translate(1000px,720px) rotate(52deg)}"
-         "85%{transform:translate(1000px,720px) rotate(46deg)}100%{transform:translate(1000px,720px) rotate(-115deg)}}")
+         ".valve{animation:vv 11s ease-in-out infinite;transform-origin:560px 300px}"
+         "@keyframes vv{0%,20%{transform:translate(560px,300px) rotate(0deg)}45%{transform:translate(560px,300px) rotate(150deg)}100%{transform:translate(560px,300px) rotate(150deg)}}"
+         ".needle{animation:nd 11s ease-in-out infinite;transform-origin:1010px 640px}"
+         "@keyframes nd{0%,20%{transform:translate(1010px,640px) rotate(-115deg)}55%{transform:translate(1010px,640px) rotate(52deg)}"
+         "85%{transform:translate(1010px,640px) rotate(46deg)}100%{transform:translate(1010px,640px) rotate(-115deg)}}")
     return _shell("".join(body), css=css, label="Pipe run with flow, valve and pressure gauge")
 
 # ---------------------------------------------------------------- INSULATION
