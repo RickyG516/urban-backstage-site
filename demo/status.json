@@ -1,0 +1,578 @@
+{
+ "ia-afg-concrete-fz9grp": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/p/AFG-Concrete-61561126111383/",
+  "note": "",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-borer-contracting-5z7f1y": {
+  "channel": "phone",
+  "fb": "",
+  "note": "no FB page exists",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-bull-west-design-s4t6wm": {
+  "channel": "phone",
+  "fb": "",
+  "note": "no FB page exists",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-certified-pest-control-sf35ug": {
+  "channel": "phone",
+  "fb": "",
+  "note": "no FB page exists",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-cordes-heating-cooling-bf6wwp": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/p/Cordes-Heating-Cooling-100063490332453/",
+  "note": "",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-cremers-meats-dubuque": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-dan-gorman-construction-tde74u": {
+  "channel": "phone",
+  "fb": "",
+  "note": "no FB page exists",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-de-ronde-flooring-mf5xka": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-dolan-concrete-masonry-pm1aag": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/p/Mike-Dolan-Concrete-and-Masonry-Owner-and-Operator-100054633090885/",
+  "note": "",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-energy-management-network-vjit5t": {
+  "channel": "phone",
+  "fb": "",
+  "note": "page says Des Moines metro; they are in Williams, IA",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-greg-wirth-electric-lucodo": {
+  "channel": "phone",
+  "fb": "",
+  "note": "FB page dead \u2014 content unavailable",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-hartwig-plumbing-46ly39": {
+  "channel": "phone",
+  "fb": "",
+  "note": "no FB page exists",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-hintermeister-electric-30kxyc": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-jesco-painting-9y03gp": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-js-paint-powerwash-42vrxg": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-kenneth-janning-sons-8yz0bc": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-kuehl-painting-decorating-5oy56m": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-lee-foundation-spraying-insulation-gshdvb": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-lynch-roofing-siding-w4e1du": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-midwest-pest-management-625dzl": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-mike-holmes-construction-qa70hw": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-palace-roofing-construction-q32rcy": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-pauley-sons-fammt9": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-pk-termite-control-yoilo8": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-plato-electric-x098ay": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-punelli-heating-air-nqzju1": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-rabalais-electric-1nc4aj": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-sierra-construction-nve595": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-superior-wood-floors-tile-fzi0sg": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-torkelson-plumbing-heating-4r9a11": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "ia-widick-roofing-construction-jakbn0": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-aldos-concrete-landscaping-5j51rs": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-allenhouse-xyf77w": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-anderson-roofing-bfthqu": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "il-budget-rooter-535r60": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-dewco-insulation-8uet11": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-duran-concrete-yezui8": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-gerard-tuck-pointing-0m1wfw": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-granite-style-design-8lquwv": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-hard-rock-terrazzo-f5nrfi": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-ii-bulls-mechanical-5cswbm": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-kevin-daniels-painting-olobmk": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-mansfield-electric-6jy0pj": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-medina-masonry-cqo67j": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-murray-custom-cabinetry-gh5alo": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-north-park-heating-i211nr": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-paint-productions-km5ojd": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-rjs-snowplowing-uv80je": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-the-tree-surgeon-g4q84i": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-tjc-roofing-kqgnl7": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": false,
+  "stage": "none"
+ },
+ "il-willis-electric-eu8wtz": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "jeffs-tree-service-sioux-city": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "landscaping-anderson-council-bluffs": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "landscaping-connercuts-racine": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "landscaping-prescott-racine": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "landscaping-zaisers-burlington": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "sanders-lawn-care-dubuque": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "tree-service-cherry-new-berlin": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-a-team-flooring-vjlffv": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-a1-pest-control-aslkvp": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-armada-coatings-bg1sus": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-bear-renovations-6i95sn": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-daytonwood-painting-rfqreh": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-guttusos-yard-service-fqkssi": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-jays-perfection-gutters-adbssk": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-lake-park-electric-oneftz": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "real",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-masterpiece-painting-ii7oii": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-primetime-roofing-fpfviu": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-pro-serve-painting-p4l1hc": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-sean-kollman-concrete-hxmq56": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-snuff-um-out-0x7cey": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ },
+ "wi-thomson-heating-cooling-mtt7ps": {
+  "channel": "unknown",
+  "fb": "",
+  "note": "",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
+ }
+}

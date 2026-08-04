@@ -150,6 +150,27 @@
   <h1>Demo Mockup Library</h1>
   <p class="sub">Cold-outreach homepage mockups &mdash; <span class="count" id="visibleCount">0</span> of <span id="totalCount">0</span> active. <button id="toggleArchived" style="background:none;border:none;color:#666;font-size:.78rem;cursor:pointer;text-decoration:underline;padding:0;margin-left:.5rem;">Show archived</button> Internal only, never indexed.</p>
 </header>
+
+<div id="unc-status-key" style="padding:14px 32px;background:#141414;border-bottom:1px solid #2a2a2a;font-size:.8rem;line-height:1.9">
+  <strong style="color:#e36b1e;letter-spacing:.06em;text-transform:uppercase;font-size:.72rem">Key</strong>
+  <span style="margin-left:14px"><b>✅</b> ready to send</span>
+  <span style="margin-left:14px"><b>🔧</b> needs work</span>
+  <span style="margin-left:18px;color:#555">|</span>
+  <span style="margin-left:14px"><b>📷</b> real photos</span>
+  <span style="margin-left:14px"><b>🎬</b> generated art</span>
+  <span style="margin-left:18px;color:#555">|</span>
+  <span style="margin-left:14px"><b>📘</b> Facebook found</span>
+  <span style="margin-left:14px"><b>☎️</b> phone only</span>
+  <span style="margin-left:14px"><b>❓</b> channel unknown</span>
+  <span style="margin-left:18px;color:#555">|</span>
+  <span style="margin-left:14px"><b>📤</b> touched</span>
+  <span style="margin-left:14px"><b>🔁</b> followed up</span>
+  <span style="margin-left:14px"><b>💬</b> replied</span>
+  <span style="margin-left:14px"><b>📞</b> call booked</span>
+  <span style="margin-left:14px"><b>🤝</b> won</span>
+  <span style="margin-left:14px"><b>🚫</b> lost / not now</span>
+  <div style="margin-top:8px;color:#777;font-size:.74rem">Hover a badge for detail. Status lives in <code style="color:#999">demo/status.json</code> &mdash; edit that, not this page.</div>
+</div>
 <div class="controls">
   <input type="search" id="searchBox" placeholder="Search business, trade, city, state...">
   <select id="tradeFilter">
@@ -280,6 +301,77 @@
   stateFilter.addEventListener('change', applyFilters);
 
   applyFilters();
+</script>
+
+<script>
+/* Status badges. Reads demo/status.json at load so the page never carries a
+   hardcoded count or a stale status. Rows without an entry render nothing. */
+(function(){
+  var STAGE = {none:"", touched:["📤","first touch sent"], followed:["🔁","follow-up sent"],
+               replied:["💬","replied"], booked:["📞","call booked"],
+               won:["🤝","closed won"], lost:["🚫","closed lost / not now"]};
+  fetch('status.json?cb='+Date.now()).then(function(r){return r.json()}).then(function(ST){
+    var rows = Array.from(document.querySelectorAll('#demoTable tbody tr'));
+    rows.forEach(function(tr){
+      var a = tr.querySelector('.biz a'); if(!a) return;
+      var m = (a.getAttribute('href')||'').match(/\/demo\/([^/]+)\//); if(!m) return;
+      var st = ST[m[1]]; if(!st) return;
+      var b = [];
+      b.push(st.ready ? ['✅','ready to send'] : ['🔧','needs work'+(st.note?' — '+st.note:'')]);
+      b.push(st.photos==='real' ? ['📷','real photos'] : ['🎬','generated art']);
+      b.push(st.channel==='fb' ? ['📘','Facebook page found']
+           : st.channel==='phone' ? ['☎️','phone only'+(st.note?' — '+st.note:'')]
+           : ['❓','channel unknown']);
+      if(STAGE[st.stage] && STAGE[st.stage].length) b.push(STAGE[st.stage]);
+      var span = document.createElement('span');
+      span.className = 'unc-badges';
+      span.style.cssText = 'margin-right:8px;letter-spacing:2px;white-space:nowrap';
+      span.innerHTML = b.map(function(x){return '<span title="'+x[1]+'">'+x[0]+'</span>'}).join('');
+      a.parentNode.insertBefore(span, a);
+      tr.dataset.ready   = st.ready ? 'yes':'no';
+      tr.dataset.channel = st.channel;
+      tr.dataset.stage   = st.stage;
+      tr.dataset.search  = (tr.dataset.search||'') + ' ' + (st.ready?'ready':'needswork') +
+                           ' ' + st.channel + ' ' + st.photos + ' ' + st.stage;
+    });
+    /* status filter, wired into whatever filtering the page already does */
+    var sel = document.createElement('select');
+    sel.id = 'statusFilter';
+    sel.innerHTML = '<option value="">All statuses</option>'
+      + '<option value="ready">✅ Ready to send</option>'
+      + '<option value="needswork">🔧 Needs work</option>'
+      + '<option value="fb">📘 Has Facebook</option>'
+      + '<option value="phone">☎️ Phone only</option>'
+      + '<option value="untouched">Not contacted yet</option>';
+    var ctr = document.querySelector('.controls'); if(ctr) ctr.appendChild(sel);
+    function apply(){
+      var v = sel.value;
+      rows.forEach(function(tr){
+        var ok = !v
+          || (v==='ready'      && tr.dataset.ready==='yes')
+          || (v==='needswork'  && tr.dataset.ready==='no')
+          || (v==='fb'         && tr.dataset.channel==='fb')
+          || (v==='phone'      && tr.dataset.channel==='phone')
+          || (v==='untouched'  && tr.dataset.stage==='none');
+        tr.dataset.statusHidden = ok ? '' : '1';
+        if(!ok) tr.style.display='none'; else tr.style.display='';
+      });
+      var ev = new Event('input',{bubbles:true});
+      var sb = document.getElementById('searchBox'); if(sb) sb.dispatchEvent(ev);
+    }
+    sel.addEventListener('change', apply);
+    /* live tally next to the key */
+    var tally = document.createElement('div');
+    tally.style.cssText='margin-top:6px;color:#9a9a9a;font-size:.76rem';
+    var vals = Object.keys(ST).map(function(k){return ST[k]});
+    tally.innerHTML = '<b style="color:#e36b1e">'+vals.filter(function(v){return v.ready}).length+'</b> ready · '
+      + vals.filter(function(v){return !v.ready}).length+' need work · '
+      + vals.filter(function(v){return v.channel==='fb'}).length+' with Facebook · '
+      + vals.filter(function(v){return v.channel==='phone'}).length+' phone only · '
+      + vals.filter(function(v){return v.stage!=='none'}).length+' contacted';
+    var key = document.getElementById('unc-status-key'); if(key) key.appendChild(tally);
+  }).catch(function(e){ console.warn('status.json not loaded', e); });
+})();
 </script>
 </body>
 </html>
