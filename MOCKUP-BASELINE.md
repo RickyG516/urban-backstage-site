@@ -131,3 +131,25 @@ pipe flow with valve and gauge, insulation heat barrier, GC phase timeline,
 remodel floor plan. Those are better than anything the grammar produces and
 stay as they are. The grammar exists to hold the line across the remaining 59
 at volume, not to replace hand work where hand work already happened.
+
+---
+
+## Hero framing rules (learned the hard way on Hartwig)
+
+1. **Author heroes wide.** A 1200x900 asset in a ~2.4:1 hero slot loses the top
+   and bottom third to `object-fit:cover`. Hartwig's valve sat half under the
+   nav; the pressure gauge was cropped off entirely. Each generated hero now
+   ships a `motion-hero.svg` — same coordinate space, same animation, viewBox
+   re-cut to a wide slice so there is nothing to crop. The 4:3 `motion.svg`
+   stays for gallery tiles.
+2. **Keep the middle third clear.** Hero copy is centre-stacked. Dense geometry
+   directly behind the headline or eyebrow chip fights the type. Shift the
+   frame so the busiest element sits in an outer third, and alternate the
+   direction between pages so a batch doesn't all lean the same way.
+3. **Base strokes need to read.** Flow dashes over a 0.16-opacity pipe look
+   like floating specks, not water in a pipe. Body strokes at 0.30+.
+4. **Check for referenced-but-missing assets before shipping.** A batch config
+   referenced `shield.svg` on four pages where only `radius` and `texture` had
+   been generated. Three good images and one broken icon went live.
+   `for src in $(grep -o 'src="[a-z-]*\.svg"' index.html); do [ -f ] || echo` —
+   run it every batch.

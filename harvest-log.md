@@ -52,3 +52,29 @@ Started 2026-08-04. Repo @ de909e4. Scope: 68 pages (Cremer's excluded per Ricky
   library on that URL family and worth a periodic re-check.
 - GBP hit rate running ~60%. Where GBP exists, median photo count is ~3 and
   includes non-job tiles, so real yield per page is 1-3 photos.
+
+---
+
+## Batch 1 complete — 2026-08-04
+
+| Page | Pack | Real photos | Generated | Status |
+|---|---|---|---|---|
+| ia-afg-concrete-fz9grp | P13 | 3 | — | live |
+| ia-certified-pest-control-sf35ug | P01 | 0 | 4 (perimeter, shield, seasonal, radius) | live |
+| ia-dan-gorman-construction-tde74u | P13 | 3 | 1 (framing blueprint) | live |
+| ia-cordes-heating-cooling-bf6wwp | P13 | 2 | 2 (load curve, shield) | live |
+| ia-dolan-concrete-masonry-pm1aag | P14 | 2 | 2 (pour sequence, shield) | live |
+| ia-greg-wirth-electric-lucodo | P17 | 1 | 3 (panel current, radius, shield) | live |
+| ia-hartwig-plumbing-46ly39 | P01 | 0 | 4 (pipe flow, radius, texture, shield) | live |
+| ia-energy-management-network-vjit5t | P09 | 0 | 4 (heat barrier, radius, texture, shield) | live |
+| ia-borer-contracting-5z7f1y | P02 | 0 | 4 (phase timeline, radius, texture, shield) | live |
+| ia-bull-west-design-s4t6wm | P04 | 0 | 4 (floor plan, radius, texture, shield) | live |
+
+**11 real photos, 0 stock, 28 generated assets. Gate clean on all ten.**
+
+Plus: 14 pages library-wide had no hero at all (badgefix selector) — fixed.
+Borer's banned headline rewritten. Gorman's portable headline rewritten.
+
+## Remaining: 59 pages
+Tooling is built — `tools/compose.py` + `tools/patch_page.py` turn the rest
+into a loop. Uniqueness verified across all 72 before any of it ships.
