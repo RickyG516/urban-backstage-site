@@ -159,7 +159,7 @@
   <span style="margin-left:14px"><b>📷</b> real photos</span>
   <span style="margin-left:14px"><b>🎬</b> generated art</span>
   <span style="margin-left:18px;color:#555">|</span>
-  <span style="margin-left:14px"><b>📘</b> Facebook found</span>
+  <span style="margin-left:14px"><b>📘</b> Facebook found <em style="color:#777;font-style:normal">(click to open)</em></span>
   <span style="margin-left:14px"><b>☎️</b> phone only</span>
   <span style="margin-left:14px"><b>❓</b> channel unknown</span>
   <span style="margin-left:18px;color:#555">|</span>
@@ -319,14 +319,18 @@
       var b = [];
       b.push(st.ready ? ['✅','ready to send'] : ['🔧','needs work'+(st.note?' — '+st.note:'')]);
       b.push(st.photos==='real' ? ['📷','real photos'] : ['🎬','generated art']);
-      b.push(st.channel==='fb' ? ['📘','Facebook page found']
+      b.push(st.channel==='fb' ? ['📘', st.fb ? 'Open their Facebook page' : 'Facebook page found', st.fb||'']
            : st.channel==='phone' ? ['☎️','phone only'+(st.note?' — '+st.note:'')]
            : ['❓','channel unknown']);
       if(STAGE[st.stage] && STAGE[st.stage].length) b.push(STAGE[st.stage]);
       var span = document.createElement('span');
       span.className = 'unc-badges';
       span.style.cssText = 'margin-right:8px;letter-spacing:2px;white-space:nowrap';
-      span.innerHTML = b.map(function(x){return '<span title="'+x[1]+'">'+x[0]+'</span>'}).join('');
+      span.innerHTML = b.map(function(x){
+        if(x[2]) return '<a href="'+x[2]+'" target="_blank" rel="noopener" title="'+x[1]+'" '
+                      + 'style="text-decoration:none;cursor:pointer">'+x[0]+'</a>';
+        return '<span title="'+x[1]+'">'+x[0]+'</span>';
+      }).join('');
       a.parentNode.insertBefore(span, a);
       tr.dataset.ready   = st.ready ? 'yes':'no';
       tr.dataset.channel = st.channel;
