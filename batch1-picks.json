@@ -1,0 +1,57 @@
+{
+  "_note": "Verified GBP photo picks, batch 1. Prefix every value with https://lh3.googleusercontent.com and suffix =w1600-h1200. Identity-gated: name+phone matched the mockup, and each photo was visually confirmed to belong to THIS business.",
+  "_date": "2026-08-04",
+
+  "ia-dan-gorman-construction-tde74u": {
+    "verdict": "FULLY REAL - 4 usable, 0 stock needed",
+    "identity": "Dan Gorman Construction Inc, (515) 291-6989 exact match, 5.0/9",
+    "picks": {
+      "hero_timber_home_exterior": "/gps-cs-s/AHRPTWnLF7LwjJaFtKjBZZJ8nu-9mooIaIWzprMkK0sBVxa4g8x20T6ij8Jx-ApV9tG4vsvVMxkydrfkevTC4IndhzdlDhywrhS7QasCDt0Q-VXbmq71LRBvUM3SjcE4vS4bcZi2-xhPx9JzOXUP",
+      "bathroom_remodel": "/gps-cs-s/AHRPTWkU77rOr2tAEtFjsi6XXK7hq2z_6smfvOxvqK96oHoy1JuWT16Av4jPfa6xedhj0FSR2E6-dUfGZSzeHcxiiux7jTEAo4K5jeESEf_IOLtpAw2_9LAzFgKbaaFh8P1udAyFiDJSEw",
+      "foundation_excavation": "/gps-cs-s/AHRPTWlusX7bbGDr9KilAfzTrrOznrUXjqYYN1fhPofHXNmA6sLhRxEzK9zEKJJa7jikBZakZlSXMRXGR4LSB5RVY5ZFw1QHfka9Pc70Qk9WrD7-drgUI17yYBRp_0zEOTwl8KqhpV67pg",
+      "stamped_patio_firepit": "/gps-cs-s/AHRPTWlkawANK8tHqqIdUOBbn1qgzVO90_wXWpATRlaL2OclMgxEnYI585FoYdVrk7q-p0G5bsR8C5rb70rn1CWVSL4rz3G7gapeeh0PBhR49izycWvUI3FpquR3hogmlaWMMn6QHmdG6m91qCw"
+    }
+  },
+
+  "ia-cordes-heating-cooling-bf6wwp": {
+    "verdict": "2 usable, 2 stock needed",
+    "identity": "Cordes Heating & Cooling, (319) 215-9607 exact match, 4.7/16",
+    "rejected": "septic-tank-service truck (different company), couple selfie, avatar tile, pet bearded dragon",
+    "picks": {
+      "own_storefront_signage": "/gps-cs-s/AHRPTWmglSx8rsZK6d7Chn2fNj7T4UDvgg_zuaAkS_X8h2Q9RlkZDolqscp5fmZRhHHWWSQVRNXEwVxl2ryURQ9xQCpcv0I-6fK1FPUOsHDnsMRC4ufcZ487nwso4jXmIabeutcdAAPzLveGr-4S",
+      "mechanical_install_interior": "/gps-cs-s/AHRPTWlUl-PPxjG5S64tvrpO7mwyc2lvzxdhLWW-Offz6al1yYWcM-l3cvLHkIr2bczo0zXtKJ55AWZlITP88JvJBEOPSS2OnzK0rfWArNV6O5DZmdr-o_8eHyDpdBTQ5-wIpitkBKxjnw"
+    }
+  },
+
+  "ia-dolan-concrete-masonry-pm1aag": {
+    "verdict": "2 usable, 2 stock needed",
+    "identity": "Dolan Mike Concrete & Masonry Inc, (319) 232-9658 exact match, 5.0/4",
+    "picks": {
+      "hero_fresh_pour_mixer_truck": "/gps-cs-s/AHRPTWnlX26n7g7aQryP3-5unlRiyAD3el3lNZR_Ruu1516_7eA9mUZmVK0op6yBapxtnvPqdcXUqov0jzm4LGwMTR62tT7CNrx4E9IkgLtyjU9IFceGG7x5CfQudr8bCzRruhMU64CP",
+      "pool_retaining_wall_masonry": "/gps-cs-s/AHRPTWkbNXKMXjcStCxsHkbl1k_OBvV_m3pqF-p1VpI0Xol2pkhM0mmqNv9m_hTSQ5g3GAETrE0JbiNmDWSYPkgtQES7GipxRsTGTZhmvj3sT0A3Jz5aRykHKlvl31LMcdzaCGMPTys7dw"
+    }
+  },
+
+  "ia-greg-wirth-electric-lucodo": {
+    "verdict": "1 usable, 3 stock needed - GALLERY HEAVILY POLLUTED",
+    "identity": "Greg Wirth Electric, (515) 232-0352 exact match, 4.6/9",
+    "rejected": "DAVE PITZ ELECTRIC CO storefront (different company), HAUPERT ELECTRIC van with their phone+email (different company), crew photo likely Haupert's, generic stock electrician, avatar tile, restaurant snapshot, personal headshot",
+    "picks": {
+      "electrical_panel_conduit": "/gps-cs-s/AHRPTWlaLwQab764b5dxBvd3wXwL5UUb2p24pr3rLScTehb2KeD7SD2_90OdTTKzKE8dQr_qGTfZ7_-eU7un69UofBdS39ny5C6B_1ZK0flVDgsOTzb3wIddWzTia2v9Kt7fm9z68Ex9oWh3bSLh"
+    }
+  },
+
+  "ia-certified-pest-control-sf35ug": {
+    "verdict": "0 usable - ALL STOCK",
+    "identity": "Certified Pest Control, (641) 673-8740 exact match, 4.8/10",
+    "rejected": "ATOMIC PEST CONTROL storefront (COMPETITOR), two abstract illustrations",
+    "picks": {}
+  },
+
+  "_no_gbp_listing_at_all": [
+    "ia-borer-contracting-5z7f1y",
+    "ia-bull-west-design-s4t6wm",
+    "ia-energy-management-network-vjit5t",
+    "ia-hartwig-plumbing-46ly39"
+  ]
+}
