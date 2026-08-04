@@ -106,7 +106,7 @@
  "ia-hintermeister-electric-30kxyc": {
   "channel": "phone",
   "fb": "",
-  "note": "FB searched, no confident match",
+  "note": "BBB, n49, BuildZoom, D&B all present \u2014 no FB page exists",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -138,7 +138,7 @@
  "ia-kuehl-painting-decorating-5oy56m": {
   "channel": "phone",
   "fb": "",
-  "note": "FB searched, no confident match",
+  "note": "Yelp, Manta, YellowPages, BuildZoom present \u2014 no FB page exists",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -226,7 +226,7 @@
  "ia-rabalais-electric-1nc4aj": {
   "channel": "phone",
   "fb": "",
-  "note": "FB searched, no confident match",
+  "note": "whodoyou, OpenCorporates, BuildZoom, D&B present \u2014 no FB page exists",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -464,9 +464,9 @@
   "stage": "none"
  },
  "sanders-lawn-care-dubuque": {
-  "channel": "phone",
-  "fb": "",
-  "note": "FB searched, no confident match",
+  "channel": "fb",
+  "fb": "https://www.facebook.com/Sanders.Lawn.Landscape/",
+  "note": "FB: page surfaces alongside Dubuque directory listings \u2014 city context matches",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -530,7 +530,7 @@
  "wi-jays-perfection-gutters-adbssk": {
   "channel": "phone",
   "fb": "",
-  "note": "FB searched, no confident match",
+  "note": "Birdeye, Roof.info, D&B present \u2014 no FB. 'Jays Seamless Gutters' is a different company",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -570,7 +570,7 @@
  "wi-sean-kollman-concrete-hxmq56": {
   "channel": "phone",
   "fb": "",
-  "note": "FB searched, no confident match",
+  "note": "Porch, Yelp, Manta, Angi present \u2014 no FB. 'Kohlman Concrete' is a different company",
   "photos": "generated",
   "ready": true,
   "stage": "none"
