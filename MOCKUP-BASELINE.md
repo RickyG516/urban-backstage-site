@@ -85,3 +85,49 @@ Both double as the trade-specific feature the skill already requires.
 `body header:not(.unc-nav){display:none!important}` in the badgefix block, and
 those 14 build the hero as `<header class="hero">`. Fixed by excluding `.hero`
 from the selector. Any newly generated page must use `<section class="hero">`.
+
+---
+
+## Uniqueness rule (added after Ricky flagged the risk)
+
+**Palette is not variation.** Recolouring one animation per trade would have
+shipped 9 identical concrete pages, 9 identical painting pages and 9 identical
+roofing pages — the same sameness failure in a new coat.
+
+Trade counts across the 72: roofing 9, painting 9, concrete 9, landscaping 8,
+electrical 7, hvac 6, remodel 4, pest 4, flooring 4, tree 3, plumbing 3,
+insulation 3, gc 2.
+
+### How it is enforced
+
+`tools/compose.py` assembles a scene from three structural axes:
+
+    SUBJECT  trade geometry — slab, gable, routed run, banded field, radial hub
+  x MOTION   draw / flow / rise / sweep / stage / radiate
+  x LAYOUT   single / mirror / stack / offset-grid
+
+32-60 families per trade. `assign()` walks that list with a **coprime stride**
+so consecutive pages in a trade share no subject, no motion and no layout.
+Sequential walking was tried first and clustered four concrete pages onto
+`run/sweep` varying only by layout — visibly siblings. The stride fixed it.
+
+Within a family, `variants.Vary` adds seeded jitter off the phone number:
+anchor, mirror, density, element counts, rotation, motion speed and stagger.
+
+### The check
+
+`variants.fingerprint()` hashes geometry and timing while ignoring colour.
+`assert_unique()` fails a batch if any two pages match.
+
+**Verified across all 72: 72 unique fingerprints, 0 family reuse in any trade.**
+
+Run it before every batch. Do not trust it by eye.
+
+### Bespoke beats generated
+
+The first nine pages carry hand-authored scenes — pest perimeter, framing
+blueprint, HVAC load curve, concrete pour-and-screed, electrical panel current,
+pipe flow with valve and gauge, insulation heat barrier, GC phase timeline,
+remodel floor plan. Those are better than anything the grammar produces and
+stay as they are. The grammar exists to hold the line across the remaining 59
+at volume, not to replace hand work where hand work already happened.
