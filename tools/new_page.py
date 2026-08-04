@@ -14,6 +14,7 @@ import gen_assets as G
 PACKS = {
  "P11": dict(disp="Big Shoulders Display", body="Libre Franklin", dw="700;800", bw="400;600"),
  "P19": dict(disp="Titillium Web",         body="Mulish",         dw="600;700", bw="400;600"),
+ "P18": dict(disp="Cabin Condensed",       body="Merriweather Sans", dw="600;700", bw="400;600"),
 }
 
 def esc(x): return html.escape(x, quote=True)
@@ -37,6 +38,8 @@ def build(d):
     chips = "".join(f'<span class="chip">{esc(t)}</span>' for t in d["areas"])
     trust = "".join(f'<div class="tcard"><strong>{esc(t[0])}</strong><span>{esc(t[1])}</span></div>' for t in d["trust"])
 
+    heroSrc = d.get("heroSrc","motion-hero.svg")
+    figs = d.get("figs")
     return f'''<!-- style-pack: {d["pack"]} | trade: {d["trade"]} | accent: {A} -->
 <!DOCTYPE html>
 <html lang="en">
@@ -160,7 +163,7 @@ footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-s
 </nav>
 
 <section class="hero">
-  <img class="hero-photo" src="motion-hero.svg" alt="{esc(d["heroAlt"])}">
+  <img class="hero-photo" src="{heroSrc}" alt="{esc(d["heroAlt"])}">
   <div class="hero-in">
     <span class="kick">{esc(d["city"])}</span>
     <h1>{d["h1"]}</h1>
@@ -192,9 +195,7 @@ footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-s
     <span class="lab">The work</span>
     <h2 class="st">{esc(d["galTitle"])}</h2>
     <div class="gg">
-      <figure><img src="motion.svg" loading="lazy" alt="{esc(d["galAlt"][0])}"><figcaption><strong>{esc(d["gal"][0][0])}</strong>{esc(d["gal"][0][1])}</figcaption></figure>
-      <figure><img src="radius.svg" loading="lazy" alt="{esc(d["galAlt"][1])}"><figcaption><strong>{esc(d["gal"][1][0])}</strong>{esc(d["gal"][1][1])}</figcaption></figure>
-      <figure><img src="texture.svg" loading="lazy" alt="{esc(d["galAlt"][2])}"><figcaption><strong>{esc(d["gal"][2][0])}</strong>{esc(d["gal"][2][1])}</figcaption></figure>
+      {"".join(f'<figure><img src="{f[0]}" loading="lazy" alt="{esc(f[1])}"><figcaption><strong>{esc(f[2])}</strong>{esc(f[3])}</figcaption></figure>' for f in (figs or [("motion.svg",d["galAlt"][0],d["gal"][0][0],d["gal"][0][1]),("radius.svg",d["galAlt"][1],d["gal"][1][0],d["gal"][1][1]),("texture.svg",d["galAlt"][2],d["gal"][2][0],d["gal"][2][1])]))}
     </div>
     <p class="ask"><strong>This is where your job photos go.</strong> {esc(d["askLine"])}</p>
   </div>
