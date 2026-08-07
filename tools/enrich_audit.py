@@ -86,6 +86,17 @@ def main():
     active = [s for s in slugs if s not in arch and s not in KNOWN_NON_PROSPECTS]
     problems = []
 
+    # --- ONE definition of "active".
+    # The page header counts everything not in DEFAULT_ARCHIVED. This audit also
+    # drops KNOWN_NON_PROSPECTS. If a non-prospect is not archived, the page says
+    # N active and the audit says N-1 — which is exactly the kind of quiet
+    # disagreement that makes the library feel untrustworthy. Force them to agree.
+    for s in sorted(KNOWN_NON_PROSPECTS & set(slugs)):
+        if s not in arch:
+            problems.append(
+                f"non-prospect not archived: {s} — page header will count it as "
+                f"active but this audit will not. Add it to DEFAULT_ARCHIVED.")
+
     # --- surface 2: index row + HubSpot link
     for s in slugs:
         if s not in rows:
@@ -96,6 +107,17 @@ def main():
     for s in active:
         if rows.get(s) is None and s in rows:
             problems.append(f"index row not linked to HubSpot: {s}")
+
+    # An unlinked row must SAY it is archived on purpose. "not in HubSpot yet"
+    # and "Pending" both read as unfinished work and make the page look sloppy.
+    for row in re.findall(r"<tr data-search=.*?</tr>", idx, re.S):
+        if "record/0-2/" in row:
+            continue
+        m = re.search(r"/demo/([^/]+)/", row)
+        if m and "archived" not in row.lower():
+            problems.append(
+                f"unlinked row does not say why: {m.group(1)} — an unlinked cell "
+                f"must read 'archived - not a prospect', never a placeholder")
 
     # --- surface 3: status.json
     for s in set(slugs) - set(st):
