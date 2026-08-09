@@ -119,6 +119,22 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-ez-roofing-clinton": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/p/EZ-Roofing-100037234851734/",
+  "note": "in HubSpot 2026-08-09 (company 338802478779) | no website: ezroofing.com loaded live in browser 2026-08-09 -> 301s to ezgeneral.com, a Fort Lauderdale FL firm, NOT theirs; ezroofingllc.com -> live but Caldwell ID firm; ezroofingclinton.com / ezroofingiowa.com / ezroofingia.com / ez-roofing.com / ezroofingqc.com all fail to resolve; BBB profile has NO website field; GBP shows the 'Add website' prompt; FB Intro lists ezroofing2006@gmail.com and no site -> FACEBOOK-AS-WEBSITE | revenue proof: Iowa contractor reg C133608 ACTIVE (BuildZoom Verified License, issued 04-17-2026, expiry 04/24/2027), BBB file open since 7/31/2018, COMMERCIAL permit BLDC24-0089 2018 Waterfront Dr Iowa City 2024-12-30 roof tear-off + replacement, FB 177 followers / 100% recommend across 19 reviews | phone (563) 249-8414 published by the business on its own FB page; ALT (563) 249-9429 on BBB + BuildZoom - lead with 249-8414 | address 2337 13th Ave N per Iowa reg + BBB + BuildZoom; FB says 2301 - use 2337 | sole proprietorship, no Iowa SOS filing (consistent); SEPARATE 'EZ ROOFING, LLC' no. 560866 DeWitt/Cedar Rapids dba 563 GUTTER is a DIFFERENT company, do not merge | UNVERIFIED, do not repeat as fact: reported 53 Google reviews at 5.0 and $23,985 permit BLDC24-0090 - only the FB 19-review figure and permit BLDC24-0089 were independently confirmed | DO NOT RAISE: BBB not accredited / Not Rated; permit BLDC24-0089 status 'expired'; that he is a sole prop not an LLC; that his FB has not posted since July 2025; that other EZ Roofing firms own the .com domains",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-freiburger-heating-cooling-dubuque": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/FreiburgerHVAC",
+  "note": "in HubSpot 2026-08-09 (company 338608589522) | no website: freiburgerhvac.com, freiburgerheatingandcooling.com and freiburgerheating.com all loaded live in browser 2026-08-09 -> Chrome error page, nothing served; PHCC of Iowa directory lists a Facebook URL in the website field and the GBP website field points to facebook.com/freiburgerhvac -> FACEBOOK-AS-WEBSITE | revenue proof: 128 permitted projects on BuildZoom (44 in 2023, 31 in 2024, 28 in 2025), FMCSA USDOT 4455825 ACTIVE with 3 drivers, MCS-150 refiled 04/15/2026, 0 inspections / 0 crashes / no OOS (verified directly on safer.fmcsa.dot.gov 2026-08-09), 4.7 stars across 30 Google reviews, commercial permits incl. 2459 Kerper Blvd (four 115k-BTU furnaces + four A/C units on one job) | phone + address confirmed directly on the FMCSA federal .gov snapshot | Iowa SOS #695063 Active formed 12/17/2021, Iowa contractor reg C142263 active thru 06/30/2029, Iowa Plumbing & Mechanical licence 52826-CL | NOTE FMCSA lists Power Units 0 against 3 drivers - do not overstate as a large fleet | DO NOT RAISE: permit volume is TRENDING DOWN 44->31->28, so no 'looks like you're growing'; their FB returned 'This content isn't available right now' logged-out so the page may be broken/restricted - confirm gently, don't assert it's deleted; LLC is only ~4.5 years old, don't credit decades",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-greg-wirth-electric-lucodo": {
   "channel": "phone",
   "fb": "",
@@ -581,6 +597,14 @@
   "note": "in HubSpot 2026-08-04 | no website | co-owner implies 2nd principal, possibly Hulisses/Ulises Serrano | since 2001",
   "photos": "generated",
   "ready": false,
+  "stage": "none"
+ },
+ "il-seward-masonry-taylor-springs": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/2018brett/",
+  "note": "in HubSpot 2026-08-09 (company 338767896305) | no website: sewardmasonryinc.com loaded live in browser 2026-08-09 -> RESOLVES, title 'Seward Masonry Inc.', body is literally the two words 'Under Construction' (hosting placeholder); sewardmasonry.com -> does not resolve; FB Intro lists phone + email, no website link. They own the domain (company email runs on it) and never built a site. Found via the http://NULL inverted signal in the CIB AGC website field | revenue proof: Bricklayers Local 8 UNION SIGNATORY listed in the 2025 Construction Contractors Directory, member of TWO trade associations (CIB AGC + Southern Illinois Builders Association), listed on Procore and ConstructConnect, FB 148 followers / 100% recommend across 5 reviews with a 2026-07-16 post drawing 107 reactions | phone, fax, address, owner and the http://NULL field all confirmed directly on https://cibagc.org/cm-business/seward-masonry-inc/ 2026-08-09 | IL SOS File #71044874 CORP ACTIVE eff. 01-11-2017, agent BRETT A. SEWARD | CORRECTED: Procore lists 798 Park St, correct address is 812 Park St. CIB AGC lists them as ASSOCIATE member, not full contractor member | DO NOT RAISE: don't assert years in business (SOS incorporation 2017 but firm reads older); a recent widely-shared FB post honours 'Joann Seward' as 'one of the best all around masons and mason tenders' - reads celebratory not memorial, but DO NOT assume and DO NOT bring it up cold",
+  "photos": "generated",
+  "ready": true,
   "stage": "none"
  },
  "il-sewell-brothers-tree-bartonville": {
