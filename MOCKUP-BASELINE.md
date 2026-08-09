@@ -153,3 +153,71 @@ at volume, not to replace hand work where hand work already happened.
    been generated. Three good images and one broken icon went live.
    `for src in $(grep -o 'src="[a-z-]*\.svg"' index.html); do [ -f ] || echo` —
    run it every batch.
+
+---
+
+## Palette rule (added 2026-08-09 after Ricky reviewed that day's batch)
+
+Ricky's note on the 2026-08-09 batch: the pages "looked a lot like our own website
+style and colors." He was right, and the library proved it. Measured across the
+113 accents live at that moment:
+
+    orange             42.5%
+    warm overall       62%     (orange + amber/tan + red)
+    warm + green       78%
+    cool               20%
+    true grey/neutral  0%
+    dark backgrounds   100%    (--dark lightness 7-16% on every page)
+
+UNC brand orange `#e36b1e` sits at hue 23 — dead centre of the dominant band.
+"Dark hero + warm glow" **is** the UNC house style, so every mockup inherited it.
+Palette is not variation (see the uniqueness rule above); neither is a warm accent
+on a near-black hero, repeated 113 times.
+
+### Stage 1 — DONE. `tools/palettes.py`
+
+A curated 22-palette pool of `(dark, accent, off)` triples across seven bands:
+blue 5, grey 4, red 4, teal 3, green 2, violet 2, **warm 2 (capped on purpose)**.
+
+- `pick_batch(n, root=...)` returns n palettes with **n distinct bands**, ordered
+  by which band is most under-represented in the live library. Variety is enforced
+  by the tool, not left to whoever runs the batch. Picking purely by
+  "least-represented" stacked four greys in a row on the first try — that is just
+  a new flavour of the same failure, hence the distinct-band rule.
+- `audit()` fails any palette that uses UNC orange, or whose accent does not clear
+  **3.0:1 on the dark hero** and **4.5:1 for dark text sitting on the accent**
+  (the template paints the accent both ways — `.kick`/`h1 span` on dark, and dark
+  text on `.btn`/`.call`). Four reds failed this on the first pass and were
+  lightened until they passed. Run `python3 tools/palettes.py` — it exits non-zero
+  on any problem.
+- Every pool accent was checked against the live library; none collide.
+
+This changes `--dark` and `--off` as well as the accent, so backgrounds move
+through navy, graphite, gunmetal, oxblood-black and petrol rather than sitting on
+near-black every time. **No template change — `dark`, `accent` and `off` were
+already parameters of `build(d)`.** Nothing in the battle-tested generator was
+rewritten.
+
+### Stage 2 — NOT BUILT. Do not skip it.
+
+Stage 1 widens colour *inside* a dark hero. It does not fix the thing that
+actually makes these read as UNC: **100% of pages are dark-hero.** Even a blue
+accent leaves the same silhouette.
+
+Stage 2 adds a scheme axis to `new_page.py`:
+
+    DARK    near-black hero (current — keep, it works)
+    SLATE   deep blue-grey / charcoal hero
+    LIGHT   white or off-white hero, dark type
+    MONO    greyscale + one restrained accent
+
+Ricky explicitly asked for white and greys. Those need LIGHT/MONO, which needs the
+hero, nav and section-contrast rules to flip — a real template change, to be made
+*alongside* the existing dark path rather than replacing it. Approved as separate,
+staged work on 2026-08-09.
+
+### Applies from the next batch onward
+
+The 2026-08-09 batch (EZ Roofing, Freiburger, Seward) shipped on the old palette
+and was deliberately left alone — Ricky was dialling it that morning and a page
+should not change under a prospect mid-outreach.
