@@ -240,6 +240,57 @@
     s.classList.remove('active'); void s.offsetWidth;
     s.innerHTML = content;
     s.classList.add('screen', 'active');
+    applyNoMockupGuard();
+  }
+
+  // ── TRIPWIRE — no mockup_url means the record is not trustworthy ──
+  // The curated batch carries some HubSpot COMPANY ids in contact_id. The
+  // worker's /sync PATCHes /crm/v3/objects/contacts/{id}, so a company id 404s,
+  // /sync returns "Contact update failed", and it bails BEFORE writing the KV
+  // call log — the outcome vanishes silently. Until that is repaired, any record
+  // with no mockup is treated as suspect and outcome logging is hard-disabled.
+  // Skip / DNC / prev / next stay live so Ricky can move past it.
+  // PERMANENT GUARD — do not remove after the CRM id repair.
+  function applyNoMockupGuard() {
+    const s = stage();
+    if (!s) return;
+    const btns = s.querySelectorAll('[data-outcome]');
+    const note = s.querySelector('#no-mockup-guard-note');
+    const prospect = (liveQueue.length && liveQueue[liveIndex]) ? liveQueue[liveIndex] : null;
+    // No live prospect loaded (manual mode) or record is good — make sure the
+    // buttons are enabled and clear any stale note.
+    const blocked = !!prospect && !prospect.mockup_url;
+    if (!blocked) {
+      btns.forEach(b => {
+        if (b.dataset.noMockupBlocked !== '1') return;
+        delete b.dataset.noMockupBlocked;
+        b.disabled = false;
+        b.removeAttribute('aria-disabled');
+        b.style.opacity = '';
+        b.style.pointerEvents = '';
+        b.title = '';
+      });
+      if (note && note.parentNode) note.parentNode.removeChild(note);
+      return;
+    }
+    if (!btns.length) return;
+    btns.forEach(b => {
+      b.dataset.noMockupBlocked = '1';
+      b.disabled = true;
+      b.setAttribute('aria-disabled', 'true');
+      b.style.opacity = '0.4';
+      b.style.pointerEvents = 'none';
+      b.title = 'Outcome logging disabled — this record has no mockup and may not be a valid contact id.';
+    });
+    if (!note) {
+      const n = document.createElement('div');
+      n.id = 'no-mockup-guard-note';
+      n.style.cssText = 'font-size:0.72rem;color:#fbbf24;margin-top:0.5rem;padding:0.4rem 0.6rem;border:1px solid rgba(251,191,36,0.35);border-radius:var(--radius-sm);background:rgba(251,191,36,0.08);';
+      n.textContent = '⚠ Outcome logging disabled — this record has no mockup and may not be a valid contact id.';
+      const anchor = btns[0].closest('.branches') || btns[0].parentNode;
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(n, anchor.nextSibling);
+      else s.appendChild(n);
+    }
   }
 
   function html(strings, ...values) {
@@ -641,6 +692,35 @@
     }
   }
 
+  // ── Curated mockup batch loader ───────────────────────────────
+  // Reads one static queue file and applies the rep guard.
+  // Returns an array of prospects, or null if the file is missing, empty, or
+  // was generated for a different rep (never serve another rep's leads).
+  async function loadStaticQueueFile(path) {
+    try {
+      const resp = await fetch(path, { cache: 'no-cache' });
+      if (!resp.ok) return null;
+      const file = await resp.json();
+      if (!file || !file.prospects || !file.prospects.length) return null;
+      const fileRep = file._generated_for_rep_id;
+      const currentRepId = Shell._currentRep ? Shell._currentRep().id : null;
+      // Only use the file if it matches current rep OR has no rep tag (legacy)
+      if (fileRep && fileRep !== currentRepId) return null;
+      return file.prospects;
+    } catch(e) { return null; }
+  }
+
+  // Today's dated queue file first, then the standing curated batch.
+  // This cockpit dials a FIXED list — the businesses we already built free
+  // homepage mockups for. That list only exists in these files, so they are
+  // the primary source. Shell.fetchQueue() hits the worker's generic /queue
+  // endpoint, which returns any owned contact with a phone and has zero
+  // awareness of mockups — that's the last resort, not the first.
+  async function loadCuratedQueue() {
+    return (await loadStaticQueueFile('/sales-ops/mockup-reveal/queue/' + todayKey() + '.json'))
+        || (await loadStaticQueueFile('/sales-ops/mockup-reveal/queue/latest.json'));
+  }
+
   async function loadNextOrRefresh() {
     // Queue exhausted — auto-fetch next batch
     renderScreen(html`
@@ -649,29 +729,14 @@
       </div>
     `);
     try {
-      let data = await Shell.fetchQueue(10);
-      // Fallback: try static queue file if worker is down
-      // CRITICAL: only use if the file was generated for the current rep — never serve another rep's leads
-      if (!data || !data.ok || !data.queue || !data.queue.length) {
-        try {
-          const currentRepId = Shell._currentRep ? Shell._currentRep().id : null;
-          let staticResp = await fetch('/sales-ops/mockup-reveal/queue/' + todayKey() + '.json', { cache: 'no-cache' });
-          if (!staticResp.ok) {
-            // No file for today's exact date — fall back to the standing curated batch.
-            // This cockpit is a fixed list (companies we built mockups for), not a
-            // daily-generated dial queue, so it should never depend on remembering a date.
-            staticResp = await fetch('/sales-ops/mockup-reveal/queue/latest.json', { cache: 'no-cache' });
-          }
-          if (staticResp.ok) {
-            const staticQueue = await staticResp.json();
-            const fileRep = staticQueue && staticQueue._generated_for_rep_id;
-            // Only use static file if it matches current rep OR has no rep tag (legacy)
-            if (staticQueue && staticQueue.prospects && staticQueue.prospects.length &&
-                (!fileRep || fileRep === currentRepId)) {
-              data = { ok: true, queue: staticQueue.prospects };
-            }
-          }
-        } catch(e) {}
+      // Curated mockup batch first — dated file, then latest.json.
+      let data = null;
+      const curated = await loadCuratedQueue();
+      if (curated && curated.length) data = { ok: true, queue: curated };
+
+      // Only if BOTH static files are missing or empty, fall back to the worker.
+      if (!data) {
+        data = await Shell.fetchQueue(10);
       }
       if (!data || !data.ok || !data.queue || !data.queue.length) {
         renderScreen(html`
@@ -765,28 +830,20 @@
     const btn = document.getElementById('load-dials-btn');
     if (btn) { btn.textContent = 'Loading...'; btn.disabled = true; }
     try {
-      // Try live worker first — falls back to today's static queue file if worker is down
-      let data = await Shell.fetchQueue(10);
+      // Curated mockup batch first — today's dated queue file, then the standing
+      // latest.json — so this never depends on remembering a date. The live
+      // worker is the fallback, because its generic /queue endpoint knows
+      // nothing about which businesses we actually built mockups for.
+      let data = null;
       let usedFallback = false;
 
-      if (!data || !data.ok || !data.queue || !data.queue.length) {
-        // Worker down or no eligible contacts — try today's static queue file, then the
-        // standing curated batch (latest.json) so this never depends on remembering a date.
-        const todayStr = todayKey();
-        const staticPath = '/sales-ops/mockup-reveal/queue/' + todayStr + '.json';
-        try {
-          let staticResp = await fetch(staticPath, { cache: 'no-cache' });
-          if (!staticResp.ok) {
-            staticResp = await fetch('/sales-ops/mockup-reveal/queue/latest.json', { cache: 'no-cache' });
-          }
-          if (staticResp.ok) {
-            const staticQueue = await staticResp.json();
-            if (staticQueue && staticQueue.prospects && staticQueue.prospects.length) {
-              data = { ok: true, queue: staticQueue.prospects };
-              usedFallback = true;
-            }
-          }
-        } catch(e) {}
+      const curated = await loadCuratedQueue();
+      if (curated && curated.length) data = { ok: true, queue: curated };
+
+      // Only if BOTH static files are missing or empty, fall back to the worker.
+      if (!data) {
+        data = await Shell.fetchQueue(10);
+        if (data && data.ok && data.queue && data.queue.length) usedFallback = true;
       }
 
       if (!data || !data.ok || !data.queue || !data.queue.length) {
@@ -795,7 +852,7 @@
       }
       liveQueue = data.queue;
       liveIndex = 0;
-      if (usedFallback && btn) { btn.title = 'Loaded from static queue file — worker offline. Cooldown filtering not applied.'; }
+      if (usedFallback && btn) { btn.title = 'Loaded from the live worker — the curated mockup batch was unavailable. These records may have no mockup built.'; }
 
       // Update button immediately so "of N" is correct when card renders
       if (btn) { btn.textContent = '✓ ' + liveQueue.length + ' dials loaded'; btn.disabled = false; }
@@ -1073,6 +1130,10 @@
     if (_greetLine && scripts && scripts.greeting && scripts.greeting.default) {
       _greetLine.innerHTML = tokenizeHTML(scripts.greeting.default);
     }
+
+    // Re-apply the no-mockup tripwire for THIS prospect. Prev/Next re-render the
+    // card without re-rendering the screen, so the guard has to run here too.
+    applyNoMockupGuard();
   }
 
   function nextLiveDial() {
