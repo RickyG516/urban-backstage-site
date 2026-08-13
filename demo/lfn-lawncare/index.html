@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LFN Lawncare Services — Grandview, Dubuque</title>
+<meta name="description" content="Liam, Finn and Nolan cut grass in South Grandview near Bryant Elementary in Dubuque, Iowa. Mowing, trimming, raking and hauling. Ask for a mow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B2118;
+  --paper:#FFF6DF;
+  --paper-2:#FFEFC7;
+  --sky:#7FD6F5;
+  --sky-hi:#B7EAFB;
+  --grass:#3FA34D;
+  --grass-mid:#5FC244;
+  --grass-hi:#7ED957;
+  --sun:#FFD23F;
+  --sun-deep:#FFB627;
+  --tomato:#E8543F;
+  --berry:#FF6B9D;
+  --shadow:6px 6px 0 var(--ink);
+  --shadow-sm:4px 4px 0 var(--ink);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Nunito,system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:Fredoka,Verdana,sans-serif;font-weight:700;line-height:1.05;margin:0}
+p{margin:0 0 1rem}
+a{color:inherit}
+.wrap{width:min(1080px,92vw);margin-inline:auto}
+.scribble{font-family:Caveat,cursive;font-size:1.45rem;line-height:1.25;color:var(--tomato)}
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky;top:0;z-index:60;
+  background:var(--paper);
+  border-bottom:4px solid var(--ink);
+}
+.bar .wrap{display:flex;align-items:center;gap:.9rem;padding:.6rem 0}
+.bar .mark{width:46px;height:46px;flex:none}
+.bar .name{font-family:Fredoka,sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:.5px}
+.bar .name span{display:block;font-family:Nunito,sans-serif;font-weight:600;font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;opacity:.65}
+.bar .btn{margin-left:auto}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-block;
+  font-family:Fredoka,sans-serif;font-weight:600;font-size:1.02rem;
+  text-decoration:none;cursor:pointer;
+  background:var(--sun);color:var(--ink);
+  border:4px solid var(--ink);border-radius:999px;
+  padding:.6rem 1.4rem;
+  box-shadow:var(--shadow-sm);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn.ghost{background:var(--paper)}
+.btn.big{font-size:1.2rem;padding:.85rem 2rem;box-shadow:var(--shadow)}
+:focus-visible{outline:4px solid var(--tomato);outline-offset:3px;border-radius:6px}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:linear-gradient(var(--sky-hi) 0%, var(--sky) 48%, var(--sky) 100%);
+  border-bottom:5px solid var(--ink);
+  padding:3.4rem 0 200px;
+  overflow:hidden;
+}
+.hero .wrap{position:relative;z-index:5;text-align:center}
+.eyebrow{
+  display:inline-block;background:var(--tomato);color:var(--paper);
+  font-weight:700;font-size:clamp(.82rem,2.4vw,1rem);letter-spacing:2px;text-transform:uppercase;
+  border:4px solid var(--ink);border-radius:999px;padding:.45rem 1.35rem;
+  box-shadow:var(--shadow-sm);transform:rotate(-2deg);
+  margin:.2rem 0 1.5rem;
+}
+.badge{width:min(210px,42vw);margin:.4rem auto 1.1rem;display:block}
+.hero h1{
+  font-size:clamp(2.4rem,7.4vw,4.6rem);
+  max-width:16ch;margin:.2rem auto .8rem;
+  text-shadow:5px 5px 0 rgba(43,33,24,.16);
+}
+.hero h1 em{font-style:normal;color:var(--paper);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
+.hero p.lede{max-width:34ch;margin:0 auto 1.6rem;font-weight:600;font-size:1.08rem}
+.hero .cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+
+/* sky props */
+.sun{position:absolute;top:26px;right:7vw;width:120px;height:120px;z-index:1}
+.sun .rays{transform-origin:60px 60px;animation:spin 40s linear infinite}
+.cloud{position:absolute;z-index:1;opacity:.95}
+.cloud.a{top:60px;left:-140px;width:170px;animation:drift 46s linear infinite}
+.cloud.b{top:150px;left:-260px;width:110px;animation:drift 66s linear infinite 6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{to{transform:translateX(calc(100vw + 300px))}}
+
+/* the lawn */
+.lawn{position:absolute;left:0;right:0;bottom:0;height:150px;background:var(--grass);z-index:3}
+.lawn .shag{
+  position:absolute;left:0;right:0;top:-24px;height:24px;
+  background:radial-gradient(ellipse 9px 24px at 50% 100%, var(--grass) 98%, transparent 100%) 0 100%/18px 24px repeat-x;
+}
+.lawn .shag::after{
+  content:'';position:absolute;left:0;right:0;top:-14px;height:20px;
+  background:radial-gradient(ellipse 7px 20px at 50% 100%, var(--grass) 98%, transparent 100%) 6px 100%/26px 20px repeat-x;
+}
+.cut{position:absolute;left:0;top:-46px;bottom:0;width:0;overflow:hidden;z-index:2;animation:mowline 11s linear infinite}
+.cut::before{content:'';position:absolute;left:0;right:0;top:0;height:46px;background:var(--sky)}
+.cut::after{
+  content:'';position:absolute;left:0;right:0;top:46px;bottom:0;
+  background:repeating-linear-gradient(90deg,var(--grass-mid) 0 46px,var(--grass-hi) 46px 92px);
+}
+@keyframes mowline{
+  0%{width:0;opacity:1}
+  88%{width:102%;opacity:1}
+  95%{width:102%;opacity:0}
+  96%{width:0;opacity:0}
+  100%{width:0;opacity:1}
+}
+.mower{position:absolute;bottom:96px;left:0;width:132px;z-index:4;animation:drive 11s linear infinite}
+.mower .wheel{transform-origin:center;animation:spin 1.1s linear infinite}
+@keyframes drive{
+  0%{transform:translateX(-150px)}
+  88%{transform:translateX(calc(100vw + 20px))}
+  100%{transform:translateX(calc(100vw + 20px))}
+}
+.clip{position:absolute;bottom:120px;width:9px;height:9px;border-radius:2px;background:var(--grass-hi);z-index:4;opacity:0}
+.clip:nth-child(1){animation:fly 11s linear infinite}
+.clip:nth-child(2){animation:fly 11s linear infinite .18s}
+.clip:nth-child(3){animation:fly 11s linear infinite .34s}
+@keyframes fly{
+  0%{transform:translate(-150px,0) rotate(0);opacity:0}
+  2%{opacity:1}
+  86%{transform:translate(calc(100vw - 60px),-46px) rotate(540deg);opacity:0}
+  100%{opacity:0}
+}
+
+/* ---------- sections ---------- */
+section{padding:4.2rem 0;position:relative}
+.head{text-align:center;margin-bottom:2.4rem}
+.head h2{font-size:clamp(1.9rem,4.6vw,2.9rem)}
+.head .scribble{margin-top:.4rem;display:block}
+.reveal{opacity:0;transform:translateY(26px) rotate(var(--tilt,0deg));transition:opacity .5s ease,transform .5s cubic-bezier(.2,.9,.3,1.4)}
+.reveal.in{opacity:1;transform:translateY(0) rotate(var(--tilt,0deg))}
+
+.grid{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{
+  background:var(--paper-2);
+  border:4px solid var(--ink);border-radius:22px;
+  padding:1.5rem 1.4rem;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.card:hover{transform:translateY(-6px) rotate(-1.2deg);box-shadow:9px 11px 0 var(--ink)}
+.card h3{font-size:1.35rem;margin-bottom:.4rem}
+.card p{margin:0;font-size:.98rem}
+.icon{width:74px;height:74px;margin-bottom:.7rem}
+
+/* crew */
+#crew{background:var(--sun);border-block:5px solid var(--ink)}
+.crew{display:grid;gap:1.8rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.kid{
+  background:var(--paper);border:4px solid var(--ink);border-radius:22px;
+  padding:1.4rem;text-align:center;box-shadow:var(--shadow);
+  transition:transform .18s ease;
+}
+.kid:hover{transform:translateY(-6px) rotate(1.5deg)}
+.kid .face{width:118px;height:118px;margin:0 auto .6rem}
+.kid h3{font-size:1.6rem}
+.kid .role{
+  display:inline-block;margin:.35rem 0 .6rem;
+  font-weight:700;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
+  border:3px solid var(--ink);border-radius:999px;padding:.15rem .8rem;
+}
+.kid.n .role{background:var(--grass-hi)}
+.kid.f .role{background:var(--sky)}
+.kid.l .role{background:var(--berry)}
+.kid p{font-size:.95rem;margin:0}
+
+/* area */
+.area{display:grid;gap:2rem;grid-template-columns:1.05fr .95fr;align-items:center}
+.map{width:100%;border:4px solid var(--ink);border-radius:22px;box-shadow:var(--shadow);background:var(--sky-hi);display:block}
+
+/* steps */
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:1.1rem;max-width:720px;margin-inline:auto}
+.steps li{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--paper-2);border:4px solid var(--ink);border-radius:18px;
+  padding:1.05rem 1.2rem;box-shadow:var(--shadow-sm);
+}
+.steps .num{
+  flex:none;width:44px;height:44px;border-radius:50%;
+  background:var(--tomato);color:var(--paper);
+  border:3px solid var(--ink);
+  display:grid;place-items:center;
+  font-family:Fredoka,sans-serif;font-weight:700;font-size:1.25rem;
+}
+.steps b{font-family:Fredoka,sans-serif;font-size:1.12rem;display:block}
+.steps span{font-size:.96rem}
+
+/* prices */
+#prices{background:var(--grass);border-block:5px solid var(--ink);color:var(--paper)}
+#prices .head h2{color:var(--paper)}
+#prices .head .scribble{color:var(--sun)}
+.tags{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));max-width:820px;margin-inline:auto}
+.tag{
+  background:var(--paper);color:var(--ink);
+  border:4px solid var(--ink);border-radius:20px;
+  padding:1.3rem 1rem;text-align:center;box-shadow:var(--shadow);
+}
+.tag .size{font-weight:700;font-size:.76rem;letter-spacing:2px;text-transform:uppercase;opacity:.7}
+.tag .amt{font-family:Fredoka,sans-serif;font-weight:700;font-size:2.9rem;line-height:1;margin:.3rem 0}
+.tag .note{font-size:.9rem;margin:0}
+.pricefoot{text-align:center;margin-top:1.6rem}
+
+/* form */
+#book .panel{
+  background:var(--paper-2);
+  border:5px solid var(--ink);border-radius:26px;
+  box-shadow:8px 8px 0 var(--ink);
+  padding:2rem clamp(1.2rem,4vw,2.6rem);
+  max-width:720px;margin-inline:auto;position:relative;
+}
+.tape{
+  position:absolute;top:-18px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  background:var(--berry);color:var(--ink);
+  border:3px solid var(--ink);border-radius:8px;
+  font-weight:700;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;
+  padding:.25rem 1.1rem;
+}
+.field{margin-bottom:1.05rem}
+.field label{display:block;font-family:Fredoka,sans-serif;font-weight:600;margin-bottom:.3rem;font-size:1rem}
+.field input,.field select,.field textarea{
+  width:100%;font-family:Nunito,sans-serif;font-size:1rem;color:var(--ink);
+  background:var(--paper);
+  border:3px solid var(--ink);border-radius:14px;
+  padding:.7rem .9rem;
+}
+.field textarea{min-height:110px;resize:vertical}
+.two{display:grid;gap:1.05rem;grid-template-columns:1fr 1fr}
+.hp{position:absolute;left:-9999px}
+.formfoot{text-align:center;margin-top:.4rem}
+.formfoot .scribble{display:block;margin-top:.7rem;color:var(--ink);opacity:.75}
+.done{display:none;text-align:center;padding:1rem 0}
+.done.show{display:block;animation:pop .45s cubic-bezier(.2,.9,.3,1.5)}
+.done h3{font-size:1.8rem;margin-bottom:.5rem}
+@keyframes pop{from{transform:scale(.7) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:3.4rem 0 2rem;position:relative;margin-top:0}
+.footgrass{
+  position:absolute;top:-22px;left:0;right:0;height:24px;
+  background:radial-gradient(ellipse 9px 24px at 50% 0%, var(--ink) 98%, transparent 100%) 0 0/18px 24px repeat-x;
+}
+footer .wrap{text-align:center}
+footer .mark{width:78px;margin-bottom:.8rem}
+footer p{font-size:.92rem;opacity:.82;margin:.3rem 0}
+footer .tagline{font-family:Caveat,cursive;font-size:1.6rem;opacity:1;color:var(--sun)}
+
+@media (max-width:760px){
+  .area{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .hero{padding-bottom:170px}
+  .sun{width:86px;height:86px;right:5vw}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .cut{width:102%;opacity:1}
+  .mower{transform:translateX(60vw)}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="bar">
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 400 400" aria-hidden="true"><use href="#logo"/></svg>
+    <div class="name">LFN Lawncare<span>South Grandview · Dubuque</span></div>
+    <a class="btn" href="#book">Ask for a mow</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <svg class="sun" viewBox="0 0 120 120" aria-hidden="true">
+    <g class="rays" stroke="#FFB627" stroke-width="7" stroke-linecap="round">
+      <line x1="60" y1="8" x2="60" y2="22"/><line x1="60" y1="98" x2="60" y2="112"/>
+      <line x1="8" y1="60" x2="22" y2="60"/><line x1="98" y1="60" x2="112" y2="60"/>
+      <line x1="23" y1="23" x2="33" y2="33"/><line x1="87" y1="87" x2="97" y2="97"/>
+      <line x1="97" y1="23" x2="87" y2="33"/><line x1="33" y1="87" x2="23" y2="97"/>
+    </g>
+    <circle cx="60" cy="60" r="28" fill="#FFD23F" stroke="#2B2118" stroke-width="5"/>
+  </svg>
+
+  <svg class="cloud a" viewBox="0 0 200 90" aria-hidden="true">
+    <path d="M40 78 a26 26 0 0 1 4 -51 a34 34 0 0 1 63 -8 a28 28 0 0 1 52 12 a24 24 0 0 1 -8 47 z" fill="#fff" stroke="#2B2118" stroke-width="5" stroke-linejoin="round"/>
+  </svg>
+  <svg class="cloud b" viewBox="0 0 200 90" aria-hidden="true">
+    <path d="M40 78 a26 26 0 0 1 4 -51 a34 34 0 0 1 63 -8 a28 28 0 0 1 52 12 a24 24 0 0 1 -8 47 z" fill="#fff" stroke="#2B2118" stroke-width="5" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="wrap">
+    <svg class="badge" viewBox="0 0 400 400" role="img" aria-label="LFN Lawncare Services badge"><use href="#logo"/></svg>
+    <span class="eyebrow">South Grandview only · near Bryant Elementary</span>
+    <h1>We cut the grass so <em>you don't have to.</em></h1>
+    <p class="lede">Liam, Finn and Nolan. Three neighborhood kids, one mower, and a whole lot of straight lines.</p>
+    <div class="cta">
+      <a class="btn big" href="#book">Ask for a mow</a>
+      <a class="btn big ghost" href="#crew">Meet the crew</a>
+    </div>
+  </div>
+
+  <div class="lawn">
+    <div class="shag"></div>
+  </div>
+  <div class="cut"></div>
+  <span class="clip"></span><span class="clip"></span><span class="clip"></span>
+
+  <svg class="mower" viewBox="0 0 150 110" aria-hidden="true">
+    <g stroke="#2B2118" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M92 62 L124 20" fill="none"/>
+      <path d="M84 62 L116 20" fill="none"/>
+      <path d="M112 16 L130 16" fill="none"/>
+      <rect x="30" y="26" width="44" height="26" rx="7" fill="#E8543F"/>
+      <path d="M14 52 h84 a8 8 0 0 1 8 8 v14 a8 8 0 0 1 -8 8 h-84 a8 8 0 0 1 -8 -8 v-14 a8 8 0 0 1 8 -8 z" fill="#FFD23F"/>
+      <circle class="wheel" cx="26" cy="88" r="14" fill="#2B2118" stroke-width="0"/>
+      <circle class="wheel" cx="86" cy="88" r="14" fill="#2B2118" stroke-width="0"/>
+      <circle cx="26" cy="88" r="5" fill="#FFF6DF" stroke-width="0"/>
+      <circle cx="86" cy="88" r="5" fill="#FFF6DF" stroke-width="0"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section id="what">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>What we do</h2>
+      <span class="scribble">no job too small, no yard too weird</span>
+    </div>
+    <div class="grid">
+
+      <article class="card reveal" style="--tilt:-1deg">
+        <svg class="icon" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="8" y="60" width="84" height="30" rx="8" fill="#7ED957" stroke="#2B2118" stroke-width="5"/>
+          <g stroke="#2B2118" stroke-width="5" stroke-linecap="round">
+            <path d="M20 60 v-16"/><path d="M36 60 v-24"/><path d="M52 60 v-14"/><path d="M68 60 v-22"/><path d="M84 60 v-15"/>
+          </g>
+        </svg>
+        <h3>Mow the lawn</h3>
+        <p>Front, back, and that weird strip by the driveway. Stripes included at no extra charge.</p>
+      </article>
+
+      <article class="card reveal" style="--tilt:1.2deg">
+        <svg class="icon" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M22 84 L70 22" stroke="#2B2118" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="74" cy="18" r="13" fill="#E8543F" stroke="#2B2118" stroke-width="5"/>
+          <path d="M14 88 q10 -14 20 -4" stroke="#3FA34D" stroke-width="6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Trim and edge</h3>
+        <p>Around trees, fences, mailboxes and the shed. The parts a mower can't reach.</p>
+      </article>
+
+      <article class="card reveal" style="--tilt:-.8deg">
+        <svg class="icon" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M50 12 v40" stroke="#2B2118" stroke-width="7" stroke-linecap="round"/>
+          <path d="M24 56 h52" stroke="#2B2118" stroke-width="7" stroke-linecap="round"/>
+          <g stroke="#2B2118" stroke-width="6" stroke-linecap="round">
+            <path d="M26 56 v22"/><path d="M38 56 v22"/><path d="M50 56 v22"/><path d="M62 56 v22"/><path d="M74 56 v22"/>
+          </g>
+        </svg>
+        <h3>Rake and haul</h3>
+        <p>We bag the clippings and take them off your lawn. Leaves in the fall too.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREW ============ -->
+<section id="crew">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Meet the crew</h2>
+      <span class="scribble" style="color:var(--ink)">the L, the F and the N, in that order</span>
+    </div>
+    <div class="crew">
+
+      <article class="kid l reveal" style="--tilt:-1deg">
+        <svg class="face" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="62" r="40" fill="#E8C39E" stroke="#2B2118" stroke-width="5"/>
+          <path d="M22 52 q6 -26 38 -26 q32 0 38 26 q-14 -10 -38 -10 q-24 0 -38 10 z" fill="#2B2118"/>
+          <circle cx="46" cy="64" r="4.5" fill="#2B2118"/><circle cx="74" cy="64" r="4.5" fill="#2B2118"/>
+          <path d="M44 78 q16 16 32 0" stroke="#2B2118" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Liam</h3>
+        <span class="role">Rake and haul</span>
+        <p>Bags every clipping. Fastest cleanup on the block, and he keeps score.</p>
+      </article>
+
+      <article class="kid f reveal" style="--tilt:1.5deg">
+        <svg class="face" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="62" r="40" fill="#FFE2C4" stroke="#2B2118" stroke-width="5"/>
+          <path d="M24 44 q12 -16 36 -16 q24 0 36 16 q-18 8 -36 8 q-18 0 -36 -8 z" fill="#8B5A2B" stroke="#2B2118" stroke-width="5"/>
+          <circle cx="46" cy="64" r="4.5" fill="#2B2118"/><circle cx="74" cy="64" r="4.5" fill="#2B2118"/>
+          <path d="M46 80 q14 14 28 0" stroke="#2B2118" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Finn</h3>
+        <span class="role">Trim boss</span>
+        <p>Handles edges and corners. Owns the good gloves and will tell you about them.</p>
+      </article>
+
+      <article class="kid n reveal" style="--tilt:-1.5deg">
+        <svg class="face" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="62" r="40" fill="#FFD9AE" stroke="#2B2118" stroke-width="5"/>
+          <path d="M18 50 a42 42 0 0 1 84 0 z" fill="#3FA34D" stroke="#2B2118" stroke-width="5"/>
+          <path d="M96 50 h16" stroke="#2B2118" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="46" cy="64" r="4.5" fill="#2B2118"/><circle cx="74" cy="64" r="4.5" fill="#2B2118"/>
+          <path d="M46 82 q14 12 28 0" stroke="#2B2118" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Nolan</h3>
+        <span class="role">Straight lines</span>
+        <p>Runs the mower. Will re-cut a crooked row for free because it bugs him.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ AREA ============ -->
+<section id="area">
+  <div class="wrap area">
+    <div class="reveal">
+      <h2 style="font-size:clamp(1.9rem,4.6vw,2.9rem)">We stick to South Grandview</h2>
+      <p class="scribble" style="margin:.5rem 0 1rem">if we can walk the mower there, we can cut it</p>
+      <p>We cut the streets around Bryant Elementary, all within biking distance of home. That keeps the price low and means we can show up the same week you ask.</p>
+      <p>Just past the edge of the neighborhood? Send the form anyway and ask. Worst case we say no.</p>
+      <a class="btn" href="#book">Check my street</a>
+    </div>
+    <svg class="map reveal" style="--tilt:1.5deg" viewBox="0 0 420 300" role="img" aria-label="Hand drawn map of the Grandview service area">
+      <rect x="0" y="0" width="420" height="300" fill="#B7EAFB"/>
+      <path d="M40 210 q60 -40 130 -20 q70 20 120 -20 q50 -40 90 -10 l0 130 l-340 0 z" fill="#7ED957"/>
+      <g stroke="#FFF6DF" stroke-width="14" stroke-linecap="round">
+        <path d="M20 120 q110 30 200 -10 q80 -34 190 -6"/>
+        <path d="M150 20 q20 120 -30 270"/>
+        <path d="M290 10 q10 140 30 280"/>
+      </g>
+      <g stroke="#2B2118" stroke-width="4" fill="#FFD23F">
+        <rect x="60" y="70" width="44" height="36" rx="5"/><path d="M56 70 l26 -22 l26 22" fill="#E8543F"/>
+        <rect x="196" y="150" width="44" height="36" rx="5"/><path d="M192 150 l26 -22 l26 22" fill="#E8543F"/>
+        <rect x="326" y="88" width="44" height="36" rx="5"/><path d="M322 88 l26 -22 l26 22" fill="#E8543F"/>
+      </g>
+      <g fill="none" stroke="#E8543F" stroke-width="7" stroke-linecap="round" stroke-dasharray="18 14">
+        <path d="M46 168 q40 -110 168 -122 q140 -14 168 106 q26 118 -104 136 q-150 22 -216 -20 q-40 -26 -16 -100 z"/>
+      </g>
+      <text x="210" y="286" text-anchor="middle" font-family="Caveat,cursive" font-size="30" fill="#2B2118">the streets by Bryant Elementary</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>How it works</h2>
+      <span class="scribble">three steps, that's the whole thing</span>
+    </div>
+    <ol class="steps">
+      <li class="reveal"><span class="num">1</span><div><b>Send the form</b><span>Tell us your street and what you need cut.</span></div></li>
+      <li class="reveal"><span class="num">2</span><div><b>A grown up calls back</b><span>We confirm the day, the price and where to park the mower.</span></div></li>
+      <li class="reveal"><span class="num">3</span><div><b>We show up and cut</b><span>Pay us when it's done and the clippings are gone.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PRICES ============ -->
+<section id="prices">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>What it costs</h2>
+      <span class="scribble">cash, check, or whatever your parents use</span>
+    </div>
+    <div class="tags">
+      <div class="tag reveal" style="--tilt:-1.5deg"><div class="size">Small yard</div><div class="amt">$30</div><p class="note">Just the front, or a small lot.</p></div>
+      <div class="tag reveal" style="--tilt:1deg"><div class="size">Medium yard</div><div class="amt">$45</div><p class="note">Front and back, normal city lot.</p></div>
+      <div class="tag reveal" style="--tilt:-1deg"><div class="size">Big yard</div><div class="amt">$60</div><p class="note">Corner lots and anything with a hill.</p></div>
+    </div>
+    <p class="pricefoot scribble" style="color:var(--sun)">first cut for a new neighbor is $10 off</p>
+  </div>
+</section>
+
+<!-- ============ FORM ============ -->
+<section id="book">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Ask for a mow</h2>
+      <span class="scribble">a grown up reads every message</span>
+    </div>
+
+    <div class="panel reveal">
+      <span class="tape">Leave us a note</span>
+
+      <form id="mowForm" name="lfn-mow-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="lfn-mow-request">
+        <p class="hp"><label>Skip this field <input name="bot-field"></label></p>
+
+        <div class="field">
+          <label for="fname">Your name</label>
+          <input id="fname" name="name" type="text" required autocomplete="name">
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="fphone">Phone</label>
+            <input id="fphone" name="phone" type="tel" required autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="femail">Email</label>
+            <input id="femail" name="email" type="email" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="faddr">Street address</label>
+          <input id="faddr" name="address" type="text" required placeholder="South Grandview only">
+        </div>
+
+        <div class="field">
+          <label for="fjob">What do you need?</label>
+          <select id="fjob" name="job">
+            <option>Mow the lawn</option>
+            <option>Mow, trim and edge</option>
+            <option>The whole thing, including hauling</option>
+            <option>Rake and haul only</option>
+            <option>Not sure, help me pick</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="fnote">Anything we should know?</label>
+          <textarea id="fnote" name="notes" placeholder="Dog in the yard, gate code, sprinkler heads, best day of the week."></textarea>
+        </div>
+
+        <div class="formfoot">
+          <button class="btn big" type="submit">Send it</button>
+          <span class="scribble">we usually answer the same day</span>
+        </div>
+      </form>
+
+      <div class="done" id="done">
+        <h3>Got it. 🌱</h3>
+        <p>Thanks for the note. A grown up will call you back to set up a day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footgrass"></div>
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 400 400" aria-hidden="true"><use href="#logo"/></svg>
+    <p class="tagline">Mowed with pride.</p>
+    <p><strong>LFN Lawncare Services</strong> · Liam, Finn &amp; Nolan</p>
+    <p>South Grandview · near Bryant Elementary · Dubuque, Iowa</p>
+    <p>An adult manages this page and every message that comes through it.</p>
+  </div>
+</footer>
+
+<!-- ============ LOGO SYMBOL ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 400 400">
+    <clipPath id="lfnClip"><circle cx="200" cy="200" r="132"/></clipPath>
+    <circle cx="200" cy="200" r="176" fill="#2B2118"/>
+    <circle cx="200" cy="200" r="168" fill="#FFD23F"/>
+    <circle cx="200" cy="200" r="152" fill="none" stroke="#2B2118" stroke-width="6" stroke-dasharray="14 12" stroke-linecap="round"/>
+    <circle cx="200" cy="200" r="132" fill="#7FD6F5"/>
+    <g clip-path="url(#lfnClip)">
+      <circle cx="112" cy="112" r="26" fill="#FFB627"/>
+      <g stroke="#FFB627" stroke-width="8" stroke-linecap="round">
+        <line x1="112" y1="66" x2="112" y2="52"/><line x1="112" y1="172" x2="112" y2="158"/>
+        <line x1="66" y1="112" x2="52" y2="112"/><line x1="158" y1="112" x2="172" y2="112"/>
+        <line x1="80" y1="80" x2="70" y2="70"/><line x1="144" y1="144" x2="154" y2="154"/>
+        <line x1="144" y1="80" x2="154" y2="70"/><line x1="80" y1="144" x2="70" y2="154"/>
+      </g>
+      <path d="M40 268 Q130 214 220 262 Q300 302 380 258 L380 340 L40 340 Z" fill="#3FA34D"/>
+      <path d="M20 292 Q120 254 210 292 Q300 328 390 288 L390 350 L20 350 Z" fill="#7ED957"/>
+      <g fill="#5FC244" opacity="0.75">
+        <rect x="60" y="290" width="26" height="64"/><rect x="130" y="286" width="26" height="68"/>
+        <rect x="204" y="294" width="26" height="60"/><rect x="276" y="300" width="26" height="54"/>
+      </g>
+      <g stroke="#2B2118" stroke-width="6" stroke-linecap="round" fill="none">
+        <path d="M96 300 q6 -22 2 -32"/><path d="M108 302 q10 -18 18 -24"/>
+        <path d="M292 306 q6 -22 2 -32"/><path d="M304 308 q10 -18 18 -24"/>
+      </g>
+    </g>
+    <circle cx="200" cy="200" r="132" fill="none" stroke="#2B2118" stroke-width="10"/>
+    <g transform="translate(200 176)">
+      <g transform="translate(6 6)" fill="#2B2118" opacity="0.35">
+        <path d="M-118 -46 h34 v70 h44 v30 h-78 z"/>
+        <path d="M-28 -46 h74 v29 h-40 v14 h34 v28 h-34 v29 h-34 z"/>
+        <path d="M58 -46 h30 l30 44 v-44 h32 v100 h-30 l-30 -45 v45 h-32 z"/>
+      </g>
+      <g fill="#FFF6DF" stroke="#2B2118" stroke-width="9" stroke-linejoin="round">
+        <path d="M-118 -46 h34 v70 h44 v30 h-78 z"/>
+        <path d="M-28 -46 h74 v29 h-40 v14 h34 v28 h-34 v29 h-34 z"/>
+        <path d="M58 -46 h30 l30 44 v-44 h32 v100 h-30 l-30 -45 v45 h-32 z"/>
+      </g>
+    </g>
+    <path d="M52 250 l32 26 l-32 26 z" fill="#2B2118"/>
+    <path d="M348 250 l-32 26 l32 26 z" fill="#2B2118"/>
+    <rect x="72" y="248" width="256" height="56" rx="14" fill="#E8543F" stroke="#2B2118" stroke-width="8"/>
+    <text x="200" y="286" text-anchor="middle" font-family="Fredoka, Verdana, sans-serif" font-size="34" font-weight="700" letter-spacing="3" fill="#FFF6DF">LAWNCARE</text>
+  </symbol>
+</svg>
+
+<script>
+/* Set to false once this is deployed on Netlify so the form posts for real. */
+const DEMO_MODE = true;
+
+const form = document.getElementById('mowForm');
+const done = document.getElementById('done');
+form.addEventListener('submit', function(e){
+  if(!DEMO_MODE) return;
+  e.preventDefault();
+  if(!form.reportValidity()) return;
+  form.style.display = 'none';
+  done.classList.add('show');
+  done.scrollIntoView({block:'center', behavior:'smooth'});
+});
+
+/* Scroll reveal */
+const io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+  });
+}, {threshold:0.15});
+document.querySelectorAll('.reveal').forEach(function(el, i){
+  el.style.transitionDelay = (i % 3) * 90 + 'ms';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
