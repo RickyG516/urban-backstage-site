@@ -6,12 +6,25 @@ fresh page driven by the pack (fonts, layout skeleton, hero treatment) and the
 prospect's own words, and satisfies every line of the spec-mockup-engine Step 5
 baseline gate.
 """
-import sys, json, html
-sys.path.insert(0,"/root/ubs/tools")
+import sys, os, json, html
+# Repo root is derived from this file's location so the generator works from
+# any clone path. Override with UBS_ROOT if you ever need to emit elsewhere.
+ROOT = os.environ.get("UBS_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEMO = os.path.join(ROOT, "demo")
+sys.path.insert(0, os.path.join(ROOT, "tools"))
 from scenes import BUILDERS
 import gen_assets as G
 
 PACKS = {
+ # P02/P05/P12/P17 were dropped from this dict at some point but their pages
+ # are still live in demo/. Font specs below are recovered from those built
+ # pages, NOT from the batch handoff doc — the handoff had P02 as Barlow
+ # Condensed 600;700, which would have given page 7 a different display face
+ # from the six P02 pages already shipped. Archivo Black is single-weight.
+ "P02": dict(disp="Archivo Black",         body="Inter",          dw="400",         bw="400;600"),
+ "P05": dict(disp="Anton",                 body="Karla",          dw="400",         bw="400;600"),
+ "P12": dict(disp="Chivo",                 body="Public Sans",    dw="600;700;900", bw="400;600"),
+ "P17": dict(disp="Sora",                  body="DM Sans",        dw="600;700;800", bw="400;600"),
  "P11": dict(disp="Big Shoulders Display", body="Libre Franklin", dw="700;800", bw="400;600"),
  "P19": dict(disp="Titillium Web",         body="Mulish",         dw="600;700", bw="400;600"),
  "P18": dict(disp="Cabin Condensed",       body="Merriweather Sans", dw="600;700", bw="400;600"),
@@ -23,12 +36,12 @@ def build(d):
     pk = PACKS[d["pack"]]; slug=d["slug"]; A=d["accent"]; DK=d["dark"]; OFF=d["off"]
     # ---- assets
     svg = BUILDERS[d["trade"]](DK, A, OFF, d["seed"], variant=d.get("variant"))
-    open(f"/root/ubs/demo/{slug}/motion.svg","w").write(svg)
-    open(f"/root/ubs/demo/{slug}/motion-hero.svg","w").write(
+    open(f"{DEMO}/{slug}/motion.svg","w").write(svg)
+    open(f"{DEMO}/{slug}/motion-hero.svg","w").write(
         svg.replace('viewBox="0 0 1200 900" width="1200" height="900"',
                     'viewBox="-390 235 1330 445" width="1330" height="445" preserveAspectRatio="xMidYMid slice"',1))
-    open(f"/root/ubs/demo/{slug}/radius.svg","w").write(G.radius(DK,A,OFF,d["seed"]))
-    open(f"/root/ubs/demo/{slug}/texture.svg","w").write(G.texture(DK,A,OFF,d["seed"]))
+    open(f"{DEMO}/{slug}/radius.svg","w").write(G.radius(DK,A,OFF,d["seed"]))
+    open(f"{DEMO}/{slug}/texture.svg","w").write(G.texture(DK,A,OFF,d["seed"]))
 
     tel = "".join(c for c in d["phone"] if c.isdigit())
     svcs = "".join(
@@ -276,6 +289,6 @@ footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-s
 if __name__ == "__main__":
     import os
     for d in json.load(open(sys.argv[1])):
-        os.makedirs(f"/root/ubs/demo/{d['slug']}", exist_ok=True)
-        open(f"/root/ubs/demo/{d['slug']}/index.html","w").write(build(d))
+        os.makedirs(f"{DEMO}/{d['slug']}", exist_ok=True)
+        open(f"{DEMO}/{d['slug']}/index.html","w").write(build(d))
         print("built", d["slug"])
