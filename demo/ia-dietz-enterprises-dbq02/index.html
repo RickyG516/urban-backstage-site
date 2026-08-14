@@ -135,13 +135,21 @@ nav.top .mark{display:flex;align-items:center;gap:10px}
 .revslot{border:1px dashed #2e2e34;border-radius:9px;padding:15px 16px;background:#0f0f11}
 .revslot .q{color:#6b6d70;font-size:.9rem;line-height:1.5}
 .revslot .w{color:#4e4e54;font-size:.78rem;margin-top:8px;letter-spacing:.04em}
+
+/* Facebook link. He runs the business off this page with 427 followers, so it
+   is a real destination for his customers, not a decorative social icon. */
+.fb-link{display:inline-flex;align-items:center;gap:6px;color:#d92b2b;text-decoration:none}
+.fb-link:hover{text-decoration:underline}
+#kobe-head .kobe-dot{display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:#3ddc7f;margin-right:8px;vertical-align:middle}
+#kobe-head em{font-style:normal;color:#a9aaad;font-weight:400;font-size:.86em}
 </style>
 </head>
 <body>
 <nav class="top">
   <a href="#" class="mark"><img src="logo.jpg" alt="" width="60" height="43" loading="eager"><span>Dietz <em>Enterprises</em></span></a>
   <div class="links">
-    <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
+    <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a class="nav-fb" href="https://www.facebook.com/DietzEnterprises/" target="_blank" rel="noopener">Facebook</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+15632134616">(563) 213-4616</a>
   </div>
 </nav>
@@ -244,14 +252,14 @@ nav.top .mark{display:flex;align-items:center;gap:10px}
   </div>
 </section>
 
-<footer>Dietz Enterprises &middot; Dubuque, Iowa &middot; <a href="tel:+15632134616">(563) 213-4616</a></footer>
+<footer>Dietz Enterprises &middot; Dubuque, Iowa &middot; <a href="tel:+15632134616">(563) 213-4616</a> &middot; <a class="fb-link" href="https://www.facebook.com/DietzEnterprises/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false"><path fill="currentColor" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.91h-2.33V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>Follow the work on Facebook</a></footer>
 <a class="sticky" href="tel:+15632134616">Call (563) 213-4616</a>
 
 <div id="kobe">
   <button id="kobe-btn" aria-label="Chat with us">Chat</button>
   <div id="kobe-panel" hidden>
-    <div id="kobe-head">Chat with Dietz</div>
-    <div id="kobe-body"><p>Hi — thanks for stopping by Dietz Enterprises. Driveway, patio, foundation or a tear-out?</p></div>
+    <div id="kobe-head"><span class="kobe-dot"></span>DOZER <em>&middot; Dietz's Helper</em></div>
+    <div id="kobe-body"><p>Hey — Dozer here. Driveway, patio, sidewalk, foundation or a tear-out? Tell me what you need and leave your number, and Dalton will get back to you.</p></div>
     <form id="kobe-form"><input placeholder="Type a message" aria-label="Message"><button>Send</button></form>
   </div>
 </div>
@@ -270,6 +278,60 @@ nav.top .mark{display:flex;align-items:center;gap:10px}
   var u=document.createElement('p');u.style.cssText='margin:8px 0;font-weight:600';u.textContent=i.value;d.appendChild(u);i.value='';
   var r=document.createElement('p');r.style.cssText='margin:8px 0';r.textContent="Thanks \u2014 we'll get right back to you. For anything urgent, give us a call.";
   setTimeout(function(){d.appendChild(r);d.scrollTop=d.scrollHeight},600)};
+})();
+</script>
+
+<script>
+/* Chat widget wiring. The markup shipped on every mockup in this library but
+   nothing ever bound the button, so clicking Chat did nothing - on a page we
+   send to a prospect, that reads as a broken site. Opens and closes, closes on
+   Escape, moves focus into the panel, and answers a submitted message with a
+   canned reply so a preview does not look dead on send. */
+(function(){
+  var btn   = document.getElementById('kobe-btn'),
+      panel = document.getElementById('kobe-panel'),
+      form  = document.getElementById('kobe-form'),
+      body  = document.getElementById('kobe-body');
+  if(!btn || !panel) return;
+
+  function open(){
+    panel.hidden = false;
+    btn.setAttribute('aria-expanded','true');
+    var i = panel.querySelector('input'); if(i) i.focus();
+  }
+  function close(){
+    panel.hidden = true;
+    btn.setAttribute('aria-expanded','false');
+    btn.focus();
+  }
+  btn.setAttribute('aria-expanded','false');
+  btn.setAttribute('aria-controls','kobe-panel');
+  btn.addEventListener('click', function(){ panel.hidden ? open() : close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !panel.hidden) close();
+  });
+
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var input = form.querySelector('input');
+      var text  = (input.value || '').trim();
+      if(!text) return;
+      var mine = document.createElement('p');
+      mine.textContent = text;
+      mine.style.cssText = 'text-align:right;opacity:.85';
+      body.appendChild(mine);
+      input.value = '';
+      setTimeout(function(){
+        var reply = document.createElement('p');
+        reply.textContent = 'Got it. Leave a number and Dalton will call you back - '
+                          + 'or ring (563) 213-4616 now if it is time sensitive.';
+        body.appendChild(reply);
+        body.scrollTop = body.scrollHeight;
+      }, 550);
+      body.scrollTop = body.scrollHeight;
+    });
+  }
 })();
 </script>
 </body>
