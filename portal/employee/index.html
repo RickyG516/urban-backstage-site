@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Employee — Urban Niche Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/portal/portal.css">
+<style>
+  /* Launcher tiles. Everything backstage already has, one door in front of it. */
+  .find{position:sticky;top:56px;z-index:55;background:var(--dark);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+  .find input{width:100%;height:var(--tap);background:#141414;border:1px solid var(--line);
+    border-radius:9px;color:var(--light);padding:0 14px;font-family:inherit;font-size:15px}
+  .find input:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:transparent}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
+  .tile{display:flex;flex-direction:column;justify-content:center;gap:3px;
+    background:var(--charcoal);border:1px solid var(--line);border-radius:9px;
+    padding:13px 14px;min-height:var(--tap);transition:border-color .15s,transform .12s}
+  .tile:hover,.tile:focus-visible{border-color:var(--orange);transform:translateY(-2px);outline:none}
+  .tile .n{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13.5px;color:var(--white);line-height:1.25}
+  .tile .s{font-size:11px;color:#7d7d7d;line-height:1.35}
+  .tile.primary{background:linear-gradient(180deg,rgba(227,107,30,.16),rgba(227,107,30,.05));
+    border-color:rgba(227,107,30,.5)}
+  .tile.primary .n{color:var(--orange)}
+  .tile .ext{font-size:9.5px;letter-spacing:.1em;color:#5a5a5a}
+
+  .deptcard{background:var(--charcoal);border:1px solid var(--line);border-radius:10px;padding:16px 17px}
+  .deptcard h3{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:14.5px;
+    color:var(--white);margin:0 0 10px}
+  .deptcard h3 b{color:var(--orange);font-weight:700}
+  .deptcard a{display:flex;align-items:center;min-height:38px;gap:8px;
+    font-size:13px;color:#b4b4b4;border-top:1px solid #232323;padding:4px 0}
+  .deptcard a:first-of-type{border-top:0}
+  .deptcard a:hover{color:var(--orange)}
+  .deptcard a .x{margin-left:auto;font-size:9.5px;letter-spacing:.1em;color:#4e4e4e}
+  .hidden{display:none!important}
+  .none{padding:26px 0;text-align:center;color:var(--dim);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<div class="skel"><b>SKELETON</b> &middot; no login yet &middot; this is the employee side of the portal</div>
+
+<div class="top">
+  <a class="brand" href="/portal/">URBAN NICHE<span>.</span></a>
+  <div class="who"><span>Employee</span><span class="dot">RG</span></div>
+</div>
+
+<nav class="tabs">
+  <a class="on" href="#launch">Launch</a>
+  <a href="#salesos">Sales OS</a>
+  <a href="#depts">Departments</a>
+  <a href="#library">Library</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="find">
+    <input id="q" type="search" placeholder="Search everything in backstage" autocomplete="off" aria-label="Search backstage">
+  </div>
+
+  <!-- ============ QUICK LAUNCH ============ -->
+  <section id="launch" data-sec>
+    <div class="head">
+      <h1>Everything, <span>one door</span></h1>
+      <p>The whole backstage, behind a single sign-in.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile primary" href="/sales-ops/workspace/"><span class="n">Workspace</span><span class="s">Sales OS cockpit</span></a>
+      <a class="tile" href="/sales-ops/tools/today/"><span class="n">Today</span><span class="s">What's on now</span></a>
+      <a class="tile" href="/sales-ops/tools/callbacks/"><span class="n">Callbacks</span><span class="s">Owed calls</span></a>
+      <a class="tile" href="https://mail.google.com/mail/u/0/"><span class="n">Gmail</span><span class="s">UNC inbox</span><span class="ext">EXTERNAL</span></a>
+      <a class="tile" href="https://drive.google.com/drive/folders/1Gs4hmmhT0hOccMUGCA0Krds_dkFX7boh"><span class="n">Drive</span><span class="s">Urban Niche Co</span><span class="ext">EXTERNAL</span></a>
+      <a class="tile" href="https://calendar.google.com/calendar/u/0/r"><span class="n">Calendar</span><span class="s">Schedule</span><span class="ext">EXTERNAL</span></a>
+      <a class="tile" href="https://app.hubspot.com/contacts/245833525/objects/0-1/views/all/list"><span class="n">HubSpot</span><span class="s">CRM</span><span class="ext">EXTERNAL</span></a>
+      <a class="tile" href="https://claude.ai/new"><span class="n">Claude</span><span class="s">Cowork</span><span class="ext">EXTERNAL</span></a>
+      <a class="tile" href="https://publish.buffer.com/"><span class="n">Buffer</span><span class="s">Scheduling</span><span class="ext">EXTERNAL</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SALES OS ============ -->
+  <section id="salesos" data-sec>
+    <div class="sec"><h2>Call flows</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/sales-ops/cold-call/"><span class="n">Cold Call</span><span class="s">First contact</span></a>
+      <a class="tile" href="/sales-ops/mockup-reveal/"><span class="n">Mockup Reveal</span><span class="s">They have a mockup</span></a>
+      <a class="tile" href="/sales-ops/discovery/"><span class="n">Discovery</span><span class="s">Qualify</span></a>
+      <a class="tile" href="/sales-ops/inbound/"><span class="n">Inbound</span><span class="s">They came to us</span></a>
+      <a class="tile" href="/sales-ops/niche-outreach/"><span class="n">Niche Outreach</span><span class="s">By trade</span></a>
+      <a class="tile" href="/sales-ops/service-pitch/"><span class="n">Service Pitch</span><span class="s">Sell the service</span></a>
+      <a class="tile" href="/sales-ops/proposal-walkthrough/"><span class="n">Proposal</span><span class="s">Walk it through</span></a>
+      <a class="tile" href="/sales-ops/onboarding-kickoff/"><span class="n">Onboarding</span><span class="s">Just signed</span></a>
+      <a class="tile" href="/sales-ops/renewal-upsell/"><span class="n">Renewal / Upsell</span><span class="s">Grow the account</span></a>
+      <a class="tile" href="/sales-ops/referral-ask/"><span class="n">Referral Ask</span><span class="s">They're happy</span></a>
+      <a class="tile" href="/sales-ops/re-engage/"><span class="n">Re-Engage</span><span class="s">Gone quiet</span></a>
+      <a class="tile" href="/sales-ops/win-back/"><span class="n">Win-Back</span><span class="s">Lost or cancelled</span></a>
+    </div>
+
+    <div class="sec"><h2>Rep tools</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/sales-ops/tools/prospect-lookup/"><span class="n">Prospect Lookup</span><span class="s">Find a record</span></a>
+      <a class="tile" href="/sales-ops/tools/pricing/"><span class="n">Pricing</span><span class="s">Build a quote</span></a>
+      <a class="tile" href="/sales-ops/tools/objections/"><span class="n">Objections</span><span class="s">Answers ready</span></a>
+      <a class="tile" href="/sales-ops/tools/snippets/"><span class="n">Snippets</span><span class="s">Copy and paste</span></a>
+      <a class="tile" href="/sales-ops/tools/voicemails/"><span class="n">Voicemails</span><span class="s">Scripts</span></a>
+      <a class="tile" href="/sales-ops/tools/email-launcher/"><span class="n">Email Launcher</span><span class="s">Send from a template</span></a>
+      <a class="tile" href="/sales-ops/tools/trade-reference/"><span class="n">Trade Reference</span><span class="s">Speak their language</span></a>
+      <a class="tile" href="/sales-ops/tools/commission/"><span class="n">Commission</span><span class="s">What's owed</span></a>
+    </div>
+
+    <div class="sec"><h2>Dashboards</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/sales-ops/dashboards/pipeline/"><span class="n">Pipeline</span><span class="s">Where deals sit</span></a>
+      <a class="tile" href="/sales-ops/dashboards/activity/"><span class="n">Activity</span><span class="s">What got done</span></a>
+      <a class="tile" href="/sales-ops/dashboards/reps/"><span class="n">Reps</span><span class="s">By person</span></a>
+      <a class="tile" href="/sales-ops/dashboards/heatmap/"><span class="n">Dial Windows</span><span class="s">When to call</span></a>
+      <a class="tile" href="/sales-ops/leaderboard/"><span class="n">Leaderboard</span><span class="s">Standings</span></a>
+      <a class="tile" href="/sales-ops/map/"><span class="n">Prospect Map</span><span class="s">Who's where</span></a>
+    </div>
+
+    <div class="sec"><h2>Learn &amp; configure</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/sales-ops/academy/"><span class="n">Academy</span><span class="s">Training</span></a>
+      <a class="tile" href="/sales-ops/guide/"><span class="n">Guide</span><span class="s">How the OS works</span></a>
+      <a class="tile" href="/sales-ops/roadmap/"><span class="n">Roadmap</span><span class="s">What's shipping</span></a>
+      <a class="tile" href="/sales-ops/demo/"><span class="n">Sales OS Demo</span><span class="s">Show someone</span></a>
+      <a class="tile" href="/sales-ops/settings/"><span class="n">Settings</span><span class="s">Keys and reps</span></a>
+    </div>
+  </section>
+
+  <!-- ============ DEPARTMENTS ============ -->
+  <section id="depts" data-sec>
+    <div class="sec"><h2>Departments</h2><div class="rule"></div></div>
+    <div class="grid two">
+
+      <div class="deptcard">
+        <h3>Revenue &amp; <b>Growth</b></h3>
+        <a href="/sales/">Sales overview</a>
+        <a href="/sales-ops/workspace/">Sales OS Cockpit</a>
+        <a href="/demo/">Demo mockups</a>
+        <a href="/playbook/rep-onboarding/">Rep onboarding</a>
+        <a href="https://app.hubspot.com/contacts/245833525/objects/0-3/views/all/board">HubSpot pipeline<span class="x">EXT</span></a>
+        <a href="https://app.brevo.com/">Brevo<span class="x">EXT</span></a>
+        <a href="https://calendly.com/event_types">Calendly<span class="x">EXT</span></a>
+      </div>
+
+      <div class="deptcard">
+        <h3>Client <b>Success</b></h3>
+        <a href="/clients/">Clients</a>
+        <a href="https://business.google.com/">Google Business Profile<span class="x">EXT</span></a>
+        <a href="https://search.google.com/search-console">Search Console<span class="x">EXT</span></a>
+        <a href="https://app.netlify.com/">Netlify<span class="x">EXT</span></a>
+        <a href="https://drive.google.com/drive/folders/1PvAc7zCYmkBEoPCa8an-P8H46EglXpoX">Drive folder<span class="x">EXT</span></a>
+      </div>
+
+      <div class="deptcard">
+        <h3>Delivery &amp; <b>Ops</b></h3>
+        <a href="/delivery/">Delivery</a>
+        <a href="/playbook/">Playbook &amp; SOPs</a>
+        <a href="/playbook/filing/">Naming &amp; filing</a>
+        <a href="https://claude.ai/new">Claude / Cowork<span class="x">EXT</span></a>
+        <a href="https://drive.google.com/drive/folders/1qcY0Z9aakOaOG-1mAZ8yeA0yWg6CaHBV">Drive folder<span class="x">EXT</span></a>
+      </div>
+
+      <div class="deptcard">
+        <h3>Content &amp; <b>Brand</b></h3>
+        <a href="/playbook/brand/">Brand standards</a>
+        <a href="https://publish.buffer.com/">Buffer<span class="x">EXT</span></a>
+        <a href="https://www.canva.com/">Canva<span class="x">EXT</span></a>
+        <a href="https://drive.google.com/drive/folders/1IYQTl4xyuIrDqRLtcVAUCSmIQeYtbBcX">Drive folder<span class="x">EXT</span></a>
+      </div>
+
+      <div class="deptcard">
+        <h3>Finance &amp; <b>Admin</b></h3>
+        <a href="/finance/">Finance</a>
+        <a href="/sales-ops/tools/commission/">Commission tracker</a>
+        <a href="https://dashboard.stripe.com/">Stripe<span class="x">EXT</span></a>
+        <a href="https://qbo.intuit.com/">QuickBooks<span class="x">EXT</span></a>
+        <a href="https://drive.google.com/drive/folders/13HRbtgNn-of_MOOetzNiVSjSJuiDTw-V">Drive folder<span class="x">EXT</span></a>
+      </div>
+
+      <div class="deptcard">
+        <h3>Tech &amp; <b>Systems</b></h3>
+        <a href="/team/">Team</a>
+        <a href="/verticals/">Vertical templates</a>
+        <a href="https://github.com/RickyG516">GitHub<span class="x">EXT</span></a>
+        <a href="https://dash.cloudflare.com/">Cloudflare<span class="x">EXT</span></a>
+        <a href="https://dcc.godaddy.com/control/portfolio">GoDaddy DNS<span class="x">EXT</span></a>
+        <a href="https://admin.google.com/">Workspace admin<span class="x">EXT</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ LIBRARY ============ -->
+  <section id="library" data-sec>
+    <div class="sec"><h2>Playbook</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/playbook/"><span class="n">Playbook</span><span class="s">Process and SOPs</span></a>
+      <a class="tile" href="/playbook/brand/"><span class="n">Brand</span><span class="s">Colors, type, voice</span></a>
+      <a class="tile" href="/playbook/filing/"><span class="n">Naming &amp; Filing</span><span class="s">Where things go</span></a>
+      <a class="tile" href="/playbook/rep-onboarding/"><span class="n">Rep Onboarding</span><span class="s">New hires</span></a>
+    </div>
+
+    <div class="sec"><h2>Libraries</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/demo/"><span class="n">Demo Mockups</span><span class="s">Spec homepages</span></a>
+      <a class="tile" href="/verticals/"><span class="n">Verticals</span><span class="s">Parked templates</span></a>
+      <a class="tile" href="/clients/"><span class="n">Clients</span><span class="s">Account records</span></a>
+    </div>
+
+    <div class="sec"><h2>Client portal</h2><div class="rule"></div></div>
+    <div class="tiles">
+      <a class="tile" href="/portal/client/"><span class="n">Open a client view</span><span class="s">Exactly what they see</span></a>
+    </div>
+
+    <p style="font-size:11.5px;color:var(--dimmer);text-align:center;margin:26px 0 34px">
+      Urban Niche Co &middot; internal
+    </p>
+  </section>
+
+  <div class="none hidden" id="none">Nothing matches that.</div>
+
+</div>
+
+<script>
+(function(){
+  /* Search filters tiles and department links in place. Sections with no
+     surviving match collapse so the page never shows an empty heading. */
+  var q = document.getElementById('q');
+  var none = document.getElementById('none');
+  var secs = [].slice.call(document.querySelectorAll('[data-sec]'));
+  var items = [].slice.call(document.querySelectorAll('.tile, .deptcard a'));
+  items.forEach(function(el){ el.dataset.hay = el.textContent.toLowerCase().replace(/\s+/g,' '); });
+
+  function blocks(sec){
+    return [].slice.call(sec.querySelectorAll('.tiles, .deptcard, .sec, .head, .grid'));
+  }
+
+  function filter(){
+    var v = q.value.trim().toLowerCase();
+    if(!v){
+      items.forEach(function(el){ el.classList.remove('hidden'); });
+      secs.forEach(function(s){ s.classList.remove('hidden');
+        blocks(s).forEach(function(b){ b.classList.remove('hidden'); }); });
+      none.classList.add('hidden');
+      return;
+    }
+    var any = false;
+    items.forEach(function(el){
+      var hit = el.dataset.hay.indexOf(v) !== -1;
+      el.classList.toggle('hidden', !hit);
+      if(hit) any = true;
+    });
+    secs.forEach(function(s){
+      blocks(s).forEach(function(b){
+        if(b.classList.contains('sec') || b.classList.contains('head')) return;
+        var live = b.querySelectorAll('.tile:not(.hidden), a:not(.hidden)').length;
+        b.classList.toggle('hidden', live === 0);
+      });
+      var live = s.querySelectorAll('.tile:not(.hidden), .deptcard a:not(.hidden)').length;
+      s.classList.toggle('hidden', live === 0);
+    });
+    none.classList.toggle('hidden', any);
+  }
+  q.addEventListener('input', filter);
+
+  /* Tab highlight follows whichever section is nearest the top. */
+  var tabs = [].slice.call(document.querySelectorAll('.tabs a'));
+  var targets = tabs.map(function(t){ return document.querySelector(t.getAttribute('href')); });
+  function sync(){
+    var best = 0, top = 1e9;
+    targets.forEach(function(s,i){
+      if(!s || s.classList.contains('hidden')) return;
+      var d = Math.abs(s.getBoundingClientRect().top - 130);
+      if(d < top){ top = d; best = i; }
+    });
+    tabs.forEach(function(t,i){ t.classList.toggle('on', i === best); });
+  }
+  addEventListener('scroll', sync, {passive:true});
+  sync();
+})();
+</script>
+
+</body>
+</html>
