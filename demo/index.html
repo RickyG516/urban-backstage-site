@@ -378,6 +378,11 @@
   ];
 
   window.DEMO_ARCHIVED_SLUGS = DEFAULT_ARCHIVED.map(function(s){ return s.replace(/^\/demo\/|\/$/g,''); });
+  /* Exposed so the tab strip can count what you will actually SEE. Without it
+     the tabs count by stage alone and report more rows than the archive view
+     renders. */
+  window.DEMO_GET_ARCHIVED = function(){ return getArchived(); };
+  window.DEMO_VIEW_MODE = function(){ return viewMode; };
   function readList(k) { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch(e) { return []; } }
   function getArchived() {
     var local = readList(ARCHIVE_KEY), un = readList(UNARCHIVE_KEY), out = local.slice();
@@ -553,14 +558,23 @@
       strip.appendChild(b);
     });
     function paintTabs(){
+      /* Count what the current archive view will actually render, so the
+         number on the tab equals the number of rows you see. */
+      var arch = (window.DEMO_GET_ARCHIVED ? window.DEMO_GET_ARCHIVED() : []) || [];
+      var vm = window.DEMO_VIEW_MODE ? window.DEMO_VIEW_MODE() : 'active';
+      function counted(tr){
+        if(vm === 'all') return true;
+        var isArch = arch.indexOf(tr.dataset.slug) !== -1;
+        return vm === 'archived' ? isArch : !isArch;
+      }
       Array.from(strip.children).forEach(function(b){
         var on = b.dataset.tab === current;
         b.style.color = on ? '#e36b1e' : '#8e8e8e';
         b.style.borderBottomColor = on ? '#e36b1e' : 'transparent';
         b.style.background = on ? 'rgba(227,107,30,.08)' : 'none';
         var t = TABS.filter(function(x){ return x[0] === b.dataset.tab; })[0];
-        var n = rows.filter(function(tr){ return t[2](tr); }).length;
-        b.textContent = t[1] + (b.dataset.tab === 'all' ? '' : '  ' + n);
+        var n = rows.filter(function(tr){ return t[2](tr) && counted(tr); }).length;
+        b.textContent = t[1] + '  ' + n;
       });
     }
     var ctrHost = document.querySelector('.controls');
@@ -594,6 +608,12 @@
       var sb = document.getElementById('searchBox'); if(sb) sb.dispatchEvent(ev);
     }
     sel.addEventListener('change', apply);
+    var vmSel = document.getElementById('viewMode');
+    if(vmSel) vmSel.addEventListener('change', function(){ setTimeout(paintTabs,0); });
+    document.addEventListener('click', function(e){
+      if(e.target && e.target.classList && e.target.classList.contains('arch-btn'))
+        setTimeout(paintTabs,0);
+    });
     paintTabs();
     apply();
     /* live tally next to the key */
