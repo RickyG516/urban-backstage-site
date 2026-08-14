@@ -14,6 +14,7 @@ if [ -f .non-prospects ]; then
   skip=$(sed 's/#.*//' .non-prospects | tr -d ' \t' | grep -v '^$')
 fi
 
+bad=0
 targets=("$@")
 if [ ${#targets[@]} -eq 0 ]; then targets=(*/); fi
 for d in "${targets[@]}"; do
@@ -50,5 +51,11 @@ for d in "${targets[@]}"; do
   dup=$(grep -o 'src="https://[^"]*"' "$f" | sort | uniq -d | wc -l)
   [ "$dup" -gt 0 ] && fails="$fails DUP-IMG-ON-PAGE"
 
-  [ -n "$fails" ] && echo "$d:$fails"
+  if [ -n "$fails" ]; then echo "$d:$fails"; bad=1; fi
 done
+
+# Exit code must mean "something failed", not "the last page was clean".
+# Previously the loop ended on `[ -n "$fails" ] && echo`, which returns 1
+# whenever $fails is EMPTY - so a fully clean run exited nonzero and any
+# `gate.sh && next-step` chain silently never ran.
+exit "${bad:-0}"
