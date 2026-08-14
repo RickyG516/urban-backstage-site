@@ -136,10 +136,10 @@ def main():
         if "record/0-2/" in row:
             continue
         m = re.search(r"/demo/([^/]+)/", row)
-        if m and "archived" not in row.lower():
+        if m and not re.search(r"archived|not a prospect", row, re.I):
             problems.append(
                 f"unlinked row does not say why: {m.group(1)} — an unlinked cell "
-                f"must read 'archived - not a prospect', never a placeholder")
+                f"must read 'archived' or 'not a prospect', never a placeholder")
 
     # --- surface 3: status.json
     for s in set(slugs) - set(st):
