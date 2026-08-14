@@ -35,9 +35,25 @@ QUEUE = os.path.join(ROOT, "sales-ops", "mockup-reveal", "queue", "latest.json")
 QUIET = "--quiet" in sys.argv
 
 # Known non-prospects that live in the library but are not contractors and will
-# never go into HubSpot or the dial queue. gate.sh carries the same exception.
-# Keep this list SHORT and justify every addition — it is a hole in the audit.
-KNOWN_NON_PROSPECTS = {"ia-cremers-meats-dubuque"}  # butcher shop, not a trade contractor
+# never go into HubSpot or the dial queue. Single source of truth is
+# demo/.non-prospects, read by this script AND gate.sh. Keep it SHORT and
+# justify every addition — it is a hole in the audit.
+NON_PROSPECT_FILE = os.path.join(DEMO, ".non-prospects")
+
+
+def _load_non_prospects():
+    if not os.path.exists(NON_PROSPECT_FILE):
+        return set()
+    out = set()
+    with open(NON_PROSPECT_FILE, encoding="utf-8") as fh:
+        for line in fh:
+            slug = line.split("#", 1)[0].strip()
+            if slug:
+                out.add(slug)
+    return out
+
+
+KNOWN_NON_PROSPECTS = _load_non_prospects()
 
 STATUS_KEYS = {"channel", "fb", "note", "photos", "ready", "stage"}
 QUEUE_KEYS = {"contact_id", "business_name", "first_name", "last_name", "trade",
@@ -81,7 +97,13 @@ def main():
     rows = index_map(idx)
     st = json.load(open(STATUS, encoding="utf-8"))
     q = json.load(open(QUEUE, encoding="utf-8"))
-    qids = {str(p.get("contact_id")) for p in q["prospects"]}
+    # Surface 4 cross-checks the queue against the demo index, and the index
+    # stores HubSpot COMPANY ids. Phase 2 (0a98128) remapped the queue's
+    # contact_id to real contact ids and moved the company id into its own
+    # field, so matching on contact_id here compared two different id spaces
+    # and reported every page and every queue row as an orphan. Match on
+    # company_id; contact_id is still checked for uniqueness below.
+    qids = {str(p.get("company_id")) for p in q["prospects"] if p.get("company_id")}
 
     active = [s for s in slugs if s not in arch and s not in KNOWN_NON_PROSPECTS]
     problems = []

@@ -5,12 +5,22 @@
 # output. `pre` came back as "0\n1", `[ "$pre" -eq 0 ]` threw
 # "integer expression expected", and the no-hero-photo check NEVER FIRED.
 cd "$(dirname "$0")/demo" || exit 1
+
+# Non-prospect pages (non-contractor niches living in the library). Single
+# source of truth is demo/.non-prospects, shared with tools/enrich_audit.py so
+# the two gates cannot drift apart. Strip comments and blanks.
+skip=""
+if [ -f .non-prospects ]; then
+  skip=$(sed 's/#.*//' .non-prospects | tr -d ' \t' | grep -v '^$')
+fi
+
 targets=("$@")
 if [ ${#targets[@]} -eq 0 ]; then targets=(*/); fi
 for d in "${targets[@]}"; do
   d="${d%/}"
   f="$d/index.html"
   [ -f "$f" ] || continue
+  if [ -n "$skip" ] && printf '%s\n' "$skip" | grep -qx "$d"; then continue; fi
   fails=""
 
   gl=$(grep -n 'id="gallery"' "$f" | head -1 | cut -d: -f1)
