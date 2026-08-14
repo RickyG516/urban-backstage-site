@@ -168,6 +168,8 @@
   <span style="margin-left:14px"><b>💬</b> replied</span>
   <span style="margin-left:14px"><b>📞</b> call booked</span>
   <span style="margin-left:14px"><b>🤝</b> won</span>
+  <span style="margin-left:14px"><b>🔨</b> build in progress</span>
+  <span style="margin-left:14px"><b>🌐</b> real site live</span>
   <span style="margin-left:14px"><b>🚫</b> lost / not now</span>
   <div style="margin-top:8px;color:#777;font-size:.74rem">Hover a badge for detail. Status lives in <code style="color:#999">demo/status.json</code> &mdash; edit that, not this page.</div>
 </div>
@@ -455,7 +457,15 @@
 (function(){
   var STAGE = {none:"", touched:["📤","first touch sent"], followed:["🔁","follow-up sent"],
                replied:["💬","replied"], booked:["📞","call booked"],
-               won:["🤝","closed won"], lost:["🚫","closed lost / not now"]};
+               won:["🤝","closed won"],
+               building:["🔨","closed — real site in progress"],
+               live:["🌐","closed — real site live"],
+               lost:["🚫","closed lost / not now"]};
+  /* Stages after `won` are no longer prospects. They are client work, so the
+     tab strip below pulls them out of the prospect list rather than leaving a
+     paying client sitting in a cold-outreach library. The PAGES stay put at
+     /demo/<slug>/ — links already sent to prospects and clients keep working. */
+  var CLOSED = ['won','building','live'];
   fetch('status.json?cb='+Date.now()).then(function(r){return r.json()}).then(function(ST){
     var rows = Array.from(document.querySelectorAll('#demoTable tbody tr'));
     rows.forEach(function(tr){
@@ -484,6 +494,45 @@
       tr.dataset.search  = (tr.dataset.search||'') + ' ' + (st.ready?'ready':'needswork') +
                            ' ' + st.channel + ' ' + st.photos + ' ' + st.stage;
     });
+    /* ---- tab strip: prospects vs closed work ----
+       A closed client is not a prospect and should not sit in a cold-outreach
+       list waiting to be dialed. Tabs split the same table rather than moving
+       any file, so every existing /demo/<slug>/ URL keeps resolving. */
+    var TABS = [
+      ['prospects', 'Prospects',  function(tr){ return CLOSED.indexOf(tr.dataset.stage) === -1; }],
+      ['builds',    'In progress',function(tr){ return tr.dataset.stage === 'building'; }],
+      ['live',      'Live',       function(tr){ return tr.dataset.stage === 'live'; }],
+      ['all',       'All',        function(){ return true; }]
+    ];
+    var strip = document.createElement('div');
+    strip.id = 'demoTabs';
+    strip.style.cssText = 'display:flex;gap:4px;padding:0 32px;margin:14px 0 -2px;flex-wrap:wrap';
+    var current = 'prospects';
+    TABS.forEach(function(t){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.dataset.tab = t[0];
+      b.textContent = t[1];
+      b.style.cssText = 'font-family:Montserrat,Arial,sans-serif;font-weight:600;font-size:.78rem;'
+        + 'padding:8px 15px;border-radius:6px 6px 0 0;cursor:pointer;background:none;'
+        + 'border:1px solid #2a2a2a;border-bottom:2px solid transparent;color:#8e8e8e';
+      b.addEventListener('click', function(){ current = t[0]; paintTabs(); apply(); });
+      strip.appendChild(b);
+    });
+    function paintTabs(){
+      Array.from(strip.children).forEach(function(b){
+        var on = b.dataset.tab === current;
+        b.style.color = on ? '#e36b1e' : '#8e8e8e';
+        b.style.borderBottomColor = on ? '#e36b1e' : 'transparent';
+        b.style.background = on ? 'rgba(227,107,30,.08)' : 'none';
+        var t = TABS.filter(function(x){ return x[0] === b.dataset.tab; })[0];
+        var n = rows.filter(function(tr){ return t[2](tr); }).length;
+        b.textContent = t[1] + (b.dataset.tab === 'all' ? '' : '  ' + n);
+      });
+    }
+    var ctrHost = document.querySelector('.controls');
+    if(ctrHost && ctrHost.parentNode) ctrHost.parentNode.insertBefore(strip, ctrHost);
+
     /* status filter, wired into whatever filtering the page already does */
     var sel = document.createElement('select');
     sel.id = 'statusFilter';
@@ -496,6 +545,7 @@
     var ctr = document.querySelector('.controls'); if(ctr) ctr.appendChild(sel);
     function apply(){
       var v = sel.value;
+      var tab = TABS.filter(function(x){ return x[0] === current; })[0];
       rows.forEach(function(tr){
         var ok = !v
           || (v==='ready'      && tr.dataset.ready==='yes')
@@ -503,6 +553,7 @@
           || (v==='fb'         && tr.dataset.channel==='fb')
           || (v==='phone'      && tr.dataset.channel==='phone')
           || (v==='untouched'  && tr.dataset.stage==='none');
+        if(ok && tab) ok = tab[2](tr);
         tr.dataset.statusHidden = ok ? '' : '1';
         if(!ok) tr.style.display='none'; else tr.style.display='';
       });
@@ -510,6 +561,8 @@
       var sb = document.getElementById('searchBox'); if(sb) sb.dispatchEvent(ev);
     }
     sel.addEventListener('change', apply);
+    paintTabs();
+    apply();
     /* live tally next to the key */
     var tally = document.createElement('div');
     tally.style.cssText='margin-top:6px;color:#9a9a9a;font-size:.76rem';
