@@ -115,11 +115,12 @@ footer{background:#121214;color:#a9aaad;text-align:center;padding:30px 24px;font
    mockup reads as HIS company rather than a template with his name typed in.
    The crop carries its own dark background, so it is framed deliberately as a
    plate instead of pretending to be a transparent mark. --- */
-.brandplate{display:inline-block;margin:0 0 22px;padding:0;border:1px solid rgba(217,43,43,.55);
-  border-radius:10px;overflow:hidden;background:#0d0d0e;
-  box-shadow:0 10px 34px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04) inset;line-height:0}
-.brandplate img{display:block;width:clamp(210px,26vw,290px);height:auto}
-nav.top .mark img{display:block;height:34px;width:auto;border-radius:5px}
+.brandplate{display:inline-block;margin:0 0 20px;line-height:0}
+/* Transparent logo now, so no frame - it sits straight on the hero and the
+   drop shadow keeps it off the photo behind it. */
+.brandplate img{display:block;width:clamp(230px,30vw,330px);height:auto;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.75))}
+nav.top .mark img{display:block;height:34px;width:auto}
 nav.top .mark{display:flex;align-items:center;gap:10px}
 @media (max-width:640px){ .brandplate img{width:200px} }
 
@@ -147,7 +148,7 @@ nav.top .mark{display:flex;align-items:center;gap:10px}
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark"><img src="logo.jpg" alt="" width="60" height="43" loading="eager"><span>Dietz <em>Enterprises</em></span></a>
+  <a href="#" class="mark"><img src="logo.png" alt="" width="529" height="371" loading="eager"><span>Dietz <em>Enterprises</em></span></a>
   <div class="links">
     <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a class="nav-fb" href="https://www.facebook.com/DietzEnterprises/" target="_blank" rel="noopener">Facebook</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+15632134616">(563) 213-4616</a>
@@ -158,7 +159,7 @@ nav.top .mark{display:flex;align-items:center;gap:10px}
   <img class="hero-photo" src="motion-hero.svg" alt="Animated stamped concrete graphic for Dietz Enterprises">
   <div class="hero-in">
     <span class="kick">Dubuque, Iowa</span>
-    <span class="brandplate"><img src="logo.jpg" width="700" height="500" alt="Dietz Enterprises Concrete Services"></span>
+    <span class="brandplate"><img src="logo.png" width="529" height="371" alt="Dietz Enterprises Concrete Services"></span>
     <h1>Concrete Work Across <span>the Tri-States</span></h1>
     <p>Flatwork, foundations and finish work for Dubuque County and both sides of the river. From the ground up.</p>
     <a class="btn" href="#contact">Get a Number</a>
