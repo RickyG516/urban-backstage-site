@@ -87,6 +87,14 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-demmer-mechanical-dyersville": {
+  "channel": "fb",
+  "fb": "https://www.facebook.com/demmermechanical/",
+  "note": "in HubSpot 2026-08-15 (company 340407140075) | NO-WEBSITE VERIFIED 2026-08-15: demmermechanical.com does not resolve (loaded live in Chrome, browser error page); no site found for .net or demmermech.com. PHCC of Iowa member directory puts their FACEBOOK PAGE in the website column, not a domain, while peer members have real domains hyperlinked. BBB website field blank with no Visit Website button (control: Ranger Services' BBB profile in the same session DOES render one, so the absence is real). REVENUE: three Iowa licenses - EL000506EC electrical (active July 2026), 52541-CL plumbing and mechanical, C137743 contractor registration filed as a corporation; three licensed principals (Allan Demmer owner, Michael Betts and Timothy Fitzgerald both Masters of Record); PHCC of Iowa dues-paying member current in the 2026 directory; BuildZoom 92 = top 32% of 39,764 Iowa contractors; bonded; BBB file open since 5/4/2016. PHONE SOURCE: BBB profile 0664-32078577, corroborated at phccia.org. Second line (563) 599-8915. CAUTION: The Dyersville Commercial ran 'New name, same faces at Demmer Mechanical' - there was a name or ownership change we could not read; do not speculate. Essentially no online reviews (1 FB review, BBB Not Rated) - do not pitch reputation management. Third-party data shows 52541-CL expiring June 2023, likely stale scrape - do not poke it. OPEN: Iowa SOS entity status unverified.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-dietz-enterprises-dbq02": {
   "channel": "fb",
   "fb": "https://www.facebook.com/DietzEnterprises/",
@@ -479,6 +487,14 @@
   "ready": true,
   "stage": "none"
  },
+ "il-designed-roofing-springfield": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-08-15 (company 340442835681) | NO-WEBSITE VERIFIED 2026-08-15: designedroofingsystems.com and .net both fail to resolve (loaded live in Chrome, browser error page); designedroofing.com is an unrelated Ontario Canada contractor; CIB AGC member profile renders the website field as the literal string http://NULL; BBB profile has no website field at all. REVENUE: $1,135,000 Illinois Capital Development Board emergency award 2024-07-24 (ref 102-040-011, Dickson Mounds State Museum, ~24,000 s.f. ballasted EPDM + ~700 l.f. coping tuckpointing); in business since 9/1/1990; 80 permitted projects; BuildZoom 91 = top 37% of 65,686 IL contractors; IDFPR roofing license 104006217; CIB AGC member. PHONE SOURCE: BBB profile 0724-3004377, corroborated at cibagc.org. PHONE ONLY, no Facebook page. CAUTION: BBB Not Rated / not accredited - do not pitch reputation; do not name the Corporate Secretary (BBB says Carl Anders, CIB AGC says Joe Anders); do not raise the Dickson Mounds artifact water damage - that was the old 1969 roof they were hired to fix. OPEN: ILSOS entity status CAPTCHA-blocked, unverified.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "il-dewco-insulation-8uet11": {
   "channel": "unknown",
   "fb": "",
@@ -787,6 +803,14 @@
   "channel": "unknown",
   "fb": "",
   "note": "",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-arteaga-construction-milwaukee": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-08-15 (company 340321388257) | NO-WEBSITE VERIFIED 2026-08-15: arteagaconstruction.com resolves but redirects to /lander and serves a GoDaddy PARKED-DOMAIN page ('parked free, courtesy of GoDaddy.com / Get This Domain') - confirmed live in Chrome; a raw non-JS fetch returns an empty shell with no title and no body copy. BBB website field blank, no Visit Website button. WMA member directory shows no site link. arteagaconstructions.com and arteaga-construction.com belong to an unrelated SF Bay Area company. REVENUE: incorporated 1986; 39 permitted projects totaling $1,285,900, 15 in the last 3 years; BuildZoom 103 = top 10% of 94,017 WI contractors; Milwaukee HVAC license 862111 and WI DSPS 862111-HVACCONT both active July 2026; Milwaukee concrete license RWCL-25-00092 active; union shop, MBE/SBE; SAM-registered federal contractor, award 2025-10-09; City Hall, VA Madison and Tomah, USDA Forest Products Lab, UWM, Indian Community School. PHONE SOURCE: BBB profile 0694-14000209, corroborated at wma-online.org. PHONE ONLY, no Facebook. CAUTION: WisDOT DENIED their DBE application - never mention it; do not quote 'workforce over 100' (their own copy; ZoomInfo says 20-49); WI entity M048090 / Nicholas De Arteaga is a DIFFERENT company, do not attach it. OPEN: WI DFI status not directly confirmed (JS-gated); OpenCorporates indexes entity P023959.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
