@@ -38,6 +38,13 @@
  *
  * KV binding: CALL_LOG
  * Secrets:    HUBSPOT_TOKEN, WORKSPACE_KEY, PLACES_API_KEY
+ *
+ * REFACTOR NOTE (2026-08-17): the fetch() handler below was restructured from
+ *   a flat chain of `if (method && pathname === '/x')` checks into a
+ *   declarative ROUTES registry + thin dispatcher, for maintainability only.
+ *   No endpoint, method, auth requirement, response shape, status code, or
+ *   error message was changed. The auth gate still runs first, unconditionally,
+ *   before any route is looked up.
  */
 
 const ALLOWED_ORIGINS = [
@@ -1527,44 +1534,643 @@ function bsShapeTask(t) {
   };
 }
 
-export default {
-  async fetch(request, env) {
-    const url    = new URL(request.url);
-    const origin = request.headers.get('Origin') || '';
-    const cors   = corsHeaders(origin);
-    const kv     = env.CALL_LOG || null;
-    const token  = env.HUBSPOT_TOKEN || null;
 
-    if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
+// ── EXTRACTED ROUTE HANDLERS (v3 refactor, 2026-08-17) ──────────────────────
+// These were previously inline blocks directly in fetch(). Pulled out into
+// named functions taking explicit params (no closure capture) so each is
+// independently testable, matching the handleX() convention used above.
+// Each owns its own try/catch exactly as it did inline — this worker has no
+// global error wrapper, and an uncaught throw returns a Cloudflare 1101 with
+// NO cors headers, which the browser then misreports as a CORS failure.
 
-    // ── AUTH GATE ── FAILS CLOSED.
-    // Previously this was opt-in (`if (env.WORKSPACE_KEY && ...)`), which meant a
-    // missing/wiped secret silently disabled auth and served the whole CRM to the
-    // public. Now a missing secret returns 503 and serves nothing.
-    if (url.pathname !== '/' && url.pathname !== '/pin') {
-      if (!env.WORKSPACE_KEY) {
-        return jsonResp({ ok: false, error: 'server misconfigured: WORKSPACE_KEY not set' }, 503, cors);
+async function handleCommissions(url, token, cors) {
+  try {
+    const ownerId = url.searchParams.get('owner_id') || '';
+    if (!ownerId) return jsonResp({ ok: false, error: 'owner_id required' }, 400, cors);
+    const body = {
+      filterGroups: [{ filters: [
+        { propertyName: 'hubspot_owner_id', operator: 'EQ', value: ownerId },
+        { propertyName: 'dealstage', operator: 'EQ', value: 'closedwon' }
+      ]}],
+      properties: ['dealname', 'amount', 'closedate', 'revenue_type'],
+      sorts: [{ propertyName: 'closedate', direction: 'DESCENDING' }],
+      limit: 100
+    };
+    const r = await bsHs('/crm/v3/objects/deals/search', 'POST', body, token);
+    if (!r.ok) return jsonResp({ ok: false, error: 'HubSpot deals search failed: ' + r.status }, 502, cors);
+    const now = new Date();
+    const thisMonth = now.getUTCFullYear() + '-' + String(now.getUTCMonth() + 1).padStart(2, '0');
+    const clients = (r.data.results || []).map((d) => {
+      const p = d.properties || {};
+      const name = p.dealname || 'Unnamed deal';
+      const amount = parseFloat(p.amount) || 0;
+      const closeDate = p.closedate || '';
+      let type = (p.revenue_type || '').toLowerCase();
+      if (!type) {
+        const n = name.toLowerCase();
+        if (/merch|shirt|hat|apparel|card|print|embroider|gear|hoodie/.test(n)) type = 'merch';
+        else if (/retainer|seo|gbp|authority|growth|domination|ppc|content|email|reputation|ai lead|monthly/.test(n)) type = 'retainer';
+        else type = 'project';
       }
-      if (request.headers.get('x-unc-key') !== env.WORKSPACE_KEY) {
-        return jsonResp({ ok: false, error: 'unauthorized' }, 401, cors);
+      let monthNum = null, rate, revenue_type, type_label, commission;
+      if (type === 'retainer' || type === 'retainer_y1' || type === 'retainer_y2') {
+        const ms = closeDate ? (now - new Date(closeDate)) : 0;
+        monthNum = Math.max(1, Math.floor(ms / (30.44 * 86400000)) + 1);
+        rate = monthNum <= 12 ? 0.30 : 0.10;
+        revenue_type = monthNum <= 12 ? 'retainer_y1' : 'retainer_y2';
+        type_label = monthNum <= 12 ? 'Retainer · Y1' : 'Retainer · Y2+';
+        commission = amount * rate;
+      } else if (type === 'merch') {
+        rate = 0.50; revenue_type = 'merch'; type_label = 'Merch'; commission = amount * rate;
+      } else {
+        rate = 0.25; revenue_type = 'project'; type_label = 'Project'; commission = amount * rate;
+      }
+      return {
+        deal_id: d.id, name: name, amount: amount, close_date: closeDate,
+        revenue_type: revenue_type, type_label: type_label, rate: rate,
+        commission: Math.round(commission * 100) / 100,
+        month_num: monthNum,
+        clawback_risk: revenue_type === 'retainer_y1' && monthNum === 1
+      };
+    });
+    const retainers = clients.filter((c) => c.revenue_type === 'retainer_y1' || c.revenue_type === 'retainer_y2');
+    let monthEarned = 0, totalEarned = 0;
+    clients.forEach((c) => {
+      if (c.month_num) {
+        monthEarned += c.commission;
+        for (let m = 1; m <= c.month_num; m++) totalEarned += c.amount * (m <= 12 ? 0.30 : 0.10);
+      } else {
+        totalEarned += c.commission;
+        if (String(c.close_date).slice(0, 7) === thisMonth) monthEarned += c.commission;
+      }
+    });
+    const summary = {
+      month_earned: Math.round(monthEarned * 100) / 100,
+      total_earned: Math.round(totalEarned * 100) / 100,
+      active_clients: clients.length,
+      active_retainers: retainers.length,
+      claude_eligible: retainers.length >= 1,
+      clawback_risk: clients.filter((c) => c.clawback_risk).map((c) => ({ name: c.name, amount: Math.round(c.amount * 0.30 * 100) / 100 }))
+    };
+    return jsonResp({ ok: true, summary: summary, clients: clients }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok: false, error: e.message }, 500, cors);
+  }
+}
+
+async function handleSearch(url, env, cors) {
+    const q = url.searchParams.get('q') || '';
+    const type = url.searchParams.get('type') || 'contacts';
+    const token = env.HUBSPOT_TOKEN;
+    if (!q) return jsonResp({ ok: false, error: 'q param required' }, 400, cors);
+    const objectType = type === 'companies' ? 'companies' : 'contacts';
+    const properties = objectType === 'contacts'
+      ? ['firstname', 'lastname', 'email', 'phone', 'company', 'lifecyclestage', 'hs_lead_status', 'trade_type', 'discovery_findings', 'discovery_date', 'recommended_package', 'avg_ticket', 'profit_margin', 'pitch_script', 'package_pitched', 'quoted_price', 'pitch_outcome', 'quick_win', 'gbp_review_count', 'website_gaps']
+      : ['name', 'domain', 'phone', 'city', 'state', 'industry'];
+    const searchBody = { query: q, limit: 20, properties };
+    const hsRes = await hs('/crm/v3/objects/' + objectType + '/search', 'POST', searchBody, token);
+    if (!hsRes.ok) return jsonResp({ ok: false, error: 'HubSpot search failed', status: hsRes.status }, 502, cors);
+    const raw = (hsRes.data && hsRes.data.results) || [];
+    const results = raw.map(r => {
+      const p = r.properties || {};
+      const fullName = [p.firstname, p.lastname].filter(Boolean).join(' ').trim();
+      return {
+  discovery_findings: p.discovery_findings || '', discovery_date: p.discovery_date || '', recommended_package: p.recommended_package || '', avg_ticket: p.avg_ticket || '', profit_margin: p.profit_margin || '',
+      pitch_script: p.pitch_script || '',
+      package_pitched: p.package_pitched || '',
+      quoted_price: p.quoted_price || '',
+      pitch_outcome: p.pitch_outcome || '',
+      trade: p.trade_type || '',
+      trade_type: p.trade_type || '', quick_win: p.quick_win || '', gbp_review_count: p.gbp_review_count || '', website_gaps: p.website_gaps || '',
+        id: r.id,
+        contact_id: r.id,
+        name: objectType === 'companies' ? (p.name || '') : (fullName || p.email || p.company || ''),
+    company: p.company || p.name || '',
+    business: p.company || p.name || '', business_name: p.company || p.name || '', first_name: p.firstname || '', last_name: p.lastname || '',
+        phone: p.phone || '',
+        email: p.email || '',
+        city: p.city || '',
+        state: p.state || '',
+        lifecyclestage: p.lifecyclestage || '',
+        lead_status: p.hs_lead_status || ''
+      };
+    });
+    return jsonResp({ ok: true, total: (hsRes.data && hsRes.data.total) || results.length, contacts: results, prospects: results, results }, 200, cors);
+  }
+
+async function handleMap(token, cors) {
+  try {
+    const ABBR = { 'ALABAMA':'AL','ALASKA':'AK','ARIZONA':'AZ','ARKANSAS':'AR','CALIFORNIA':'CA','COLORADO':'CO','CONNECTICUT':'CT','DELAWARE':'DE','FLORIDA':'FL','GEORGIA':'GA','HAWAII':'HI','IDAHO':'ID','ILLINOIS':'IL','INDIANA':'IN','IOWA':'IA','KANSAS':'KS','KENTUCKY':'KY','LOUISIANA':'LA','MAINE':'ME','MARYLAND':'MD','MASSACHUSETTS':'MA','MICHIGAN':'MI','MINNESOTA':'MN','MISSISSIPPI':'MS','MISSOURI':'MO','MONTANA':'MT','NEBRASKA':'NE','NEVADA':'NV','NEW HAMPSHIRE':'NH','NEW JERSEY':'NJ','NEW MEXICO':'NM','NEW YORK':'NY','NORTH CAROLINA':'NC','NORTH DAKOTA':'ND','OHIO':'OH','OKLAHOMA':'OK','OREGON':'OR','PENNSYLVANIA':'PA','RHODE ISLAND':'RI','SOUTH CAROLINA':'SC','SOUTH DAKOTA':'SD','TENNESSEE':'TN','TEXAS':'TX','UTAH':'UT','VERMONT':'VT','VIRGINIA':'VA','WASHINGTON':'WA','WEST VIRGINIA':'WV','WISCONSIN':'WI','WYOMING':'WY' };
+    const stAbbr = (x) => { const u = String(x || '').trim().toUpperCase(); return u.length === 2 ? u : (ABBR[u] || u); };
+    const KNOWN = ['HOT','WARM','COLD','PARK','DNC','WRG','REF','COLD-GK'];
+    const norm = (o) => { const u = String(o || '').trim().toUpperCase(); return KNOWN.indexOf(u) !== -1 ? u : 'NA'; };
+    const CO_PROPS = ['name','city','state','trade_type','hs_lead_status'];
+    const CT_PROPS = ['firstname','lastname','company','city','state','trade_type','last_call_outcome','ai_hook'];
+    const pull = async (objPath, props) => {
+      const out = []; let after;
+      for (let page = 0; page < 6; page++) {
+        const body = { filterGroups: [{ filters: [{ propertyName: 'city', operator: 'HAS_PROPERTY' }] }], properties: props, limit: 200 };
+        if (after) body.after = after;
+        const r = await hs(objPath, 'POST', body, token);
+        if (!r.ok || !r.data) break;
+        out.push.apply(out, r.data.results || []);
+        after = r.data.paging && r.data.paging.next && r.data.paging.next.after;
+        if (!after) break;
+      }
+      return out;
+    };
+    const both = await Promise.all([
+      pull('/crm/v3/objects/companies/search', CO_PROPS),
+      pull('/crm/v3/objects/contacts/search', CT_PROPS)
+    ]);
+    const companies = both[0].map((c) => { const p = c.properties || {}; return {
+      id: 'co' + c.id, type: 'company', name: p.name || '', city: p.city || '', state: stAbbr(p.state),
+      trade: p.trade_type || '', outcome: norm(p.hs_lead_status), ai_hook: '' }; });
+    const contacts = both[1].map((c) => { const p = c.properties || {}; return {
+      id: 'ct' + c.id, type: 'contact', name: ((p.firstname || '') + ' ' + (p.lastname || '')).trim(),
+      company: p.company || '', city: p.city || '', state: stAbbr(p.state),
+      trade: p.trade_type || '', outcome: norm(p.last_call_outcome), ai_hook: p.ai_hook || '' }; });
+    // Fallback: if the companies object is unreadable (missing scope) or empty,
+    // synthesize company pins from contacts so the map always runs on live data.
+    if (companies.length === 0 && contacts.length > 0) {
+      const byCo = {};
+      contacts.forEach((ct) => {
+        const key = (ct.company || ct.name || '').toLowerCase();
+        if (!key) return;
+        const rank = ct.outcome === 'HOT' ? 3 : ct.outcome === 'WARM' ? 2 : ct.outcome === 'NA' ? 0 : 1;
+        if (!byCo[key]) byCo[key] = { id: 'syn-' + key.replace(/[^a-z0-9]+/g, '-').slice(0, 40), type: 'company', name: ct.company || ct.name, city: ct.city, state: ct.state, trade: ct.trade, outcome: ct.outcome, ai_hook: ct.ai_hook || '', _r: rank };
+        else if (rank > byCo[key]._r) { byCo[key].outcome = ct.outcome; byCo[key]._r = rank; }
+      });
+      Object.keys(byCo).forEach((k) => { delete byCo[k]._r; companies.push(byCo[k]); });
+    }
+    // Company pins inherit heat from their contacts when the company record itself is blank
+    const heat = {};
+    contacts.forEach((ct) => { if (!ct.company) return; const k = ct.company.toLowerCase(); const rank = ct.outcome === 'HOT' ? 3 : ct.outcome === 'WARM' ? 2 : 0; if (!heat[k] || rank > heat[k].r) heat[k] = { r: rank, o: ct.outcome }; });
+    companies.forEach((co) => { const h = heat[(co.name || '').toLowerCase()]; if (h && h.r > 0 && co.outcome === 'NA') co.outcome = h.o; });
+    const stSet = {};
+    companies.concat(contacts).forEach((c) => { if (c.state) stSet[c.state] = 1; });
+    const stats = {
+      companies: companies.length,
+      contacts: contacts.length,
+      states: Object.keys(stSet).length,
+      hot: companies.filter((c) => c.outcome === 'HOT').length,
+      warm: companies.filter((c) => c.outcome === 'WARM').length,
+      untouched: companies.filter((c) => c.outcome === 'NA').length
+    };
+    return jsonResp({ ok: true, companies, contacts, stats }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok: false, error: e.message }, 500, cors);
+  }
+}
+
+async function handleCallbacks(env, cors) {
+  const token = env.HUBSPOT_TOKEN;
+  try {
+    const sb = {
+      filterGroups: [{ filters: [{ propertyName: 'last_call_outcome', operator: 'IN', values: ['FOLLOW_UP_BOOKED','WARM'] }] }],
+      properties: ['firstname','lastname','company','phone','last_call_outcome','last_call_date','last_call_notes', 'discovery_findings', 'discovery_date', 'recommended_package', 'avg_ticket', 'profit_margin', 'pitch_script', 'package_pitched', 'quoted_price', 'pitch_outcome', 'quick_win', 'gbp_review_count', 'website_gaps'],
+      sorts: [{ propertyName: 'last_call_date', direction: 'DESCENDING' }],
+      limit: 25
+    };
+    const hr = await hs('/crm/v3/objects/contacts/search', 'POST', sb, token);
+    if (!hr.ok) return jsonResp({ ok: true, callbacks: [] }, 200, cors);
+    const raw = (hr.data && hr.data.results) || [];
+    const callbacks = raw.map(r => {
+      const p = r.properties || {};
+      return {
+        id: r.id, contact_id: r.id, business_name: p.company || '',
+        first_name: p.firstname || '', last_name: p.lastname || '',
+        phone: p.phone || '', when: p.last_call_date || '',
+        last_outcome: p.last_call_outcome || '', notes: p.last_call_notes || ''
+      };
+    });
+    return jsonResp({ ok: true, callbacks }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok: true, callbacks: [] }, 200, cors);
+  }
+}
+
+async function handlePipeline(token, cors) {
+  try {
+    if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
+    const raw       = await bsAllDeals(token, 6);
+    const flagged   = bsClassifyDeals(raw);
+    const real      = flagged.filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
+    const junk      = flagged.filter(f =>  f.junk);
+
+    const stages = BS_STAGES.map(s => {
+      const d = real.filter(x => x.stage_id === s.id);
+      return {
+        id: s.id, label: s.label, open: s.open,
+        count: d.length,
+        value: Math.round(d.reduce((a, x) => a + x.amount, 0) * 100) / 100,
+        deals: d.sort((a, b) => (b.amount - a.amount) || ((a.days_idle||0) - (b.days_idle||0)))
+      };
+    });
+
+    const open = real.filter(d => {
+      const s = BS_STAGES[BS_STAGE_ORDER[d.stage_id]];
+      return s && s.open;
+    });
+
+    return jsonResp({
+      ok: true,
+      stages,
+      totals: {
+        all_deals:   real.length,
+        open_deals:  open.length,
+        open_value:  Math.round(open.reduce((a, d) => a + d.amount, 0) * 100) / 100,
+        won:         real.filter(d => d.stage_id === 'closedwon').length,
+        lost:        real.filter(d => d.stage_id === 'closedlost').length
+      },
+      junk: {
+        total: junk.length,
+        test:  junk.filter(j => j.junk === 'test').length,
+        spam:  junk.filter(j => j.junk === 'spam').length,
+        sample: junk.slice(0, 25).map(j => ({
+          id:   j.deal.id,
+          name: (j.deal.properties || {}).dealname || '',
+          kind: j.junk,
+          hubspot_url: bsDealUrl(j.deal.id)
+        }))
+      },
+      fetched_at: new Date().toISOString()
+    }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok:false, error: e.message }, 500, cors);
+  }
+}
+
+async function handleClients(url, token, cors) {
+  try {
+    if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
+    const rawDeals = await bsAllDeals(token, 6);
+    const real      = bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
+    const companies = await bsCompaniesForNames(bsWonClientNames(real), token);
+    const roster    = bsBuildRoster(real, companies);
+
+    // Attach open delivery work per client so a card can show live status
+    // without the page having to cross-reference two endpoints itself.
+    let tasks = [];
+    try { tasks = (await bsOpenTasks(token, 2)).map(bsShapeTask); } catch (e) { tasks = []; }
+    for (const c of roster) {
+      const key = bsNorm(c.name);
+      const mine = tasks.filter(t => t.client && bsNameMatch(t.client, c.name));
+      c.open_tasks     = mine.length;
+      c.overdue_tasks  = mine.filter(t => t.overdue).length;
+    }
+
+    const slug = url.searchParams.get('slug');
+    if (slug) {
+      const one = roster.filter(c => c.slug === slug)[0];
+      if (!one) return jsonResp({ ok:false, error:'client not found', slug }, 404, cors);
+      one.tasks = tasks.filter(t => t.client && bsNameMatch(t.client, one.name));
+      return jsonResp({ ok:true, client: one, fetched_at:new Date().toISOString() }, 200, cors);
+    }
+
+    return jsonResp({
+      ok: true,
+      clients: roster,
+      totals: {
+        count:          roster.length,
+        active_retainer:roster.filter(c => c.active_retainer).length,
+        mrr:            Math.round(roster.reduce((a, c) => a + c.mrr, 0) * 100) / 100,
+        lifetime:       Math.round(roster.reduce((a, c) => a + c.lifetime, 0) * 100) / 100
+      },
+      fetched_at: new Date().toISOString()
+    }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok:false, error: e.message }, 500, cors);
+  }
+}
+
+async function handleDelivery(token, cors) {
+  try {
+    if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
+    const all      = (await bsOpenTasks(token, 3)).map(bsShapeTask);
+    const delivery = all.filter(t => t.is_delivery);
+
+    const byClient = {};
+    for (const t of delivery) {
+      const k = t.client || 'Unassigned';
+      if (!byClient[k]) byClient[k] = { client: k, slug: bsSlug(k), tasks: [], overdue: 0, due_soon: 0 };
+      byClient[k].tasks.push(t);
+      if (t.overdue)  byClient[k].overdue++;
+      if (t.due_soon) byClient[k].due_soon++;
+    }
+    const groups = Object.keys(byClient).map(k => byClient[k])
+      .sort((a, b) => (b.overdue - a.overdue) || (b.due_soon - a.due_soon) || (b.tasks.length - a.tasks.length));
+
+    const otherOverdue = all.filter(t => !t.is_delivery && t.overdue)
+      .sort((a, b) => (a.days_until || 0) - (b.days_until || 0));
+
+    return jsonResp({
+      ok: true,
+      groups,
+      other_overdue: otherOverdue.slice(0, 60),
+      totals: {
+        delivery_open:    delivery.length,
+        delivery_overdue: delivery.filter(t => t.overdue).length,
+        delivery_soon:    delivery.filter(t => t.due_soon).length,
+        all_open_tasks:   all.length,
+        all_overdue:      all.filter(t => t.overdue).length,
+        other_overdue:    otherOverdue.length
+      },
+      fetched_at: new Date().toISOString()
+    }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok:false, error: e.message }, 500, cors);
+  }
+}
+
+async function handleFinance(token, cors) {
+  try {
+    if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
+    const raw  = await bsAllDeals(token, 6);
+    const real = bsClassifyDeals(raw).filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
+
+    const won = real.filter(d => d.stage_id === 'closedwon');
+    const isRetainer = d => d.revenue_type === 'retainer_y1' || d.revenue_type === 'retainer_y2';
+
+    const mrr       = won.filter(isRetainer).reduce((a, d) => a + d.amount, 0);
+    const oneTime   = won.filter(d => !isRetainer(d)).reduce((a, d) => a + d.amount, 0);
+    const bookedAll = won.reduce((a, d) => a + d.amount, 0);
+
+    // "Outstanding" = priced or proposed but not yet won or lost.
+    const outstandingStages = ['contractsent', '3479061187'];
+    const outstanding = real.filter(d => outstandingStages.indexOf(d.stage_id) > -1);
+
+    // Month-by-month booked value, last 6 months, for a trend line.
+    const months = [];
+    const now = new Date();
+    for (let i = 5; i >= 0; i--) {
+      const dt   = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const next = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
+      const key  = dt.toISOString().slice(0, 7);
+      const v = won.filter(d => {
+        if (!d.close_date) return false;
+        const t = new Date(d.close_date).getTime();
+        return t >= dt.getTime() && t < next.getTime();
+      }).reduce((a, d) => a + d.amount, 0);
+      months.push({ month: key, booked: Math.round(v * 100) / 100 });
+    }
+
+    const byType = {};
+    for (const d of won) {
+      const k = d.revenue_type || 'unclassified';
+      byType[k] = Math.round(((byType[k] || 0) + d.amount) * 100) / 100;
+    }
+
+    return jsonResp({
+      ok: true,
+      source: 'HubSpot deals — bookings, not cleared payments. Drive UNC_Tracker_PaymentDispersal remains the source of truth for cash received.',
+      summary: {
+        mrr:              Math.round(mrr * 100) / 100,
+        arr_projected:    Math.round(mrr * 12 * 100) / 100,
+        one_time_booked:  Math.round(oneTime * 100) / 100,
+        booked_all_time:  Math.round(bookedAll * 100) / 100,
+        outstanding_value:Math.round(outstanding.reduce((a, d) => a + d.amount, 0) * 100) / 100,
+        outstanding_count:outstanding.length,
+        won_count:        won.length,
+        unpriced_won:     won.filter(d => d.amount === 0).length
+      },
+      by_revenue_type: byType,
+      months,
+      outstanding: outstanding.sort((a, b) => b.amount - a.amount),
+      fetched_at: new Date().toISOString()
+    }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok:false, error: e.message }, 500, cors);
+  }
+}
+
+async function handleBrief(token, cors) {
+  try {
+    if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
+
+    const rawDeals  = await bsAllDeals(token, 6);
+    const companies = await bsCompaniesForNames(
+      bsWonClientNames(bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal))),
+      token);
+    let tasks = [], tasksOk = true;
+    try { tasks = (await bsOpenTasks(token, 3)).map(bsShapeTask); }
+    catch (e) { tasks = []; tasksOk = false; }
+
+    const flagged = bsClassifyDeals(rawDeals);
+    const real    = flagged.filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
+    const junkN   = flagged.length - real.length;
+    const roster  = bsBuildRoster(real, companies);
+
+    const openDeals = real.filter(d => {
+      const s = BS_STAGES[BS_STAGE_ORDER[d.stage_id]];
+      return s && s.open;
+    });
+    const mrr = roster.reduce((a, c) => a + c.mrr, 0);
+    const signals = [];
+    const S = (severity, key, title, detail, metric, action) =>
+      signals.push({ severity, key, title, detail, metric, action });
+
+    // 1. Revenue concentration — the number that decides whether a bad week
+    //    is an inconvenience or an extinction event.
+    if (roster.length > 0 && mrr > 0) {
+      const top   = roster.filter(c => c.mrr > 0).sort((a, b) => b.mrr - a.mrr)[0];
+      const share = Math.round((top.mrr / mrr) * 100);
+      if (share >= 60) {
+        S('critical', 'concentration',
+          share >= 100 ? 'All recurring revenue is one client' : 'Revenue concentrated in one client',
+          top.name + ' is ' + share + '% of MRR ($' + top.mrr.toLocaleString() + ' of $' + Math.round(mrr).toLocaleString() + '). If they leave, recurring revenue goes to near zero the same day.',
+          share + '%',
+          'Close a second retainer. Not a project — a retainer. That single signature is the difference between a client and a business.');
+      } else {
+        S('good', 'concentration', 'Revenue spread across clients',
+          'Largest client is ' + share + '% of MRR. No single cancellation ends the business.',
+          share + '%', 'Keep it that way — no client above 50%.');
+      }
+    } else {
+      S('critical', 'concentration', 'No recurring revenue',
+        'Zero active retainers found in Closed Won. One-time projects do not compound — every month restarts at zero.',
+        '$0 MRR',
+        'One retainer. That is the entire job right now.');
+    }
+
+    // 2. Data hygiene — junk in the CRM silently corrupts every metric
+    //    above it, so this is a data-integrity signal, not housekeeping.
+    if (junkN > 0) {
+      const pct = Math.round((junkN / flagged.length) * 100);
+      S(pct >= 25 ? 'critical' : 'warn', 'hygiene', 'CRM is carrying junk records',
+        junkN + ' of ' + flagged.length + ' deals (' + pct + '%) are form spam or test records. They are excluded from every number on this site, but they are still in HubSpot skewing anything that reads the portal directly — including your weekly CRO report.',
+        junkN + ' junk',
+        'Bulk-delete them in HubSpot, then add a honeypot or reCAPTCHA to the inbound form so they stop arriving.');
+    } else {
+      S('good', 'hygiene', 'CRM is clean', 'No spam or test deals detected.', '0 junk', 'Nothing to do.');
+    }
+
+    // 3. Stalled deals — the pipeline's actual failure mode is not losing
+    //    deals, it is deals that never move and never get declared dead.
+    const stalled = openDeals.filter(d => (d.days_idle || 0) >= 21);
+    if (stalled.length) {
+      S(stalled.length >= 5 ? 'critical' : 'warn', 'stalled', 'Deals are rotting in the pipeline',
+        stalled.length + ' open deal' + (stalled.length === 1 ? '' : 's') + ' with no activity in 21+ days. Oldest: ' +
+        stalled.sort((a, b) => (b.days_idle||0) - (a.days_idle||0))[0].name + ' at ' +
+        (stalled[0].days_idle) + ' days. A deal nobody has touched in three weeks is not a deal, it is a bookmark.',
+        stalled.length + ' stalled',
+        'Work them or mark them Closed Lost today. A false pipeline is worse than an empty one.');
+    } else if (openDeals.length) {
+      S('good', 'stalled', 'Pipeline is moving', 'No open deal has sat untouched for 21+ days.', '0 stalled', 'Keep the cadence.');
+    }
+
+    // 4. Funnel shape — an empty middle means outreach is happening but
+    //    conversion is not, which is a different problem from low volume.
+    const emptyOpen = BS_STAGES.filter(s => s.open && real.filter(d => d.stage_id === s.id).length === 0);
+    if (emptyOpen.length >= 3) {
+      S('warn', 'funnel', 'Funnel has holes',
+        emptyOpen.length + ' open stages are completely empty: ' + emptyOpen.map(s => s.label).join(', ') +
+        '. Deals are entering and dying without ever reaching the middle of the funnel.',
+        emptyOpen.length + ' empty stages',
+        'Pick five prospects today and move each one exactly one stage. Movement first, volume second.');
+    }
+
+    // 5. Delivery risk — the fastest way to lose the client you already have.
+    const overdue = tasks.filter(t => t.is_delivery && t.overdue);
+    if (overdue.length) {
+      S('critical', 'delivery', 'Delivery work is overdue',
+        overdue.length + ' [DELIVERY] task' + (overdue.length === 1 ? ' is' : 's are') + ' past due. Late delivery is the cheapest way to lose the only recurring revenue you have.',
+        overdue.length + ' overdue',
+        'Clear these before any new outreach. Retention beats acquisition every time.');
+    } else if (!tasksOk) {
+      S('warn', 'delivery', 'Delivery status could not be read',
+        'HubSpot did not return the task list for this request, most likely a burst rate-limit. ' +
+        'This is NOT a report that delivery is clear — it is a report that delivery is unknown. Reload in a few seconds.',
+        'unknown',
+        'Reload the page. If it persists, check the HubSpot private app token has tasks read scope.');
+    } else {
+      const dOpen = tasks.filter(t => t.is_delivery).length;
+      S('good', 'delivery', dOpen ? 'Delivery on schedule' : 'No delivery work queued',
+        dOpen ? dOpen + ' open delivery task' + (dOpen === 1 ? '' : 's') + ', none overdue.'
+              : 'No [DELIVERY] tasks in HubSpot. Either work is done or it was never scheduled.',
+        dOpen + ' open',
+        dOpen ? 'Stay ahead of it.' : 'Run delivery-scheduler for active clients so the work is tracked.');
+    }
+
+    // 5b. RENEWAL CLIFF — the most consequential date in the business.
+    // Concentration tells you the risk exists. This tells you when it lands.
+    // A retainer with no recorded end date is itself the finding: the date
+    // 100% of recurring revenue stops exists only in someone's memory.
+    const retainers = real.filter(d => d.stage_id === 'closedwon' &&
+      (d.revenue_type === 'retainer_y1' || d.revenue_type === 'retainer_y2'));
+    const dated   = retainers.filter(d => d.days_to_renewal !== null);
+    const undated = retainers.filter(d => d.days_to_renewal === null);
+
+    if (dated.length) {
+      const soonest = dated.sort((a, b) => a.days_to_renewal - b.days_to_renewal)[0];
+      const dleft   = soonest.days_to_renewal;
+      const share   = mrr > 0 ? Math.round((soonest.amount / mrr) * 100) : 0;
+      if (dleft < 0) {
+        S('critical', 'renewal', 'A retainer term has already ended',
+          bsClientName(soonest.name) + ' passed its contract end date ' + Math.abs(dleft) +
+          ' days ago and nothing has been recorded since. That is ' + share + '% of MRR in limbo.',
+          Math.abs(dleft) + 'd past', 'Confirm renewal in writing today, or move it to Closed Lost and stop counting the revenue.');
+      } else if (dleft <= 45) {
+        S('critical', 'renewal', 'Revenue cliff in ' + dleft + ' days',
+          bsClientName(soonest.name) + ' — ' + share + '% of MRR — reaches contract end on ' +
+          String(soonest.contract_end).slice(0, 10) + '. Renewal conversations that start in the final ' +
+          'two weeks are negotiations from weakness. Start now, while the work is still fresh.',
+          dleft + 'd left', 'Book the renewal conversation this week. Bring the results, not the invoice.');
+      } else {
+        S('good', 'renewal', 'Renewal runway is healthy',
+          'Nearest contract end is ' + dleft + ' days out (' + bsClientName(soonest.name) + ').',
+          dleft + 'd left', 'Diarise the conversation for 45 days out.');
       }
     }
-
-    // Health check
-    if (request.method === 'GET' && url.pathname === '/') {
-      return jsonResp({ ok: true, service: 'unc-sales-os-sync', version: '3.0', kv: !!kv }, 200, cors);
+    if (undated.length) {
+      S('warn', 'renewal_unknown', 'Retainer has no recorded end date',
+        undated.length + ' active retainer' + (undated.length === 1 ? '' : 's') + ' (' +
+        undated.map(d => bsClientName(d.name)).join(', ') + ') carry no contract_end_date. ' +
+        'The date your recurring revenue stops is not in any system this dashboard can read — ' +
+        'it exists only in a document or in your head, which means nothing can warn you as it approaches.',
+        undated.length + ' undated',
+        'Set contract_end_date and contract_term_months on the deal. Then this page counts down for you.');
     }
 
-    // Setup (run once after deployment)
-    if (request.method === 'POST' && url.pathname === '/setup') {
-      return jsonResp(await handleSetup(kv), 200, cors);
+    // 6. Unpriced wins — $0 Closed Won deals make MRR and lifetime value lie.
+    const unpriced = real.filter(d => d.stage_id === 'closedwon' && d.amount === 0);
+    if (unpriced.length) {
+      S('warn', 'unpriced', 'Closed Won deals with no amount',
+        unpriced.length + ' won deal' + (unpriced.length === 1 ? ' has' : 's have') + ' $0 on them. Some are genuinely free (case-study builds), but until each one is labelled, lifetime value per client is understated.',
+        unpriced.length + ' at $0',
+        'Set the real amount, or tag deliberate freebies so they stop looking like missing data.');
     }
 
-    // Sync
-    if (request.method === 'POST' && url.pathname === '/sync') {
+    // 7. Social coverage — directly requested, and it has teeth: a client
+    //    with no social links on file cannot be serviced by content or
+    //    reputation retainers without someone going hunting first.
+    const noSocial = roster.filter(c => !c.social.facebook && !c.social.instagram);
+    if (roster.length && noSocial.length) {
+      S('warn', 'social', 'Clients missing social profiles',
+        noSocial.length + ' of ' + roster.length + ' client' + (roster.length === 1 ? '' : 's') +
+        ' have no Facebook or Instagram on file: ' + noSocial.map(c => c.name).join(', ') +
+        '. Content Pack and Reputation retainers both need these before work can start.',
+        noSocial.length + ' incomplete',
+        'Fill facebook_company_page and instagram_page on the HubSpot company record.');
+    }
+
+    const rank = { critical: 0, warn: 1, good: 2 };
+    signals.sort((a, b) => rank[a.severity] - rank[b.severity]);
+
+    return jsonResp({
+      ok: true,
+      signals,
+      counts: {
+        critical: signals.filter(s => s.severity === 'critical').length,
+        warn:     signals.filter(s => s.severity === 'warn').length,
+        good:     signals.filter(s => s.severity === 'good').length
+      },
+      headline: (signals.filter(s => s.severity === 'critical')[0] || signals[0] || {}).title || 'All clear',
+      context: {
+        mrr: Math.round(mrr * 100) / 100,
+        clients: roster.length,
+        open_deals: openDeals.length,
+        junk_deals: junkN,
+        open_tasks: tasks.length
+      },
+      fetched_at: new Date().toISOString()
+    }, 200, cors);
+  } catch (e) {
+    return jsonResp({ ok:false, error: e.message }, 500, cors);
+  }
+}
+
+
+// ── ROUTE REGISTRY (v3 refactor, 2026-08-17) ─────────────────────────────────
+// Declarative replacement for the old flat `if (method && pathname==='/x')`
+// chain. Each entry: { method, path, prefix?, public?, handler(ctx) }.
+//   method   — 'GET' | 'POST' | 'PUT' | array of methods (e.g. /config, /goals)
+//   path     — exact pathname, or a prefix when `prefix: true`
+//   public   — true for the two routes the auth gate is allowed to skip
+//   handler  — async (ctx) => Response, ctx = { request, url, env, kv, token, origin, cors }
+// Order mirrors the original if-chain. Behavior, status codes, and error
+// shapes are unchanged from the pre-refactor inline version for every route.
+const ROUTES = [
+  // Health check
+  {
+    method: 'GET', path: '/', public: true,
+    handler: async (ctx) => jsonResp({ ok: true, service: 'unc-sales-os-sync', version: '3.0', kv: !!ctx.kv }, 200, ctx.cors)
+  },
+
+  // Setup (run once after deployment)
+  {
+    method: 'POST', path: '/setup',
+    handler: async (ctx) => jsonResp(await handleSetup(ctx.kv), 200, ctx.cors)
+  },
+
+  // Sync
+  {
+    method: 'POST', path: '/sync',
+    handler: async (ctx) => {
+      const { request, token, kv, cors } = ctx;
       if (!token) return jsonResp({ ok: false, error: 'HUBSPOT_TOKEN not configured' }, 500, cors);
       let payload;
-      try { payload = await request.json(); } catch(e) {
+      try { payload = await request.json(); } catch (e) {
         return jsonResp({ ok: false, error: 'Invalid JSON' }, 400, cors);
       }
       const calls = payload.calls || (payload.call ? [payload.call] : null);
@@ -1572,99 +2178,36 @@ export default {
       const results = [];
       for (const call of calls) {
         try { results.push(await handleSync(call, token, kv)); }
-        catch(e) { results.push({ ok: false, call_id: call.call_id, error: e.message }); }
+        catch (e) { results.push({ ok: false, call_id: call.call_id, error: e.message }); }
       }
       const allOk = results.every(r => r.ok);
       return jsonResp({ ok: allOk, results }, allOk ? 200 : 207, cors);
     }
+  },
 
-    // Queue
-    if (request.method === 'GET' && url.pathname === '/queue') {
-      if (!token) return jsonResp({ ok: false, error: 'HUBSPOT_TOKEN not configured' }, 500, cors);
-      return jsonResp(await handleQueue(url, token, kv), 200, cors);
+  // Queue
+  {
+    method: 'GET', path: '/queue',
+    handler: async (ctx) => {
+      if (!ctx.token) return jsonResp({ ok: false, error: 'HUBSPOT_TOKEN not configured' }, 500, ctx.cors);
+      return jsonResp(await handleQueue(ctx.url, ctx.token, ctx.kv), 200, ctx.cors);
     }
+  },
 
-    // Stats
-    // ── GET /commissions — rep commission summary from HubSpot closed-won deals ──
-    // Rates (per rep agreement): Retainer Y1 30% monthly, Y2+ 10% monthly, Project 25%, Merch 50%.
-    // revenue_type deal property wins when set; otherwise classified from the deal name.
-    if (request.method === 'GET' && url.pathname === '/commissions') {
-      try {
-        const ownerId = url.searchParams.get('owner_id') || '';
-        if (!ownerId) return jsonResp({ ok: false, error: 'owner_id required' }, 400, cors);
-        const body = {
-          filterGroups: [{ filters: [
-            { propertyName: 'hubspot_owner_id', operator: 'EQ', value: ownerId },
-            { propertyName: 'dealstage', operator: 'EQ', value: 'closedwon' }
-          ]}],
-          properties: ['dealname', 'amount', 'closedate', 'revenue_type'],
-          sorts: [{ propertyName: 'closedate', direction: 'DESCENDING' }],
-          limit: 100
-        };
-        const r = await bsHs('/crm/v3/objects/deals/search', 'POST', body, token);
-        if (!r.ok) return jsonResp({ ok: false, error: 'HubSpot deals search failed: ' + r.status }, 502, cors);
-        const now = new Date();
-        const thisMonth = now.getUTCFullYear() + '-' + String(now.getUTCMonth() + 1).padStart(2, '0');
-        const clients = (r.data.results || []).map((d) => {
-          const p = d.properties || {};
-          const name = p.dealname || 'Unnamed deal';
-          const amount = parseFloat(p.amount) || 0;
-          const closeDate = p.closedate || '';
-          let type = (p.revenue_type || '').toLowerCase();
-          if (!type) {
-            const n = name.toLowerCase();
-            if (/merch|shirt|hat|apparel|card|print|embroider|gear|hoodie/.test(n)) type = 'merch';
-            else if (/retainer|seo|gbp|authority|growth|domination|ppc|content|email|reputation|ai lead|monthly/.test(n)) type = 'retainer';
-            else type = 'project';
-          }
-          let monthNum = null, rate, revenue_type, type_label, commission;
-          if (type === 'retainer' || type === 'retainer_y1' || type === 'retainer_y2') {
-            const ms = closeDate ? (now - new Date(closeDate)) : 0;
-            monthNum = Math.max(1, Math.floor(ms / (30.44 * 86400000)) + 1);
-            rate = monthNum <= 12 ? 0.30 : 0.10;
-            revenue_type = monthNum <= 12 ? 'retainer_y1' : 'retainer_y2';
-            type_label = monthNum <= 12 ? 'Retainer · Y1' : 'Retainer · Y2+';
-            commission = amount * rate;
-          } else if (type === 'merch') {
-            rate = 0.50; revenue_type = 'merch'; type_label = 'Merch'; commission = amount * rate;
-          } else {
-            rate = 0.25; revenue_type = 'project'; type_label = 'Project'; commission = amount * rate;
-          }
-          return {
-            deal_id: d.id, name: name, amount: amount, close_date: closeDate,
-            revenue_type: revenue_type, type_label: type_label, rate: rate,
-            commission: Math.round(commission * 100) / 100,
-            month_num: monthNum,
-            clawback_risk: revenue_type === 'retainer_y1' && monthNum === 1
-          };
-        });
-        const retainers = clients.filter((c) => c.revenue_type === 'retainer_y1' || c.revenue_type === 'retainer_y2');
-        let monthEarned = 0, totalEarned = 0;
-        clients.forEach((c) => {
-          if (c.month_num) {
-            monthEarned += c.commission;
-            for (let m = 1; m <= c.month_num; m++) totalEarned += c.amount * (m <= 12 ? 0.30 : 0.10);
-          } else {
-            totalEarned += c.commission;
-            if (String(c.close_date).slice(0, 7) === thisMonth) monthEarned += c.commission;
-          }
-        });
-        const summary = {
-          month_earned: Math.round(monthEarned * 100) / 100,
-          total_earned: Math.round(totalEarned * 100) / 100,
-          active_clients: clients.length,
-          active_retainers: retainers.length,
-          claude_eligible: retainers.length >= 1,
-          clawback_risk: clients.filter((c) => c.clawback_risk).map((c) => ({ name: c.name, amount: Math.round(c.amount * 0.30 * 100) / 100 }))
-        };
-        return jsonResp({ ok: true, summary: summary, clients: clients }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok: false, error: e.message }, 500, cors);
-      }
-    }
+  // Stats
+  // ── GET /commissions — rep commission summary from HubSpot closed-won deals ──
+  // Rates (per rep agreement): Retainer Y1 30% monthly, Y2+ 10% monthly, Project 25%, Merch 50%.
+  // revenue_type deal property wins when set; otherwise classified from the deal name.
+  {
+    method: 'GET', path: '/commissions',
+    handler: async (ctx) => handleCommissions(ctx.url, ctx.token, ctx.cors)
+  },
 
-    // ── POST /setup-pitch-field — one-shot: create the pitch_script contact property ──
-    if (request.method === 'POST' && url.pathname === '/setup-pitch-field') {
+  // ── POST /setup-pitch-field — one-shot: create the pitch_script contact property ──
+  {
+    method: 'POST', path: '/setup-pitch-field',
+    handler: async (ctx) => {
+      const { token, cors } = ctx;
       try {
         const r = await hs('/crm/v3/properties/contacts', 'POST', {
           name: 'pitch_script',
@@ -1679,611 +2222,174 @@ export default {
         return jsonResp({ ok: false, status: r.status, detail: r.data }, 502, cors);
       } catch (e) { return jsonResp({ ok: false, error: e.message }, 500, cors); }
     }
+  },
 
-    if (request.method === 'GET' && url.pathname === '/leaderboard') {
-      return jsonResp(await handleLeaderboard(kv), 200, cors);
-    }
+  {
+    method: 'GET', path: '/leaderboard',
+    handler: async (ctx) => jsonResp(await handleLeaderboard(ctx.kv), 200, ctx.cors)
+  },
 
-    if (request.method === 'GET' && url.pathname === '/stats') {
-      return jsonResp(await handleStats(url, kv), 200, cors);
-    }
+  {
+    method: 'GET', path: '/stats',
+    handler: async (ctx) => jsonResp(await handleStats(ctx.url, ctx.kv), 200, ctx.cors)
+  },
 
-    // PIN
-    if (request.method === 'POST' && url.pathname === '/pin') {
+  // PIN
+  {
+    method: 'POST', path: '/pin', public: true,
+    handler: async (ctx) => {
       let body;
-      try { body = await request.json(); } catch(e) { body = {}; }
-      return jsonResp(await handlePin(body, kv, env, origin), 200, cors);
+      try { body = await ctx.request.json(); } catch (e) { body = {}; }
+      return jsonResp(await handlePin(body, ctx.kv, ctx.env, ctx.origin), 200, ctx.cors);
     }
+  },
 
-    // Contact history
-    if (request.method === 'GET' && url.pathname.startsWith('/contact/')) {
-      const parts = url.pathname.split('/');
+  // Contact history
+  {
+    method: 'GET', path: '/contact/', prefix: true,
+    handler: async (ctx) => {
+      const parts = ctx.url.pathname.split('/');
       const contactId = parts[2];
-      if (!contactId) return jsonResp({ ok: false, error: 'contact id required' }, 400, cors);
-      return jsonResp(await handleContactHistory(contactId, kv), 200, cors);
+      if (!contactId) return jsonResp({ ok: false, error: 'contact id required' }, 400, ctx.cors);
+      return jsonResp(await handleContactHistory(contactId, ctx.kv), 200, ctx.cors);
     }
+  },
 
-    // Config
-    if (url.pathname === '/config') {
+  // Config
+  {
+    method: ['GET', 'PUT'], path: '/config',
+    handler: async (ctx) => {
+      const { request, kv, cors } = ctx;
       if (request.method === 'GET')  return jsonResp(await handleGetConfig(kv), 200, cors);
       if (request.method === 'PUT') {
         let body;
-        try { body = await request.json(); } catch(e) { body = {}; }
+        try { body = await request.json(); } catch (e) { body = {}; }
         return jsonResp(await handlePutConfig(body, kv), 200, cors);
       }
     }
+  },
 
-    // Goals
-    if (url.pathname === '/goals') {
+  // Goals
+  {
+    method: ['GET', 'PUT'], path: '/goals',
+    handler: async (ctx) => {
+      const { request, kv, cors } = ctx;
       if (request.method === 'GET') return jsonResp(await handleGetGoals(kv), 200, cors);
       if (request.method === 'PUT') {
         let body;
-        try { body = await request.json(); } catch(e) { body = {}; }
+        try { body = await request.json(); } catch (e) { body = {}; }
         return jsonResp(await handlePutGoals(body, kv), 200, cors);
       }
     }
+  },
 
+  // Calendar slots
+  {
+    method: 'GET', path: '/calendar/slots',
+    handler: async (ctx) => jsonResp(await handleCalendarSlots(ctx.url, ctx.kv), 200, ctx.cors)
+  },
 
-    // Calendar slots
-    if (request.method === 'GET' && url.pathname === '/calendar/slots') {
-      return jsonResp(await handleCalendarSlots(url, kv), 200, cors);
+  // Calendar book
+  {
+    method: 'POST', path: '/calendar/book',
+    handler: async (ctx) => {
+      let body; try { body = await ctx.request.json(); } catch (e) { body = {}; }
+      return jsonResp(await handleCalendarBook(body, ctx.kv), 200, ctx.cors);
     }
+  },
 
-    // Calendar book
-    if (request.method === 'POST' && url.pathname === '/calendar/book') {
-      let body; try { body = await request.json(); } catch(e) { body = {}; }
-      return jsonResp(await handleCalendarBook(body, kv), 200, cors);
-    }
-
-    // Setup calendar form (browser UI — no CORS issues)
-    if (request.method === 'GET' && url.pathname === '/setup-calendar-form') {
+  // Setup calendar form (browser UI — no CORS issues)
+  {
+    method: 'GET', path: '/setup-calendar-form',
+    handler: async () => {
       const formHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UNC Calendar Setup</title><style>*{box-sizing:border-box;margin:0;padding:0}body{background:#0f0f0f;color:#fff;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem}.card{background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:2rem;width:100%;max-width:480px}h1{font-size:1.2rem;font-weight:800;color:#e36b1e;margin-bottom:0.35rem}p{font-size:0.82rem;color:rgba(255,255,255,0.6);margin-bottom:1.5rem;line-height:1.5}label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.35rem;margin-top:1rem}input{width:100%;padding:0.75rem 1rem;background:#222;border:1px solid rgba(255,255,255,0.2);border-radius:6px;color:#fff;font-family:system-ui;font-size:0.9rem;outline:none}input:focus{border-color:#e36b1e}button{width:100%;margin-top:1.5rem;padding:0.85rem;background:#e36b1e;color:#000;border:none;border-radius:6px;font-weight:800;font-size:1rem;cursor:pointer}#msg{margin-top:1rem;padding:0.75rem;border-radius:6px;font-size:0.85rem;display:none}</style></head><body><div class="card"><h1>UNC Calendar Setup</h1><p>Enter your Google OAuth credentials to connect the booking system to your calendar. This page is served directly from the Worker — credentials never touch the main site.</p><form id="f"><label>Client Secret</label><input type="password" id="cs" placeholder="GOCSPX-..." autocomplete="off" required /><label>Refresh Token</label><input type="password" id="rt" placeholder="1//0g..." autocomplete="off" required /><button type="submit">Connect Calendar</button></form><div id="msg"></div></div><script>document.getElementById("f").addEventListener("submit",async function(e){e.preventDefault();const btn=this.querySelector("button");const msg=document.getElementById("msg");btn.textContent="Connecting...";btn.disabled=true;try{const r=await fetch("/setup-calendar",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({client_secret:document.getElementById("cs").value,refresh_token:document.getElementById("rt").value,client_id:"37969998857-g6m8787uldnmhf4geqp7nbrduh6to580.apps.googleusercontent.com"})});const d=await r.json();msg.style.display="block";if(d.ok){msg.style.background="rgba(34,197,94,0.15)";msg.style.border="1px solid #22c55e";msg.style.color="#22c55e";msg.textContent="✓ "+d.message;document.getElementById("cs").value="";document.getElementById("rt").value="";}else{msg.style.background="rgba(239,68,68,0.15)";msg.style.border="1px solid #ef4444";msg.style.color="#ef4444";msg.textContent="✗ "+(d.error||"Failed — check credentials");}}catch(e){msg.style.display="block";msg.textContent="Network error: "+e.message;}finally{btn.textContent="Connect Calendar";btn.disabled=false;}});</script></body></html>`;
       return new Response(formHTML, { status: 200, headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
     }
+  },
 
-    // Setup calendar credentials (one-time)
-    if (request.method === 'POST' && url.pathname === '/setup-calendar') {
-      let body; try { body = await request.json(); } catch(e) { body = {}; }
-      return jsonResp(await handleSetupCalendar(body, kv), 200, cors);
+  // Setup calendar credentials (one-time)
+  {
+    method: 'POST', path: '/setup-calendar',
+    handler: async (ctx) => {
+      let body; try { body = await ctx.request.json(); } catch (e) { body = {}; }
+      return jsonResp(await handleSetupCalendar(body, ctx.kv), 200, ctx.cors);
     }
+  },
 
-    // Places search proxy
-    if (request.method === 'POST' && url.pathname === '/places') {
-      let body; try { body = await request.json(); } catch(e) { body = {}; }
-      return jsonResp(await handlePlaces(body, env), 200, cors);
+  // Places search proxy
+  {
+    method: 'POST', path: '/places',
+    handler: async (ctx) => {
+      let body; try { body = await ctx.request.json(); } catch (e) { body = {}; }
+      return jsonResp(await handlePlaces(body, ctx.env), 200, ctx.cors);
     }
+  },
 
-      // HubSpot prospect search proxy
-      if (request.method === 'GET' && url.pathname === '/search') {
-        const q = url.searchParams.get('q') || '';
-        const type = url.searchParams.get('type') || 'contacts';
-        const token = env.HUBSPOT_TOKEN;
-        if (!q) return jsonResp({ ok: false, error: 'q param required' }, 400, cors);
-        const objectType = type === 'companies' ? 'companies' : 'contacts';
-        const properties = objectType === 'contacts'
-          ? ['firstname', 'lastname', 'email', 'phone', 'company', 'lifecyclestage', 'hs_lead_status', 'trade_type', 'discovery_findings', 'discovery_date', 'recommended_package', 'avg_ticket', 'profit_margin', 'pitch_script', 'package_pitched', 'quoted_price', 'pitch_outcome', 'quick_win', 'gbp_review_count', 'website_gaps']
-          : ['name', 'domain', 'phone', 'city', 'state', 'industry'];
-        const searchBody = { query: q, limit: 20, properties };
-        const hsRes = await hs('/crm/v3/objects/' + objectType + '/search', 'POST', searchBody, token);
-        if (!hsRes.ok) return jsonResp({ ok: false, error: 'HubSpot search failed', status: hsRes.status }, 502, cors);
-        const raw = (hsRes.data && hsRes.data.results) || [];
-        const results = raw.map(r => {
-          const p = r.properties || {};
-          const fullName = [p.firstname, p.lastname].filter(Boolean).join(' ').trim();
-          return {
-      discovery_findings: p.discovery_findings || '', discovery_date: p.discovery_date || '', recommended_package: p.recommended_package || '', avg_ticket: p.avg_ticket || '', profit_margin: p.profit_margin || '',
-          pitch_script: p.pitch_script || '',
-          package_pitched: p.package_pitched || '',
-          quoted_price: p.quoted_price || '',
-          pitch_outcome: p.pitch_outcome || '',
-          trade: p.trade_type || '',
-          trade_type: p.trade_type || '', quick_win: p.quick_win || '', gbp_review_count: p.gbp_review_count || '', website_gaps: p.website_gaps || '',
-            id: r.id,
-            contact_id: r.id,
-            name: objectType === 'companies' ? (p.name || '') : (fullName || p.email || p.company || ''),
-        company: p.company || p.name || '',
-        business: p.company || p.name || '', business_name: p.company || p.name || '', first_name: p.firstname || '', last_name: p.lastname || '',
-            phone: p.phone || '',
-            email: p.email || '',
-            city: p.city || '',
-            state: p.state || '',
-            lifecyclestage: p.lifecyclestage || '',
-            lead_status: p.hs_lead_status || ''
-          };
-        });
-        return jsonResp({ ok: true, total: (hsRes.data && hsRes.data.total) || results.length, contacts: results, prospects: results, results }, 200, cors);
-      }
-              // ── GET /map — live companies + contacts for the Intel Map ──────────────
-    if (request.method === 'GET' && url.pathname === '/map') {
-      try {
-        const ABBR = { 'ALABAMA':'AL','ALASKA':'AK','ARIZONA':'AZ','ARKANSAS':'AR','CALIFORNIA':'CA','COLORADO':'CO','CONNECTICUT':'CT','DELAWARE':'DE','FLORIDA':'FL','GEORGIA':'GA','HAWAII':'HI','IDAHO':'ID','ILLINOIS':'IL','INDIANA':'IN','IOWA':'IA','KANSAS':'KS','KENTUCKY':'KY','LOUISIANA':'LA','MAINE':'ME','MARYLAND':'MD','MASSACHUSETTS':'MA','MICHIGAN':'MI','MINNESOTA':'MN','MISSISSIPPI':'MS','MISSOURI':'MO','MONTANA':'MT','NEBRASKA':'NE','NEVADA':'NV','NEW HAMPSHIRE':'NH','NEW JERSEY':'NJ','NEW MEXICO':'NM','NEW YORK':'NY','NORTH CAROLINA':'NC','NORTH DAKOTA':'ND','OHIO':'OH','OKLAHOMA':'OK','OREGON':'OR','PENNSYLVANIA':'PA','RHODE ISLAND':'RI','SOUTH CAROLINA':'SC','SOUTH DAKOTA':'SD','TENNESSEE':'TN','TEXAS':'TX','UTAH':'UT','VERMONT':'VT','VIRGINIA':'VA','WASHINGTON':'WA','WEST VIRGINIA':'WV','WISCONSIN':'WI','WYOMING':'WY' };
-        const stAbbr = (x) => { const u = String(x || '').trim().toUpperCase(); return u.length === 2 ? u : (ABBR[u] || u); };
-        const KNOWN = ['HOT','WARM','COLD','PARK','DNC','WRG','REF','COLD-GK'];
-        const norm = (o) => { const u = String(o || '').trim().toUpperCase(); return KNOWN.indexOf(u) !== -1 ? u : 'NA'; };
-        const CO_PROPS = ['name','city','state','trade_type','hs_lead_status'];
-        const CT_PROPS = ['firstname','lastname','company','city','state','trade_type','last_call_outcome','ai_hook'];
-        const pull = async (objPath, props) => {
-          const out = []; let after;
-          for (let page = 0; page < 6; page++) {
-            const body = { filterGroups: [{ filters: [{ propertyName: 'city', operator: 'HAS_PROPERTY' }] }], properties: props, limit: 200 };
-            if (after) body.after = after;
-            const r = await hs(objPath, 'POST', body, token);
-            if (!r.ok || !r.data) break;
-            out.push.apply(out, r.data.results || []);
-            after = r.data.paging && r.data.paging.next && r.data.paging.next.after;
-            if (!after) break;
-          }
-          return out;
-        };
-        const both = await Promise.all([
-          pull('/crm/v3/objects/companies/search', CO_PROPS),
-          pull('/crm/v3/objects/contacts/search', CT_PROPS)
-        ]);
-        const companies = both[0].map((c) => { const p = c.properties || {}; return {
-          id: 'co' + c.id, type: 'company', name: p.name || '', city: p.city || '', state: stAbbr(p.state),
-          trade: p.trade_type || '', outcome: norm(p.hs_lead_status), ai_hook: '' }; });
-        const contacts = both[1].map((c) => { const p = c.properties || {}; return {
-          id: 'ct' + c.id, type: 'contact', name: ((p.firstname || '') + ' ' + (p.lastname || '')).trim(),
-          company: p.company || '', city: p.city || '', state: stAbbr(p.state),
-          trade: p.trade_type || '', outcome: norm(p.last_call_outcome), ai_hook: p.ai_hook || '' }; });
-        // Fallback: if the companies object is unreadable (missing scope) or empty,
-        // synthesize company pins from contacts so the map always runs on live data.
-        if (companies.length === 0 && contacts.length > 0) {
-          const byCo = {};
-          contacts.forEach((ct) => {
-            const key = (ct.company || ct.name || '').toLowerCase();
-            if (!key) return;
-            const rank = ct.outcome === 'HOT' ? 3 : ct.outcome === 'WARM' ? 2 : ct.outcome === 'NA' ? 0 : 1;
-            if (!byCo[key]) byCo[key] = { id: 'syn-' + key.replace(/[^a-z0-9]+/g, '-').slice(0, 40), type: 'company', name: ct.company || ct.name, city: ct.city, state: ct.state, trade: ct.trade, outcome: ct.outcome, ai_hook: ct.ai_hook || '', _r: rank };
-            else if (rank > byCo[key]._r) { byCo[key].outcome = ct.outcome; byCo[key]._r = rank; }
-          });
-          Object.keys(byCo).forEach((k) => { delete byCo[k]._r; companies.push(byCo[k]); });
-        }
-        // Company pins inherit heat from their contacts when the company record itself is blank
-        const heat = {};
-        contacts.forEach((ct) => { if (!ct.company) return; const k = ct.company.toLowerCase(); const rank = ct.outcome === 'HOT' ? 3 : ct.outcome === 'WARM' ? 2 : 0; if (!heat[k] || rank > heat[k].r) heat[k] = { r: rank, o: ct.outcome }; });
-        companies.forEach((co) => { const h = heat[(co.name || '').toLowerCase()]; if (h && h.r > 0 && co.outcome === 'NA') co.outcome = h.o; });
-        const stSet = {};
-        companies.concat(contacts).forEach((c) => { if (c.state) stSet[c.state] = 1; });
-        const stats = {
-          companies: companies.length,
-          contacts: contacts.length,
-          states: Object.keys(stSet).length,
-          hot: companies.filter((c) => c.outcome === 'HOT').length,
-          warm: companies.filter((c) => c.outcome === 'WARM').length,
-          untouched: companies.filter((c) => c.outcome === 'NA').length
-        };
-        return jsonResp({ ok: true, companies, contacts, stats }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok: false, error: e.message }, 500, cors);
-      }
-    }
+  // HubSpot prospect search proxy
+  {
+    method: 'GET', path: '/search',
+    handler: async (ctx) => handleSearch(ctx.url, ctx.env, ctx.cors)
+  },
 
-    if (request.method === 'GET' && url.pathname === '/callbacks') { const token = env.HUBSPOT_TOKEN; try { const sb = { filterGroups: [{ filters: [{ propertyName: 'last_call_outcome', operator: 'IN', values: ['FOLLOW_UP_BOOKED','WARM'] }] }], properties: ['firstname','lastname','company','phone','last_call_outcome','last_call_date','last_call_notes', 'discovery_findings', 'discovery_date', 'recommended_package', 'avg_ticket', 'profit_margin', 'pitch_script', 'package_pitched', 'quoted_price', 'pitch_outcome', 'quick_win', 'gbp_review_count', 'website_gaps'], sorts: [{ propertyName: 'last_call_date', direction: 'DESCENDING' }], limit: 25 }; const hr = await hs('/crm/v3/objects/contacts/search','POST',sb,token); if (!hr.ok) return jsonResp({ ok: true, callbacks: [] }, 200, cors); const raw = (hr.data && hr.data.results) || []; const callbacks = raw.map(r => { const p = r.properties || {}; return { id: r.id, contact_id: r.id, business_name: p.company || '', first_name: p.firstname || '', last_name: p.lastname || '', phone: p.phone || '', when: p.last_call_date || '', last_outcome: p.last_call_outcome || '', notes: p.last_call_notes || '' }; }); return jsonResp({ ok: true, callbacks }, 200, cors); } catch (e) { return jsonResp({ ok: true, callbacks: [] }, 200, cors); } }
+  // ── GET /map — live companies + contacts for the Intel Map ──────────────
+  {
+    method: 'GET', path: '/map',
+    handler: async (ctx) => handleMap(ctx.token, ctx.cors)
+  },
 
+  {
+    method: 'GET', path: '/callbacks',
+    handler: async (ctx) => handleCallbacks(ctx.env, ctx.cors)
+  },
 
-    // ╔════════════════════════════════════════════════════════════════════╗
-    // ║  BACKSTAGE ROUTES — v3                                             ║
-    // ║  Inserted ahead of the 404 fallthrough. Each handler owns its own  ║
-    // ║  try/catch: this worker has no global error wrapper, and an        ║
-    // ║  uncaught throw returns a Cloudflare 1101 with NO cors headers,    ║
-    // ║  which the browser then misreports as a CORS failure.             ║
-    // ╚════════════════════════════════════════════════════════════════════╝
+  // ╔════════════════════════════════════════════════════════════════════╗
+  // ║  BACKSTAGE ROUTES — v3                                             ║
+  // ║  Each handler owns its own try/catch: this worker has no global    ║
+  // ║  error wrapper, and an uncaught throw returns a Cloudflare 1101    ║
+  // ║  with NO cors headers, which the browser then misreports as a     ║
+  // ║  CORS failure.                                                     ║
+  // ╚════════════════════════════════════════════════════════════════════╝
 
-    // ── GET /pipeline ────────────────────────────────────────────────────
-    if (request.method === 'GET' && url.pathname === '/pipeline') {
-      try {
-        if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
-        const raw       = await bsAllDeals(token, 6);
-        const flagged   = bsClassifyDeals(raw);
-        const real      = flagged.filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
-        const junk      = flagged.filter(f =>  f.junk);
+  // ── GET /pipeline ────────────────────────────────────────────────────
+  {
+    method: 'GET', path: '/pipeline',
+    handler: async (ctx) => handlePipeline(ctx.token, ctx.cors)
+  },
 
-        const stages = BS_STAGES.map(s => {
-          const d = real.filter(x => x.stage_id === s.id);
-          return {
-            id: s.id, label: s.label, open: s.open,
-            count: d.length,
-            value: Math.round(d.reduce((a, x) => a + x.amount, 0) * 100) / 100,
-            deals: d.sort((a, b) => (b.amount - a.amount) || ((a.days_idle||0) - (b.days_idle||0)))
-          };
-        });
+  // ── GET /clients ─────────────────────────────────────────────────────
+  {
+    method: 'GET', path: '/clients',
+    handler: async (ctx) => handleClients(ctx.url, ctx.token, ctx.cors)
+  },
 
-        const open = real.filter(d => {
-          const s = BS_STAGES[BS_STAGE_ORDER[d.stage_id]];
-          return s && s.open;
-        });
+  // ── GET /delivery ────────────────────────────────────────────────────
+  {
+    method: 'GET', path: '/delivery',
+    handler: async (ctx) => handleDelivery(ctx.token, ctx.cors)
+  },
 
-        return jsonResp({
-          ok: true,
-          stages,
-          totals: {
-            all_deals:   real.length,
-            open_deals:  open.length,
-            open_value:  Math.round(open.reduce((a, d) => a + d.amount, 0) * 100) / 100,
-            won:         real.filter(d => d.stage_id === 'closedwon').length,
-            lost:        real.filter(d => d.stage_id === 'closedlost').length
-          },
-          junk: {
-            total: junk.length,
-            test:  junk.filter(j => j.junk === 'test').length,
-            spam:  junk.filter(j => j.junk === 'spam').length,
-            sample: junk.slice(0, 25).map(j => ({
-              id:   j.deal.id,
-              name: (j.deal.properties || {}).dealname || '',
-              kind: j.junk,
-              hubspot_url: bsDealUrl(j.deal.id)
-            }))
-          },
-          fetched_at: new Date().toISOString()
-        }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok:false, error: e.message }, 500, cors);
-      }
-    }
+  // ── GET /finance ─────────────────────────────────────────────────────
+  {
+    method: 'GET', path: '/finance',
+    handler: async (ctx) => handleFinance(ctx.token, ctx.cors)
+  },
 
-    // ── GET /clients ─────────────────────────────────────────────────────
-    if (request.method === 'GET' && url.pathname === '/clients') {
-      try {
-        if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
-        const rawDeals = await bsAllDeals(token, 6);
-        const real      = bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
-        const companies = await bsCompaniesForNames(bsWonClientNames(real), token);
-        const roster    = bsBuildRoster(real, companies);
+  // ── GET /brief ───────────────────────────────────────────────────────
+  {
+    method: 'GET', path: '/brief',
+    handler: async (ctx) => handleBrief(ctx.token, ctx.cors)
+  },
 
-        // Attach open delivery work per client so a card can show live status
-        // without the page having to cross-reference two endpoints itself.
-        let tasks = [];
-        try { tasks = (await bsOpenTasks(token, 2)).map(bsShapeTask); } catch (e) { tasks = []; }
-        for (const c of roster) {
-          const key = bsNorm(c.name);
-          const mine = tasks.filter(t => t.client && bsNameMatch(t.client, c.name));
-          c.open_tasks     = mine.length;
-          c.overdue_tasks  = mine.filter(t => t.overdue).length;
-        }
-
-        const slug = url.searchParams.get('slug');
-        if (slug) {
-          const one = roster.filter(c => c.slug === slug)[0];
-          if (!one) return jsonResp({ ok:false, error:'client not found', slug }, 404, cors);
-          one.tasks = tasks.filter(t => t.client && bsNameMatch(t.client, one.name));
-          return jsonResp({ ok:true, client: one, fetched_at:new Date().toISOString() }, 200, cors);
-        }
-
-        return jsonResp({
-          ok: true,
-          clients: roster,
-          totals: {
-            count:          roster.length,
-            active_retainer:roster.filter(c => c.active_retainer).length,
-            mrr:            Math.round(roster.reduce((a, c) => a + c.mrr, 0) * 100) / 100,
-            lifetime:       Math.round(roster.reduce((a, c) => a + c.lifetime, 0) * 100) / 100
-          },
-          fetched_at: new Date().toISOString()
-        }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok:false, error: e.message }, 500, cors);
-      }
-    }
-
-    // ── GET /delivery ────────────────────────────────────────────────────
-    if (request.method === 'GET' && url.pathname === '/delivery') {
-      try {
-        if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
-        const all      = (await bsOpenTasks(token, 3)).map(bsShapeTask);
-        const delivery = all.filter(t => t.is_delivery);
-
-        const byClient = {};
-        for (const t of delivery) {
-          const k = t.client || 'Unassigned';
-          if (!byClient[k]) byClient[k] = { client: k, slug: bsSlug(k), tasks: [], overdue: 0, due_soon: 0 };
-          byClient[k].tasks.push(t);
-          if (t.overdue)  byClient[k].overdue++;
-          if (t.due_soon) byClient[k].due_soon++;
-        }
-        const groups = Object.keys(byClient).map(k => byClient[k])
-          .sort((a, b) => (b.overdue - a.overdue) || (b.due_soon - a.due_soon) || (b.tasks.length - a.tasks.length));
-
-        const otherOverdue = all.filter(t => !t.is_delivery && t.overdue)
-          .sort((a, b) => (a.days_until || 0) - (b.days_until || 0));
-
-        return jsonResp({
-          ok: true,
-          groups,
-          other_overdue: otherOverdue.slice(0, 60),
-          totals: {
-            delivery_open:    delivery.length,
-            delivery_overdue: delivery.filter(t => t.overdue).length,
-            delivery_soon:    delivery.filter(t => t.due_soon).length,
-            all_open_tasks:   all.length,
-            all_overdue:      all.filter(t => t.overdue).length,
-            other_overdue:    otherOverdue.length
-          },
-          fetched_at: new Date().toISOString()
-        }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok:false, error: e.message }, 500, cors);
-      }
-    }
-
-    // ── GET /finance ─────────────────────────────────────────────────────
-    // SOURCE NOTE, read this before trusting the numbers:
-    // Per UNC globals the authoritative financial record is the Drive
-    // "UNC_Tracker_PaymentDispersal" sheet — money actually received, by any
-    // method. This worker cannot reach Drive, so everything here is derived
-    // from HubSpot deal records instead. That means it reflects what was SOLD
-    // and marked Closed Won, not what has CLEARED. The response says so in
-    // `source` and the UI prints it. Do not quietly present this as banked cash.
-    if (request.method === 'GET' && url.pathname === '/finance') {
-      try {
-        if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
-        const raw  = await bsAllDeals(token, 6);
-        const real = bsClassifyDeals(raw).filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
-
-        const won = real.filter(d => d.stage_id === 'closedwon');
-        const isRetainer = d => d.revenue_type === 'retainer_y1' || d.revenue_type === 'retainer_y2';
-
-        const mrr       = won.filter(isRetainer).reduce((a, d) => a + d.amount, 0);
-        const oneTime   = won.filter(d => !isRetainer(d)).reduce((a, d) => a + d.amount, 0);
-        const bookedAll = won.reduce((a, d) => a + d.amount, 0);
-
-        // "Outstanding" = priced or proposed but not yet won or lost.
-        const outstandingStages = ['contractsent', '3479061187'];
-        const outstanding = real.filter(d => outstandingStages.indexOf(d.stage_id) > -1);
-
-        // Month-by-month booked value, last 6 months, for a trend line.
-        const months = [];
-        const now = new Date();
-        for (let i = 5; i >= 0; i--) {
-          const dt   = new Date(now.getFullYear(), now.getMonth() - i, 1);
-          const next = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
-          const key  = dt.toISOString().slice(0, 7);
-          const v = won.filter(d => {
-            if (!d.close_date) return false;
-            const t = new Date(d.close_date).getTime();
-            return t >= dt.getTime() && t < next.getTime();
-          }).reduce((a, d) => a + d.amount, 0);
-          months.push({ month: key, booked: Math.round(v * 100) / 100 });
-        }
-
-        const byType = {};
-        for (const d of won) {
-          const k = d.revenue_type || 'unclassified';
-          byType[k] = Math.round(((byType[k] || 0) + d.amount) * 100) / 100;
-        }
-
-        return jsonResp({
-          ok: true,
-          source: 'HubSpot deals — bookings, not cleared payments. Drive UNC_Tracker_PaymentDispersal remains the source of truth for cash received.',
-          summary: {
-            mrr:              Math.round(mrr * 100) / 100,
-            arr_projected:    Math.round(mrr * 12 * 100) / 100,
-            one_time_booked:  Math.round(oneTime * 100) / 100,
-            booked_all_time:  Math.round(bookedAll * 100) / 100,
-            outstanding_value:Math.round(outstanding.reduce((a, d) => a + d.amount, 0) * 100) / 100,
-            outstanding_count:outstanding.length,
-            won_count:        won.length,
-            unpriced_won:     won.filter(d => d.amount === 0).length
-          },
-          by_revenue_type: byType,
-          months,
-          outstanding: outstanding.sort((a, b) => b.amount - a.amount),
-          fetched_at: new Date().toISOString()
-        }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok:false, error: e.message }, 500, cors);
-      }
-    }
-
-    // ── GET /brief ───────────────────────────────────────────────────────
-    // THE BRAINS LAYER.
-    // Every other endpoint reports what IS. This one decides what MATTERS.
-    // It reads the same data and emits ranked signals — each with a severity,
-    // a number behind it, and a specific next action. A dashboard that only
-    // mirrors the CRM makes you do the thinking; this does some of it for you.
-    if (request.method === 'GET' && url.pathname === '/brief') {
-      try {
-        if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
-
-        const rawDeals  = await bsAllDeals(token, 6);
-        const companies = await bsCompaniesForNames(
-          bsWonClientNames(bsClassifyDeals(rawDeals).filter(f => !f.junk).map(f => bsShapeDeal(f.deal))),
-          token);
-        let tasks = [], tasksOk = true;
-        try { tasks = (await bsOpenTasks(token, 3)).map(bsShapeTask); }
-        catch (e) { tasks = []; tasksOk = false; }
-
-        const flagged = bsClassifyDeals(rawDeals);
-        const real    = flagged.filter(f => !f.junk).map(f => bsShapeDeal(f.deal));
-        const junkN   = flagged.length - real.length;
-        const roster  = bsBuildRoster(real, companies);
-
-        const openDeals = real.filter(d => {
-          const s = BS_STAGES[BS_STAGE_ORDER[d.stage_id]];
-          return s && s.open;
-        });
-        const mrr = roster.reduce((a, c) => a + c.mrr, 0);
-        const signals = [];
-        const S = (severity, key, title, detail, metric, action) =>
-          signals.push({ severity, key, title, detail, metric, action });
-
-        // 1. Revenue concentration — the number that decides whether a bad week
-        //    is an inconvenience or an extinction event.
-        if (roster.length > 0 && mrr > 0) {
-          const top   = roster.filter(c => c.mrr > 0).sort((a, b) => b.mrr - a.mrr)[0];
-          const share = Math.round((top.mrr / mrr) * 100);
-          if (share >= 60) {
-            S('critical', 'concentration',
-              share >= 100 ? 'All recurring revenue is one client' : 'Revenue concentrated in one client',
-              top.name + ' is ' + share + '% of MRR ($' + top.mrr.toLocaleString() + ' of $' + Math.round(mrr).toLocaleString() + '). If they leave, recurring revenue goes to near zero the same day.',
-              share + '%',
-              'Close a second retainer. Not a project — a retainer. That single signature is the difference between a client and a business.');
-          } else {
-            S('good', 'concentration', 'Revenue spread across clients',
-              'Largest client is ' + share + '% of MRR. No single cancellation ends the business.',
-              share + '%', 'Keep it that way — no client above 50%.');
-          }
-        } else {
-          S('critical', 'concentration', 'No recurring revenue',
-            'Zero active retainers found in Closed Won. One-time projects do not compound — every month restarts at zero.',
-            '$0 MRR',
-            'One retainer. That is the entire job right now.');
-        }
-
-        // 2. Data hygiene — junk in the CRM silently corrupts every metric
-        //    above it, so this is a data-integrity signal, not housekeeping.
-        if (junkN > 0) {
-          const pct = Math.round((junkN / flagged.length) * 100);
-          S(pct >= 25 ? 'critical' : 'warn', 'hygiene', 'CRM is carrying junk records',
-            junkN + ' of ' + flagged.length + ' deals (' + pct + '%) are form spam or test records. They are excluded from every number on this site, but they are still in HubSpot skewing anything that reads the portal directly — including your weekly CRO report.',
-            junkN + ' junk',
-            'Bulk-delete them in HubSpot, then add a honeypot or reCAPTCHA to the inbound form so they stop arriving.');
-        } else {
-          S('good', 'hygiene', 'CRM is clean', 'No spam or test deals detected.', '0 junk', 'Nothing to do.');
-        }
-
-        // 3. Stalled deals — the pipeline's actual failure mode is not losing
-        //    deals, it is deals that never move and never get declared dead.
-        const stalled = openDeals.filter(d => (d.days_idle || 0) >= 21);
-        if (stalled.length) {
-          S(stalled.length >= 5 ? 'critical' : 'warn', 'stalled', 'Deals are rotting in the pipeline',
-            stalled.length + ' open deal' + (stalled.length === 1 ? '' : 's') + ' with no activity in 21+ days. Oldest: ' +
-            stalled.sort((a, b) => (b.days_idle||0) - (a.days_idle||0))[0].name + ' at ' +
-            (stalled[0].days_idle) + ' days. A deal nobody has touched in three weeks is not a deal, it is a bookmark.',
-            stalled.length + ' stalled',
-            'Work them or mark them Closed Lost today. A false pipeline is worse than an empty one.');
-        } else if (openDeals.length) {
-          S('good', 'stalled', 'Pipeline is moving', 'No open deal has sat untouched for 21+ days.', '0 stalled', 'Keep the cadence.');
-        }
-
-        // 4. Funnel shape — an empty middle means outreach is happening but
-        //    conversion is not, which is a different problem from low volume.
-        const emptyOpen = BS_STAGES.filter(s => s.open && real.filter(d => d.stage_id === s.id).length === 0);
-        if (emptyOpen.length >= 3) {
-          S('warn', 'funnel', 'Funnel has holes',
-            emptyOpen.length + ' open stages are completely empty: ' + emptyOpen.map(s => s.label).join(', ') +
-            '. Deals are entering and dying without ever reaching the middle of the funnel.',
-            emptyOpen.length + ' empty stages',
-            'Pick five prospects today and move each one exactly one stage. Movement first, volume second.');
-        }
-
-        // 5. Delivery risk — the fastest way to lose the client you already have.
-        const overdue = tasks.filter(t => t.is_delivery && t.overdue);
-        if (overdue.length) {
-          S('critical', 'delivery', 'Delivery work is overdue',
-            overdue.length + ' [DELIVERY] task' + (overdue.length === 1 ? ' is' : 's are') + ' past due. Late delivery is the cheapest way to lose the only recurring revenue you have.',
-            overdue.length + ' overdue',
-            'Clear these before any new outreach. Retention beats acquisition every time.');
-        } else if (!tasksOk) {
-          S('warn', 'delivery', 'Delivery status could not be read',
-            'HubSpot did not return the task list for this request, most likely a burst rate-limit. ' +
-            'This is NOT a report that delivery is clear — it is a report that delivery is unknown. Reload in a few seconds.',
-            'unknown',
-            'Reload the page. If it persists, check the HubSpot private app token has tasks read scope.');
-        } else {
-          const dOpen = tasks.filter(t => t.is_delivery).length;
-          S('good', 'delivery', dOpen ? 'Delivery on schedule' : 'No delivery work queued',
-            dOpen ? dOpen + ' open delivery task' + (dOpen === 1 ? '' : 's') + ', none overdue.'
-                  : 'No [DELIVERY] tasks in HubSpot. Either work is done or it was never scheduled.',
-            dOpen + ' open',
-            dOpen ? 'Stay ahead of it.' : 'Run delivery-scheduler for active clients so the work is tracked.');
-        }
-
-        // 5b. RENEWAL CLIFF — the most consequential date in the business.
-        // Concentration tells you the risk exists. This tells you when it lands.
-        // A retainer with no recorded end date is itself the finding: the date
-        // 100% of recurring revenue stops exists only in someone's memory.
-        const retainers = real.filter(d => d.stage_id === 'closedwon' &&
-          (d.revenue_type === 'retainer_y1' || d.revenue_type === 'retainer_y2'));
-        const dated   = retainers.filter(d => d.days_to_renewal !== null);
-        const undated = retainers.filter(d => d.days_to_renewal === null);
-
-        if (dated.length) {
-          const soonest = dated.sort((a, b) => a.days_to_renewal - b.days_to_renewal)[0];
-          const dleft   = soonest.days_to_renewal;
-          const share   = mrr > 0 ? Math.round((soonest.amount / mrr) * 100) : 0;
-          if (dleft < 0) {
-            S('critical', 'renewal', 'A retainer term has already ended',
-              bsClientName(soonest.name) + ' passed its contract end date ' + Math.abs(dleft) +
-              ' days ago and nothing has been recorded since. That is ' + share + '% of MRR in limbo.',
-              Math.abs(dleft) + 'd past', 'Confirm renewal in writing today, or move it to Closed Lost and stop counting the revenue.');
-          } else if (dleft <= 45) {
-            S('critical', 'renewal', 'Revenue cliff in ' + dleft + ' days',
-              bsClientName(soonest.name) + ' — ' + share + '% of MRR — reaches contract end on ' +
-              String(soonest.contract_end).slice(0, 10) + '. Renewal conversations that start in the final ' +
-              'two weeks are negotiations from weakness. Start now, while the work is still fresh.',
-              dleft + 'd left', 'Book the renewal conversation this week. Bring the results, not the invoice.');
-          } else {
-            S('good', 'renewal', 'Renewal runway is healthy',
-              'Nearest contract end is ' + dleft + ' days out (' + bsClientName(soonest.name) + ').',
-              dleft + 'd left', 'Diarise the conversation for 45 days out.');
-          }
-        }
-        if (undated.length) {
-          S('warn', 'renewal_unknown', 'Retainer has no recorded end date',
-            undated.length + ' active retainer' + (undated.length === 1 ? '' : 's') + ' (' +
-            undated.map(d => bsClientName(d.name)).join(', ') + ') carry no contract_end_date. ' +
-            'The date your recurring revenue stops is not in any system this dashboard can read — ' +
-            'it exists only in a document or in your head, which means nothing can warn you as it approaches.',
-            undated.length + ' undated',
-            'Set contract_end_date and contract_term_months on the deal. Then this page counts down for you.');
-        }
-
-        // 6. Unpriced wins — $0 Closed Won deals make MRR and lifetime value lie.
-        const unpriced = real.filter(d => d.stage_id === 'closedwon' && d.amount === 0);
-        if (unpriced.length) {
-          S('warn', 'unpriced', 'Closed Won deals with no amount',
-            unpriced.length + ' won deal' + (unpriced.length === 1 ? ' has' : 's have') + ' $0 on them. Some are genuinely free (case-study builds), but until each one is labelled, lifetime value per client is understated.',
-            unpriced.length + ' at $0',
-            'Set the real amount, or tag deliberate freebies so they stop looking like missing data.');
-        }
-
-        // 7. Social coverage — directly requested, and it has teeth: a client
-        //    with no social links on file cannot be serviced by content or
-        //    reputation retainers without someone going hunting first.
-        const noSocial = roster.filter(c => !c.social.facebook && !c.social.instagram);
-        if (roster.length && noSocial.length) {
-          S('warn', 'social', 'Clients missing social profiles',
-            noSocial.length + ' of ' + roster.length + ' client' + (roster.length === 1 ? '' : 's') +
-            ' have no Facebook or Instagram on file: ' + noSocial.map(c => c.name).join(', ') +
-            '. Content Pack and Reputation retainers both need these before work can start.',
-            noSocial.length + ' incomplete',
-            'Fill facebook_company_page and instagram_page on the HubSpot company record.');
-        }
-
-        const rank = { critical: 0, warn: 1, good: 2 };
-        signals.sort((a, b) => rank[a.severity] - rank[b.severity]);
-
-        return jsonResp({
-          ok: true,
-          signals,
-          counts: {
-            critical: signals.filter(s => s.severity === 'critical').length,
-            warn:     signals.filter(s => s.severity === 'warn').length,
-            good:     signals.filter(s => s.severity === 'good').length
-          },
-          headline: (signals.filter(s => s.severity === 'critical')[0] || signals[0] || {}).title || 'All clear',
-          context: {
-            mrr: Math.round(mrr * 100) / 100,
-            clients: roster.length,
-            open_deals: openDeals.length,
-            junk_deals: junkN,
-            open_tasks: tasks.length
-          },
-          fetched_at: new Date().toISOString()
-        }, 200, cors);
-      } catch (e) {
-        return jsonResp({ ok:false, error: e.message }, 500, cors);
-      }
-    }
-
-    // ── POST /setup-social-fields ────────────────────────────────────────
-    // Idempotent. HubSpot ships facebook_company_page, linkedin_company_page
-    // and twitterhandle out of the box but has NO Instagram or Google Business
-    // Profile field — and for a contractor marketing agency those two matter
-    // more than Twitter. Creates them once; a 409 back from HubSpot means the
-    // property already exists and is treated as success.
-    if (request.method === 'POST' && url.pathname === '/setup-social-fields') {
+  // ── POST /setup-social-fields ────────────────────────────────────────
+  // Idempotent. HubSpot ships facebook_company_page, linkedin_company_page
+  // and twitterhandle out of the box but has NO Instagram or Google Business
+  // Profile field — and for a contractor marketing agency those two matter
+  // more than Twitter. Creates them once; a 409 back from HubSpot means the
+  // property already exists and is treated as success.
+  {
+    method: 'POST', path: '/setup-social-fields',
+    handler: async (ctx) => {
+      const { token, cors } = ctx;
       try {
         if (!token) return jsonResp({ ok:false, error:'HUBSPOT_TOKEN not configured' }, 500, cors);
         const defs = [
@@ -2306,7 +2412,50 @@ export default {
         return jsonResp({ ok:false, error: e.message }, 500, cors);
       }
     }
+  }
+];
 
+// The two paths the auth gate is allowed to skip. Derived from the registry
+// so there is exactly one place (below, in fetch()) that decides "is this
+// request allowed through without a key" — the registry only supplies the
+// exception set, it is not itself a second enforcement point.
+const PUBLIC_PATHS = new Set(ROUTES.filter((r) => r.public).map((r) => r.path));
+
+export default {
+  async fetch(request, env) {
+    const url    = new URL(request.url);
+    const origin = request.headers.get('Origin') || '';
+    const cors   = corsHeaders(origin);
+    const kv     = env.CALL_LOG || null;
+    const token  = env.HUBSPOT_TOKEN || null;
+
+    if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
+
+    // ── AUTH GATE ── FAILS CLOSED.
+    // Previously this was opt-in (`if (env.WORKSPACE_KEY && ...)`), which meant a
+    // missing/wiped secret silently disabled auth and served the whole CRM to the
+    // public. Now a missing secret returns 503 and serves nothing.
+    if (!PUBLIC_PATHS.has(url.pathname)) {
+      if (!env.WORKSPACE_KEY) {
+        return jsonResp({ ok: false, error: 'server misconfigured: WORKSPACE_KEY not set' }, 503, cors);
+      }
+      if (request.headers.get('x-unc-key') !== env.WORKSPACE_KEY) {
+        return jsonResp({ ok: false, error: 'unauthorized' }, 401, cors);
+      }
+    }
+
+    // ── DISPATCH ── walk the registry in order; first method+path match wins.
+    const ctx = { request, url, env, kv, token, origin, cors };
+    for (const route of ROUTES) {
+      const methodOk = Array.isArray(route.method)
+        ? route.method.includes(request.method)
+        : route.method === request.method;
+      if (!methodOk) continue;
+      const pathOk = route.prefix ? url.pathname.startsWith(route.path) : url.pathname === route.path;
+      if (!pathOk) continue;
+      const res = await route.handler(ctx);
+      if (res) return res;
+    }
 
     return jsonResp({ ok: false, error: 'Not found' }, 404, cors);
   }
