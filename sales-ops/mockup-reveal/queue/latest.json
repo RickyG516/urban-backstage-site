@@ -1,10 +1,10 @@
 {
- "_date": "2026-08-15",
- "_generated_at": "2026-08-15T17:50:18+00:00",
+ "_date": "2026-08-17",
+ "_generated_at": "2026-08-17T17:56:00+00:00",
  "_session_cap": 116,
  "prospects": [
   {
-   "contact_id": 340442835681,
+   "contact_id": 536816512716,
    "company_id": 340442835681,
    "business_name": "Designed Roofing Systems, Inc.",
    "first_name": "Steve",
@@ -13,7 +13,7 @@
    "phone": "(217) 585-1101",
    "city": "Springfield",
    "state": "IL",
-   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-2/340442835681",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/536816512716",
    "last_touched": null,
    "last_outcome": null,
    "notes_preview": null,
@@ -22,7 +22,7 @@
    "ai_hook": "Ask for Steve Bowsher, he's the president. Lead with Dickson Mounds: the Illinois Capital Development Board handed them a $1,135,000 EMERGENCY award on 2024-07-24 - ref 102-040-011 - to strip and replace about 24,000 square feet of ballasted EPDM at the state museum in Fulton County, plus roughly 700 linear feet of coping tuckpointing. Say: 'the State of Illinois picked you for an emergency million-dollar roof, and there is not one page online a private building owner can find you on.' Back it with 35 years - started September 1990 - IDFPR license 104006217, and 80 permitted projects. The no-website line is real and checkable: designedroofingsystems.com does not resolve at all, and the CIB AGC directory literally prints 'http://NULL' where his website should be. DO NOT mention BBB (Not Rated, not accredited) - no reputation pitch. DO NOT use the corporate secretary's name, sources disagree on Carl vs Joe Anders. DO NOT bring up the museum's ruined artifacts or water damage - that was the failing 1969 roof he was hired to FIX, and framing it as a problem story will land as an insult. Commercial shop - do not ask about houses."
   },
   {
-   "contact_id": 340321388257,
+   "contact_id": 536825385697,
    "company_id": 340321388257,
    "business_name": "Arteaga Construction, Inc.",
    "first_name": "Tony",
@@ -31,7 +31,7 @@
    "phone": "(414) 744-7944",
    "city": "Milwaukee",
    "state": "WI",
-   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-2/340321388257",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/536825385697",
    "last_touched": null,
    "last_outcome": null,
    "notes_preview": null,
@@ -40,7 +40,7 @@
    "ai_hook": "Ask for Tony Arteaga - he owns it. Lead with the parked domain, it is the most concrete thing you have: he owns arteagaconstruction.com and right now typing it lands you on a GoDaddy 'this domain is parked, get this domain' page with ad links on it. Say: 'you already paid for the name and GoDaddy is selling ad space on it.' Then the proof he is worth a real page: on 2025-03-31 he pulled City of Milwaukee permit HVAC-GEN-25-01012 for the Bronzeville Creative Arts & Technology Hub buildout at 616 W North Ave - $1,000,000 valuation, $12,201 permit fee. Forty years in Milwaukee, incorporated 1986, BuildZoom top 10% of 94,017 Wisconsin contractors, union shop, MBE and SBE. DO NOT mention DBE - WisDOT denied their application and it is in the federal appeals database. DO NOT say 'workforce over 100' - that is their marketing copy and ZoomInfo says 20-49; do not put a headcount in his mouth. DO NOT reference Nicholas De Arteaga or WI entity M048090, that is a different company in Fremont. Do not poke the older lapsed concrete license dates."
   },
   {
-   "contact_id": 340407140075,
+   "contact_id": 536859210455,
    "company_id": 340407140075,
    "business_name": "Demmer Mechanical Corp",
    "first_name": "Allan",
@@ -49,7 +49,7 @@
    "phone": "(563) 875-8544",
    "city": "Dyersville",
    "state": "IA",
-   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-2/340407140075",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/536859210455",
    "last_touched": null,
    "last_outcome": null,
    "notes_preview": null,
@@ -2074,7 +2074,8 @@
    "company_id": 339346970334
   },
   {
-   "contact_id": null,
+   "contact_id": 532885088955,
+   "company_id": 338608850676,
    "business_name": "MAI Concrete LLC",
    "first_name": null,
    "last_name": null,
@@ -2082,15 +2083,14 @@
    "phone": null,
    "city": "Dubuque",
    "state": "IA",
-   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-2/338608850676",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/532885088955",
    "last_touched": null,
    "last_outcome": null,
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-mai-concrete-dubuque/",
-   "ai_hook": "Owner Rick Mai, 30 years claimed, phone-first via the Facebook page since there is no site. FLAG: BuildZoom shows license C124995 expired 2020-07-08 with a BZ score of 0, so do not lead with licensing. Sourced from an in-person encounter in Dubuque, still running print classifieds. No contact record in HubSpot yet, create one before dialing.",
-   "company_id": 338608850676
+   "ai_hook": "Owner Rick Mai, 30 years claimed, phone-first via the Facebook page since there is no site. FLAG: BuildZoom shows license C124995 expired 2020-07-08 with a BZ score of 0, so do not lead with licensing. Sourced from an in-person encounter in Dubuque, still running print classifieds."
   }
  ],
- "_comment": "Standing curated batch — the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company."
+ "_comment": "Standing curated batch — the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url."
 }
