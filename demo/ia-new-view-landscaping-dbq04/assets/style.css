@@ -182,3 +182,98 @@ footer{background:var(--ink);color:var(--silver);padding:50px 0 26px}
 @media(max-width:860px){.split{grid-template-columns:1fr}}
 .stat{font-family:'Montserrat';font-weight:900;font-size:36px;color:var(--navy)}
 .stat-label{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+
+/* ============================================================
+   PREMIUM LAYER — cinematic photo treatment, gold accent,
+   scroll reveals, 3D tilt, ambient hero effect.
+   ============================================================ */
+:root{
+  --gold:#c9a15a;
+  --gold-bright:#e6c07d;
+  --gold-dim:#8a6f3d;
+}
+
+/* ---------- gold accent touches ---------- */
+.eyebrow{color:var(--gold-bright) !important; letter-spacing:.18em;}
+.hero-tag{border-color:rgba(201,161,90,.4) !important; color:var(--gold-bright) !important;}
+.hero-tag:before{content:"";display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;margin-right:7px;vertical-align:middle;}
+.btn-primary{position:relative;overflow:hidden;}
+.btn-primary:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(230,192,125,.35),transparent);transform:translateX(-120%);transition:transform .6s ease;}
+.btn-primary:hover:after{transform:translateX(120%);}
+.callbtn{border-bottom:2px solid var(--gold);}
+nav.links a{position:relative;}
+nav.links a:after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--gold);transition:right .28s ease;}
+nav.links a:hover:after{right:0;}
+.card.service-card{border-top:3px solid var(--gold);}
+.badge{border-color:rgba(201,161,90,.35) !important;}
+.area-chip:hover{border-color:var(--gold) !important;color:var(--gold-dim) !important;}
+.stat{color:var(--gold-dim);}
+footer{border-top:2px solid var(--gold-dim);}
+
+/* ---------- cinematic hero: ken burns zoom + gradient dim ---------- */
+.hero{position:relative;overflow:hidden;}
+.hero .cine-media{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero .cine-media img{width:100%;height:100%;object-fit:cover;animation:kenburns 26s ease-in-out infinite alternate;filter:saturate(1.05) contrast(1.03);}
+@keyframes kenburns{
+  0%{transform:scale(1.0) translate(0,0);}
+  100%{transform:scale(1.14) translate(-1.5%,-1.5%);}
+}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;background:
+  linear-gradient(120deg,rgba(10,16,23,.94),rgba(21,32,46,.72) 55%,rgba(10,16,23,.6)),
+  radial-gradient(ellipse at 30% 100%,rgba(201,161,90,.10),transparent 55%);}
+.hero .wrap{position:relative;z-index:3;}
+.hero-particles{position:absolute;inset:0;z-index:2;pointer-events:none;}
+
+/* pagehead cinematic (interior pages) */
+.pagehead{position:relative;overflow:hidden;}
+.pagehead .cine-media{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.pagehead .cine-media img{width:100%;height:100%;object-fit:cover;animation:kenburns 30s ease-in-out infinite alternate;opacity:.55;}
+.pagehead:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,rgba(10,16,23,.93),rgba(21,32,46,.82));}
+.pagehead .wrap{position:relative;z-index:2;}
+
+/* ---------- scroll reveal ---------- */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1);}
+[data-reveal].is-in{opacity:1;transform:translateY(0);}
+[data-reveal="stagger"] > *{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+[data-reveal="stagger"].is-in > *{opacity:1;transform:translateY(0);}
+[data-reveal="stagger"].is-in > *:nth-child(1){transition-delay:.03s}
+[data-reveal="stagger"].is-in > *:nth-child(2){transition-delay:.1s}
+[data-reveal="stagger"].is-in > *:nth-child(3){transition-delay:.17s}
+[data-reveal="stagger"].is-in > *:nth-child(4){transition-delay:.24s}
+[data-reveal="stagger"].is-in > *:nth-child(5){transition-delay:.31s}
+[data-reveal="stagger"].is-in > *:nth-child(6){transition-delay:.38s}
+[data-reveal="stagger"].is-in > *:nth-child(7){transition-delay:.45s}
+[data-reveal="stagger"].is-in > *:nth-child(8){transition-delay:.52s}
+[data-reveal="stagger"].is-in > *:nth-child(9){transition-delay:.59s}
+
+/* ---------- 3D tilt cards ---------- */
+.tilt{transform-style:preserve-3d;perspective:900px;transition:transform .15s ease,box-shadow .3s ease;will-change:transform;}
+.tilt:hover{box-shadow:0 22px 40px rgba(10,16,23,.18);}
+
+/* ---------- portfolio hover reveal ---------- */
+.shot{position:relative;overflow:hidden;border-radius:10px;aspect-ratio:4/3;cursor:pointer;}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,.8,.3,1),filter .5s ease;}
+.shot:hover img{transform:scale(1.13);filter:brightness(.55) saturate(1.1);}
+.shot .shot-cap{position:absolute;left:0;right:0;bottom:0;padding:16px;background:linear-gradient(0deg,rgba(10,16,23,.92),transparent);color:#fff;font-family:'Montserrat';font-weight:800;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;transform:translateY(100%);opacity:0;transition:transform .4s cubic-bezier(.16,.8,.3,1),opacity .4s ease;}
+.shot:hover .shot-cap{transform:translateY(0);opacity:1;}
+.shot .shot-cap span{color:var(--gold-bright);}
+
+/* wide hero photo on interior pages, same cinematic treatment */
+.photo-cine{position:relative;overflow:hidden;border-radius:10px;aspect-ratio:16/9;}
+.photo-cine img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,.8,.3,1);}
+.photo-cine:hover img{transform:scale(1.06);}
+.photo-cine:after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 60%,rgba(10,16,23,.35));pointer-events:none;}
+
+/* ---------- animated line-draw divider (grows like a vine / plant) ---------- */
+.grow-divider{width:100%;max-width:220px;margin:26px 0;}
+.grow-divider path{stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset 1.4s cubic-bezier(.16,.8,.3,1);}
+.grow-divider.is-in path{stroke-dashoffset:0;}
+
+/* ---------- animated stat counters ---------- */
+.stat[data-count]{font-variant-numeric:tabular-nums;}
+
+@media (prefers-reduced-motion: reduce){
+  .hero .cine-media img, .pagehead .cine-media img{animation:none;}
+  [data-reveal],[data-reveal="stagger"] > *{opacity:1 !important;transform:none !important;}
+  .shot img, .photo-cine img{transition:none;}
+}
