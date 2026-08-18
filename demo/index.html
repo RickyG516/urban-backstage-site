@@ -380,16 +380,11 @@
 
   /* Archived in the repo, not just in one browser's localStorage. These are off the
      active list on every device and survive a cache wipe. Reason for each is recorded
-     in demo/status.json. Hitting Unarchive still works and is remembered per browser. */
-  const DEFAULT_ARCHIVED = [
-    "/demo/il-blondell-plumbing-moline/",
-    "/demo/ia-vogel-irrigation-waterloo/",
-    "/demo/ia-lewis-electric-sioux-city/",
-    "/demo/wi-midwest-home-improvements-eau-claire/",
-    "/demo/il-toonco-painting-collinsville/",
-    "/demo/ia-cremers-meats-dubuque/",
-    "/demo/lfn-lawncare/"
-  ];
+     in demo/status.json. Hitting Unarchive still works and is remembered per browser.
+     2026-08-17: cleared per Ricky — the "All" tab silently failed to show these
+     because it only cleared the stage filter, not the separate viewMode dropdown.
+     Looked like data loss. Nothing was ever deleted; see the tab-strip fix below. */
+  const DEFAULT_ARCHIVED = [];
 
   window.DEMO_ARCHIVED_SLUGS = DEFAULT_ARCHIVED.map(function(s){ return s.replace(/^\/demo\/|\/$/g,''); });
   /* Exposed so the tab strip can count what you will actually SEE. Without it
@@ -594,7 +589,21 @@
       b.style.cssText = 'font-family:Montserrat,Arial,sans-serif;font-weight:600;font-size:.78rem;'
         + 'padding:8px 15px;border-radius:6px 6px 0 0;cursor:pointer;background:none;'
         + 'border:1px solid #2a2a2a;border-bottom:2px solid transparent;color:#8e8e8e';
-      b.addEventListener('click', function(){ current = t[0]; paintTabs(); apply(); });
+      b.addEventListener('click', function(){
+        current = t[0];
+        /* Fix 2026-08-17: the All tab used to only clear the stage filter,
+           leaving the separate viewMode dropdown on "Active only" — so
+           archived rows stayed invisible on the tab literally labeled "All".
+           Force both filters into agreement whenever All is selected. */
+        if (t[0] === 'all') {
+          var vmSel = document.getElementById('viewMode');
+          if (vmSel && vmSel.value !== 'all') {
+            vmSel.value = 'all';
+            vmSel.dispatchEvent(new Event('change', {bubbles:true}));
+          }
+        }
+        paintTabs(); apply();
+      });
       strip.appendChild(b);
     });
     function paintTabs(){
