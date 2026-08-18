@@ -247,8 +247,8 @@
   // The curated batch carries some HubSpot COMPANY ids in contact_id. The
   // worker's /sync PATCHes /crm/v3/objects/contacts/{id}, so a company id 404s,
   // /sync returns "Contact update failed", and it bails BEFORE writing the KV
-  // call log — the outcome vanishes silently. Until that is repaired, any record
-  // with no mockup is treated as suspect and outcome logging is hard-disabled.
+  // call log \u2014 the outcome vanishes silently. Any record that looks unbridged is
+  // treated as suspect and outcome logging is hard-disabled.
   // Skip / DNC / prev / next stay live so Ricky can move past it.
   // PERMANENT GUARD — do not remove after the CRM id repair.
   function applyNoMockupGuard() {
@@ -259,7 +259,22 @@
     const prospect = (liveQueue.length && liveQueue[liveIndex]) ? liveQueue[liveIndex] : null;
     // No live prospect loaded (manual mode) or record is good — make sure the
     // buttons are enabled and clear any stale note.
-    const blocked = !!prospect && !prospect.mockup_url;
+    // TWO independent tripwires, both meaning "this record may not be a valid
+    // CONTACT id, so an outcome logged against it would die silently at /sync":
+    //   1. no mockup_url at all
+    //   2. contact_id === company_id - the signature of a record the spec-mockup
+    //      batch appended without ever bridging it to a real contact. This has
+    //      recurred on multiple batches, so the check is permanent.
+    let blockReason = '';
+    if (prospect) {
+      if (!prospect.mockup_url) {
+        blockReason = 'this record has no mockup and may not be a valid contact id';
+      } else if (prospect.company_id != null &&
+                 String(prospect.contact_id) === String(prospect.company_id)) {
+        blockReason = 'this record still points at a COMPANY id instead of a contact';
+      }
+    }
+    const blocked = !!blockReason;
     if (!blocked) {
       btns.forEach(b => {
         if (b.dataset.noMockupBlocked !== '1') return;
@@ -280,13 +295,13 @@
       b.setAttribute('aria-disabled', 'true');
       b.style.opacity = '0.4';
       b.style.pointerEvents = 'none';
-      b.title = 'Outcome logging disabled — this record has no mockup and may not be a valid contact id.';
+      b.title = 'Outcome logging disabled \u2014 ' + blockReason + '.';
     });
     if (!note) {
       const n = document.createElement('div');
       n.id = 'no-mockup-guard-note';
       n.style.cssText = 'font-size:0.72rem;color:#fbbf24;margin-top:0.5rem;padding:0.4rem 0.6rem;border:1px solid rgba(251,191,36,0.35);border-radius:var(--radius-sm);background:rgba(251,191,36,0.08);';
-      n.textContent = '⚠ Outcome logging disabled — this record has no mockup and may not be a valid contact id.';
+      n.textContent = '\u26a0 Outcome logging disabled \u2014 ' + blockReason + '.';
       const anchor = btns[0].closest('.branches') || btns[0].parentNode;
       if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(n, anchor.nextSibling);
       else s.appendChild(n);

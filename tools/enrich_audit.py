@@ -24,13 +24,14 @@ stale in this library once.
     python3 tools/enrich_audit.py            # report, exit 1 on any gap
     python3 tools/enrich_audit.py --quiet    # exit code only
 """
-import os, re, sys, json
+import os, re, sys, json, io
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEMO = os.path.join(ROOT, "demo")
 INDEX = os.path.join(DEMO, "index.html")
 STATUS = os.path.join(DEMO, "status.json")
 QUEUE = os.path.join(ROOT, "sales-ops", "mockup-reveal", "queue", "latest.json")
+QUEUE_README = os.path.join(ROOT, "sales-ops", "mockup-reveal", "queue", "README.md")
 
 QUIET = "--quiet" in sys.argv
 
@@ -53,7 +54,24 @@ def _load_non_prospects():
     return out
 
 
+def _load_valid_trades():
+    """Valid `trade` values, parsed from the queue README's own vocabulary block.
+
+    Deliberately NOT hardcoded here. The README is the documented single source of
+    truth for this list; duplicating it in code guarantees the two drift and the
+    gate starts passing values HubSpot rejects.
+    """
+    if not os.path.exists(QUEUE_README):
+        return set()
+    txt = io.open(QUEUE_README, encoding="utf-8").read()
+    m = re.search(r"Valid contractor values:\s*\n(.*?)\n\s*(?:Legacy|###)", txt, re.S)
+    if not m:
+        return set()
+    return {x.strip(" `") for x in m.group(1).replace("\n", " ").split("\u00b7") if x.strip(" `")}
+
+
 KNOWN_NON_PROSPECTS = _load_non_prospects()
+VALID_TRADES = _load_valid_trades()
 
 STATUS_KEYS = {"channel", "fb", "note", "photos", "ready", "stage"}
 QUEUE_KEYS = {"contact_id", "business_name", "first_name", "last_name", "trade",
@@ -171,6 +189,40 @@ def main():
     dupe = len(qids) != len(q["prospects"])
     if dupe:
         problems.append("duplicate contact_id in queue")
+
+    # --- queue row shape: the checks that used to live only in a prose checklist.
+    # Every one of these has already shipped broken at least once. A human-read
+    # bullet list did not stop it three separate times; an exit code does.
+    for p in q["prospects"]:
+        name = p.get("business_name", "?")
+        cid, coid = p.get("contact_id"), p.get("company_id")
+
+        # THE recurring defect: the batch writes the COMPANY id into contact_id and
+        # never bridges the record to a real contact. /sync then PATCHes
+        # /objects/contacts/<company id>, 404s, and drops the outcome silently.
+        if coid is None:
+            problems.append(f"queue {name}: no company_id")
+        elif cid is not None and str(cid) == str(coid):
+            problems.append(
+                f"queue {name}: contact_id == company_id ({cid}) - record was never "
+                f"bridged to a real CONTACT. Create/find the contact, associate it to "
+                f"the company, and put the CONTACT id here.")
+
+        url = p.get("hubspot_url") or ""
+        if "/0-1/" not in url:
+            problems.append(f"queue {name}: hubspot_url is not a /0-1/ contact link: {url}")
+        elif cid is not None and not url.rstrip("/").endswith(str(cid)):
+            problems.append(f"queue {name}: hubspot_url id does not match contact_id {cid}")
+
+        st_code = p.get("state") or ""
+        if not re.fullmatch(r"[A-Z]{2}", st_code):
+            problems.append(f"queue {name}: state must be a 2-letter USPS code, got {st_code!r}")
+
+        trade = p.get("trade")
+        if VALID_TRADES and trade not in VALID_TRADES:
+            problems.append(
+                f"queue {name}: trade {trade!r} is not a HubSpot trade_type option - "
+                f"see the mapping table in the queue README")
 
     if not QUIET:
         print(f"pages: {len(slugs)}  active: {len(active)}  archived: {len(arch)}")
