@@ -637,13 +637,35 @@
       + '<option value="needswork">🔧 Needs work</option>'
       + '<option value="fb">📘 Has Facebook</option>'
       + '<option value="phone">☎️ Phone only</option>'
-      + '<option value="untouched">Not contacted yet</option>';
+      + '<option value="untouched">Not contacted yet</option>'
+      + '<option value="archived">🗄 Archived</option>';
     var ctr = document.querySelector('.controls'); if(ctr) ctr.appendChild(sel);
+    /* 2026-08-17: "Archived" here is the one control to actually see archived
+       rows. It forces the tab strip to All (so no stage filter hides them) and
+       the separate viewMode dropdown to "archived" (so isArchived rows show
+       instead of being excluded). Picking anything else flips viewMode back
+       to active. This replaces hunting for the hidden dropdown up top. */
+    sel.addEventListener('change', function(){
+      var vmSel = document.getElementById('viewMode');
+      if (sel.value === 'archived') {
+        current = 'all';
+        if (vmSel && vmSel.value !== 'archived') {
+          vmSel.value = 'archived';
+          vmSel.dispatchEvent(new Event('change', {bubbles:true}));
+        }
+        paintTabs();
+      } else if (vmSel && vmSel.value === 'archived') {
+        vmSel.value = 'active';
+        vmSel.dispatchEvent(new Event('change', {bubbles:true}));
+      }
+      apply();
+    });
     function apply(){
       var v = sel.value;
       var tab = TABS.filter(function(x){ return x[0] === current; })[0];
       rows.forEach(function(tr){
         var ok = !v
+          || v==='archived'
           || (v==='ready'      && tr.dataset.ready==='yes')
           || (v==='needswork'  && tr.dataset.ready==='no')
           || (v==='fb'         && tr.dataset.channel==='fb')
