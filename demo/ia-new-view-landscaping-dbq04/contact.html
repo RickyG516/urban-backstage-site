@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact | New View Landscaping LLC</title>
+<meta name="description" content="Request a free landscaping estimate from New View Landscaping in Dubuque, IA. Call (563) 451-8031 or send a few project details.">
+<link rel="canonical" href="https://newviewdbq.com/contact.html">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<meta property="og:title" content="Contact | New View Landscaping LLC">
+<meta property="og:description" content="Request a free landscaping estimate from New View Landscaping in Dubuque, IA. Call (563) 451-8031 or send a few project details.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.svg" alt="New View Landscaping LLC logo" style="height:44px;width:auto;">
+      <div>
+        <div class="brand-t">New View Landscaping</div>
+        <div class="brand-s">Design &middot; Install &middot; Dubuque, IA</div>
+      </div>
+    </a>
+    <nav class="links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="service-areas.html">Service Areas</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+    <a href="tel:5634518031" class="callbtn">Call (563) 451-8031</a>
+    <button class="navtoggle" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+<section class="pagehead">
+  <div class="wrap">
+    <div class="crumb">Contact</div>
+    <h1>Get a Free Estimate</h1>
+    <p>Call, email or send a few details below and Dallas will get back to you.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap split">
+    <div class="formcard">
+      <form name="estimate-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="estimateForm">
+        <input type="hidden" name="form-name" value="estimate-request">
+        <p class="honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <div class="formgrid">
+          <div class="formrow"><label>Name</label><input type="text" name="name" required></div>
+          <div class="formrow"><label>Phone</label><input type="tel" name="phone" required></div>
+        </div>
+        <div class="formrow"><label>Email</label><input type="email" name="email" required></div>
+        <div class="formrow"><label>Property Address / City</label><input type="text" name="address"></div>
+        <div class="formrow"><label>What are you looking to do?</label>
+          <select name="service">
+            <option value="">Select a service</option>
+            <option value="Landscape Design & Install">Landscape Design & Install</option><option value="Retaining Walls">Retaining Walls</option><option value="Patios, Walkways & Fire Pits">Patios, Walkways & Fire Pits</option><option value="Mulch, Rock & Bed Work">Mulch, Rock & Bed Work</option><option value="Sod, Grading & Drainage">Sod, Grading & Drainage</option><option value="Trees & Plantings">Trees & Plantings</option><option value="Landscape Lighting">Landscape Lighting</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+        <div class="formrow"><label>Project Details</label><textarea name="message" placeholder="Tell us a bit about the space and what you're picturing."></textarea></div>
+        <button type="submit" class="submitbtn">Request My Free Estimate</button>
+        <p id="formError" style="display:none;color:#b3423e;font-size:13px;margin-top:12px;">Something went wrong sending that. Please call or email us directly.</p>
+      </form>
+    </div>
+    <script>
+    document.getElementById('estimateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new URLSearchParams(new FormData(form)).toString();
+      fetch('https://new-view-landscaping.netlify.app/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+      }).then(function(res) {
+        if (res.ok) {
+          window.location.href = 'thank-you.html';
+        } else {
+          document.getElementById('formError').style.display = 'block';
+        }
+      }).catch(function() {
+        document.getElementById('formError').style.display = 'block';
+      });
+    });
+    </script>
+    <div>
+      <h3 style="font-size:18px;">Direct Contact</h3>
+      <p style="color:var(--muted);margin-top:10px;">Prefer to call or email? Reach Dallas directly.</p>
+      <div style="margin-top:20px;">
+        <div style="margin-bottom:14px;"><b style="font-family:'Montserrat';display:block;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);">Phone</b><a href="tel:5634518031" style="color:var(--steel2);font-weight:700;">(563) 451-8031</a></div>
+        <div style="margin-bottom:14px;"><b style="font-family:'Montserrat';display:block;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);">Email</b><a href="mailto:Dallas@newviewdbq.com" style="color:var(--steel2);font-weight:700;">Dallas@newviewdbq.com</a></div>
+        <div style="margin-bottom:14px;"><b style="font-family:'Montserrat';display:block;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);">Service Area</b>Dubuque, IA &middot; 30-mile radius</div>
+      </div>
+      <h3 style="font-size:16px;margin-top:30px;">FAQs</h3>
+      <div style="margin-top:10px;"><div class="faq-item"><h3>Do you offer free estimates?</h3><p>Yes. Dallas walks the property in person and puts together a quote &mdash; no charge, no obligation.</p></div><div class="faq-item"><h3>What's your service area?</h3><p>Roughly 30 miles from Dubuque, IA &mdash; including Asbury, Peosta, Galena IL and Platteville WI.</p></div><div class="faq-item"><h3>Do you do lawn care or snow removal?</h3><p>No. New View focuses on landscape design, hardscape and planting work only.</p></div><div class="faq-item"><h3>How far out are you booking?</h3><p>Varies by season &mdash; call or send a request and Dallas will give you a real timeline.</p></div></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <div class="footbrand">New View Landscaping</div>
+        <p class="footdesc">Landscape design, hardscaping and outdoor builds across the Dubuque Tri-State area. Design & Install &middot; Retaining Walls &middot; Patios &middot; Trees & Lighting.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul><li><a href="landscape-design-install.html">Design & Install</a></li><li><a href="retaining-walls.html">Retaining Walls</a></li><li><a href="patios-walkways-fire-pits.html">Patios, Walkways & Fire Pits</a></li><li><a href="mulch-bed-work.html">Mulch, Rock & Bed Work</a></li><li><a href="sod-grading-drainage.html">Sod, Grading & Drainage</a></li><li><a href="trees-plantings.html">Trees & Plantings</a></li><li><a href="landscape-lighting.html">Landscape Lighting</a></li></ul>
+      </div>
+      <div>
+        <h4>Service Areas</h4>
+        <ul><li><a href="landscaping-dubuque-ia.html">Dubuque, IA</a></li><li><a href="landscaping-asbury-ia.html">Asbury, IA</a></li><li><a href="landscaping-peosta-ia.html">Peosta, IA</a></li><li><a href="landscaping-galena-il.html">Galena, IL</a></li><li><a href="landscaping-platteville-wi.html">Platteville, WI</a></li></ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:5634518031">(563) 451-8031</a></li>
+          <li><a href="mailto:Dallas@newviewdbq.com">Dallas@newviewdbq.com</a></li>
+          <li>Dubuque, IA &middot; 30-mile radius</li>
+          <li><a href="https://www.facebook.com/newviewlandscapingdbq" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footbottom">
+      <div>&copy; 2026 New View Landscaping LLC. All rights reserved.</div>
+      <div>Site by <a href="https://urbannicheco.com" target="_blank" rel="noopener">Urban Niche Co.</a></div>
+    </div>
+  </div>
+</footer>
+<button class="chat-fab" aria-label="Open chat">&#128172; ROOT</button>
+<div class="chat-panel">
+  <div class="chat-header">
+    <div style="font-family:'Montserrat';font-weight:800;">ROOT</div>
+    <div class="status">Online &middot; New View Landscaping's Helper</div>
+  </div>
+  <div class="chat-body">
+    Hey there! I'm ROOT &mdash; New View Landscaping's helper. Ask me about a project, service area, or get a free estimate started.
+  </div>
+  <div class="chat-footer">Powered by New View Landscaping</div>
+</div>
+<script src="assets/main.js"></script>
+<script src="assets/chatbot.js"></script>
+</body>
+</html>
