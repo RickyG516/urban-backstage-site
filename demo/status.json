@@ -367,6 +367,14 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-rd-primmer-roofing-walker": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-18 (company 340776393413) | BBB profile renders NO Visit Website button, control-tested against Robison Construction same session | rdprimmerroofing.com tested live in Chrome 2026-08-18 -> Chrome error page, dead | NAMESAKE: primmerroofing.com IS live but is an unrelated Tampa FL company, phone (813) 802-8826 | Iowa reg C138098 active, bonded $25k, BBB A+, 4 reviews all 5-star, 0 complaints | phone from BBB, corroborated on BuildZoom | PHONE ONLY, no Facebook",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
  "ia-rw-cardella-keokuk-k7m2vd": {
   "channel": "phone",
   "fb": "",
@@ -567,6 +575,14 @@
   "ready": true,
   "stage": "none"
  },
+ "il-landgrebe-interior-springfield": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-18 (company 339032405697) | record created 2026-08-11 but the mockup URL it carried was never built and 404'd for a week - page built 2026-08-18 at that same slug, record repaired not duplicated | landgrebeconstruction.com re-tested live in Chrome 2026-08-18 -> Chrome error page, mail-only domain | CIB AGC profile shows website field as literal 'http://NULL' | IL SOS file 56630996 CORP ACTIVE | IL Treasurer sole-source contract Oct 2021, Marine Bank Building, $93/hr prevailing wage | trade_type corrected Insulation -> General Contractor",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
  "il-mansfield-electric-6jy0pj": {
   "channel": "unknown",
   "fb": "",
@@ -639,12 +655,28 @@
   "ready": false,
   "stage": "none"
  },
+ "il-rj-window-cleaning-t3wnfp": {
+  "channel": "none",
+  "fb": false,
+  "note": "not a prospect - window cleaning is outside the UNC trade-contractor verticals. Page kept in the library, archived 2026-08-18. Never entered HubSpot and never queued for dialing.",
+  "photos": 0,
+  "ready": false,
+  "stage": "none"
+ },
  "il-rjs-snowplowing-uv80je": {
   "channel": "unknown",
   "fb": "",
   "note": "",
   "photos": "generated",
   "ready": true,
+  "stage": "none"
+ },
+ "il-screenlab-screen-repair-e7dqm2": {
+  "channel": "none",
+  "fb": false,
+  "note": "not a prospect - screen repair is outside the UNC trade-contractor verticals. Page kept in the library, archived 2026-08-18. Never entered HubSpot and never queued for dialing.",
+  "photos": 0,
+  "ready": false,
   "stage": "none"
  },
  "il-serranos-concrete-rockford": {
@@ -884,6 +916,14 @@
   "fb": "",
   "note": "Birdeye, Roof.info, D&B present — no FB. 'Jays Seamless Gutters' is a different company",
   "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-john-sheehan-construction-west-allis": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-18 (company 340730623730) | BBB profile read live in Chrome 2026-08-18, NO Visit Website button, control-tested against Robison Construction | johnsheehanconstruction.com and sheehanconstruction.com both tested live in Chrome 2026-08-18 -> Chrome error pages, both dead | started 1991-05-01, 35 yrs, BBB A+ accredited 2018, 0 complaints | Blue Book listed since 2016 for GC sourcing, 3 counties | sole prop, crew size unconfirmed | PHONE ONLY",
+  "photos": 0,
   "ready": true,
   "stage": "none"
  },
