@@ -277,3 +277,13 @@ footer{border-top:2px solid var(--gold-dim);}
   [data-reveal],[data-reveal="stagger"] > *{opacity:1 !important;transform:none !important;}
   .shot img, .photo-cine img{transition:none;}
 }
+
+/* ---------- above-the-fold entrance (no JS dependency, unlike scroll-reveal) ---------- */
+.enter{animation:enterFade .9s cubic-bezier(.16,.8,.3,1) both;}
+@keyframes enterFade{
+  0%{opacity:0;transform:translateY(22px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+@media (prefers-reduced-motion: reduce){
+  .enter{animation:none;}
+}
