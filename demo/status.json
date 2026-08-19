@@ -31,6 +31,14 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-breon-roofing-siding-sheldon": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-19 (company 340893225686, contact 537700123350) | BBB renders NO Visit Website button | breonroofing.com tested live in Chrome 2026-08-19 -> browser error page, dead | 32 yrs since Aug 1994, TWO Iowa locations (Sheldon + Boone, ~250 mi apart) | Iowa reg C136643 active, second reg C118431 also active | BuildZoom 92, top third statewide | CAUTION: three different phone numbers across sources, BBB number used",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
  "ia-bull-west-design-s4t6wm": {
   "channel": "phone",
   "fb": "",
@@ -116,6 +124,14 @@
   "fb": "https://www.facebook.com/p/Mike-Dolan-Concrete-and-Masonry-Owner-and-Operator-100054633090885/",
   "note": "",
   "photos": "real",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-eastern-iowa-masonry-cedar-rapids": {
+  "channel": "phone",
+  "fb": true,
+  "note": "in HubSpot 2026-08-19 (company 341016893131, contact 537700657872) | BBB renders NO Visit Website button | easterniowamasonry.com tested live in Chrome 2026-08-19 -> browser error page, dead | 5.0 on Angi, commercial + residential | scope includes flashing systems, caulking, building-envelope waterproofing | WEAKEST paper trail in batch: BBB has no entity type and no start date, no Iowa licence located",
+  "photos": 0,
   "ready": true,
   "stage": "none"
  },
@@ -212,6 +228,14 @@
   "fb": "",
   "note": "",
   "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-konfrst-tree-service-council-bluffs": {
+  "channel": "phone",
+  "fb": true,
+  "note": "in HubSpot 2026-08-19 (company 340998975173, contact 537472622327) | BBB website field points at Facebook = Facebook-as-website | konfrsttreeservice.com tested live in Chrome 2026-08-19 -> browser error page, dead | Iowa reg C127115 ACTIVE as Wayne Konfrst Enterprises LLC dba Konfrst Tree Service | licensed arborists + pesticide-application licence | 25 yrs, 4.6/5 over 8 reviews | phone from BBB",
+  "photos": 0,
   "ready": true,
   "stage": "none"
  },
@@ -439,6 +463,14 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-woodys-heating-air-west-branch": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-19 (company 340907598566, contact 537719367409) | BBB renders NO Visit Website button | woodysheatingandair.com tested live in Chrome 2026-08-19 -> browser error page, dead | 27 yrs since 1999, BBB A+, 4.32 over 12 reviews | does replacements and remodel work, not just service calls | secondary number 319-430-2743",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
  "il-aldos-concrete-landscaping-5j51rs": {
   "channel": "unknown",
   "fb": "",
@@ -487,11 +519,35 @@
   "ready": false,
   "stage": "none"
  },
+ "il-breckenkamp-painting-quincy": {
+  "channel": "phone",
+  "fb": true,
+  "note": "in HubSpot 2026-08-19 (company 340907598567, contact 537700738772) | BBB renders NO Visit Website button, control-verified | breckenkamppainting.com tested live in Chrome 2026-08-19 -> browser error page, dead | BBB A+, 16 yrs since 2010 | IUPAT union, Painters DC 58 signatory | Bluebook/Procore across 7 CSI divisions | sole proprietorship despite Inc in the name | address conflict: BBB 3820 Stonegate Rd vs Yelp 5410 S 24th St",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
  "il-budget-rooter-535r60": {
   "channel": "unknown",
   "fb": "",
   "note": "",
   "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "il-cover-electric-peoria": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-19 (company 340893225687, contact 537476297429) | BBB renders NO Visit Website button, control-verified | IBEW Local 34/NECA directory prints URLs for ~35 of ~45 signatories and none for Cover | coverelectric.com tested live in Chrome 2026-08-19 -> REDIRECTS TO /lander, PARKED DOMAIN | 56 yrs since 1970, IBEW 34 signatory, NECA member, +Five warranty contractor | Manta revenue estimate is modelled, do not quote it",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "il-cranford-plumbing-dunlap": {
+  "channel": "phone",
+  "fb": true,
+  "note": "in HubSpot 2026-08-19 (company 341016893132, contact 537719367414) | BBB renders NO Visit Website button on an ACCREDITED profile; Additional Websites field holds only a Facebook URL | cranfordplumbinginc.com tested live in Chrome 2026-08-19 -> dead | NAMESAKE: cranfordplumbing.com IS live but is an unrelated NEW JERSEY company, 908-272-4641 | 49 yrs inc 1977, BBB A+ accredited 2015, UA Local 63, MIMCA, WBE certified, runs Cranford Trenching & Backhoe | only 3 employees on file | alt number 309-697-3484",
+  "photos": 0,
   "ready": true,
   "stage": "none"
  },
@@ -532,6 +588,14 @@
   "fb": "",
   "note": "",
   "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "il-gm-sipes-construction-rushville": {
+  "channel": "phone",
+  "fb": true,
+  "note": "in HubSpot 2026-08-19 (company 341027490547, contact 537700738770) | BBB website field points at Facebook | gmsipes.com (their staff email domain) tested live in Chrome 2026-08-19 -> RESOLVES but serves an UNDER CONSTRUCTION placeholder: logo, (c) 2026 line, nav links only, no content | FMCSA USDOT 2015080 ACTIVE, 5 power units, 6 drivers, 0 crashes | named on IDOT contract awards | AGC of Illinois member since 2021",
+  "photos": 0,
   "ready": true,
   "stage": "none"
  },
@@ -733,6 +797,14 @@
   "note": "EXCLUDED PENDING MANUAL CHECK - owns tooncopainting.com and it resolves, but serves an empty shell; may be a JS site my fetcher cannot render | email eric@tooncopainting.com | eyeball before sending",
   "photos": "generated",
   "ready": false,
+  "stage": "none"
+ },
+ "il-top-quality-roofing-mount-zion": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-19 (company 340934618859, contact 537722340064) | BBB renders NO Visit Website button, control-verified vs Knapp Concrete | tqrfg.com (listed as their site on Procore) tested live in Chrome 2026-08-19 -> browser error page, DEAD - this closes the open question from the 2026-08-18 run | Roofers Local 69 signatory, IL licence 104012273 | revenue proof THIN | DO NOT MENTION the public complaint about unreturned calls",
+  "photos": 0,
+  "ready": true,
   "stage": "none"
  },
  "il-willis-electric-eu8wtz": {
@@ -965,6 +1037,14 @@
   "note": "in HubSpot 2026-08-04 | no website - BBB website field points to a FB profile | log home restoration/staining specialty | USDOT 4401822, since 2013",
   "photos": "generated",
   "ready": false,
+  "stage": "none"
+ },
+ "wi-poss-painting-muskego": {
+  "channel": "phone",
+  "fb": false,
+  "note": "in HubSpot 2026-08-19 (company 340950972110, contact 537700657870) | BBB renders NO Visit Website button | posspainting.com tested live in Chrome 2026-08-19 -> REDIRECTS TO /lander AND SERVES A PARKED-DOMAIN PAGE with ad tiles - he owns the domain and it is parked | founded 1954, 72 years, LLC inc 2005 | two Muskego locations | no review volume anywhere - do not assume how busy they are",
+  "photos": 0,
+  "ready": true,
   "stage": "none"
  },
  "wi-primetime-roofing-fpfviu": {
