@@ -292,9 +292,10 @@ footer{border-top:2px solid var(--gold-dim);}
 nav.links .has-sub{position:relative}
 nav.links .has-sub > a{display:flex;align-items:center;gap:5px}
 nav.links .has-sub .caret{font-size:10px;transition:transform .2s ease}
-nav.links .has-sub:hover .caret{transform:rotate(180deg)}
-.subnav{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 34px rgba(10,16,23,.14);padding:8px;min-width:220px;display:none;flex-direction:column;gap:2px;z-index:70;margin-top:10px;}
-nav.links .has-sub:hover .subnav{display:flex}
+nav.links .has-sub.subnav-open .caret{transform:rotate(180deg)}
+.subnav{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 34px rgba(10,16,23,.14);padding:8px;min-width:220px;display:flex;flex-direction:column;gap:2px;z-index:70;margin-top:14px;opacity:0;visibility:hidden;transition:opacity .15s ease;pointer-events:none;}
+.subnav:before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px;}
+nav.links .has-sub.subnav-open .subnav{display:flex;opacity:1;visibility:visible;pointer-events:auto;}
 .subnav a{padding:9px 12px;border-radius:6px;font-size:13.5px;white-space:nowrap;color:#3b4653;}
 .subnav a:hover{background:var(--mist);color:var(--steel2)}
 .subnav a:after{display:none}
@@ -302,8 +303,7 @@ nav.links .has-sub:hover .subnav{display:flex}
 @media(max-width:860px){
   nav.links .has-sub{width:100%}
   nav.links .has-sub > a{justify-content:space-between;width:100%}
-  .subnav{position:static;transform:none;box-shadow:none;border:none;background:var(--mist);display:flex;margin-top:8px;width:100%;padding:6px;}
-  nav.links .has-sub:hover .subnav{display:none}
-  nav.links .has-sub.open .subnav{display:flex}
+  .subnav{position:static;transform:none;box-shadow:none;border:none;background:var(--mist);display:flex;opacity:1;visibility:visible;pointer-events:auto;margin-top:8px;width:100%;padding:6px;max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  nav.links .has-sub.open .subnav{max-height:400px;}
   nav.links .has-sub .caret{margin-left:auto}
 }
