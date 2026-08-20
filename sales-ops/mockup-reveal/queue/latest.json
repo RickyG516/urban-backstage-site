@@ -1,6 +1,6 @@
 {
-  "_date": "2026-08-19",
-  "_generated_at": "2026-08-19T10:15:00Z",
+  "_date": "2026-08-20",
+  "_generated_at": "2026-08-20T09:30:00Z",
   "_session_cap": 130,
   "prospects": [
     {
@@ -474,8 +474,8 @@
     {
       "contact_id": 534669076173,
       "business_name": "Wm. A. Hein Construction Co., Inc.",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Pete",
+      "last_name": "Hein",
       "trade": "Concrete",
       "phone": "(920) 336-9411",
       "city": "De Pere",
@@ -492,8 +492,8 @@
     {
       "contact_id": 534646218486,
       "business_name": "Dewco Insulation Inc",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Dewey",
+      "last_name": "Moncrief",
       "trade": "Insulation",
       "phone": "(309) 799-9842",
       "city": "Coal Valley",
@@ -564,8 +564,8 @@
     {
       "contact_id": 534682320597,
       "business_name": "Willis Electric, Inc.",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Phyllis",
+      "last_name": "Willis",
       "trade": "Electrician",
       "phone": "(309) 579-2926",
       "city": "Chillicothe",
@@ -600,8 +600,8 @@
     {
       "contact_id": 534513072872,
       "business_name": "Widick Roofing & Construction Inc",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Jerry",
+      "last_name": "Widick",
       "trade": "Roofer",
       "phone": "5152971077",
       "city": "Webster City",
@@ -618,8 +618,8 @@
     {
       "contact_id": 534555430624,
       "business_name": "Punelli Heating & Air Conditioning",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Anthony",
+      "last_name": "Punelli",
       "trade": "HVAC",
       "phone": "5152841426",
       "city": "Des Moines",
@@ -906,8 +906,8 @@
     {
       "contact_id": 509459914437,
       "business_name": "Sanders Lawn Care & Landscaping",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Nate",
+      "last_name": "Sanders",
       "trade": "Landscaper",
       "phone": "(563) 599-2244",
       "city": "Dubuque",
@@ -1158,8 +1158,8 @@
     {
       "contact_id": 521618262726,
       "business_name": "Dolan Concrete & Masonry",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Mike",
+      "last_name": "Dolan",
       "trade": "Masonry",
       "phone": "3192329658",
       "city": "Waterloo",
@@ -1266,8 +1266,8 @@
     {
       "contact_id": 501491581686,
       "business_name": "Zaiser's Landscaping Inc (Scott Zaiser Owner)",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Scott",
+      "last_name": "Zaiser",
       "trade": "Landscaper",
       "phone": "3197540030",
       "city": "Burlington",
@@ -1554,10 +1554,10 @@
     {
       "contact_id": 522976134863,
       "business_name": "Cherry Tree Service LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Eduardo",
+      "last_name": "Mendez",
       "trade": "Tree Service",
-      "phone": "",
+      "phone": "(414) 850-9702",
       "city": "New Berlin",
       "state": "WI",
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/522976134863",
@@ -1566,13 +1566,13 @@
       "notes_preview": null,
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/tree-service-cherry-new-berlin/",
-      "ai_hook": "Already built Cherry Tree Service LLC a free working homepage — lead with that, not a review-gap stat.",
+      "ai_hook": "Ask for Eduardo Mendez, he's the owner. Lead with the lead-broker problem: his phone number only exists on a HomeAdvisor listing and a Facebook page, so every call he gets he is effectively renting from HomeAdvisor. Say: 'Eduardo, right now HomeAdvisor owns your phone number online - you're paying them for calls that should come straight to you. I already built you a working homepage that puts your number first.' 7+ years in outdoor maintenance, runs tree and hedge removal, stumps, weed control and gutters across all of Milwaukee County out of 19725 W Lincoln Ave, New Berlin. Mon-Sat 8-6, closed Sunday - do not dial Sunday.",
       "company_id": 335110813375
     },
     {
       "contact_id": 525708368574,
       "business_name": "Prescott Landscaping",
-      "first_name": null,
+      "first_name": "Kevin",
       "last_name": null,
       "trade": "Landscaper",
       "phone": "2626725115",
@@ -1680,8 +1680,8 @@
     {
       "contact_id": 534576336586,
       "business_name": "Lee Foundation Spraying & Insulation LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Christopher",
+      "last_name": "Lee",
       "trade": "Insulation",
       "phone": "3196103503",
       "city": "Nashua",
@@ -1698,8 +1698,8 @@
     {
       "contact_id": 534669085380,
       "business_name": "Certified Pest Control",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Beth",
+      "last_name": "Brown",
       "trade": "Pest Control",
       "phone": "6416738740",
       "city": "Oskaloosa",
@@ -1716,8 +1716,8 @@
     {
       "contact_id": 503610306261,
       "business_name": "Hartwig Plumbing & Heating Inc",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Keith",
+      "last_name": "Brown",
       "trade": "HVAC",
       "phone": "641-752-5707",
       "city": "Marshalltown",
@@ -1770,8 +1770,8 @@
     {
       "contact_id": 534530956994,
       "business_name": "Blaze Electric LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Scott",
+      "last_name": "Petras",
       "trade": "Electrician",
       "phone": "(715) 532-0112",
       "city": "Ladysmith",
@@ -1806,8 +1806,8 @@
     {
       "contact_id": 534530956999,
       "business_name": "Experienced Roofing, LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Thomas",
+      "last_name": "Fury",
       "trade": "Roofer",
       "phone": "(563) 556-0315",
       "city": "Dubuque",
@@ -1932,8 +1932,8 @@
     {
       "contact_id": 534669087461,
       "business_name": "McNeal's Refrigeration Inc",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Daniel",
+      "last_name": "McNeal",
       "trade": "HVAC",
       "phone": "(319) 329-4835",
       "city": "Cedar Rapids",
@@ -1968,8 +1968,8 @@
     {
       "contact_id": 534684653301,
       "business_name": "Perfection Painting LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Paul",
+      "last_name": "Gordon",
       "trade": "Painter",
       "phone": "(515) 274-0326",
       "city": "Des Moines",
@@ -2094,8 +2094,8 @@
     {
       "contact_id": 534669088471,
       "business_name": "Sewell Brothers Tree Experts, Inc.",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Greg",
+      "last_name": "Sewell",
       "trade": "Tree Service",
       "phone": "(309) 697-1668",
       "city": "Bartonville",
@@ -2112,8 +2112,8 @@
     {
       "contact_id": 534587137777,
       "business_name": "Alcar Roofing & Home Improvements LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Allen",
+      "last_name": "Carder",
       "trade": "Roofer",
       "phone": "(608) 385-8871",
       "city": "La Crosse",
@@ -2130,8 +2130,8 @@
     {
       "contact_id": 534576339648,
       "business_name": "Calderon Services LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Jonathan",
+      "last_name": "Calderon Marquez",
       "trade": "Concrete",
       "phone": "(414) 484-4885",
       "city": "Milwaukee",
@@ -2148,8 +2148,8 @@
     {
       "contact_id": 534611812041,
       "business_name": "Double D Resurfacing",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Dan",
+      "last_name": "Dedrick",
       "trade": "Flooring",
       "phone": "(414) 687-0165",
       "city": "Milwaukee",
@@ -2184,8 +2184,8 @@
     {
       "contact_id": 534536167153,
       "business_name": "Johnson Tree Care, LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Michael",
+      "last_name": "Johnson",
       "trade": "Tree Service",
       "phone": "(608) 259-9078",
       "city": "Monona",
@@ -2202,8 +2202,8 @@
     {
       "contact_id": 534514636504,
       "business_name": "Peaveys Painting LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "David",
+      "last_name": "Neau",
       "trade": "Painter",
       "phone": "(262) 497-5458",
       "city": "Union Grove",
@@ -2329,10 +2329,10 @@
       "contact_id": 532885088955,
       "company_id": 338608850676,
       "business_name": "MAI Concrete LLC",
-      "first_name": null,
-      "last_name": null,
+      "first_name": "Rick",
+      "last_name": "Mai",
       "trade": "Concrete",
-      "phone": null,
+      "phone": "(563) 513-9121",
       "city": "Dubuque",
       "state": "IA",
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/532885088955",
@@ -2344,5 +2344,5 @@
       "ai_hook": "Owner Rick Mai, 30 years claimed, phone-first via the Facebook page since there is no site. FLAG: BuildZoom shows license C124995 expired 2020-07-08 with a BZ score of 0, so do not lead with licensing. Sourced from an in-person encounter in Dubuque, still running print classifieds."
     }
   ],
-  "_comment": "Standing curated batch — the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url."
+  "_comment": "Standing curated batch — the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot)."
 }
