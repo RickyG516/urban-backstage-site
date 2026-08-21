@@ -2,6 +2,35 @@ FILING DESTINATION: TECH & SYSTEMS / AI & Automation
 SOURCE: CLAUDE OUTPUT — Ricky Garner
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+> ## ⚠ ACTIVE BLOCKER — EVERY MOCKUP URL IS BEHIND CLOUDFLARE ACCESS (found 2026-08-21)
+>
+> A Cloudflare Access application named **`urbanbackstage.com`** was created
+> **2026-08-18T04:07:53Z** covering `urbanbackstage.com` + `www.urbanbackstage.com`
+> with a single policy: `allow`, include `email = ricky@urbannicheco.com`.
+> Session 24h.
+>
+> **Consequence:** every `https://urbanbackstage.com/demo/<slug>/` link now serves a
+> Cloudflare sign-in page to anyone who is not Ricky. That is the entire prospect-facing
+> product. A prospect who opens a mockup link sees a login wall, not their homepage.
+>
+> Verified live 2026-08-21 in authenticated Chrome: `/`, `/demo/`, `/demo/<slug>/`,
+> `/playbook/`, `/sales-ops/`, `/sales-ops/workspace/`, `/portal/`, `demo/status.json`,
+> `sales-ops/shared/reps.json` and `sales-ops/mockup-reveal/queue/latest.json` all return
+> an opaque redirect to `cloudflareaccess.com`. Only `/robots.txt` still serves (200).
+>
+> **One slug is already exempt**, which shows the intended fix: an app named
+> `New View Landscaping Demo (Public Bypass)` on
+> `urbanbackstage.com/demo/ia-new-view-landscaping-dbq04*`, policy `bypass` / everyone,
+> created 2026-08-19. Somebody hit this for one client demo and patched that slug only.
+> The other 129 queue rows were never covered.
+>
+> **This is a Cloudflare dashboard change, not a repo change** — nothing in this repo
+> can fix it. Zero Trust → Access controls → Applications. Do not read a mockup URL to a
+> prospect until `/demo/*` is bypassed.
+>
+> Note this also contradicts the hosting truth map in the Claude globals, which still says
+> backstage does not pass through Cloudflare at all. That section is stale as of 2026-08-18.
+
 # Spec Mockup — Imagery Baseline v3
 Set 2026-08-04. Supersedes the "minimum 4 photos, stock as last resort" rule
 in spec-mockup-engine v2 Step 3. Fold this into the skill.
