@@ -34,30 +34,84 @@
 
   /* ── 1. the page itself never scrolls sideways ────────────────────────── */
   html{ -webkit-text-size-adjust:100%; }
-  body{ overflow-x:hidden; }
+  /* clip, not hidden: `hidden` turns body into a scroll container and can
+     break position:sticky on the nav. clip does not. hidden is the fallback
+     for anything that does not understand clip. */
+  body{ overflow-x:hidden; overflow-x:clip; }
 
-  /* ── 2. the nav scrolls instead, as a swipeable strip ─────────────────── */
+  /* ── 2. the nav collapses into a hamburger ───────────────────────────── */
+  /* No sideways scrolling of any kind. The links move into a panel that
+     drops down under the nav bar. mobile-nav.js injects the button. */
+
+  /* overflow must be visible here or the nav clips its own dropdown. */
   body .ub-nav{
-    overflow-x:auto;
-    overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    overflow:visible;
     padding-left:14px;
     padding-right:14px;
     gap:6px;
   }
-  body .ub-nav::-webkit-scrollbar{ display:none; }
 
-  /* Flex children default to shrinking. Without these the links squash into
-     each other instead of overflowing into the scroll. */
-  body .ub-brand{ flex:0 0 auto; margin-right:10px; }
-  body .ub-links{ flex:0 0 auto; gap:2px; }
-  body .ub-links a{ padding:8px 11px; white-space:nowrap; }
-
-  /* The noindex badge is margin-left:auto, which fights a scrolling flex row
-     and wastes a thumb-width of strip. backstage.css already drops it at
-     900px; this matches that for the pages with inline nav copies. */
+  /* Brand takes the auto margin so the button lands hard right. */
+  body .ub-brand{ flex:0 0 auto; margin-right:auto; }
   body .ub-flag{ display:none; }
+
+  /* The button is created with the `hidden` attribute. This is the only rule
+     that reveals it, and it lives inside a max-width query, so a desktop
+     browser never shows it. */
+  body .ub-burger{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:44px;
+    height:44px;
+    padding:0 10px;
+    margin-left:auto;
+    background:none;
+    border:0;
+    cursor:pointer;
+    flex:0 0 auto;
+  }
+  body .ub-burger span{
+    display:block;
+    height:2px;
+    width:100%;
+    background:#9a9a9a;
+    border-radius:2px;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  body .ub-nav.open .ub-burger span{ background:#e36b1e; }
+  body .ub-nav.open .ub-burger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  body .ub-nav.open .ub-burger span:nth-child(2){ opacity:0; }
+  body .ub-nav.open .ub-burger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  /* The panel. Absolute against the sticky nav, full width, its own scroll
+     if the list is long enough to run off the screen. */
+  body .ub-nav .ub-links{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    flex-direction:column;
+    gap:2px;
+    background:#0f0f0f;
+    border-bottom:1px solid #262626;
+    padding:8px 12px 14px;
+    max-height:calc(100vh - 56px);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    z-index:70;
+    box-shadow:0 14px 28px rgba(0,0,0,.55);
+  }
+  body .ub-nav.open .ub-links{ display:flex; }
+  body .ub-nav .ub-links a{
+    display:block;
+    padding:13px 12px;
+    font-size:15px;
+    border-radius:8px;
+    white-space:nowrap;
+  }
 
   /* ── 3. gutters sized for a phone, not a monitor ──────────────────────── */
   /* Left/right only — vertical rhythm from the original rules is preserved. */
@@ -79,37 +133,34 @@
   }
 
   /* ── 5. the demo library stacks into cards ────────────────────────────── */
-  /* Scoped to tr[data-search], which only the demo library table has, so no
-     other table gets restructured. Wrapped in @supports: on a browser without
-     :has() the whole block is skipped and rule 4 above still applies, so the
-     worst case is a swipeable table rather than a broken one. */
-  @supports selector(:has(*)){
-    body table:has(tr[data-search]){ overflow-x:visible; }
-    body table:has(tr[data-search]) thead{ display:none; }
-    body table:has(tr[data-search]) tbody,
-    body table:has(tr[data-search]) tr,
-    body table:has(tr[data-search]) td{ display:block; }
+  /* Scoped to body.demo-library so no other table on the site is restructured.
+     Uses a plain class rather than :has() so it works on every browser. */
+  body.demo-library table{ overflow-x:visible; }
+  body.demo-library thead{ display:none; }
+  body.demo-library tbody,
+  body.demo-library tbody tr,
+  body.demo-library tbody td{ display:block; }
 
-    body table:has(tr[data-search]) tbody tr{
-      border:1px solid #262626;
-      border-radius:10px;
-      background:#141414;
-      padding:12px 14px;
-      margin-bottom:10px;
-    }
-    body table:has(tr[data-search]) tbody td{
-      border-bottom:0;
-      padding:2px 0;
-      font-size:13px;
-    }
-    body table:has(tr[data-search]) tbody td.biz{
-      font-size:15px;
-      padding-bottom:6px;
-    }
-    /* The family/not-a-prospect row has no HubSpot link; an empty cell would
-       leave a dead gap in the card. */
-    body table:has(tr[data-search]) tbody td:empty{ display:none; }
+  body.demo-library tbody tr{
+    border:1px solid #262626;
+    border-radius:10px;
+    background:#141414;
+    padding:12px 14px;
+    margin-bottom:10px;
   }
+  body.demo-library tbody tr:hover{ background:#141414; }
+  body.demo-library tbody td{
+    border-bottom:0;
+    padding:2px 0;
+    font-size:13px;
+  }
+  body.demo-library tbody td.biz{
+    font-size:15px;
+    padding-bottom:6px;
+  }
+  /* The family/not-a-prospect row has no HubSpot link; an empty cell would
+     leave a dead gap in the card. */
+  body.demo-library tbody td:empty{ display:none; }
 
   /* ── 6. controls you can actually hit with a thumb ────────────────────── */
   /* 16px on form controls is the threshold below which iOS Safari zooms the
