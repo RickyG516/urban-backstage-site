@@ -1,0 +1,144 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   URBAN BACKSTAGE — mobile repair layer
+   Added 2026-08-13.
+
+   THE RULE FOR THIS FILE: every single declaration lives inside a
+   `@media (max-width: …)` block. Nothing here can reach a desktop viewport.
+   If you add a rule outside a media query you have broken that guarantee —
+   don't.
+
+   WHY IT EXISTS: six pages (hub, demo library, the four playbook pages,
+   verticals index) each carry their own inline copy of the `.ub-nav` CSS,
+   and those copies are missing the `overflow-x:auto` that the shared
+   backstage.css version has. Ten to nineteen nav links at full width then
+   push the whole document sideways on a phone. That is the "backstage is
+   shit on mobile" bug. Rather than editing six drifting copies of the same
+   CSS, this file overrides them all from one place.
+
+   LOADING ORDER MATTERS: link this LAST in <head>, after any inline <style>
+   block. Media queries add no specificity, so it wins ties on source order.
+   Selectors are prefixed with `body` to clear inline element selectors like
+   `main{padding:…}` without resorting to !important.
+
+   DELIBERATELY NOT TOUCHED:
+     - nav height stays 56px. demo/index.html sticks .controls at top:56px;
+       changing the height would float it off the nav.
+     - /sales-ops/ cockpit pages. cockpit-shell.css already has worked-out
+       breakpoints at 860/720/600/480/400. That is the tool actually used in
+       the field and it is not worth the risk.
+     - the 116 demo mockups. Client-facing, each on its own style pack, and
+       gate.sh polices them.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 820px){
+
+  /* ── 1. the page itself never scrolls sideways ────────────────────────── */
+  html{ -webkit-text-size-adjust:100%; }
+  body{ overflow-x:hidden; }
+
+  /* ── 2. the nav scrolls instead, as a swipeable strip ─────────────────── */
+  body .ub-nav{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-left:14px;
+    padding-right:14px;
+    gap:6px;
+  }
+  body .ub-nav::-webkit-scrollbar{ display:none; }
+
+  /* Flex children default to shrinking. Without these the links squash into
+     each other instead of overflowing into the scroll. */
+  body .ub-brand{ flex:0 0 auto; margin-right:10px; }
+  body .ub-links{ flex:0 0 auto; gap:2px; }
+  body .ub-links a{ padding:8px 11px; white-space:nowrap; }
+
+  /* The noindex badge is margin-left:auto, which fights a scrolling flex row
+     and wastes a thumb-width of strip. backstage.css already drops it at
+     900px; this matches that for the pages with inline nav copies. */
+  body .ub-flag{ display:none; }
+
+  /* ── 3. gutters sized for a phone, not a monitor ──────────────────────── */
+  /* Left/right only — vertical rhythm from the original rules is preserved. */
+  body header,
+  body main,
+  body footer,
+  body .wrap,
+  body .controls{
+    padding-left:16px;
+    padding-right:16px;
+  }
+
+  /* ── 4. wide tables swipe themselves instead of the page ──────────────── */
+  body table{
+    display:block;
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* ── 5. the demo library stacks into cards ────────────────────────────── */
+  /* Scoped to tr[data-search], which only the demo library table has, so no
+     other table gets restructured. Wrapped in @supports: on a browser without
+     :has() the whole block is skipped and rule 4 above still applies, so the
+     worst case is a swipeable table rather than a broken one. */
+  @supports selector(:has(*)){
+    body table:has(tr[data-search]){ overflow-x:visible; }
+    body table:has(tr[data-search]) thead{ display:none; }
+    body table:has(tr[data-search]) tbody,
+    body table:has(tr[data-search]) tr,
+    body table:has(tr[data-search]) td{ display:block; }
+
+    body table:has(tr[data-search]) tbody tr{
+      border:1px solid #262626;
+      border-radius:10px;
+      background:#141414;
+      padding:12px 14px;
+      margin-bottom:10px;
+    }
+    body table:has(tr[data-search]) tbody td{
+      border-bottom:0;
+      padding:2px 0;
+      font-size:13px;
+    }
+    body table:has(tr[data-search]) tbody td.biz{
+      font-size:15px;
+      padding-bottom:6px;
+    }
+    /* The family/not-a-prospect row has no HubSpot link; an empty cell would
+       leave a dead gap in the card. */
+    body table:has(tr[data-search]) tbody td:empty{ display:none; }
+  }
+
+  /* ── 6. controls you can actually hit with a thumb ────────────────────── */
+  /* 16px on form controls is the threshold below which iOS Safari zooms the
+     whole page on focus, which is its own kind of awful. */
+  body input,
+  body select,
+  body textarea{ font-size:16px; }
+
+  body .ub-links a,
+  body button,
+  body select,
+  body input[type="search"],
+  body input[type="text"]{ min-height:44px; }
+
+  /* ── 7. headlines that fit the screen ─────────────────────────────────── */
+  body .hero h1{ font-size:24px; line-height:1.2; }
+  body .page-head h1{ font-size:22px; line-height:1.2; }
+}
+
+/* Narrow phones. Same guarantee: query-scoped, desktop untouched. */
+@media (max-width: 400px){
+  body .ub-brand{ font-size:12px; }
+  body .ub-links a{ padding:8px 9px; font-size:12.5px; }
+  body header,
+  body main,
+  body footer,
+  body .wrap,
+  body .controls{
+    padding-left:12px;
+    padding-right:12px;
+  }
+}
