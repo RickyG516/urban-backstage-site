@@ -1,6 +1,6 @@
 {
-  "_date": "2026-08-21",
-  "_generated_at": "2026-08-21T05:30:00Z",
+  "_date": "2026-08-23",
+  "_generated_at": "2026-08-23T23:00:00Z",
   "_session_cap": 130,
   "prospects": [
     {
@@ -16,10 +16,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/537780855483",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "Commercial painter, wallcoverings + resinous flooring. SIBA-AGC member. Owns tooncopainting.com but it is a GoDaddy PARKED lander - email-only domain. Owner/President Eric Toon.",
+      "notes_preview": "Commercial painter, wallcoverings + resinous flooring. SIBA-AGC member. Owns tooncopainting.com. RE-VERIFIED 2026-08-23: the domain no longer serves a parked lander - it serves NOTHING, browser error page on http and https. DNS healthy at GoDaddy; MX live on Microsoft 365 + FortiMail filtering. He pays for business email on a domain whose website errors out. Owner/President Eric Toon.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-toonco-painting-collinsville/",
-      "ai_hook": "Ask for Eric Toon, he's the owner/president. LEAD WITH THE PARKED DOMAIN - he already paid for the name. Say: 'Eric, you're sending bids from eric@tooncopainting.com, so anybody who gets that email and types tooncopainting.com into a browser lands on a GoDaddy parking page with ad tiles on it. You own the address, it just has nothing behind it.' Then the credibility line: he bids commercial work through SIBA - Staunton High School, the Lewis & Clark Confluence Tower - and a GC checking him out has nothing to look at. Second angle: he carries wallcoverings AND resinous/epoxy flooring on top of paint, which most painters don't, and there is nowhere online that says so. DO NOT say his site is 'broken' or 'down' - it isn't, it's parked, and he may well know. Frame it as unused, not failed. Note: this mockup has existed since 2026-08-04 and was archived pending exactly this check - it is already built and ready to reveal."
+      "ai_hook": "Ask for Eric Toon, owner/president. LEAD WITH THE SPLIT: his email works, his website doesn't. Say: 'Eric, you're bidding commercial work off eric@tooncopainting.com - that's Microsoft 365, you pay for it. But when a GC types tooncopainting.com into a browser they get an error page. You bought the name and you're paying to run mail on it, and the part your customers actually look at is the one part that isn't there.' DO NOT say 'your site is parked' - that was true 08-19, it errors out entirely as of 08-23. Getting it wrong burns the first ten seconds. Proof points if he pushes back: SIBA-AGC member, Staunton High School renovation, Lewis & Clark Confluence Tower. WARNING 2026-08-23: urbanbackstage.com is behind Cloudflare Access - do NOT send him the mockup link until /demo/ is excluded from the Access policy."
     },
     {
       "contact_id": 537472622327,

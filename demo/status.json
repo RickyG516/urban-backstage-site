@@ -607,6 +607,14 @@
     "ready": true,
     "stage": "none"
   },
+  "il-grape-escape-galena": {
+    "channel": "none",
+    "fb": false,
+    "note": "not a prospect - wine bar / live music venue in Galena IL, outside the UNC trade-contractor verticals. Hand-built page (v2, no style pack), still an active pitch - Ricky sourcing real photos separately per commit 4dc838d. Wired to the library and archived 2026-08-23 because it had NO index row and NO status entry and was failing enrich_audit. Never entered HubSpot and never queued for dialing. Unarchive if UNC opens the hospitality vertical.",
+    "photos": 0,
+    "ready": false,
+    "stage": "none"
+  },
   "il-haier-plumbing-okawville": {
     "channel": "phone",
     "fb": "https://www.facebook.com/HaierPlumbing/",
@@ -794,7 +802,7 @@
   "il-toonco-painting-collinsville": {
     "channel": "fb",
     "fb": "https://www.facebook.com/p/ToonCo-Painting-LLC-100089315511894/",
-    "note": "in HubSpot 2026-08-19 (company 341027520218) | LEGACY REVIVAL - was archived 'EXCLUDED PENDING MANUAL CHECK'; manual check now done. Chrome 2026-08-19: tooncopainting.com -> www.tooncopainting.com/lander, DOM renders only class='parked-content' = GoDaddy parked lander, NOT a JS site. Domain is email-only. | SIBA-AGC member profile lists no website field, phone (618) 973-2483, Owner/President Eric Toon | contact 537780855483 | commercial proof: Staunton HS reno, Lewis & Clark Confluence Tower reno | IL SOS/IDFPR status NOT checked (CAPTCHA-gated) | no-website re-verified 2026-08-20 (parked domain)",
+    "note": "in HubSpot 2026-08-19 (company 341027520218) | LEGACY REVIVAL - was archived 'EXCLUDED PENDING MANUAL CHECK'; manual check now done. Chrome 2026-08-19: tooncopainting.com -> www.tooncopainting.com/lander, DOM renders only class='parked-content' = GoDaddy parked lander, NOT a JS site. Domain is email-only. | SIBA-AGC member profile lists no website field, phone (618) 973-2483, Owner/President Eric Toon | contact 537780855483 | commercial proof: Staunton HS reno, Lewis & Clark Confluence Tower reno | IL SOS/IDFPR status NOT checked (CAPTCHA-gated) | no-website re-verified 2026-08-20 (parked domain) | RE-VERIFIED 2026-08-23 in Chrome: tooncopainting.com no longer serves the parked lander - browser ERROR PAGE on https apex, https www and http. DNS is healthy (NS ns45/ns46.domaincontrol.com, A 15.197.148.33 + 3.33.130.190) and MX is LIVE (Microsoft 365 + fortimail.quackcom.com), so the domain is paid-for and running mail while the website serves nothing. Hook updated in the queue: say 'errors out', never 'parked'.",
     "photos": "generated",
     "ready": true,
     "stage": "none"
