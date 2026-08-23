@@ -91,13 +91,6 @@
     background:var(--navy);
     padding:90px 32px 70px;
   }
-  .hero-bg{
-    position:absolute; inset:0; z-index:0;
-    background-image:
-      linear-gradient(180deg, rgba(18,20,32,0.55) 0%, rgba(18,20,32,0.75) 55%, rgba(18,20,32,0.96) 100%),
-      url('https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_65942da73eae1acb31f1a3aa0199c3af.jpg');
-    background-size:cover; background-position:center;
-  }
   .hero-inner{
     max-width:1200px; margin:0 auto; position:relative; z-index:2;
     display:grid; grid-template-columns:1.15fr 0.85fr; gap:50px; align-items:center;
@@ -144,6 +137,53 @@
   .hero-addr{margin-top:20px; font-family:'Barlow Condensed',sans-serif; letter-spacing:0.04em; color:var(--coral); font-size:0.95rem;}
   @media (max-width:900px){ .hero-inner{grid-template-columns:1fr;} }
 
+  /* POUR ANIMATION — wine glass filling on loop */
+  .pour-panel{
+    position:relative; border:2px solid var(--pink); border-radius:4px;
+    background:rgba(0,0,0,0.18); padding:36px 28px 26px;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+  }
+  .pour-panel:before{
+    content:""; position:absolute; inset:8px; border:1px dotted rgba(230,163,187,0.5); border-radius:2px; pointer-events:none;
+  }
+  .pour-scene{width:150px; height:170px; position:relative; margin-bottom:10px;}
+  .pour-stream{
+    position:absolute; top:0; left:50%; width:4px; height:38px; margin-left:-2px;
+    background:linear-gradient(180deg, rgba(217,112,95,0) 0%, var(--coral) 40%, var(--coral) 100%);
+    transform-origin:top center; opacity:0;
+    animation:pourStream 3.6s ease-in-out infinite;
+  }
+  .pour-glass{
+    position:absolute; top:34px; left:50%; transform:translateX(-50%);
+    width:104px; height:132px;
+  }
+  .pour-glass svg{width:100%; height:100%; display:block;}
+  .pour-liquid{
+    animation:pourFill 3.6s ease-in-out infinite;
+  }
+  .pour-wave{ animation:pourWave 1.8s ease-in-out infinite; }
+  .pour-kicker{font-family:'Bungee',sans-serif; color:var(--pink); font-size:0.72rem; letter-spacing:0.14em; margin-bottom:8px; text-transform:uppercase;}
+  .pour-panel h3{font-family:'Bungee',sans-serif; color:var(--cream); font-size:1.4rem; line-height:1.3; margin-bottom:10px;}
+  .pour-panel p{color:rgba(242,233,216,0.7); font-size:0.9rem; line-height:1.55;}
+
+  @keyframes pourStream{
+    0%{opacity:0; height:0;}
+    8%{opacity:1;}
+    32%{opacity:1; height:38px;}
+    40%{opacity:0; height:38px;}
+    100%{opacity:0; height:0;}
+  }
+  @keyframes pourFill{
+    0%{transform:translateY(46px);}
+    35%{transform:translateY(46px);}
+    65%{transform:translateY(6px);}
+    100%{transform:translateY(6px);}
+  }
+  @keyframes pourWave{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(3px);}
+  }
+
   /* TICKER — real current cocktail names, script style like the sangria card */
   .ticker-wrap{
     background:var(--cream); border-top:3px solid var(--navy); border-bottom:3px solid var(--navy);
@@ -182,23 +222,43 @@
   .about-panel{
     position:relative; border-radius:4px; overflow:hidden;
     box-shadow:0 26px 50px -14px rgba(27,30,41,0.4); border:4px solid var(--navy);
-    min-height:440px;
+    background:var(--navy); min-height:440px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px;
   }
-  .about-panel img{width:100%; height:440px; object-fit:cover; display:block;}
-  .about-panel-caption{
-    position:absolute; left:0; right:0; bottom:0; z-index:2;
-    background:linear-gradient(0deg, rgba(18,20,32,0.92) 0%, rgba(18,20,32,0) 100%);
-    padding:60px 28px 22px;
+  .about-panel .grid-pattern{position:absolute; inset:0; opacity:0.9;}
+  .martini-scene{position:relative; z-index:2; width:170px; height:190px; margin-bottom:22px;}
+  .martini-stream{
+    position:absolute; top:0; left:50%; width:4px; height:30px; margin-left:-2px;
+    background:linear-gradient(180deg, rgba(230,163,187,0) 0%, var(--pink) 40%, var(--pink) 100%);
+    opacity:0; animation:pourStream 4s ease-in-out infinite;
+  }
+  .martini-glass{position:absolute; top:26px; left:50%; transform:translateX(-50%); width:130px; height:164px;}
+  .martini-glass svg{width:100%; height:100%; display:block;}
+  .martini-liquid{animation:martiniFill 4s ease-in-out infinite;}
+  .olive{animation:oliveDrop 4s ease-in-out infinite;}
+  @keyframes martiniFill{
+    0%{transform:translateY(52px);}
+    35%{transform:translateY(52px);}
+    62%{transform:translateY(12px);}
+    100%{transform:translateY(12px);}
+  }
+  @keyframes oliveDrop{
+    0%{transform:translateY(-40px); opacity:0;}
+    55%{transform:translateY(-40px); opacity:0;}
+    68%{opacity:1;}
+    75%{transform:translateY(0px); opacity:1;}
+    100%{transform:translateY(0px); opacity:1;}
   }
   .about-panel-quote{
-    font-family:'Caveat', cursive; font-weight:700; font-size:1.5rem; color:var(--pink);
-    line-height:1.4;
+    position:relative; z-index:2;
+    font-family:'Caveat', cursive; font-weight:700; font-size:1.4rem; color:var(--pink);
+    line-height:1.4; text-align:center; max-width:320px;
   }
   .about-panel-quote .who{
     display:block; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; letter-spacing:0.12em;
-    text-transform:uppercase; color:var(--cream); opacity:0.7; margin-top:10px; font-weight:400;
+    text-transform:uppercase; color:var(--cream); opacity:0.7; margin-top:12px; font-weight:400;
   }
-  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;} .about-panel{min-height:320px;} .about-panel img{height:320px;} }
+  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;} .about-panel{min-height:340px;} }
 
   /* MENU CARDS — styled after the real menu page headers */
   .menu{background:var(--navy); color:var(--cream);}
@@ -221,16 +281,47 @@
   .menu-item .desc{font-size:0.88rem; color:#5a4a3c; margin-top:2px; line-height:1.4;}
   .menu-foot{margin-top:22px; padding-top:16px; border-top:1px dashed rgba(27,30,41,0.25); font-family:'Caveat',cursive; font-weight:700; color:var(--coral); font-size:1.15rem;}
 
-  /* GALLERY — real photos */
+  /* GALLERY — animated tiles, no external images */
   .gallery{background:var(--paper);}
   .gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;}
-  .gallery-grid a{display:block; overflow:hidden; border-radius:4px; border:3px solid var(--navy);}
-  .gallery-grid img{width:100%; height:230px; object-fit:cover; display:block; transition:transform .4s ease;}
-  .gallery-grid img:hover{transform:scale(1.06);}
+  .gtile{
+    background:var(--navy); border-radius:4px; padding:30px 20px;
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px;
+    border-bottom:4px solid var(--coral);
+    min-height:210px; justify-content:center;
+  }
+  .gtile .label{font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; font-size:0.85rem; color:var(--cream);}
+  .gtile .sub{font-size:0.78rem; color:rgba(242,233,216,0.55);}
   @media (max-width:900px){ .gallery-grid{grid-template-columns:repeat(2,1fr);} }
 
+  /* mini wine glass fill */
+  .mini-wine{width:34px; height:44px; position:relative;}
+  .mini-wine svg{width:100%; height:100%;}
+  .mini-wine .fill{animation:pourFill 2.6s ease-in-out infinite;}
+
+  /* pizza steam */
+  .pizza-icon{position:relative; width:44px; height:36px;}
+  .steam{position:absolute; bottom:100%; width:3px; height:16px; border-radius:2px; background:rgba(242,233,216,0.5); animation:steamRise 2.2s ease-in infinite;}
+  .steam:nth-child(1){left:8px; animation-delay:0s;}
+  .steam:nth-child(2){left:20px; animation-delay:0.5s;}
+  .steam:nth-child(3){left:32px; animation-delay:1s;}
+  @keyframes steamRise{
+    0%{transform:translateY(0) scaleX(1); opacity:0;}
+    20%{opacity:0.7;}
+    100%{transform:translateY(-18px) scaleX(1.6); opacity:0;}
+  }
+
+  /* mini equalizer reused */
+  .mini-eq{display:flex; align-items:flex-end; gap:4px; height:28px;}
+  .mini-eq span{width:4px; background:var(--pink); border-radius:2px; animation:eqBounce 1s ease-in-out infinite;}
+  .mini-eq span:nth-child(1){height:40%; animation-delay:0s;}
+  .mini-eq span:nth-child(2){height:90%; animation-delay:0.15s;}
+  .mini-eq span:nth-child(3){height:60%; animation-delay:0.3s;}
+  .mini-eq span:nth-child(4){height:100%; animation-delay:0.45s;}
+  .mini-eq span:nth-child(5){height:50%; animation-delay:0.6s;}
+
   /* EVENTS */
-  .events{background:var(--navy); color:var(--cream);}
+  .events{background:var(--navy); color:var(--cream); position:relative; overflow:hidden;}
   .events .section-eyebrow{color:var(--pink);}
   .events .section-head h2{color:var(--cream);}
   .events-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:10px;}
@@ -239,6 +330,43 @@
   .event-card h3{font-family:'Bungee',sans-serif; font-size:1.15rem; margin-bottom:10px; color:var(--pink);}
   .event-card p{font-size:0.92rem; color:rgba(242,233,216,0.72); line-height:1.6;}
   @media (max-width:840px){ .events-grid{grid-template-columns:1fr;} }
+
+  /* EQUALIZER — live-music header decoration */
+  .eq{
+    display:flex; align-items:flex-end; gap:5px; height:34px; margin-bottom:18px;
+  }
+  .eq span{
+    width:5px; background:var(--coral); border-radius:2px;
+    animation:eqBounce 1s ease-in-out infinite;
+  }
+  .eq span:nth-child(1){height:40%; animation-delay:0s;}
+  .eq span:nth-child(2){height:80%; animation-delay:0.12s;}
+  .eq span:nth-child(3){height:55%; animation-delay:0.24s;}
+  .eq span:nth-child(4){height:95%; animation-delay:0.36s;}
+  .eq span:nth-child(5){height:65%; animation-delay:0.48s;}
+  .eq span:nth-child(6){height:35%; animation-delay:0.6s;}
+  @keyframes eqBounce{
+    0%,100%{transform:scaleY(0.4);}
+    50%{transform:scaleY(1);}
+  }
+
+  /* Floating notes drifting in the background of the events section */
+  .notes-field{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .note{
+    position:absolute; bottom:-10%; color:rgba(230,163,187,0.16);
+    font-size:1.8rem; animation:noteFloat linear infinite;
+  }
+  .note:nth-child(1){left:6%; font-size:1.4rem; animation-duration:14s; animation-delay:0s;}
+  .note:nth-child(2){left:22%; font-size:2.2rem; animation-duration:18s; animation-delay:3s;}
+  .note:nth-child(3){left:48%; font-size:1.6rem; animation-duration:12s; animation-delay:1.5s;}
+  .note:nth-child(4){left:68%; font-size:2rem; animation-duration:20s; animation-delay:5s;}
+  .note:nth-child(5){left:86%; font-size:1.5rem; animation-duration:15s; animation-delay:2.5s;}
+  @keyframes noteFloat{
+    0%{transform:translateY(0) rotate(0deg); opacity:0;}
+    10%{opacity:1;}
+    90%{opacity:1;}
+    100%{transform:translateY(-620px) rotate(18deg); opacity:0;}
+  }
 
   /* MERCH / QR STRIP */
   .merch-strip{
@@ -281,7 +409,6 @@
 </header>
 
 <section class="hero grid-pattern">
-  <div class="hero-bg"></div>
   <div class="hero-inner">
     <div>
       <div class="eyebrow">Downtown Galena, Illinois</div>
@@ -293,10 +420,26 @@
       </div>
       <div class="hero-addr">242 N. Main Street, Galena, IL · (779) 214-0003</div>
     </div>
-    <div class="hero-tagbox">
-      <div class="kicker">The People's Choice</div>
+    <div class="pour-panel">
+      <div class="pour-kicker">The People's Choice</div>
+      <div class="pour-scene">
+        <div class="pour-stream"></div>
+        <div class="pour-glass">
+          <svg viewBox="0 0 104 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="glassClip"><path d="M18 8h68l-9 88c-2 18-15 30-25 30s-23-12-25-30L18 8z"/></clipPath>
+            <g clip-path="url(#glassClip)">
+              <g class="pour-liquid">
+                <rect x="0" y="52" width="104" height="80" fill="#d9705f"/>
+                <path class="pour-wave" d="M0 52 Q13 47 26 52 T52 52 T78 52 T104 52 V0 H0 Z" fill="#e6a3bb" opacity="0.55"/>
+              </g>
+            </g>
+            <path d="M18 8h68l-9 88c-2 18-15 30-25 30s-23-12-25-30L18 8z" stroke="#e6a3bb" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M52 126v-3" stroke="#e6a3bb" stroke-width="2.5"/>
+          </svg>
+        </div>
+      </div>
       <h3>Galena Sour</h3>
-      <p>Blaum Bros. Rye Whiskey, lime-sour, agave, topped with a rich red wine float — voted Galena's People's Choice in 2018, still on the menu because it never got beat.</p>
+      <p>Blaum Bros. rye, lime-sour, agave, topped with a rich red wine float — "The People's Choice," 2018. Still on the menu because it never got beat.</p>
     </div>
   </div>
 </section>
@@ -318,12 +461,27 @@
       <div class="sig">— Miss Kitty</div>
     </div>
     <div class="about-panel">
-      <img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_ec7e030503c79131ad51ea0bc64b5912.jpg" alt="Martinis at Miss Kitty's Grape Escape">
-      <div class="about-panel-caption">
-        <div class="about-panel-quote">
-          155 Yelp reviews. Regulars who show up by name. A room that fills up the second the band starts.
-          <span class="who">— Reputation Miss Kitty's already earned</span>
+      <div class="grid-pattern"></div>
+      <div class="martini-scene">
+        <div class="martini-stream"></div>
+        <div class="martini-glass">
+          <svg viewBox="0 0 130 164" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="martiniClip"><path d="M10 10h110L65 84v56h20v10H45v-10h20V84L10 10z"/></clipPath>
+            <g clip-path="url(#martiniClip)">
+              <g class="martini-liquid">
+                <rect x="0" y="30" width="130" height="60" fill="#e6a3bb"/>
+                <path d="M0 30 Q16 25 32 30 T65 30 T98 30 T130 30 V0 H0 Z" fill="#f2e9d8" opacity="0.5"/>
+              </g>
+            </g>
+            <path d="M10 10h110L65 84v56h20v10H45v-10h20V84L10 10z" stroke="#e6a3bb" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle class="olive" cx="65" cy="14" r="7" fill="#d9705f"/>
+            <line class="olive" x1="65" y1="14" x2="65" y2="4" stroke="#e6a3bb" stroke-width="2"/>
+          </svg>
         </div>
+      </div>
+      <div class="about-panel-quote">
+        155 Yelp reviews. Regulars who show up by name. A room that fills up the second the band starts.
+        <span class="who">— Reputation Miss Kitty's already earned</span>
       </div>
     </div>
   </div>
@@ -367,20 +525,53 @@
     <div class="section-head">
       <div class="section-eyebrow">The Room</div>
       <h2 style="color:var(--navy);">A gallery that lives on your own site.</h2>
-      <p>Right now it says "in the works." A real photo gallery — the room, the drinks, the band — belongs here, not just on Facebook.</p>
+      <p>Right now it says "in the works." A real photo gallery — the room, the drinks, the band — belongs here once we've got shots to use.</p>
     </div>
     <div class="gallery-grid">
-      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_97b544648556b05b854877ec633050ba.jpg" alt="Miss Kitty's Grape Escape"></a>
-      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_d492a6aef2452c61095c50ba2d2d54f6.jpg" alt="Miss Kitty's Grape Escape"></a>
-      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_b34681f051251220302ad622f942ffda.jpg" alt="Miss Kitty's Grape Escape"></a>
-      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_db8b43ee8623f6dd6460012404398ace.jpg" alt="Miss Kitty's Grape Escape"></a>
+      <div class="gtile">
+        <div class="mini-wine">
+          <svg viewBox="0 0 34 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="miniClip"><path d="M6 3h22l-3 27c-0.6 6-5 10-8 10s-7.4-4-8-10L6 3z"/></clipPath>
+            <g clip-path="url(#miniClip)"><rect class="fill" x="0" y="16" width="34" height="26" fill="#d9705f"/></g>
+            <path d="M6 3h22l-3 27c-0.6 6-5 10-8 10s-7.4-4-8-10L6 3z" stroke="#e6a3bb" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div class="label">Wine &amp; Martinis</div>
+        <div class="sub">The full pour list</div>
+      </div>
+      <div class="gtile">
+        <div class="pizza-icon">
+          <span class="steam"></span><span class="steam"></span><span class="steam"></span>
+          <svg viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; bottom:0;">
+            <path d="M4 32L22 4l18 28" stroke="#e6a3bb" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M2 32h40" stroke="#e6a3bb" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="22" cy="15" r="2.2" fill="#d9705f"/><circle cx="16" cy="20" r="1.6" fill="#d9705f"/><circle cx="28" cy="20" r="1.6" fill="#d9705f"/>
+          </svg>
+        </div>
+        <div class="label">Wood-Fired Pizza</div>
+        <div class="sub">Made to order, 7 nights</div>
+      </div>
+      <div class="gtile">
+        <div class="mini-eq"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="label">Live Bands</div>
+        <div class="sub">Thursday through Sunday</div>
+      </div>
+      <div class="gtile">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect x="9" y="12" width="30" height="22" rx="2" stroke="#e6a3bb" stroke-width="2"/><path d="M9 30l9-8 6 5 8-9 7 6" stroke="#d9705f" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="19" r="2" fill="#e6a3bb"/></svg>
+        <div class="label">The Room</div>
+        <div class="sub">Gallery — coming soon</div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="events" id="events">
-  <div class="section-inner">
+  <div class="notes-field">
+    <span class="note">♪</span><span class="note">♫</span><span class="note">♪</span><span class="note">♫</span><span class="note">♪</span>
+  </div>
+  <div class="section-inner" style="position:relative; z-index:1;">
     <div class="section-head">
+      <div class="eq"><span></span><span></span><span></span><span></span><span></span><span></span></div>
       <div class="section-eyebrow">This Week</div>
       <h2>Live music, quiz shows &amp; Sunday Fundays.</h2>
     </div>
