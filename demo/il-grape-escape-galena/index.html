@@ -91,6 +91,13 @@
     background:var(--navy);
     padding:90px 32px 70px;
   }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(180deg, rgba(18,20,32,0.55) 0%, rgba(18,20,32,0.75) 55%, rgba(18,20,32,0.96) 100%),
+      url('https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_65942da73eae1acb31f1a3aa0199c3af.jpg');
+    background-size:cover; background-position:center;
+  }
   .hero-inner{
     max-width:1200px; margin:0 auto; position:relative; z-index:2;
     display:grid; grid-template-columns:1.15fr 0.85fr; gap:50px; align-items:center;
@@ -175,21 +182,23 @@
   .about-panel{
     position:relative; border-radius:4px; overflow:hidden;
     box-shadow:0 26px 50px -14px rgba(27,30,41,0.4); border:4px solid var(--navy);
-    background:var(--navy); min-height:440px;
-    display:flex; align-items:center; justify-content:center; padding:50px 40px;
+    min-height:440px;
   }
-  .about-panel .grid-pattern{position:absolute; inset:0; opacity:0.9;}
-  .about-panel-content{position:relative; z-index:2; text-align:center;}
-  .about-panel svg{width:74px; height:74px; margin-bottom:22px;}
+  .about-panel img{width:100%; height:440px; object-fit:cover; display:block;}
+  .about-panel-caption{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    background:linear-gradient(0deg, rgba(18,20,32,0.92) 0%, rgba(18,20,32,0) 100%);
+    padding:60px 28px 22px;
+  }
   .about-panel-quote{
-    font-family:'Caveat', cursive; font-weight:700; font-size:1.7rem; color:var(--pink);
-    line-height:1.4; max-width:340px; margin:0 auto;
+    font-family:'Caveat', cursive; font-weight:700; font-size:1.5rem; color:var(--pink);
+    line-height:1.4;
   }
   .about-panel-quote .who{
-    display:block; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.12em;
-    text-transform:uppercase; color:var(--cream); opacity:0.6; margin-top:16px; font-weight:400;
+    display:block; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--cream); opacity:0.7; margin-top:10px; font-weight:400;
   }
-  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;} .about-panel{min-height:340px;} }
+  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;} .about-panel{min-height:320px;} .about-panel img{height:320px;} }
 
   /* MENU CARDS — styled after the real menu page headers */
   .menu{background:var(--navy); color:var(--cream);}
@@ -212,17 +221,12 @@
   .menu-item .desc{font-size:0.88rem; color:#5a4a3c; margin-top:2px; line-height:1.4;}
   .menu-foot{margin-top:22px; padding-top:16px; border-top:1px dashed rgba(27,30,41,0.25); font-family:'Caveat',cursive; font-weight:700; color:var(--coral); font-size:1.15rem;}
 
-  /* GALLERY — icon tiles, no external images */
+  /* GALLERY — real photos */
   .gallery{background:var(--paper);}
   .gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;}
-  .gtile{
-    background:var(--navy); border-radius:4px; padding:34px 20px;
-    display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
-    border-bottom:4px solid var(--coral);
-  }
-  .gtile svg{width:40px; height:40px;}
-  .gtile .label{font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; font-size:0.85rem; color:var(--cream);}
-  .gtile .sub{font-size:0.8rem; color:rgba(242,233,216,0.55);}
+  .gallery-grid a{display:block; overflow:hidden; border-radius:4px; border:3px solid var(--navy);}
+  .gallery-grid img{width:100%; height:230px; object-fit:cover; display:block; transition:transform .4s ease;}
+  .gallery-grid img:hover{transform:scale(1.06);}
   @media (max-width:900px){ .gallery-grid{grid-template-columns:repeat(2,1fr);} }
 
   /* EVENTS */
@@ -277,6 +281,7 @@
 </header>
 
 <section class="hero grid-pattern">
+  <div class="hero-bg"></div>
   <div class="hero-inner">
     <div>
       <div class="eyebrow">Downtown Galena, Illinois</div>
@@ -313,14 +318,8 @@
       <div class="sig">— Miss Kitty</div>
     </div>
     <div class="about-panel">
-      <div class="grid-pattern"></div>
-      <div class="about-panel-content">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 8h24l-2 20c-1 9-8 15-10 15s-9-6-10-15L20 8z" stroke="#e6a3bb" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M32 43v13" stroke="#e6a3bb" stroke-width="2"/>
-          <path d="M22 56h20" stroke="#e6a3bb" stroke-width="2" stroke-linecap="round"/>
-          <path d="M21 15h22" stroke="#d9705f" stroke-width="1.5" opacity="0.7"/>
-        </svg>
+      <img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_ec7e030503c79131ad51ea0bc64b5912.jpg" alt="Martinis at Miss Kitty's Grape Escape">
+      <div class="about-panel-caption">
         <div class="about-panel-quote">
           155 Yelp reviews. Regulars who show up by name. A room that fills up the second the band starts.
           <span class="who">— Reputation Miss Kitty's already earned</span>
@@ -371,26 +370,10 @@
       <p>Right now it says "in the works." A real photo gallery — the room, the drinks, the band — belongs here, not just on Facebook.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gtile">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 6h20l-1.5 16C31.5 29.5 26 34 24 34s-7.5-4.5-8.5-12L14 6z" stroke="#e6a3bb" stroke-width="2"/><path d="M24 34v9" stroke="#e6a3bb" stroke-width="2"/><path d="M16 43h16" stroke="#e6a3bb" stroke-width="2" stroke-linecap="round"/></svg>
-        <div class="label">Wine &amp; Martinis</div>
-        <div class="sub">The full pour list</div>
-      </div>
-      <div class="gtile">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 38l6-26h16l6 26" stroke="#e6a3bb" stroke-width="2" stroke-linejoin="round"/><path d="M8 38h32" stroke="#e6a3bb" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="19" r="2.4" fill="#d9705f"/><circle cx="18" cy="24" r="1.6" fill="#d9705f"/><circle cx="30" cy="24" r="1.6" fill="#d9705f"/></svg>
-        <div class="label">Wood-Fired Pizza</div>
-        <div class="sub">Made to order, 7 nights</div>
-      </div>
-      <div class="gtile">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 34V10l16-4v24" stroke="#e6a3bb" stroke-width="2" stroke-linejoin="round"/><circle cx="15" cy="36" r="4" stroke="#d9705f" stroke-width="2"/><circle cx="31" cy="32" r="4" stroke="#d9705f" stroke-width="2"/></svg>
-        <div class="label">Live Bands</div>
-        <div class="sub">Thursday through Sunday</div>
-      </div>
-      <div class="gtile">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="12" width="30" height="22" rx="2" stroke="#e6a3bb" stroke-width="2"/><path d="M9 30l9-8 6 5 8-9 7 6" stroke="#d9705f" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="19" r="2" fill="#e6a3bb"/></svg>
-        <div class="label">The Room</div>
-        <div class="sub">Gallery — coming soon</div>
-      </div>
+      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_97b544648556b05b854877ec633050ba.jpg" alt="Miss Kitty's Grape Escape"></a>
+      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_d492a6aef2452c61095c50ba2d2d54f6.jpg" alt="Miss Kitty's Grape Escape"></a>
+      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_b34681f051251220302ad622f942ffda.jpg" alt="Miss Kitty's Grape Escape"></a>
+      <a href="#"><img src="https://static.where-e.com/United_States/Illinois/Jo_Daviess_County/The-Grape-Escape_db8b43ee8623f6dd6460012404398ace.jpg" alt="Miss Kitty's Grape Escape"></a>
     </div>
   </div>
 </section>
