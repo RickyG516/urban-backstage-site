@@ -609,10 +609,10 @@
   },
   "il-grape-escape-galena": {
     "channel": "none",
-    "fb": false,
-    "note": "not a prospect - wine bar / live music venue in Galena IL, outside the UNC trade-contractor verticals. Hand-built page (v2, no style pack), still an active pitch - Ricky sourcing real photos separately per commit 4dc838d. Wired to the library and archived 2026-08-23 because it had NO index row and NO status entry and was failing enrich_audit. Never entered HubSpot and never queued for dialing. Unarchive if UNC opens the hospitality vertical.",
-    "photos": 0,
-    "ready": false,
+    "fb": "https://www.facebook.com/GrapeEscapeGalena",
+    "note": "Not a trade-contractor prospect \u2014 wine/martini bar with live music in Galena IL, one-off pitch page for a personal contact of Ricky's. Hand-built page (v2, animated placeholder graphics), never entered HubSpot, never queued for dialing. Kept visible (not archived) in the library at Ricky's request so it can be shown live. Real photos to be swapped in once sourced.",
+    "photos": "none",
+    "ready": true,
     "stage": "none"
   },
   "il-haier-plumbing-okawville": {
@@ -1108,14 +1108,6 @@
     "fb": "",
     "note": "",
     "photos": "generated",
-    "ready": true,
-    "stage": "none"
-  },
-  "il-grape-escape-galena": {
-    "channel": "none",
-    "fb": "https://www.facebook.com/GrapeEscapeGalena",
-    "note": "Not a contractor lead \u2014 personal/prospect mockup for Ricky, animated placeholder graphics until real photos are supplied",
-    "photos": "none",
     "ready": true,
     "stage": "none"
   }
