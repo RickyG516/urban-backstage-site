@@ -402,15 +402,10 @@
      because it only cleared the stage filter, not the separate viewMode dropdown.
      Looked like data loss. Nothing was ever deleted; see the tab-strip fix below. */
   const DEFAULT_ARCHIVED = [
-    "/demo/ia-cremers-meats-dubuque/",
-    "/demo/lfn-lawncare/",
-    "/demo/il-rj-window-cleaning-t3wnfp/",
-    "/demo/il-screenlab-screen-repair-e7dqm2/",
     "/demo/ia-lewis-electric-sioux-city/",
     "/demo/ia-vogel-irrigation-waterloo/",
     "/demo/il-blondell-plumbing-moline/",
-    "/demo/wi-midwest-home-improvements-eau-claire/",
-    "/demo/il-grape-escape-galena/"
+    "/demo/wi-midwest-home-improvements-eau-claire/"
   ];
 
   window.DEMO_ARCHIVED_SLUGS = DEFAULT_ARCHIVED.map(function(s){ return s.replace(/^\/demo\/|\/$/g,''); });
