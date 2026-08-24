@@ -1,6 +1,6 @@
 {
-  "_date": "2026-08-23",
-  "_generated_at": "2026-08-23T23:00:00Z",
+  "_date": "2026-08-24",
+  "_generated_at": "2026-08-24T09:30:00Z",
   "_session_cap": 130,
   "prospects": [
     {
@@ -16,10 +16,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/537780855483",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "Commercial painter, wallcoverings + resinous flooring. SIBA-AGC member. Owns tooncopainting.com. RE-VERIFIED 2026-08-23: the domain no longer serves a parked lander - it serves NOTHING, browser error page on http and https. DNS healthy at GoDaddy; MX live on Microsoft 365 + FortiMail filtering. He pays for business email on a domain whose website errors out. Owner/President Eric Toon.",
+      "notes_preview": "Commercial painter, wallcoverings + resinous flooring. SIBA-AGC member. Owns tooncopainting.com. RE-VERIFIED 2026-08-24 in Chrome: the domain is BACK to a parked lander - apex 302s to /lander and the DOM renders a single class='parked-content' node on a blank dark page, no business content, no ad tiles. (08-19 parked, 08-23 error page, 08-24 parked again - this domain flip-flops, load it right before you dial.) DNS healthy at GoDaddy; MX live on Microsoft 365 + FortiMail. He pays for business email on a domain that shows visitors a blank parking page. Owner/President Eric Toon.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-toonco-painting-collinsville/",
-      "ai_hook": "Ask for Eric Toon, owner/president. LEAD WITH THE SPLIT: his email works, his website doesn't. Say: 'Eric, you're bidding commercial work off eric@tooncopainting.com - that's Microsoft 365, you pay for it. But when a GC types tooncopainting.com into a browser they get an error page. You bought the name and you're paying to run mail on it, and the part your customers actually look at is the one part that isn't there.' DO NOT say 'your site is parked' - that was true 08-19, it errors out entirely as of 08-23. Getting it wrong burns the first ten seconds. Proof points if he pushes back: SIBA-AGC member, Staunton High School renovation, Lewis & Clark Confluence Tower. WARNING 2026-08-23: urbanbackstage.com is behind Cloudflare Access - do NOT send him the mockup link until /demo/ is excluded from the Access policy."
+      "ai_hook": "Ask for Eric Toon, owner/president. LEAD WITH THE SPLIT: his email works, his website doesn't. Say: 'Eric, you're bidding commercial work off eric@tooncopainting.com - that's Microsoft 365, you pay for it. But when a GC types tooncopainting.com into a browser, nothing of yours comes up.' *** LOAD tooncopainting.com YOURSELF RIGHT BEFORE YOU DIAL. *** It has flip-flopped three times: parked lander 08-19, dead error page 08-23, parked lander again 08-24. As of 2026-08-24 it serves a BLANK PARKING PAGE, so say 'it loads a blank parking page' - and if it errors when you check, say 'it errors out' instead. Do not commit to either wording sight-unseen; being wrong burns the first ten seconds. Safe wording that works either way: 'there's nothing of yours on it.' Proof points if he pushes back: SIBA-AGC member, Staunton High School renovation, Lewis & Clark Confluence Tower. MOCKUP LINK: the 2026-08-23 note claiming urbanbackstage.com sits behind Cloudflare Access did NOT hold up on 2026-08-24 - /demo/ mockup pages returned HTTP 200 with no Access prompt, and per the hosting truth map backstage is GitHub Pages with no Cloudflare in the page path at all. Before you send the link to a prospect the first time, open it once on your phone with wifi off to be certain."
     },
     {
       "contact_id": 537472622327,
