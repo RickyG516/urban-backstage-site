@@ -74,9 +74,9 @@
   "ia-cremers-meats-dubuque": {
     "channel": "unknown",
     "fb": "",
-    "note": "",
+    "note": "WEBSITE BUILD PROSPECT | Jeff Cremer, 3rd-gen owner | 731 Rhomberg Ave, Dubuque IA 52001 | cremersmeats.com IS live but dated - newest news item 2015, zero email capture | Google 4.9 / ~135 reviews | est 1948, Dubuque's last family-owned grocery | Ricky is a regular - warm walk-in | HubSpot 337441403610",
     "photos": "generated",
-    "ready": false,
+    "ready": true,
     "stage": "none"
   },
   "ia-dan-gorman-construction-tde74u": {
@@ -610,7 +610,7 @@
   "il-grape-escape-galena": {
     "channel": "none",
     "fb": "https://www.facebook.com/GrapeEscapeGalena",
-    "note": "Not a trade-contractor prospect \u2014 wine/martini bar with live music in Galena IL, one-off pitch page for a personal contact of Ricky's. Hand-built page (v2, animated placeholder graphics), never entered HubSpot, never queued for dialing. Listed in demo/.non-prospects AND DEFAULT_ARCHIVED as of 2026-08-24 so the library's active count reconciles with enrich_audit.py; the page itself is unaffected and still live at its URL. To pin it visible in the library, click Unarchive once on the row \u2014 that choice persists in this browser. Real photos to be swapped in once sourced.",
+    "note": "WEBSITE BUILD PROSPECT | wine/martini bar with live music, Galena IL | personal contact of Ricky's | hand-built page",
     "photos": "none",
     "ready": true,
     "stage": "none"
@@ -730,9 +730,9 @@
   "il-rj-window-cleaning-t3wnfp": {
     "channel": "none",
     "fb": false,
-    "note": "not a prospect - window cleaning is outside the UNC trade-contractor verticals. Page kept in the library, archived 2026-08-18. Never entered HubSpot and never queued for dialing.",
+    "note": "WEBSITE BUILD PROSPECT | archived 2026-08-18 by accident during the PIN fix, restored 2026-08-24 | not yet in HubSpot",
     "photos": 0,
-    "ready": false,
+    "ready": true,
     "stage": "none"
   },
   "il-rjs-snowplowing-uv80je": {
@@ -746,9 +746,9 @@
   "il-screenlab-screen-repair-e7dqm2": {
     "channel": "none",
     "fb": false,
-    "note": "not a prospect - screen repair is outside the UNC trade-contractor verticals. Page kept in the library, archived 2026-08-18. Never entered HubSpot and never queued for dialing.",
+    "note": "WEBSITE BUILD PROSPECT | archived 2026-08-18 by accident during the PIN fix, restored 2026-08-24 | not yet in HubSpot",
     "photos": 0,
-    "ready": false,
+    "ready": true,
     "stage": "none"
   },
   "il-serranos-concrete-rockford": {
@@ -866,9 +866,9 @@
   "lfn-lawncare": {
     "channel": "none",
     "fb": "",
-    "note": "not a prospect | nephew's kid summer lawn business | page exists so the link is easy to send | no HubSpot record, no outreach, no conversion tracking",
+    "note": "Nephew's kid's summer lawn business | page kept in the library so the link is easy to send | no HubSpot record, no outreach tracking",
     "photos": "generated",
-    "ready": false,
+    "ready": true,
     "stage": "building"
   },
   "sanders-lawn-care-dubuque": {
