@@ -70,6 +70,18 @@ PALETTES = [
     # ---- warm: deliberately capped, the library is already 62% warm ----
     dict(name="amber-restraint", dark="#16130f", accent="#d6a851", off="#f6f4f0", band="warm"),
     dict(name="ember",           dark="#151110", accent="#c2673a", off="#f6f3f1", band="warm"),
+    # ---- added 2026-08-26: pool was EXHAUSTED (all 22 originals live in demo/),
+    # so pick_batch(3) raised "palette pool exhausted". These extend the same
+    # bands the library is thinnest in (grey 4, violet 5, blue 15) plus spares.
+    # Every one checked against the 136 live accents and against audit().
+    dict(name="iron-fog",       dark="#131518", accent="#96a1ab", off="#f4f5f6", band="grey"),
+    dict(name="ash-pewter",     dark="#121416", accent="#8b949b", off="#f4f5f5", band="grey"),
+    dict(name="amethyst-slate", dark="#12101a", accent="#9a7ac9", off="#f4f3f8", band="violet"),
+    dict(name="orchid-iron",    dark="#141019", accent="#b07fc6", off="#f6f4f8", band="violet"),
+    dict(name="azure-steel",    dark="#0e1419", accent="#4f9fd1", off="#f0f4f7", band="blue"),
+    dict(name="slate-sapphire", dark="#0f121a", accent="#7093d4", off="#f2f3f8", band="blue"),
+    dict(name="kelp",           dark="#0f1412", accent="#5aa47a", off="#f1f5f2", band="green"),
+    dict(name="garnet-iron",    dark="#161112", accent="#cc6f74", off="#f7f3f4", band="red"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
