@@ -123,4 +123,33 @@ document.addEventListener('DOMContentLoaded', function () {
     growEls.forEach(function (el) { gio.observe(el); });
   }
 
+  /* ---------- scroll progress bar (visible on every device, not hover-dependent) ---------- */
+  var progressBar = document.createElement('div');
+  progressBar.className = 'scroll-progress';
+  document.body.appendChild(progressBar);
+  function updateProgress() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ---------- parallax on hero/pagehead background photos (scroll-linked, works on touch) ---------- */
+  var parallaxEls = document.querySelectorAll('.cine-media');
+  if (parallaxEls.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    function updateParallax() {
+      parallaxEls.forEach(function (el) {
+        var rect = el.parentElement.getBoundingClientRect();
+        if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+        // clamp so the 1.08 scale buffer always covers the shift, never reveals an edge
+        var offset = Math.max(-20, Math.min(20, rect.top * 0.06));
+        el.style.transform = 'translateY(' + offset.toFixed(1) + 'px) scale(1.08)';
+      });
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+  }
+
 });

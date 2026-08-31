@@ -339,3 +339,22 @@ nav.links .has-sub.subnav-open .subnav{display:flex;opacity:1;visibility:visible
   .ba-side:first-child .photo-cine{border-radius:12px 12px 0 0;}
   .ba-side:last-child .photo-cine{border-radius:0 0 12px 12px;}
 }
+
+/* ---------- scroll progress bar ---------- */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));width:0%;z-index:9999;transition:width .1s linear;box-shadow:0 0 8px rgba(230,192,125,.6);}
+
+/* ---------- pulsing glow on primary CTAs ---------- */
+.btn-primary{animation:ctaPulse 2.8s ease-in-out infinite;}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(230,192,125,.35);}
+  50%{box-shadow:0 0 0 10px rgba(230,192,125,0);}
+}
+.btn-primary:hover{animation-play-state:paused;}
+
+/* ---------- parallax on hero/pagehead media (works on touch too, scroll-linked not hover) ---------- */
+.cine-media{will-change:transform;}
+
+@media (prefers-reduced-motion: reduce){
+  .btn-primary{animation:none;}
+  .cine-media{transform:none !important;}
+}
