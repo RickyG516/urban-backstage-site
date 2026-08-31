@@ -326,8 +326,9 @@ nav.links .has-sub.subnav-open .subnav{display:flex;opacity:1;visibility:visible
 .ba-wrap{max-width:900px;margin:0 auto;}
 .ba-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;position:relative;}
 .ba-side{position:relative;}
-.ba-side .photo-cine{aspect-ratio:3/4;margin:0;background:#e8e4dd;}
-.ba-side .photo-cine img{object-fit:contain !important;}
+.ba-side .photo-cine{aspect-ratio:3/4;margin:0;}
+.ba-side:last-child .photo-cine{background:#e8e4dd;}
+.ba-side:last-child .photo-cine img{object-fit:contain !important;}
 .ba-side:first-child .photo-cine{border-radius:12px 0 0 12px;}
 .ba-side:last-child .photo-cine{border-radius:0 12px 12px 0;}
 .ba-tag{position:absolute;top:16px;left:16px;font-family:'Montserrat';font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(10,16,23,.6);padding:6px 14px;border-radius:999px;z-index:2;}
