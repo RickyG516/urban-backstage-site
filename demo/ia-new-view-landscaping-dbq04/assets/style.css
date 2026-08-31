@@ -322,14 +322,18 @@ nav.links .has-sub.subnav-open .subnav{display:flex;opacity:1;visibility:visible
   100%{opacity:1;transform:scale(1);}
 }
 
-/* ---------- before/after slider ---------- */
-.ba-slider{position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;cursor:ew-resize;user-select:none;box-shadow:0 18px 40px rgba(10,16,23,.18);}
-.ba-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
-.ba-slider .ba-after{clip-path:inset(0 0 0 50%);}
-.ba-slider .ba-handle{position:absolute;top:0;bottom:0;left:50%;width:0;pointer-events:none;}
-.ba-slider .ba-line{position:absolute;top:0;bottom:0;left:0;width:3px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.4);transform:translateX(-50%);}
-.ba-slider .ba-grip{position:absolute;top:50%;left:0;width:46px;height:46px;transform:translate(-50%,-50%);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(10,16,23,.3);}
-.ba-slider .ba-grip:before{content:"\2039 \203A";font-size:16px;font-weight:900;color:var(--navy);letter-spacing:2px;}
-.ba-slider .ba-label{position:absolute;top:16px;font-family:'Montserrat';font-weight:800;font-size:11px;letter-spacing:.08em;color:#fff;background:rgba(10,16,23,.55);padding:6px 12px;border-radius:999px;pointer-events:none;}
-.ba-slider .ba-label-before{left:16px;}
-.ba-slider .ba-label-after{right:16px;}
+/* ---------- before/after side-by-side ---------- */
+.ba-wrap{max-width:900px;margin:0 auto;}
+.ba-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;position:relative;}
+.ba-side{position:relative;}
+.ba-side .photo-cine{aspect-ratio:4/3;margin:0;}
+.ba-side:first-child .photo-cine{border-radius:12px 0 0 12px;}
+.ba-side:last-child .photo-cine{border-radius:0 12px 12px 0;}
+.ba-tag{position:absolute;top:16px;left:16px;font-family:'Montserrat';font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(10,16,23,.6);padding:6px 14px;border-radius:999px;z-index:2;}
+.ba-tag-gold{background:var(--gold);color:var(--navy);}
+.ba-caption{grid-column:1 / -1;text-align:center;margin-top:16px;font-family:'Montserrat';font-weight:700;color:var(--muted);font-size:13.5px;}
+@media(max-width:640px){
+  .ba-pair{grid-template-columns:1fr;}
+  .ba-side:first-child .photo-cine{border-radius:12px 12px 0 0;}
+  .ba-side:last-child .photo-cine{border-radius:0 0 12px 12px;}
+}
