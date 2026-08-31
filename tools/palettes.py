@@ -82,6 +82,25 @@ PALETTES = [
     dict(name="slate-sapphire", dark="#0f121a", accent="#7093d4", off="#f2f3f8", band="blue"),
     dict(name="kelp",           dark="#0f1412", accent="#5aa47a", off="#f1f5f2", band="green"),
     dict(name="garnet-iron",    dark="#161112", accent="#cc6f74", off="#f7f3f4", band="red"),
+    # ---- added 2026-08-30: pool EXHAUSTED again (29 of 30 already live in
+    # demo/, garnet-iron the only survivor), so pick_batch(3) raised "palette
+    # pool exhausted" for the second time. Same fix as 08-26, same discipline:
+    # extend the bands the library is thinnest in (grey 6, violet 7, teal 16,
+    # blue 17, green 21) and add NOTHING warm - the library is still 59/143
+    # warm. Every accent checked against the 146 live accents (no collision)
+    # and against audit().
+    dict(name="tungsten",       dark="#121417", accent="#9ba5ac", off="#f4f5f6", band="grey"),
+    dict(name="slate-ash",      dark="#141618", accent="#939ea6", off="#f4f5f6", band="grey"),
+    dict(name="iris-iron",      dark="#131019", accent="#8d78c4", off="#f4f3f8", band="violet"),
+    dict(name="wisteria-dusk",  dark="#151119", accent="#a586c8", off="#f6f4f8", band="violet"),
+    dict(name="lilac-graphite", dark="#12111a", accent="#9c8ad0", off="#f5f4f9", band="violet"),
+    dict(name="cyan-slate",     dark="#0e1517", accent="#45a6ad", off="#f1f6f6", band="teal"),
+    dict(name="verdigris",      dark="#101718", accent="#4fb2ab", off="#f1f6f6", band="teal"),
+    dict(name="tidewater",      dark="#0f1618", accent="#62aeb0", off="#f2f6f7", band="teal"),
+    dict(name="glacier-blue",   dark="#0d1218", accent="#5aa3d8", off="#f1f4f8", band="blue"),
+    dict(name="prussian",       dark="#0e1219", accent="#5f93cc", off="#f1f4f8", band="blue"),
+    dict(name="fern-slate",     dark="#0e1411", accent="#68a97e", off="#f2f6f3", band="green"),
+    dict(name="sage-iron",      dark="#111412", accent="#7ba883", off="#f3f6f4", band="green"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
