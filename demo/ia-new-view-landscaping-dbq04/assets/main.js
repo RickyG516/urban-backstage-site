@@ -44,4 +44,47 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     });
   }
+
+  /* ---------- portfolio category filter ---------- */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  if (filterBtns.length) {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cat = btn.getAttribute('data-filter');
+        document.querySelectorAll('.shot').forEach(function (shot) {
+          var matches = cat === 'all' || shot.getAttribute('data-cat') === cat;
+          if (matches) {
+            shot.classList.remove('filter-hidden');
+            shot.classList.remove('filter-enter');
+            void shot.offsetWidth;
+            shot.classList.add('filter-enter');
+          } else {
+            shot.classList.add('filter-hidden');
+          }
+        });
+      });
+    });
+  }
+
+  /* ---------- before/after slider ---------- */
+  document.querySelectorAll('.ba-slider').forEach(function (slider) {
+    var afterImg = slider.querySelector('.ba-after');
+    var handle = slider.querySelector('.ba-handle');
+    var dragging = false;
+
+    function setPosition(clientX) {
+      var rect = slider.getBoundingClientRect();
+      var pct = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      afterImg.style.clipPath = 'inset(0 0 0 ' + (pct * 100) + '%)';
+      handle.style.left = (pct * 100) + '%';
+    }
+    slider.addEventListener('mousedown', function (e) { dragging = true; setPosition(e.clientX); });
+    window.addEventListener('mousemove', function (e) { if (dragging) setPosition(e.clientX); });
+    window.addEventListener('mouseup', function () { dragging = false; });
+    slider.addEventListener('touchstart', function (e) { dragging = true; setPosition(e.touches[0].clientX); }, {passive: true});
+    slider.addEventListener('touchmove', function (e) { if (dragging) setPosition(e.touches[0].clientX); }, {passive: true});
+    slider.addEventListener('touchend', function () { dragging = false; });
+  });
 });

@@ -307,3 +307,29 @@ nav.links .has-sub.subnav-open .subnav{display:flex;opacity:1;visibility:visible
   nav.links .has-sub.open .subnav{max-height:400px;}
   nav.links .has-sub .caret{margin-left:auto}
 }
+
+/* ---------- portfolio category filter ---------- */
+.filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 32px;}
+.filter-btn{font-family:'Montserrat';font-weight:800;font-size:12.5px;letter-spacing:.03em;padding:10px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:all .2s ease;}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold-dim);}
+.filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+.filter-btn .count{opacity:.6;font-weight:700;margin-left:4px;}
+.shot{transition:opacity .35s ease, transform .35s ease;}
+.shot.filter-hidden{display:none;}
+.shot.filter-enter{animation:filterFadeIn .4s ease both;}
+@keyframes filterFadeIn{
+  0%{opacity:0;transform:scale(.94);}
+  100%{opacity:1;transform:scale(1);}
+}
+
+/* ---------- before/after slider ---------- */
+.ba-slider{position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;cursor:ew-resize;user-select:none;box-shadow:0 18px 40px rgba(10,16,23,.18);}
+.ba-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
+.ba-slider .ba-after{clip-path:inset(0 0 0 50%);}
+.ba-slider .ba-handle{position:absolute;top:0;bottom:0;left:50%;width:0;pointer-events:none;}
+.ba-slider .ba-line{position:absolute;top:0;bottom:0;left:0;width:3px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.4);transform:translateX(-50%);}
+.ba-slider .ba-grip{position:absolute;top:50%;left:0;width:46px;height:46px;transform:translate(-50%,-50%);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(10,16,23,.3);}
+.ba-slider .ba-grip:before{content:"\2039 \203A";font-size:16px;font-weight:900;color:var(--navy);letter-spacing:2px;}
+.ba-slider .ba-label{position:absolute;top:16px;font-family:'Montserrat';font-weight:800;font-size:11px;letter-spacing:.08em;color:#fff;background:rgba(10,16,23,.55);padding:6px 12px;border-radius:999px;pointer-events:none;}
+.ba-slider .ba-label-before{left:16px;}
+.ba-slider .ba-label-after{right:16px;}
