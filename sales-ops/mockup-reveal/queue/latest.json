@@ -1,8 +1,62 @@
 {
- "_date": "2026-08-31",
- "_generated_at": "2026-08-31T21:58:42Z",
- "_session_cap": 143,
+ "_date": "2026-09-01",
+ "_generated_at": "2026-09-01T10:14:42Z",
+ "_session_cap": 146,
  "prospects": [
+  {
+   "contact_id": "544361391826",
+   "company_id": "343247463118",
+   "business_name": "Mark's Tree Care",
+   "first_name": "Mark",
+   "last_name": "Heiderscheit",
+   "trade": "Tree Service",
+   "phone": "(563) 663-0693",
+   "city": "Durango",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/544361391826",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Tree removal/trimming/storm cleanup, Durango IA (Dubuque suburb). 23 yrs, since 2003, sole proprietor. Closest prospect to home base.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-marks-tree-care-durango-t7v3qm/",
+   "ai_hook": "Lead with the squatter: 'Somebody is selling markstreecare.com right now - your own business name, listed for sale on a domain broker. A Dubuque homeowner searching for you finds a for-sale sign.' Then the mockup. Mirror back 23 years since 2003 and that he's basically a neighbour. DO NOT mention the Rockford, Illinois Mark's Tree Care - different company, no connection."
+  },
+  {
+   "contact_id": "544351868619",
+   "company_id": "343318705898",
+   "business_name": "Fox's Repair and Remodeling, LLC",
+   "first_name": "Brian",
+   "last_name": "Fox",
+   "trade": "Remodeler",
+   "phone": "(815) 291-8369",
+   "city": "Freeport",
+   "state": "IL",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/544351868619",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Bath/kitchen remodels, drywall, paint, repair. Freeport IL. 12 yrs since 2014, one-man shop, 3 written BBB reviews.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/il-foxs-repair-remodeling-freeport-r9x4bd/",
+   "ai_hook": "Lead with the dead domain: 'foxsrepairandremodeling.com doesn't load at all - so somebody in Freeport who hears your name and types it in gets an error page.' Then the mockup. Mirror back the three written reviews for baths and kitchens - that's his proof and he'll know it. He is genuinely a one-man shop (1 employee), so do not pitch as if he has a crew or office staff."
+  },
+  {
+   "contact_id": "544356517622",
+   "company_id": "343387561712",
+   "business_name": "Weber Construction & Electric",
+   "first_name": "Randy",
+   "last_name": "Weber",
+   "trade": "Electrician",
+   "phone": "(563) 608-2360",
+   "city": "Wadena",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/544356517622",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Electrical + general construction, Wadena IA (Clayton County, ~40 min from Dubuque). 36 yrs, since 1990, sole proprietor.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-weber-construction-electric-wadena-k5m8zp/",
+   "ai_hook": "Lead with the dead domain plus the longevity: 'Thirty-six years since 1990 and weberconstructionelectric.com doesn't resolve - somebody in Clayton County looking you up finds nothing.' Then the mockup. The differentiator to mirror back is that he does the wiring AND the building from one shop. DO NOT claim anything about his electrical licence - not verified this run. DO NOT reference weberelectric.com; that parked domain is not his."
+  },
   {
    "contact_id": "544035169008",
    "company_id": "343289036530",
@@ -738,7 +792,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-dewco-insulation-8uet11/",
-   "ai_hook": "Already built Dewco Insulation Inc a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Dewco Insulation Inc a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 337285080822
   },
   {
@@ -756,7 +810,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/landscaping-connercuts-racine/",
-   "ai_hook": "Already built Conner Cuts Lawn Care & Exterior Maintenance a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Conner Cuts Lawn Care & Exterior Maintenance a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 335296304864
   },
   {
@@ -774,7 +828,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-pro-serve-painting-p4l1hc/",
-   "ai_hook": "Already built Pro Serve Painting a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Pro Serve Painting a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337188567741
   },
   {
@@ -792,7 +846,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-afg-concrete-fz9grp/",
-   "ai_hook": "Already built AFG Concrete LLC a free working homepage — lead with that, not a review-gap stat. NAME CAVEAT: first name only, surname never confirmed. ⚠ WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
+   "ai_hook": "Already built AFG Concrete LLC a free working homepage \u2014 lead with that, not a review-gap stat. NAME CAVEAT: first name only, surname never confirmed. \u26a0 WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
    "company_id": 318810771137
   },
   {
@@ -810,7 +864,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-willis-electric-eu8wtz/",
-   "ai_hook": "Already built Willis Electric, Inc. a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Willis Electric, Inc. a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 337339850446
   },
   {
@@ -828,7 +882,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-jays-perfection-gutters-adbssk/",
-   "ai_hook": "Already built Jays Perfection Gutters a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Jays Perfection Gutters a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337190219461
   },
   {
@@ -846,7 +900,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-widick-roofing-construction-jakbn0/",
-   "ai_hook": "Already built Widick Roofing & Construction Inc a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Widick Roofing & Construction Inc a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 337300667110
   },
   {
@@ -864,7 +918,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-punelli-heating-air-nqzju1/",
-   "ai_hook": "Already built Punelli Heating & Air Conditioning a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Punelli Heating & Air Conditioning a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 337285070577
   },
   {
@@ -882,7 +936,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-gerard-tuck-pointing-0m1wfw/",
-   "ai_hook": "Already built Gerard Tuck Pointing a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Gerard Tuck Pointing a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337262785215
   },
   {
@@ -900,7 +954,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-lake-park-electric-oneftz/",
-   "ai_hook": "Already built Lake Park Electric a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Lake Park Electric a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337324651244
   },
   {
@@ -918,7 +972,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-superior-wood-floors-tile-fzi0sg/",
-   "ai_hook": "Already built Superior Wood Floors & Tile a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Superior Wood Floors & Tile a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337274313418
   },
   {
@@ -936,7 +990,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-midwest-pest-management-625dzl/",
-   "ai_hook": "Already built Midwest Pest Management & Lawn Services LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Midwest Pest Management & Lawn Services LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337192183541
   },
   {
@@ -954,7 +1008,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-granite-style-design-8lquwv/",
-   "ai_hook": "Already built Granite Style Design a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Granite Style Design a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337292108536
   },
   {
@@ -972,7 +1026,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/jeffs-tree-service-sioux-city/",
-   "ai_hook": "Already built Jeff's Tree Service a free working homepage — lead with that, not a review-gap stat. ⚠ WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
+   "ai_hook": "Already built Jeff's Tree Service a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
    "company_id": 335075538642
   },
   {
@@ -990,7 +1044,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-pk-termite-control-yoilo8/",
-   "ai_hook": "Already built P & K Termite Control a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built P & K Termite Control a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337240216278
   },
   {
@@ -1008,7 +1062,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-de-ronde-flooring-mf5xka/",
-   "ai_hook": "Already built De Ronde Flooring Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built De Ronde Flooring Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337192185590
   },
   {
@@ -1026,7 +1080,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-primetime-roofing-fpfviu/",
-   "ai_hook": "Already built Primetime Roofing a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Primetime Roofing a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337199301314
   },
   {
@@ -1044,7 +1098,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-js-paint-powerwash-42vrxg/",
-   "ai_hook": "Already built J's Paint & Powerwash LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built J's Paint & Powerwash LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337292114637
   },
   {
@@ -1062,7 +1116,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-snuff-um-out-0x7cey/",
-   "ai_hook": "Already built Snuff Um Out Pest Control a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Snuff Um Out Pest Control a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337321048780
   },
   {
@@ -1080,7 +1134,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-cordes-heating-cooling-bf6wwp/",
-   "ai_hook": "Already built Cordes Heating & Cooling a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Cordes Heating & Cooling a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337341627120
   },
   {
@@ -1098,7 +1152,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-plato-electric-x098ay/",
-   "ai_hook": "Already built Plato Electric a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Plato Electric a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337190218468
   },
   {
@@ -1116,7 +1170,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-masterpiece-painting-ii7oii/",
-   "ai_hook": "Already built Masterpiece Painting & Decorating a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Masterpiece Painting & Decorating a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337192184522
   },
   {
@@ -1134,7 +1188,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-sean-kollman-concrete-hxmq56/",
-   "ai_hook": "Already built Sean Kollman Concrete Services a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Sean Kollman Concrete Services a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337300689628
   },
   {
@@ -1152,7 +1206,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/sanders-lawn-care-dubuque/",
-   "ai_hook": "Already built Sanders Lawn Care & Landscaping a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Sanders Lawn Care & Landscaping a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 330432382653
   },
   {
@@ -1170,7 +1224,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-murray-custom-cabinetry-gh5alo/",
-   "ai_hook": "Already built Murray Custom Cabinetry a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Murray Custom Cabinetry a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337274314477
   },
   {
@@ -1188,7 +1242,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-dan-gorman-construction-tde74u/",
-   "ai_hook": "Already built Dan Gorman Construction Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Dan Gorman Construction Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337293894341
   },
   {
@@ -1206,7 +1260,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-duran-concrete-yezui8/",
-   "ai_hook": "Already built Duran Concrete a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Duran Concrete a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337285071563
   },
   {
@@ -1224,7 +1278,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-hintermeister-electric-30kxyc/",
-   "ai_hook": "Already built Hintermeister Electric LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Hintermeister Electric LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337300674287
   },
   {
@@ -1242,7 +1296,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-a-team-flooring-vjlffv/",
-   "ai_hook": "Already built A-Team Flooring LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built A-Team Flooring LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337240189683
   },
   {
@@ -1260,7 +1314,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-mike-holmes-construction-qa70hw/",
-   "ai_hook": "Already built Mike Holmes Construction a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Mike Holmes Construction a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337285068480
   },
   {
@@ -1278,7 +1332,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-hard-rock-terrazzo-f5nrfi/",
-   "ai_hook": "Already built Hard Rock Terrazzo Products, Inc. a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Hard Rock Terrazzo Products, Inc. a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337347032807
   },
   {
@@ -1296,7 +1350,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-paint-productions-km5ojd/",
-   "ai_hook": "Already built Paint Productions Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Paint Productions Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337336248006
   },
   {
@@ -1314,7 +1368,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-thomson-heating-cooling-mtt7ps/",
-   "ai_hook": "Already built Thomson Heating and Cooling LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Thomson Heating and Cooling LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337347009258
   },
   {
@@ -1332,7 +1386,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-daytonwood-painting-rfqreh/",
-   "ai_hook": "Already built Daytonwood Painting LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Daytonwood Painting LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337264484088
   },
   {
@@ -1350,7 +1404,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-medina-masonry-cqo67j/",
-   "ai_hook": "Already built Medina Masonry a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Medina Masonry a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337264506612
   },
   {
@@ -1368,7 +1422,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-pauley-sons-fammt9/",
-   "ai_hook": "Already built Pauley & Sons Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Pauley & Sons Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337322839792
   },
   {
@@ -1386,7 +1440,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-tjc-roofing-kqgnl7/",
-   "ai_hook": "Already built TJC Roofing a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built TJC Roofing a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337272480489
   },
   {
@@ -1404,7 +1458,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-dolan-concrete-masonry-pm1aag/",
-   "ai_hook": "Already built Dolan Concrete & Masonry a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Dolan Concrete & Masonry a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 334477332161
   },
   {
@@ -1422,7 +1476,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/landscaping-anderson-council-bluffs/",
-   "ai_hook": "Already built Anderson Lawn and Landscaping a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Anderson Lawn and Landscaping a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 327113010934
   },
   {
@@ -1440,7 +1494,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-kevin-daniels-painting-olobmk/",
-   "ai_hook": "Already built Kevin Daniels Painting & Drywall a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Kevin Daniels Painting & Drywall a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337188543211
   },
   {
@@ -1458,7 +1512,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-borer-contracting-5z7f1y/",
-   "ai_hook": "Already built Borer Contracting LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Borer Contracting LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337338073793
   },
   {
@@ -1476,7 +1530,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-the-tree-surgeon-g4q84i/",
-   "ai_hook": "Already built The Tree Surgeon a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built The Tree Surgeon a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337272499949
   },
   {
@@ -1494,7 +1548,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-energy-management-network-vjit5t/",
-   "ai_hook": "Already built Energy Management Network LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Energy Management Network LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337339854561
   },
   {
@@ -1512,7 +1566,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/landscaping-zaisers-burlington/",
-   "ai_hook": "Already built Zaiser's Landscaping Inc (Scott Zaiser Owner) a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Zaiser's Landscaping Inc (Scott Zaiser Owner) a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 327349405410
   },
   {
@@ -1530,7 +1584,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-ii-bulls-mechanical-5cswbm/",
-   "ai_hook": "Already built II Bulls Mechanical Services a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built II Bulls Mechanical Services a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337338047173
   },
   {
@@ -1548,7 +1602,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-a1-pest-control-aslkvp/",
-   "ai_hook": "Already built A-1 Pest Control a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built A-1 Pest Control a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337272489707
   },
   {
@@ -1566,7 +1620,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-armada-coatings-bg1sus/",
-   "ai_hook": "Already built Armada Coatings a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Armada Coatings a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337192181437
   },
   {
@@ -1584,7 +1638,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-allenhouse-xyf77w/",
-   "ai_hook": "Already built Allenhouse a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Allenhouse a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337347009267
   },
   {
@@ -1602,7 +1656,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-guttusos-yard-service-fqkssi/",
-   "ai_hook": "Already built Guttuso's Yard Service a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Guttuso's Yard Service a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337262805709
   },
   {
@@ -1620,7 +1674,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-palace-roofing-construction-q32rcy/",
-   "ai_hook": "Already built Palace Roofing & Construction a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Palace Roofing & Construction a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337247256283
   },
   {
@@ -1638,7 +1692,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-bear-renovations-6i95sn/",
-   "ai_hook": "Already built Bear Renovations Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Bear Renovations Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337347010247
   },
   {
@@ -1656,7 +1710,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-bull-west-design-s4t6wm/",
-   "ai_hook": "Already built Bull West Design LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Bull West Design LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337240212158
   },
   {
@@ -1674,7 +1728,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-lynch-roofing-siding-w4e1du/",
-   "ai_hook": "Already built Lynch Roofing & Siding Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Lynch Roofing & Siding Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337199286970
   },
   {
@@ -1692,7 +1746,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-rabalais-electric-1nc4aj/",
-   "ai_hook": "Already built Rabalais Electric LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Rabalais Electric LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337199293117
   },
   {
@@ -1710,7 +1764,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-sierra-construction-nve595/",
-   "ai_hook": "Already built Sierra Construction a free working homepage — lead with that, not a review-gap stat. ⚠ WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
+   "ai_hook": "Already built Sierra Construction a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
    "company_id": 318975472371
   },
   {
@@ -1728,7 +1782,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-jesco-painting-9y03gp/",
-   "ai_hook": "Already built Jesco Painting LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Jesco Painting LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337322839791
   },
   {
@@ -1746,7 +1800,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-mansfield-electric-6jy0pj/",
-   "ai_hook": "Already built Mansfield Electric a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Mansfield Electric a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337345205988
   },
   {
@@ -1764,7 +1818,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-kenneth-janning-sons-8yz0bc/",
-   "ai_hook": "Already built Kenneth Janning & Sons Inc a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Kenneth Janning & Sons Inc a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337262807773
   },
   {
@@ -1782,7 +1836,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-torkelson-plumbing-heating-4r9a11/",
-   "ai_hook": "Already built Torkelson Plumbing & Heating a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Torkelson Plumbing & Heating a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337321059045
   },
   {
@@ -1818,7 +1872,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/landscaping-prescott-racine/",
-   "ai_hook": "Already built Prescott Landscaping a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Prescott Landscaping a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 336146133736
   },
   {
@@ -1836,7 +1890,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-anderson-roofing-bfthqu/",
-   "ai_hook": "Already built Anderson Roofing a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Anderson Roofing a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337264501471
   },
   {
@@ -1854,7 +1908,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-aldos-concrete-landscaping-5j51rs/",
-   "ai_hook": "Already built Aldo's Concrete & Landscaping a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Aldo's Concrete & Landscaping a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337322846925
   },
   {
@@ -1872,7 +1926,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-kuehl-painting-decorating-5oy56m/",
-   "ai_hook": "Already built Kuehl Painting & Decorating a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Kuehl Painting & Decorating a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337264494273
   },
   {
@@ -1890,7 +1944,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-greg-wirth-electric-lucodo/",
-   "ai_hook": "Already built Greg Wirth Electric a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Greg Wirth Electric a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337199293116
   },
   {
@@ -1908,7 +1962,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-budget-rooter-535r60/",
-   "ai_hook": "Already built Budget Rooter Sewer & Drain a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built Budget Rooter Sewer & Drain a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337264495307
   },
   {
@@ -1926,7 +1980,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-lee-foundation-spraying-insulation-gshdvb/",
-   "ai_hook": "Already built Lee Foundation Spraying & Insulation LLC a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Lee Foundation Spraying & Insulation LLC a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 337345239796
   },
   {
@@ -1944,7 +1998,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-certified-pest-control-sf35ug/",
-   "ai_hook": "Already built Certified Pest Control a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Certified Pest Control a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 337262803695
   },
   {
@@ -1962,7 +2016,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-hartwig-plumbing-46ly39/",
-   "ai_hook": "Already built Hartwig Plumbing & Heating Inc a free working homepage — lead with that, not a review-gap stat.",
+   "ai_hook": "Already built Hartwig Plumbing & Heating Inc a free working homepage \u2014 lead with that, not a review-gap stat.",
    "company_id": 328087663304
   },
   {
@@ -1980,7 +2034,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-north-park-heating-i211nr/",
-   "ai_hook": "Already built North Park Heating & Air Conditioning a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built North Park Heating & Air Conditioning a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337338079979
   },
   {
@@ -1998,7 +2052,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-rjs-snowplowing-uv80je/",
-   "ai_hook": "Already built RJS Snowplowing Services LLC a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Already built RJS Snowplowing Services LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
    "company_id": 337247263425
   },
   {
@@ -2124,7 +2178,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-better-home-improvements-bettendorf/",
-   "ai_hook": "Already built Better Home Improvements LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | BBB lists betterhomeimprovementsllc.com but domain has NO DNS - verified dead | owner spelling varies by source NAME CAVEAT: surname spelling varies between sources.",
+   "ai_hook": "Already built Better Home Improvements LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | BBB lists betterhomeimprovementsllc.com but domain has NO DNS - verified dead | owner spelling varies by source NAME CAVEAT: surname spelling varies between sources.",
    "company_id": 338212839131
   },
   {
@@ -2142,7 +2196,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-bluffs-paving-crescent/",
-   "ai_hook": "Already built Bluffs Paving & Utility Company, Inc. a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website at all | since 1980 | USDOT 547679",
+   "ai_hook": "Already built Bluffs Paving & Utility Company, Inc. a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website at all | since 1980 | USDOT 547679",
    "company_id": 338281207536
   },
   {
@@ -2160,7 +2214,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-jj-tree-service-dubuque/",
-   "ai_hook": "Already built J & J Tree Service a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website, no FB, no owner name found - directory listings only | LOCAL to Dubuque",
+   "ai_hook": "Already built J & J Tree Service a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website, no FB, no owner name found - directory listings only | LOCAL to Dubuque",
    "company_id": 338373131966
   },
   {
@@ -2178,7 +2232,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-mcneals-refrigeration-cedar-rapids/",
-   "ai_hook": "Already built McNeal's Refrigeration Inc a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | since 2001",
+   "ai_hook": "Already built McNeal's Refrigeration Inc a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | since 2001",
    "company_id": 338199144144
   },
   {
@@ -2196,7 +2250,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-muller-plumbing-heating-iowa-city/",
-   "ai_hook": "Already built Muller Plumbing & Heating a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees NAME CAVEAT: source name order looks scraper-inverted (could be Russell Steven) - do NOT lead with the name, ask for the owner.",
+   "ai_hook": "Already built Muller Plumbing & Heating a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees NAME CAVEAT: source name order looks scraper-inverted (could be Russell Steven) - do NOT lead with the name, ask for the owner.",
    "company_id": 338378240728
   },
   {
@@ -2214,7 +2268,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-perfection-painting-des-moines/",
-   "ai_hook": "Already built Perfection Painting LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources",
+   "ai_hook": "Already built Perfection Painting LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources",
    "company_id": 338379971314
   },
   {
@@ -2232,7 +2286,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-april-building-services-roselle/",
-   "ai_hook": "Already built April Building Services, Inc. a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | EMAIL FOUND | union signatory Local 21, MBE/WBE certified | $1M-$10M contracts, 10-50 employees | historic masonry preservation Sandy Guzman is VP, the decision maker - not titled owner.",
+   "ai_hook": "Already built April Building Services, Inc. a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | EMAIL FOUND | union signatory Local 21, MBE/WBE certified | $1M-$10M contracts, 10-50 employees | historic masonry preservation Sandy Guzman is VP, the decision maker - not titled owner.",
    "company_id": 338199144145
   },
   {
@@ -2250,7 +2304,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-b-and-sons-lawncare-peoria/",
-   "ai_hook": "Already built B & Sons Lawncare & Home Maintenance a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | ZERO digital footprint - no site, no FB, no email | strong pitch angle | owner single-sourced to BBB NAME CAVEAT: single-sourced to BBB - confirm on the call.",
+   "ai_hook": "Already built B & Sons Lawncare & Home Maintenance a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | ZERO digital footprint - no site, no FB, no email | strong pitch angle | owner single-sourced to BBB NAME CAVEAT: single-sourced to BBB - confirm on the call.",
    "company_id": 338279453433
   },
   {
@@ -2268,7 +2322,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-garcia-roofing-peoria/",
-   "ai_hook": "Already built Garcia Roofing and Construction a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | BBB only source | possible FB page with 'Connstruction' typo - unverified, eyeball manually | since 2019",
+   "ai_hook": "Already built Garcia Roofing and Construction a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | BBB only source | possible FB page with 'Connstruction' typo - unverified, eyeball manually | since 2019",
    "company_id": 338216424162
   },
   {
@@ -2286,7 +2340,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-papas-painting-drywall-lincoln/",
-   "ai_hook": "Already built Papa's Painting and Drywall a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | NO website and NO Facebook - strong web-presence pitch | BBB A+ accredited 2025 | dba Macmar Industries LLC",
+   "ai_hook": "Already built Papa's Painting and Drywall a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | NO website and NO Facebook - strong web-presence pitch | BBB A+ accredited 2025 | dba Macmar Industries LLC",
    "company_id": 338340098746
   },
   {
@@ -2322,7 +2376,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-serranos-concrete-rockford/",
-   "ai_hook": "Already built Serrano's Concrete a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | co-owner implies 2nd principal, possibly Hulisses/Ulises Serrano | since 2001 Co-owner - there is likely a second principal (possibly Hulisses/Ulises Serrano).",
+   "ai_hook": "Already built Serrano's Concrete a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | co-owner implies 2nd principal, possibly Hulisses/Ulises Serrano | since 2001 Co-owner - there is likely a second principal (possibly Hulisses/Ulises Serrano).",
    "company_id": 338371314420
   },
   {
@@ -2340,7 +2394,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-sewell-brothers-tree-bartonville/",
-   "ai_hook": "Already built Sewell Brothers Tree Experts, Inc. a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | sewellbrothers.com DEAD - domain no longer resolves, BBB lists FB as their web presence | BBB A+ since 1993, est 1963",
+   "ai_hook": "Already built Sewell Brothers Tree Experts, Inc. a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | sewellbrothers.com DEAD - domain no longer resolves, BBB lists FB as their web presence | BBB A+ since 1993, est 1963",
    "company_id": 338207459011
   },
   {
@@ -2358,7 +2412,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-alcar-roofing-la-crosse/",
-   "ai_hook": "Already built Alcar Roofing & Home Improvements LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | TWO dead domains alcarservices.com + alcarroofingandhomeimprovement.com - strong website pitch | alt phone (608) 782-1133 | BBB A+ since 1987",
+   "ai_hook": "Already built Alcar Roofing & Home Improvements LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | TWO dead domains alcarservices.com + alcarroofingandhomeimprovement.com - strong website pitch | alt phone (608) 782-1133 | BBB A+ since 1987",
    "company_id": 338376458949
   },
   {
@@ -2376,7 +2430,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-calderon-services-milwaukee/",
-   "ai_hook": "Already built Calderon Services LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020",
+   "ai_hook": "Already built Calderon Services LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020",
    "company_id": 338376458950
   },
   {
@@ -2394,7 +2448,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-double-d-resurfacing-milwaukee/",
-   "ai_hook": "Already built Double D Resurfacing a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website, no FB, no email | since 1997 | bowling lane specialty not independently confirmed",
+   "ai_hook": "Already built Double D Resurfacing a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website, no FB, no email | since 1997 | bowling lane specialty not independently confirmed",
    "company_id": 338266296038
   },
   {
@@ -2412,7 +2466,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-four-seasons-landscaping-platteville/",
-   "ai_hook": "Already built Four Seasons Landscaping & Nursery, LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | owner from LinkedIn, city not independently confirmed NAME CAVEAT: Tom Cullen is from LinkedIn and the city was not confirmed - verify it is the right Tom Cullen.",
+   "ai_hook": "Already built Four Seasons Landscaping & Nursery, LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website | owner from LinkedIn, city not independently confirmed NAME CAVEAT: Tom Cullen is from LinkedIn and the city was not confirmed - verify it is the right Tom Cullen.",
    "company_id": 338345852632
   },
   {
@@ -2430,7 +2484,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-johnson-tree-care-monona/",
-   "ai_hook": "Already built Johnson Tree Care, LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB website field points to a Twitter account | address varies across directories",
+   "ai_hook": "Already built Johnson Tree Care, LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB website field points to a Twitter account | address varies across directories",
    "company_id": 338187625193
   },
   {
@@ -2448,7 +2502,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-peaveys-painting-union-grove/",
-   "ai_hook": "Already built Peaveys Painting LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB website field points to a FB profile | log home restoration/staining specialty | USDOT 4401822, since 2013",
+   "ai_hook": "Already built Peaveys Painting LLC a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB website field points to a FB profile | log home restoration/staining specialty | USDOT 4401822, since 2013",
    "company_id": 338345852634
   },
   {
@@ -2466,7 +2520,7 @@
    "notes_preview": null,
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-switlick-and-sons-athens/",
-   "ai_hook": "Already built Switlick & Sons, Inc. a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website, no FB | phone verified against federal FMCSA SAFER record | alt (715) 257-9081 in circulation | owner from D&B lineage only NAME CAVEAT: 'Merlin Switlick' is D&B-lineage only, never independently confirmed - ask who runs it rather than using the name cold.",
+   "ai_hook": "Already built Switlick & Sons, Inc. a free working homepage \u2014 lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website, no FB | phone verified against federal FMCSA SAFER record | alt (715) 257-9081 in circulation | owner from D&B lineage only NAME CAVEAT: 'Merlin Switlick' is D&B-lineage only, never independently confirmed - ask who runs it rather than using the name cold.",
    "company_id": 338207459012
   },
   {
@@ -2578,5 +2632,5 @@
    "ai_hook": "Owner Rick Mai, 30 years claimed, phone-first via the Facebook page since there is no site. FLAG: BuildZoom shows license C124995 expired 2020-07-08 with a BZ score of 0, so do not lead with licensing. Sourced from an in-person encounter in Dubuque, still running print classifieds."
   }
  ],
- "_comment": "Standing curated batch — the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot). | 2026-08-21 run: backlog still 0.8% touched (1 of 130), so NO new mockups were built per the task file's 10% rule. BLOCKER FOUND AND UNFIXED: a Cloudflare Access application named 'urbanbackstage.com' created 2026-08-18T04:07:53Z gates the ENTIRE domain behind an owner-only email login, so all 129 unbypassed mockup_url values in this file return a Cloudflare sign-in page to anyone who is not ricky@urbannicheco.com. Only ia-new-view-landscaping-dbq04 has a public-bypass app. Do not read a mockup URL to a prospect until a bypass policy covers /demo/*. Top 10 of this queue had their no-website findings re-verified in Chrome on 2026-08-21: 6 NXDOMAIN, 2 parked landers, 1 verified 08-20, 1 namesake flagged (Top Quality Roofing)."
+ "_comment": "Standing curated batch \u2014 the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot). | 2026-08-21 run: backlog still 0.8% touched (1 of 130), so NO new mockups were built per the task file's 10% rule. BLOCKER FOUND AND UNFIXED: a Cloudflare Access application named 'urbanbackstage.com' created 2026-08-18T04:07:53Z gates the ENTIRE domain behind an owner-only email login, so all 129 unbypassed mockup_url values in this file return a Cloudflare sign-in page to anyone who is not ricky@urbannicheco.com. Only ia-new-view-landscaping-dbq04 has a public-bypass app. Do not read a mockup URL to a prospect until a bypass policy covers /demo/*. Top 10 of this queue had their no-website findings re-verified in Chrome on 2026-08-21: 6 NXDOMAIN, 2 parked landers, 1 verified 08-20, 1 namesake flagged (Top Quality Roofing). | 2026-09-01 build run: 3 new call-ready prospects added at the TOP (Mark's Tree Care Durango IA, Fox's Repair and Remodeling Freeport IL, Weber Construction & Electric Wadena IA). All three browser-verified in Chrome the same morning, all three have a real owner name, a CONTACT id and a full company description payload. One pool candidate (M. Eggleston Construction LLC, Orfordville WI) was REJECTED on verification - megglestonconstruction.com is a live business-owned site, so the BBB no-website blank was a false positive."
 }
