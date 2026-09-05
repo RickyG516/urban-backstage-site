@@ -1,8 +1,62 @@
 {
- "_date": "2026-09-01",
- "_generated_at": "2026-09-01T10:14:42Z",
- "_session_cap": 146,
+ "_date": "2026-09-03",
+ "_generated_at": "2026-09-03T10:30:00Z",
+ "_session_cap": 149,
  "prospects": [
+  {
+   "contact_id": "545279617760",
+   "business_name": "Ridge View Roofing & Construction, LLC",
+   "first_name": "Joseph",
+   "last_name": "Helmuth",
+   "trade": "Roofer",
+   "phone": "(319) 480-9644",
+   "city": "Hopkinton",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/545279617760",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Metal roofing, pole buildings and siding, Hopkinton IA. Six-day work week. Two out-of-state namesakes own the obvious domains.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-ridge-view-roofing-hopkinton-z3k8fp/",
+   "ai_hook": "Lead with the six-day week - they run 7am to 4pm Monday THROUGH SATURDAY, which is the headline and a real differentiator. NEVER open with 'I looked at your website': ridgeviewroofing.org is a MICHIGAN company and ridgeview-roofing.com is RHODE ISLAND, neither is Joe. Yelp misspells them 'Ridge Veiw'. VERIFICATION NOTE: no-website confirmed by search-index + BBB absence + two decoys positively identified, but NOT by a live browser load this run - spot-check before leaning hard on 'you have nothing online'.",
+   "company_id": "343693948631"
+  },
+  {
+   "contact_id": "545124841151",
+   "business_name": "Niklasen Carpentry",
+   "first_name": "Dean",
+   "last_name": "Niklasen",
+   "trade": "Remodeler",
+   "phone": "(563) 543-7320",
+   "city": "Monticello",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/545124841151",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Framing through finish carpentry, Jones County IA since 2000. Incorporated 2004, A+ BBB 14 yrs. Monticello and Farley addresses are the same shop.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-niklasen-carpentry-monticello-r6b2wt/",
+   "ai_hook": "Lead with 'the same carpenter frames it and finishes it' - sixteen trades under one name since 2000, incorporated 2004, A+ BBB for fourteen straight years. Safe to mention the Monticello/Farley two-address thing; the headline is built on it and it is one business, not two. Nothing negative on file to avoid. VERIFICATION NOTE: cleanest no-website signal of the three (no decoy domain exists at all), but confirmed by directory + search-index absence, not a live browser load this run.",
+   "company_id": "343694327535"
+  },
+  {
+   "contact_id": "545130467047",
+   "business_name": "Santee Construction",
+   "first_name": "Jeff",
+   "last_name": "Santee",
+   "trade": "Concrete",
+   "phone": "(563) 285-7416",
+   "city": "Eldridge",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/545130467047",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Flatwork and structural concrete, Eldridge IA. 17 permits on public record, BuildZoom 100, 34 years. santeeconstruction.com is a Kansas namesake.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-santee-construction-eldridge-q7d4mv/",
+   "ai_hook": "Lead with the permit record - 17 permitted jobs 2020-2025 and a BuildZoom score of 100 (top 13% of 39,764 Iowa contractors) is proof nobody can argue with. DO NOT SAY 'I saw your website': santeeconstruction.com is a Kansas homebuilder, not Jeff. DO NOT RAISE the one negative BBB review ('worst concrete job') - do not bring it up, just do not be surprised by it. VERIFICATION NOTE: no-website rests on directory + search-index absence plus an identified decoy, not a live browser load this run.",
+   "company_id": "343675026106"
+  },
   {
    "contact_id": "544361391826",
    "company_id": "343247463118",
@@ -2632,5 +2686,5 @@
    "ai_hook": "Owner Rick Mai, 30 years claimed, phone-first via the Facebook page since there is no site. FLAG: BuildZoom shows license C124995 expired 2020-07-08 with a BZ score of 0, so do not lead with licensing. Sourced from an in-person encounter in Dubuque, still running print classifieds."
   }
  ],
- "_comment": "Standing curated batch \u2014 the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot). | 2026-08-21 run: backlog still 0.8% touched (1 of 130), so NO new mockups were built per the task file's 10% rule. BLOCKER FOUND AND UNFIXED: a Cloudflare Access application named 'urbanbackstage.com' created 2026-08-18T04:07:53Z gates the ENTIRE domain behind an owner-only email login, so all 129 unbypassed mockup_url values in this file return a Cloudflare sign-in page to anyone who is not ricky@urbannicheco.com. Only ia-new-view-landscaping-dbq04 has a public-bypass app. Do not read a mockup URL to a prospect until a bypass policy covers /demo/*. Top 10 of this queue had their no-website findings re-verified in Chrome on 2026-08-21: 6 NXDOMAIN, 2 parked landers, 1 verified 08-20, 1 namesake flagged (Top Quality Roofing). | 2026-09-01 build run: 3 new call-ready prospects added at the TOP (Mark's Tree Care Durango IA, Fox's Repair and Remodeling Freeport IL, Weber Construction & Electric Wadena IA). All three browser-verified in Chrome the same morning, all three have a real owner name, a CONTACT id and a full company description payload. One pool candidate (M. Eggleston Construction LLC, Orfordville WI) was REJECTED on verification - megglestonconstruction.com is a live business-owned site, so the BBB no-website blank was a false positive."
+ "_comment": "Standing curated batch \u2014 the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot). | 2026-08-21 run: backlog still 0.8% touched (1 of 130), so NO new mockups were built per the task file's 10% rule. BLOCKER FOUND AND UNFIXED: a Cloudflare Access application named 'urbanbackstage.com' created 2026-08-18T04:07:53Z gates the ENTIRE domain behind an owner-only email login, so all 129 unbypassed mockup_url values in this file return a Cloudflare sign-in page to anyone who is not ricky@urbannicheco.com. Only ia-new-view-landscaping-dbq04 has a public-bypass app. Do not read a mockup URL to a prospect until a bypass policy covers /demo/*. Top 10 of this queue had their no-website findings re-verified in Chrome on 2026-08-21: 6 NXDOMAIN, 2 parked landers, 1 verified 08-20, 1 namesake flagged (Top Quality Roofing). | 2026-09-01 build run: 3 new call-ready prospects added at the TOP (Mark's Tree Care Durango IA, Fox's Repair and Remodeling Freeport IL, Weber Construction & Electric Wadena IA). All three browser-verified in Chrome the same morning, all three have a real owner name, a CONTACT id and a full company description payload. One pool candidate (M. Eggleston Construction LLC, Orfordville WI) was REJECTED on verification - megglestonconstruction.com is a live business-owned site, so the BBB no-website blank was a false positive. | 2026-09-03 build run: REPAIR-IN-PLACE. An earlier attempt the same night (01:29Z) had already researched and created full HubSpot company+contact records for Ridge View Roofing (Hopkinton IA), Niklasen Carpentry (Monticello IA) and Santee Construction (Eldridge IA) - descriptions included mockup_url values - but NEVER BUILT THE PAGES and never wrote the queue/index/status surfaces. That is the Landgrebe defect: three CRM records pointing at 404s. This run built the three pages at the exact slugs already recorded in HubSpot and completed all four surfaces. No duplicate companies or contacts created. ENVIRONMENT: no live browser on this run either (Chrome extension offline, in-app browser denied navigation, sandbox has no DNS/outbound HTTP) - no-website findings rest on directory absence + search-index absence + positively-identified decoy domains, NOT on a live browser load. Two decoys were fetched and confirmed to be other companies (ridgeviewroofing.org = Michigan, santeeconstruction.com = Kansas)."
 }
