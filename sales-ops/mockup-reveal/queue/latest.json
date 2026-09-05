@@ -1,8 +1,62 @@
 {
- "_date": "2026-09-03",
- "_generated_at": "2026-09-03T10:30:00Z",
- "_session_cap": 149,
+ "_date": "2026-09-05",
+ "_generated_at": "2026-09-05T16:50:00Z",
+ "_session_cap": 152,
  "prospects": [
+  {
+   "contact_id": "546984198882",
+   "business_name": "Winegar Plumbing Inc.",
+   "first_name": "Craig",
+   "last_name": "Winegar",
+   "trade": "Plumber",
+   "phone": "(563) 652-4202",
+   "city": "Maquoketa",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/546984198882",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Family plumbing corporation, Maquoketa IA, since 1991. Craig holds the Iowa hydronics licence. Maryland namesake owns the obvious domain.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-winegar-plumbing-h4kq7m/",
+   "ai_hook": "Lead with the HYDRONICS LICENCE - Craig carries Iowa Contractor, Hydronics, Plumbing AND Plumbing & Mechanical, and most plumbers in Jackson County do not have the hydronics one. That is the headline on the mockup. Three Winegars are on the corporate officer list (Craig President, Matt VP, Wendy Sec/Treas) and they have run it since Nov 1991 - 34 years with no website at all. DO NOT SAY 'I looked at your website': winegarandsonplumbing.com is a MARYLAND company, not them. DO NOT compliment their BBB rating - they are not accredited and are 'Not Rated'. PHONE CORRECTION: dial (563) 652-4202, not the 528-0552 that was in the prospect pool (wrong digit; BBB alt is 528-0554).",
+   "company_id": "344298319580"
+  },
+  {
+   "contact_id": "547137643240",
+   "business_name": "Woodhouse & Lee Construction",
+   "first_name": "Tom",
+   "last_name": "Woodhouse",
+   "trade": "Concrete",
+   "phone": "(515) 989-3893",
+   "city": "Carlisle",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/547137643240",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Concrete, Carlisle IA, since 1983. A+ BBB for 24 yrs. Only web presence is a Thryv rented page listing a phone number that is not theirs.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-woodhouse-lee-concrete-t8rv2c/",
+   "ai_hook": "Strongest hook in this batch: their name on Google lands on a THRYV/localsearch.com rented page they do not own - and it lists 515-809-0634, which is NOT the number on their BBB profile. Somebody else is renting them their own name and routing the calls. Open there. Backing facts: 43 years (since Jan 1983), incorporated 1986, A+ with the BBB for 24 unbroken years since Sept 2002, Tom and Mary Woodhouse, commercial parking lots and floor slabs plus residential, snow removal in winter. Do not make anything of the fax number - BBB lists the fax identical to the phone, almost certainly a data-entry artifact.",
+   "company_id": "344303723218"
+  },
+  {
+   "contact_id": "547132154571",
+   "business_name": "ASAP Pest Control",
+   "first_name": "Curtis",
+   "last_name": "Pruitt",
+   "trade": "Pest Control",
+   "phone": "(515) 402-7378",
+   "city": "Stuart",
+   "state": "IA",
+   "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/547132154571",
+   "last_touched": null,
+   "last_outcome": null,
+   "notes_preview": "Pest control AND carpet cleaning, Stuart IA, owner-run since 2006. Heavily duplicated company name - do not cite out-of-state namesakes.",
+   "pipeline_stage": "Prospect Identified",
+   "mockup_url": "https://urbanbackstage.com/demo/ia-asap-pest-control-w6nd3p/",
+   "ai_hook": "Lead with the two-trades-one-owner angle: Curtis does termites, bats, bees, bed bugs and rodents AND carpet/upholstery cleaning off the same truck - twelve BBB service categories under one owner. 20 years out of Stuart (since July 2006), toll-free 866 line alongside the local number. DO NOT cite any review, photo or website you did not get from the Stuart/Dexter Iowa BBB or Angi profile - 'ASAP Pest Control' is a heavily duplicated name and there are unrelated companies in Ontario Canada and Florida with real sites. Also do not say 'accredited for years' - BBB accreditation is recent (June 2026); the 20 years is time in business.",
+   "company_id": "344389468917"
+  },
   {
    "contact_id": "545279617760",
    "business_name": "Ridge View Roofing & Construction, LLC",
@@ -2686,5 +2740,5 @@
    "ai_hook": "Owner Rick Mai, 30 years claimed, phone-first via the Facebook page since there is no site. FLAG: BuildZoom shows license C124995 expired 2020-07-08 with a BZ score of 0, so do not lead with licensing. Sourced from an in-person encounter in Dubuque, still running print classifieds."
   }
  ],
- "_comment": "Standing curated batch \u2014 the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot). | 2026-08-21 run: backlog still 0.8% touched (1 of 130), so NO new mockups were built per the task file's 10% rule. BLOCKER FOUND AND UNFIXED: a Cloudflare Access application named 'urbanbackstage.com' created 2026-08-18T04:07:53Z gates the ENTIRE domain behind an owner-only email login, so all 129 unbypassed mockup_url values in this file return a Cloudflare sign-in page to anyone who is not ricky@urbannicheco.com. Only ia-new-view-landscaping-dbq04 has a public-bypass app. Do not read a mockup URL to a prospect until a bypass policy covers /demo/*. Top 10 of this queue had their no-website findings re-verified in Chrome on 2026-08-21: 6 NXDOMAIN, 2 parked landers, 1 verified 08-20, 1 namesake flagged (Top Quality Roofing). | 2026-09-01 build run: 3 new call-ready prospects added at the TOP (Mark's Tree Care Durango IA, Fox's Repair and Remodeling Freeport IL, Weber Construction & Electric Wadena IA). All three browser-verified in Chrome the same morning, all three have a real owner name, a CONTACT id and a full company description payload. One pool candidate (M. Eggleston Construction LLC, Orfordville WI) was REJECTED on verification - megglestonconstruction.com is a live business-owned site, so the BBB no-website blank was a false positive. | 2026-09-03 build run: REPAIR-IN-PLACE. An earlier attempt the same night (01:29Z) had already researched and created full HubSpot company+contact records for Ridge View Roofing (Hopkinton IA), Niklasen Carpentry (Monticello IA) and Santee Construction (Eldridge IA) - descriptions included mockup_url values - but NEVER BUILT THE PAGES and never wrote the queue/index/status surfaces. That is the Landgrebe defect: three CRM records pointing at 404s. This run built the three pages at the exact slugs already recorded in HubSpot and completed all four surfaces. No duplicate companies or contacts created. ENVIRONMENT: no live browser on this run either (Chrome extension offline, in-app browser denied navigation, sandbox has no DNS/outbound HTTP) - no-website findings rest on directory absence + search-index absence + positively-identified decoy domains, NOT on a live browser load. Two decoys were fetched and confirmed to be other companies (ridgeviewroofing.org = Michigan, santeeconstruction.com = Kansas)."
+ "_comment": "Standing curated batch \u2014 the 71 companies UNC built free homepage mockups for. This file is the durable fallback the cockpit always finds regardless of date; keep it updated (append/replace) whenever a new mockup batch is built, no need to also maintain a dated file. | Phase 2 (2026-08-12): contact_id remapped from COMPANY ids to real CONTACT ids; company_id preserves the original company; hubspot_url corrected from 0-2 to 0-1. 98 contacts created, 9 updated, all associated to their company. | Phase 2 residual sweep (2026-08-17): the 2026-08-13 through 2026-08-15 spec-mockup batches had re-introduced COMPANY ids as contact_id on 4 records. Designed Roofing Systems, Arteaga Construction and Demmer Mechanical got new contacts created and associated to their company; MAI Concrete matched the existing Rick Mai contact. All 116 records now carry a real CONTACT id, a preserved company_id, and a 0-1 hubspot_url. | Queue accuracy pass (2026-08-20): backlog was 0.8% touched so no new mockups were built. All 130 contact_ids re-verified against HubSpot (0 notFound, so /sync will not 404 on any card). 24 rows that carried a null first_name were backfilled with the real owner name already stored on their own HubSpot contact. Two rows were undialable: MAI Concrete LLC had a null phone (restored (563) 513-9121 from its HubSpot record) and Cherry Tree Service LLC had an empty phone (sourced (414) 850-9702 from HomeAdvisor listing 147725487, written back to HubSpot). | 2026-08-21 run: backlog still 0.8% touched (1 of 130), so NO new mockups were built per the task file's 10% rule. BLOCKER FOUND AND UNFIXED: a Cloudflare Access application named 'urbanbackstage.com' created 2026-08-18T04:07:53Z gates the ENTIRE domain behind an owner-only email login, so all 129 unbypassed mockup_url values in this file return a Cloudflare sign-in page to anyone who is not ricky@urbannicheco.com. Only ia-new-view-landscaping-dbq04 has a public-bypass app. Do not read a mockup URL to a prospect until a bypass policy covers /demo/*. Top 10 of this queue had their no-website findings re-verified in Chrome on 2026-08-21: 6 NXDOMAIN, 2 parked landers, 1 verified 08-20, 1 namesake flagged (Top Quality Roofing). | 2026-09-01 build run: 3 new call-ready prospects added at the TOP (Mark's Tree Care Durango IA, Fox's Repair and Remodeling Freeport IL, Weber Construction & Electric Wadena IA). All three browser-verified in Chrome the same morning, all three have a real owner name, a CONTACT id and a full company description payload. One pool candidate (M. Eggleston Construction LLC, Orfordville WI) was REJECTED on verification - megglestonconstruction.com is a live business-owned site, so the BBB no-website blank was a false positive. | 2026-09-03 build run: REPAIR-IN-PLACE. An earlier attempt the same night (01:29Z) had already researched and created full HubSpot company+contact records for Ridge View Roofing (Hopkinton IA), Niklasen Carpentry (Monticello IA) and Santee Construction (Eldridge IA) - descriptions included mockup_url values - but NEVER BUILT THE PAGES and never wrote the queue/index/status surfaces. That is the Landgrebe defect: three CRM records pointing at 404s. This run built the three pages at the exact slugs already recorded in HubSpot and completed all four surfaces. No duplicate companies or contacts created. ENVIRONMENT: no live browser on this run either (Chrome extension offline, in-app browser denied navigation, sandbox has no DNS/outbound HTTP) - no-website findings rest on directory absence + search-index absence + positively-identified decoy domains, NOT on a live browser load. Two decoys were fetched and confirmed to be other companies (ridgeviewroofing.org = Michigan, santeeconstruction.com = Kansas). | 2026-09-05 build run: 3 new call-ready prospects added at the TOP (Winegar Plumbing Maquoketa IA, Woodhouse & Lee Construction Carlisle IA, ASAP Pest Control Stuart IA). All three no-website findings VERIFIED IN A LIVE CHROME SESSION this run - not directory absence. Two decoy domains positively identified as other companies: winegarandsonplumbing.com = Burtonsville MARYLAND, and the 'ASAP Pest Control' Facebook pages that surface in search are Ontario CA and Florida operations. Woodhouse & Lee's only web presence is a Thryv/localsearch.com rented template carrying a phone number (515-809-0634) that differs from their real BBB-listed number. PALETTE POOL was EXHAUSTED for the third time (41 of 42 live); extended tools/palettes.py with 6 new entries in the thinnest bands (grey, violet, teal), audit clean, no accent collisions. Recommend Stage 2 (LIGHT/MONO hero schemes) rather than a fourth hand-extension. Cloudflare Access blocker on /demo/* is STILL UNFIXED - mockup URLs are not yet showable to prospects."
 }

@@ -101,6 +101,22 @@ PALETTES = [
     dict(name="prussian",       dark="#0e1219", accent="#5f93cc", off="#f1f4f8", band="blue"),
     dict(name="fern-slate",     dark="#0e1411", accent="#68a97e", off="#f2f6f3", band="green"),
     dict(name="sage-iron",      dark="#111412", accent="#7ba883", off="#f3f6f4", band="green"),
+    # ---- added 2026-09-05: pool EXHAUSTED for the THIRD time (41 of 42 already
+    # live in demo/, verdigris the only survivor), so pick_batch(3) raised
+    # "palette pool exhausted" again. Same fix, same discipline as 08-26 and
+    # 08-30: extend only the bands the library is thinnest in - grey 8 and
+    # violet 10 against warm 59 - and add NOTHING warm. Every accent checked
+    # against the 155 live accents (no collision), against the existing pool,
+    # and against audit(). NOTE for whoever hits this a fourth time: the pool
+    # is consumed ~1 palette per prospect, so this hand-extension is now a
+    # recurring tax. The real fix is Stage 2 (LIGHT/MONO hero schemes), which
+    # multiplies the usable space instead of lengthening a flat list.
+    dict(name="pewter-mist",      dark="#131517", accent="#a2acb4", off="#f4f5f7", band="grey"),
+    dict(name="zinc-slate",       dark="#111416", accent="#8f99a1", off="#f4f5f6", band="grey"),
+    dict(name="basalt-grey",      dark="#151618", accent="#9aa0a6", off="#f5f5f6", band="grey"),
+    dict(name="heather-iron",     dark="#131019", accent="#9781cd", off="#f5f3f9", band="violet"),
+    dict(name="thistle-graphite", dark="#141119", accent="#ab8ad2", off="#f6f4f9", band="violet"),
+    dict(name="aquamarine-slate", dark="#0f1617", accent="#4fada6", off="#f1f6f6", band="teal"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
