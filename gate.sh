@@ -47,8 +47,12 @@ for d in "${targets[@]}"; do
   grep -q '<form' "$f" || fails="$fails no-form"
   grep -q '<nav' "$f" || fails="$fails no-nav"
 
-  # within-page duplicate image URLs
-  dup=$(grep -o 'src="https://[^"]*"' "$f" | sort | uniq -d | wc -l)
+  # Within-page duplicate images. WIDENED 2026-09-08: this used to match only
+  # src="https://..." so it caught duplicated hotlinks but was blind to a local
+  # file used twice (e.g. the same job photo in the hero AND the gallery).
+  # Ricky flagged exactly that on the Ness page -- "Dont reuse the same photos
+  # on the same page. Thats slop. Have a standard." Now checks EVERY src.
+  dup=$(grep -o 'src="[^"]*"' "$f" | grep -viE 'src="(data:|#)' | sort | uniq -d | wc -l)
   [ "$dup" -gt 0 ] && fails="$fails DUP-IMG-ON-PAGE"
 
   if [ -n "$fails" ]; then echo "$d:$fails"; bad=1; fi

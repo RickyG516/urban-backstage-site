@@ -250,3 +250,36 @@ staged work on 2026-08-09.
 The 2026-08-09 batch (EZ Roofing, Freiburger, Seward) shipped on the old palette
 and was deliberately left alone — Ricky was dialling it that morning and a page
 should not change under a prospect mid-outreach.
+
+---
+
+## No image appears twice on a page (added 2026-09-08)
+
+Ricky, reviewing the Ness Custom Flooring build: *"Dont reuse the same photos on
+the same page. Thats slop. Have a standard."*
+
+**The rule: every `<img>` on a page resolves to a distinct image.** A photo used
+in the hero does not reappear in the gallery. A composite hero counts as using
+its source photos — if the hero is built from photo A and photo B, then A and B
+are spent and cannot be gallery tiles.
+
+Enforced by `gate.sh` as `DUP-IMG-ON-PAGE`. That check already existed but only
+matched `src="https://..."`, so it caught duplicated hotlinks and was completely
+blind to a local file used twice — which is the common case now that heroes are
+composited from local job photos. Widened to check every `src`.
+
+**Consequence for photo-poor prospects:** with N real photos you get a hero
+built from *k* of them plus *N-k* gallery tiles, not N tiles plus a hero. If
+that leaves the gallery too thin, harvest more photos — do not pad by repeating.
+On Ness this meant a 2-panel hero (oak LVP + tile shower) and 3 gallery tiles
+(grey LVP, carpet bedroom, carpeted stairs), all five distinct.
+
+### The GBP gallery is still contaminated — check every photo, every time
+
+Ness's own Google Business Profile gallery was mined for extra photos to avoid
+padding. Of the three owner photos pulled, **two were not flooring at all**: a
+bucket truck doing tree removal, and an outdoor stone BBQ island under a pergola.
+Only the carpeted staircase was a real flooring job. Same failure mode as AFG
+Concrete, Certified Pest and Greg Wirth Electric above, and it survives even when
+the business-level identity gate passes cleanly. **Photo-level review is not
+optional and does not get faster with practice.**
