@@ -230,36 +230,57 @@ def tree(dark, acc, off, seed, variant=None):
     return _wrap("".join(body), css, f"Tree drawing itself, {habit} habit", dark, off, v)
 
 # ------------------------------------------------------------------ FLOORING
-def flooring(dark, acc, off, seed):
+def flooring(dark, acc, off, seed, variant=None):
+    """Planks laid in true running bond.
+
+    REWRITTEN 2026-09-08. The original re-rolled `planks` (and therefore the
+    plank WIDTH) on every row, and clamped the first plank of each offset row
+    back to the left margin. Net effect: rows had different-width planks and a
+    flush left edge, so the stagger read as noise rather than a running bond —
+    Ricky flagged exactly this on the Ness page ("the second and third row...
+    it all kinda looks like shit"). Fix: one plank width for the whole floor,
+    a real fractional offset that advances per row, and a clip rect so planks
+    genuinely run off both edges instead of being squared up against them.
+    """
     v = Vary(seed, 3); v.acc = acc
-    rows = v.count(6, 8, 10)
-    x0, y0, w = 180, SAFE[0]+15, 840
-    rh = (SAFE[1]-SAFE[0]-30)/rows
-    body=[]
+    if variant is not None: v.variant = variant % 3
+
+    rows   = v.count(9, 11, 13)                    # thinner rows read as flooring
+    x0, y0, w = 180, SAFE[0]+10, 840
+    rh = (SAFE[1]-SAFE[0]-20)/rows
+    pw = w/4.2 + v.f(-14, 14)                      # ONE plank width, whole floor
+    # running bond: each row advances by a fixed fraction of a plank
+    step = pw * v.pick([1/2, 1/3, 2/5])
+    cid  = f"flclip{abs(seed)%99991}"
+
+    body = []
     for r in range(rows):
-        y = y0 + r*rh
-        planks = v.i(3, 5)
-        off_x = (r % 2) * (w/planks/2)
-        x = x0 - off_x
-        i = 0
+        y     = y0 + r*rh
+        shift = (r*step) % pw
+        x     = x0 - pw + shift                    # start off-canvas on purpose
+        i     = 0
         while x < x0 + w:
-            left = max(x, x0)                      # clamp: no plank hangs off the left edge
-            pw = min(x + w/planks, x0 + w) - left
-            x_draw = left
-            if pw > 24:
-                body.append(f'<rect class="plank" x="{x_draw:.0f}" y="{y:.0f}" width="{pw-6:.0f}" height="{rh-6:.0f}" rx="2" '
-                            f'fill="{acc}" opacity="{.16+((r+i)%3)*.07:.2f}" style="animation-delay:{(r*3+i)*v.stagger*.5:.2f}s"/>')
-                body.append(f'<rect class="plank" x="{x_draw:.0f}" y="{y:.0f}" width="{pw-6:.0f}" height="{rh-6:.0f}" rx="2" '
-                            f'fill="none" stroke="{acc}" stroke-width="1.5" opacity=".45" style="animation-delay:{(r*3+i)*v.stagger*.5:.2f}s"/>')
-                for g in range(2):                          # grain
-                    gy = y + (rh-6)*(g+1)/3
-                    body.append(f'<line class="plank" x1="{x_draw+6:.0f}" y1="{gy:.0f}" x2="{x_draw+pw-12:.0f}" y2="{gy:.0f}" '
-                                f'stroke="{off}" stroke-width="1" opacity=".13" style="animation-delay:{(r*3+i)*v.stagger*.5:.2f}s"/>')
-            x += w/planks; i += 1
+            op    = .18 + ((r*3+i) % 4)*.06
+            delay = ((r*2 + i) * v.stagger*.45) % 3.2
+            body.append(f'<rect class="plank" x="{x:.1f}" y="{y:.1f}" width="{pw-7:.1f}" height="{rh-5:.1f}" rx="2" '
+                        f'fill="{acc}" opacity="{op:.2f}" style="animation-delay:{delay:.2f}s"/>')
+            body.append(f'<rect class="plank" x="{x:.1f}" y="{y:.1f}" width="{pw-7:.1f}" height="{rh-5:.1f}" rx="2" '
+                        f'fill="none" stroke="{acc}" stroke-width="1.4" opacity=".42" '
+                        f'style="animation-delay:{delay:.2f}s"/>')
+            for g in range(2):                     # grain
+                gy = y + (rh-5)*(g+1)/3
+                body.append(f'<line class="plank" x1="{x+7:.1f}" y1="{gy:.1f}" x2="{x+pw-14:.1f}" y2="{gy:.1f}" '
+                            f'stroke="{off}" stroke-width="1" opacity=".12" '
+                            f'style="animation-delay:{delay:.2f}s"/>')
+            x += pw; i += 1
+
     css = (".plank{opacity:0;animation:pk %ss ease-in-out infinite}"
-           "@keyframes pk{0%%,4%%{opacity:0;transform:translateY(-10px)}20%%{opacity:1;transform:translateY(0)}"
-           "84%%{opacity:1}95%%,100%%{opacity:0}}" % v.dur(11))
-    return _wrap("".join(body), css, "Floor planks laid in staggered rows", dark, off, v)
+           "@keyframes pk{0%%,3%%{opacity:0;transform:translateY(-8px)}18%%{opacity:1;transform:translateY(0)}"
+           "86%%{opacity:1}96%%,100%%{opacity:0}}" % v.dur(11))
+    defs = f'<clipPath id="{cid}"><rect x="{x0}" y="{y0-4}" width="{w}" height="{rows*rh+8}" rx="3"/></clipPath>'
+    return _wrap(f'<g clip-path="url(#{cid})">{"".join(body)}</g>', css,
+                 "Floor planks laid in a staggered running bond", dark, off, v, extra_defs=defs)
+
 
 BUILDERS = {"roofing":roofing, "painting":painting, "landscaping":landscaping,
             "tree":tree, "flooring":flooring}
