@@ -117,6 +117,34 @@ PALETTES = [
     dict(name="heather-iron",     dark="#131019", accent="#9781cd", off="#f5f3f9", band="violet"),
     dict(name="thistle-graphite", dark="#141119", accent="#ab8ad2", off="#f6f4f9", band="violet"),
     dict(name="aquamarine-slate", dark="#0f1617", accent="#4fada6", off="#f1f6f6", band="teal"),
+    # ---- added 2026-09-09: pool EXHAUSTED for the FOURTH time (47 of 48 already
+    # live in demo/, zinc-slate the only survivor), so pick_batch(3) raised
+    # "palette pool exhausted" again. Same fix and same discipline as 08-26,
+    # 08-30 and 09-05: extend only the thinnest bands - grey 10, violet 12,
+    # red 18, blue 19 against warm 60 - and add NOTHING warm. Every accent
+    # checked against the 162 live accents (no collision), against the existing
+    # pool, and against audit(). Eight added rather than three so the next few
+    # runs do not each pay this tax. STANDING NOTE, now four runs old: the pool
+    # burns ~1 palette per prospect, so a flat list will keep running dry. The
+    # real fix is Stage 2 (LIGHT / MONO hero schemes), which multiplies the
+    # usable space instead of lengthening the list. It is still not built.
+    dict(name="nickel",           dark="#121416", accent="#97a0a8", off="#f4f5f6", band="grey"),
+    dict(name="dove-iron",        dark="#141517", accent="#a5aeb5", off="#f5f5f7", band="grey"),
+    dict(name="mulberry-slate",   dark="#151119", accent="#b183cd", off="#f6f4f9", band="violet"),
+    dict(name="carmine-slate",    dark="#151112", accent="#c9666e", off="#f7f3f4", band="red"),
+    dict(name="terracotta-iron",  dark="#141110", accent="#c66a60", off="#f7f4f2", band="red"),
+    dict(name="rose-graphite",    dark="#161113", accent="#d06c72", off="#f7f4f4", band="red"),
+    dict(name="cerulean-iron",    dark="#0e1318", accent="#4c9bcd", off="#f0f4f8", band="blue"),
+    dict(name="marine-slate",     dark="#0f131a", accent="#6a90cf", off="#f2f4f9", band="blue"),
+    # Teal and green were fully consumed too - the __main__ preview's "following
+    # batch of 3" could not find 3 distinct bands until these were added, which
+    # is exactly the failure tomorrow's run would have hit. Same checks applied.
+    dict(name="seafoam-iron",     dark="#0e1516", accent="#57b0a4", off="#f1f6f6", band="teal"),
+    dict(name="teal-shale",       dark="#101617", accent="#3f9fa8", off="#f1f6f7", band="teal"),
+    dict(name="lagoon-graphite",  dark="#0f1718", accent="#6ab5b2", off="#f2f7f7", band="teal"),
+    dict(name="juniper-slate",    dark="#0f1412", accent="#5fa572", off="#f2f6f3", band="green"),
+    dict(name="olive-iron",       dark="#111412", accent="#84ab6b", off="#f4f6f3", band="green"),
+    dict(name="emerald-graphite", dark="#0e1311", accent="#4fa886", off="#f1f6f4", band="green"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
