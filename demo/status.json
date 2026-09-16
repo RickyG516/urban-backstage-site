@@ -183,10 +183,18 @@
   "ready": false,
   "stage": "none"
  },
+ "ia-exira-plumbing-heating-electrical": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-09-14 (company 346716708546) | contact 552086697693 (Ryan Wilson, Owner) | NO-WEBSITE FINDING: BBB profile renders NO 'Visit Website' button (2026-09-07, re-confirmed 2026-09-14 against a same-session control). Domains tested in a live Chrome session 2026-09-14: exiraplumbing.com, exiraplumbingheating.com and exiraplumbingheatingelectrical.com ALL fail to resolve. RE-CHECKED 2026-09-16: domain-scoped search returned zero indexed pages on all three, and a full name search surfaced only Nextdoor, BBB, Yelp, YellowPages, Manta, BuildZoom, getvibrato and the Audubon County official directory - no company site. *** TODAY'S CHECK WAS NOT BROWSER-BASED *** - Chrome extension offline and the in-app browser pane was auto-declined on this scheduled run; today's evidence is search-index absence. The authoritative browser verification is the 2026-09-14 one. | REVENUE: BBB Accredited since 8/27/2001 (25 years accredited), A+ rating; holds an Electrical Contractor licence plus seven more with the Iowa licensing board; plumbing, heating, air conditioning and electrical from one shop at 112 Factory St, Exira IA 50076; listed in both the Audubon County and City of Exira official directories; ~4 employees. | AGE CONFLICT - DO NOT QUOTE A FOUNDING YEAR ON THE CALL: BBB records 72 years in business (est. 1954) and the LLC dates to 1999, but a directory aggregator prints 'established 1986'. Unresolved. Let him say it. | NAME CAVEAT: Ryan Wilson is the BBB-listed owner; BuildZoom associates 'Dennis L Adkins' with the business, likely a prior owner or licence holder. Lead with Ryan, confirm on the call. | PHONE ONLY - Nextdoor page only, no Facebook page found.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-experienced-roofing-dbq03": {
   "channel": "unknown",
   "fb": "",
-  "note": "in HubSpot 2026-08-07 (company 338677790452) | 3 real GBP roof photos. 5.0 stars but only 1 review — thin proof, Tier C. Verified no website.",
+  "note": "in HubSpot 2026-08-07 (company 338677790452) | 3 real GBP roof photos. 5.0 stars but only 1 review \u2014 thin proof, Tier C. Verified no website.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -210,7 +218,7 @@
  "ia-greg-wirth-electric-lucodo": {
   "channel": "phone",
   "fb": "",
-  "note": "FB page dead — content unavailable | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "FB page dead \u2014 content unavailable | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -234,7 +242,7 @@
  "ia-hintermeister-electric-30kxyc": {
   "channel": "phone",
   "fb": "",
-  "note": "BBB, n49, BuildZoom, D&B all present — no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "BBB, n49, BuildZoom, D&B all present \u2014 no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -290,7 +298,7 @@
  "ia-kuehl-painting-decorating-5oy56m": {
   "channel": "phone",
   "fb": "",
-  "note": "Yelp, Manta, YellowPages, BuildZoom present — no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "Yelp, Manta, YellowPages, BuildZoom present \u2014 no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -466,7 +474,7 @@
  "ia-rabalais-electric-1nc4aj": {
   "channel": "phone",
   "fb": "",
-  "note": "whodoyou, OpenCorporates, BuildZoom, D&B present — no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "whodoyou, OpenCorporates, BuildZoom, D&B present \u2014 no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -818,7 +826,7 @@
  "il-haier-plumbing-okawville": {
   "channel": "phone",
   "fb": "https://www.facebook.com/HaierPlumbing/",
-  "note": "in HubSpot 2026-08-07 (company 338670190315) | no website | haierplumbing.com serves a hosting-default UNDER CONSTRUCTION placeholder (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1318341 + BBB + SIBA-AGC + CIB AGC | 76 power units / 60 drivers / 1.49M mi 2025 | SAFER safety rating Conditional (2010) — do not raise on the call",
+  "note": "in HubSpot 2026-08-07 (company 338670190315) | no website | haierplumbing.com serves a hosting-default UNDER CONSTRUCTION placeholder (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1318341 + BBB + SIBA-AGC + CIB AGC | 76 power units / 60 drivers / 1.49M mi 2025 | SAFER safety rating Conditional (2010) \u2014 do not raise on the call",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -994,7 +1002,7 @@
  "il-the-tree-surgeon-g4q84i": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/The-Tree-Surgeon-100058714466374/",
-  "note": "FB: title names Peoria IL — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "FB: title names Peoria IL \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -1031,6 +1039,14 @@
   "ready": true,
   "stage": "none"
  },
+ "il-union-roofing-chenoa": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/p/Union-Roofing-Company-Inc-100054439662731/",
+  "note": "in HubSpot 2026-09-14 (company 346291607228) | contact 552058523331 (Rod E. Hoselton, President) | NO-WEBSITE FINDING - FAKE-WEBSITE PATTERN, RE-CONFIRMED LIVE 2026-09-16: BBB DOES render a 'Visit Website' button pointing at https://unionroofing.com/, but that URL 302s to http://www.importantlocalbusinesses.com - a generic third-party 'Support Family Owned Businesses' essay page with no roofing content, no mention of Union Roofing, and a call-to-action number of (847) 720-5807 Ext. 111 that is not theirs. Fetched and read directly this run; the redirect and the page body were both observed, not inferred. Same shell independently seen on Robert L Smith Construction Co (Mount Pleasant IA) - a rented placeholder being used across unrelated small contractors. This QUALIFIES, it is not a rejection. | REVENUE: established 1931 (95 years), incorporated 1979; residential, commercial and industrial roofing including TPO and EPDM single-ply; BBB A+ (not accredited); member, Greater Peoria Contractors & Suppliers Association; registered UST facility with the Illinois State Fire Marshal; listed on Procore and The Blue Book as a subcontractor; 410 N Division St, Chenoa IL 61726. Doug Hoselton VP, Jeffrey M. Hoselton Sec/Treas. | DO NOT RAISE / NAMESAKE: an unrelated 'Union Roofing' in Philadelphia PA (unionroofing.net, 215-464-6425, founded 1981) is a much larger company - do not conflate. | Illinois SOS and IDFPR corporate/licence lookups are CAPTCHA-gated and were NOT run. | ALT PHONE: (309) 828-2741 secondary line. | Facebook page exists.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "il-willis-electric-eu8wtz": {
   "channel": "unknown",
   "fb": "",
@@ -1058,7 +1074,7 @@
  "landscaping-connercuts-racine": {
   "channel": "fb",
   "fb": "https://www.facebook.com/ConnerCutsLawnCareExteriorMaintenance/",
-  "note": "FB: title names Racine WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "FB: title names Racine WI \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1074,7 +1090,7 @@
  "landscaping-zaisers-burlington": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Zaisers-Landscaping-100068421721766/",
-  "note": "FB: title names Burlington IA — matches",
+  "note": "FB: title names Burlington IA \u2014 matches",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1090,7 +1106,7 @@
  "sanders-lawn-care-dubuque": {
   "channel": "fb",
   "fb": "https://www.facebook.com/Sanders.Lawn.Landscape/",
-  "note": "FB: page surfaces alongside Dubuque directory listings — city context matches",
+  "note": "FB: page surfaces alongside Dubuque directory listings \u2014 city context matches",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1170,7 +1186,7 @@
  "wi-daytonwood-painting-rfqreh": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Daytonwood-Painting-100057800074513/",
-  "note": "FB: title names Belleville WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "FB: title names Belleville WI \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1210,7 +1226,7 @@
  "wi-hein-construction-de-pere": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-07 (company 338525587170) | no website | heinconst.com serves a blank domain-parking page (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1071319 + Wisconsin Masonry Alliance directory, where peers carry website links and Hein carries none | revenue proof is WMA contractor membership, not fleet — SAFER shows only 3 power units and registration data last filed 2015",
+  "note": "in HubSpot 2026-08-07 (company 338525587170) | no website | heinconst.com serves a blank domain-parking page (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1071319 + Wisconsin Masonry Alliance directory, where peers carry website links and Hein carries none | revenue proof is WMA contractor membership, not fleet \u2014 SAFER shows only 3 power units and registration data last filed 2015",
   "photos": "generated",
   "ready": false,
   "stage": "none"
@@ -1218,7 +1234,7 @@
  "wi-jays-perfection-gutters-adbssk": {
   "channel": "phone",
   "fb": "",
-  "note": "Birdeye, Roof.info, D&B present — no FB. 'Jays Seamless Gutters' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "Birdeye, Roof.info, D&B present \u2014 no FB. 'Jays Seamless Gutters' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -1306,7 +1322,7 @@
  "wi-sean-kollman-concrete-hxmq56": {
   "channel": "phone",
   "fb": "",
-  "note": "Porch, Yelp, Manta, Angi present — no FB. 'Kohlman Concrete' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "Porch, Yelp, Manta, Angi present \u2014 no FB. 'Kohlman Concrete' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1331,6 +1347,14 @@
   "channel": "phone",
   "fb": "",
   "note": "in HubSpot 2026-08-04 | no website, no FB | phone verified against federal FMCSA SAFER record | alt (715) 257-9081 in circulation | owner from D&B lineage only",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-t-and-t-builders-pound": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-09-14 (company 346242107120) | contact 552057555655 (Todd J. Tachick, Owner) | NO-WEBSITE FINDING: BBB profile renders NO 'Visit Website' button (confirmed 2026-09-07 and re-confirmed 2026-09-14 against a same-session control profile that DID show one). Domains tested in a live Chrome session 2026-09-14: tandtbuildersinc.com and ttbuildersinc.com do not resolve; tandtbuilders.com serves a Wix \"this domain isn't connected to a site\" placeholder with OWNERSHIP UNCONFIRMED - ask, do not assert; ttbuilders.com could not be read that session and is unverified either way. RE-CHECKED 2026-09-16: zero pages indexed on any of the four domains (domain-scoped search returned no links), and no company website surfaced in a full name search - only BBB, D&B, Procore, Manta, Yahoo Local and elocal directory listings. *** TODAY'S CHECK WAS NOT BROWSER-BASED *** - Chrome extension offline and the in-app browser pane was auto-declined on this scheduled run, so today's evidence is search-index absence, not a live page load. The authoritative browser verification is the 2026-09-14 one. | REVENUE: started 1/1/1975, incorporated 3/6/1975 (51 years); D&B estimates ~$1,000,000 annual revenue and ~20 employees; BBB Accredited A+ since 4/9/2020; masonry and concrete contracting across Oconto and Marinette counties; 10786 Wescott Lake Rd, Pound WI 54161. Barbara Tachick listed as VP, Randall Tachick also named by D&B. | Pre-verified by the 2026-09-08 and 2026-09-14 runs and left unused both times; built today. | PHONE ONLY - no Facebook page found.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
