@@ -85,9 +85,11 @@ Both double as the trade-specific feature the skill already requires.
 
 ## Technical notes
 
-- SVGs referenced via `<img>` **do** run their own CSS animations. They are
-  sandboxed: no external resources, and **no webfonts**. Keep text in the HTML
-  and let the SVG carry graphics only, or the type falls back to system sans.
+- ~~SVGs referenced via `<img>` **do** run their own CSS animations.~~ **THIS WAS
+  WRONG AND IT COST THE LIBRARY WEEKS OF BLANK HEROES — see "The `<img>` animation
+  defect" below.** What is still true: SVGs in `<img>` are sandboxed — no external
+  resources, and **no webfonts**. Keep text in the HTML and let the SVG carry
+  graphics only, or the type falls back to system sans.
 - Always include `@media (prefers-reduced-motion: reduce)` inside the SVG.
   Degrade to the finished state, never to an empty frame.
 - Hotlinked GBP URLs: `/gps-cs-s/` paths have been reliable. One `/grass-cs/`
@@ -283,3 +285,92 @@ Only the carpeted staircase was a real flooring job. Same failure mode as AFG
 Concrete, Certified Pest and Greg Wirth Electric above, and it survives even when
 the business-level identity gate passes cleanly. **Photo-level review is not
 optional and does not get faster with practice.**
+
+---
+
+## The `<img>` animation defect (found 2026-09-16 — read before building anything)
+
+**Chrome does not run CSS animations inside an SVG referenced via `<img>`.**
+
+Every generated scene authors its elements at their *initial* state — `stroke-dashoffset:100`,
+`opacity:0`, `transform:scaleY(0)` — and relies on the animation to reveal them. When the
+animation never runs, the frame paints **completely empty**. That is what a prospect saw:
+a headline over a black rectangle.
+
+### How it was proved
+
+The identical SVG was inlined into the page DOM next to the `<img>` version. The inline copy
+drew the full scene; the `<img>` stayed blank. `getComputedStyle` on the inline copy returned
+`animation-name: dw` and `stroke-dashoffset: 0px`. `prefers-reduced-motion` was `false`, so the
+existing reduce-motion fallback was not firing either. Loading the same file as a top-level
+document also drew correctly — the defect is specific to the `<img>` context.
+
+### Blast radius
+
+**162 of 171 page dirs — 318 asset files — 95% of the library.** Only pages whose motion rests
+visible (the `flow` family, whose dashes are drawn at `stroke-dashoffset:0`) were unaffected.
+
+### The fix
+
+`tools/rest_state_fix.py`. It appends a base ruleset putting every animated class at its settled
+state: `stroke-dashoffset:0` plus the maximum opacity that class reaches in its own keyframes.
+**No `!important`** — keyframes outrank normal declarations, so any context that *does* run the
+animation still plays it normally. Geometry and timing are untouched, so `variants.fingerprint()`
+does not change and no page's uniqueness is affected. Verified: zero fingerprint drift across the
+whole library.
+
+**Run it on every page you build, before you commit.** It is idempotent — it marks patched files
+with `/*rest-state*/` and skips them on a second pass.
+
+### Verifying this live — you will fool yourself with cache
+
+GitHub Pages serves the new SVG within ~60s, but **the browser keeps serving the old one to the
+`<img>`**, because `?v=` on the page URL does not bust a relative `src`. A page that looks broken
+after a fix is almost always cache. Bust the images before you judge:
+
+```js
+for (const i of document.images) { i.src = i.getAttribute('src').split('?')[0] + '?b=' + Date.now() }
+```
+
+Confirm the deployed file actually carries the fix before concluding anything:
+`await fetch('motion-hero.svg?cb='+Date.now(), {cache:'no-store'}).then(r=>r.text())` and look for
+`/*rest-state*/`.
+
+---
+
+## Scene family saturation (updated 2026-09-16)
+
+The bespoke `scenes.*` builders have small family spaces and the big trades have exhausted them.
+**`scenes.concrete()` has only FOUR families** — `variant=` cycles mod 4 and every value collides.
+Same defect class as the documented `scenes.gc()` (which ignores seed *and* variant entirely).
+
+**Saturated — go straight to `compose.py`, do not waste a variant sweep: `concrete`, `hvac`,
+`plumbing`, `remodel`.**
+
+### Picking a compose family — do not take the first free one
+
+`(subject, 'rise'|'stage', 'single')` produces a single flat slab that reads as an empty grey
+rectangle at hero scale. Score candidates before choosing:
+
+1. count drawn elements, excluding the background rect and the `opacity=".03"` grid;
+2. count how many path points land inside the hero band.
+
+For concrete, `(1,'flow','offset')` scored 113 elements / 160 in-band points. **Prefer `flow`
+where it fits** — its dashes rest visible, so it survives the `<img>` defect above with no patch
+at all.
+
+### The hero re-cut is not one-size-fits-all
+
+`new_page.py` hardcodes `viewBox="-390 235 1330 445"`, which assumes geometry centred around
+y 235-680. Compose families that sit outside that band produce an empty hero, or drop the mass
+behind the headline. Derive the window from the scene's own path bbox instead:
+
+    height = content_height * 1.12
+    width  = height * 2.99
+    x0     = content_x0 - width * 0.42     # mass lands right of the centre-left headline
+
+### Base strokes, again
+
+`compose.m_flow` was drawing its body strokes at `opacity=".14"` — below the 0.30 floor this
+document already sets in hero rule 3, and the reason the first T & T rebuild still read as
+nothing. Raised to `.32` on 2026-09-16. **Check any motion you add against that floor.**
