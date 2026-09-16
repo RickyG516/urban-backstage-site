@@ -1,0 +1,27 @@
+# WEBSITE BUILD PROSPECTS — the third category.
+#
+# These pages are VISIBLE in the demo library on purpose, but they are NOT
+# cold-dial prospects and never enter the mockup-reveal queue. Ricky unarchived
+# them on 2026-08-24 and recast them as website-build pitches rather than spec
+# mockups for contractor cold calling.
+#
+# Before this file existed, the five below sat in .non-prospects while staying
+# unarchived, so demo/index.html's header counted them ACTIVE and
+# tools/enrich_audit.py did not — a permanent five-line disagreement that every
+# run had to be told to ignore. Both available "fixes" were wrong: re-archiving
+# reverses Ricky's decision, and removing them from .non-prospects forces five
+# fake cold-dial rows for a butcher, a wine bar, a window cleaner, a screen
+# repair shop and a kid's lawn business. This file is the third category that
+# was always the real answer.
+#
+# Read by tools/enrich_audit.py and gate.sh. Effect: excluded from the dial-queue
+# and HubSpot-parity requirements, counted separately in the audit's header line
+# so the two numbers reconcile openly instead of silently disagreeing.
+#
+# One slug per line. Blank lines and # comments ignored.
+
+ia-cremers-meats-dubuque          # butcher shop, barter pitch
+il-grape-escape-galena            # wine/martini bar, hand-built pitch, Ricky sourcing photos
+il-rj-window-cleaning-t3wnfp      # window cleaning, not a trade-contractor vertical
+il-screenlab-screen-repair-e7dqm2 # screen repair, not a trade-contractor vertical
+lfn-lawncare                      # family, kid summer lawn business, standalone link only

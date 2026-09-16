@@ -40,13 +40,19 @@ QUIET = "--quiet" in sys.argv
 # demo/.non-prospects, read by this script AND gate.sh. Keep it SHORT and
 # justify every addition — it is a hole in the audit.
 NON_PROSPECT_FILE = os.path.join(DEMO, ".non-prospects")
+# Two further categories, added 2026-09-16. Same file format, same purpose:
+#   .website-build-prospects  visible in the library on purpose, never cold-dialled
+#   .client-sites             replicas of signed clients' real sites, not mockups
+# Both are shared with gate.sh so the two gates cannot drift apart.
+WEBSITE_BUILD_FILE = os.path.join(DEMO, ".website-build-prospects")
+CLIENT_SITE_FILE = os.path.join(DEMO, ".client-sites")
 
 
-def _load_non_prospects():
-    if not os.path.exists(NON_PROSPECT_FILE):
+def _load_slug_list(path):
+    if not os.path.exists(path):
         return set()
     out = set()
-    with open(NON_PROSPECT_FILE, encoding="utf-8") as fh:
+    with open(path, encoding="utf-8") as fh:
         for line in fh:
             slug = line.split("#", 1)[0].strip()
             if slug:
@@ -70,7 +76,9 @@ def _load_valid_trades():
     return {x.strip(" `") for x in m.group(1).replace("\n", " ").split("\u00b7") if x.strip(" `")}
 
 
-KNOWN_NON_PROSPECTS = _load_non_prospects()
+KNOWN_NON_PROSPECTS = _load_slug_list(NON_PROSPECT_FILE)
+WEBSITE_BUILD = _load_slug_list(WEBSITE_BUILD_FILE)
+CLIENT_SITES = _load_slug_list(CLIENT_SITE_FILE)
 VALID_TRADES = _load_valid_trades()
 
 STATUS_KEYS = {"channel", "fb", "note", "photos", "ready", "stage"}
@@ -123,7 +131,10 @@ def main():
     # company_id; contact_id is still checked for uniqueness below.
     qids = {str(p.get("company_id")) for p in q["prospects"] if p.get("company_id")}
 
-    active = [s for s in slugs if s not in arch and s not in KNOWN_NON_PROSPECTS]
+    visible_non_dial = (KNOWN_NON_PROSPECTS | WEBSITE_BUILD | CLIENT_SITES) & set(slugs)
+    active = [s for s in slugs
+              if s not in arch and s not in KNOWN_NON_PROSPECTS
+              and s not in WEBSITE_BUILD and s not in CLIENT_SITES]
     problems = []
 
     # --- ONE definition of "active".
@@ -131,11 +142,13 @@ def main():
     # drops KNOWN_NON_PROSPECTS. If a non-prospect is not archived, the page says
     # N active and the audit says N-1 — which is exactly the kind of quiet
     # disagreement that makes the library feel untrustworthy. Force them to agree.
-    for s in sorted(KNOWN_NON_PROSPECTS & set(slugs)):
-        if s not in arch:
-            problems.append(
-                f"non-prospect not archived: {s} — page header will count it as "
-                f"active but this audit will not. Add it to DEFAULT_ARCHIVED.")
+    # WAS: a "non-prospect not archived" problem line per slug, telling you to add
+    # it to DEFAULT_ARCHIVED. That advice was wrong for the five website-build
+    # prospects — archiving them reverses Ricky's 2026-08-24 decision to keep them
+    # visible — so the run had to be told to ignore five permanent problem lines,
+    # which is exactly how a genuine sixth failure gets missed. The disagreement is
+    # real but INTENTIONAL, so reconcile it openly in the header rather than
+    # reporting it as a fault. See demo/.website-build-prospects.
 
     # --- surface 2: index row + HubSpot link
     for s in slugs:
@@ -225,7 +238,12 @@ def main():
                 f"see the mapping table in the queue README")
 
     if not QUIET:
-        print(f"pages: {len(slugs)}  active: {len(active)}  archived: {len(arch)}")
+        print(f"pages: {len(slugs)}  active: {len(active)}  archived: {len(arch)}  "
+              f"visible non-dial: {len(visible_non_dial)} "
+              f"({len(WEBSITE_BUILD & set(slugs))} website-build, "
+              f"{len(CLIENT_SITES & set(slugs))} client replica)")
+        print(f"  reconciles: {len(active)} + {len(arch)} + {len(visible_non_dial)} "
+              f"= {len(active)+len(arch)+len(visible_non_dial)} of {len(slugs)} pages")
         print(f"index rows: {len(rows)}  status entries: {len(st)}  "
               f"queue prospects: {len(q['prospects'])}")
         linked = sum(1 for s in active if rows.get(s))

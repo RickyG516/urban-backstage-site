@@ -1,0 +1,17 @@
+# CLIENT SITE REPLICAS — pages in demo/ that are NOT spec mockups.
+#
+# A slug here holds a full replica of a SIGNED CLIENT's site, not a generated
+# prospect mockup. The MOCKUP-BASELINE rules (style-pack comment, print CSS,
+# generated-asset gallery, unc-added provenance meta) describe the mockup
+# generator's output and do not apply to hand-built client work.
+#
+# Before this file existed, gate.sh failed New View on every single run with
+# "no-print-css no-pack-comment no-form" and added_dates warned about its
+# missing unc-added meta — noise that every run had to be told to ignore, which
+# is exactly how a real failure gets missed.
+#
+# DO NOT "fix" a page listed here to satisfy the gate. Exclude it instead.
+#
+# Read by gate.sh, tools/enrich_audit.py and tools/added_dates.py.
+
+ia-new-view-landscaping-dbq04   # New View Landscaping — converted to a signed client; slug holds a 20-page site replica

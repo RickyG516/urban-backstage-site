@@ -9,10 +9,19 @@ cd "$(dirname "$0")/demo" || exit 1
 # Non-prospect pages (non-contractor niches living in the library). Single
 # source of truth is demo/.non-prospects, shared with tools/enrich_audit.py so
 # the two gates cannot drift apart. Strip comments and blanks.
+# Three exclusion lists, one source of truth each, all shared with
+# tools/enrich_audit.py so the two gates cannot drift apart:
+#   .non-prospects          non-contractor pages; trade-page image rules N/A
+#   .website-build-prospects visible in the library, never cold-dialled
+#   .client-sites           replicas of signed clients' real sites, not mockups
+# Strip comments and blanks from each.
 skip=""
-if [ -f .non-prospects ]; then
-  skip=$(sed 's/#.*//' .non-prospects | tr -d ' \t' | grep -v '^$')
-fi
+for f in .non-prospects .website-build-prospects .client-sites; do
+  [ -f "$f" ] || continue
+  skip="$skip
+$(sed 's/#.*//' "$f" | tr -d ' \t' | grep -v '^$')"
+done
+skip=$(printf '%s\n' "$skip" | grep -v '^$')
 
 bad=0
 targets=("$@")
@@ -52,7 +61,11 @@ for d in "${targets[@]}"; do
   # file used twice (e.g. the same job photo in the hero AND the gallery).
   # Ricky flagged exactly that on the Ness page -- "Dont reuse the same photos
   # on the same page. Thats slop. Have a standard." Now checks EVERY src.
-  dup=$(grep -o 'src="[^"]*"' "$f" | grep -viE 'src="(data:|#)' | sort | uniq -d | wc -l)
+  # A LOGO in the nav and again in the hero is ordinary web design, not the
+  # padding Ricky flagged ("Dont reuse the same photos on the same page").
+  # Scope the check to photos and generated assets; exempt logo files only.
+  dup=$(grep -o 'src="[^"]*"' "$f" | grep -viE 'src="(data:|#)' \
+        | grep -viE 'src="[^"]*logo[^"]*"' | sort | uniq -d | wc -l)
   [ "$dup" -gt 0 ] && fails="$fails DUP-IMG-ON-PAGE"
 
   if [ -n "$fails" ]; then echo "$d:$fails"; bad=1; fi
