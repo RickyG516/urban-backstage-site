@@ -374,3 +374,55 @@ behind the headline. Derive the window from the scene's own path bbox instead:
 `compose.m_flow` was drawing its body strokes at `opacity=".14"` — below the 0.30 floor this
 document already sets in hero rule 3, and the reason the first T & T rebuild still read as
 nothing. Raised to `.32` on 2026-09-16. **Check any motion you add against that floor.**
+
+---
+
+## ⚠ THE VERIFICATION GATES NOW EXIT 0. A NON-ZERO EXIT IS A REAL FAILURE.
+
+**Changed 2026-09-16. This section OVERRIDES the "KNOWN PRE-EXISTING" list in
+`daily-spec-mockups--3-call-ready-prospects/SKILL.md`**, which still describes the
+old state. That task file explicitly defers to this document on anything technical.
+
+All three gates are clean on a fresh checkout:
+
+    bash gate.sh                          -> exit 0, no output
+    python3 tools/enrich_audit.py         -> exit 0, "clean"
+    python3 tools/added_dates.py --check  -> exit 0, "clean"
+
+**If any of them reports anything, it is YOURS and it must be fixed before you
+commit.** Do not go looking for a documented exception to file it under. There
+aren't any left.
+
+### What was fixed, so nobody reintroduces it
+
+| Was reported every run | Actually was | Fix |
+|---|---|---|
+| `enrich_audit`: five "non-prospect not archived" lines | Five pages deliberately unarchived on 2026-08-24 and recast as website-build pitches, while `.non-prospects` made the audit treat them as inactive. Header said active, audit said not. | `demo/.website-build-prospects` — the third category. Excluded from dial-queue parity, reconciled openly in the header line. |
+| `gate.sh`: `ia-new-view-landscaping-dbq04` fails `no-print-css no-pack-comment no-form` | A signed client's 20-page site replica, not a generated mockup. The generator's conventions never applied to it. | `demo/.client-sites`. Excluded from gate.sh and from `added_dates` stamping. |
+| `added_dates`: "index rows N+1 != page dirs N" and "index row with no page: None" | The six `data-kind="client"` rows link to clients' own domains and have no `/demo/<slug>/` path, so counting them against page dirs guaranteed an off-by-six. | Count rows-that-point-at-a-page separately; report client rows on their own. |
+| `added_dates`: duplicate img src `logo.png` | A logo in the nav and again in the hero is ordinary web design. Ricky's rule was about repeated *photos* padding a thin gallery. | DUP-IMG exempts `logo*` files, in both `gate.sh` and `added_dates`. |
+| `added_dates`: duplicate img src `job-stamped-patio.jpg` on dietz | A genuine defect — the third gallery tile was a literal repeat of the hero photo. | Replaced with the process animation. |
+
+### The data-loss landmine is defused
+
+`tools/added_dates.py` run **bare** used to DELETE live client rows: `slug_of()`
+returns `None` for all six `data-kind="client"` rows, so `dedupe()` put the first
+`None` in `seen` and dropped the other five as duplicates. That is why every prior
+doc said "use `--check` only". `dedupe()` now never dedupes rows without a slug,
+and the bare run was verified non-destructive on a copy (7 client markers in,
+7 out, 177 rows in, 177 out). `--check` is still the sensible default, but the
+bare run is no longer a trap.
+
+### Still genuinely pre-existing — do not chase
+
+Seven same-trade SVG fingerprint collision groups, all predating this work:
+hartwig-plumbing/budget-rooter, aldos-concrete/medina-masonry,
+gerard-tuck-pointing/sean-kollman-concrete, torkelson-plumbing/thomson-heating-cooling,
+tobin-bros/strongs-plumbing-fonddulac, bull-west-design/niklasen-carpentry-monticello,
+and santee-construction-eldridge/seward-masonry-taylor-springs. None is reported by
+the three gates; they surface only in a deliberate library-wide fingerprint sweep.
+
+One queue row points at a non-dial page on purpose: New View Landscaping, marked
+`Closed Won` / `CLOSED_WON`. That is accurate history — a signed client that
+converted from a spec mockup. It is why `queue prospects` reads one higher than
+`active`. Leave it.
