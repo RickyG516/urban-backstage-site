@@ -93,7 +93,7 @@ def m_flow(s, v, acc, off):
     paths = _paths_of(s, v)
     body = ""
     for i, d in enumerate(paths):
-        body += (f'<path d="{d}" stroke="{off}" stroke-width="{v.f(9,17):.1f}" opacity=".14" fill="none" stroke-linecap="round"/>'
+        body += (f'<path d="{d}" stroke="{off}" stroke-width="{v.f(9,17):.1f}" opacity=".32" fill="none" stroke-linecap="round"/>'
                  f'<path class="fl" d="{d}" stroke="{acc}" stroke-width="{v.f(4,8):.1f}" fill="none" '
                  f'stroke-dasharray="{v.f(14,30):.0f} {v.f(60,110):.0f}" stroke-linecap="round" '
                  f'style="animation-delay:{i*v.stagger:.2f}s"/>')
