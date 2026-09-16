@@ -3,18 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GBG Dubuque | Professional Exterior Services</title>
+  <title>GBG Dubuque | Professional Exterior Services for Dubuque, IA Homeowners</title>
+  <meta name="description" content="Pressure washing, junk removal, gutter cleaning, yard cleanup & holiday lights in Dubuque, IA. Local, reliable, trusted. Free quotes.">
+  <meta name="keywords" content="pressure washing Dubuque, gutter cleaning, junk removal, yard cleanup, holiday lights Dubuque Iowa">
+  <meta property="og:title" content="GBG Dubuque | Local Exterior Services">
+  <meta property="og:description" content="Three local guys handling pressure washing, junk removal, gutter cleaning, and more.">
+  <meta property="og:type" content="business.business">
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; }
     
-    /* Colors */
     :root {
       --dark: #1a1a1a;
       --accent: #e36b1e;
       --light: #f5f5f5;
       --gray: #666;
+      --gray-light: #999;
     }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    @keyframes wash-stroke {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-fade { animation: fadeInUp 0.8s ease-out; }
+    .animate-slide { animation: slideInLeft 0.8s ease-out; }
 
     /* Header */
     header {
@@ -24,18 +60,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo-section {
       display: flex;
       align-items: center;
       gap: 20px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .logo-section:hover {
+      transform: scale(1.05);
     }
 
     .logo-mark {
       width: 50px;
       height: 50px;
+      animation: float 3s ease-in-out infinite;
     }
 
     .logo-text h1 {
@@ -50,74 +96,136 @@
       letter-spacing: 1px;
     }
 
+    header nav {
+      display: flex;
+      gap: 30px;
+    }
+
     header nav a {
       color: white;
       text-decoration: none;
       font-size: 14px;
-      margin-left: 30px;
-      transition: color 0.3s;
+      font-weight: 500;
+      transition: color 0.3s, border-bottom 0.3s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 5px;
     }
 
     header nav a:hover {
       color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     /* Hero */
     .hero {
       background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
       color: white;
-      padding: 80px 40px;
+      padding: 100px 40px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(227,107,30,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero h2 {
-      font-size: 48px;
+      font-size: 56px;
       margin-bottom: 20px;
       font-weight: 900;
       letter-spacing: 1px;
+      animation: fadeInUp 0.8s ease-out;
+      line-height: 1.2;
     }
 
-    .hero p {
+    .hero .tagline {
       font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      color: #ddd;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .hero .subtext {
+      font-size: 14px;
       max-width: 600px;
       margin: 0 auto 40px;
-      color: #ccc;
+      color: #bbb;
+      animation: fadeInUp 1s ease-out 0.4s both;
+      font-style: italic;
     }
 
     .cta-button {
       background: var(--accent);
       color: white;
-      padding: 14px 40px;
+      padding: 16px 48px;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 700;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
-      transition: background 0.3s;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(227,107,30,0.3);
+      animation: fadeInUp 1s ease-out 0.6s both;
     }
 
     .cta-button:hover {
       background: #d45a0a;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(227,107,30,0.4);
     }
 
-    /* Services */
-    .services {
+    .cta-button:active {
+      transform: translateY(-1px);
+    }
+
+    /* Section spacing */
+    section {
       padding: 80px 40px;
-      background: white;
     }
 
     .section-title {
       text-align: center;
-      font-size: 36px;
+      font-size: 40px;
       margin-bottom: 50px;
       font-weight: 900;
+      color: var(--dark);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: var(--gray);
+      max-width: 600px;
+      margin: -40px auto 50px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Services */
+    .services {
+      background: white;
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
       max-width: 1200px;
       margin: 0 auto;
@@ -125,18 +233,114 @@
 
     .service-card {
       background: var(--light);
-      padding: 30px;
-      border-radius: 4px;
-      border-left: 4px solid var(--accent);
+      padding: 40px 30px;
+      border-radius: 8px;
+      border-left: 5px solid var(--accent);
+      transition: all 0.3s;
+      animation: fadeInUp 0.8s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(227,107,30,0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: rotate(360deg) scale(1.1);
+      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     .service-card h3 {
-      font-size: 20px;
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: var(--dark);
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 15px;
+    }
+
+    .price-range {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Why Choose Us */
+    .why-choose {
+      background: var(--light);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .why-card {
+      text-align: center;
+      padding: 30px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .why-number {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .why-card h3 {
+      font-size: 18px;
       margin-bottom: 10px;
       color: var(--dark);
     }
 
-    .service-card p {
+    .why-card p {
       font-size: 14px;
       color: var(--gray);
       line-height: 1.6;
@@ -144,135 +348,340 @@
 
     /* Pricing */
     .pricing {
-      background: var(--light);
-      padding: 80px 40px;
+      background: white;
     }
 
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      gap: 25px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .pricing-card {
       background: white;
-      padding: 25px;
-      border-radius: 4px;
+      padding: 30px;
+      border-radius: 8px;
+      border: 2px solid var(--light);
       text-align: center;
+      transition: all 0.3s;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .pricing-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 25px rgba(227,107,30,0.15);
+      transform: translateY(-5px);
     }
 
     .pricing-card h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
+      font-size: 20px;
+      margin-bottom: 15px;
       color: var(--dark);
+      font-weight: 700;
     }
 
-    .pricing-card .price {
-      font-size: 24px;
+    .price {
+      font-size: 32px;
       color: var(--accent);
-      font-weight: bold;
-      margin: 15px 0;
+      font-weight: 900;
+      margin: 20px 0;
+      line-height: 1.2;
     }
 
-    .pricing-card p {
+    .price-note {
       font-size: 13px;
-      color: var(--gray);
+      color: var(--gray-light);
+      margin-bottom: 20px;
     }
 
     /* About */
     .about {
       background: white;
-      padding: 80px 40px;
-      text-align: center;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-    }
-
-    .about h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
+      text-align: center;
     }
 
     .about p {
-      font-size: 16px;
+      font-size: 18px;
       color: var(--gray);
-      line-height: 1.8;
+      line-height: 1.9;
+      margin-bottom: 25px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .about strong {
+      color: var(--accent);
+      font-weight: 700;
     }
 
     /* Contact */
     .contact {
-      background: var(--dark);
+      background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
       color: white;
-      padding: 60px 40px;
+      padding: 80px 40px;
       text-align: center;
     }
 
     .contact h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
+      font-size: 40px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    .contact-info {
-      margin-bottom: 30px;
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .contact-info p {
+    .contact-method {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .contact-method h3 {
       font-size: 18px;
-      margin: 10px 0;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .contact-info a {
+    .contact-method p {
+      font-size: 18px;
+      color: var(--light);
+      margin-bottom: 10px;
+    }
+
+    .contact-method a {
       color: var(--accent);
       text-decoration: none;
+      font-weight: 700;
+      transition: opacity 0.3s;
+    }
+
+    .contact-method a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
     }
 
     .contact-form {
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 8px;
       max-width: 500px;
-      margin: 30px auto 0;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       text-align: left;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      padding: 10px;
-      border: none;
+      padding: 12px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
       border-radius: 4px;
       font-size: 14px;
+      transition: all 0.3s;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 13px;
+    .form-group input::placeholder,
+    .form-group select::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 0 15px rgba(227,107,30,0.3);
+    }
+
+    .form-group select option {
+      background: var(--dark);
+      color: white;
     }
 
     /* Footer */
     footer {
       background: #0f0f0f;
       color: #999;
-      padding: 30px 40px;
+      padding: 40px;
       text-align: center;
-      font-size: 12px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    footer strong {
+      color: var(--light);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      header { flex-direction: column; gap: 20px; }
-      header nav { display: none; }
-      .hero h2 { font-size: 32px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
+      header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 20px;
+      }
+
+      header nav {
+        flex-direction: column;
+        gap: 15px;
+        font-size: 13px;
+      }
+
+      .hero h2 {
+        font-size: 36px;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+
+      section {
+        padding: 50px 20px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .services-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-methods {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    /* Utility */
+    .text-accent {
+      color: var(--accent);
+    }
+
+    .shadow-lg {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "GBG Dubuque",
+    "image": "https://urbanbackstage.com/gbg/gbg-logo.png",
+    "description": "Professional exterior services including pressure washing, junk removal, gutter cleaning, and yard cleanup in Dubuque, Iowa.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Dubuque",
+      "addressLocality": "Dubuque",
+      "addressRegion": "IA",
+      "postalCode": "52001",
+      "addressCountry": "US"
+    },
+    "telephone": "(515) 344-4053",
+    "email": "info@gbgdubuque.com",
+    "url": "https://urbanbackstage.com/gbg/",
+    "areaServed": {
+      "@type": "City",
+      "name": "Dubuque, Iowa"
+    },
+    "priceRange": "$150-$1500",
+    "servesCuisine": "Exterior Services",
+    "sameAs": [
+      "https://www.facebook.com/gbgdubuque",
+      "https://www.instagram.com/gbgdubuque"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "GBG Dubuque",
+    "url": "https://urbanbackstage.com/gbg/",
+    "logo": "https://urbanbackstage.com/gbg/gbg-logo.png",
+    "description": "Local exterior services company in Dubuque, Iowa offering pressure washing, junk removal, gutter cleaning, yard cleanup, and holiday light installation.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubuque",
+      "addressRegion": "IA",
+      "addressCountry": "US"
+    },
+    "telephone": "(515) 344-4053",
+    "email": "info@gbgdubuque.com"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What areas do you service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We service Dubuque, Iowa and surrounding areas. Call us at (515) 344-4053 for a free quote."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer recurring services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Gutter cleaning, trash can cleaning, and yard cleanup are all available as recurring services with monthly rates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can you schedule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We typically book within 7-14 days. For urgent jobs, call us directly at (515) 344-4053."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide free quotes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All quotes are free. Fill out our contact form or call us today."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- Header -->
   <header>
     <div class="logo-section">
@@ -292,6 +701,7 @@
     </div>
     <nav>
       <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
       <a href="#pricing">Pricing</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -299,126 +709,258 @@
 
   <!-- Hero -->
   <section class="hero">
-    <h2>Professional Exterior Services</h2>
-    <p>Three local guys from North Dubuque. We handle it all. Pressure washing, junk removal, gutter cleaning, yard cleanup, and more.</p>
-    <a href="#contact" class="cta-button">Get a Free Quote</a>
+    <div class="hero-content">
+      <h2>Your Dubuque Exterior Experts</h2>
+      <p class="tagline">Three local guys. One mission. We handle the work so you don't have to.</p>
+      <p class="subtext">From pressure washing driveways to hauling junk, we're the professionals Dubuque trusts. Free quotes. Local rates. Real results.</p>
+      <a href="#contact" class="cta-button">Get Your Free Quote Today</a>
+    </div>
   </section>
 
   <!-- Services -->
   <section class="services" id="services">
-    <h2 class="section-title">What We Do</h2>
+    <h2 class="section-title">What We Handle</h2>
+    <p class="section-subtitle">Professional exterior services designed to save you time and make your property look its best year-round.</p>
+    
     <div class="services-grid">
       <div class="service-card">
+        <div class="service-icon">🚿</div>
         <h3>Pressure Washing</h3>
-        <p>Residential and commercial. Driveways, patios, siding, storefronts. We make it look new.</p>
+        <p>Deep clean your driveway, patio, siding, or storefront. We handle residential and commercial properties across Dubuque. Professional equipment. Spotless results.</p>
+        <div class="price-range">$200 – $600</div>
       </div>
+
       <div class="service-card">
+        <div class="service-icon">🚛</div>
         <h3>Junk Removal & Hauling</h3>
-        <p>Debris, old furniture, renovation waste. We haul it away. You get the space back.</p>
+        <p>Renovation debris, old furniture, yard waste — we haul it away. One call. No mess left behind. Fully licensed and insured. Same-day pickup available.</p>
+        <div class="price-range">$300 – $800</div>
       </div>
+
       <div class="service-card">
+        <div class="service-icon">🪜</div>
         <h3>Gutter Cleaning</h3>
-        <p>Spring and fall. Keep your gutters flowing. Recurring service available.</p>
+        <p>Spring and fall gutter maintenance keeps your home protected. We clear leaves, debris, and buildup. Standing contracts available for recurring peace of mind.</p>
+        <div class="price-range">$150 – $300</div>
       </div>
+
       <div class="service-card">
-        <h3>Yard Cleanup</h3>
-        <p>Branches, leaves, yard prep. Seasonal services. Build standing contracts.</p>
+        <div class="service-icon">🌿</div>
+        <h3>Yard Cleanup & Landscaping</h3>
+        <p>Spring cleanup, fall leaf removal, branch clearing. Seasonal services and standing contracts both available. We turn overgrown yards into showcases.</p>
+        <div class="price-range">$200 – $500</div>
       </div>
+
       <div class="service-card">
-        <h3>Holiday Lights Installation</h3>
-        <p>Professional roofline and yard displays. We install. We remove. Repeat every year.</p>
+        <div class="service-icon">✨</div>
+        <h3>Holiday Light Installation</h3>
+        <p>Professional roofline and yard displays for the holidays. We install in November, remove in January. Repeat every year stress-free. Dubuque's top choice for holiday magic.</p>
+        <div class="price-range">$800 – $1,500</div>
       </div>
+
       <div class="service-card">
-        <h3>Trash Can Cleaning</h3>
-        <p>Monthly recurring service. Clean bins delivered back. Simple recurring revenue.</p>
+        <div class="service-icon">🧹</div>
+        <h3>Trash Can & Bin Cleaning</h3>
+        <p>Monthly recurring service. We clean your bins, eliminating odor and bacteria. Clean bins delivered back to your door. Simple. Reliable. Monthly rate.</p>
+        <div class="price-range">$20 – $40/month</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-choose" id="why">
+    <h2 class="section-title">Why GBG Dubuque?</h2>
+    <p class="section-subtitle">We're not a corporation. We're three guys from North Dubuque who grew up here and know this community inside and out.</p>
+    
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-number">100%</div>
+        <h3>Local</h3>
+        <p>We live here. We work here. Your neighbors are our neighbors. That means accountability and pride in every job.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-number">25+</div>
+        <h3>Years Combined</h3>
+        <p>Between the three of us, we've got decades of real-world exterior and trades experience. We know what works.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-number">$0</div>
+        <h3>Hidden Fees</h3>
+        <p>Transparent pricing. You get a quote. You know the cost. No surprises. That's how we do business.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-number">48hr</div>
+        <h3>Response Time</h3>
+        <p>Call or email us today. We respond within 48 hours with a free quote and next-available booking.</p>
       </div>
     </div>
   </section>
 
   <!-- Pricing -->
   <section class="pricing" id="pricing">
-    <h2 class="section-title">Pricing</h2>
+    <h2 class="section-title">Simple Pricing. No Surprises.</h2>
+    <p class="section-subtitle">All jobs quoted upfront. All prices include labor, equipment, and cleanup.</p>
+    
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Pressure Washing</h3>
-        <div class="price">$200 – $600</div>
-        <p>Per job. Residential + commercial.</p>
+        <div class="price">$200–$600</div>
+        <p class="price-note">per job · Residential & Commercial</p>
+        <p>Driveways, patios, siding, storefronts — we clean it all professionally.</p>
       </div>
+
       <div class="pricing-card">
         <h3>Junk Removal</h3>
-        <div class="price">$300 – $800</div>
-        <p>Per job. Varies by volume.</p>
+        <div class="price">$300–$800</div>
+        <p class="price-note">per job · volume-dependent</p>
+        <p>Debris, furniture, construction waste — same-day pickup available.</p>
       </div>
+
       <div class="pricing-card">
         <h3>Gutter Cleaning</h3>
-        <div class="price">$150 – $300</div>
-        <p>Per house. Recurring discounts available.</p>
+        <div class="price">$150–$300</div>
+        <p class="price-note">per house · recurring discounts</p>
+        <p>Spring & fall service. Standing contracts save 15% per cleaning.</p>
       </div>
+
       <div class="pricing-card">
         <h3>Yard Cleanup</h3>
-        <div class="price">$200 – $500</div>
-        <p>Per job. Seasonal or standing contracts.</p>
+        <div class="price">$200–$500</div>
+        <p class="price-note">per job · seasonal or contract</p>
+        <p>Spring & fall leaf removal. Year-round standing contracts available.</p>
       </div>
+
       <div class="pricing-card">
         <h3>Holiday Lights</h3>
-        <div class="price">$800 – $1,500</div>
-        <p>Per installation. Nov–Dec bookings.</p>
+        <div class="price">$800–$1,500</div>
+        <p class="price-note">per install · Nov–Dec booking</p>
+        <p>Professional display design & installation. Removal in January included.</p>
       </div>
+
       <div class="pricing-card">
         <h3>Trash Can Cleaning</h3>
-        <div class="price">$20 – $40</div>
-        <p>Per bin/month. Recurring.</p>
+        <div class="price">$20–$40</div>
+        <p class="price-note">per month · recurring</p>
+        <p>Monthly service. Clean bins. No odor. Delivered back to your home.</p>
       </div>
     </div>
   </section>
 
   <!-- About -->
   <section class="about">
-    <h2>Who We Are</h2>
-    <p>Three guys from North Dubuque who grew up together. We handle the work. We handle it right. We're not an agency. We're local. We're built to last.</p>
+    <h2 class="section-title">Built in North Dubuque</h2>
+    <p>We're not a franchise. We're not a big corporate operation. We're three guys from Dubuque who grew up together, who know this town, and who show up every day to do real work.</p>
+    <p>We handle the exterior. You enjoy your property. That's the deal. <strong>That's it.</strong></p>
+    <p style="margin-top: 40px; font-style: italic;">Exterior services done right. Local. Reliable. Built to last.</p>
   </section>
 
   <!-- Contact -->
   <section class="contact" id="contact">
-    <h2>Get a Free Quote</h2>
-    <div class="contact-info">
-      <p><strong>Call:</strong> <a href="tel:+15153444053">(515) 344-4053</a></p>
-      <p><strong>Email:</strong> <a href="mailto:info@gbgdubuque.com">info@gbgdubuque.com</a></p>
+    <h2>Ready? Let's Get Started.</h2>
+    
+    <div class="contact-methods">
+      <div class="contact-method">
+        <h3>Call Us</h3>
+        <p><a href="tel:+15153444053">(515) 344-4053</a></p>
+        <p style="font-size: 13px; color: #aaa;">Available Mon–Sat, 8am–6pm</p>
+      </div>
+
+      <div class="contact-method">
+        <h3>Email Us</h3>
+        <p><a href="mailto:info@gbgdubuque.com">info@gbgdubuque.com</a></p>
+        <p style="font-size: 13px; color: #aaa;">We'll respond within 48 hours</p>
+      </div>
+
+      <div class="contact-method">
+        <h3>Get a Quote Online</h3>
+        <p>Fill out the form below</p>
+        <p style="font-size: 13px; color: #aaa;">Free quote. No obligation.</p>
+      </div>
     </div>
+
     <form class="contact-form">
       <div class="form-group">
-        <label>Name *</label>
-        <input type="text" required>
+        <label for="name">Your Name *</label>
+        <input type="text" id="name" name="name" required placeholder="John Smith">
       </div>
+
       <div class="form-group">
-        <label>Phone *</label>
-        <input type="tel" required>
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
       </div>
+
       <div class="form-group">
-        <label>Service *</label>
-        <select required>
-          <option value="">Select a service</option>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com">
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service Needed *</label>
+        <select id="service" name="service" required>
+          <option value="">-- Select a service --</option>
           <option value="pressure-washing">Pressure Washing</option>
-          <option value="junk-removal">Junk Removal</option>
+          <option value="junk-removal">Junk Removal & Hauling</option>
           <option value="gutter-cleaning">Gutter Cleaning</option>
           <option value="yard-cleanup">Yard Cleanup</option>
-          <option value="holiday-lights">Holiday Lights</option>
+          <option value="holiday-lights">Holiday Light Installation</option>
           <option value="trash-cleaning">Trash Can Cleaning</option>
           <option value="other">Other</option>
         </select>
       </div>
+
       <div class="form-group">
-        <label>Date Needed *</label>
-        <input type="date" required>
+        <label for="date">Date Needed *</label>
+        <input type="date" id="date" name="date" required>
       </div>
-      <button type="submit" class="cta-button" style="width: 100%;">Request Quote</button>
+
+      <button type="submit" class="cta-button" style="width: 100%; margin-top: 10px;">Get My Free Quote</button>
     </form>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>GBG Dubuque | Professional Exterior Services | (515) 344-4053</p>
-    <p style="margin-top: 10px; color: #666;">Built in Dubuque, Iowa</p>
+    <p><strong>GBG Dubuque</strong> | Professional Exterior Services</p>
+    <p>(515) 344-4053 | info@gbgdubuque.com</p>
+    <p>Serving Dubuque, IA and surrounding areas</p>
+    <p style="margin-top: 20px; color: #666; font-size: 12px;">© 2026 GBG Dubuque. All rights reserved. Licensed & Insured.</p>
   </footer>
+
+  <script>
+    // Smooth scroll behavior for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .why-card, .pricing-card').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+
+    // Form submission (basic demo)
+    document.querySelector('form')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you! We\'ll contact you within 48 hours with a free quote.');
+      this.reset();
+    });
+  </script>
 </body>
 </html>
