@@ -391,6 +391,14 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-milam-concrete-nevada": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/p/Milam-Concrete-Construction-Inc-100054466720455/",
+  "note": "in HubSpot 2026-09-18 (company 347254226661) | contact 554388183790 (Terry Milam, Owner) | NO-WEBSITE FINDING, METHOD = search-index absence + domain-scoped search, NOT a live browser load (no Chrome and no in-app browser on this unattended run). (1) Plain name+city WebSearch run twice with different phrasing returned only BBB, BuildZoom, Nextdoor, Yelp, cityof.com and about.me - zero first-party domain. (2) Domain-scoped WebSearch on milamconcrete.com, milamconstruction.com and milamconcreteandconstruction.com returned NO links at all. (3) BBB profile carries no 'Visit Website' button (pool signal 2026-09-07). (4) Corroborating: their published business email is milamconcrete@aol.com. Confidence HIGH. | REVENUE: started 1/1/2003, incorporated in Iowa 3/2/2004 (23 years, same owner); BBB Accredited since 1/10/2011 (15 years) with an A+ rating; Iowa contractor license C000211; active Facebook page posting job photos, plus Nextdoor and a Yelp listing with 14 photos. | ADDRESS CONFLICT: BBB lists PO Box 266; Yelp and BuildZoom list the physical 1505 2nd St. | CALL WARNINGS: none found - no open complaints, no safety flags. | FB: https://www.facebook.com/p/Milam-Concrete-Construction-Inc-100054466720455/",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-millius-mulch-landscaping-dbq01": {
   "channel": "fb",
   "fb": "https://www.facebook.com/MilliusLandscaping/",
@@ -575,10 +583,26 @@
   "ready": true,
   "stage": "none"
  },
+ "ia-tile-pros-webstercity": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-09-18 (company 347223616206) | contact 554382468824 (Brandon Hayes, Owner; Travis Wearda is co-owner) | NO-WEBSITE FINDING, METHOD = search-index absence + domain-scoped search + a fetched chamber profile, NOT a live browser load (no Chrome and no in-app browser on this unattended run). (1) Plain name+city WebSearch returned only BBB, Nextdoor, BuildZoom, HomeAdvisor, Yelp, YellowPages, Manta, CMac and the Webster City Area Chamber listing - zero first-party domain. (2) Domain-scoped WebSearch: only tilepros.com resolved, to a Tucson ARIZONA tile company on a 520 number (namesake); thetilepros.com, tileprosinc.com and thetileprosinc.com returned nothing. (3) The Webster City Area Chamber member page was FETCHED IN FULL and carries address, phone and email but NO website link - a chamber profile is precisely where a member site would appear. (4) BBB profile carries no 'Visit Website' button (pool signal 2026-09-04). Confidence HIGH. | TRADE CONFIRMED as floor/wall tile, NOT agricultural drainage tile: BBB files them under Excavating Contractors and the chamber lists 'Tile Pros / TMI Services', both ambiguous in Iowa, but BuildZoom and HomeAdvisor both list tile flooring, showers, backsplashes and countertops. | REVENUE: established 2001 (25 years at 308 3rd St); approximately 8 employees; BuildZoom score 91 = top 37% of 39,764 Iowa licensed contractors; Webster City Area Chamber member; shop premises, not home-based. | ALT PHONE: chamber lists (515) 832-6162 for the same address. | CALL WARNINGS: DO NOT open on licensing - BuildZoom shows C147415 Active but expiring June 2026 (renewal status unknown) and a second licence C003885 as Inactive/cancelled. Unrelated namesake in Tucson AZ. | PHONE ONLY - no Facebook page found.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-torkelson-plumbing-heating-4r9a11": {
   "channel": "fb",
   "fb": "https://www.facebook.com/165462856813089/",
   "note": "FB: only result, exact business name | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-tr-painting-victor": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-09-18 (company 347220017894) | contact 554356756193 (Cory L Timm, Owner) | NO-WEBSITE FINDING, METHOD = search-index absence + domain-scoped search, NOT a live browser load (no Chrome and no in-app browser on this unattended run). (1) Plain name+city WebSearch returned only BBB, BuildZoom, a BBB category page and YellowPages - zero first-party domain. (2) Domain-scoped WebSearch: trpaintingllc.com = 'T&R Painting LLC' of KENTUCKY (namesake, different name and state); trpainting.com = 'Todd Robinson Painting' of Tumwater WASHINGTON (namesake); trpaintingiowa.com = no links. (3) BBB profile carries no 'Visit Website' button (pool signal 2026-09-15). Confidence HIGH. | REVENUE: Iowa contractor registration C142230 verified ACTIVE by BuildZoom as of June 2026; $25,000 surety bond on file; BuildZoom score 92 = top 32% of 39,764 Iowa licensed contractors; in business since 2/13/2017 (9 years); BBB Accredited A+ since 7/11/2024; 609 Williams St, Victor IA 52347. | CALL WARNINGS: two unrelated namesakes (KY and WA) - do not imply he has a site; the 11-25-2025 license date is a RENEWAL, not a start date. | PHONE ONLY - no Facebook page found.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
