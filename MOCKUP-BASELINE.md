@@ -426,3 +426,50 @@ One queue row points at a non-dial page on purpose: New View Landscaping, marked
 `Closed Won` / `CLOSED_WON`. That is accurate history — a signed client that
 converted from a spec mockup. It is why `queue prospects` reads one higher than
 `active`. Leave it.
+
+---
+
+## Labelled placeholders — the stock ban is NARROWED, not lifted (Ricky, 2026-09-19)
+
+The rule above still stands as written: **stock photography passed off as the
+prospect's own work is retired and stays retired.** That is what produced
+manufactured sameness and it is not coming back.
+
+What Ricky authorised on 2026-09-19 is a different thing, and the distinction is
+the whole point: **a placeholder that announces itself.** Building the enrichment
+task (`daily-mockup-enrichment`) forced the question, because ~40% of prospects
+have no usable Google Business Profile gallery and under the old rule those pages
+could never become sendable.
+
+His instruction, verbatim: *"If they cant find photos maybe we just build a section
+that has their trade stock photos in it... Same with reviews if not available some
+placeholder and then like a astrict notice telling them that this is where they
+will go... Like do their innitials and a note that says, send is your logo file and
+we replace it. Just make sure they know the shit that is not custom and matching
+their brand will once we have those assets."*
+
+### The contract
+
+A non-real asset may ship **only** if both of these are true:
+
+1. the element carries `data-placeholder="stock|logo|reviews"`, and
+2. the page carries the visible `.swap-notice` block naming what is a placeholder
+   and what the prospect sends to replace it.
+
+`tools/enrich_level.py` enforces both and **hard-fails** a page that carries
+placeholders without the notice. A page that ships unannounced stock is the exact
+failure the original ban exists to prevent, and the script treats it that way.
+
+### Why this is a sales mechanic, not a compromise
+
+The gaps become the reason a prospect replies. "Send me your logo file and three
+job photos and this becomes yours" is a smaller, easier ask than "hire me", and it
+is the ask that starts the conversation. A page with honest holes in it outperforms
+a page that quietly pretends somebody else's driveway is theirs — and it cannot
+blow up later, which the quiet version absolutely can.
+
+### Levels
+
+`enrich_level.py` scores every page GOLD / SILVER / BRONZE / BASE. GOLD is the Ness
+standard: real photos, real logo, real reviews. BASE is the build task's output and
+is **not sendable**. As of 2026-09-19: 1 GOLD, 18 BRONZE, 161 BASE.
