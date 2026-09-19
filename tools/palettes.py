@@ -145,6 +145,29 @@ PALETTES = [
     dict(name="juniper-slate",    dark="#0f1412", accent="#5fa572", off="#f2f6f3", band="green"),
     dict(name="olive-iron",       dark="#111412", accent="#84ab6b", off="#f4f6f3", band="green"),
     dict(name="emerald-graphite", dark="#0e1311", accent="#4fa886", off="#f1f6f4", band="green"),
+    # ---- added 2026-09-19: pool EXHAUSTED for the FIFTH time. 174 live accents
+    # against a 62-entry pool and every single pool accent now appears in demo/,
+    # so pick() had zero candidates and pick_batch(3) raised "palette pool
+    # exhausted". Same fix and same discipline as 08-26, 08-30, 09-05 and 09-09:
+    # extend only the thinnest bands - grey 13, violet 13, blue 21, red 21,
+    # teal 22, green 24 against warm 60 - and add NOTHING warm. Every accent
+    # below was checked against the 174 live accents (no collision), against the
+    # existing pool, against band_of() agreement, and against audit()'s 3.0:1
+    # hero / 4.5:1 dark-text-on-accent thresholds. Nine added so the next two
+    # runs do not each pay this tax.
+    # STANDING NOTE, now FIVE runs old and getting louder: the pool burns ~1
+    # palette per prospect, so a flat list will keep running dry roughly every
+    # third run. The real fix is Stage 2 (LIGHT / MONO hero schemes), which
+    # multiplies the usable space instead of lengthening the list. Still not built.
+    dict(name="ironstone",        dark="#151617", accent="#a0a7ad", off="#f5f5f6", band="grey"),
+    dict(name="flint-grey",       dark="#101113", accent="#949da4", off="#f4f4f6", band="grey"),
+    dict(name="amethyst-iron",    dark="#141019", accent="#9c86d4", off="#f5f4f9", band="violet"),
+    dict(name="orchid-shale",     dark="#161219", accent="#b58ed6", off="#f7f4f9", band="violet"),
+    dict(name="azure-shale",      dark="#0d1217", accent="#57a0d0", off="#f1f4f8", band="blue"),
+    dict(name="slate-cobalt",     dark="#0f1219", accent="#6d94d9", off="#f2f4f9", band="blue"),
+    dict(name="coral-shale",      dark="#151210", accent="#cf6f61", off="#f7f4f3", band="red"),
+    dict(name="verdigris-iron",   dark="#0f1617", accent="#4aa8a0", off="#f1f6f6", band="teal"),
+    dict(name="cypress-slate",    dark="#0f1411", accent="#6fae7a", off="#f2f6f3", band="green"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
