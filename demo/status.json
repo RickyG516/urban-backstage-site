@@ -442,10 +442,12 @@
   "ia-millius-mulch-landscaping-dbq01": {
     "channel": "fb",
     "fb": "https://www.facebook.com/MilliusLandscaping/",
-    "note": "in HubSpot 2026-08-07 (company 338481182456) | 446 followers, 100% recommend / 5 reviews. No website, no GBP.",
-    "photos": "generated",
+    "note": "in HubSpot 2026-08-07 (company 338481182456) | 446 followers, 100% recommend / 5 reviews. No website, no GBP. | ENRICHED 2026-09-20: GOLD -- 2 real job photos (a flagstone-and-black-mulch bed built around two backyard trees, two angles) harvested from Facebook, identity-gate checked. Real logo cropped from their own branded T-shirt ('Millius Landscaping' pink script wordmark). Real review: Facebook shows 100% recommend across 5 reviews; pulled the one verbatim quote FB actually renders (Michele Austin) plus the aggregate stat. Colors sampled from the shirt logo (rose pink #d9738f on near-black #12111a, contrast audited clean both directions).",
+    "photos": "real",
     "ready": true,
-    "stage": "none"
+    "stage": "none",
+    "enrich_level": "GOLD",
+    "enriched": "2026-09-20"
   },
   "ia-muller-plumbing-heating-iowa-city": {
     "channel": "fb",
