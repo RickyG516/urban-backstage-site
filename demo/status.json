@@ -470,10 +470,12 @@
   "ia-muller-plumbing-heating-iowa-city": {
     "channel": "fb",
     "fb": "https://www.facebook.com/MullerPlumbingHeating/",
-    "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04.",
-    "photos": "generated",
+    "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04. | ENRICHED 2026-09-22 (GOLD): real logo pulled from facebook.com/MullerPlumbingHeating cover banner and used in nav; 2 real job photos harvested from Google Business Profile (hero = storefront exterior w/ Muller Plumbing and Heating awning sign, gallery tile = rough-in plumbing in a framed wall, Feb 2020) -- both photo-level identity-checked, no third-party branding present; 3 verbatim Google reviews (Chuck D., Michael C., Ed F.) pulled from the confirmed GBP listing at 97 Commercial Dr (4.3 avg / 32 reviews); accent recolored to sampled brand red #d75855 (lightened off logo red #c6322e for contrast) with brand-colors:sampled marker. No placeholders left on the page.",
+    "photos": "real",
     "ready": true,
-    "stage": "none"
+    "stage": "none",
+    "enrich_level": "GOLD",
+    "enriched": "2026-09-22"
   },
   "ia-ness-custom-flooring-k3n7wd": {
     "channel": "phone",
