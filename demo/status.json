@@ -557,6 +557,14 @@
     "ready": true,
     "stage": "none"
   },
+  "ia-r-and-b-painting-cedar-rapids": {
+    "channel": "phone",
+    "fb": "https://www.facebook.com/www.rbpaintingstucco/",
+    "note": "in HubSpot 2026-09-23 (company 348263364292) | No-website VERIFIED 2026-09-23 by the two-test method, search-based only - no browser on this unattended run. (1) Plain WebSearch 'R & B Painting Cedar Rapids Iowa Roger Brecht' returned only aggregators - BBB, Dun & Bradstreet, BuildZoom, Angi, Yelp, YellowPages, Manta, claimspages, Facebook - and zero first-party domain. (2) Domain-scoped WebSearch across rbpaintingcr.com / rbpainting.com / rbfinishes.com / rbpaintingstucco.com / randbpainting.com returned links for randbpainting.com ONLY, and that site is R and B Painting of the Willamette Valley, OREGON - an unrelated namesake trading since 2008, not this business. Published directory email is rbfinishes@yahoo.com, free webmail, which corroborates. Confidence HIGH. Owner Roger A. Brecht per BBB Business Management, corroborated by the D&B key-principal field. REVENUE PROOF: ~20 years in Cedar Rapids per third-party listings, BBB A+ with file opened 3/30/2022, Iowa contractor licence on file, BuildZoom score 91 (top 37% of Iowa licensed contractors), commercial and light-industrial client base, and a specialty stack - Lotusan high-performance finish, traditional three-coat stucco, EIFS, plaster, window glazing - that needs a trained crew rather than one painter. CALL WARNINGS: trades under two names ('R & B Painting' and 'R & B Stucco, Plaster & Painting'), so confirm which he uses; and do NOT tell him someone took 'his' domain - randbpainting.com is a legitimate unrelated Oregon company.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
   "ia-rabalais-electric-1nc4aj": {
     "channel": "phone",
     "fb": "",
@@ -591,13 +599,13 @@
   },
   "ia-rubel-roofing-construction-6nihze": {
     "channel": "phone",
+    "enrich_level": "BRONZE",
+    "enriched": "2026-09-22",
     "fb": "https://www.facebook.com/people/Rubel-Roofing-Company/100053267936141/",
     "note": "in HubSpot 2026-08-26 (company 342153841361) | no-website VERIFIED in Chrome 2026-08-26: rubelroofing.com, rubelroofingandconstruction.com, rubelroofingco.com all error pages; BBB has no Visit Website button | second confirmation: Albia Chamber directory lists gmail address and no website | revenue proof: 24 yrs (since 2002), BBB A+ 0 complaints, res+comm+LARGE COMMERCIAL, six-town service area | Owens Corning Preferred per Angi = SECONDARY source, do not assert on call | owner Justin C Rubel (BBB) | phone verified against Albia Chamber Main Street directory | ENRICHED 2026-09-22 (BRONZE): identity re-confirmed on Facebook (facebook.com/people/Rubel-Roofing-Company/100053267936141, name/phone/service-area all matching (641) 777-5365). 2 real job photos harvested from FB (cover photo = branded boom-lift truck with 'RUBEL ROOFING COMPANY 641-777-5365' on the door at a residential job site, used as hero; profile photo = crew member installing shingles, used as a gallery tile) -- both photo-level clean, no other company's branding. 3 verbatim Google reviews added (Jennifer S., Daniel, Gannon S. -- 5.0 avg / 7 reviews). No real logo available: FB page never set a custom profile picture (default silhouette avatar) -- used a labelled 'RR' initials placeholder badge (data-placeholder=logo) in the nav with a swap-notice asking Justin to send the real logo. No distinct brand color found on the truck (plain black lettering on white) so left the pool accent (#4f9fd1) unchanged rather than force a brand-colors claim.",
     "photos": "real",
     "ready": true,
-    "stage": "none",
-    "enrich_level": "BRONZE",
-    "enriched": "2026-09-22"
+    "stage": "none"
   },
   "ia-rw-cardella-keokuk-k7m2vd": {
     "channel": "phone",
@@ -1089,6 +1097,14 @@
     "ready": true,
     "stage": "none"
   },
+  "il-r-maquet-plumbing-pekin": {
+    "channel": "phone",
+    "fb": "https://www.facebook.com/p/RMaquet-Plumbing-Inc-100063971140625/",
+    "note": "in HubSpot 2026-09-23 (company 348294988488) | No-website VERIFIED 2026-09-23 by the two-test method, search-based only - no browser on this unattended run. (1) Plain WebSearch 'Maquet Plumbing Pekin Illinois Robert Maquet' returned only aggregators - BBB, Nextdoor, D&B, Yahoo Local, Facebook, Angi, Alignable, Yelp, yellow-pages.us.com and the Bradford White contractor finder - and NO owned domain. (2) Domain-scoped WebSearch across maquetplumbing.com / rmaquetplumbing.com / maquetplumbingandpiping.com returned two results, neither a working site for this contractor: maquetplumbing.com is 'Maquet Plumbing Code Consultants', an Illinois plumbing-CODE-CONSULTING and apprentice-exam-prep practice with no contractor service pages and no reference to the Pekin contracting company (almost certainly a relative's separate venture), and maquetplumbingandpiping.com now serves an offshore gambling page - a lapsed domain that has been squatted. This settles the ownership question the pool row carried open since 2026-09-19 as far as search can: the contracting company has no site of its own. Confidence MEDIUM-HIGH; an attended Chrome run could close it outright. Owner Robert R. Maquet per BBB and the D&B key-principal field. REVENUE PROOF: 37 years family-owned, Illinois corporation, BBB A+ since 2021, company copy claims 70+ years COMBINED experience (implies several licensed plumbers on staff), serves residential AND commercial AND industrial process piping, listed on the Bradford White manufacturer contractor finder, fixed shop at 1207 Black St with published Mon-Fri 7:00-4:30 hours. CALL WARNINGS: do NOT open with 'you have no web presence' - a Maquet-branded plumbing site exists and is likely a relative's; do not assert maquetplumbingandpiping.com was ever theirs; alternate number (309) 346-4722 appears on yellow-pages.us.com, BBB-sourced (309) 241-0771 is primary; and Angi dates 'Maquet Plumbing & Piping' to 1997 against the company's own '37 years', so quote the 37 years, never a founding year.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
   "il-r-marit-painting-7jp0a6": {
     "channel": "phone",
     "fb": "",
@@ -1517,6 +1533,14 @@
     "channel": "unknown",
     "fb": "",
     "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
+  "wi-wisconsin-concrete-restoration-boscobel": {
+    "channel": "phone",
+    "fb": "https://www.facebook.com/WCRNISM/",
+    "note": "in HubSpot 2026-09-23 (company 348086174432) | No-website VERIFIED 2026-09-23 by the two-test method plus a sister-business check, search-based only - no browser on this unattended run. (1) Plain WebSearch 'Wisconsin Concrete Restoration Boscobel silo repair Rick Howell' returned only BBB, Facebook, Yelp, Kompass and claimspages - zero first-party domain. (2) Domain-scoped WebSearch across wisconsinconcreterestoration.com / northeastsilo.com / wcrsilo.com / nesilo.com returned ZERO links. (3) A third search on the sister operation 'Northeast Silo Manufacturing' Boscobel also surfaced no owned domain, closing the loophole that the silo-manufacturing side might carry a site covering both. Only web presence is the shared Facebook page facebook.com/WCRNISM. Confidence HIGH. Owner Rick Howell per BBB Business Management. REVENUE PROOF: started 8/1991 - 35 years - Wisconsin corporation, BBB A+ accredited, runs two operations out of the yard at 611 Superior St (restoration plus Northeast Silo Manufacturing Co.), and ag-structure restoration is equipment-heavy staging-and-hoisting work, not a one-truck trade. CALL WARNINGS: Boscobel holds at least two other silo businesses - Midwest Silo Company of Boscobel WI Inc (505 E Prairie St) and MidWest Silo & Jetcrete LLC - so confirm 611 Superior St; and the Facebook page is shared between the two Howell businesses.",
     "photos": "generated",
     "ready": true,
     "stage": "none"

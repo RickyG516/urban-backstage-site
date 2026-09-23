@@ -35,7 +35,13 @@ def esc(x): return html.escape(x, quote=True)
 def build(d):
     pk = PACKS[d["pack"]]; slug=d["slug"]; A=d["accent"]; DK=d["dark"]; OFF=d["off"]
     # ---- assets
-    svg = BUILDERS[d["trade"]](DK, A, OFF, d["seed"], variant=d.get("variant"))
+    # scenes.painting() (and any other builder without a variant axis) does not
+    # accept variant=. Every run rediscovered this as a TypeError; handled here
+    # once instead. 2026-09-23.
+    try:
+        svg = BUILDERS[d["trade"]](DK, A, OFF, d["seed"], variant=d.get("variant"))
+    except TypeError:
+        svg = BUILDERS[d["trade"]](DK, A, OFF, d["seed"])
     open(f"{DEMO}/{slug}/motion.svg","w").write(svg)
     open(f"{DEMO}/{slug}/motion-hero.svg","w").write(
         svg.replace('viewBox="0 0 1200 900" width="1200" height="900"',

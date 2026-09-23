@@ -143,6 +143,21 @@ PALETTES = [
     dict(name="teal-shale",       dark="#101617", accent="#3f9fa8", off="#f1f6f7", band="teal"),
     dict(name="lagoon-graphite",  dark="#0f1718", accent="#6ab5b2", off="#f2f7f7", band="teal"),
     dict(name="juniper-slate",    dark="#0f1412", accent="#5fa572", off="#f2f6f3", band="green"),
+    # 2026-09-23: pool exhausted again (184 live accents; only 3 unused entries and
+    # two of those in the same band, so pick_batch(3) could not find 3 distinct
+    # bands). Topped up in the bands the LIVE library is thinnest in - grey 15,
+    # violet 16, blue 21 - deliberately not warm, which is still 59. All pass
+    # audit() both directions; none collides with a live accent.
+    dict(name="pewter-shale",     dark="#121314", accent="#9aa3a8", off="#f3f4f5", band="grey"),
+    dict(name="ash-graphite",     dark="#131414", accent="#adb1b0", off="#f4f5f5", band="grey"),
+    dict(name="wisteria-iron",    dark="#141119", accent="#a98cd8", off="#f5f3fa", band="violet"),
+    dict(name="lilac-shale",      dark="#151219", accent="#c091d8", off="#f7f4fa", band="violet"),
+    dict(name="cobalt-shale",     dark="#0d1119", accent="#5f94dd", off="#f1f4fa", band="blue"),
+    dict(name="jade-shale",       dark="#0e1513", accent="#4fb089", off="#f1f7f4", band="green"),
+    dict(name="mist-teal",        dark="#101718", accent="#5cb8bd", off="#f2f7f7", band="teal"),
+    dict(name="cyan-shale",       dark="#0e1618", accent="#49a9bb", off="#f1f6f8", band="teal"),
+    dict(name="brick-iron",       dark="#161110", accent="#cf7268", off="#f8f4f3", band="red"),
+    dict(name="fern-iron",        dark="#0f1411", accent="#6cb07a", off="#f2f6f3", band="green"),
     dict(name="olive-iron",       dark="#111412", accent="#84ab6b", off="#f4f6f3", band="green"),
     dict(name="emerald-graphite", dark="#0e1311", accent="#4fa886", off="#f1f6f4", band="green"),
     # ---- added 2026-09-19: pool EXHAUSTED for the FIFTH time. 174 live accents
