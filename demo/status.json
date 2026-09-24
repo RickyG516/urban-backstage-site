@@ -153,6 +153,14 @@
     "ready": true,
     "stage": "none"
   },
+  "ia-dans-tree-service-orange-city": {
+    "channel": "phone",
+    "fb": "https://www.facebook.com/danstreeservicellc/",
+    "note": "in HubSpot 2026-09-24 (company 348474743529) | No-website VERIFIED 2026-09-24 by the two-test method plus a live BBB profile fetch - no browser on this unattended run. (1) Plain WebSearch \"Dan's Tree Service\" Orange City Iowa arborist returned only Angi, BBB, opencorporates, YellowPages, Facebook and Manta - no owned domain. (2) Domain-scoped WebSearch on danstreeservice.com and danstreeservicellc.com returned a LIVE site belonging to an UNRELATED Dan's Tree Service serving Williamsburg since 2003 - not this business. (3) A live fetch of the BBB profile itself confirmed there is no Visit Website button on it. Confidence HIGH. Owner Dan Venma per BBB Business Management and Principal Contacts. REVENUE PROOF: started 1/1/2010 (16 years per BBB), LLC incorporated 4/14/2009, Iowa entity #378884, BBB A+ with no complaints surfaced, Angi 5.0, reviewer describes Dan as a trained arborist, address 801 5th St SE Orange City IA 51041. CALL WARNINGS: two other Dan's Tree Services exist (danstreeservice.com in Williamsburg, danstreeserviceil.com in Illinois) plus Dan's Custom Landscapes in Ames IA - do not confuse them on the call; BBB lists an alt number (712) 737-8995 that several directories use as primary; and he is A+ but NOT accredited, so do not imply he pays BBB for anything.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
   "ia-de-ronde-flooring-mf5xka": {
     "channel": "unknown",
     "fb": "",
@@ -1359,10 +1367,26 @@
     "ready": true,
     "stage": "none"
   },
+  "wi-davenport-flooring-eau-claire": {
+    "channel": "phone",
+    "fb": "",
+    "note": "in HubSpot 2026-09-24 (company 348576132815) | No-website VERIFIED 2026-09-24 by the two-test method plus a live BBB profile fetch - no browser on this unattended run. (1) Plain WebSearch Davenport Flooring Eau Claire Wisconsin David Davenport returned only BBB, Yelp and YellowPages - no owned domain. (2) Domain-scoped WebSearch on davenportflooring.com returned exactly one result: a GoDaddy lander reading davenportflooring.com is for sale - Buy now for $899. (3) The live BBB profile fetch confirmed no Visit Website button. Confidence HIGH on the website finding. THE HOOK: his own name domain is parked for sale at $899. Owner Mr. David Davenport per BBB Business Management and Principal Contacts. REVENUE PROOF IS THE WEAK POINT: started 4/1/2008 (18 years per BBB) at a fixed address, 4505 Fuller Ave, but no review count, crew size, fleet or commercial work was found - treat him as an owner-operator until the call says otherwise. CALL WARNINGS: BBB rating is Not Rated (insufficient information, NOT complaints) so do NOT reference an A+; davenporthardwoodflooring.com is a different business, likely Davenport IA; and Davey Hardwood Floors on Silvermine Dr is a separate Eau Claire flooring company with a confusingly similar name. No Facebook page found - phone only.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
   "wi-daytonwood-painting-rfqreh": {
     "channel": "fb",
     "fb": "https://www.facebook.com/p/Daytonwood-Painting-100057800074513/",
     "note": "FB: title names Belleville WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
+  "wi-dons-concrete-racine": {
+    "channel": "phone",
+    "fb": "",
+    "note": "in HubSpot 2026-09-24 (company 348402992847) | No-website VERIFIED 2026-09-24 by the two-test method, re-run on top of the 2026-09-23 pool verification - no browser on this unattended run. (1) Plain WebSearch \"Don's Concrete\" Racine WI Babington concrete sawing returned only BBB, two FMCSA-data aggregators (bubba.ai, newbizbot.ai) and HomeAdvisor category pages - no owned domain. (2) Domain-scoped WebSearch on donsconcrete.com, donsconcreteinc.com and donsconcretewi.com returned ZERO links. (3) The BBB profile carries no Visit Website button. Confidence HIGH. Owner Don (Donald William) Babington per BBB Business Management, corroborated by the FMCSA carrier record registered to DONALD WILLIAM BABINGTON dba Don's Concrete Inc; Tara Babington also listed as an officer. REVENUE PROOF - strongest in this batch: started 5/1/2008 (18 years), incorporated, ACTIVE registered motor carrier USDOT #1879517 running his own trucks, BBB A+, and he does both concrete sawing and flatwork where most crews sub the sawing out. Address 1820 Blake Ave, Racine WI 53404. CALL WARNINGS: Don's Concrete & Snow Removal in Eau Claire WI is a different company; he is A+ but NOT BBB-accredited. No Facebook page found - phone only.",
     "photos": "generated",
     "ready": true,
     "stage": "none"
