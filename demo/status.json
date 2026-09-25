@@ -23,6 +23,14 @@
     "ready": true,
     "stage": "none"
   },
+  "ia-am-brothers-cedar-falls": {
+    "channel": "phone",
+    "fb": "https://www.facebook.com/ambrothersLandscapingAndPainting",
+    "note": "in HubSpot 2026-09-25 (company 348457771724) | No-website VERIFIED 2026-09-25 by the two-test method plus a live BBB profile fetch - search-based only, NO BROWSER on this unattended run. (1) Live BBB profile HTML fetched at pool add-time showed NO 'Visit Website' element. (2) Plain WebSearch 'A&M Brothers Landscaping and Painting Cedar Falls Iowa Chris Anderson' returned only aggregators - Nextdoor, BBB, Facebook, Birdeye, Cylex, constructioncompanies.com, VerView, gravel-reviews.com - zero first-party domain. (3) Domain-scoped WebSearch across ambrotherslandscaping.com / ambrothers.com / ambrotherslandscapingandpainting.com / ambrothersiowa.com returned ZERO links. Confidence HIGH on website. Owner Chris Anderson per BBB Business Management, also appears as Chris Anderson-Murphy. REVENUE PROOF IS THE WEAK POINT: started 5/1/2017 - 9 years - six service lines and year-round work (mowing in summer, snow in winter), but BBB is Not Rated (insufficient data), Birdeye carries 1 review, and there is no crew-size, fleet or contract evidence. QUALIFY BUDGET EARLY. CALL WARNINGS: do not congratulate him on a BBB rating - he has none, the profile reads Not Rated. 1409 Clay St is residential, so this is home-based: do not ask about his shop. Surname appears two ways; use 'Chris'.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
   "ia-asap-pest-control-w6nd3p": {
     "channel": "phone",
     "fb": "",
@@ -594,6 +602,14 @@
     "fb": false,
     "note": "in HubSpot 2026-08-18 (company 340776393413) | BBB profile renders NO Visit Website button, control-tested against Robison Construction same session | rdprimmerroofing.com tested live in Chrome 2026-08-18 -> Chrome error page, dead | NAMESAKE: primmerroofing.com IS live but is an unrelated Tampa FL company, phone (813) 802-8826 | Iowa reg C138098 active, bonded $25k, BBB A+, 4 reviews all 5-star, 0 complaints | phone from BBB, corroborated on BuildZoom | PHONE ONLY, no Facebook",
     "photos": 0,
+    "ready": true,
+    "stage": "none"
+  },
+  "ia-redmond-roofing-dubuque": {
+    "channel": "phone",
+    "fb": "",
+    "note": "in HubSpot 2026-09-25 (company 348445484792) | No-website VERIFIED 2026-09-25 by the two-test method plus a live BBB profile fetch - search-based only, NO BROWSER on this unattended run. (1) Live BBB profile HTML fetched at pool add-time showed NO 'Visit Website' element, proved against same-session CONTROL profiles Connor Construction and Cramer's Construction which DID render the button. (2) Plain WebSearch 'Redmond Roofing Dubuque Iowa Joshua Redmond' returned only BBB, DexKnows, homeyou, Yelp and OnDubuque - zero first-party domain. (3) Domain-scoped WebSearch across redmondroofing.com / redmondroofingdubuque.com / redmondroofingandremodeling.com returned ONLY redmondroofing.com, positively identified as an UNRELATED Redmond WASHINGTON roofer (Bob Hernacki, 425-836-0123, trading since 1987, serving Bellevue/Kirkland/Issaquah). Confidence HIGH. Owner Joshua Redmond per BBB Business Management, sole proprietorship. REVENUE PROOF: started 1/1/2011 - 15 years - BBB A+, file opened 3/28/2012, fixed address 1760 Auburn St, and the book covers roofing plus room additions, basement finishing and garage conversions, a wider book than a one-truck roofer. CALL WARNINGS: do not reference redmondroofing.com or imply he has a site - that is the Washington company. Crew size unknown, so do not assume plural crews. No Facebook page found: PHONE ONLY.",
+    "photos": "generated",
     "ready": true,
     "stage": "none"
   },
@@ -1345,6 +1361,14 @@
     "channel": "phone",
     "fb": "",
     "note": "in HubSpot 2026-08-15 (company 340321388257) | NO-WEBSITE VERIFIED 2026-08-15: arteagaconstruction.com resolves but redirects to /lander and serves a GoDaddy PARKED-DOMAIN page ('parked free, courtesy of GoDaddy.com / Get This Domain') - confirmed live in Chrome; a raw non-JS fetch returns an empty shell with no title and no body copy. BBB website field blank, no Visit Website button. WMA member directory shows no site link. arteagaconstructions.com and arteaga-construction.com belong to an unrelated SF Bay Area company. REVENUE: incorporated 1986; 39 permitted projects totaling $1,285,900, 15 in the last 3 years; BuildZoom 103 = top 10% of 94,017 WI contractors; Milwaukee HVAC license 862111 and WI DSPS 862111-HVACCONT both active July 2026; Milwaukee concrete license RWCL-25-00092 active; union shop, MBE/SBE; SAM-registered federal contractor, award 2025-10-09; City Hall, VA Madison and Tomah, USDA Forest Products Lab, UWM, Indian Community School. PHONE SOURCE: BBB profile 0694-14000209, corroborated at wma-online.org. PHONE ONLY, no Facebook. CAUTION: WisDOT DENIED their DBE application - never mention it; do not quote 'workforce over 100' (their own copy; ZoomInfo says 20-49); WI entity M048090 / Nicholas De Arteaga is a DIFFERENT company, do not attach it. OPEN: WI DFI status not directly confirmed (JS-gated); OpenCorporates indexes entity P023959.",
+    "photos": "generated",
+    "ready": true,
+    "stage": "none"
+  },
+  "wi-bbs-electric-cross-plains": {
+    "channel": "phone",
+    "fb": "",
+    "note": "in HubSpot 2026-09-25 (company 348478615249) | No-website VERIFIED 2026-09-25 by the two-test method plus a live BBB profile fetch - search-based only, NO BROWSER on this unattended run. (1) Live BBB profile HTML fetched at pool add-time showed NO 'Visit Website' element (non-accredited profile). (2) Domain-scoped WebSearch on bbselectric.com and bbselectricinc.com returned ZERO links. (3) An unscoped search on the literal string 'bbselectric.com' RESOLVED the ambiguity that had held this row since 2026-09-24: the aggregator summaries citing 'www.bbselectric.com' actually resolve to bbs-electric.com, a DIFFERENT BBS Electric in QUINCY ILLINOIS founded by a man named Brad. Not Doug's. Confidence HIGH on website. Owner Doug Bowar per BBB and HomeAdvisor. REVENUE PROOF IS THE WEAK POINT: established approximately 2002 per Buzzfile/Manta - about 20 years - incorporated, BBB A+ with file opened 5/17/2016, fixed commercial address at 8250 W Mineral Point Rd; but directories estimate approximately 2 staff and approximately $213k revenue. A real long-running shop, but a small one. QUALIFY BUDGET EARLY. CALL WARNINGS: do not mention BBS Electric of Quincy IL. TWO phone numbers in circulation - BBB lists (608) 575-3304, directories use (608) 798-3944; confirm which is his. BuildZoom also lists a 'Bowar Daniel A' licence locally, likely a relative - do not confuse them. No Facebook page found: PHONE ONLY.",
     "photos": "generated",
     "ready": true,
     "stage": "none"
