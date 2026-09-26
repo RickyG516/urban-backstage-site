@@ -78,10 +78,12 @@
  "ia-bluffs-paving-crescent": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Bluffs-Paving-Utility-Inc-100057398831569/",
-  "note": "in HubSpot 2026-08-04 | no website at all | since 1980 | USDOT 547679",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-04 | no website at all | since 1980 | USDOT 547679 | ENRICHED 2026-09-26 -> BRONZE: FB page identity-gated (Crescent IA, (712) 328-0068). Logo = FB profile image (navy excavator + BLUFFS PAVING AND UTILITY), background knocked out, on white pill in nav; colours sampled (navy #0a1d61 -> dark #0b1438, accent #6f8be4 same hue). Hero = slipform paving train (FB 2021-11-09; GOMACO is the machine maker, not a rival); gallery = curb forming, finished curb, slipform on rural shoulder (FB 2026-04). Rejected: 9/11 memorial image. PLACEHOLDER: reviews - Google shows 2.7 from 7, mostly homeowner lawn-damage complaints on a city curb job; deliberately NOT shown. bluffspaving.com now serves a Bluehost 'coming soon' page (no real site yet).",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-09-26"
  },
  "ia-borer-contracting-5z7f1y": {
   "channel": "phone",
@@ -382,10 +384,12 @@
  "ia-konfrst-tree-service-council-bluffs": {
   "channel": "phone",
   "fb": true,
-  "note": "in HubSpot 2026-08-19 (company 340998975173, contact 537472622327) | BBB website field points at Facebook = Facebook-as-website | konfrsttreeservice.com tested live in Chrome 2026-08-19 -> browser error page, dead | Iowa reg C127115 ACTIVE as Wayne Konfrst Enterprises LLC dba Konfrst Tree Service | licensed arborists + pesticide-application licence | 25 yrs, 4.6/5 over 8 reviews | phone from BBB | no-website RE-VERIFIED 2026-08-21 in Chrome: konfrsttreeservice.com = NXDOMAIN",
-  "photos": 0,
+  "note": "in HubSpot 2026-08-19 (company 340998975173, contact 537472622327) | BBB website field points at Facebook = Facebook-as-website | konfrsttreeservice.com tested live in Chrome 2026-08-19 -> browser error page, dead | Iowa reg C127115 ACTIVE as Wayne Konfrst Enterprises LLC dba Konfrst Tree Service | licensed arborists + pesticide-application licence | 25 yrs, 4.6/5 over 8 reviews | phone from BBB | no-website RE-VERIFIED 2026-08-21 in Chrome: konfrsttreeservice.com = NXDOMAIN | ENRICHED 2026-09-26 -> BRONZE: Google Business Profile identity-gated (Konfrst Tree Service, 1501 Ave P Council Bluffs, (402) 813-5821). 3 real job photos from the GBP gallery (by-owner spider lift + bucket truck hero; crew beside KONFRST-lettered bucket truck; spider lift in canopy) - 'People also search for' tiles and a leftover 'Iowa City & North Liberty' image were in the DOM and excluded. 3 verbatim Google reviews, 4.7 from 10. Trust card corrected 4.6/8 -> 4.7/10. PLACEHOLDER: logo (KT monogram) - no FB page any more (facebook.com/441630925952638 now 'content isn't available'); only mark found is truck-door lettering. Pool palette kept (no logo to sample).",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-09-26"
  },
  "ia-kuehl-painting-decorating-5oy56m": {
   "channel": "phone",
@@ -570,7 +574,7 @@
  "ia-perfection-painting-des-moines": {
   "channel": "fb",
   "fb": "https://www.facebook.com/PerfectionPainting515/",
-  "note": "in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources | RE-VERIFIED 2026-08-25 (Chrome): perfectionpaintingllc.com does not resolve, browser error page.",
+  "note": "in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources | RE-VERIFIED 2026-08-25 (Chrome): perfectionpaintingllc.com does not resolve, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Perfection Painting LLC', 500 N Valley Dr #702 (matches FB address) lists (515) 771-8718, not (515) 274-0326. 4.7 from 13 Google + FB logo available - if Ricky confirms 771-8718 is theirs, this is a GOLD candidate next run. perfectionpaintingdmi.com (FB link) is dead.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -594,7 +598,7 @@
  "ia-punelli-heating-air-nqzju1": {
   "channel": "fb",
   "fb": "https://www.facebook.com/104458022953046/",
-  "note": "FB: only result, exact business name",
+  "note": "FB: only result, exact business name | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED: fb field points at an auto-generated 'Unofficial Page' with no content; Maps search on name+phone returns Prybil Heating & Air (different company).",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1154,7 +1158,7 @@
  "il-pikuza-electric-moline": {
   "channel": "fb",
   "fb": "https://www.facebook.com/pikuzaelectric/",
-  "note": "in HubSpot 2026-08-04 | CORRECTED 2026-08-25: pikuzaelectric.com is LIVE and PARKED - unbranded electrician lead-gen page, banner states 'Parked domain... no affiliation with prior owner or business', all CTAs dial (833) 763-0280 not their (309) 762-0819. Prior note said only that the GBP site 404s; that understated the hook. Old pikuzaelectric.business.site still 404s. Verified in Chrome 2026-08-25. | 188 permits, BuildZoom top 16% of IL contractors",
+  "note": "in HubSpot 2026-08-04 | CORRECTED 2026-08-25: pikuzaelectric.com is LIVE and PARKED - unbranded electrician lead-gen page, banner states 'Parked domain... no affiliation with prior owner or business', all CTAs dial (833) 763-0280 not their (309) 762-0819. Prior note said only that the GBP site 404s; that understated the hook. Old pikuzaelectric.business.site still 404s. Verified in Chrome 2026-08-25. | 188 permits, BuildZoom top 16% of IL contractors | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED, BUSINESS MAY BE CLOSED: the Google listing that carries Pikuza's reviews (Sue B. naming Ed) is now titled 'Not now' and marked PERMANENTLY CLOSED; FB page last posted ~2019, photos from 2016, domain lapsed/parked. Logo + 4 photos were harvested and NOT shipped. Confirm they are still operating before dialling or enriching.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1212,7 +1216,7 @@
  "il-serranos-concrete-rockford": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Serranos-Concrete-100068212158702/",
-  "note": "in HubSpot 2026-08-04 | no website | co-owner implies 2nd principal, possibly Hulisses/Ulises Serrano | since 2001 | RE-VERIFIED 2026-08-25 (Chrome): serranosconcrete.com does not resolve, browser error page.",
+  "note": "in HubSpot 2026-08-04 | no website | co-owner implies 2nd principal, possibly Hulisses/Ulises Serrano | since 2001 | RE-VERIFIED 2026-08-25 (Chrome): serranosconcrete.com does not resolve, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - SKIPPED: FB page empty; GBP 3.7 from 3 incl. a complaint; only asset is a ~300px photo of a business card - too low-res for a logo.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1228,7 +1232,7 @@
  "il-sewell-brothers-tree-bartonville": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Sewell-Brothers-Tree-Experts-100089526379977/",
-  "note": "in HubSpot 2026-08-04 | sewellbrothers.com DEAD - domain no longer resolves, BBB lists FB as their web presence | BBB A+ since 1993, est 1963",
+  "note": "in HubSpot 2026-08-04 | sewellbrothers.com DEAD - domain no longer resolves, BBB lists FB as their web presence | BBB A+ since 1993, est 1963 | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED, nothing harvestable: FB page identity matches (Bartonville, (309) 697-1668) but the profile image is clip-art, posts are shared articles, 2 FB reviews; Google Maps search returns Leveled Up Tree & Crane (a different company) - no Sewell GBP.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1260,10 +1264,12 @@
  "il-toonco-painting-collinsville": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/ToonCo-Painting-LLC-100089315511894/",
-  "note": "in HubSpot 2026-08-19 (company 341027520218) | LEGACY REVIVAL - was archived 'EXCLUDED PENDING MANUAL CHECK'; manual check now done. Chrome 2026-08-19: tooncopainting.com -> www.tooncopainting.com/lander, DOM renders only class='parked-content' = GoDaddy parked lander, NOT a JS site. Domain is email-only. | SIBA-AGC member profile lists no website field, phone (618) 973-2483, Owner/President Eric Toon | contact 537780855483 | commercial proof: Staunton HS reno, Lewis & Clark Confluence Tower reno | IL SOS/IDFPR status NOT checked (CAPTCHA-gated) | no-website re-verified 2026-08-20 (parked domain) | RE-VERIFIED 2026-08-23 in Chrome: tooncopainting.com no longer serves the parked lander - browser ERROR PAGE on https apex, https www and http. DNS is healthy (NS ns45/ns46.domaincontrol.com, A 15.197.148.33 + 3.33.130.190) and MX is LIVE (Microsoft 365 + fortimail.quackcom.com), so the domain is paid-for and running mail while the website serves nothing. Hook updated in the queue: say 'errors out', never 'parked'. | RE-VERIFIED 2026-08-24 in Chrome: domain is PARKED AGAIN - https://tooncopainting.com 302s to /lander, DOM renders only class='parked-content' on a blank dark page (same general-domainparking.com system that serves posspainting.com, but with an empty ad feed). Third state change in six days: parked 08-19, error page 08-23, parked 08-24. Hook rewritten to be wording-agnostic - re-check the domain immediately before dialing. Also 2026-08-24: the 08-23 'urbanbackstage.com is behind Cloudflare Access' warning did not reproduce - /demo/ pages returned 200 with no Access prompt.",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-19 (company 341027520218) | LEGACY REVIVAL - was archived 'EXCLUDED PENDING MANUAL CHECK'; manual check now done. Chrome 2026-08-19: tooncopainting.com -> www.tooncopainting.com/lander, DOM renders only class='parked-content' = GoDaddy parked lander, NOT a JS site. Domain is email-only. | SIBA-AGC member profile lists no website field, phone (618) 973-2483, Owner/President Eric Toon | contact 537780855483 | commercial proof: Staunton HS reno, Lewis & Clark Confluence Tower reno | IL SOS/IDFPR status NOT checked (CAPTCHA-gated) | no-website re-verified 2026-08-20 (parked domain) | RE-VERIFIED 2026-08-23 in Chrome: tooncopainting.com no longer serves the parked lander - browser ERROR PAGE on https apex, https www and http. DNS is healthy (NS ns45/ns46.domaincontrol.com, A 15.197.148.33 + 3.33.130.190) and MX is LIVE (Microsoft 365 + fortimail.quackcom.com), so the domain is paid-for and running mail while the website serves nothing. Hook updated in the queue: say 'errors out', never 'parked'. | RE-VERIFIED 2026-08-24 in Chrome: domain is PARKED AGAIN - https://tooncopainting.com 302s to /lander, DOM renders only class='parked-content' on a blank dark page (same general-domainparking.com system that serves posspainting.com, but with an empty ad feed). Third state change in six days: parked 08-19, error page 08-23, parked 08-24. Hook rewritten to be wording-agnostic - re-check the domain immediately before dialing. Also 2026-08-24: the 08-23 'urbanbackstage.com is behind Cloudflare Access' warning did not reproduce - /demo/ pages returned 200 with no Access prompt. | ENRICHED 2026-09-26 -> BRONZE: logo (FB profile image, 'ToonCo Painting LLC' wordmark + orange icon on black) in nav; brand colours sampled off it (dark #07090a, accent #df5f23 - their orange, NOT UNC #e36b1e); hero = new ToonCo HQ hallway with metallic epoxy floor (FB post 2024-04-04); gallery tile = metallic epoxy floor (FB post 2023-11-30). Rejected from FB gallery: Rosati's Pizzeria floor (only exists as a LinkedIn screenshot with text), a Tindall Construction shared post (other company), crew/party group shots, a 270px exterior shot. PLACEHOLDER: reviews (only 2 FB reviews, no Google Business Profile found). Other two gallery tiles still generated SVG.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-09-26"
  },
  "il-top-quality-roofing-mount-zion": {
   "channel": "phone",
@@ -1374,7 +1380,7 @@
  "wi-alcar-roofing-la-crosse": {
   "channel": "fb",
   "fb": "https://www.facebook.com/profile.php?id=100063951526700",
-  "note": "in HubSpot 2026-08-04 | TWO dead domains alcarservices.com + alcarroofingandhomeimprovement.com - strong website pitch | alt phone (608) 782-1133 | BBB A+ since 1987 | RE-VERIFIED 2026-08-25 (Chrome): alcarservices.com still dead, browser error page.",
+  "note": "in HubSpot 2026-08-04 | TWO dead domains alcarservices.com + alcarroofingandhomeimprovement.com - strong website pitch | alt phone (608) 782-1133 | BBB A+ since 1987 | RE-VERIFIED 2026-08-25 (Chrome): alcarservices.com still dead, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Alcar Roofing & Home Improvement', 93 Copeland Ave La Crosse lists (608) 782-1133, not (608) 385-8871; FB page lists no phone. 3.8 from 13.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1462,7 +1468,7 @@
  "wi-four-seasons-landscaping-platteville": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Four-Seasons-Landscaping-Nursery-LLC-100063605409378/",
-  "note": "in HubSpot 2026-08-04 | no website | owner from LinkedIn, city not independently confirmed",
+  "note": "in HubSpot 2026-08-04 | no website | owner from LinkedIn, city not independently confirmed | 2026-09-26 - NO LONGER A NO-WEBSITE PROSPECT: fourseasonsplatteville.com now serves a live branded site ('Outdoor Living, Designed for Every Season', (608) 348-6617). Pull from the dial queue.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1510,7 +1516,7 @@
  "wi-johnson-tree-care-monona": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Johnson-Tree-Care-100063249816940/",
-  "note": "in HubSpot 2026-08-04 | no website - BBB website field points to a Twitter account | address varies across directories",
+  "note": "in HubSpot 2026-08-04 | no website - BBB website field points to a Twitter account | address varies across directories | 2026-09-26 - NO LONGER A NO-WEBSITE PROSPECT: FB page links johnsontreecarellc.com, which now serves a live branded site ('Johnson Tree Care | ISA Certified Arborist & Tree Services Madison, WI'). Pull from the dial queue / recast as website-build pitch.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
