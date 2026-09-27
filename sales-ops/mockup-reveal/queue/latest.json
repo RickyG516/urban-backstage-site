@@ -2247,10 +2247,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534514628297",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "ENRICHED 2026-09-27 BRONZE: real logo off their business card, 4 real photos from the Aug 30 'finished home' post, slate/gold brand colours. Reviews are a placeholder (only 2 on Google). Women owned: Doris Diaz, Bridget Kiefer, Jill Hubbard.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/wi-daytonwood-painting-rfqreh/",
-      "ai_hook": "Already built Daytonwood Painting LLC a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+      "ai_hook": "Ask for Doris (her number, 608-438-4449, is the one on the card and the FB page; Bridget's cell 608-213-7891). Lead with their own work: 'I took the finished home you posted at the end of August - the coffered ceiling, the kitchen - and built Daytonwood a homepage around it with your logo off the business card.' The only gap is reviews: they have 2 on Google, ask for a few more and they drop in. GBP lists a different number, (608) 424-3449 - ask which one they want on the site. Record is from the unenriched 2026-07-29 batch: qualify whether they have a site before saying they don't.",
       "company_id": 337264484088
     },
     {
@@ -2715,10 +2715,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/522976134863",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "ENRICHED 2026-09-27 GOLD: 5.0 from 32 Google reviews (3 quoted), real Cherry Tree Services logo off the GBP banner, 3 real job photos, cherry-red brand colours. GBP name is 'Cherry Tree Services LLC' (plural).",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/tree-service-cherry-new-berlin/",
-      "ai_hook": "Ask for Eduardo Mendez, he's the owner. Lead with the lead-broker problem: his phone number only exists on a HomeAdvisor listing and a Facebook page, so every call he gets he is effectively renting from HomeAdvisor. Say: 'Eduardo, right now HomeAdvisor owns your phone number online - you're paying them for calls that should come straight to you. I already built you a working homepage that puts your number first.' 7+ years in outdoor maintenance, runs tree and hedge removal, stumps, weed control and gutters across all of Milwaukee County out of 19725 W Lincoln Ave, New Berlin. Mon-Sat 8-6, closed Sunday - do not dial Sunday.",
+      "ai_hook": "Ask for Eduardo (reviews call him Eddie). Lead with the reviews: 'Eduardo, you've got 32 Google reviews, every one of them five stars, and nowhere to send people to read them. I built you a homepage that puts them front and centre - your logo, your jobs, your reviews.' Then HomeAdvisor: his number otherwise lives on a lead-broker listing. It's 'Cherry Tree SERVICES' - say it right. Do NOT cite the Facebook page: it shows a different number (779-713-9522) and '68% recommend' on 5 reviews. Mon-Sat 8-6, closed Sunday - do not dial Sunday.",
       "company_id": 335110813375
     },
     {
@@ -2931,10 +2931,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534530956994",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "ENRICHED 2026-09-27 SILVER: real Blaze Electric logo (dog-in-circle, off the shop sign), 5.0 from 3 Google reviews quoted, navy/orange brand colours. No job photos yet - that's the ask. GBP Website button points at a spam directory.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/wi-blaze-electric-ladysmith-b6q3wn/",
-      "ai_hook": "No website at all - blazeelectric.org is an unrelated Florida company. They bought Ziegler Electrical and kept the shop, crew and phone; their FB page is still under the Ziegler name. Focus on Energy Trade Ally.",
+      "ai_hook": "Ask for Scott. Lead with the broken Website button: 'Scott, if somebody taps Website on your Google listing right now it sends them to usmapinformation.com - a spam directory, not you. I built Blaze a real homepage with your sign logo and your three five-star reviews on it. Send me a few panel or barn-job photos and it's done.' Kept Ziegler's shop, crew and number - lead with continuity for Ziegler customers. Don't cite blazeelectric.org (unrelated Florida company). FB page is still under the Ziegler name.",
       "company_id": 338668336850
     },
     {

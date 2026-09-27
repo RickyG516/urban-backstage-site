@@ -78,3 +78,20 @@ Borer's banned headline rewritten. Gorman's portable headline rewritten.
 ## Remaining: 59 pages
 Tooling is built — `tools/compose.py` + `tools/patch_page.py` turn the rest
 into a loop. Uniqueness verified across all 72 before any of it ships.
+
+---
+
+## 2026-09-27 — the Maps "Recents" sidebar is a photo source you must exclude
+
+Scraping `googleusercontent` images out of a Maps place page picks up the **Recents rail on the
+far left** (thumbnails of places viewed earlier in this browser). Its tiles carry the aria-label
+`Google Maps`, the same label as the place's own header photo, so the label does not separate them.
+On this run a red spider-lift photo surfaced on BOTH Cherry Tree Services (New Berlin WI) and
+Blaze Electric (Ladysmith WI) — it was Konfrst Tree Service's photo (Council Bluffs, still in
+Recents from the 2026-09-26 run), byte-for-byte the same scene as Konfrst's
+`photo-lift-in-canopy.jpg`. A fresh page load does NOT clear it; Recents persists per profile.
+
+**Rule:** only take photos whose aria-label names this listing (`Photo N on <reviewer>'s review`,
+`By owner`, `Videos`, the place's own header) and compare any `Google Maps`-labelled tile against the
+Recents rail before trusting it. Also on this run: a Cherry review photo carried an "ACE" dump truck
+in the background (another company's vehicle) — rejected at zoom, invisible at thumbnail size.

@@ -746,7 +746,7 @@
   "ia-torkelson-plumbing-heating-4r9a11": {
     "channel": "fb",
     "fb": "https://www.facebook.com/165462856813089/",
-    "note": "FB: only result, exact business name | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+    "note": "FB: only result, exact business name | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHMENT ATTEMPT 2026-09-27 - DROPPED: fb field points at an auto-generated 'Unofficial Page' (0 followers, only a 2018 Tupperware event) - carries (641) 585-5445 but no content; no GBP (Maps returned Nelson Plumbing Heating & Elec and North Iowa Plumbing Heating). Nothing harvestable.",
     "photos": "generated",
     "ready": true,
     "stage": "none"
@@ -1332,7 +1332,7 @@
   "landscaping-zaisers-burlington": {
     "channel": "fb",
     "fb": "https://www.facebook.com/p/Zaisers-Landscaping-100068421721766/",
-    "note": "FB: title names Burlington IA \u2014 matches",
+    "note": "FB: title names Burlington IA \u2014 matches | 2026-09-27 - NO LONGER A NO-WEBSITE PROSPECT: the Zaiser's Landscaping FB page (2400 Sunnyside Ave, Burlington) links zaisersgardencenter.com, verified live in Chrome 2026-09-27 - title 'Landscaping & Greenhouse in Iowa | Zaiser's Landscaping & Greenhouse', with Florist / Landscaping / Greenhouse / Request a Quote sections and testimonials. Same address as Zaisers Florist & Greenhouse (GBP 4.9/150, (319) 752-6871, zaisersflorist.com). Do NOT pitch 'no website'. Candidate for .non-prospects or a website-upgrade pitch - Ricky's call.",
     "photos": "generated",
     "ready": true,
     "stage": "none"
@@ -1355,11 +1355,13 @@
   },
   "tree-service-cherry-new-berlin": {
     "channel": "phone",
-    "fb": "https://www.facebook.com/p/Cherry-TREE-Services-LLC-61561502156981/",
-    "note": "in HubSpot (company 335110813375, contact 522976134863) | queue row had NO PHONE and was undialable - phone (414) 850-9702 sourced 2026-08-20 from HomeAdvisor profile rated.CherryTreeServiceLLC.147725487, address on that listing (19725 W Lincoln Ave, New Berlin WI 53146) matches the HubSpot company record | owner Eduardo Mendez, 7+ yrs | NO WEBSITE - HomeAdvisor + Facebook only, per 2026-07-21 lead-prospector import; not re-verified in a browser this run (sandbox has no outbound network) so re-check the domain before pitching | Mon-Sat 8-6, closed Sun",
-    "photos": "generated",
+    "fb": "",
+    "note": "in HubSpot (company 335110813375, contact 522976134863) | queue row had NO PHONE and was undialable - phone (414) 850-9702 sourced 2026-08-20 from HomeAdvisor profile rated.CherryTreeServiceLLC.147725487, address on that listing (19725 W Lincoln Ave, New Berlin WI 53146) matches the HubSpot company record | owner Eduardo Mendez, 7+ yrs | NO WEBSITE - HomeAdvisor + Facebook only, per 2026-07-21 lead-prospector import; not re-verified in a browser this run (sandbox has no outbound network) so re-check the domain before pitching | Mon-Sat 8-6, closed Sun | ENRICHED 2026-09-27 (GOLD): identity confirmed live on GBP 'Cherry Tree Services LLC' (note: SERVICES, plural - page name corrected to match), 19725 W Lincoln Ave, New Berlin WI 53146, (414) 850-9702 - name + city + phone all match. GBP has NO website field ('Add website'). 5.0 from 32 Google reviews; 3 VERBATIM: Joanne N. (3 months ago), Nancy F. (6 months ago), Emily K. (3 months ago, names 'Eddie and Jimmy'). REAL LOGO: arc-lettered 'Cherry Tree Services LLC' + red-blossom tree, cropped off the GBP cover banner (banner also carries 414-850-9702 and cherrytreeservice2@gmail.com), sky keyed out, lettering to white, blossoms kept red. BRAND COLOURS sampled: cherry red lightened to accent #e24856 (4.65:1 both ways), dark #131414 unchanged; SVGs recoloured, fingerprints unchanged. 3 REAL PHOTOS from this listing's own gallery, each reviewed: hero = cleared yard with logs cut and stacked (review photo, Nancy F.); tiles = climber roped into an oak (Nancy F.) and crew bucking a felled tree on a front lawn (owner video tile). REJECTED: a red spider-lift photo that was the Maps 'Recents' sidebar thumbnail of KONFRST Tree Service (Council Bluffs) - same image as Konfrst's photo-lift-in-canopy.jpg; a bucket-truck photo with an 'ACE' dump truck (another company's vehicle); 4 competitor 'People also search' tiles. PLACEHOLDERS: none. FB page facebook.com/p/Cherry-TREE-Services-LLC-61561502156981 FAILED the identity gate - no phone listed and its profile image shows 779-713-9522, not (414) 850-9702; fb field cleared, no FB assets used. FB shows '68% recommend (5 reviews)' - do not cite FB.",
+    "photos": "real",
     "ready": true,
-    "stage": "none"
+    "stage": "none",
+    "enrich_level": "GOLD",
+    "enriched": "2026-09-27"
   },
   "wi-a-team-flooring-vjlffv": {
     "channel": "unknown",
@@ -1420,10 +1422,12 @@
   "wi-blaze-electric-ladysmith-b6q3wn": {
     "channel": "fb",
     "fb": "https://www.facebook.com/ZieglerElectrical/",
-    "note": "in HubSpot 2026-08-07 (company 338668336850) | added 2026-08-05 | no site; blazeelectric.org is an unrelated Florida company | bought Ziegler Electrical Services, kept shop/crew/phone | FB page is still under the Ziegler name | Focus on Energy Trade Ally | phone from BBB profile",
+    "note": "in HubSpot 2026-08-07 (company 338668336850) | added 2026-08-05 | no site; blazeelectric.org is an unrelated Florida company | bought Ziegler Electrical Services, kept shop/crew/phone | FB page is still under the Ziegler name | Focus on Energy Trade Ally | phone from BBB profile | ENRICHED 2026-09-27 (SILVER): identity confirmed live on GBP 'Blaze Electric LLC', 101 W 5th St N, Ladysmith WI 54848, (715) 532-0112 - name + city + phone all match; owner Scott named in reviews. 5.0 from exactly 3 Google reviews, all 3 quoted verbatim (S., Jeff W., Heidi B.; two are Google-truncated and shown with an ellipsis, not paraphrased). REAL LOGO: orange circle with black dog + 'Blaze Electric LLC', cropped and de-skewed off the shop sign in the GBP photo (sign also reads 'Master Electrician 715-532-0112'), lettering to white for the dark nav. BRAND COLOURS sampled: sign orange-red -> accent #ec6a4a (5.78:1), navy dark #0f1626 unchanged; SVGs recoloured, fingerprints unchanged. NO JOB PHOTOS: the GBP gallery holds only the shop exterior and a street shot; a spider-lift photo in the DOM was the Maps Recents leftover (Konfrst) and a Ziegler shop photo came from 'People also search' - both rejected. Hero and tiles stay on the generated SVGs; the gallery note asks for panel/barn/truck photos. CALL HOOK: the GBP 'Website' field is usmaperx.org, which redirects to usmapinformation.com, a spam business directory - customers who tap Website on his Google listing land on somebody else's directory. FB page is still the predecessor's (Ziegler Electrical Services Inc., same phone/address, pinned post announcing the sale to Blaze) - not a Blaze-named page.",
     "photos": "generated",
     "ready": true,
-    "stage": "none"
+    "stage": "none",
+    "enrich_level": "SILVER",
+    "enriched": "2026-09-27"
   },
   "wi-calderon-services-milwaukee": {
     "channel": "fb",
@@ -1444,10 +1448,12 @@
   "wi-daytonwood-painting-rfqreh": {
     "channel": "fb",
     "fb": "https://www.facebook.com/p/Daytonwood-Painting-100057800074513/",
-    "note": "FB: title names Belleville WI \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-    "photos": "generated",
+    "note": "FB: title names Belleville WI \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-27 (BRONZE): identity confirmed live on FB business page facebook.com/p/Daytonwood-Painting-100057800074513 ('Daytonwood Painting', Belleville WI, (608) 438-4449, 'Women owned and operated') - name + city + phone match the page. Their business card (FB photos) lists Doris Diaz 608-438-4449, Bridget Kiefer 608-213-7891, Jill Hubbard (team member). GBP 'Daytonwood Painting LLC' W3175 Daytonwood Rd Belleville exists with a DIFFERENT phone (608) 424-3449 and no website field; 5.0 from only 2 reviews (Leah N., Elisa S.) - below the 3-review floor, so reviews are a labelled placeholder. REAL LOGO: 'Daytonwood Painting, LLC' serif + gold brush, cropped off the business card, card keyed out, lettering to white. BRAND COLOURS sampled: slate navy -> dark #1c2233, brush gold -> accent #cda05a (6.6:1); SVGs recoloured, fingerprints unchanged. 4 REAL PHOTOS from the Aug 30 2026 'Here's the finished home!' post (tagged Bridget Kiefer): hero = open kitchen with white cabinets and dark island; tiles = coffered-ceiling living room, dining/island under vaulted ceiling, two-storey front entry. Each shot appeared twice in the Photos tab; duplicates dropped. Trust card changed from 'Locally Owned' to 'Women Owned & Operated' (FB + card). PLACEHOLDERS: reviews (data-reviews=placeholder + swap-notice addressed to Doris, Bridget and Jill). No-website: GBP has no website field and FB lists none - still not a full two-test verification.",
+    "photos": "real",
     "ready": true,
-    "stage": "none"
+    "stage": "none",
+    "enrich_level": "BRONZE",
+    "enriched": "2026-09-27"
   },
   "wi-dons-concrete-racine": {
     "channel": "phone",
@@ -1548,7 +1554,7 @@
   "wi-peaveys-painting-union-grove": {
     "channel": "fb",
     "fb": "https://www.facebook.com/peaveyspainting/",
-    "note": "in HubSpot 2026-08-04 | no website - BBB website field points to a FB profile | log home restoration/staining specialty | USDOT 4401822, since 2013 | RE-VERIFIED 2026-08-25 (Chrome): peaveyspainting.com does not resolve - browser error page, no site. This matters because the ORIGINAL finding rested only on 'BBB website field points to a FB profile', a signal the engine has since measured as unreliable (wrong 2/2 on 2026-08-18). Finding now stands on a direct browser check, not the BBB button.",
+    "note": "in HubSpot 2026-08-04 | no website - BBB website field points to a FB profile | log home restoration/staining specialty | USDOT 4401822, since 2013 | RE-VERIFIED 2026-08-25 (Chrome): peaveyspainting.com does not resolve - browser error page, no site. This matters because the ORIGINAL finding rested only on 'BBB website field points to a FB profile', a signal the engine has since measured as unreliable (wrong 2/2 on 2026-08-18). Finding now stands on a direct browser check, not the BBB button. | ENRICHMENT ATTEMPT 2026-09-27 - DROPPED: no Google Business Profile (Maps returned only Pegasus Painting, a union hall and Sommers Painting); FB page facebook.com/peaveyspainting now returns 'This content isn't available right now' - page deleted or restricted. Nothing harvestable. Re-verify the business is still operating before dialing.",
     "photos": "generated",
     "ready": true,
     "stage": "none"
