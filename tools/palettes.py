@@ -181,6 +181,14 @@ PALETTES = [
     dict(name="azure-shale",      dark="#0d1217", accent="#57a0d0", off="#f1f4f8", band="blue"),
     dict(name="slate-cobalt",     dark="#0f1219", accent="#6d94d9", off="#f2f4f9", band="blue"),
     dict(name="coral-shale",      dark="#151210", accent="#cf6f61", off="#f7f4f3", band="red"),
+    # Added 2026-09-28: the 81-entry pool was fully consumed against a 199-accent
+    # library, so pick_batch(3) could no longer satisfy the distinct-band rule
+    # (only red and green had anything free). Three entries in the three
+    # least-represented library bands. All checked against every live accent and
+    # against audit() before being added.
+    dict(name="slate-ash",        dark="#141618", accent="#8f9ba3", off="#f2f4f5", band="grey"),
+    dict(name="orchid-iron",      dark="#141018", accent="#a583c9", off="#f5f2f8", band="violet"),
+    dict(name="azure-basalt",     dark="#0e1319", accent="#5ea3d8", off="#f1f5f8", band="blue"),
     dict(name="verdigris-iron",   dark="#0f1617", accent="#4aa8a0", off="#f1f6f6", band="teal"),
     dict(name="cypress-slate",    dark="#0f1411", accent="#6fae7a", off="#f2f6f3", band="green"),
 ]
