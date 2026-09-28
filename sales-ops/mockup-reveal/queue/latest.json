@@ -1725,10 +1725,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/523339030204",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "ENRICHED 2026-09-28 GOLD: real logo + orange/green brand colours, 2 real GBP photos, 4.8 from 73 Google reviews (3 quoted), veteran-owned. GBP links to connercutslawncare.com, which does not resolve (NXDOMAIN).",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/landscaping-connercuts-racine/",
-   "ai_hook": "Already built Conner Cuts Lawn Care & Exterior Maintenance a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Ask for Conner (reviews also mention Travis running crews). Lead with the dead link: 'Your Google profile sends people to connercutslawncare.com and that address doesn't load - 73 reviews at 4.8 and the website button goes nowhere.' Then the page: 'I built you one with your logo, your photos and your reviews on it.' GBP name is now 'Conner Cuts Lawn & Garden, LLC' - ask which name he's using. Veteran-owned per Google - fine to acknowledge.",
    "company_id": 335296304864
   },
   {
@@ -2571,10 +2571,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534514629346",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "ENRICHED 2026-09-28 BRONZE: real GBP photos (incl. their red trailer), 4.9 from 11 Google reviews (3 quoted), owner Dominic. Logo is a placeholder. GBP has no website; FB page is gone.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-guttusos-yard-service-fqkssi/",
-   "ai_hook": "Already built Guttuso's Yard Service a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Ask for Dominic. Lead with the ask, not a pitch: 'I built you a homepage - your photos, your 11 Google reviews, your trailer is even in one of the shots. Only thing missing is your logo. Text me a photo of it and it's done.' GBP now reads 'Guttuso Outdoor Services LLC' - ask which name he wants on it. Reviews are ~3 years old; don't call them recent.",
    "company_id": 337262805709
   },
   {
@@ -3345,10 +3345,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534576339648",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "ENRICHED 2026-09-28 GOLD: real saw-blade logo, 4 real job photos from his Google listing and customer reviews, 4.7 from 28 Google reviews (3 quoted). GBP has no website.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-calderon-services-milwaukee/",
-   "ai_hook": "Already built Calderon Services LLC a free working homepage — lead with that, not a review-gap stat. Context: in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020",
+   "ai_hook": "Ask for Jonathan. Lead with his customers: '28 Google reviews and your customers keep posting photos of your patios and walls - there's no website to send anyone to. I put those photos, your logo and your reviews on a homepage for you.' Keep to concrete/patios/walls; the snow-removal line on the page came from earlier research and wasn't re-checked.",
    "company_id": 338376458950
   },
   {

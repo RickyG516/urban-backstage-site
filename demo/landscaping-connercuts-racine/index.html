@@ -1,4 +1,5 @@
-<!-- style-pack: P07 | trade: landscaping | accent: #428232 -->
+<!-- style-pack: P07 | trade: landscaping | accent: #e46e25 -->
+<!-- brand-colors: sampled (orange #e46e25 + grass green #138040 off the Conner Cuts logo, Facebook profile image, 2026-09-28) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +14,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --grass-dark:#16261a;
-    --grass:#2d7a3f;
+    --grass-dark:#13241a;
+    --grass:#138040;
     --grass-mid:#409c55;
-    --gold:#428232;
-    --gold-light:#428232;
+    --gold:#e46e25;
+    --gold-light:#f0843a;
     --cream:#f8f6ef;
     --white:#ffffff;
     --ink:#182018;
@@ -42,7 +43,8 @@
 
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
   .hero-bg{position:absolute;inset:0;background:
-      radial-gradient(circle at 78% 18%, rgba(219,161,60,0.18), transparent 45%);
+      linear-gradient(90deg, rgba(19,36,26,.90) 0%, rgba(19,36,26,.70) 55%, rgba(19,36,26,.38) 100%),
+      radial-gradient(circle at 78% 18%, rgba(228,110,37,0.16), transparent 45%);
       animation:kenburns 24s ease-in-out infinite alternate;}
   .hero-bg::before{content:"";position:absolute;inset:0;opacity:.09;
     background-image:
@@ -88,7 +90,7 @@
   @media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr;}}
   @media(max-width:560px){.svc-grid{grid-template-columns:1fr;}}
 
-  .season{background:linear-gradient(120deg,var(--gold) 0%,#bd812c 100%);color:var(--grass-dark);}
+  .season{background:linear-gradient(120deg,var(--gold) 0%,#c95a17 100%);color:var(--grass-dark);}
   .season .container{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
   .season h2{color:var(--grass-dark);margin-bottom:6px;font-size:30px;}
   .season p{font-size:16px;max-width:520px;color:#3a2c0f;}
@@ -130,41 +132,41 @@
 </style>
 <style>
 .unc-nav{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
-gap:1rem;padding:.7rem 1.4rem;background:#16261a;border-bottom:2px solid #428232}
+gap:1rem;padding:.7rem 1.4rem;background:#13241a;border-bottom:2px solid #e46e25}
 .unc-mark{font-family:'Fjalla One',sans-serif;font-size:1.35rem;letter-spacing:.02em;color:#fff;text-decoration:none}
 .unc-navlinks{display:flex;align-items:center;gap:1.3rem}
 .unc-navlinks a{color:#fff;text-decoration:none;font-family:'Lato',sans-serif;font-size:.95rem}
-.unc-navcall{background:#428232;color:#16261a!important;padding:.5rem .95rem;border-radius:4px;font-weight:700}
-.unc-faq{padding:4rem 1.4rem;background:#16261a;color:#fff}
+.unc-navcall{background:#e46e25;color:#13241a!important;padding:.5rem .95rem;border-radius:4px;font-weight:700}
+.unc-faq{padding:4rem 1.4rem;background:#13241a;color:#fff}
 .unc-faq h2{font-family:'Fjalla One',sans-serif;font-size:2rem;margin-bottom:1.6rem}
 .unc-wrap{max-width:820px;margin:0 auto}
 .unc-q{border-bottom:1px solid rgba(255,255,255,.16);padding:1rem 0}
 .unc-q summary{cursor:pointer;font-weight:700;font-family:'Lato',sans-serif;font-size:1.03rem}
 .unc-q p{margin:.7rem 0 0;opacity:.85;line-height:1.6}
 .unc-formsec{padding:4rem 1.4rem;background:#9bd07c}
-.unc-formsec h2{font-family:'Fjalla One',sans-serif;font-size:2rem;margin-bottom:1.3rem;color:#16261a}
+.unc-formsec h2{font-family:'Fjalla One',sans-serif;font-size:2rem;margin-bottom:1.3rem;color:#13241a}
 .unc-form{display:grid;gap:.8rem;max-width:520px}
 .unc-form input,.unc-form textarea{padding:.85rem;border:1px solid rgba(0,0,0,.25);border-radius:4px;
 font-family:'Lato',sans-serif;font-size:1rem}
-.unc-form button{background:#16261a;color:#fff;border:0;padding:.95rem;border-radius:4px;
+.unc-form button{background:#13241a;color:#fff;border:0;padding:.95rem;border-radius:4px;
 font-family:'Fjalla One',sans-serif;font-size:1.1rem;cursor:pointer}
 .unc-sticky{display:none}
 #unc-kobe{position:fixed;right:18px;bottom:18px;z-index:950;font-family:'Lato',sans-serif}
-#unc-kobe-btn{background:#428232;color:#16261a;border:0;border-radius:30px;padding:.8rem 1.4rem;
+#unc-kobe-btn{background:#e46e25;color:#13241a;border:0;border-radius:30px;padding:.8rem 1.4rem;
 font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3)}
 #unc-kobe-panel{position:absolute;right:0;bottom:56px;width:290px;background:#fff;border-radius:10px;
 overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
-#unc-kobe-head{background:#16261a;color:#fff;padding:.75rem 1rem;font-weight:700}
+#unc-kobe-head{background:#13241a;color:#fff;padding:.75rem 1rem;font-weight:700}
 #unc-kobe-body{padding:.85rem;max-height:230px;overflow-y:auto}
 .unc-kobe-msg{background:#eef0f2;padding:.6rem .8rem;border-radius:8px;margin:0 0 .55rem;font-size:.9rem}
 .unc-kobe-you{background:#9bd07c;text-align:right}
 #unc-kobe-form{display:flex;border-top:1px solid #e2e5e8}
 #unc-kobe-form input{flex:1;border:0;padding:.7rem;font-size:.9rem}
-#unc-kobe-form button{border:0;background:#428232;color:#16261a;padding:0 1rem;font-weight:700;cursor:pointer}
+#unc-kobe-form button{border:0;background:#e46e25;color:#13241a;padding:0 1rem;font-weight:700;cursor:pointer}
 @media(max-width:768px){
  .unc-navlinks a:not(.unc-navcall){display:none}
- .unc-sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:940;background:#428232;
- color:#16261a;text-align:center;padding:.95rem;font-weight:800;text-decoration:none;
+ .unc-sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:940;background:#e46e25;
+ color:#13241a;text-align:center;padding:.95rem;font-weight:800;text-decoration:none;
  font-family:'Fjalla One',sans-serif;font-size:1.1rem}
  body{padding-bottom:3.4rem}
  #unc-kobe{bottom:64px}
@@ -187,34 +189,53 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
 
 /* Branded-asset gallery: graphics carry the visual, captions carry the facts. */
 .unc-grid figure{aspect-ratio:auto;background:none;border-radius:0}
-.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#16261a}
+.unc-grid figure img{aspect-ratio:4/3;height:auto;border-radius:6px;background:#13241a}
 .unc-grid figure:hover img{transform:none}
 .unc-grid figcaption{margin-top:.7rem;font-size:.86rem;line-height:1.45;color:#4a4a46}
-.unc-grid figcaption strong{display:block;color:#16261a;font-weight:700;margin-bottom:.15rem}
-.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #428232;border-radius:8px;
+.unc-grid figcaption strong{display:block;color:#13241a;font-weight:700;margin-bottom:.15rem}
+.unc-galnote{max-width:640px;margin:2rem auto 0;padding:1.1rem 1.3rem;border:1px dashed #e46e25;border-radius:8px;
   opacity:1;font-size:.92rem;line-height:1.55;color:#3a3934;background:rgba(255,255,255,.04)}
-.unc-galnote strong{color:#428232}
+.unc-galnote strong{color:#e46e25}
 @media print{.unc-galnote{border-style:solid}}
+
+/* enrichment 2026-09-28 */
+.mark img{display:block;object-fit:contain}
+.about-photo--real{background:#13241a;display:block}
+.about-photo--real img{width:100%;height:100%;object-fit:cover;display:block}
+#reviews{background:#f8f6ef;color:#13241a;padding:74px 0}
+#reviews .rwrap{max-width:1140px;margin:0 auto;padding:0 24px}
+#reviews .rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.9rem;margin-bottom:8px}
+#reviews h2{margin:0;font-size:clamp(1.7rem,3.4vw,2.5rem)}
+#reviews .score{display:inline-flex;align-items:center;gap:.5rem;background:#e46e25;color:#13241a;font-weight:700;border-radius:999px;padding:.34rem .85rem;font-size:.95rem}
+#reviews .rsub{color:#5a655c;margin:0 0 30px;font-size:1.02rem}
+#reviews .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+#reviews .rcard{background:#fff;border:1px solid #e3ded0;border-left:4px solid #e46e25;border-radius:10px;padding:22px 22px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin:0}
+#reviews .rcard .s{color:#b4520f;letter-spacing:.14em;font-size:.95rem}
+#reviews .rcard blockquote{margin:.6rem 0 1rem;font-size:1.02rem;line-height:1.55;color:#182018}
+#reviews .rcard cite{font-style:normal;font-weight:700;font-size:.95rem;color:#13241a}
+#reviews .rcard .when{display:block;font-weight:400;color:#5a655c;font-size:.85rem;margin-top:2px}
+@media print{#reviews .rcard{break-inside:avoid}}
 </style></head>
 <body>
 
 <div style="position:fixed;bottom:14px;right:14px;z-index:200;background:rgba(23,51,24,.92);color:#fff;font-size:11px;padding:8px 12px;border-radius:4px;">Speculative preview build &mdash; Urban Niche Co.</div>
 
-<header>
+<header class="unc-nav">
   <nav>
-    <div class="brand">Conner <span>Cuts</span></div>
+    <div class="brand mark"><img src="logo.png" alt="Conner Cuts Lawn Care &amp; Exterior Maintenance logo" data-role="logo" width="231" height="116" style="height:52px;width:auto;display:block;background:#fff;border-radius:6px;padding:3px 6px"></div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#reviews">Reviews</a></li>
       <li><a href="#area">Service Area</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="tel:12628220496" class="nav-cta">Call Now</a>
+    <a href="tel:12628220496" class="nav-cta">(262) 822-0496</a>
   </nav>
 </header>
 
 <section class="hero">
-  <img class="hero-photo" src="motion-hero.svg" alt="Animated landscaping graphic for Conner Cuts Lawn Care &amp; Exterior Maintenance">
+  <img class="hero-photo" src="hero.jpg" alt="Striped front lawn and trimmed beds on a Racine-area property, from the Conner Cuts Google Business Profile">
   <div class="hero-bg"></div>
   <div class="container hero-content">
     <span class="badge">Now Booking &mdash; Racine, WI</span>
@@ -225,9 +246,10 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
       <a href="#services" class="btn btn-secondary">See Our Services</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><b>Locally Owned</b><span>Racine, WI</span></div>
-      <div class="hero-stat"><b>Res. &amp; Comm.</b><span>Properties Served</span></div>
-      <div class="hero-stat"><b>Full-Season</b><span>Mowing Plans</span></div>
+      <div class="hero-stat"><b>4.8&#9733;</b><span>Google Rating</span></div>
+      <div class="hero-stat"><b>73</b><span>Google Reviews</span></div>
+      <div class="hero-stat"><b>Veteran-Owned</b><span>Racine, WI</span></div>
+      <div class="hero-stat"><b>Mow to Snow</b><span>Year-Round Service</span></div>
     </div>
   </div>
 </section>
@@ -238,13 +260,10 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
       <span class="eyebrow">Who We Are</span>
       <h2>Local, Reliable, Straightforward</h2>
       <p>Conner Cuts Lawn Care &amp; Exterior Maintenance is a locally owned crew serving homeowners and businesses in and around Racine, WI. No call centers, no runaround &mdash; just a crew that shows up on schedule and does the work right.</p>
-      <p>From weekly mowing to full seasonal cleanups and exterior property maintenance, we treat every property like it's the one next to ours.</p>
+      <p>From weekly mowing to full seasonal cleanups, landscape beds and snow removal, we treat every property like it's the one next to ours. Veteran-owned, with a 4.8-star rating across 73 Google reviews.</p>
     </div>
-    <div class="about-photo reveal">
-      <div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f0c169" stroke-width="1.4"><rect x="2" y="9" width="14" height="7" rx="1"/><path d="M16 12h3.5l2.5 3v1h-6z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
-        <p>Crew &amp; property photo goes here &mdash; swapping in the real branded shot once we've got it.</p>
-      </div>
+    <div class="about-photo about-photo--real reveal">
+      <img src="photo-flower-bed.jpg" alt="Planted bed of knock-out roses and hostas along a cedar fence, fresh edge and mulch, from the Conner Cuts Google Business Profile" loading="lazy">
     </div>
   </div>
 </section>
@@ -298,6 +317,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </div>
 </section>
 
+<section id="reviews" data-reviews="real"><div class="rwrap"><div class="rhead"><h2>What Racine says</h2><span class="score">&#9733; 4.8 from 73 Google reviews</span></div><p class="rsub">Pulled straight from your Google Business Profile, word for word:</p><div class="rgrid"><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;The company l work for hired Conner Cuts to maintain all of their campus and l couldn&rsquo;t be happier. So many tenants had left complaints about the grounds being an eye sore but Travis and his team have really turned things around for the better. &hellip; They are all very hard workers and deserve to be acknowledged for their good work. Everything looks fantastic. &hellip;&rdquo;</blockquote><cite>Lesa<span class="when">Google review &middot; 11 months ago</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Conner Cuts Lawns is doing a terrific job of lawn care, snow removal, etc. for us. We asked Conner, in addition, to help place outdoor holiday lights on a tall pine tree, and he came in the nighttime, wrestled for quite a long time with an extremely long light cord just to help us out. &hellip;&rdquo;</blockquote><cite>Trygve T.<span class="when">Google review &middot; 9 months ago</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Conner cuts did a great job on my lawn, and took their time. I would definitely be using their service again in the future. Thanks again.&rdquo;</blockquote><cite>QC &amp; Vonn<span class="when">Google review &middot; a year ago</span></cite></figure></div></div></section>
 <section class="area" id="area">
   <div class="container">
     <span class="eyebrow">Where We Work</span>
@@ -342,7 +362,7 @@ overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.32)}
   </div>
 </section>
 
-<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="motion.svg" loading="lazy" alt="landscaping process animation"><figcaption><strong>Cut, edge, and detail</strong>Same pattern every visit so the lawn stripes stay clean.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service area radius"><figcaption><strong>Based in Racine</strong>WI and the surrounding towns.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Service pattern"><figcaption><strong>Through the season</strong>Spring clean-up, weekly cuts, fall tidy.</figcaption></figure></div><p class="unc-galnote"><strong>This is where your job photos go.</strong> Send whatever you&rsquo;ve got &mdash; trucks, crews, before and afters &mdash; and they&rsquo;re on the page the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>Do you offer seasonal contracts?</summary><p>Yes. Most customers do a full-season agreement — it works out cheaper than one-off visits.</p></details><details class="unc-q"><summary>How often do you mow?</summary><p>Weekly through the growing season, every other week when growth slows.</p></details><details class="unc-q"><summary>Do you handle spring and fall cleanup?</summary><p>Yes — cleanups, dethatching, and leaf removal are all part of what we do.</p></details><details class="unc-q"><summary>Do you do landscape design too?</summary><p>Yes. Beds, plantings, edging, and hardscape — we'll walk the property with you first.</p></details></div></section><section class="cta" id="contact">
+<section id="gallery" class="unc-gallery"><div class="unc-wrap"><h2>The work we do</h2><div class="unc-grid"><figure><img src="motion.svg" loading="lazy" alt="landscaping process animation"><figcaption><strong>Cut, edge, and detail</strong>Same pattern every visit so the lawn stripes stay clean.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service area radius"><figcaption><strong>Based in Racine</strong>WI and the surrounding towns.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Service pattern"><figcaption><strong>Through the season</strong>Spring clean-up, weekly cuts, fall tidy.</figcaption></figure></div><p class="unc-galnote"><strong>More of your work goes here.</strong> The two photos above came off your Google profile. Send a few more &mdash; stripes, beds, snow runs, before and afters &mdash; and these graphics get swapped for your own jobs the same week.</p></div></section><section id="faq" class="unc-faq"><div class="unc-wrap"><h2>Questions We Get A Lot</h2><details class="unc-q"><summary>Do you offer seasonal contracts?</summary><p>Yes. Most customers do a full-season agreement — it works out cheaper than one-off visits.</p></details><details class="unc-q"><summary>How often do you mow?</summary><p>Weekly through the growing season, every other week when growth slows.</p></details><details class="unc-q"><summary>Do you handle spring and fall cleanup?</summary><p>Yes — cleanups, dethatching, and leaf removal are all part of what we do.</p></details><details class="unc-q"><summary>Do you do landscape design too?</summary><p>Yes. Beds, plantings, edging, and hardscape — we'll walk the property with you first.</p></details></div></section><section class="cta" id="contact">
   <div class="container cta-grid">
     <div class="cta-info reveal">
       <span class="eyebrow">Get In Touch</span>

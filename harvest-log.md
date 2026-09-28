@@ -95,3 +95,24 @@ Recents from the 2026-09-26 run), byte-for-byte the same scene as Konfrst's
 `By owner`, `Videos`, the place's own header) and compare any `Google Maps`-labelled tile against the
 Recents rail before trusting it. Also on this run: a Cherry review photo carried an "ACE" dump truck
 in the background (another company's vehicle) — rejected at zoom, invisible at thumbnail size.
+
+---
+
+## 2026-09-28 — Recents leftovers hit ALL THREE pages, and a hidden Chrome tab can't screenshot
+
+**The Recents rail contaminated every prospect this run.** Conner Cuts pulled Konfrst's red lift photo;
+Guttuso pulled Konfrst's lift AND a Cherry Tree Services photo (with Cherry's phone number on it);
+Calderon pulled Guttuso's striped lawn AND the Cherry photo. Each listing you open joins the rail and
+shows up on the NEXT one as a `Google Maps`-labelled tile. The Recents rule from 2026-09-27 is not an
+edge case — it fires every run. Only ship `Google Maps`-labelled tiles you can match to the listing's own
+header/`All` thumbnail; prefer `By owner`, `Exterior` and `Photo N on <reviewer>'s review` labels.
+
+**If `document.visibilityState` is `hidden`, screenshots time out** (Ricky's Chrome window was not in
+front). Everything else still works: collect URLs in JS, download at `=w1600` from the maps tab
+(google.com allows several downloads), build the numbered contact sheet with PIL in bash, and look at it
+with the Read tool. That review path is as good as a screenshot grid — use it rather than skipping
+photo-level review.
+
+Also: the recorded `fb` for sanders-lawn-care-dubuque is an Ohio business (937 area code) — cleared.
+A GBP "Website" field can point at a dead domain (Conner Cuts → NXDOMAIN): that is a better opening line
+than "you don't have a website".

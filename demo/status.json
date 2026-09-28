@@ -1316,10 +1316,12 @@
  "landscaping-connercuts-racine": {
   "channel": "fb",
   "fb": "https://www.facebook.com/ConnerCutsLawnCareExteriorMaintenance/",
-  "note": "FB: title names Racine WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "note": "FB: title names Racine WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-28 GOLD. Identity gate passed 3 ways: FB page (Conner Cuts Lawn Care & Exterior Maintenance, Racine WI 53408, (262) 822-0496, connercuts@yahoo.com) and GBP 'Conner Cuts Lawn & Garden, LLC' (same phone, Racine area, identifies as veteran-owned, 4.8 from 73). NO-WEBSITE NOW VERIFIED: GBP website field points at connercutslawncare.com which is DNS_PROBE_FINISHED_NXDOMAIN (loaded in Chrome 2026-09-28) - a dead link on their own profile. REAL: logo (FB profile PNG, 231x116, orange/green wordmark, shown on a white pill in the nav), brand colours sampled (orange #e46e25 accent, logo green #138040), 2 photos from the GBP listing itself (header photo of a striped front lawn -> hero; 'By owner' flower bed along a cedar fence -> about panel), 3 verbatim Google reviews (Lesa, Trygve T., QC & Vonn). Reviews name Conner and Travis. REJECTED: a red spider-lift photo (Konfrst Tree Service, Maps Recents-rail leftover); all FB photos are promo graphics, no job photos. Also fixed: the page's own <header> was hidden by the badgefix rule (no nav at all) - tagged unc-nav. PLACEHOLDERS: none. Name note: GBP now reads 'Conner Cuts Lawn & Garden, LLC'; page keeps the FB/logo name.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-09-28"
  },
  "landscaping-prescott-racine": {
   "channel": "unknown",
@@ -1347,8 +1349,8 @@
  },
  "sanders-lawn-care-dubuque": {
   "channel": "fb",
-  "fb": "https://www.facebook.com/Sanders.Lawn.Landscape/",
-  "note": "FB: page surfaces alongside Dubuque directory listings — city context matches",
+  "fb": "",
+  "note": "FB: page surfaces alongside Dubuque directory listings — city context matches | ENRICH ATTEMPT 2026-09-28 - DROPPED at identity gate: the recorded fb page facebook.com/Sanders.Lawn.Landscape is 'Sanders Lawn Care and Landscaping' run by Damien Sanders in Union/Clark/Champaign County OHIO, (937) 505-7767, and announced a rename to Midwest Rolling Operations LLC - a different business from the Dubuque (563) 599-2244 prospect. fb field cleared. Still BASE.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1432,10 +1434,12 @@
  "wi-calderon-services-milwaukee": {
   "channel": "fb",
   "fb": "https://www.facebook.com/calderonServices/",
-  "note": "in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020 | ENRICHED 2026-09-28 GOLD. Identity gate: FB facebook.com/calderonServices (Calderon Services, concrete, Milwaukee WI, no phone listed, 94% recommend/15) + GBP 'Calderon Services' concrete contractor, (414) 484-4885, service-area business, 4.7 from 28, NO website field. Name + city + phone all match. Reviews name Jonathan throughout. REAL: logo (FB profile image 605px, black saw-blade badge, knocked out to white-on-transparent for the dark nav), 4 photos tied to this listing (stamped patio from RJ B.'s review -> hero; curved walkway from Juli B.'s review; capped block retaining wall from 'By owner'; backyard patio from Jen's review), 3 verbatim Google reviews. REJECTED: Guttuso striped-lawn and Cherry Tree photos (Maps Recents-rail leftovers from this run) and an unattributed 'Google Maps' driveway tile that could not be tied to the listing. Brand colours NOT sampled: logo is monochrome, pool accent kept. PLACEHOLDERS: none. Also fixed contact-form placeholder phone (563) -> (414). Note: page hero claims snow removal/plowing from the build research; FB lists driveways, patios, sidewalks, stamped, garage slabs, retaining walls - snow not re-verified this run.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-09-28"
  },
  "wi-davenport-flooring-eau-claire": {
   "channel": "phone",
@@ -1489,11 +1493,13 @@
  },
  "wi-guttusos-yard-service-fqkssi": {
   "channel": "fb",
-  "fb": "https://www.facebook.com/guttusoyardservice/",
-  "note": "FB: exact name, only match | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "fb": "",
+  "note": "FB: exact name, only match | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-28 BRONZE. FB page facebook.com/guttusoyardservice now 'This content isn't available' - fb field cleared. Identity gate passed on GBP 'Guttuso Outdoor Services LLC', 1123 Drake Ct, Mukwonago WI 53149, (414) 339-9072, 4.9 from 11; a review names 'Guttuso's Yard Service, LLC' and the owner Dominic. GBP has NO website field ('Add website'). REAL: 3 photos from the listing (header striped lawn -> hero; owner-posted PIC-COLLAGE split into its two panels, sod install by a patio + sod along a curved walk with the red 'GUTTUSO'S YARD SERVICE (414) 339-9072' trailer behind - verified at zoom), 3 verbatim Google reviews (Kate H., Jorja M., Kelly R., all ~3 yrs old). REJECTED: a Cherry Tree Services photo and the Konfrst lift photo (Maps Recents-rail leftovers), 'People also search' tiles (Eden Landscaping, Fickau). PLACEHOLDERS: logo (GY monogram, data-placeholder=logo, swap-notice asks for the logo file or a photo of the trailer-door mark). Palette left on pool accent #bb322d - happens to match the trailer red; not sampled, so no brand-colors tag.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-09-28"
  },
  "wi-hein-construction-de-pere": {
   "channel": "phone",

@@ -112,19 +112,34 @@ footer{background:#181a1c;color:#9aa3a0;text-align:center;padding:30px 24px;font
 }
 /* ---- layout skeleton L-A ---- */
 
+/* ---- enrichment 2026-09-28 ---- */
+nav.top .mark img{display:block;object-fit:contain}
+#reviews{background:#f6f6f5;color:#181a1c;padding:74px 0}
+#reviews .rwrap{max-width:1120px;margin:0 auto;padding:0 24px}
+#reviews .rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.9rem;margin-bottom:8px}
+#reviews h2{margin:0;font-size:clamp(1.7rem,3.4vw,2.5rem)}
+#reviews .score{display:inline-flex;align-items:center;gap:.5rem;background:#d98a35;color:#181a1c;font-weight:700;border-radius:999px;padding:.34rem .85rem;font-size:.95rem}
+#reviews .rsub{color:#5d6663;margin:0 0 30px;font-size:1.02rem}
+#reviews .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+#reviews .rcard{background:#fff;border:1px solid #e3e6e3;border-left:4px solid #d98a35;border-radius:10px;padding:22px 22px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin:0}
+#reviews .rcard .s{color:#a8621a;letter-spacing:.14em;font-size:.95rem}
+#reviews .rcard blockquote{margin:.6rem 0 1rem;font-size:1.02rem;line-height:1.55;color:#181a1c}
+#reviews .rcard cite{font-style:normal;font-weight:700;font-size:.95rem}
+#reviews .rcard .when{display:block;font-weight:400;color:#5d6663;font-size:.85rem;margin-top:2px}
+@media print{#reviews .rcard{break-inside:avoid}}
 </style>
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark">Calderon <em>Services</em></a>
+  <a href="#" class="mark"><img src="logo.png" alt="Calderon Services logo" data-role="logo" width="509" height="470" style="height:58px;width:auto;display:block"></a>
   <div class="links">
-    <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
+    <a href="#services">Services</a><a href="#work">Work</a><a href="#reviews">Reviews</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+14144844885">(414) 484-4885</a>
   </div>
 </nav>
 
 <section class="hero">
-  <img class="hero-photo" src="motion-hero.svg" alt="Animated illustration of a concrete pour spreading and being finished">
+  <img class="hero-photo" src="hero.jpg" alt="Finished stamped concrete patio with a curved border behind a blue-sided house, a Calderon Services job photographed by the customer for their Google review">
   <div class="hero-in">
     <span class="kick">Milwaukee</span>
     <h1>We pour it in summer <span>and plow it in January</span></h1>
@@ -156,11 +171,13 @@ footer{background:#181a1c;color:#9aa3a0;text-align:center;padding:30px 24px;font
     <span class="lab">The work</span>
     <h2 class="st">Recent work</h2>
     <div class="gg">
-      <figure><img src="motion.svg" loading="lazy" alt="Animated concrete pour and finish sequence"><figcaption><strong>Driveway pour</strong>Tear-out, base rebuild and a new drive poured and jointed.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service radius diagram"><figcaption><strong>Stamped patio</strong>Pattern and colour finished to match the house exterior.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Layered aggregate texture pattern"><figcaption><strong>Commercial lot</strong>Flatwork on a commercial property we also plow through the winter.</figcaption></figure>
+      <figure><img src="photo-curved-walkway.jpg" loading="lazy" alt="New curved concrete walkway along the side of a house"><figcaption><strong>Side walkway</strong>New curved walk poured along the house &mdash; photo from Juli B.&rsquo;s Google review.</figcaption></figure><figure><img src="photo-block-retaining-wall.jpg" loading="lazy" alt="Capped segmental block retaining wall with a stone border"><figcaption><strong>Block retaining wall</strong>Capped wall with a stone border at the base &mdash; one of your own posted photos.</figcaption></figure><figure><img src="photo-backyard-patio.jpg" loading="lazy" alt="New broom-finished backyard concrete patio beside a grey house"><figcaption><strong>Backyard patio</strong>New slab off the back door &mdash; photo from Jen&rsquo;s Google review, her third job with you.</figcaption></figure><figure><img src="motion.svg" loading="lazy" alt="Animated concrete pour and finish sequence"><figcaption><strong>How a pour goes</strong>Tear-out, base rebuild, then poured, finished and jointed.</figcaption></figure>
     </div>
-    <p class="ask"><strong>This is where your job photos go.</strong> Text over your best recent jobs and this turns into a real portfolio.</p>
+    <p class="ask"><strong>Every photo above is your work.</strong> They came off your Google profile and your customers&rsquo; reviews. Send more of your best jobs and this turns into a full portfolio.</p>
   </div>
 </section>
+
+<section id="reviews" data-reviews="real"><div class="rwrap"><div class="rhead"><h2>What Milwaukee says</h2><span class="score">&#9733; 4.7 from 28 Google reviews</span></div><p class="rsub">Pulled straight from your Google Business Profile, word for word:</p><div class="rgrid"><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Jonathan was awesome to work with on our backyard patio and retaining wall project. He is a great communicator and very knowledgeable. It was a difficult project with limited access to the backyard - and he was excited to tackle it. I would recommend him to anybody.&rdquo;</blockquote><cite>RJ B.<span class="when">Google review &middot; 3 months ago</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Jonathan and his crew did an outstanding job on my new concrete walkways as well as in regrading my entire yard. They were extremely hard working and diligent in completing my project. &hellip; I would highly recommend this company for any concrete and landscaping needs&rdquo;</blockquote><cite>Juli B.<span class="when">Google review &middot; a year ago</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Jonathan and his team are extremely hard working, very professional and polite. His team has now completed 3 projects for us, front walkway, a vinyl fence and today our new patio. We will definitely recommend Jonathan and his team.&rdquo;</blockquote><cite>Jen<span class="when">Google review &middot; a year ago</span></cite></figure></div></div></section>
 
 <section id="area">
   <div class="wrap">
@@ -193,7 +210,7 @@ footer{background:#181a1c;color:#9aa3a0;text-align:center;padding:30px 24px;font
       </div>
       <form class="form" onsubmit="event.preventDefault();this.innerHTML='<p style=\'padding:30px 0;text-align:center\'>Thanks &mdash; we&rsquo;ll be in touch shortly.</p>'">
         <label for="n">Name</label><input id="n" name="name" placeholder="Your name">
-        <label for="p">Phone</label><input id="p" name="phone" type="tel" placeholder="(563) 555-0100">
+        <label for="p">Phone</label><input id="p" name="phone" type="tel" placeholder="(414) 555-0100">
         <label for="s">What do you need?</label>
         <select id="s" name="service"><option>Driveways &amp; slabs</option><option>Decorative &amp; stamped</option><option>Commercial snow removal</option><option>Something else</option></select>
         <label for="m">Details</label><textarea id="m" name="message" rows="4" placeholder="Tell us about the job"></textarea>
