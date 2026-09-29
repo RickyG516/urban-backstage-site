@@ -116,3 +116,22 @@ photo-level review.
 Also: the recorded `fb` for sanders-lawn-care-dubuque is an Ohio business (937 area code) — cleared.
 A GBP "Website" field can point at a dead domain (Conner Cuts → NXDOMAIN): that is a better opening line
 than "you don't have a website".
+
+---
+
+## 2026-09-29 — no-site prospects mostly have no harvestable profile; scan wide before you dig
+
+The build task picks businesses with no website, and most of them also have a thin or missing
+Google listing. This run scanned ~25 BASE pages on Maps before finding three with a matching phone
+and 3+ reviews. Two recorded `fb` URLs failed the phone gate (Wisconsin Concrete Restoration, Bart
+Pals). **Several "FB pages" are auto-generated `Unofficial Page`s** (Shaffer, Dulin, Kellington) —
+0 followers, no posts, stock silhouette. They are not the business's page and never a logo source;
+one (Dulin) even carries a different phone number.
+
+**Review photos can carry another company's name too.** Kellington's before/after (from a customer
+review) had a water-softener dealer's service sticker on the control head. Cropped out; the plumbing
+itself is Kellington's job per the review.
+
+Two recorded FB pages now link LIVE websites (Zaiser's → zaisersgardencenter.com, Four Seasons →
+fourseasonsplatteville.com) — no longer no-website prospects. Homestead Services' GBP links
+homesteadserv.com, which serves a WordPress "critical error" page — a hook, not a disqualifier.

@@ -110,13 +110,27 @@ footer{background:#101617;color:#9aa3a0;text-align:center;padding:30px 24px;font
   .hero-photo{animation:none} .reveal{opacity:1;transform:none}
   .card,.gg figure,.tcard{break-inside:avoid} .hero{min-height:auto}
 }
+
+/* enrichment 2026-09-29 */
+nav.top .mark{display:inline-flex;align-items:center;gap:.6rem}
+nav.top .mark img{display:block;border-radius:7px}
+#reviews{background:var(--off);color:var(--dark)}
+#reviews .score{display:table;margin:0 auto 34px;background:var(--dark);color:#fff;font-weight:700;border-radius:999px;padding:.38rem 1rem;font-size:.95rem}
+#reviews .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}
+#reviews .rcard{background:#fff;border:1px solid rgba(0,0,0,.09);border-left:4px solid var(--accent);border-radius:8px;padding:22px 22px 18px;margin:0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+#reviews .rcard .s{color:var(--dark);letter-spacing:.14em;font-size:.95rem}
+#reviews .rcard blockquote{margin:.6rem 0 1rem;font-size:1rem;line-height:1.6;color:var(--dark)}
+#reviews .rcard cite{font-style:normal;font-weight:700;font-size:.93rem}
+#reviews .rcard .when{display:block;font-weight:400;color:#5d6663;font-size:.84rem;margin-top:2px}
+.swap-notice{max-width:820px;margin:40px auto 0;padding:1.1rem 1.4rem;border:1px dashed var(--dark);border-radius:8px;font-size:.95rem;line-height:1.6;color:var(--dark);background:rgba(0,0,0,.03)}
+@media print{.swap-notice{border-style:solid}#reviews .rcard{break-inside:avoid}}
 </style>
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark">Dulin <em>Contracting</em></a>
+  <a href="#" class="mark"><img src="logo-placeholder.svg" alt="Dulin Contracting placeholder initials badge" width="34" height="34" data-placeholder="logo" title="Placeholder - send your logo file" decoding="async">Dulin <em>Contracting</em></a>
   <div class="links">
-    <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
+    <a href="#services">Services</a><a href="#work">Work</a><a href="#reviews">Reviews</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+17123202220">(712) 320-2220</a>
   </div>
 </nav>
@@ -146,6 +160,17 @@ footer{background:#101617;color:#9aa3a0;text-align:center;padding:30px 24px;font
     <h2 class="st">Twenty-eight winters on the same lakes</h2>
     <p class="ss">Established 1998 by Steve Dulin and still owner-run out of Eloise Street.</p>
     <div class="tgrid"><div class="tcard"><strong>Since 1998</strong><span>28 years serving the Iowa Great Lakes</span></div><div class="tcard"><strong>Trane dealer</strong><span>factory-supported equipment and parts</span></div><div class="tcard"><strong>Registered apprenticeship</strong><span>state-registered program, Iowa #2023-IA-116814</span></div><div class="tcard"><strong>PHCC member</strong><span>Plumbing-Heating-Cooling Contractors of Iowa</span></div></div>
+  </div>
+</section>
+
+<section id="reviews" data-reviews="real">
+  <div class="wrap">
+    <span class="lab">In their words</span>
+    <h2 class="st">What The Lakes Area Says</h2>
+    <p class="ss">Pulled straight from your Google Business Profile, word for word.</p>
+    <span class="score">&#9733; 5.0 from 5 Google reviews</span>
+    <div class="rgrid"><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;… His amazing crew just finished installing my furnace and AC and I couldn&rsquo;t be happier. Not only were they efficient, knowledgeable, and friendly they were very professional and clean, you seriously can&rsquo;t tell they were here except for the new system. … I would never consider a different contractor, Dulin Contracting is top shelf all the way.&rdquo;</blockquote><cite>Chris S.<span class="when">Google review &middot; 3 years ago</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Helps repair old things and installs new things fast and with care and quality. Always helps us out. Steve and his team are great to work with!&rdquo;</blockquote><cite>Leah &amp; Steven J.<span class="when">Google review &middot; 6 years ago</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Great service after our house closed. Reccomend them to anyone looking quality work done in their home in Spirit Lake area.&rdquo;</blockquote><cite>Jerry F.<span class="when">Google review &middot; 2 years ago</span></cite></figure></div>
+    <div class="swap-notice"><p><strong>&#10033; Steve &mdash; two things on this page are placeholders:</strong> the &ldquo;DC&rdquo; badge in the top-left, and the drawn diagrams in the gallery below. Send your logo file and a few install and mechanical-room photos and they go on the page, usually the same week, with the colours matched to your brand. Every review above is five stars and already real &mdash; your customers&rsquo; words, straight off your Google profile.</p></div>
   </div>
 </section>
 

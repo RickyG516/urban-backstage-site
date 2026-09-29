@@ -178,10 +178,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/559019519706",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": "No-website VERIFIED 2026-09-26 by the three-test method, search+fetch only - NO BROWSER on this unattended run. (1) LIVE web_fetch of the full BBB profile HTML (bbb.org/us/ia/anamosa/profile/plumber/shaffer-plumbing-heating-0664-32031804): ",
+   "notes_preview": "Since 1981, two Iowa licences plus the state septic roster. 4.4 from 18 Google reviews - mockup now carries 3 verbatim.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-shaffer-plumbing-heating-anamosa/",
-   "ai_hook": "Lead with forty-five years and the septic licence together - 'Nancy, you've been the plumbing and heating shop in Anamosa since 1981, and you're on the state septic installer roster on top of it, and there is still nothing to find when somebody searches you.' Ask for Nancy or Mike; BBB lists Nancy as both principal and customer contact so she is most likely who picks up. The hook that lands is breadth - two Iowa licences plus septic means one call covers water, heat and ground, and nobody searching can tell. DO NOT say they have no web presence flatly: shafferplumbing.com IS live, but it is Ray A. Shaffer Inc of Pennsylvania, now merged into Carney Plumbing - naming that shows you did the work. DO NOT cite a BBB rating; they are 'Not Rated' because the file is thin, not because of a problem."
+   "ai_hook": "ENRICHED 2026-09-29: lead with forty-five years + septic licence, then the ask: 'I already put three of your Google reviews on a homepage for you - send me your logo and a few job photos and it's finished.' Ask for Nancy or Mike. DO NOT raise the 4.4 or the low reviews: two 1-star and one 2-star on the listing are about unreturned calls, a late arrival and fees - if anything, a website with a quote form answers the call-back complaint, but let THEM bring it up. shafferplumbing.com is a Pennsylvania namesake - don't imply it's theirs. No BBB rating to cite."
   },
   {
    "contact_id": "559116117694",
@@ -447,10 +447,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/555802069710",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": "Twenty-eight years in Okoboji, runs a state-registered apprenticeship program, and owns no domain.",
+   "notes_preview": "Since 1998 in Okoboji, runs a state-registered apprenticeship. 5.0 from 5 Google reviews - mockup now carries 3 verbatim.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-dulin-contracting-okoboji/",
-   "ai_hook": "THE HOOK: he runs a STATE-REGISTERED APPRENTICESHIP PROGRAM, Iowa #2023-IA-116814 - he trains his own technicians, which almost no lake-country mechanical shop can claim, and there is nothing online that says so. Open with: 'you have been doing this in Okoboji since 1998 and you train your own techs - nobody searching you can tell.' Ask for Steve - he founded it in 1998 and still owns it. Back it up with the Trane dealership and the PHCC membership. DO NOT ASSERT HIS TRADE: Trane lists him HVAC, PHCC lists him plumbing-heating-cooling, aggregators call him a general contractor. Ask what he actually does or it reads as a mailing list. DO NOT lean on reviews - he has only 6, all 5-star. No Facebook page, so this is a phone play only.",
+   "ai_hook": "ENRICHED 2026-09-29: lead with the apprenticeship (Iowa #2023-IA-116814) - 'you train your own techs and nobody searching you can tell.' Then the small ask: 'the homepage already has your five-star reviews on it; send me your logo and a few mechanical-room photos and it's done.' Ask for Steve. Do NOT assert his trade - ask. Don't make the reviews the headline, there are only five. Phone only - the FB page under his name is an auto-generated 'Unofficial Page' with a different number, (712) 332-5480; don't cite it.",
    "company_id": "347865781953"
   },
   {
@@ -537,10 +537,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/554802160327",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": "Thirty-five years, BBB accredited since 1995, plumbing and HVAC both - and nothing online he owns.",
+   "notes_preview": "5.0 stars from 36 Google reviews, BBB A+ since 1995 - and nowhere he controls to show it. Mockup now carries 3 of those reviews word for word and a real before/after re-pipe from a customer's review.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-don-kellington-son-plumbing-peoria/",
-   "ai_hook": "THE HOOK: he has been BBB accredited for 31 CONSECUTIVE YEARS (since October 1995), is rated A+, sits at 4.9 stars across 35 reviews, and a homeowner searching him finds a Yelp page and a Google Maps pin he does not control. Open with 'you have a longer clean record than anyone I call in Peoria and there is nowhere a customer can actually see it.' Ask for Don - he runs it with his son Bill and his wife Sandy, so if Bill answers he is a decision-maker too. Lead on the fact he does plumbing AND heating AND air under one roof, which most Peoria shops split. DO NOT quote a precise founding year as a gotcha - BBB says 35 years in business but lists the start as 2/1/1991. Nothing adverse on file: no complaints, A+ rating.",
+   "ai_hook": "ENRICHED 2026-09-29: lead with the reviews. 'Don, you've got thirty-six Google reviews, every one five stars, and a customer posted before-and-after photos of your copper re-pipe - I put them on a homepage for you. The only thing missing is your logo.' The ask is small: send the logo (or a photo of the truck door) and a few more job photos. Ask for Don; Bill is a decision-maker too. Nothing adverse on file.",
    "company_id": "347251135172"
   },
   {
