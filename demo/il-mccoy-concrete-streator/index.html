@@ -94,6 +94,26 @@ footer{background:#131019;color:#9aa3a0;text-align:center;padding:30px 24px;font
 .sticky{display:none}
 @media(max-width:768px){.sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:950;background:#9a7fd2;
   color:#131019;text-align:center;padding:15px;font-weight:700}body{padding-bottom:58px}}
+/* reviews placeholder + swap notice (announced-placeholder contract) */
+#reviews{background:#f5f3f9;color:#131019;padding:74px 0}
+#reviews .rwrap{max-width:1140px;margin:0 auto;padding:0 24px}
+#reviews .rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.9rem;margin-bottom:8px}
+#reviews h2{margin:0;font-family:'Cabin Condensed',system-ui,sans-serif;font-weight:700;font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:.01em}
+#reviews .score{display:inline-flex;align-items:center;gap:.5rem;background:#9a7fd2;color:#131019;font-weight:700;border-radius:999px;padding:.34rem .85rem;font-size:.95rem}
+#reviews .rsub{color:#5d6663;margin:0 0 30px;font-size:1.02rem}
+#reviews .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+#reviews .rcard{background:#fff;border:1px solid #dfe3e5;border-left:4px solid #9a7fd2;border-radius:10px;padding:22px 22px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+#reviews .rcard .s{color:#9a7fd2;letter-spacing:.14em;font-size:.95rem}
+#reviews .rcard blockquote{margin:.6rem 0 1rem;font-size:1.02rem;line-height:1.55;color:#20272b}
+#reviews .rcard cite{font-style:normal;font-weight:700;font-size:.95rem;color:#131019}
+#reviews .rcard .when{display:block;font-weight:400;color:#7d8890;font-size:.85rem;margin-top:2px}
+#reviews .rnote{margin:26px auto 0;font-size:.88rem;color:#7d8890;text-align:center;max-width:640px}
+@media(max-width:640px){#reviews{padding:54px 0}}
+.swap-wrap{padding:44px 24px 0;background:#f5f3f9}
+.swap-notice{max-width:820px;margin:0 auto;padding:1.1rem 1.4rem;border:1px dashed #9a7fd2;border-radius:8px;
+  font-size:.92rem;color:#3d3d3d;background:#fff}
+.swap-notice strong{color:#131019}
+.mark img{width:32px;height:32px;border-radius:6px;margin-right:8px;display:inline-block;vertical-align:middle}
 /* kobe */
 #kobe{position:fixed;right:18px;bottom:18px;z-index:940}
 #kobe-btn{background:#9a7fd2;color:#131019;border:none;border-radius:26px;padding:13px 22px;font-weight:700;cursor:pointer}
@@ -114,7 +134,7 @@ footer{background:#131019;color:#9aa3a0;text-align:center;padding:30px 24px;font
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark">McCoy <em>Concrete</em></a>
+  <a href="#" class="mark"><img src="logo-placeholder.svg" alt="McCoy Concrete Contractors placeholder initials badge" width="32" height="32" data-placeholder="logo" title="Placeholder &mdash; send your logo file and this is replaced" decoding="async">McCoy <em>Concrete</em></a>
   <div class="links">
     <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+18158221298">(815) 822-1298</a>
@@ -176,6 +196,17 @@ footer{background:#131019;color:#9aa3a0;text-align:center;padding:30px 24px;font
     <div style="margin-top:30px"><details class="q"><summary>How long before I can drive on it?</summary><p>Foot traffic in a day or two, vehicles at seven days on a standard residential mix. Justin will tell you the date, not a range.</p></details><details class="q"><summary>Do you cut control joints?</summary><p>Every pour. Joints are what decide where concrete cracks, and skipping them is how a driveway ends up looking random in year three.</p></details><details class="q"><summary>Can you match the finish on my existing slab?</summary><p>Usually. Bring him out to look at what is there — broom direction and edge detail are easier to match in person than over the phone.</p></details><details class="q"><summary>Do you do stamped or coloured work?</summary><p>Yes, on patios and walks. It costs more than a broom finish and he will quote both so you can see the difference.</p></details></div>
   </div>
 </section>
+
+<section id="reviews" data-reviews="placeholder">
+  <div class="rwrap">
+    <div class="rhead"><h2>What Streator says</h2><span class="score">&#9733; Reviews go here</span></div>
+    <p class="rsub">Placeholder layout &mdash; this is where real reviews from your customers will sit, word for word:</p>
+    <div class="rgrid"><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;&#10022; Your customers&#x27; own words go here — the driveway that still looks right after five winters.&rdquo;</blockquote><cite>Customer name<span class="when">&#10022; placeholder</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;&#10022; A second real review lands here once there are a few to pick from.&rdquo;</blockquote><cite>Customer name<span class="when">&#10022; placeholder</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;&#10022; A third one rounds it out — three is usually enough to make the point.&rdquo;</blockquote><cite>Customer name<span class="when">&#10022; placeholder</span></cite></figure></div>
+    <p class="rnote">&#10022; Placeholder reviews &mdash; not real quotes.</p>
+  </div>
+</section>
+
+<div class="swap-wrap"><div class="swap-notice"><p><strong>Justin &mdash; two things on this page are placeholders</strong>, and they are marked so you know: the badge next to the McCoy name is just your initials, and the reviews above are a layout, not real quotes. Send over your logo file and the names of three or four customers happy to say a word, and both go live. A few job photos and they replace the drawings in the work row too, usually the same week.</p></div></div>
 
 <section id="contact">
   <div class="wrap">

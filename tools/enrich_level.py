@@ -13,7 +13,19 @@ THE LEVELS
   GOLD   real job photos + real logo + real reviews
   SILVER real logo + real reviews, photos are labelled placeholders
   BRONZE at least one real asset, the rest labelled placeholders
-  BASE   generated SVG only -- the build-task output, not sendable
+  PRIMED no real asset yet, but the page is COMPLETE and fully disclosed --
+         every placeholder marked and the visible .swap-notice present. Sendable.
+  BASE   generated SVG only, nothing asked for -- bare, not sendable
+
+WHY PRIMED EXISTS (added 2026-09-29, Ricky's call)
+BRONZE deliberately means "at least one piece of the prospect's OWN stuff is on
+this page", so placeholders can never earn it no matter how complete the page
+looks -- verified against all 49 non-BASE pages, every one has a real photo,
+logo or review. That left a page carrying a full announced-placeholder set
+scored identically to a bare generated-SVG page, which is wrong in the direction
+that matters: one can be sent to a prospect today and the other cannot. PRIMED
+splits them. BRONZE keeps its meaning, the enrichment backlog number stops
+over-counting, and `--list-base` returns only pages that are genuinely bare.
 
 PLACEHOLDER CONTRACT (this is the part that protects the prospect relationship)
 Every non-real asset MUST carry a data-placeholder attribute AND the page MUST
@@ -57,6 +69,7 @@ def classify(html):
     if real_photo and logo_real and reviews_real: level = "GOLD"
     elif logo_real and reviews_real:              level = "SILVER"
     elif real_photo or logo_real or reviews_real: level = "BRONZE"
+    elif n_ph and has_notice:                     level = "PRIMED"
     else:                                         level = "BASE"
 
     problems = []
@@ -92,10 +105,11 @@ def main():
 
     total = sum(counts.values())
     print(f"pages scored: {total}")
-    for l in ("GOLD", "SILVER", "BRONZE", "BASE"):
+    for l in ("GOLD", "SILVER", "BRONZE", "PRIMED", "BASE"):
         n = counts.get(l, 0)
         print(f"  {l:<7}{n:>4}  {100*n/total if total else 0:.0f}%")
-    print(f"remaining to lift off BASE: {counts.get('BASE',0)}")
+    print(f"sendable (GOLD+SILVER+BRONZE+PRIMED): {total - counts.get('BASE',0)} of {total}")
+    print(f"bare, not sendable (BASE): {counts.get('BASE',0)}")
     if "--list-base" in sys.argv:
         print("\nBASE pages (enrichment backlog, oldest first):")
         for slug, lvl, _ in rows:

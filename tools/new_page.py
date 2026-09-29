@@ -6,7 +6,7 @@ fresh page driven by the pack (fonts, layout skeleton, hero treatment) and the
 prospect's own words, and satisfies every line of the spec-mockup-engine Step 5
 baseline gate.
 """
-import sys, os, json, html
+import sys, os, json, html, re
 # Repo root is derived from this file's location so the generator works from
 # any clone path. Override with UBS_ROOT if you ever need to emit elsewhere.
 ROOT = os.environ.get("UBS_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,6 +49,23 @@ def build(d):
     open(f"{DEMO}/{slug}/radius.svg","w").write(G.radius(DK,A,OFF,d["seed"]))
     open(f"{DEMO}/{slug}/texture.svg","w").write(G.texture(DK,A,OFF,d["seed"]))
 
+    # ---- announced placeholders (Ricky, 2026-09-19; made default 2026-09-29)
+    # An initials badge standing in for the logo, plus the reviews block below.
+    # Both are marked data-placeholder / data-reviews="placeholder" and are
+    # disclosed by the .swap-notice. See the placeholder contract in
+    # MOCKUP-BASELINE.md and tools/enrich_level.py -- a page that ships these
+    # WITHOUT the notice is a hard failure there, on purpose.
+    initials = d.get("initials") or "".join(
+        w[0] for w in re.findall(r"[A-Za-z&]+", d["name"])
+        if w.lower() not in ("the","and","of","llc","inc","co","corporation","company","ltd","services","service")
+    )[:3].upper() or d["name"][:2].upper()
+    open(f"{DEMO}/{slug}/logo-placeholder.svg","w").write(
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">\n'
+        f'  <rect width="64" height="64" rx="10" fill="{A}"/>\n'
+        f'  <text x="32" y="41" font-family="{pk["disp"]}, Arial, sans-serif" font-weight="700" '
+        f'font-size="{26 if len(initials)<3 else 20}" fill="{DK}" text-anchor="middle">{esc(initials)}</text>\n'
+        f'</svg>\n')
+
     tel = "".join(c for c in d["phone"] if c.isdigit())
     svcs = "".join(
       f'<div class="card reveal"><h3>{esc(s[0])}</h3><p>{esc(s[1])}</p></div>' for s in d["services"])
@@ -59,6 +76,30 @@ def build(d):
 
     heroSrc = d.get("heroSrc","motion-hero.svg")
     figs = d.get("figs")
+
+    # Placeholder review cards. The bullet glyph marks every line as not-real,
+    # and .rnote says so in plain words underneath.
+    _rev = d.get("revQuotes") or [
+      "Your customers' own words go here, pulled straight from your Google profile.",
+      "A second real review lands here once there are a few to pick from.",
+      "A third one rounds it out — three is usually enough to make the point.",
+    ]
+    reviews = "".join(
+      '<figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div>'
+      f'<blockquote>&ldquo;&#10022; {esc(q)}&rdquo;</blockquote>'
+      '<cite>Customer name<span class="when">&#10022; placeholder</span></cite></figure>'
+      for q in _rev)
+
+    # The notice is the whole point: it names what is fake and what to send to
+    # fix it. That ask is the reply hook, not an apology for the page.
+    revTitle = d.get("revTitle") or f"What {d['city'].split(',')[0]} says"
+    _who = d.get("ownerFirst")
+    swapline = d.get("swapLine") or (
+      (f"<strong>{esc(_who)} &mdash; two things on this page are placeholders</strong>, and they are marked so you know: "
+       if _who else "<strong>Two things on this page are placeholders</strong>, and they are marked so you know: ")
+      + f"the badge next to the {esc(d['markA'])} name is just your initials, and the reviews above are a layout, not real quotes. "
+      "Send over your logo file and the names of three or four customers happy to say a word, and both go live. "
+      "A few job photos and they replace the drawings in the work row too, usually the same week.")
     return f'''<!-- style-pack: {d["pack"]} | trade: {d["trade"]} | accent: {A} -->
 <!DOCTYPE html>
 <html lang="en">
@@ -154,6 +195,26 @@ footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-s
 .sticky{{display:none}}
 @media(max-width:768px){{.sticky{{display:block;position:fixed;left:0;right:0;bottom:0;z-index:950;background:{A};
   color:{DK};text-align:center;padding:15px;font-weight:700}}body{{padding-bottom:58px}}}}
+/* reviews placeholder + swap notice (announced-placeholder contract) */
+#reviews{{background:{OFF};color:{DK};padding:74px 0}}
+#reviews .rwrap{{max-width:1140px;margin:0 auto;padding:0 24px}}
+#reviews .rhead{{display:flex;flex-wrap:wrap;align-items:baseline;gap:.9rem;margin-bottom:8px}}
+#reviews h2{{margin:0;font-family:'{pk["disp"]}',system-ui,sans-serif;font-weight:700;font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:.01em}}
+#reviews .score{{display:inline-flex;align-items:center;gap:.5rem;background:{A};color:{DK};font-weight:700;border-radius:999px;padding:.34rem .85rem;font-size:.95rem}}
+#reviews .rsub{{color:#5d6663;margin:0 0 30px;font-size:1.02rem}}
+#reviews .rgrid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}}
+#reviews .rcard{{background:#fff;border:1px solid #dfe3e5;border-left:4px solid {A};border-radius:10px;padding:22px 22px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05)}}
+#reviews .rcard .s{{color:{A};letter-spacing:.14em;font-size:.95rem}}
+#reviews .rcard blockquote{{margin:.6rem 0 1rem;font-size:1.02rem;line-height:1.55;color:#20272b}}
+#reviews .rcard cite{{font-style:normal;font-weight:700;font-size:.95rem;color:{DK}}}
+#reviews .rcard .when{{display:block;font-weight:400;color:#7d8890;font-size:.85rem;margin-top:2px}}
+#reviews .rnote{{margin:26px auto 0;font-size:.88rem;color:#7d8890;text-align:center;max-width:640px}}
+@media(max-width:640px){{#reviews{{padding:54px 0}}}}
+.swap-wrap{{padding:44px 24px 0;background:{OFF}}}
+.swap-notice{{max-width:820px;margin:0 auto;padding:1.1rem 1.4rem;border:1px dashed {A};border-radius:8px;
+  font-size:.92rem;color:#3d3d3d;background:#fff}}
+.swap-notice strong{{color:{DK}}}
+.mark img{{width:32px;height:32px;border-radius:6px;margin-right:8px;display:inline-block;vertical-align:middle}}
 /* kobe */
 #kobe{{position:fixed;right:18px;bottom:18px;z-index:940}}
 #kobe-btn{{background:{A};color:{DK};border:none;border-radius:26px;padding:13px 22px;font-weight:700;cursor:pointer}}
@@ -174,7 +235,7 @@ footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-s
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark">{esc(d["markA"])} <em>{esc(d["markB"])}</em></a>
+  <a href="#" class="mark"><img src="logo-placeholder.svg" alt="{esc(d["name"])} placeholder initials badge" width="32" height="32" data-placeholder="logo" title="Placeholder &mdash; send your logo file and this is replaced" decoding="async">{esc(d["markA"])} <em>{esc(d["markB"])}</em></a>
   <div class="links">
     <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+1{tel}">{esc(d["phone"])}</a>
@@ -236,6 +297,17 @@ footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-s
     <div style="margin-top:30px">{faqs}</div>
   </div>
 </section>
+
+<section id="reviews" data-reviews="placeholder">
+  <div class="rwrap">
+    <div class="rhead"><h2>{esc(revTitle)}</h2><span class="score">&#9733; Reviews go here</span></div>
+    <p class="rsub">Placeholder layout &mdash; this is where real reviews from your customers will sit, word for word:</p>
+    <div class="rgrid">{reviews}</div>
+    <p class="rnote">&#10022; Placeholder reviews &mdash; not real quotes.</p>
+  </div>
+</section>
+
+<div class="swap-wrap"><div class="swap-notice"><p>{swapline}</p></div></div>
 
 <section id="contact">
   <div class="wrap">

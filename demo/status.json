@@ -1713,7 +1713,9 @@
   "note": "in HubSpot 2026-09-29 (company 349317777143) | No-website VERIFIED 2026-09-29, NO live browser on this unattended run, method was three tests: (1) live fetch of the full BBB profile HTML - a tel: link and a 'Write a Review' link are present and there is NO 'Visit Website' element anywhere on the page, so absence is confirmed directly rather than inferred from a scraped summary; (2) plain WebSearch 'Buhmeyer Construction Iowa City Travis Buhmeyer' returned only aggregators - BBB, BuildZoom, Bizapedia, opengovus, clustrmaps, corporationwiki, homeflock, officialusa, iowacitytoday and the Greater Iowa City HBA directory flipbook - zero first-party domain; (3) domain-scoped WebSearch on buhmeyerconstruction.com returned no links for that domain, the nearest hit being bhmconstruction.com, an unrelated public-works GC. Confidence HIGH. | Owner Travis Buhmeyer, confirmed by two independent sources: BBB prints him as Business Management, Principal Contact and Customer Contact, and the Iowa SOS registration names him registered agent. | Revenue proof: 13 building permits totalling $822,000 (BuildZoom), 8+ projects in 2 years, BuildZoom score 100 (above 87% of Iowa contractors), 12 years trading, BBB A+ with no complaints, Greater Iowa City Area HBA member and Parade of Homes builder. | Phone (319) 631-0409 from the BBB profile, independently matched in the HBA 2024 membership directory. | No Facebook page found - PHONE ONLY. | Minor address conflict: BBB prints Hersleigh Dr NE, Iowa SOS prints Hensleigh Drive NE. Residential address, so owner-operator builder. | Nothing to avoid on the call - cleanest record in the batch. | ENRICHMENT ATTEMPT 2026-09-29 - nothing harvestable: GBP 'Buhmeyer Construction Llc' (3901 Hensleigh Dr NE) has no phone, no reviews, no photos and is flagged 'This place may be closed'; no FB page found.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "PRIMED",
+  "enriched": "2026-09-29"
  },
  "il-mccoy-concrete-streator": {
   "channel": "phone",
@@ -1721,7 +1723,9 @@
   "note": "in HubSpot 2026-09-29 (company 349366217426) | No-website VERIFIED, NO live browser on this unattended run, method was three tests: (1) BBB profile website field checked from live profile HTML fetched at pool add time 2026-09-27 - no 'Visit Website' element and no 'Additional Websites' field; (2) plain WebSearch 'McCoy Concrete Contractors Streator Illinois Justin McCoy driveway' returned only aggregators - BBB, Dun & Bradstreet, YellowPages, Yelp, Nextdoor, Procore - zero first-party domain; (3) domain-scoped WebSearch on mccoyconcrete.com and mccoyconcretecontractors.com returned no links for either. THREE NAMESAKES POSITIVELY IDENTIFIED rather than rejected on sight: facebook.com/MCCOYCONCRETE.LLC is McCoy Concrete LLC of Clearwater MINNESOTA, mccoyconcretemn.com is a St Cloud / Minneapolis MINNESOTA contractor, and realmccoyconcrete.com is Real McCoy Concrete & Construction of North Little Rock ARKANSAS. Confidence HIGH. | Owner Justin McCoy, from the BBB principal field (printed 'Justin Mc Coy') and corroborated by a Dun & Bradstreet directory entry under 'Justin A McCoy - Streator IL'. | Revenue proof: 17 years trading, D&B summary ~$180,000 revenue on 3 employees (a real crew with payroll, modest but not one-man), fixed address on Holcomb Street. | Phone (815) 822-1298 from the BBB profile, matched on D&B and YellowPages. | No Facebook page of his own - PHONE ONLY (the McCoyConcrete.LLC page is the Minnesota namesake, do not message it). | CALL WARNINGS: founding-year conflict, BBB says started 1/1/2009 while a search summary says founded 2010, unresolved - do not assert a year; a separate McCoy & Sons Excavating also operates in Streator and may or may not be family, ask as a question and never assert the connection; do not confuse with McCoy Construction Co of Pontiac IL.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "PRIMED",
+  "enriched": "2026-09-29"
  },
  "ia-keeling-tree-service-mason-city": {
   "channel": "phone",
@@ -1729,6 +1733,8 @@
   "note": "in HubSpot 2026-09-29 (company 349191961309) | No-website VERIFIED 2026-09-29, NO live browser on this unattended run, method was three tests: (1) live fetch of the full BBB profile HTML - a tel: link and a 'Write a Review' link are present and there is NO 'Visit Website' element anywhere on the page, absence confirmed directly; (2) plain WebSearch 'Keeling Tree Service Mason City Iowa Kevin Keeling' returned only aggregators - BBB, BuildZoom, Yelp, YellowPages, Homeyou, Manta, chamberofcommerce.com, 2findlocal, CMac - zero first-party domain; (3) domain-scoped WebSearch on keelingtreeservice.com and keelingtree.com returned no links for either. Confidence HIGH. | Owner Kevin Keeling, from BBB Business Management, corroborated by a Manta listing filed under his personal name at the same address and by a customer review naming 'Kevin and his crew'. | Revenue proof: 22 years trading (established 2004), ~3 staff per directories, 4.3 stars from 6 reviews, and a review describing a tree taken down in 3 hours in pouring rain, which evidences a rigging crew rather than one man with a chainsaw. | Phone (641) 424-1617 from the BBB profile, matched on chamberofcommerce.com, CMac and YellowPages. | No Facebook page found - PHONE ONLY. | CALL WARNINGS: Iowa contractor registration C126126 shows EXPIRED 02-15-2023 - Iowa tree work does not generally require one and the Yelp listing was updated July 2025, so this is probably a lapsed registration on a trading business, but it is NOT confirmed and must not be raised; namesakes at 4901 W State St Rockford IL and in Bristow OK, do not cite their history back to him; BBB 'Not Rated' means insufficient information, not a bad rating. | ENRICHMENT ATTEMPT 2026-09-29 - DROPPED: GBP 4.4/7 has no phone to match, is flagged 'This place may be closed', and one 5-star is from a 'Billy Keeling' (family). Not shippable.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "PRIMED",
+  "enriched": "2026-09-29"
  }
 }
