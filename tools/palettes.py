@@ -191,6 +191,20 @@ PALETTES = [
     dict(name="azure-basalt",     dark="#0e1319", accent="#5ea3d8", off="#f1f5f8", band="blue"),
     dict(name="verdigris-iron",   dark="#0f1617", accent="#4aa8a0", off="#f1f6f6", band="teal"),
     dict(name="cypress-slate",    dark="#0f1411", accent="#6fae7a", off="#f2f6f3", band="green"),
+    # ---- added 2026-09-29: pool EXHAUSTED for the EIGHTH time (the 2026-09-28
+    # run hand-extended by 3 and flagged it would be dry again by morning; it
+    # was). Same discipline as every prior extension: extend only the thinnest
+    # bands measured against the live library - grey 18, violet 19, teal 23
+    # against warm 61 - and add NOTHING warm. Three added, one per band, which
+    # is exactly what pick_batch(3) needs. STANDING NOTE, now five runs old and
+    # getting louder: the pool burns ~1 palette per prospect, so lengthening a
+    # flat list is a treadmill, not a fix. Stage 2 (LIGHT / MONO hero schemes,
+    # see MOCKUP-BASELINE.md) multiplies the usable space instead of the list,
+    # and it is STILL not built. Every accent below checked against all 208
+    # live accents (no collision), against the existing pool, and audit().
+    dict(name="pewter-ash",       dark="#13161a", accent="#a2a6a4", off="#f4f5f5", band="grey"),
+    dict(name="iris-basalt",      dark="#131019", accent="#9a7fd2", off="#f5f3f9", band="violet"),
+    dict(name="aqua-basalt",      dark="#0e1517", accent="#52b3b8", off="#f1f6f7", band="teal"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
