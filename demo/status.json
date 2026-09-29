@@ -1736,5 +1736,13 @@
   "stage": "none",
   "enrich_level": "PRIMED",
   "enriched": "2026-09-29"
+ },
+ "ia-tsq-metals-dubuque": {
+  "channel": "warm",
+  "fb": "https://www.facebook.com/TSQMetals/",
+  "note": "WEBSITE BUILD PROSPECT | TriState Quality Metals (TSQM), metal fabrication job shop, 651 Seippel Rd, Dubuque IA 52002, (563) 582-7400 | Zach Wilming, VP (warm - Ricky knows him) | current site tsqmetals.com is a 2015 Net-Smart WordPress/Elementor build; no quote form beyond a generic contact form with a 200-country dropdown | ZERO Google reviews, 0 FB reviews, FB 177 followers | hiring ALL positions ALL shifts per FB | built 2026-09-29 as a 9-page industrial rebuild: every photo + logo harvested from tsqmetals.com (manufacturer stock of Bystronic/SafanDarley machines and one likely-stock laser-spark shot excluded); brand amber sampled from logo; customer-quote cards are labelled placeholders | HubSpot company 349693636288, contact Zach Wilming 561329364718 | owner/president Gary Wilming | ZoomInfo est $6.1M rev, 11-50 staff | 44k sq ft plant 2014 + 31,350 sq ft addition announced 2022",
+  "photos": "real",
+  "ready": true,
+  "stage": "none"
  }
 }
