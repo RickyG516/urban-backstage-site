@@ -202,3 +202,8 @@ footer a:hover{color:var(--amber)}
 }
 
 @media(max-width:768px){.util{display:none}.hero .wrap{padding-top:60px}}
+
+/* hero small-text legibility (2026-09-29, Ricky) */
+.hero .tag{background:rgba(9,11,13,.62);padding:.45rem .85rem;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid rgba(232,150,30,.28)}
+.hero p.lead{background:rgba(9,11,13,.58);padding:1rem 1.2rem;border-left:3px solid var(--amber);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#e6eaee;text-shadow:none}
+@media print{.hero .tag,.hero p.lead{background:none;backdrop-filter:none;border:0}}
