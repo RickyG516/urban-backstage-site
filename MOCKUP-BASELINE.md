@@ -2,7 +2,19 @@ FILING DESTINATION: TECH & SYSTEMS / AI & Automation
 SOURCE: CLAUDE OUTPUT — Ricky Garner
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-> ## ⚠ ACTIVE BLOCKER — EVERY MOCKUP URL IS BEHIND CLOUDFLARE ACCESS (found 2026-08-21)
+> ## ✅ RESOLVED 2026-09-30 — MOCKUP URLS ARE PUBLIC; LIBRARY INDEX STAYS LOCKED
+>
+> Access app **"All Demo Mockups (Public Bypass)"** (id b4d9271a…) bypasses everyone on
+> `urbanbackstage.com/demo/` + `ia-*`, `il-*`, `wi-*`, `landscaping-*`, `tree-service-*`,
+> `jeffs-tree-service-sioux-city*`, `sanders-lawn-care-dubuque*`, `lfn-lawncare*`.
+> **"Demo Index Lock (Owner only)"** keeps `/demo/` and `/demo/index.html` private, and the root
+> app keeps `/demo/status.json`, the hub, playbook and sales-ops private. Verified 2026-09-30 with
+> cookie-less requests: every mockup slug 200, index/status/sales-ops/hub redirect to login.
+> **A NEW SLUG PREFIX (anything not in the list above, e.g. `mn-`) IS NOT COVERED** — add it to
+> that app's destinations or the page serves a login wall. Enrichment emails no longer need the
+> "NOT SENDABLE" banner for covered prefixes.
+>
+> ## (historical) ACTIVE BLOCKER — EVERY MOCKUP URL IS BEHIND CLOUDFLARE ACCESS (found 2026-08-21)
 >
 > A Cloudflare Access application named **`urbanbackstage.com`** was created
 > **2026-08-18T04:07:53Z** covering `urbanbackstage.com` + `www.urbanbackstage.com`
