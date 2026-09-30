@@ -56,8 +56,9 @@ def classify(html):
     # Bespoke hand-authored SVG scenes (Certified Pest hero.svg, Dan Gorman build-sequence.svg)
     # are generated assets and are never placeholders. Do not flag them.
     reviews_real = bool(re.search(r'data-reviews="real"', html))
-    if not reviews_real:
-        # back-compat: pages enriched before the data-reviews convention (e.g. Ness) carry a
+    if not reviews_real and 'data-reviews=' not in html:
+        # back-compat (only for pages that predate the data-reviews attribute;
+        # an explicit data-reviews="placeholder" must never be read as real): pages enriched before the data-reviews convention (e.g. Ness) carry a
         # real reviews section with verbatim quotes. Detect it rather than demote good work.
         m = re.search(r'<section[^>]*id="reviews"[\s\S]*?</section>', html)
         reviews_real = bool(m and re.search(r'google review', m.group(0), re.I))

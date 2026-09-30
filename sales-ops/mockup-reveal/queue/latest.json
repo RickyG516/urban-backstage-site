@@ -268,10 +268,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/559051751123",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": "No-website VERIFIED 2026-09-26 by the three-test method, search+fetch only - NO BROWSER on this unattended run. (1) LIVE web_fetch of the full BBB profile HTML (bbb.org/us/ia/clinton/profile/roofing-contractors/homestead-services-llc-0664-3",
+   "notes_preview": "ENRICHED 2026-09-30: page now carries 3 of David's own roofs off his Google profile + 2 verbatim reviews ('Even the insurance claim adjuster said no other contractor could have done better'). Only the logo is a placeholder.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-homestead-services-clinton/",
-   "ai_hook": "Lead with the accreditation and the review in one breath - 'David, you paid for BBB accreditation, you're sitting at A+, your last review says ten out of ten, and somebody searching Clinton roofers finds a drywall company in Michigan instead of you.' The BBB accreditation is the strongest signal in tonight's batch: it is paid and vetted, so he already believes in buying credibility - that is exactly the buying signal. The outlook.com email is a second, gentler way in. DO NOT mention the address - it is an apartment, he works out of home. DO NOT guess at crew size, ask. DO NOT say his name domain is free: homesteadservicesllc.com belongs to a Michigan drywall and plaster outfit, and saying so by name is what makes the call sound researched rather than scripted."
+   "ai_hook": "Lead with his own customer: 'David, Kevin Metz wrote that even the insurance adjuster said nobody could've done your roof better - I put that on a homepage for you, with three of your own roofs on it. All I'm missing is your logo.' The ask is small: send the logo file. BBB A+ accreditation still backs it up. DO NOT mention the address (apartment, works from home). DO NOT bring up the Google average (3.8 - one 3-star is about slow warranty paperwork); if he raises it, the fix is getting warranty docs out faster and asking happy customers for reviews. DO NOT name the Michigan drywall company."
   },
   {
    "contact_id": "558517493496",
@@ -681,10 +681,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/554382468824",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": "25 years of tile and stone at 308 3rd St, two working owners, eight on the crew - and no website anywhere.",
+   "notes_preview": "ENRICHED 2026-09-30: page carries the Tile Pros logo off their own shop sign, colours matched to it, and the shop photo. Google files them as a PLUMBER with zero reviews; BBB files them as EXCAVATING.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-tile-pros-webstercity/",
-   "ai_hook": "THE HOOK: 25 years at the same Webster City address, two owners who both still work, roughly eight on the crew - and a homeowner googling 'tile Webster City' finds a BBB page that files them under EXCAVATING contractors. Open with 'the internet cannot even tell people what trade you are in.' That miscategorisation is the whole pitch. Ask for Brandon (Travis Wearda is the other owner). DO NOT lead with licensing - one licence shows a June 2026 expiry and an older one reads cancelled, and you do not want to open on that. Try (515) 832-4699 first; (515) 832-6162 is the chamber's alt number.",
+   "ai_hook": "THE HOOK got stronger: Google lists The Tile Pros as a PLUMBER, BBB lists them as an EXCAVATING contractor, and neither has a single review. Open with 'the internet can't even tell people you set tile.' Then: 'I built you a homepage with your logo off the shop sign - send me six shower and floor photos and it's done.' Ask for Brandon (Travis Wearda is the other owner). DO NOT lead with licensing (one licence shows a June 2026 expiry, an older one reads cancelled). Try (515) 832-4699 first; (515) 832-6162 is the chamber's alt.",
    "company_id": "347223616206"
   },
   {
@@ -789,10 +789,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/552086697693",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": "Plumbing, heating AND electrical from one shop, eight Iowa licences, listed by the county - and all three likely domains are dead.",
+   "notes_preview": "ENRICHED 2026-09-30: page now carries 3 verbatim Google reviews, 4.9 from 14 - 'Highly ethical family owned local business. Only downside is they are always busy.' Logo + photos are placeholders.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-exira-plumbing-heating-electrical/",
-   "ai_hook": "THE HOOK: the county points people at him and there is nowhere for them to land. Audubon County and the City of Exira both list this shop in their official directories, he holds eight trade licences with the Iowa board - electrical contractor plus seven more - and exiraplumbing.com, exiraplumbingheating.com and exiraplumbingheatingelectrical.com all fail to resolve. Only web presence is a Nextdoor page. Lead with 'the county lists you, but there's nowhere to send anybody.' The differentiator to sell back to him: three trades under one licence set in a town this size - a homeowner doing a remodel calls one number instead of three, and nothing online says that. NAME CAVEAT: ask for Ryan Wilson, but BuildZoom also names a Dennis L Adkins - probably a prior owner or licence holder, confirm rather than assume. DO NOT quote a founding year: BBB says 72 years (1954), another source says 1986, and they cannot both be right - let him tell you.",
+   "ai_hook": "Lead with the reviews: 'Ryan, you've got 4.9 stars from 14 people on Google and nowhere to send anybody - I put those reviews on a homepage for you. Send me your logo and a few truck and install photos and it's done.' Pair it with the county-directory angle (county lists you, nowhere to land). NAME CAVEAT: ask for Ryan Wilson; BuildZoom also names Dennis L Adkins - confirm, don't assume. DO NOT quote a founding year (1954 vs 1986 conflict).",
    "company_id": "346716708546"
   },
   {

@@ -135,3 +135,27 @@ itself is Kellington's job per the review.
 Two recorded FB pages now link LIVE websites (Zaiser's → zaisersgardencenter.com, Four Seasons →
 fourseasonsplatteville.com) — no longer no-website prospects. Homestead Services' GBP links
 homesteadserv.com, which serves a WordPress "critical error" page — a hook, not a disqualifier.
+
+---
+
+## 2026-09-30 — hidden window: gallery thumbnails never paint; resource timing works, but it also catches Recents
+
+Ricky's Chrome window was in the background again (`visibilityState: hidden`). This time the Maps
+photo-gallery thumbnails never loaded at all: `[data-photo-index]` tiles had no image, clicking them
+did not advance the viewer URL, and one long click-loop froze the renderer (CDP timeout). What worked:
+`performance.getEntriesByType('resource')` lists every `googleusercontent` image the page actually
+fetched. Match those against the listing panel's own labelled tiles (`Photo of <business>`, `House`,
+`By owner`) by URL tail, then fetch at `=w1600-h1200-k-no` and download from the maps tab.
+
+**Resource timing picks up Recents too.** On The Tile Pro's (Webster City) the third fetched image was
+a MARK'S TREE CARE (Rockford IL) truck-and-crew photo, left over from searching that name minutes
+earlier. It was unlabelled in the panel, which is why it got a contact-sheet look before anything
+shipped. Rule: only ship resource-timing URLs whose tail matches a labelled tile in THIS listing's
+panel. Treat anything else as contamination until the contact sheet proves otherwise.
+
+**A storefront sign is a logo source.** Tile Pros has no FB page, but its own GBP gallery has a photo of
+the shop sign with the logo AND the matching phone number on it. That one image passed the identity
+gate and gave up the logo and the brand colours together.
+
+Also: `enrich_level.py`'s back-compat review detection read placeholder review cards as real because
+the cards said "Google review". It now only runs on pages with no `data-reviews` attribute at all.
