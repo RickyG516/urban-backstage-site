@@ -1,966 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GBG Dubuque | Professional Exterior Services for Dubuque, IA Homeowners</title>
-  <meta name="description" content="Pressure washing, junk removal, gutter cleaning, yard cleanup & holiday lights in Dubuque, IA. Local, reliable, trusted. Free quotes.">
-  <meta name="keywords" content="pressure washing Dubuque, gutter cleaning, junk removal, yard cleanup, holiday lights Dubuque Iowa">
-  <meta property="og:title" content="GBG Dubuque | Local Exterior Services">
-  <meta property="og:description" content="Three local guys handling pressure washing, junk removal, gutter cleaning, and more.">
-  <meta property="og:type" content="business.business">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; }
-    
-    :root {
-      --dark: #1a1a1a;
-      --accent: #e36b1e;
-      --light: #f5f5f5;
-      --gray: #666;
-      --gray-light: #999;
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    @keyframes wash-stroke {
-      0% { stroke-dashoffset: 100; }
-      100% { stroke-dashoffset: 0; }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .animate-fade { animation: fadeInUp 0.8s ease-out; }
-    .animate-slide { animation: slideInLeft 0.8s ease-out; }
-
-    /* Header */
-    header {
-      background: var(--dark);
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    .logo-section:hover {
-      transform: scale(1.05);
-    }
-
-    .logo-mark {
-      width: 50px;
-      height: 50px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .logo-text h1 {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .logo-text p {
-      font-size: 11px;
-      color: #aaa;
-      letter-spacing: 1px;
-    }
-
-    header nav {
-      display: flex;
-      gap: 30px;
-    }
-
-    header nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.3s, border-bottom 0.3s;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 5px;
-    }
-
-    header nav a:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
-
-    /* Hero */
-    .hero {
-      background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
-      color: white;
-      padding: 100px 40px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(227,107,30,0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero h2 {
-      font-size: 56px;
-      margin-bottom: 20px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      animation: fadeInUp 0.8s ease-out;
-      line-height: 1.2;
-    }
-
-    .hero .tagline {
-      font-size: 18px;
-      max-width: 700px;
-      margin: 0 auto 20px;
-      color: #ddd;
-      animation: fadeInUp 1s ease-out 0.2s both;
-    }
-
-    .hero .subtext {
-      font-size: 14px;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      color: #bbb;
-      animation: fadeInUp 1s ease-out 0.4s both;
-      font-style: italic;
-    }
-
-    .cta-button {
-      background: var(--accent);
-      color: white;
-      padding: 16px 48px;
-      font-size: 16px;
-      font-weight: 700;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(227,107,30,0.3);
-      animation: fadeInUp 1s ease-out 0.6s both;
-    }
-
-    .cta-button:hover {
-      background: #d45a0a;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(227,107,30,0.4);
-    }
-
-    .cta-button:active {
-      transform: translateY(-1px);
-    }
-
-    /* Section spacing */
-    section {
-      padding: 80px 40px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 40px;
-      margin-bottom: 50px;
-      font-weight: 900;
-      color: var(--dark);
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      font-size: 16px;
-      color: var(--gray);
-      max-width: 600px;
-      margin: -40px auto 50px;
-      animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
-
-    /* Services */
-    .services {
-      background: white;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .service-card {
-      background: var(--light);
-      padding: 40px 30px;
-      border-radius: 8px;
-      border-left: 5px solid var(--accent);
-      transition: all 0.3s;
-      animation: fadeInUp 0.8s ease-out;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, transparent 0%, rgba(227,107,30,0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
-
-    .service-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      margin-bottom: 20px;
-      transition: transform 0.3s;
-    }
-
-    .service-card:hover .service-icon {
-      transform: rotate(360deg) scale(1.1);
-      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    .service-card h3 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      color: var(--dark);
-      position: relative;
-      z-index: 2;
-    }
-
-    .service-card p {
-      font-size: 15px;
-      color: var(--gray);
-      line-height: 1.7;
-      position: relative;
-      z-index: 2;
-      margin-bottom: 15px;
-    }
-
-    .price-range {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent);
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Why Choose Us */
-    .why-choose {
-      background: var(--light);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .why-card {
-      text-align: center;
-      padding: 30px;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .why-number {
-      font-size: 48px;
-      font-weight: 900;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    .why-card h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: var(--dark);
-    }
-
-    .why-card p {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.6;
-    }
-
-    /* Pricing */
-    .pricing {
-      background: white;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .pricing-card {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      border: 2px solid var(--light);
-      text-align: center;
-      transition: all 0.3s;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .pricing-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 25px rgba(227,107,30,0.15);
-      transform: translateY(-5px);
-    }
-
-    .pricing-card h3 {
-      font-size: 20px;
-      margin-bottom: 15px;
-      color: var(--dark);
-      font-weight: 700;
-    }
-
-    .price {
-      font-size: 32px;
-      color: var(--accent);
-      font-weight: 900;
-      margin: 20px 0;
-      line-height: 1.2;
-    }
-
-    .price-note {
-      font-size: 13px;
-      color: var(--gray-light);
-      margin-bottom: 20px;
-    }
-
-    /* About */
-    .about {
-      background: white;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .about p {
-      font-size: 18px;
-      color: var(--gray);
-      line-height: 1.9;
-      margin-bottom: 25px;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .about strong {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    /* Contact */
-    .contact {
-      background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
-      color: white;
-      padding: 80px 40px;
-      text-align: center;
-    }
-
-    .contact h2 {
-      font-size: 40px;
-      margin-bottom: 40px;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .contact-methods {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-bottom: 60px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .contact-method {
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .contact-method h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .contact-method p {
-      font-size: 18px;
-      color: var(--light);
-      margin-bottom: 10px;
-    }
-
-    .contact-method a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      transition: opacity 0.3s;
-    }
-
-    .contact-method a:hover {
-      opacity: 0.8;
-      text-decoration: underline;
-    }
-
-    .contact-form {
-      background: rgba(255,255,255,0.05);
-      padding: 40px;
-      border-radius: 8px;
-      max-width: 500px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: all 0.3s;
-    }
-
-    .form-group input::placeholder,
-    .form-group select::placeholder {
-      color: rgba(255,255,255,0.6);
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
-      background: rgba(255,255,255,0.15);
-      box-shadow: 0 0 15px rgba(227,107,30,0.3);
-    }
-
-    .form-group select option {
-      background: var(--dark);
-      color: white;
-    }
-
-    /* Footer */
-    footer {
-      background: #0f0f0f;
-      color: #999;
-      padding: 40px;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    footer strong {
-      color: var(--light);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 20px;
-        padding: 15px 20px;
-      }
-
-      header nav {
-        flex-direction: column;
-        gap: 15px;
-        font-size: 13px;
-      }
-
-      .hero h2 {
-        font-size: 36px;
-      }
-
-      .hero {
-        padding: 60px 20px;
-      }
-
-      section {
-        padding: 50px 20px;
-      }
-
-      .section-title {
-        font-size: 28px;
-      }
-
-      .services-grid,
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-methods {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-    }
-
-    /* Utility */
-    .text-accent {
-      color: var(--accent);
-    }
-
-    .shadow-lg {
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permanent Lights &amp; Driveway Sealing in Dubuque, IA | GBG</title>
+<meta name="description" content="Permanent roofline lighting and driveway sealing in Dubuque, Iowa and within 30 miles. Locally owned, custom colors and patterns. Get a private estimate.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://urbanbackstage.com/gbg/">
+<meta name="theme-color" content="#0c0c0e">
+<meta property="og:site_name" content="GBG Dubuque">
+<meta property="og:title" content="Permanent Lights &amp; Driveway Sealing in Dubuque, IA | GBG">
+<meta property="og:description" content="Permanent roofline lighting and driveway sealing in Dubuque, Iowa and within 30 miles. Locally owned, custom colors and patterns. Get a private estimate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://urbanbackstage.com/gbg/">
+<meta property="og:image" content="https://urbanbackstage.com/gbg/assets/og.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Permanent Lights &amp; Driveway Sealing in Dubuque, IA | GBG">
+<meta name="twitter:description" content="Permanent roofline lighting and driveway sealing in Dubuque, Iowa and within 30 miles. Locally owned, custom colors and patterns. Get a private estimate.">
+<meta name="twitter:image" content="https://urbanbackstage.com/gbg/assets/og.png">
+<meta name="geo.region" content="US-IA">
+<meta name="geo.placename" content="Dubuque">
+<meta name="geo.position" content="42.5006;-90.6646">
+<meta name="ICBM" content="42.5006, -90.6646">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","@id":"https://urbanbackstage.com/gbg/#business","name":"GBG Dubuque","url":"https://urbanbackstage.com/gbg/","telephone":"+15153444053","email":"info@gbgdubuque.com","image":"https://urbanbackstage.com/gbg/assets/og.png","logo":"https://urbanbackstage.com/gbg/assets/favicon.svg","description":"Permanent lighting and driveway sealing for Dubuque, Iowa and communities within about 30 miles. Also yard spraying, trash can cleaning and epoxy coating, with trusted partners for painting, landscaping and tree service.","address":{"@type":"PostalAddress","addressLocality":"Dubuque","addressRegion":"IA","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":42.5006,"longitude":-90.6646},"areaServed":[{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":42.5006,"longitude":-90.6646},"geoRadius":48280},{"@type":"City","name":"Dubuque, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Asbury, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Peosta, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Epworth, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Farley, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Key West, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Sherrill, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Holy Cross, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Dyersville, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Cascade, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"Bellevue, IA","containedInPlace":{"@type":"AdministrativeArea","name":"Iowa"}},{"@type":"City","name":"East Dubuque, IL","containedInPlace":{"@type":"AdministrativeArea","name":"Illinois"}},{"@type":"City","name":"Galena, IL","containedInPlace":{"@type":"AdministrativeArea","name":"Illinois"}},{"@type":"City","name":"Hanover, IL","containedInPlace":{"@type":"AdministrativeArea","name":"Illinois"}},{"@type":"City","name":"Elizabeth, IL","containedInPlace":{"@type":"AdministrativeArea","name":"Illinois"}},{"@type":"City","name":"Scales Mound, IL","containedInPlace":{"@type":"AdministrativeArea","name":"Illinois"}},{"@type":"City","name":"Stockton, IL","containedInPlace":{"@type":"AdministrativeArea","name":"Illinois"}},{"@type":"City","name":"Hazel Green, WI","containedInPlace":{"@type":"AdministrativeArea","name":"Wisconsin"}},{"@type":"City","name":"Cuba City, WI","containedInPlace":{"@type":"AdministrativeArea","name":"Wisconsin"}},{"@type":"City","name":"Dickeyville, WI","containedInPlace":{"@type":"AdministrativeArea","name":"Wisconsin"}},{"@type":"City","name":"Potosi, WI","containedInPlace":{"@type":"AdministrativeArea","name":"Wisconsin"}},{"@type":"City","name":"Platteville, WI","containedInPlace":{"@type":"AdministrativeArea","name":"Wisconsin"}}],"knowsAbout":["Permanent lighting","Driveway sealing","Yard spraying","Epoxy coating"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"GBG Dubuque services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Permanent Lights","url":"https://urbanbackstage.com/gbg/permanent-lights/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Driveway Sealing","url":"https://urbanbackstage.com/gbg/driveway-sealing/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Yard Spraying","url":"https://urbanbackstage.com/gbg/yard-spraying/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Trash Can Cleaning","url":"https://urbanbackstage.com/gbg/trash-can-cleaning/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Epoxy Coating","url":"https://urbanbackstage.com/gbg/epoxy-coating/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Painting","url":"https://urbanbackstage.com/gbg/painting/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Landscaping","url":"https://urbanbackstage.com/gbg/landscaping/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Tree Service","url":"https://urbanbackstage.com/gbg/tree-service/"}}]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://urbanbackstage.com/gbg/#website","url":"https://urbanbackstage.com/gbg/","name":"GBG Dubuque","publisher":{"@id":"https://urbanbackstage.com/gbg/#business"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do permanent lights have to come down each season?","acceptedAnswer":{"@type":"Answer","text":"No. Permanent lights are installed once along your roofline and stay up all year, designed to blend into the trim by day."}},{"@type":"Question","name":"Can I change the colors?","acceptedAnswer":{"@type":"Answer","text":"Yes. Colors, patterns and schedules are controlled from your phone, so you can go from warm white to holiday colors in seconds."}},{"@type":"Question","name":"When is the best time to seal a driveway in Iowa?","acceptedAnswer":{"@type":"Answer","text":"Warm, dry weather works best, typically late spring through early fall. We will recommend timing once we have seen your driveway."}},{"@type":"Question","name":"How long until I can drive on a sealed driveway?","acceptedAnswer":{"@type":"Answer","text":"Most driveways need roughly 24 to 48 hours to cure depending on weather. We will tell you exactly when yours is ready."}},{"@type":"Question","name":"What areas do you serve?","acceptedAnswer":{"@type":"Answer","text":"Dubuque and communities within roughly 30 miles, including parts of Iowa, Illinois and Wisconsin. See our service areas page or call to confirm your address."}}]}</script>
 </head>
 <body>
-  <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "GBG Dubuque",
-    "image": "https://urbanbackstage.com/gbg/gbg-logo.png",
-    "description": "Professional exterior services including pressure washing, junk removal, gutter cleaning, and yard cleanup in Dubuque, Iowa.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Dubuque",
-      "addressLocality": "Dubuque",
-      "addressRegion": "IA",
-      "postalCode": "52001",
-      "addressCountry": "US"
-    },
-    "telephone": "(515) 344-4053",
-    "email": "info@gbgdubuque.com",
-    "url": "https://urbanbackstage.com/gbg/",
-    "areaServed": {
-      "@type": "City",
-      "name": "Dubuque, Iowa"
-    },
-    "priceRange": "$150-$1500",
-    "servesCuisine": "Exterior Services",
-    "sameAs": [
-      "https://www.facebook.com/gbgdubuque",
-      "https://www.instagram.com/gbgdubuque"
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "GBG Dubuque",
-    "url": "https://urbanbackstage.com/gbg/",
-    "logo": "https://urbanbackstage.com/gbg/gbg-logo.png",
-    "description": "Local exterior services company in Dubuque, Iowa offering pressure washing, junk removal, gutter cleaning, yard cleanup, and holiday light installation.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Dubuque",
-      "addressRegion": "IA",
-      "addressCountry": "US"
-    },
-    "telephone": "(515) 344-4053",
-    "email": "info@gbgdubuque.com"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What areas do you service?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We service Dubuque, Iowa and surrounding areas. Call us at (515) 344-4053 for a free quote."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you offer recurring services?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Gutter cleaning, trash can cleaning, and yard cleanup are all available as recurring services with monthly rates."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How quickly can you schedule?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We typically book within 7-14 days. For urgent jobs, call us directly at (515) 344-4053."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you provide free quotes?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. All quotes are free. Fill out our contact form or call us today."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Header -->
-  <header>
-    <div class="logo-section">
-      <svg class="logo-mark" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
-        <rect x="30" y="220" width="60" height="60" fill="#e36b1e" stroke="#fff" stroke-width="2"/>
-        <rect x="105" y="220" width="60" height="60" fill="#e36b1e" stroke="#fff" stroke-width="2"/>
-        <rect x="180" y="220" width="60" height="60" fill="#e36b1e" stroke="#fff" stroke-width="2"/>
-        <rect x="67.5" y="145" width="60" height="60" fill="#e36b1e" stroke="#fff" stroke-width="2"/>
-        <rect x="142.5" y="145" width="60" height="60" fill="#e36b1e" stroke="#fff" stroke-width="2"/>
-        <rect x="105" y="70" width="60" height="60" fill="#e36b1e" stroke="#fff" stroke-width="2"/>
-        <circle cx="135" cy="100" r="8" fill="#e36b1e"/>
-      </svg>
-      <div class="logo-text">
-        <h1>GBG</h1>
-        <p>DUBUQUE</p>
-      </div>
+<script>document.documentElement.classList.add('js');window.GBG={email:"info@gbgdubuque.com"}</script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="bloom" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a0d"/><stop offset="1" stop-color="#040405"/></linearGradient><linearGradient id="wallglow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--lc,#ffd9a0)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--lc,#ffd9a0)" stop-opacity="0"/></linearGradient></defs></svg><a class="skip" href="#main">Skip to content</a>
+<nav class="top" id="nav" aria-label="Main">
+  <div class="wrap">
+    <a href="./" class="brand" aria-label="GBG Dubuque home"><svg viewBox="0 0 90 90" aria-hidden="true"><g fill="#e36b1e"><rect x="4" y="60" width="24" height="24" rx="2"/><rect x="33" y="60" width="24" height="24" rx="2"/><rect x="62" y="60" width="24" height="24" rx="2"/><rect x="18.5" y="32" width="24" height="24" rx="2"/><rect x="47.5" y="32" width="24" height="24" rx="2"/><rect x="33" y="4" width="24" height="24" rx="2"/></g></svg><div><b>GBG</b><span>DUBUQUE</span></div></a>
+    <div class="nav-r">
+      <a class="tel" href="tel:+15153444053">(515) 344-4053</a>
+      <a class="btn btn-primary" href="#contact">Private Estimate</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#why">Why Us</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Your Dubuque Exterior Experts</h2>
-      <p class="tagline">Three local guys. One mission. We handle the work so you don't have to.</p>
-      <p class="subtext">From pressure washing driveways to hauling junk, we're the professionals Dubuque trusts. Free quotes. Local rates. Real results.</p>
-      <a href="#contact" class="cta-button">Get Your Free Quote Today</a>
+  </div>
+</nav>
+<div class="menu" id="menu">
+  <div class="wrap menu-grid">
+    <div class="menu-col"><h4 style="--i:0">Featured</h4><a class="big" href="permanent-lights/" style="--i:0"><b>Permanent Lights</b><span>Custom-fit architectural lighting that traces your roofline. Installed once, on every night of the year.</span></a><a class="big" href="driveway-sealing/" style="--i:1"><b>Driveway Sealing</b><span>Cleaned, repaired and sealed to a deep, even finish that protects your driveway and frames your home.</span></a></div>
+    <div class="menu-col"><h4 style="--i:0">More services</h4><a class="sm" href="yard-spraying/" style="--i:0">Yard Spraying<i>In-house</i></a><a class="sm" href="trash-can-cleaning/" style="--i:1">Trash Can Cleaning<i>In-house</i></a><a class="sm" href="epoxy-coating/" style="--i:2">Epoxy Coating<i>In-house</i></a><a class="sm" href="painting/" style="--i:3">Painting<i>Trusted partner</i></a><a class="sm" href="landscaping/" style="--i:4">Landscaping<i>Trusted partner</i></a><a class="sm" href="tree-service/" style="--i:5">Tree Service<i>Trusted partner</i></a></div>
+    <div class="menu-col">
+      <h4 style="--i:0">Company</h4>
+      <a class="sm" href="service-areas/" style="--i:1">Service areas</a>
+      <a class="sm" href="careers/" style="--i:2">Careers</a>
+      <a class="sm" href="#contact" style="--i:3">Request an estimate</a>
+      <a class="mcall" href="tel:+15153444053" style="--i:4">(515) 344-4053</a>
+      <p class="mnote" style="--i:5">Locally owned. Serving Dubuque and communities within about 30 miles.</p>
     </div>
-  </section>
+  </div>
+</div>
+<main id="main">
+<header class="hero" id="top">
+  <div class="stars" data-stars="70"></div>
+  <div class="hero-copy wrap">
+    <div class="eyebrow rv">Dubuque, Iowa &middot; Permanent Lighting &middot; Driveway Sealing</div>
+    <h1 class="rv d1">Your home,<br><em>lit like it deserves.</em></h1>
+    <p class="sub rv d2">Permanent lighting and flawless driveway sealing for Dubuque and communities within 30 miles. Done once. Done right.</p>
+    <div class="cta rv d3"><a href="#contact" class="btn btn-primary">Request a private estimate</a><a href="#lights" class="btn btn-ghost">Design your lights</a></div>
+  </div>
+  <div class="hero-house"><svg class="house" id="heroHouse" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Illustration of an estate with permanent lights cycling through colors and patterns"></svg></div>
+  <div class="now"><span>Now showing&nbsp;<b id="heroNow"></b></span><a href="#lights">Customize it &rarr;</a></div>
+</header>
 
-  <!-- Services -->
-  <section class="services" id="services">
-    <h2 class="section-title">What We Handle</h2>
-    <p class="section-subtitle">Professional exterior services designed to save you time and make your property look its best year-round.</p>
-    
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🚿</div>
-        <h3>Pressure Washing</h3>
-        <p>Deep clean your driveway, patio, siding, or storefront. We handle residential and commercial properties across Dubuque. Professional equipment. Spotless results.</p>
-        <div class="price-range">$200 – $600</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🚛</div>
-        <h3>Junk Removal & Hauling</h3>
-        <p>Renovation debris, old furniture, yard waste — we haul it away. One call. No mess left behind. Fully licensed and insured. Same-day pickup available.</p>
-        <div class="price-range">$300 – $800</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🪜</div>
-        <h3>Gutter Cleaning</h3>
-        <p>Spring and fall gutter maintenance keeps your home protected. We clear leaves, debris, and buildup. Standing contracts available for recurring peace of mind.</p>
-        <div class="price-range">$150 – $300</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🌿</div>
-        <h3>Yard Cleanup & Landscaping</h3>
-        <p>Spring cleanup, fall leaf removal, branch clearing. Seasonal services and standing contracts both available. We turn overgrown yards into showcases.</p>
-        <div class="price-range">$200 – $500</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">✨</div>
-        <h3>Holiday Light Installation</h3>
-        <p>Professional roofline and yard displays for the holidays. We install in November, remove in January. Repeat every year stress-free. Dubuque's top choice for holiday magic.</p>
-        <div class="price-range">$800 – $1,500</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🧹</div>
-        <h3>Trash Can & Bin Cleaning</h3>
-        <p>Monthly recurring service. We clean your bins, eliminating odor and bacteria. Clean bins delivered back to your door. Simple. Reliable. Monthly rate.</p>
-        <div class="price-range">$20 – $40/month</div>
-      </div>
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="eyebrow rv">What we do best</div>
+    <h2 class="rv d1">Two things. Perfected.</h2>
+    <p class="lead rv d2">We handle most exterior work directly, but these are the two we would put our name on first.</p>
+    <div class="two">
+      <a href="permanent-lights/" class="card c1 rv"><div class="dots" aria-hidden="true"></div><span class="num">01</span><h3>Permanent Lights</h3><p>Custom-fit architectural lighting that traces your roofline. Installed once, on every night of the year.</p><span class="more">Explore &rarr;</span></a>
+      <a href="driveway-sealing/" class="card c2 rv d1"><div class="seal-line" aria-hidden="true"><i></i></div><span class="num">02</span><h3>Driveway Sealing</h3><p>Cleaned, repaired and sealed to a deep, even finish that protects your driveway and frames your home.</p><span class="more">Explore &rarr;</span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Why Choose Us -->
-  <section class="why-choose" id="why">
-    <h2 class="section-title">Why GBG Dubuque?</h2>
-    <p class="section-subtitle">We're not a corporation. We're three guys from North Dubuque who grew up here and know this community inside and out.</p>
-    
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-number">100%</div>
-        <h3>Local</h3>
-        <p>We live here. We work here. Your neighbors are our neighbors. That means accountability and pride in every job.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-number">25+</div>
-        <h3>Years Combined</h3>
-        <p>Between the three of us, we've got decades of real-world exterior and trades experience. We know what works.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-number">$0</div>
-        <h3>Hidden Fees</h3>
-        <p>Transparent pricing. You get a quote. You know the cost. No surprises. That's how we do business.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-number">48hr</div>
-        <h3>Response Time</h3>
-        <p>Call or email us today. We respond within 48 hours with a free quote and next-available booking.</p>
-      </div>
+<section class="sec alt" id="lights">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow rv">01 &middot; Permanent Lights</div>
+      <h2 class="rv d1">Any color. Any pattern. Any night.</h2>
+      <p class="lead rv d2">A clean line of light along your eaves and gables that disappears by day. Then it goes to work: warm white on a quiet Tuesday, holiday colors in December, your team’s colors on game day.</p>
+      <ul class="ticks rv d2">
+        <li>Custom-fit to your home’s exact roofline</li>
+        <li>Themes, patterns, speed and colors, controlled from your phone</li>
+        <li>Blends into the trim during the day</li>
+        <li>One install replaces every seasonal light job</li>
+      </ul>
+      <p class="rv d3"><a href="permanent-lights/" class="btn btn-ghost">Permanent lighting details</a></p>
     </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="pricing" id="pricing">
-    <h2 class="section-title">Simple Pricing. No Surprises.</h2>
-    <p class="section-subtitle">All jobs quoted upfront. All prices include labor, equipment, and cleanup.</p>
-    
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Pressure Washing</h3>
-        <div class="price">$200–$600</div>
-        <p class="price-note">per job · Residential & Commercial</p>
-        <p>Driveways, patios, siding, storefronts — we clean it all professionally.</p>
+    <div class="rv d1"><div class="stage" id="stage">
+        <div class="stars" data-stars="34"></div>
+        <svg class="house" id="demoHouse" role="img" aria-label="Interactive preview of permanent lights with customizable colors and patterns" preserveAspectRatio="xMidYMax meet"></svg>
+        <div class="now"><span>Now showing&nbsp;<b id="studioNow"></b></span></div>
       </div>
+      <div class="studio">
+        <div><span class="lbl">Themes</span><div class="chips" id="themes" role="group" aria-label="Light themes"></div></div>
+        <div class="ctl-row">
+          <div><label class="lbl" for="pattern">Pattern</label><select id="pattern"></select></div>
+          <div><label class="lbl" for="speed">Cadence <span id="speedVal">1.0x</span></label><input type="range" id="speed" min="0.3" max="3" step="0.1" value="1"></div>
+        </div>
+        <div><span class="lbl">Colors</span><div class="swatches"><input type="color" id="c0" aria-label="Color 1" value="#ffd9a0"><input type="color" id="c1" aria-label="Color 2" value="#ffd9a0"><input type="color" id="c2" aria-label="Color 3" value="#ffd9a0"></div></div>
+        <div class="chips">
+          <button class="chip" id="showBtn" type="button" aria-pressed="false">Auto-cycle themes</button>
+          <button class="chip" id="dayBtn" type="button" aria-pressed="false">View by day</button>
+          <a class="btn btn-primary" id="bookLook" href="#contact" style="padding:.55rem 1.1rem;font-size:.82rem" data-service="Permanent Lights">Book this look</a>
+        </div>
+        <p class="hint">Illustration for preview. Your installation is designed around your actual home, and colors, patterns and schedules are controlled from your phone.</p>
+      </div></div>
+  </div>
+</section>
 
-      <div class="pricing-card">
-        <h3>Junk Removal</h3>
-        <div class="price">$300–$800</div>
-        <p class="price-note">per job · volume-dependent</p>
-        <p>Debris, furniture, construction waste — same-day pickup available.</p>
+<section class="sec" id="driveway">
+  <div class="wrap split flip">
+    <div class="rv d1"><div class="art seal" id="seal">
+        <div class="cap" id="sealStage">Before</div>
+        <svg viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animation of a driveway being cleaned, repaired and sealed">
+          <defs>
+            <clipPath id="cpDrive"><polygon points="380,120 620,120 720,520 280,520"/></clipPath>
+            <clipPath id="cpClean"><rect x="0" y="120" width="1000" height="0"/></clipPath>
+            <clipPath id="cpRepair"><rect x="0" y="120" width="1000" height="0"/></clipPath>
+            <clipPath id="cpSeal"><rect x="0" y="120" width="1000" height="0"/></clipPath>
+            <linearGradient id="sheenS" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#fff" stop-opacity=".12"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          </defs>
+          <rect width="1000" height="560" fill="#0d1610"/>
+          <g stroke="#2c5a32" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M238 69 q1 -5 1 -10"/><path d="M626 26 q2 -3 3 -6"/><path d="M259 41 q-0 -8 -0 -16"/><path d="M836 63 q-2 -6 -3 -12"/><path d="M635 98 q1 -6 2 -11"/><path d="M671 26 q0 -7 1 -14"/><path d="M301 23 q-0 -7 -0 -15"/><path d="M719 99 q2 -7 4 -13"/><path d="M395 92 q2 -5 4 -10"/><path d="M879 29 q-1 -4 -3 -7"/><path d="M965 59 q-1 -6 -2 -12"/><path d="M507 55 q0 -5 1 -10"/><path d="M584 101 q2 -6 4 -13"/><path d="M856 109 q-2 -6 -3 -13"/><path d="M861 107 q0 -8 1 -15"/><path d="M714 39 q0 -7 1 -14"/><path d="M285 26 q2 -7 5 -15"/><path d="M89 92 q-2 -5 -3 -10"/><path d="M294 89 q-2 -7 -5 -15"/><path d="M615 24 q-1 -7 -2 -13"/><path d="M881 108 q2 -6 5 -11"/><path d="M310 27 q-2 -6 -5 -12"/><path d="M197 57 q-2 -6 -3 -12"/><path d="M42 98 q2 -5 5 -9"/><path d="M897 54 q0 -5 0 -11"/><path d="M644 74 q1 -6 1 -12"/><path d="M941 66 q1 -5 2 -10"/><path d="M238 47 q0 -8 0 -16"/><path d="M548 21 q0 -5 1 -10"/><path d="M20 75 q-2 -6 -4 -12"/><path d="M627 62 q-1 -6 -1 -13"/><path d="M707 86 q-2 -3 -4 -6"/><path d="M676 107 q-0 -4 -0 -9"/><path d="M593 49 q-1 -5 -2 -10"/><path d="M369 74 q-1 -5 -1 -9"/><path d="M772 22 q1 -6 2 -12"/><path d="M310 40 q-1 -7 -3 -14"/><path d="M187 59 q-2 -6 -4 -13"/><path d="M322 50 q-0 -7 -1 -14"/><path d="M856 35 q1 -5 2 -9"/><path d="M885 61 q-2 -4 -4 -8"/><path d="M530 37 q2 -7 3 -14"/><path d="M184 45 q1 -7 1 -14"/><path d="M806 51 q-1 -4 -2 -7"/><path d="M794 44 q-0 -5 -1 -9"/><path d="M420 57 q-2 -8 -3 -15"/><path d="M5 105 q2 -7 5 -15"/><path d="M434 106 q-1 -8 -3 -15"/><path d="M746 95 q0 -6 0 -13"/><path d="M289 51 q-2 -4 -4 -8"/><path d="M589 46 q-2 -7 -5 -14"/><path d="M904 82 q2 -8 4 -15"/><path d="M900 72 q1 -3 2 -6"/><path d="M172 47 q0 -6 0 -13"/><path d="M414 105 q-1 -6 -2 -12"/><path d="M252 98 q1 -5 3 -11"/><path d="M352 38 q2 -6 3 -11"/><path d="M171 91 q2 -8 3 -15"/><path d="M823 21 q2 -6 4 -12"/><path d="M50 44 q0 -4 0 -9"/><path d="M423 63 q-2 -7 -5 -14"/><path d="M55 31 q-2 -4 -4 -7"/><path d="M975 97 q0 -3 0 -7"/><path d="M316 48 q1 -5 1 -10"/><path d="M587 52 q-1 -4 -2 -8"/><path d="M124 70 q-1 -7 -1 -13"/><path d="M80 36 q1 -5 1 -10"/><path d="M783 54 q1 -7 1 -14"/><path d="M432 54 q1 -5 2 -11"/><path d="M421 82 q-1 -5 -3 -11"/><path d="M536 83 q-0 -3 -1 -7"/><path d="M426 99 q-1 -8 -1 -15"/><path d="M898 91 q-0 -4 -0 -9"/><path d="M123 93 q2 -6 4 -13"/><path d="M792 80 q0 -7 1 -13"/><path d="M103 73 q-2 -3 -4 -6"/><path d="M774 24 q-2 -3 -4 -7"/><path d="M880 36 q2 -3 3 -6"/><path d="M121 96 q2 -6 3 -13"/><path d="M952 72 q-2 -7 -5 -14"/><path d="M767 66 q-2 -7 -4 -13"/><path d="M749 104 q-1 -3 -2 -7"/><path d="M564 95 q-2 -4 -3 -8"/><path d="M250 75 q-1 -7 -1 -14"/><path d="M367 56 q-0 -5 -1 -10"/><path d="M83 65 q-0 -8 -1 -16"/><path d="M747 34 q1 -6 3 -13"/><path d="M674 67 q1 -5 1 -11"/><path d="M897 33 q1 -3 2 -7"/><path d="M917 67 q1 -5 2 -10"/></g>
+          <rect x="0" y="0" width="1000" height="120" fill="#16211a" opacity=".55"/>
+          <g fill="#101014" stroke="#2b2b31" stroke-width="2"><rect x="290" y="0" width="420" height="120"/></g>
+          <g stroke="#2b2b31" stroke-width="2" fill="none"><rect x="320" y="30" width="170" height="90"/><rect x="510" y="30" width="170" height="90"/><line x1="376" y1="30" x2="376" y2="120"/><line x1="433" y1="30" x2="433" y2="120"/><line x1="566" y1="30" x2="566" y2="120"/><line x1="623" y1="30" x2="623" y2="120"/></g>
+          <g clip-path="url(#cpDrive)">
+            <rect x="0" y="120" width="1000" height="400" fill="#66666c"/>
+            <ellipse cx="470" cy="350" rx="60" ry="30" fill="#2a2a2e" opacity=".55"/><ellipse cx="560" cy="250" rx="40" ry="18" fill="#2a2a2e" opacity=".4"/><ellipse cx="420" cy="180" rx="30" ry="14" fill="#333338" opacity=".4"/>
+            <g stroke="#1e1e21" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M410 150 l18 60 l-14 40 l32 70 l-8 60 l30 70 M560 140 l-16 70 l22 50 l-12 80 l30 60 M330 330 l60 -14 l40 18 M600 400 l-70 10"/></g>
+            <g stroke="#4f8a3a" stroke-width="2" fill="none" stroke-linecap="round"><path d="M428 210 q3 -10 0 -16 M428 210 q-5 -8 -8 -12 M428 210 q6 -8 9 -13"/><path d="M414 250 q3 -10 0 -16 M414 250 q-5 -8 -8 -12 M414 250 q6 -8 9 -13"/><path d="M546 210 q3 -10 0 -16 M546 210 q-5 -8 -8 -12 M546 210 q6 -8 9 -13"/><path d="M534 260 q3 -10 0 -16 M534 260 q-5 -8 -8 -12 M534 260 q6 -8 9 -13"/><path d="M390 316 q3 -10 0 -16 M390 316 q-5 -8 -8 -12 M390 316 q6 -8 9 -13"/><path d="M600 396 q3 -10 0 -16 M600 396 q-5 -8 -8 -12 M600 396 q6 -8 9 -13"/></g>
+            <g clip-path="url(#cpClean)"><rect x="0" y="120" width="1000" height="400" fill="#8b8b93"/><g stroke="#3a3a40" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M410 150 l18 60 l-14 40 l32 70 l-8 60 l30 70 M560 140 l-16 70 l22 50 l-12 80 l30 60 M330 330 l60 -14 l40 18 M600 400 l-70 10"/></g></g>
+            <g clip-path="url(#cpRepair)"><rect x="0" y="120" width="1000" height="400" fill="#7f7f87"/><g stroke="#9c9ca5" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".7"><path d="M410 150 l18 60 l-14 40 l32 70 l-8 60 l30 70 M560 140 l-16 70 l22 50 l-12 80 l30 60 M330 330 l60 -14 l40 18 M600 400 l-70 10"/></g></g>
+            <g clip-path="url(#cpSeal)"><rect x="0" y="120" width="1000" height="400" fill="#0b0b0d"/><rect x="0" y="120" width="1000" height="400" fill="url(#sheenS)"/></g>
+            <g id="barClean" opacity="0"><rect x="0" y="0" width="1000" height="8" fill="#7fd0ff" opacity=".9"/><rect x="0" y="-6" width="1000" height="20" fill="#7fd0ff" opacity=".18"/></g>
+            <g id="barRepair" opacity="0"><rect x="0" y="0" width="1000" height="8" fill="#ffd9a0" opacity=".9"/><rect x="0" y="-6" width="1000" height="20" fill="#ffd9a0" opacity=".18"/></g>
+            <g id="barSeal" opacity="0"><rect x="0" y="0" width="1000" height="8" fill="#e36b1e"/><rect x="0" y="-8" width="1000" height="24" fill="#e36b1e" opacity=".25"/></g>
+          </g>
+          <polygon points="380,120 620,120 720,520 280,520" fill="none" stroke="#2f2f36" stroke-width="2"/>
+          <rect x="0" y="520" width="1000" height="40" fill="#16161a"/><rect x="0" y="518" width="1000" height="4" fill="#3a3a42"/>
+          <g stroke="#3a3a42" stroke-width="3" stroke-dasharray="26 22">
+            <line x1="0" y1="540" x2="1000" y2="540"/></g>
+        </svg>
       </div>
-
-      <div class="pricing-card">
-        <h3>Gutter Cleaning</h3>
-        <div class="price">$150–$300</div>
-        <p class="price-note">per house · recurring discounts</p>
-        <p>Spring & fall service. Standing contracts save 15% per cleaning.</p>
+      <div class="scrub">
+        <input type="range" id="sealRange" min="0" max="100" value="0" aria-label="Scrub through the sealing process">
+        <div class="stepchips"><button class="chip" type="button" aria-pressed="false">1 &middot; Clean</button><button class="chip" type="button" aria-pressed="false">2 &middot; Repair</button><button class="chip" type="button" aria-pressed="false">3 &middot; Seal</button></div>
+        <p class="hint">Illustration for preview. Drag to scrub through the process.</p>
+      </div></div>
+    <div>
+      <div class="eyebrow rv">02 &middot; Driveway Sealing</div>
+      <h2 class="rv d1">The finish that frames the house.</h2>
+      <p class="lead rv d2">A driveway is the first thing people see. We restore it to a deep, uniform finish that protects the surface through Iowa winters and sharpens the whole property.</p>
+      <div class="steps rv d2">
+        <div class="step"><b>Clean</b><span>Deep clean to remove dirt, oil and growth.</span></div>
+        <div class="step"><b>Repair</b><span>Cracks filled before anything is sealed.</span></div>
+        <div class="step"><b>Seal</b><span>Even coat, clean edges, no missed corners.</span></div>
       </div>
-
-      <div class="pricing-card">
-        <h3>Yard Cleanup</h3>
-        <div class="price">$200–$500</div>
-        <p class="price-note">per job · seasonal or contract</p>
-        <p>Spring & fall leaf removal. Year-round standing contracts available.</p>
-      </div>
-
-      <div class="pricing-card">
-        <h3>Holiday Lights</h3>
-        <div class="price">$800–$1,500</div>
-        <p class="price-note">per install · Nov–Dec booking</p>
-        <p>Professional display design & installation. Removal in January included.</p>
-      </div>
-
-      <div class="pricing-card">
-        <h3>Trash Can Cleaning</h3>
-        <div class="price">$20–$40</div>
-        <p class="price-note">per month · recurring</p>
-        <p>Monthly service. Clean bins. No odor. Delivered back to your home.</p>
-      </div>
+      <div class="cta-row rv d3"><a href="driveway-sealing/" class="btn btn-ghost">Driveway sealing details</a><a href="#contact" class="btn btn-primary" data-service="Driveway Sealing">Get a sealing estimate</a></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- About -->
-  <section class="about">
-    <h2 class="section-title">Built in North Dubuque</h2>
-    <p>We're not a franchise. We're not a big corporate operation. We're three guys from Dubuque who grew up together, who know this town, and who show up every day to do real work.</p>
-    <p>We handle the exterior. You enjoy your property. That's the deal. <strong>That's it.</strong></p>
-    <p style="margin-top: 40px; font-style: italic;">Exterior services done right. Local. Reliable. Built to last.</p>
-  </section>
+<section class="sec alt" id="more">
+  <div class="wrap">
+    <div class="eyebrow rv">One call covers it all</div>
+    <h2 class="rv d1">Everything exterior, handled.</h2>
+    <p class="lead rv d2">We handle most work directly. For specialized jobs, we coordinate with trusted local partners so you only ever deal with one team.</p>
+    <div class="grid6"><a class="mini rv d0" href="yard-spraying/"><span class="pill in">In-house</span><h3>Yard Spraying</h3><p>Recurring lawn treatment to keep the yard looking its best all season.</p><span class="go">Learn more &rarr;</span></a><a class="mini rv d1" href="trash-can-cleaning/"><span class="pill in">In-house</span><h3>Trash Can Cleaning</h3><p>Recurring cleaning so bins stay fresh and out of sight.</p><span class="go">Learn more &rarr;</span></a><a class="mini rv d2" href="epoxy-coating/"><span class="pill in">In-house</span><h3>Epoxy Coating</h3><p>Durable, polished floors for garages and more.</p><span class="go">Learn more &rarr;</span></a><a class="mini rv d0" href="painting/"><span class="pill pt">Trusted partner</span><h3>Painting</h3><p>Exterior painting by a vetted local pro, coordinated by us.</p><span class="go">Learn more &rarr;</span></a><a class="mini rv d1" href="landscaping/"><span class="pill pt">Trusted partner</span><h3>Landscaping</h3><p>Design and installation from an established Dubuque team.</p><span class="go">Learn more &rarr;</span></a><a class="mini rv d2" href="tree-service/"><span class="pill pt">Trusted partner</span><h3>Tree Service</h3><p>Trimming and removal by experienced local arborists.</p><span class="go">Learn more &rarr;</span></a></div>
+  </div>
+</section>
 
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <h2>Ready? Let's Get Started.</h2>
-    
-    <div class="contact-methods">
-      <div class="contact-method">
-        <h3>Call Us</h3>
-        <p><a href="tel:+15153444053">(515) 344-4053</a></p>
-        <p style="font-size: 13px; color: #aaa;">Available Mon–Sat, 8am–6pm</p>
-      </div>
+<section class="sec" id="areas">
+  <div class="wrap">
+    <div class="eyebrow rv">Service area</div>
+    <h2 class="rv d1">Dubuque and everywhere within 30 miles.</h2>
+    <p class="lead rv d2">We serve the whole tri-state neighborhood: eastern Iowa, northwest Illinois and southwest Wisconsin.</p>
+    <div class="rv d2"><div class="towns"><span>Dubuque, IA</span><span>Asbury, IA</span><span>Peosta, IA</span><span>Epworth, IA</span><span>Farley, IA</span><span>Key West, IA</span><span>Sherrill, IA</span><span>Holy Cross, IA</span><span>Dyersville, IA</span><span>Cascade, IA</span><span>Bellevue, IA</span><span>East Dubuque, IL</span><span>Galena, IL</span><span>Hanover, IL</span><span>Elizabeth, IL</span><span>Scales Mound, IL</span><span>Stockton, IL</span><span>Hazel Green, WI</span><span>Cuba City, WI</span><span>Dickeyville, WI</span><span>Potosi, WI</span><span>Platteville, WI</span></div></div>
+    <p style="margin-top:1.6rem" class="rv d3"><a class="btn btn-ghost" href="service-areas/">See all service areas</a></p>
+  </div>
+</section>
 
-      <div class="contact-method">
-        <h3>Email Us</h3>
-        <p><a href="mailto:info@gbgdubuque.com">info@gbgdubuque.com</a></p>
-        <p style="font-size: 13px; color: #aaa;">We'll respond within 48 hours</p>
-      </div>
-
-      <div class="contact-method">
-        <h3>Get a Quote Online</h3>
-        <p>Fill out the form below</p>
-        <p style="font-size: 13px; color: #aaa;">Free quote. No obligation.</p>
-      </div>
+<section class="sec alt">
+  <div class="wrap">
+    <div class="eyebrow rv">The GBG standard</div>
+    <h2 class="rv d1">Locally owned. Built in North Dubuque.</h2>
+    <div class="trio">
+      <div class="rv"><div class="k">I</div><h3>One point of contact</h3><p>You talk to the people who own the company, not a call center. Coordinating the whole job is our job.</p></div>
+      <div class="rv d1"><div class="k">II</div><h3>Quality first</h3><p>We would rather do fewer jobs beautifully than many jobs quickly. Your home is not a volume game.</p></div>
+      <div class="rv d2"><div class="k">III</div><h3>Plain, honest quotes</h3><p>Clear scope, clear price, no pressure. If we are not the right fit, we will say so.</p></div>
     </div>
+  </div>
+</section>
 
-    <form class="contact-form">
-      <div class="form-group">
-        <label for="name">Your Name *</label>
-        <input type="text" id="name" name="name" required placeholder="John Smith">
+<section class="sec">
+  <div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">Good to know.</h2></div><div class="faq rv"><details><summary>Do permanent lights have to come down each season?</summary><p>No. Permanent lights are installed once along your roofline and stay up all year, designed to blend into the trim by day.</p></details><details><summary>Can I change the colors?</summary><p>Yes. Colors, patterns and schedules are controlled from your phone, so you can go from warm white to holiday colors in seconds.</p></details><details><summary>When is the best time to seal a driveway in Iowa?</summary><p>Warm, dry weather works best, typically late spring through early fall. We will recommend timing once we have seen your driveway.</p></details><details><summary>How long until I can drive on a sealed driveway?</summary><p>Most driveways need roughly 24 to 48 hours to cure depending on weather. We will tell you exactly when yours is ready.</p></details><details><summary>What areas do you serve?</summary><p>Dubuque and communities within roughly 30 miles, including parts of Iowa, Illinois and Wisconsin. See our service areas page or call to confirm your address.</p></details></div></div>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap cgrid">
+    <div>
+      <div class="eyebrow rv">Private estimate</div>
+      <h2 class="rv d1">Let’s take a look at your home.</h2>
+      <p class="lead rv d2">Tell us a little about the property and what you have in mind. We will follow up personally to schedule a visit. Serving Dubuque and communities within about 30 miles.</p>
+      <a class="big-phone rv d2" href="tel:+15153444053">(515) 344-4053</a>
+      <p class="fine rv d3" style="margin-top:.6rem">Now booking the 2027 season.</p>
+    </div>
+    <div class="rv d1"><form class="q" id="quote" name="estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-lead data-subject="Estimate request">
+      <input type="hidden" name="form-name" value="estimate">
+      <p class="hp"><label>Leave this empty<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="ok" role="status">Thank you. We received your message and will follow up personally.</div>
+      <div class="fields" style="display:grid;gap:14px">
+      <div class="row2"><label>Name<input name="name" required autocomplete="name"></label><label>Phone<input name="phone" type="tel" required autocomplete="tel"></label></div>
+      <div class="row2"><label>Email<input name="email" type="email" autocomplete="email"></label><label>Town<input name="town" placeholder="e.g. Dubuque, Galena, Peosta" autocomplete="address-level2"></label></div>
+      <label>Interested in<select name="service"><option selected>Permanent Lights</option><option>Driveway Sealing</option><option>Yard Spraying</option><option>Trash Can Cleaning</option><option>Epoxy Coating</option><option>Painting</option><option>Landscaping</option><option>Tree Service</option><option>More than one</option><option>Not sure yet</option></select></label>
+      <label>Anything we should know?<textarea name="message"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-label="Request my estimate">Request my estimate</button>
+      <p class="fine">We only use your details to respond to this request.</p></div>
+    </form></div>
+  </div>
+</section>
+
+</main>
+<div class="sticky"><a class="btn btn-ghost" href="tel:+15153444053">Call</a><a class="btn btn-primary" href="#contact">Free estimate</a></div>
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="./"><svg viewBox="0 0 90 90" aria-hidden="true"><g fill="#e36b1e"><rect x="4" y="60" width="24" height="24" rx="2"/><rect x="33" y="60" width="24" height="24" rx="2"/><rect x="62" y="60" width="24" height="24" rx="2"/><rect x="18.5" y="32" width="24" height="24" rx="2"/><rect x="47.5" y="32" width="24" height="24" rx="2"/><rect x="33" y="4" width="24" height="24" rx="2"/></g></svg><div><b>GBG</b><span>DUBUQUE</span></div></a>
+        <p style="margin-top:1rem;max-width:22rem">Permanent lighting and driveway sealing for Dubuque, Iowa and communities within about 30 miles. Locally owned. Built in North Dubuque.</p>
       </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number *</label>
-        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com">
-      </div>
-
-      <div class="form-group">
-        <label for="service">Service Needed *</label>
-        <select id="service" name="service" required>
-          <option value="">-- Select a service --</option>
-          <option value="pressure-washing">Pressure Washing</option>
-          <option value="junk-removal">Junk Removal & Hauling</option>
-          <option value="gutter-cleaning">Gutter Cleaning</option>
-          <option value="yard-cleanup">Yard Cleanup</option>
-          <option value="holiday-lights">Holiday Light Installation</option>
-          <option value="trash-cleaning">Trash Can Cleaning</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="date">Date Needed *</label>
-        <input type="date" id="date" name="date" required>
-      </div>
-
-      <button type="submit" class="cta-button" style="width: 100%; margin-top: 10px;">Get My Free Quote</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p><strong>GBG Dubuque</strong> | Professional Exterior Services</p>
-    <p>(515) 344-4053 | info@gbgdubuque.com</p>
-    <p>Serving Dubuque, IA and surrounding areas</p>
-    <p style="margin-top: 20px; color: #666; font-size: 12px;">© 2026 GBG Dubuque. All rights reserved. Licensed & Insured.</p>
-  </footer>
-
-  <script>
-    // Smooth scroll behavior for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Intersection Observer for fade-in animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.service-card, .why-card, .pricing-card').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
-    });
-
-    // Form submission (basic demo)
-    document.querySelector('form')?.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you! We\'ll contact you within 48 hours with a free quote.');
-      this.reset();
-    });
-  </script>
+      <div><h4>Services</h4><ul><li><a href="permanent-lights/">Permanent Lights</a></li><li><a href="driveway-sealing/">Driveway Sealing</a></li><li><a href="yard-spraying/">Yard Spraying</a></li><li><a href="trash-can-cleaning/">Trash Can Cleaning</a></li><li><a href="epoxy-coating/">Epoxy Coating</a></li><li><a href="painting/">Painting</a></li><li><a href="landscaping/">Landscaping</a></li><li><a href="tree-service/">Tree Service</a></li></ul></div>
+      <div><h4>Areas</h4><ul><li><a href="service-areas/">Dubuque, IA</a></li><li><a href="service-areas/">Asbury, IA</a></li><li><a href="service-areas/">Peosta, IA</a></li><li><a href="service-areas/">East Dubuque, IL</a></li><li><a href="service-areas/">Galena, IL</a></li><li><a href="service-areas/">Dyersville, IA</a></li><li><a href="service-areas/">All service areas</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="careers/">Careers</a></li><li><a href="#contact">Request an estimate</a></li><li><a href="tel:+15153444053">(515) 344-4053</a></li></ul></div>
+    </div>
+    <div class="legal"><span>&copy; 2026 GBG Dubuque &middot; Dubuque, Iowa</span><span>Trusted-partner services are coordinated by GBG and performed by independent local businesses.</span></div>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
