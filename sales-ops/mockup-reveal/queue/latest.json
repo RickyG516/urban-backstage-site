@@ -3597,10 +3597,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/535385610945",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "ENRICHED 2026-10-01 GOLD: their own logo, 4 job photos off FB, 3 verbatim Google reviews (4.8 from 49), brand red. FB page facebook.com/strongsplumbingllc. Owner may now be Brian, not Mark - ask.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/wi-strongs-plumbing-heating-fonddulac/",
-   "ai_hook": "Ask for Mark, he opened the doors in March 1994. Highest scoring prospect in the batch. Lead with the property manager angle: one of his reviewers manages 230 units and found him through word of mouth, not search. Multi-unit and commercial is where the recurring money is and it is exactly the buyer who searches before calling. Back it with 4.9 across 43 and an A+ BBB record, both public. Boiler work is a real differentiator, fewer shops every year will touch one. Thirty-two years in one town is the headline. Website build first.",
+   "ai_hook": "Ask for the owner - BBB says Mark Strong, but a recent Google review calls Brian the hands-on owner and the FB page now reads Strong's Plumbing & Heating, LLC. Lead with what's already theirs: a property manager with 230 apartments wrote that they always respond quickly, and that's on the page word for word next to their own logo and their own trench photos. Their email domain splumbingheating.com loads nothing - they own the address and nobody can find them at it. Mention the Fairgrounds Park Pool water heater job off their FB. Website build first. DO NOT mention the GoFundMe post on their page.",
    "company_id": 339429186268
   },
   {
@@ -3615,10 +3615,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/535302030055",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "ENRICHED 2026-10-01 BRONZE: 3 of his own job photos + 3 verbatim Google reviews (5.0 from 41 on Google - NOT 118, that was Birdeye's aggregate). Logo still a placeholder - ask for it. Phone only, no FB page.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-chris-ihrig-lawn-snow-maquoketa/",
-   "ai_hook": "PHONE-FIRST, he has no Facebook page, so there is no DM path. 118 reviews in Maquoketa and every single one is five stars, which is the whole pitch by itself. Reviewer line worth quoting back: responsible, honest, timely, responds within minutes. Seasonal urgency is real and it is now, get on the route before the first storm is a line he already uses on customers. Maquoketa is wide open, nobody is ranking, so flag him for the SEO upsell at day 30 after the build closes. Do not lead with SEO.",
+   "ai_hook": "PHONE-FIRST, no Facebook page. He has a 5.0 on Google from 41 reviews and a customer who wrote that the neighbours compliment her 'perfect stripes' - that quote and his own striped-lawn photo are the top of the page. Use 41 on Google, not 118. He also landed a City of Maquoketa mowing bid (KMAQ, March 2025) - a city contract and no website. The ask is small: send the logo off the trailer and it goes on the page. Snow season is close, so get-on-the-route-before-the-first-storm is timely. Do not lead with SEO.",
    "company_id": 339458430700
   },
   {

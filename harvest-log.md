@@ -159,3 +159,24 @@ gate and gave up the logo and the brand colours together.
 
 Also: `enrich_level.py`'s back-compat review detection read placeholder review cards as real because
 the cards said "Google review". It now only runs on pages with no `data-reviews` attribute at all.
+
+---
+
+## 2026-10-01 — recorded review counts and phones go stale; re-check them before building copy on them
+
+Scanned 13 BASE pages, enriched 2. **The figures in `status.json` notes are not current facts.**
+Chris Ihrig's page headlined "118 reviews, every one five stars" — Google shows **41** (5.0); 118/119 is
+Birdeye's cross-platform aggregate. Strong's said 4.9/43 and "A+ BBB" — Google now 4.8/49 and BBB lists them
+Not Accredited. Rewrite any count the page leans on from the live profile, not the note.
+
+Drops this run: Tree Cutters (Council Bluffs) GBP phone (712) 208-3436 ≠ page 355-1032; Neuman's Insulation
+(Springfield) every directory lists (217) 725-2371 ≠ page 717-9515, and Maps fuzzy-matched Prairie Insulation;
+The Roofing Company (Dubuque) GBP phone (563) 495-8746 + a website; **Grind It Up (Cedar Rapids) now has a live
+site, grinditupcedarrapids.com — no longer a no-website prospect**; **Vogel Irrigation (Waterloo) is marked
+PERMANENTLY CLOSED on Google**; Designed Roofing (Springfield) only one-line reviews. Thin/no profile: BBS Electric,
+Switlick, Tobin Bros, McNeal's, Schroeder, Dimmer Bros, Carpet Specialists, Redmond Roofing, Big Jim's (has a website link).
+
+**FB photos carry other companies too, even on the business's own page.** Strong's water-main job: two of the
+trench shots show the excavating sub's machine (BAUMHARDT) and a strip mall's signs. Shot-level review caught it.
+FB's one-download-per-page limit was handled by packing several images onto one canvas and splitting with PIL,
+and by the robots.txt hash relay for the full-size viewer images.

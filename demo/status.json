@@ -130,10 +130,12 @@
  "ia-chris-ihrig-lawn-snow-maquoketa": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-11 | no website | 5.0 stars across 118 reviews, zero below five | no Facebook page, PHONE-FIRST | Maquoketa market wide open | 20/20 SEO winnability, flag for day-30 upsell",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-11 | no website | 5.0 stars across 118 reviews, zero below five | no Facebook page, PHONE-FIRST | Maquoketa market wide open | 20/20 SEO winnability, flag for day-30 upsell | ENRICHED 2026-10-01 BRONZE (Chrome): identity gate PASSED on GBP 'Chris Ihrig Lawn Care and Snow Removal LLC', 309 S Otto St Maquoketa, (563) 321-0444. REAL: 3 own job photos off the GBP (striped lawn = hero; red mulch bed with block edging = GBP 'Inside' tile; backyard mulched beds = photo 1 on reviewer John C's review of a mulching job), 3 verbatim Google reviews (Kayla F., Cindy R., Kathy M. - Kathy's is an excerpt marked with an ellipsis). PLACEHOLDER: logo (CI monogram, data-placeholder=logo, swap-notice present). Pool palette kept - no clean logo; the only logo seen is a partial on his camo trailer in a GBP photo (green house mark), so ask for the file. CORRECTED: Google now shows 5.0 from 41 reviews, not 118 - the 118/119 figure is Birdeye's cross-platform aggregate. Hero, trust strip and meta rewritten to the Google count. Removed an unsourced reviewer quote ('Responsible, honest, timely...') that was not found in the Google reviews. NEW HOOK: KMAQ (2025-03-04) reports the City of Maquoketa approved mowing bids with Chris Ihrig lawn care & snow removal llc. Still no FB business page.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-01"
  },
  "ia-christner-concrete-k4m9tq": {
   "channel": "phone",
@@ -1629,11 +1631,13 @@
  },
  "wi-strongs-plumbing-heating-fonddulac": {
   "channel": "fb",
-  "fb": "",
-  "note": "in HubSpot 2026-08-11 | no website | 4.9 stars across 43 reviews, A+ BBB | opened March 1994, Mark Strong still owner | one reviewer manages 230 apartment units | Tier A, score 77, highest in batch",
-  "photos": "generated",
+  "fb": "https://www.facebook.com/strongsplumbingllc",
+  "note": "in HubSpot 2026-08-11 | no website | 4.9 stars across 43 reviews, A+ BBB | opened March 1994, Mark Strong still owner | one reviewer manages 230 apartment units | Tier A, score 77, highest in batch | ENRICHED 2026-10-01 GOLD (Chrome): identity gate PASSED twice - GBP 'Strong's Plumbing & Heating Inc', 219 W 9th St Fond du Lac, (920) 922-6210, 4.8 from 49; FB business page facebook.com/strongsplumbingllc ('Strong's Plumbing, LLC', 188 followers) lists the same phone and address. REAL: logo (FB profile image, black knocked out -> logo.png), 4 photos off the FB page (crew member in a Strong's hoodie in a water-main trench = hero; crew joining new main; commercial urinal install; two logo'd service vans, left edge cropped to remove another org's banner), 3 verbatim Google reviews (Mike G. 230 apartments, Dan R., Steven H.), brand colours sampled from the logo (red #971621 lightened to #e44350 for 4.8:1 contrast, near-black #100c0d). PLACEHOLDER: none. REJECTED: GBP's only photo (a customer's flooded basement), FB photos of a Marine Corps family event (personal), and two trench shots showing BAUMHARDT Sand & Gravel's excavator plus a Cousins Subs / Wisconsin Vision storefront (other companies). CORRECTED: removed 'A+ BBB rating' (BBB lists them Not Accredited; rating not re-verified) and the 4.9/43 figure (now 4.8/49 on Google). Hero no longer names Mark. OWNER FLAG: BBB lists Mark P Strong as owner (Inc); a 2026 Google review summary calls 'Brian' the hands-on owner, and the FB page/logo now say 'Strong's Plumbing & Heating, LLC' - possible handover. Ask for the owner, do not assume Mark. HOOK: their email domain splumbingheating.com does not load (timed out 2026-10-01). FB featured post: replaced the Fairgrounds Park Pool water heater (1M BTU PVI -> two HTP 100-gal). DO NOT RAISE: FB page shared a GoFundMe for a family tragedy.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-01"
  },
  "wi-switlick-and-sons-athens": {
   "channel": "phone",
