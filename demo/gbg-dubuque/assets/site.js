@@ -82,16 +82,29 @@ function buildHouse(svg,viewBox){
   [[580,340,440,180],[170,390,410,130],[1020,390,410,130]].forEach(function(r){
     el('rect',{x:r[0],y:r[1],width:r[2],height:r[3],fill:'url(#wallglow)'},svg);
   });
-  el('rect',{'class':'wall',x:905,y:200,width:44,height:90},svg);
-  el('rect',{'class':'trim',x:899,y:194,width:56,height:8},svg);
   var W=[[625,380,44,70],[705,380,44,70],[851,380,44,70],[931,380,44,70],[228,428,44,60],[328,428,44,60],[428,428,44,60]];
-  var seed=3;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
-  function win(x,y,w,h,off){
-    el('rect',{'class':'win'+(off?' off':''),x:x,y:y,width:w,height:h,rx:2},svg);
+  var WALK_AT=[705,931,328];
+  function win(x,y,w,h){
+    el('rect',{'class':'win',x:x,y:y,width:w,height:h,rx:2},svg);
     el('line',{'class':'mull',x1:x+w/2,y1:y,x2:x+w/2,y2:y+h},svg);
     el('line',{'class':'mull',x1:x,y1:y+h*.5,x2:x+w,y2:y+h*.5},svg);
   }
-  W.forEach(function(w){win(w[0],w[1],w[2],w[3],rnd()>.62);if(w[0]<560)win(1600-w[0]-w[2],w[1],w[2],w[3],rnd()>.62)});
+  function addWalker(x,y,w,h){
+    var dur=(24+Math.random()*12).toFixed(1),delay=(-Math.random()*dur).toFixed(1);
+    var g=el('g',{'class':'walker',style:'animation-duration:'+dur+'s;animation-delay:'+delay+'s;--dist:'+(w*.6).toFixed(1)+'px'},svg);
+    var headR=h*.11,bodyH=h*.46,bodyW=headR*1.7,cx=x+w*.22,topY=y+h-bodyH-headR*1.7;
+    el('circle',{cx:cx,cy:topY+headR,r:headR,fill:'#07070a'},g);
+    el('rect',{x:cx-bodyW/2,y:topY+headR*1.75,width:bodyW,height:bodyH,rx:bodyW/2,fill:'#07070a'},g);
+  }
+  W.forEach(function(w){
+    win(w[0],w[1],w[2],w[3]);
+    if(WALK_AT.indexOf(w[0])!==-1)addWalker(w[0],w[1],w[2],w[3]);
+    if(w[0]<560){
+      var mx=1600-w[0]-w[2];
+      win(mx,w[1],w[2],w[3]);
+      if(WALK_AT.indexOf(w[0])!==-1)addWalker(mx,w[1],w[2],w[3]);
+    }
+  });
   el('circle',{'class':'win',cx:800,cy:242,r:22},svg);
   el('line',{'class':'mull',x1:778,y1:242,x2:822,y2:242},svg);
   el('line',{'class':'mull',x1:800,y1:220,x2:800,y2:264},svg);
@@ -116,6 +129,8 @@ function buildHouse(svg,viewBox){
     var b=el('circle',{cx:p[0],cy:p[1],r:3.1,fill:'#000',opacity:0},crisp);
     bulbs.push({i:idx,n:n,x:p[0]/1600,ph:(Math.sin(idx*12.9898)*43758.5453)%1,g:g,b:b});
   });
+  el('rect',{'class':'wall',x:905,y:200,width:44,height:90},svg);
+  el('rect',{'class':'trim',x:899,y:194,width:56,height:8},svg);
   svg._bulbs=bulbs;
   return svg;
 }

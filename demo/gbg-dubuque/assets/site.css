@@ -85,19 +85,20 @@ body.menu-open .menu-col>*{opacity:1;transform:none}
 .stars{position:absolute;inset:0 0 35% 0;pointer-events:none;transform:translate(calc(var(--mx,0)*-8px),calc(var(--my,0)*-5px));transition:transform .4s ease-out}
 .stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.6;animation:tw 4s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.15}50%{opacity:.85}}
-.hero-copy{position:relative;z-index:3;text-align:center;padding:clamp(84px,11vh,140px) 0 20px}
-.hero h1{font-size:clamp(2.7rem,min(8.4vw,12.5vh),7.6rem);font-weight:500;margin:1rem 0 1.3rem;text-shadow:0 4px 60px rgba(0,0,0,.6)}
+.hero-top{position:relative;z-index:3;text-align:center;padding:clamp(70px,9vh,110px) 0 6px}
+.hero-bottom{position:relative;z-index:3;text-align:center;padding:10px 0 26px}
+.hero h1{font-size:clamp(2.7rem,min(8.4vw,12.5vh),7.6rem);font-weight:500;margin:1rem 0 .4rem;text-shadow:0 4px 60px rgba(0,0,0,.6)}
 .hero h1 em{font-style:italic;color:#ffd9a0;font-weight:500}
 .hero .sub{max-width:38rem;margin:0 auto 1.6rem;color:#cbc6bd;font-size:1.1rem}
 .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.hero-house{position:relative;margin-top:auto;flex:1 1 auto;min-height:clamp(420px,62vh,760px);z-index:2;transform:translate(calc(var(--mx,0)*5px),0);transition:transform .5s ease-out}
+.hero-house{position:relative;flex:1 1 auto;min-height:clamp(420px,62vh,760px);z-index:2;transform:translate(calc(var(--mx,0)*5px),0);transition:transform .5s ease-out}
 .hero-house .house{position:absolute;inset:0}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,7,.55) 0%,transparent 38%);z-index:2;pointer-events:none}
 .now{position:absolute;left:24px;bottom:18px;z-index:4;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#a8a299;display:flex;align-items:center;gap:10px}
 .now b{color:#fff;font-weight:600}
 .now::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:tw 2s infinite}
 .now a{color:var(--accent-hi);margin-left:6px}
-@media(max-width:700px){.now{left:16px;right:16px;bottom:84px;font-size:.62rem}.hero .cta .btn-ghost{display:none}.hero-house{min-height:400px}.hero-copy{padding-top:84px}}
+@media(max-width:700px){.now{left:16px;right:16px;bottom:84px;font-size:.62rem}.hero .cta .btn-ghost{display:none}.hero-house{min-height:400px}.hero-top{padding-top:64px}}
 
 /* inner page hero */
 .phero{position:relative;padding:clamp(120px,16vh,170px) 0 clamp(40px,6vw,70px);background:radial-gradient(100% 80% at 80% 0%,#23150b 0%,transparent 60%),var(--ink);overflow:hidden}
@@ -125,6 +126,16 @@ body.menu-open .menu-col>*{opacity:1;transform:none}
 .day .win{opacity:.15;fill:#1c1c22}
 .day .wall,.day .roof{fill:#26262c;stroke:#3a3a42}
 .day .door{fill:#2b1a10}
+.day .walker{display:none}
+.walker{opacity:0;transform:translateX(0);animation-name:walkby;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+@keyframes walkby{
+  0%,86%{opacity:0;transform:translateX(0)}
+  87.5%{opacity:.8}
+  88%{transform:translateX(0)}
+  94%{transform:translateX(var(--dist,20px))}
+  94.5%{opacity:.8}
+  96%,100%{opacity:0;transform:translateX(var(--dist,20px))}
+}
 
 /* sections */
 .sec{padding:clamp(64px,9vw,120px) 0;position:relative}
@@ -274,7 +285,8 @@ footer .legal{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--li
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none;transition:none}
-  .stars i,.card .dots i,.card .seal-line i,.now::before,.grow,.treeswing,.art-grass{animation:none}
+  .stars i,.card .dots i,.card .seal-line i,.now::before,.grow,.treeswing,.art-grass,.walker{animation:none}
+  .walker{opacity:0}
   .grow{transform:scale(1)}
   .menu,.menu-col>*{transition:none}
 }
