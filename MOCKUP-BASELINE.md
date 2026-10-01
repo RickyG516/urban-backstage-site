@@ -2,6 +2,30 @@ FILING DESTINATION: TECH & SYSTEMS / AI & Automation
 SOURCE: CLAUDE OUTPUT — Ricky Garner
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+> ## ⚠ 2026-10-01 — RE-VERIFIED LOGGED-OUT. BARE DOMAIN IS PUBLIC. `www.` IS NOT.
+>
+> **Tested in the Claude desktop app's built-in browser pane (its own profile, NO Cloudflare Access
+> session).** Control checks proved the profile was logged out: `/demo/`, `/demo/status.json` and
+> `/sales-ops/` all redirected to the Cloudflare Access sign-in (`auth_status: NONE`). In that same
+> profile these all served the real page: ia-gbg-dubuque, ia-tsq-metals-dubuque,
+> ia-exira-plumbing-heating-electrical, ia-tile-pros-webstercity, ia-homestead-services-clinton,
+> ia-chris-ihrig-lawn-snow-maquoketa, wi-strongs-plumbing-heating-fonddulac, il-pikuza-electric-moline,
+> ia-deans-light-box-waverly. No-trailing-slash also works (redirects to `/`).
+>
+> **THE GAP: `https://www.urbanbackstage.com/demo/<slug>/` serves the LOGIN WALL.** The bypass app only
+> lists the bare host. A link typed, autocompleted or pasted with `www.` fails for the prospect. That is
+> the most likely cause of the failed phone test on ia-gbg-dubuque on 2026-10-01.
+> - **Fix (Ricky, Cloudflare dashboard):** Zero Trust → Access → Applications → "All Demo Mockups
+>   (Public Bypass)" → add the same destinations on `www.urbanbackstage.com`.
+> - **Until then:** every link sent to a prospect is `https://urbanbackstage.com/demo/<slug>/` with no
+>   `www.`. Repo, queue and sent mail were grepped 2026-10-01 and carry no `www.` mockup links.
+>
+> **THE ONLY VALID PUBLIC CHECK** is a browser that is provably logged out. Use the built-in browser
+> pane (`mcp__Claude_Browser__*`), load `/demo/` FIRST as the control, and only trust a slug result if
+> the control showed the Access sign-in. **Never use Claude in Chrome for this.** Ricky's Chrome holds
+> an Access cookie, so every slug "passes" there whether it is bypassed or not. A run that cannot do
+> the controlled check writes "public status NOT re-checked this run", not "PUBLIC".
+
 > ## ✅ RESOLVED 2026-09-30 — MOCKUP URLS ARE PUBLIC; LIBRARY INDEX STAYS LOCKED
 >
 > Access app **"All Demo Mockups (Public Bypass)"** (id b4d9271a…) bypasses everyone on
