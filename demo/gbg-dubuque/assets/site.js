@@ -250,7 +250,7 @@ LightShow.prototype.stop=function(){this.running=false;cancelAnimationFrame(this
 CFG.shows=CFG.shows||[];window.GBG=CFG;
 var heroSvg=$('#heroHouse');
 if(heroSvg){
-  buildHouse(heroSvg,window.innerWidth<700?'230 110 1140 490':'0 0 1600 600');
+  buildHouse(heroSvg,window.innerWidth<700?'230 90 1140 440':'110 70 1380 480');
   var heroNow=$('#heroNow');
   var hs=new LightShow(heroSvg,{onTheme:function(c){if(heroNow)heroNow.textContent=c.name}});
   var start=seasonalId();
