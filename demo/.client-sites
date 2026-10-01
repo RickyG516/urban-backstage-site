@@ -15,4 +15,4 @@
 # Read by gate.sh, tools/enrich_audit.py and tools/added_dates.py.
 
 ia-new-view-landscaping-dbq04   # New View Landscaping — converted to a signed client; slug holds a 20-page site replica
-ia-gbg-dubuque                  # GBG Dubuque — Ricky's own venture (not a client, not cold-dialed); staging copy of gbg/, hand-built multi-page site, reviewed here before promotion; slug prefixed ia- to match the existing Cloudflare Access bypass wildcard, no dashboard change needed
+ia-gbg-dubuque                  # GBG Dubuque — Ricky's own venture (not a client, not cold-dialed); staging copy of gbg/, hand-built multi-page site, reviewed here before promotion; public on the bare domain (urbanbackstage.com), NOT on www. — see MOCKUP-BASELINE.md 2026-10-01 entry
