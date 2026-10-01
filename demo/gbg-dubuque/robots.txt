@@ -1,0 +1,3 @@
+# STAGING build. The parent domain is noindexed; production build flips this.
+User-agent: *
+Disallow: /
