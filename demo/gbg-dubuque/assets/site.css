@@ -123,18 +123,19 @@ body.menu-open .menu-col>*{opacity:1;transform:none}
 .house .win.off{fill:#15151b;opacity:1}
 .house .mull{stroke:#0a0a0d;stroke-width:2}
 .house .door{fill:#1a0f08;stroke:#3a2416;stroke-width:1.5}
+.house .shutter{fill:#241209;stroke:#120904;stroke-width:1}
+.house .shutter-line{stroke:#120904;stroke-width:1}
+.house .sill{fill:#1c1c22;opacity:.9}
+.house .shrub{fill:#152218;stroke:#0b120d;stroke-width:1}
 .day .win{opacity:.15;fill:#1c1c22}
 .day .wall,.day .roof{fill:#26262c;stroke:#3a3a42}
 .day .door{fill:#2b1a10}
+.day .shutter{fill:#3a2a1c;stroke:#2a1c11}
 .day .walker{display:none}
-.walker{opacity:0;transform:translateX(0);animation-name:walkby;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+.walker{transform:translateX(0);animation-name:walkby;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
 @keyframes walkby{
-  0%,86%{opacity:0;transform:translateX(0)}
-  87.5%{opacity:.8}
-  88%{transform:translateX(0)}
-  94%{transform:translateX(var(--dist,20px))}
-  94.5%{opacity:.8}
-  96%,100%{opacity:0;transform:translateX(var(--dist,20px))}
+  0%,84%{transform:translateX(0)}
+  92%,100%{transform:translateX(var(--dist,40px))}
 }
 
 /* sections */
@@ -286,7 +287,6 @@ footer .legal{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--li
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none;transition:none}
   .stars i,.card .dots i,.card .seal-line i,.now::before,.grow,.treeswing,.art-grass,.walker{animation:none}
-  .walker{opacity:0}
   .grow{transform:scale(1)}
   .menu,.menu-col>*{transition:none}
 }
