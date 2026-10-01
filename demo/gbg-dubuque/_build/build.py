@@ -195,7 +195,7 @@ def head(page, r):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{r}assets/site.css">
+<link rel="stylesheet" href="{r}assets/site.css?v=2">
 {ld}</head>
 <body>
 <script>document.documentElement.classList.add('js');window.GBG={{email:{json.dumps(EMAIL)}}}</script>
@@ -256,7 +256,7 @@ def footer(r):
     <div class="legal"><span>&copy; {datetime.date.today().year} GBG Dubuque &middot; Dubuque, Iowa</span><span>Trusted-partner services are coordinated by GBG and performed by independent local businesses.</span></div>
   </div>
 </footer>
-<script src="{r}assets/site.js" defer></script>
+<script src="{r}assets/site.js?v=2" defer></script>
 </body>
 </html>
 '''
