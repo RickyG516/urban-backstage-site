@@ -272,7 +272,7 @@
  "ia-experienced-roofing-dbq03": {
   "channel": "unknown",
   "fb": "",
-  "note": "in HubSpot 2026-08-07 (company 338677790452) | 3 real GBP roof photos. 5.0 stars but only 1 review \u2014 thin proof, Tier C. Verified no website.",
+  "note": "in HubSpot 2026-08-07 (company 338677790452) | 3 real GBP roof photos. 5.0 stars but only 1 review — thin proof, Tier C. Verified no website.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -300,7 +300,7 @@
  "ia-greg-wirth-electric-lucodo": {
   "channel": "phone",
   "fb": "",
-  "note": "FB page dead \u2014 content unavailable | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "FB page dead — content unavailable | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -324,7 +324,7 @@
  "ia-hintermeister-electric-30kxyc": {
   "channel": "phone",
   "fb": "",
-  "note": "BBB, n49, BuildZoom, D&B all present \u2014 no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "BBB, n49, BuildZoom, D&B all present — no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -402,7 +402,7 @@
  "ia-kuehl-painting-decorating-5oy56m": {
   "channel": "phone",
   "fb": "",
-  "note": "Yelp, Manta, YellowPages, BuildZoom present \u2014 no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "Yelp, Manta, YellowPages, BuildZoom present — no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -624,7 +624,7 @@
  "ia-rabalais-electric-1nc4aj": {
   "channel": "phone",
   "fb": "",
-  "note": "whodoyou, OpenCorporates, BuildZoom, D&B present \u2014 no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "whodoyou, OpenCorporates, BuildZoom, D&B present — no FB page exists | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -784,7 +784,7 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-09-22",
   "fb": "https://www.facebook.com/vhconcrete/",
-  "note": "in HubSpot 2026-09-09 (company 345413033718) | contact 549195911867 (Randy Van't Hof, President) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-09: vanthofconcrete.com AND www.vanthofconcrete.com both resolve but serve a bare hosting-default page whose entire body is '404 / Page not found!'; vanthofconcreteinc.com does not resolve (browser error page). BBB profile has NO 'Visit Website' button - control profile loaded in the SAME session (Will's Way Consolidated, Iowa City) DID show the button, so the absence is real, not a scrape artifact. Sioux Center Chamber directory listing carries no website field either. | REVENUE: incorporated 4/25/1989 (37 yrs), BBB Accredited A+ since 6/23/2003, moved into a larger Highway 75 facility in 2019 (nwestiowa.com), ~60-mile radius across four counties, Procore contractor-network listing. | ADDRESS CONFLICT: BBB and Chamber now both say 1245 N Main Ave; Yelp and older directories still print 369 6th Ave NW, which is the pre-2019 address. Use 1245 N Main Ave. | FB https://www.facebook.com/vhconcrete/ + IG @vanthofconcrete. | ENRICHED 2026-09-22 (BRONZE): real logo pulled from Facebook (facebook.com/vhconcrete, via graph.facebook.com/vhconcrete/picture) and used in nav, accent recolored to sampled brand red #c46259 (lightened off logo red for contrast, was pool blue #4c9bcd) with brand-colors:sampled marker. Reviews placeholder: GBP shows only 3.5/2 at the confirmed address (1245 N Main Ave) \u2014 below the 3-review floor, so left as labelled placeholder, not real. Photos placeholder: GBP gallery is Street-View-only (no owner photos), FB gated further content behind login wall after cover photo (which shows a third-party-branded APEX CONCRETE PUMPING truck, so was not used). Existing generated-SVG gallery (motion.svg/radius.svg/texture.svg) left as-is per MOCKUP-BASELINE (SVG art is not stock, no placeholder marker needed). swap-notice addressed to Randy Van't Hof (confirmed owner/president) asking him to send a reviews link and job photos.",
+  "note": "in HubSpot 2026-09-09 (company 345413033718) | contact 549195911867 (Randy Van't Hof, President) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-09: vanthofconcrete.com AND www.vanthofconcrete.com both resolve but serve a bare hosting-default page whose entire body is '404 / Page not found!'; vanthofconcreteinc.com does not resolve (browser error page). BBB profile has NO 'Visit Website' button - control profile loaded in the SAME session (Will's Way Consolidated, Iowa City) DID show the button, so the absence is real, not a scrape artifact. Sioux Center Chamber directory listing carries no website field either. | REVENUE: incorporated 4/25/1989 (37 yrs), BBB Accredited A+ since 6/23/2003, moved into a larger Highway 75 facility in 2019 (nwestiowa.com), ~60-mile radius across four counties, Procore contractor-network listing. | ADDRESS CONFLICT: BBB and Chamber now both say 1245 N Main Ave; Yelp and older directories still print 369 6th Ave NW, which is the pre-2019 address. Use 1245 N Main Ave. | FB https://www.facebook.com/vhconcrete/ + IG @vanthofconcrete. | ENRICHED 2026-09-22 (BRONZE): real logo pulled from Facebook (facebook.com/vhconcrete, via graph.facebook.com/vhconcrete/picture) and used in nav, accent recolored to sampled brand red #c46259 (lightened off logo red for contrast, was pool blue #4c9bcd) with brand-colors:sampled marker. Reviews placeholder: GBP shows only 3.5/2 at the confirmed address (1245 N Main Ave) — below the 3-review floor, so left as labelled placeholder, not real. Photos placeholder: GBP gallery is Street-View-only (no owner photos), FB gated further content behind login wall after cover photo (which shows a third-party-branded APEX CONCRETE PUMPING truck, so was not used). Existing generated-SVG gallery (motion.svg/radius.svg/texture.svg) left as-is per MOCKUP-BASELINE (SVG art is not stock, no placeholder marker needed). swap-notice addressed to Randy Van't Hof (confirmed owner/president) asking him to send a reviews link and job photos.",
   "photos": "stock-placeholder",
   "ready": true,
   "stage": "none"
@@ -1050,7 +1050,7 @@
  "il-haier-plumbing-okawville": {
   "channel": "phone",
   "fb": "https://www.facebook.com/HaierPlumbing/",
-  "note": "in HubSpot 2026-08-07 (company 338670190315) | no website | haierplumbing.com serves a hosting-default UNDER CONSTRUCTION placeholder (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1318341 + BBB + SIBA-AGC + CIB AGC | 76 power units / 60 drivers / 1.49M mi 2025 | SAFER safety rating Conditional (2010) \u2014 do not raise on the call | ENRICHED 2026-09-25 (GOLD): identity - GBP 'Haier Plumbing & Heating Inc', 301 N Elkton St Okawville, (618) 243-5908, 4.1 from 22 reviews; FB facebook.com/HaierPlumbing shows the same phone. REAL LOGO: FB cover - navy 'HAIER PLUMBING & HEATING, INC.' wordmark with pipe + backhoe art, which has 618.243.5908 | 301 N Elkton St printed in it; trimmed to logo.png on a white pad. BRAND COLOURS: logo navy #111030 -> dark #111030, accent #8380da (navy hue lightened for 4.5:1); generated SVGs recoloured, fingerprints unchanged. 1 REAL PHOTO from FB: triplex Grundfos booster pump package w/ control panel, Amtrol tank, 4in cold water header (only manufacturer labels, no rival contractor) - first work tile; hero + 2 tiles stay generated. REJECTED: holiday/Veterans/Labor Day graphics, a staff portrait in the parts room. 3 VERBATIM GOOGLE REVIEWS: Kyla D. (a year ago, excerpt ending in ellipsis as Google truncates it), Tom D. (5 yrs), Richard M. (6 yrs). DO NOT RAISE: two recent 1-star GBP reviews from residents angry about torn-up roads/yards during a utility job and a broken service line (one threatens BBB + lawsuit). No placeholders left.",
+  "note": "in HubSpot 2026-08-07 (company 338670190315) | no website | haierplumbing.com serves a hosting-default UNDER CONSTRUCTION placeholder (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1318341 + BBB + SIBA-AGC + CIB AGC | 76 power units / 60 drivers / 1.49M mi 2025 | SAFER safety rating Conditional (2010) — do not raise on the call | ENRICHED 2026-09-25 (GOLD): identity - GBP 'Haier Plumbing & Heating Inc', 301 N Elkton St Okawville, (618) 243-5908, 4.1 from 22 reviews; FB facebook.com/HaierPlumbing shows the same phone. REAL LOGO: FB cover - navy 'HAIER PLUMBING & HEATING, INC.' wordmark with pipe + backhoe art, which has 618.243.5908 | 301 N Elkton St printed in it; trimmed to logo.png on a white pad. BRAND COLOURS: logo navy #111030 -> dark #111030, accent #8380da (navy hue lightened for 4.5:1); generated SVGs recoloured, fingerprints unchanged. 1 REAL PHOTO from FB: triplex Grundfos booster pump package w/ control panel, Amtrol tank, 4in cold water header (only manufacturer labels, no rival contractor) - first work tile; hero + 2 tiles stay generated. REJECTED: holiday/Veterans/Labor Day graphics, a staff portrait in the parts room. 3 VERBATIM GOOGLE REVIEWS: Kyla D. (a year ago, excerpt ending in ellipsis as Google truncates it), Tom D. (5 yrs), Richard M. (6 yrs). DO NOT RAISE: two recent 1-star GBP reviews from residents angry about torn-up roads/yards during a utility job and a broken service line (one threatens BBB + lawsuit). No placeholders left.",
   "photos": "real",
   "ready": true,
   "stage": "none",
@@ -1254,7 +1254,7 @@
  "il-the-tree-surgeon-g4q84i": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/The-Tree-Surgeon-100058714466374/",
-  "note": "FB: title names Peoria IL \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "FB: title names Peoria IL — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -1330,7 +1330,7 @@
  "landscaping-connercuts-racine": {
   "channel": "fb",
   "fb": "https://www.facebook.com/ConnerCutsLawnCareExteriorMaintenance/",
-  "note": "FB: title names Racine WI \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-28 GOLD. Identity gate passed 3 ways: FB page (Conner Cuts Lawn Care & Exterior Maintenance, Racine WI 53408, (262) 822-0496, connercuts@yahoo.com) and GBP 'Conner Cuts Lawn & Garden, LLC' (same phone, Racine area, identifies as veteran-owned, 4.8 from 73). NO-WEBSITE NOW VERIFIED: GBP website field points at connercutslawncare.com which is DNS_PROBE_FINISHED_NXDOMAIN (loaded in Chrome 2026-09-28) - a dead link on their own profile. REAL: logo (FB profile PNG, 231x116, orange/green wordmark, shown on a white pill in the nav), brand colours sampled (orange #e46e25 accent, logo green #138040), 2 photos from the GBP listing itself (header photo of a striped front lawn -> hero; 'By owner' flower bed along a cedar fence -> about panel), 3 verbatim Google reviews (Lesa, Trygve T., QC & Vonn). Reviews name Conner and Travis. REJECTED: a red spider-lift photo (Konfrst Tree Service, Maps Recents-rail leftover); all FB photos are promo graphics, no job photos. Also fixed: the page's own <header> was hidden by the badgefix rule (no nav at all) - tagged unc-nav. PLACEHOLDERS: none. Name note: GBP now reads 'Conner Cuts Lawn & Garden, LLC'; page keeps the FB/logo name.",
+  "note": "FB: title names Racine WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-28 GOLD. Identity gate passed 3 ways: FB page (Conner Cuts Lawn Care & Exterior Maintenance, Racine WI 53408, (262) 822-0496, connercuts@yahoo.com) and GBP 'Conner Cuts Lawn & Garden, LLC' (same phone, Racine area, identifies as veteran-owned, 4.8 from 73). NO-WEBSITE NOW VERIFIED: GBP website field points at connercutslawncare.com which is DNS_PROBE_FINISHED_NXDOMAIN (loaded in Chrome 2026-09-28) - a dead link on their own profile. REAL: logo (FB profile PNG, 231x116, orange/green wordmark, shown on a white pill in the nav), brand colours sampled (orange #e46e25 accent, logo green #138040), 2 photos from the GBP listing itself (header photo of a striped front lawn -> hero; 'By owner' flower bed along a cedar fence -> about panel), 3 verbatim Google reviews (Lesa, Trygve T., QC & Vonn). Reviews name Conner and Travis. REJECTED: a red spider-lift photo (Konfrst Tree Service, Maps Recents-rail leftover); all FB photos are promo graphics, no job photos. Also fixed: the page's own <header> was hidden by the badgefix rule (no nav at all) - tagged unc-nav. PLACEHOLDERS: none. Name note: GBP now reads 'Conner Cuts Lawn & Garden, LLC'; page keeps the FB/logo name.",
   "photos": "real",
   "ready": true,
   "stage": "none",
@@ -1348,7 +1348,7 @@
  "landscaping-zaisers-burlington": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Zaisers-Landscaping-100068421721766/",
-  "note": "FB: title names Burlington IA \u2014 matches | 2026-09-27 - NO LONGER A NO-WEBSITE PROSPECT: the Zaiser's Landscaping FB page (2400 Sunnyside Ave, Burlington) links zaisersgardencenter.com, verified live in Chrome 2026-09-27 - title 'Landscaping & Greenhouse in Iowa | Zaiser's Landscaping & Greenhouse', with Florist / Landscaping / Greenhouse / Request a Quote sections and testimonials. Same address as Zaisers Florist & Greenhouse (GBP 4.9/150, (319) 752-6871, zaisersflorist.com). Do NOT pitch 'no website'. Candidate for .non-prospects or a website-upgrade pitch - Ricky's call. | 2026-09-29 - NO LONGER A NO-WEBSITE PROSPECT: FB page links zaisersgardencenter.com, which serves a live branded site ('Zaiser's Landscaping & Greenhouse'). Recast as website-build pitch or pull. | 2026-09-30 RECAST AS REBUILD PITCH (Ricky): live site at zaisersgardencenter.com, so no longer a no-website cold-dial prospect. Pulled from the mockup-reveal queue; shows under Rebuild Pitches. Pitch = mockup vs their current site.",
+  "note": "FB: title names Burlington IA — matches | 2026-09-27 - NO LONGER A NO-WEBSITE PROSPECT: the Zaiser's Landscaping FB page (2400 Sunnyside Ave, Burlington) links zaisersgardencenter.com, verified live in Chrome 2026-09-27 - title 'Landscaping & Greenhouse in Iowa | Zaiser's Landscaping & Greenhouse', with Florist / Landscaping / Greenhouse / Request a Quote sections and testimonials. Same address as Zaisers Florist & Greenhouse (GBP 4.9/150, (319) 752-6871, zaisersflorist.com). Do NOT pitch 'no website'. Candidate for .non-prospects or a website-upgrade pitch - Ricky's call. | 2026-09-29 - NO LONGER A NO-WEBSITE PROSPECT: FB page links zaisersgardencenter.com, which serves a live branded site ('Zaiser's Landscaping & Greenhouse'). Recast as website-build pitch or pull. | 2026-09-30 RECAST AS REBUILD PITCH (Ricky): live site at zaisersgardencenter.com, so no longer a no-website cold-dial prospect. Pulled from the mockup-reveal queue; shows under Rebuild Pitches. Pitch = mockup vs their current site.",
   "photos": "generated",
   "ready": true,
   "stage": "rebuild-target"
@@ -1364,7 +1364,7 @@
  "sanders-lawn-care-dubuque": {
   "channel": "fb",
   "fb": "",
-  "note": "FB: page surfaces alongside Dubuque directory listings \u2014 city context matches | ENRICH ATTEMPT 2026-09-28 - DROPPED at identity gate: the recorded fb page facebook.com/Sanders.Lawn.Landscape is 'Sanders Lawn Care and Landscaping' run by Damien Sanders in Union/Clark/Champaign County OHIO, (937) 505-7767, and announced a rename to Midwest Rolling Operations LLC - a different business from the Dubuque (563) 599-2244 prospect. fb field cleared. Still BASE.",
+  "note": "FB: page surfaces alongside Dubuque directory listings — city context matches | ENRICH ATTEMPT 2026-09-28 - DROPPED at identity gate: the recorded fb page facebook.com/Sanders.Lawn.Landscape is 'Sanders Lawn Care and Landscaping' run by Damien Sanders in Union/Clark/Champaign County OHIO, (937) 505-7767, and announced a rename to Midwest Rolling Operations LLC - a different business from the Dubuque (563) 599-2244 prospect. fb field cleared. Still BASE.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1466,7 +1466,7 @@
  "wi-daytonwood-painting-rfqreh": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Daytonwood-Painting-100057800074513/",
-  "note": "FB: title names Belleville WI \u2014 matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-27 (BRONZE): identity confirmed live on FB business page facebook.com/p/Daytonwood-Painting-100057800074513 ('Daytonwood Painting', Belleville WI, (608) 438-4449, 'Women owned and operated') - name + city + phone match the page. Their business card (FB photos) lists Doris Diaz 608-438-4449, Bridget Kiefer 608-213-7891, Jill Hubbard (team member). GBP 'Daytonwood Painting LLC' W3175 Daytonwood Rd Belleville exists with a DIFFERENT phone (608) 424-3449 and no website field; 5.0 from only 2 reviews (Leah N., Elisa S.) - below the 3-review floor, so reviews are a labelled placeholder. REAL LOGO: 'Daytonwood Painting, LLC' serif + gold brush, cropped off the business card, card keyed out, lettering to white. BRAND COLOURS sampled: slate navy -> dark #1c2233, brush gold -> accent #cda05a (6.6:1); SVGs recoloured, fingerprints unchanged. 4 REAL PHOTOS from the Aug 30 2026 'Here's the finished home!' post (tagged Bridget Kiefer): hero = open kitchen with white cabinets and dark island; tiles = coffered-ceiling living room, dining/island under vaulted ceiling, two-storey front entry. Each shot appeared twice in the Photos tab; duplicates dropped. Trust card changed from 'Locally Owned' to 'Women Owned & Operated' (FB + card). PLACEHOLDERS: reviews (data-reviews=placeholder + swap-notice addressed to Doris, Bridget and Jill). No-website: GBP has no website field and FB lists none - still not a full two-test verification.",
+  "note": "FB: title names Belleville WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-27 (BRONZE): identity confirmed live on FB business page facebook.com/p/Daytonwood-Painting-100057800074513 ('Daytonwood Painting', Belleville WI, (608) 438-4449, 'Women owned and operated') - name + city + phone match the page. Their business card (FB photos) lists Doris Diaz 608-438-4449, Bridget Kiefer 608-213-7891, Jill Hubbard (team member). GBP 'Daytonwood Painting LLC' W3175 Daytonwood Rd Belleville exists with a DIFFERENT phone (608) 424-3449 and no website field; 5.0 from only 2 reviews (Leah N., Elisa S.) - below the 3-review floor, so reviews are a labelled placeholder. REAL LOGO: 'Daytonwood Painting, LLC' serif + gold brush, cropped off the business card, card keyed out, lettering to white. BRAND COLOURS sampled: slate navy -> dark #1c2233, brush gold -> accent #cda05a (6.6:1); SVGs recoloured, fingerprints unchanged. 4 REAL PHOTOS from the Aug 30 2026 'Here's the finished home!' post (tagged Bridget Kiefer): hero = open kitchen with white cabinets and dark island; tiles = coffered-ceiling living room, dining/island under vaulted ceiling, two-storey front entry. Each shot appeared twice in the Photos tab; duplicates dropped. Trust card changed from 'Locally Owned' to 'Women Owned & Operated' (FB + card). PLACEHOLDERS: reviews (data-reviews=placeholder + swap-notice addressed to Doris, Bridget and Jill). No-website: GBP has no website field and FB lists none - still not a full two-test verification.",
   "photos": "real",
   "ready": true,
   "stage": "none",
@@ -1518,7 +1518,7 @@
  "wi-hein-construction-de-pere": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-07 (company 338525587170) | no website | heinconst.com serves a blank domain-parking page (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1071319 + Wisconsin Masonry Alliance directory, where peers carry website links and Hein carries none | revenue proof is WMA contractor membership, not fleet \u2014 SAFER shows only 3 power units and registration data last filed 2015",
+  "note": "in HubSpot 2026-08-07 (company 338525587170) | no website | heinconst.com serves a blank domain-parking page (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1071319 + Wisconsin Masonry Alliance directory, where peers carry website links and Hein carries none | revenue proof is WMA contractor membership, not fleet — SAFER shows only 3 power units and registration data last filed 2015",
   "photos": "generated",
   "ready": false,
   "stage": "none"
@@ -1526,7 +1526,7 @@
  "wi-jays-perfection-gutters-adbssk": {
   "channel": "phone",
   "fb": "",
-  "note": "Birdeye, Roof.info, D&B present \u2014 no FB. 'Jays Seamless Gutters' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "Birdeye, Roof.info, D&B present — no FB. 'Jays Seamless Gutters' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -1614,7 +1614,7 @@
  "wi-sean-kollman-concrete-hxmq56": {
   "channel": "phone",
   "fb": "",
-  "note": "Porch, Yelp, Manta, Angi present \u2014 no FB. 'Kohlman Concrete' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "Porch, Yelp, Manta, Angi present — no FB. 'Kohlman Concrete' is a different company | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1774,6 +1774,30 @@
   "fb": "",
   "note": "in HubSpot 2026-09-30 (company 349681289970) | No-website VERIFIED 2026-09-30, NO live browser on this unattended run, three tests: (1) LIVE web_fetch of the full BBB profile HTML shows a tel: link, an 'Email Business' link and a 'Write a Review' link and NO 'Visit Website' element; (2) domain-scoped WebSearch across perfectparadiselandscaping.com, perfectparadiselandscapingllc.com and perfectparadisewi.com returned ZERO links on all three; (3) plain WebSearch returned only BBB, Indeed pages for unrelated Paradise-named firms, YellowPages, Angi, HomeAdvisor and competitors' own sites. Confidence HIGH. | Owner Timothy Alexander, from BBB Business Management, Principal Contacts and Customer Contacts. | Revenue proof: 13 years - started 5/1/2013, incorporated 8/12/2013. BBB A+ and BBB Accredited since 4/29/2025. TWO listed locations, both on N 1st Ave Wausau. 27 BBB service categories INCLUDING Commercial Landscape Contractors and Commercial Snow Removal Services, i.e. a twelve-month book rather than one season. Two phone lines. | Phone (715) 574-8993 from the BBB profile; alt (715) 574-9907 (BBB Other Phone). Address 102 1/2 N 1st Ave. | No Facebook page found - PHONE ONLY. | CALL WARNINGS: (1) 'Outdoor Paradise Snow & Landscape' is a DIFFERENT Wausau business - do not mix them up. (2) No public review count was found on any platform, so do not open by complimenting his reviews. (3) BBB accreditation is recent (Apr 2025) while the business is 13 years old - do not imply he is new.",
   "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-deans-light-box-waverly": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-01 (company 349845049067) | No-website VERIFIED 2026-10-01, NO live browser on this unattended run, three tests: (1) domain-scoped WebSearch(allowed_domains:[deanslightbox.com]) returned ZERO links; (2) plain WebSearch on name + city + owner returned 10 results, ALL third-party (BBB, thebluebook.com, Yahoo Local, YellowPages, Procore, Yelp, DexKnows, Manta, wcfcourier) with no first-party domain; (3) BBB profile carries no 'Visit Website' button, against pool-builder control profiles in the same session that DID show one. Confidence HIGH. | Owner Jeff Soash, President, from BBB + thebluebook iProView; founded by father Dean Soash 1977, Dean now semi-retired. | Revenue proof: 49 years, since 1/1/1977, same name same town. BBB Accredited since 1/31/2011. Listed on thebluebook.com AND Procore's contractor network, both commercial-GC-facing, so they bid real commercial subcontract work. Four service lines incl. fiber/low-voltage and their own trencher = capital equipment, multiple crews. | Phone (319) 352-1036 from the BBB profile. Address 217 W Bremer Ave, consistent across BBB, Yelp, Manta. No alt phones, no address conflict. | No Facebook found, phone only. | CALL WARNING: founder Dean Soash ran a write-in campaign for Waverly mayor and sat 18 years on planning & zoning. Do not open with local politics. Address Jeff, not Dean. | Pack P11 / layout L-A / palette tin-slate #949da2 (grey band). Bespoke electrical scene, variant 1, rest-state patched.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-aaa-roofing-wisconsin-dells": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-01 (company 349881115326) | No-website VERIFIED 2026-10-01, NO live browser on this unattended run, three tests: (1) domain-scoped WebSearch across aaaroofingwi.com, aaaroofingdells.com and aaa-roofing.com surfaced ONLY aaa-roofing.com, which is 'AAA Roofing NJ', an unrelated New Jersey namesake; (2) plain WebSearch on name + city + their exact phone returned 10 results, ALL third-party (BBB, YellowPages, Yelp, Owens Corning locator, directorii, two COMPETITORS' city pages, ChamberofCommerce, Roof.info x2) with no first-party domain; (3) BBB profile carries no 'Visit Website' button. Confidence HIGH. | Principals Brian S. Swartz and Joshua Wells, from the BBB principals field. | Revenue proof: roofing the Dells market since 2001 (~25 yrs) per Yelp and Roof.info; BBB file opened 6/26/1997. Two named principals, not a lone owner-operator. In the Owens Corning independent contractor locator, i.e. a real manufacturer supply relationship. | Phone (608) 586-6485 from the BBB profile. ADDRESS CONFLICT: BBB says 723 Fur Ave, Yelp says 731 Fur Ave; 723 used. Confirm on the call, do not assert it. | No Facebook found, phone only. | CALL WARNINGS: (1) BBB is 'Not Rated - file being reviewed/updated' and they are NOT accredited, so no BBB compliments; (2) NAMESAKE - separate 'AAA Roofing Company' Des Moines IA (515) 282-6510 already exists in this portal as company 318853253861, different company, do not merge or reference Iowa; (3) aaa-roofing.com is a New Jersey firm, never tell them they have a website. | Pack P18 / layout L-D / palette ash-mauve #a98fc4 (violet band). Bespoke roofing scene, variant 2, rest-state patched.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "il-solar-heating-ac-peoria": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/Solar-Heating-AC-161430454008483/",
+  "note": "in HubSpot 2026-10-01 (company 349839688390) | No-website VERIFIED 2026-10-01, NO live browser on this unattended run. The one candidate domain, solarheatingac.com, is NOT theirs and is a rented third-party lead-gen shell, same pattern as unionroofing.com: its CTA is a toll-free (833) 687-2815 that does NOT match the verified (309) 685-5420; it self-describes as a 'network of local HVAC technicians'; a second domain-scoped search for its address returned NO physical location; and two direct web_fetch calls (/ and /how-we-can-help) returned an EMPTY body, i.e. a client-rendered shell. Plain WebSearch on the Peoria business returned only Nextdoor, BBB, Angi, YellowPages x2, Yelp and aggregators. BBB 'Visit Website' points at Facebook, which per standing rule is not evidence on its own. Confidence MEDIUM-HIGH - the business plainly has no first-party site; the residual unknown is whether solarheatingac.com was ever rented in their name, which only a browser could settle. | Owner Bruce Smith, sole proprietor; office assistant Shannon Yearian, from BBB. | Revenue proof: 46 years, since 1980, one owner one market. A STAFFED OFFICE (named assistant) is the strongest signal - payroll beyond the owner. Amana dealer. Does geothermal install AND service, which most shops this size will not quote. Yelp listing carries 21 photos. | Phone (309) 685-5420 from the BBB profile. NO street address verified to a confident standard - field left EMPTY rather than guessed, do not state an address on the call. | Facebook: https://www.facebook.com/Solar-Heating-AC-161430454008483/ | CALL WARNINGS: (1) 'Solar' is the 1980 company name, NOT solar panels - do not pitch solar; (2) never say 'you already have a website', solarheatingac.com belongs to someone else; (3) 46 years in, avoid any 'behind the times' framing. | Pack P19 / layout L-C / palette verdigris #49b09f (teal band). HVAC is family-saturated so this uses compose family (2,'flow','offset') - 96 elements, 80 in-band hero points - with a derived hero viewBox; flow rests visible so no rest-state patch needed.",
+  "photos": 0,
   "ready": true,
   "stage": "none"
  }

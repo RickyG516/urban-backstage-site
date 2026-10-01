@@ -205,6 +205,20 @@ PALETTES = [
     dict(name="pewter-ash",       dark="#13161a", accent="#a2a6a4", off="#f4f5f5", band="grey"),
     dict(name="iris-basalt",      dark="#131019", accent="#9a7fd2", off="#f5f3f9", band="violet"),
     dict(name="aqua-basalt",      dark="#0e1517", accent="#52b3b8", off="#f1f6f7", band="teal"),
+    # 2026-10-01 - pool exhausted again at 208 live accents. Same treadmill the
+    # note above describes; Stage 2 is STILL not built and is still the real fix.
+    # Bands chosen by live under-representation: grey 19, violet 20, teal 24.
+    # Each accent checked against all 208 live accents (no collision) and against
+    # audit() both directions (>=3.0 on dark hero, >=4.5 dark text on accent).
+    dict(name="tin-slate",        dark="#121416", accent="#949da2", off="#f4f5f6", band="grey"),
+    dict(name="ash-mauve",        dark="#15131a", accent="#a98fc4", off="#f5f4f8", band="violet"),
+    dict(name="verdigris",        dark="#0e1616", accent="#49b09f", off="#f1f6f5", band="teal"),
+    # Three more so the NEXT run is not blocked on day one the way this one was
+    # (the pool had exactly zero free palettes when 2026-10-01 started). Same
+    # collision + audit checks as the three above.
+    dict(name="slate-pacific",    dark="#0f1419", accent="#4f9bd1", off="#f1f5f8", band="blue"),
+    dict(name="fern-basalt",      dark="#101513", accent="#63ab79", off="#f2f6f3", band="green"),
+    dict(name="clay-ember",       dark="#16110f", accent="#c96f5e", off="#f7f4f2", band="red"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
