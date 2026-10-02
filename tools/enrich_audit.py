@@ -151,8 +151,10 @@ def main():
     # reporting it as a fault. See demo/.website-build-prospects.
 
     # --- surface 2: index row + HubSpot link
+    # Client replicas / own-venture staging copies (demo/.client-sites) are not
+    # prospects: an index row and status entry are optional for them.
     for s in slugs:
-        if s not in rows:
+        if s not in rows and s not in CLIENT_SITES:
             problems.append(f"no index row: {s}")
     for s in rows:
         if s not in slugs:
@@ -173,7 +175,7 @@ def main():
                 f"must read 'archived' or 'not a prospect', never a placeholder")
 
     # --- surface 3: status.json
-    for s in set(slugs) - set(st):
+    for s in set(slugs) - set(st) - CLIENT_SITES:
         problems.append(f"no status.json entry: {s}")
     for s in set(st) - set(slugs):
         problems.append(f"status.json entry with no page: {s}")

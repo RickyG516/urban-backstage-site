@@ -702,10 +702,12 @@
  "ia-robert-l-smith-construction-mtpleasant": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-09-17 (company 347150718659) | contact 553878079184 (Robert L Smith, Owner) | NO-WEBSITE FINDING: verified 2026-09-17 without a browser (none available on this scheduled run). BBB profile fetched live this session DOES show a 'Visit Website' button, but it points at https://www.importantlocalbusinesses.com - a rented generic 'shop local' shell, the same one already documented on Union Roofing Co. (Chenoa IL), and the profile's 'Other Phone' (847) 720-5807 belongs to that shell, not to this business. Domain-scoped WebSearch on rlsmithconstructionco.com, robertlsmithconstructionco.com and smithconstructionmtpleasant.com returned ZERO links. This is the QUALIFYING pattern. Confidence HIGH. | REVENUE: 22 years (started and incorporated 2004), BBB Accredited since 6/11/2012 with an A+ rating, industrial + commercial + some residential concrete, owns backhoe/site equipment, listed on Angi, Yelp, Nextdoor, Birdeye and Chamber of Commerce. 706 Laurel Drive, Mount Pleasant IA 52641. Fax (319) 986-5349. | CALL WARNING: robertsmithconstruction.com is a LIVE Wix site for an unrelated custom-home designer in Fort Collins CO - a namesake. Do not imply it is theirs. | PHONE ONLY - no Facebook page found.",
-  "photos": "generated",
+  "note": "in HubSpot 2026-09-17 (company 347150718659) | contact 553878079184 (Robert L Smith, Owner) | NO-WEBSITE FINDING: verified 2026-09-17 without a browser (none available on this scheduled run). BBB profile fetched live this session DOES show a 'Visit Website' button, but it points at https://www.importantlocalbusinesses.com - a rented generic 'shop local' shell, the same one already documented on Union Roofing Co. (Chenoa IL), and the profile's 'Other Phone' (847) 720-5807 belongs to that shell, not to this business. Domain-scoped WebSearch on rlsmithconstructionco.com, robertlsmithconstructionco.com and smithconstructionmtpleasant.com returned ZERO links. This is the QUALIFYING pattern. Confidence HIGH. | REVENUE: 22 years (started and incorporated 2004), BBB Accredited since 6/11/2012 with an A+ rating, industrial + commercial + some residential concrete, owns backhoe/site equipment, listed on Angi, Yelp, Nextdoor, Birdeye and Chamber of Commerce. 706 Laurel Drive, Mount Pleasant IA 52641. Fax (319) 986-5349. | CALL WARNING: robertsmithconstruction.com is a LIVE Wix site for an unrelated custom-home designer in Fort Collins CO - a namesake. Do not imply it is theirs. | PHONE ONLY - no Facebook page found. | ENRICHED 2026-10-02 -> BRONZE. Identity gate: Google listing Robert L. Smith Construction Co., Inc., Mount Pleasant service area, (319) 931-4774 - match. REAL: 1 job photo (poured foundation walls for an addition, his GBP header photo, 720px original). PLACEHOLDER: logo (RS monogram), 2 work tiles, reviews (Google shows 5.0 from 2 ratings, neither has written text). Listing says 5 photos but limited-view Maps would not open the gallery; worth a re-run from a signed-in browser for the other 4.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-02"
  },
  "ia-rubel-roofing-construction-6nihze": {
   "channel": "phone",
@@ -1294,10 +1296,12 @@
  "il-r-marit-painting-7jp0a6": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-27 (company 342427631309) | contact 541900069612 Robin Marit | no-website RE-VERIFIED live in Chrome 2026-08-28: maritpainting.com, rmaritpainting.com and maritpaintinginc.com all dead; BBB Additional Websites lists only an angi.com listing and a share.google link | revenue: 34 yrs, inc 2009, BBB A+ accredited unbroken since 1998, top 99% of 65,686 IL contractors on BuildZoom | PHONE WARNING: BBB's listed 309-686-0944 is a FAX, voice line is 309-256-4335 | page BUILT AND PUBLISHED 2026-08-28 - 08-27 run created the CRM record but never pushed the page",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-27 (company 342427631309) | contact 541900069612 Robin Marit | no-website RE-VERIFIED live in Chrome 2026-08-28: maritpainting.com, rmaritpainting.com and maritpaintinginc.com all dead; BBB Additional Websites lists only an angi.com listing and a share.google link | revenue: 34 yrs, inc 2009, BBB A+ accredited unbroken since 1998, top 99% of 65,686 IL contractors on BuildZoom | PHONE WARNING: BBB's listed 309-686-0944 is a FAX, voice line is 309-256-4335 | page BUILT AND PUBLISHED 2026-08-28 - 08-27 run created the CRM record but never pushed the page | ENRICHED 2026-10-02 -> GOLD. Identity gate: Google listing R.Marit Painting INC., (309) 256-4335, Peoria service area; BBB profile R. Marit Painting, Inc., 3307 N Leroy Ave Peoria. REAL: logo (paint-swatch fan + R.Marit Painting INC. wordmark cropped off the vinyl banner in her own GBP header photo, knocked out white), brand colours sampled (banner navy #323c58 -> dark #141a2b, banner tan -> accent #d1bc8e), 3 job photos from her own BBB profile uploads (dark-slate exterior repaint, log siding stain, deck recoat; 600px originals - BBB serves no larger), 3 verbatim Google reviews, 5.0 from 7. No placeholders left. REJECTED: BBB photo of a TitleMax storefront (another business name on the building); the GBP banner photo itself (two people, one hoodie with another company logo). CALL FLAG: the banner in that GBP photo prints (424) 333-9932, not 309-256-4335 - confirm which line is current before quoting either; reviews name Robin and Shane.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-02"
  },
  "il-rj-window-cleaning-t3wnfp": {
   "channel": "none",
@@ -1318,10 +1322,12 @@
  "il-rns-electric-washington-h6q3zn": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-31 (company 343265827524) | contact 543965724371 | NO-WEBSITE verified live in Chrome 2026-08-31 - STRONGEST HOOK IN THIS BATCH: rnselectric.com is an error page, and rnselectricinc.com RESOLVES but redirects to /lander and serves a GoDaddy PARKED-DOMAIN page (body is a single iframe to parked-content.godaddy.com, zero text, zero images). They own the domain and use it for email (gina@rnselectricinc.com) while the browser shows a parking page. Their listed 'website' is rnselectricinc.localsearch.com, a Thryv directory template. REVENUE: since 2010, ~$438K revenue, 4-5 staff, 13 permitted commercial buildouts (McDonald's, Starbucks, Taco Bell, Dunkin, Pizza Hut, Buffalo Wild Wings, Krispy Kreme, Auntie Anne's) across Normal/Bloomington/Champaign/Jacksonville, $2.7K-$65.5K; BuildZoom 95 = top 22% of 65,686 IL contractors; IBEW Local 34 / NECA union contractor. IL licences 25-0168 and 17-0714 ACTIVE July 2026. WARNING: a third licence (City of Jacksonville 14-000046) shows a 2022 expiry on BuildZoom - the state licences are current, do NOT imply they are unlicensed. Illinois SOS/IDFPR are CAPTCHA-gated and were NOT checked.",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-31 (company 343265827524) | contact 543965724371 | NO-WEBSITE verified live in Chrome 2026-08-31 - STRONGEST HOOK IN THIS BATCH: rnselectric.com is an error page, and rnselectricinc.com RESOLVES but redirects to /lander and serves a GoDaddy PARKED-DOMAIN page (body is a single iframe to parked-content.godaddy.com, zero text, zero images). They own the domain and use it for email (gina@rnselectricinc.com) while the browser shows a parking page. Their listed 'website' is rnselectricinc.localsearch.com, a Thryv directory template. REVENUE: since 2010, ~$438K revenue, 4-5 staff, 13 permitted commercial buildouts (McDonald's, Starbucks, Taco Bell, Dunkin, Pizza Hut, Buffalo Wild Wings, Krispy Kreme, Auntie Anne's) across Normal/Bloomington/Champaign/Jacksonville, $2.7K-$65.5K; BuildZoom 95 = top 22% of 65,686 IL contractors; IBEW Local 34 / NECA union contractor. IL licences 25-0168 and 17-0714 ACTIVE July 2026. WARNING: a third licence (City of Jacksonville 14-000046) shows a 2022 expiry on BuildZoom - the state licences are current, do NOT imply they are unlicensed. Illinois SOS/IDFPR are CAPTCHA-gated and were NOT checked. | ENRICHED 2026-10-02 -> GOLD. Identity gate: Google listing RNS Electric, Inc., 301 Zinser Pl, Washington IL, (309) 444-5200, all match; shop sign in its own header photo carries the same number. REAL: logo (RNS mark knocked out of the shop sign in the GBP header photo; a utility wire crosses the sign, cleaned by colour mask), brand colours sampled (navy #10187c on sign -> dark #0b1036, accent #6871f3 lightened for contrast), shop photo (301 Zinser Pl with RNS van), 3 verbatim Google reviews, 5.0 from 4. PLACEHOLDER: first work tile (no job photos reachable - limited-view Maps gallery would not open; the one review photo showed a customer family mantel with children, rejected). NEW HOOK: the Website button on the Google listing points at usmapol.org/details/rns-electric-inc (redirects to a scraped directory, usmapinformation.com) - not to RNS. Reviews are residential (meter replace/move with Ameren, TV mount) - FAQ updated so the page no longer says they do no residential work.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-02"
  },
  "il-screenlab-screen-repair-e7dqm2": {
   "channel": "none",

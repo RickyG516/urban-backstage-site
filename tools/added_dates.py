@@ -161,6 +161,10 @@ def main():
     all_row_slugs = [slug_of(r) for r in rows]
     client_rows = [r for r in rows if slug_of(r) is None]
     row_slugs = [sl for sl in all_row_slugs if sl is not None]
+    # A client replica / own-venture staging copy (demo/.client-sites) is not a
+    # prospect, so it is not REQUIRED to have an index row or a status entry.
+    # ia-gbg-dubuque (Ricky's own venture, added 2026-10-01) has neither by design.
+    slugs = [sl for sl in slugs if sl not in CLIENT_SITES or sl in row_slugs]
     if len(row_slugs) != len(slugs):
         problems.append(f"index rows with a page {len(row_slugs)} != page dirs {len(slugs)}")
     if len(set(row_slugs)) != len(row_slugs):

@@ -180,3 +180,38 @@ Switlick, Tobin Bros, McNeal's, Schroeder, Dimmer Bros, Carpet Specialists, Redm
 trench shots show the excavating sub's machine (BAUMHARDT) and a strip mall's signs. Shot-level review caught it.
 FB's one-download-per-page limit was handled by packing several images onto one canvas and splitting with PIL,
 and by the robots.txt hash relay for the full-size viewer images.
+
+---
+
+## 2026-10-02 — limited-view Maps won't open galleries; storefront/banner photos and BBB uploads carried the run
+
+Ricky's Chrome showed Maps in "limited view" and the window was hidden. The photo gallery would not open
+(clicks on the header photo and "See photos" did nothing). Only the header photo and review-photo tiles were
+reachable. That was still enough: **two of three logos this run came off signage in the business's own GBP
+header photo** — RNS Electric's shop sign (same phone printed on it, which doubles as the identity proof) and
+R. Marit Painting's vinyl banner.
+
+**BBB profiles carry business-uploaded job photos.** R. Marit had six on BBB (`m.bbb.org/prod/ProfileImages/...`,
+CORS-open, 600px max). One was a TitleMax storefront — another business's name on the building — rejected.
+Downloaded by packing all images onto one canvas and splitting with PIL (one download, no multi-download prompt).
+The BBB "logo" image was just the business name in a system font — not a logo.
+
+**A business's own banner can disagree with its listing.** R. Marit's 2026 banner prints (424) 333-9932, while
+Google, BBB and the page carry (309) 256-4335. Not a disqualifier (name + city + listing phone all match) but a
+call flag — confirm the number before quoting either.
+
+**A GBP "Website" field can point at a scraper directory.** RNS Electric's Website button opens
+usmapol.org/details/rns-electric-inc…, which redirects to usmapinformation.com. That is a better opening line
+than "you don't have a website."
+
+Drops/thin this run: Midwest Painting Service (1 review), Mixer Insulation (0), Klunck Masonry (no listing),
+AB Concrete (1 review, 2.0), Davenport Flooring / Don's Concrete / Breon / Poss / YM / Weber / Stufflebeem /
+Niklasen / Fox's / Winegar / KVI / T/R Painting / All-Wall / Wernimont (no matching listing), Christner (1),
+Cy-Ment (2, and the Google phone (641) 864-2462 ≠ page 515-689-0792), Ridge View (2), J.A. Fritch (4.2/5,
+not opened), Benson's (Maps returned a Tallahassee FL namesake), Woody's Heating (Maps listing is Ottumwa,
+(641) 682-3407 — fails the gate), Gibbons Masonry (4.2/10, mixed, phone not checked — a candidate for
+reviews-only BRONZE later), Grimm Electric (4.3/9, not opened), Genteman (3.9/7, not opened).
+**Santee Construction (Eldridge) is marked PERMANENTLY CLOSED on Google.**
+
+Also fixed: `ia-gbg-dubuque` (Ricky's own venture, listed in `demo/.client-sites`) made `enrich_audit.py` and
+`added_dates.py --check` fail on "no index row / no status.json entry". Client-site slugs no longer need either.
