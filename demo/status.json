@@ -477,6 +477,14 @@
   "ready": false,
   "stage": "none"
  },
+ "ia-loomis-plumbing-west-union": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-03 (company 350183931579) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile has no Visit Website button. (2) Domain-scoped WebSearch across loomisplumbing.com / loomisplumbingandheating.com / loomisph.com / loomisplumbingheating.com returned ZERO links. (3) Extended WebSearch on name + city + owner surfaced only BBB, Nextdoor, BuildZoom, D&B, Birdeye, YellowPages, whodoyou, Manta, licensed.contractors and a Rheem dealer locator - no first-party domain. Confidence HIGH. OWNER: Bill (William) Loomis per BBB Business Management, corroborated on licensed.contractors. REVENUE PROOF: started 7/1/2002 (24 yrs); BBB ACCREDITED since 5/26/2008 with an A+ rating - 18 straight years of paid accreditation, which also proves the business is actively trading; D&B profile exists; 11-county NE Iowa service area off one shop; three trades under one roof (plumbing, HVAC, appliance). CALL WARNINGS: only 1 public review exists (Birdeye, 5 stars) so do NOT use a review-gap opener - lead with 24 years and the A+; ADDRESS CONFLICT, BBB/Birdeye say 211 S Vine St but licensed.contractors says 116 W Franklin St, so ask rather than assert; do not open with his military service or the Gene Perry purchase (public, but his story to tell).",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-lynch-roofing-siding-w4e1du": {
   "channel": "phone",
   "fb": "",
@@ -701,13 +709,13 @@
  },
  "ia-robert-l-smith-construction-mtpleasant": {
   "channel": "phone",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-02",
   "fb": "",
   "note": "in HubSpot 2026-09-17 (company 347150718659) | contact 553878079184 (Robert L Smith, Owner) | NO-WEBSITE FINDING: verified 2026-09-17 without a browser (none available on this scheduled run). BBB profile fetched live this session DOES show a 'Visit Website' button, but it points at https://www.importantlocalbusinesses.com - a rented generic 'shop local' shell, the same one already documented on Union Roofing Co. (Chenoa IL), and the profile's 'Other Phone' (847) 720-5807 belongs to that shell, not to this business. Domain-scoped WebSearch on rlsmithconstructionco.com, robertlsmithconstructionco.com and smithconstructionmtpleasant.com returned ZERO links. This is the QUALIFYING pattern. Confidence HIGH. | REVENUE: 22 years (started and incorporated 2004), BBB Accredited since 6/11/2012 with an A+ rating, industrial + commercial + some residential concrete, owns backhoe/site equipment, listed on Angi, Yelp, Nextdoor, Birdeye and Chamber of Commerce. 706 Laurel Drive, Mount Pleasant IA 52641. Fax (319) 986-5349. | CALL WARNING: robertsmithconstruction.com is a LIVE Wix site for an unrelated custom-home designer in Fort Collins CO - a namesake. Do not imply it is theirs. | PHONE ONLY - no Facebook page found. | ENRICHED 2026-10-02 -> BRONZE. Identity gate: Google listing Robert L. Smith Construction Co., Inc., Mount Pleasant service area, (319) 931-4774 - match. REAL: 1 job photo (poured foundation walls for an addition, his GBP header photo, 720px original). PLACEHOLDER: logo (RS monogram), 2 work tiles, reviews (Google shows 5.0 from 2 ratings, neither has written text). Listing says 5 photos but limited-view Maps would not open the gallery; worth a re-run from a signed-in browser for the other 4.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-02"
+  "stage": "none"
  },
  "ia-rubel-roofing-construction-6nihze": {
   "channel": "phone",
@@ -1071,6 +1079,14 @@
   "ready": true,
   "stage": "none"
  },
+ "il-eric-sebree-construction-lewistown": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-03 (company 350204636862) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile HTML fetched live: a Visit Website button EXISTS but points at share.google/uYQHRYJ8pClMvhDdn, a Google Business Profile share link rather than a domain - same qualifying pattern as Facebook-as-website. (2) Domain-scoped WebSearch across sebreeconstruction.com / ericsebreeconstruction.com / sebreeconst.com returned ZERO links. (3) Extended WebSearch surfaced only BBB, BuildZoom, YellowPages, Birdeye, Buzzfile, DexKnows and Manta. (4) Buzzfile's own Website field is BLANK. Confidence HIGH. OWNER: Eric Sebree, Owner, per BBB Business Management / Principal Contacts / Customer Contacts, corroborated on Buzzfile. REVENUE PROOF: started 1/1/1995 (31 yrs per BBB); BBB ACCREDITED since 6/1/2008 with an A+ rating - 18 straight years; Buzzfile reports ~4 employees at this single location and an estimated $165,172 annual revenue; scope includes ground-up custom homes. CALL WARNINGS: DO NOT MENTION LICENSING - an IL roofer licence #104010887 expired 12-31-2017 (verified expired 04-10-2023) and IDFPR lookups are CAPTCHA-gated so current status is unknown; ZERO public reviews so no review-gap opener; founding-year conflict (BBB 1995 vs Buzzfile 1997) - say 'over thirty years' and let him correct it; ALTERNATE PHONE (309) 547-7412 on Buzzfile/YellowPages/DexKnows if the BBB number does not connect; Buzzfile misclassifies him as a plumbing contractor - ignore.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "il-foxs-repair-remodeling-freeport-r9x4bd": {
   "channel": "phone",
   "fb": "",
@@ -1295,13 +1311,13 @@
  },
  "il-r-marit-painting-7jp0a6": {
   "channel": "phone",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-02",
   "fb": "",
   "note": "in HubSpot 2026-08-27 (company 342427631309) | contact 541900069612 Robin Marit | no-website RE-VERIFIED live in Chrome 2026-08-28: maritpainting.com, rmaritpainting.com and maritpaintinginc.com all dead; BBB Additional Websites lists only an angi.com listing and a share.google link | revenue: 34 yrs, inc 2009, BBB A+ accredited unbroken since 1998, top 99% of 65,686 IL contractors on BuildZoom | PHONE WARNING: BBB's listed 309-686-0944 is a FAX, voice line is 309-256-4335 | page BUILT AND PUBLISHED 2026-08-28 - 08-27 run created the CRM record but never pushed the page | ENRICHED 2026-10-02 -> GOLD. Identity gate: Google listing R.Marit Painting INC., (309) 256-4335, Peoria service area; BBB profile R. Marit Painting, Inc., 3307 N Leroy Ave Peoria. REAL: logo (paint-swatch fan + R.Marit Painting INC. wordmark cropped off the vinyl banner in her own GBP header photo, knocked out white), brand colours sampled (banner navy #323c58 -> dark #141a2b, banner tan -> accent #d1bc8e), 3 job photos from her own BBB profile uploads (dark-slate exterior repaint, log siding stain, deck recoat; 600px originals - BBB serves no larger), 3 verbatim Google reviews, 5.0 from 7. No placeholders left. REJECTED: BBB photo of a TitleMax storefront (another business name on the building); the GBP banner photo itself (two people, one hoodie with another company logo). CALL FLAG: the banner in that GBP photo prints (424) 333-9932, not 309-256-4335 - confirm which line is current before quoting either; reviews name Robin and Shane.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "GOLD",
-  "enriched": "2026-10-02"
+  "stage": "none"
  },
  "il-rj-window-cleaning-t3wnfp": {
   "channel": "none",
@@ -1321,13 +1337,13 @@
  },
  "il-rns-electric-washington-h6q3zn": {
   "channel": "phone",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-02",
   "fb": "",
   "note": "in HubSpot 2026-08-31 (company 343265827524) | contact 543965724371 | NO-WEBSITE verified live in Chrome 2026-08-31 - STRONGEST HOOK IN THIS BATCH: rnselectric.com is an error page, and rnselectricinc.com RESOLVES but redirects to /lander and serves a GoDaddy PARKED-DOMAIN page (body is a single iframe to parked-content.godaddy.com, zero text, zero images). They own the domain and use it for email (gina@rnselectricinc.com) while the browser shows a parking page. Their listed 'website' is rnselectricinc.localsearch.com, a Thryv directory template. REVENUE: since 2010, ~$438K revenue, 4-5 staff, 13 permitted commercial buildouts (McDonald's, Starbucks, Taco Bell, Dunkin, Pizza Hut, Buffalo Wild Wings, Krispy Kreme, Auntie Anne's) across Normal/Bloomington/Champaign/Jacksonville, $2.7K-$65.5K; BuildZoom 95 = top 22% of 65,686 IL contractors; IBEW Local 34 / NECA union contractor. IL licences 25-0168 and 17-0714 ACTIVE July 2026. WARNING: a third licence (City of Jacksonville 14-000046) shows a 2022 expiry on BuildZoom - the state licences are current, do NOT imply they are unlicensed. Illinois SOS/IDFPR are CAPTCHA-gated and were NOT checked. | ENRICHED 2026-10-02 -> GOLD. Identity gate: Google listing RNS Electric, Inc., 301 Zinser Pl, Washington IL, (309) 444-5200, all match; shop sign in its own header photo carries the same number. REAL: logo (RNS mark knocked out of the shop sign in the GBP header photo; a utility wire crosses the sign, cleaned by colour mask), brand colours sampled (navy #10187c on sign -> dark #0b1036, accent #6871f3 lightened for contrast), shop photo (301 Zinser Pl with RNS van), 3 verbatim Google reviews, 5.0 from 4. PLACEHOLDER: first work tile (no job photos reachable - limited-view Maps gallery would not open; the one review photo showed a customer family mantel with children, rejected). NEW HOOK: the Website button on the Google listing points at usmapol.org/details/rns-electric-inc (redirects to a scraped directory, usmapinformation.com) - not to RNS. Reviews are residential (meter replace/move with Ameren, TV mount) - FAQ updated so the page no longer says they do no residential work.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "GOLD",
-  "enriched": "2026-10-02"
+  "stage": "none"
  },
  "il-screenlab-screen-repair-e7dqm2": {
   "channel": "none",
@@ -1741,6 +1757,14 @@
   "channel": "phone",
   "fb": "",
   "note": "in HubSpot 2026-09-30 (company 349681289970) | No-website VERIFIED 2026-09-30, NO live browser on this unattended run, three tests: (1) LIVE web_fetch of the full BBB profile HTML shows a tel: link, an 'Email Business' link and a 'Write a Review' link and NO 'Visit Website' element; (2) domain-scoped WebSearch across perfectparadiselandscaping.com, perfectparadiselandscapingllc.com and perfectparadisewi.com returned ZERO links on all three; (3) plain WebSearch returned only BBB, Indeed pages for unrelated Paradise-named firms, YellowPages, Angi, HomeAdvisor and competitors' own sites. Confidence HIGH. | Owner Timothy Alexander, from BBB Business Management, Principal Contacts and Customer Contacts. | Revenue proof: 13 years - started 5/1/2013, incorporated 8/12/2013. BBB A+ and BBB Accredited since 4/29/2025. TWO listed locations, both on N 1st Ave Wausau. 27 BBB service categories INCLUDING Commercial Landscape Contractors and Commercial Snow Removal Services, i.e. a twelve-month book rather than one season. Two phone lines. | Phone (715) 574-8993 from the BBB profile; alt (715) 574-9907 (BBB Other Phone). Address 102 1/2 N 1st Ave. | No Facebook page found - PHONE ONLY. | CALL WARNINGS: (1) 'Outdoor Paradise Snow & Landscape' is a DIFFERENT Wausau business - do not mix them up. (2) No public review count was found on any platform, so do not open by complimenting his reviews. (3) BBB accreditation is recent (Apr 2025) while the business is 13 years old - do not imply he is new.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-pleasant-view-forestry-fond-du-lac": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/groups/229274974225920/",
+  "note": "in HubSpot 2026-10-03 (company 350219033289) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile HTML fetched live: no Visit Website element and no Additional Websites field, proved meaningful against a same-session control (the Eric Sebree BBB profile DOES render a Visit Website button). (2) Domain-scoped WebSearch across pleasantviewforestry.com / pleasantviewforestryandlandscaping.com / pvforestry.com returned ZERO links. (3) Plain + extended WebSearch on name + city + owner surfaced only BBB, HomeAdvisor/Angi, Birdeye, Yelp, landscape.directory and home8.org - no first-party domain. Only social presence is a Facebook GROUP (not a page), facebook.com/groups/229274974225920. Confidence HIGH. OWNER: 'Jerry' - FIRST NAME ONLY, surname not establishable (BBB lists no principal; WI DFI corporate search returns no entity, consistent with a sole proprietorship). Corroborated across six HomeAdvisor reviews 2018-2023 plus one Birdeye review. REVENUE PROOF: since 1/1/2000 (26 yrs); 4.7/5 over 42 HomeAdvisor jobs and 4.6/5 over 23 Birdeye/Google reviews; runs a crew; owns chipping and flatbed haul capacity; hours 8 AM-9 PM seven days; emergency service. CALL WARNINGS: ask for 'Jerry', do not guess a surname; one 1-star HomeAdvisor review (Jun 2019) over an unfinished wet-weather job with a long public owner reply - leave it alone; founding-year conflict (HomeAdvisor 1997 vs BBB 2000) - say 'since 2000'.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
