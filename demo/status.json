@@ -1031,11 +1031,13 @@
  },
  "il-cranford-plumbing-dunlap": {
   "channel": "phone",
-  "fb": true,
-  "note": "in HubSpot 2026-08-19 (company 341016893132, contact 537719367414) | BBB renders NO Visit Website button on an ACCREDITED profile; Additional Websites field holds only a Facebook URL | cranfordplumbinginc.com tested live in Chrome 2026-08-19 -> dead | NAMESAKE: cranfordplumbing.com IS live but is an unrelated NEW JERSEY company, 908-272-4641 | 49 yrs inc 1977, BBB A+ accredited 2015, UA Local 63, MIMCA, WBE certified, runs Cranford Trenching & Backhoe | only 3 employees on file | alt number 309-697-3484",
-  "photos": 0,
+  "fb": "https://www.facebook.com/cranfordplumbing",
+  "note": "in HubSpot 2026-08-19 (company 341016893132, contact 537719367414) | BBB renders NO Visit Website button on an ACCREDITED profile; Additional Websites field holds only a Facebook URL | cranfordplumbinginc.com tested live in Chrome 2026-08-19 -> dead | NAMESAKE: cranfordplumbing.com IS live but is an unrelated NEW JERSEY company, 908-272-4641 | 49 yrs inc 1977, BBB A+ accredited 2015, UA Local 63, MIMCA, WBE certified, runs Cranford Trenching & Backhoe | only 3 employees on file | alt number 309-697-3484 | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'Cranford Plumbing' (329 E Lake Ave, Peoria) carries (309) 696-7353 = page phone; FB business page facebook.com/cranfordplumbing lists Dunlap IL 61525 (matches UA Local 63 contractor list, PO Box 755 Dunlap); the van photo on that FB page prints 696-7353. REAL: logo (Cranford pipe-C wordmark knocked out of the FB cover photo, white for the dark nav), brand colours sampled (logo navy ~#000830 -> dark #0b1430, accent #7f9bd6 steel blue lightened from the same hue for contrast), 1 photo (the Cranford van with logo and number, FB, 689px), 2 verbatim Google reviews (C. P. and Amy W., both ~Jan 2026, both name Michael), 4.4 from 19. PLACEHOLDER: first work tile (motion.svg). FB has only 5 photos: cover, 2 copies of the van, 2 copies of the logo sign - no job photos anywhere. NEW HOOK: their own FB page 'Links' field still points at cranfordplumbinginc.com, which is dead. Hero copy untouched.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-03"
  },
  "il-designed-roofing-springfield": {
   "channel": "phone",
@@ -1261,11 +1263,13 @@
  },
  "il-north-park-heating-i211nr": {
   "channel": "unknown",
-  "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "fb": "https://www.facebook.com/northparkhvacil/",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'North Park Heating & Air Conditioning', 912 River Ln, Loves Park, (815) 654-3389 = page; FB business page facebook.com/northparkhvacil same address, its graphics print 815-654-3389. NO-WEBSITE now verified: Google listing has no website; FB 'Links' points at northparkheatingandair.net which is NXDOMAIN (checked live 2026-10-03). REAL: logo ('NORTH PARK Heating AC - Keeping it simple.', FB profile image 283px, shown on a white chip in the nav), brand colours sampled (navy + red; dark stays #111d33, accent red lightened to #f2605c for contrast, dark2 brown -> navy #0a1226), 1 photo (van + man in a navy shirt cropped off their FB cover banner - likely Ron, NOT confirmed, caption does not name him), 2 verbatim Google review excerpts (Chris S. 2024, Karen V. 2022 - Maps limited view would not expand 'More', quotes cut with an ellipsis at the truncation point, words unaltered), 4.4 from 19. Reviews name 'Ron'. PLACEHOLDER: first and last work tiles. COPY FIX: page said 'Since 1993' / 'over three decades' - unverified; replaced with FB's own claim 'over 38 years'. Google AI overview calls them veteran-owned - NOT verified, not on the page.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-03"
  },
  "il-nova-painting-rockford": {
   "channel": "phone",
@@ -1440,10 +1444,12 @@
  "il-willis-electric-eu8wtz": {
   "channel": "unknown",
   "fb": "",
-  "note": "",
-  "photos": "generated",
+  "note": " | ENRICHED 2026-10-03 -> BRONZE. IDENTITY: Google listing 'Willis Electric Inc', 3205 E Rene Ave, Chillicothe, (309) 579-2926 = page; BBB profile (A+, accredited 7/1/2025) same address and phone, President Phyllis A Willis, owner Lou Ann Willis Harms, business started 10/25/1993 (page said 'since 1994' / '32 Years' - corrected to 1993). No-website: Google listing has no website, BBB has no Visit Website link. REAL: 3 verbatim Google review excerpts (C. S. 2020 names Don; a 2022 reviewer with only a username; Jennifer L. 2023), 4.3 from 10 - Maps limited view would not expand, quotes cut at the truncation point. PLACEHOLDER: logo (WE monogram - the only logo found is a 200x22 letterhead strip on BBB, red/green/blue wire W, too small to use), first and last work tiles. No business FB page (only mentions on community pages: Chillicothe Veterans Memorial lighting, IVC Tackle Cancer sponsor). Colours left on the pool palette.",
+  "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-03"
  },
  "jeffs-tree-service-sioux-city": {
   "channel": "phone",

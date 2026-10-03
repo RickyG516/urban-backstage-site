@@ -215,3 +215,31 @@ reviews-only BRONZE later), Grimm Electric (4.3/9, not opened), Genteman (3.9/7,
 
 Also fixed: `ia-gbg-dubuque` (Ricky's own venture, listed in `demo/.client-sites`) made `enrich_audit.py` and
 `added_dates.py --check` fail on "no index row / no status.json entry". Client-site slugs no longer need either.
+
+---
+
+## 2026-10-03 — FB "Links" fields are hooks; Maps limited view truncates reviews
+
+Scanned ~30 BASE pages, enriched 3: Cranford Plumbing (Dunlap IL) GOLD, North Park Heating & AC (Loves Park IL) GOLD,
+Willis Electric (Chillicothe IL) BRONZE.
+
+**A business FB page's "Links" field often points at a dead domain** — Cranford → cranfordplumbinginc.com (dead),
+North Park → northparkheatingandair.net (NXDOMAIN). That is the best opening line either page has. Check it every time.
+
+**FB cover banners are a logo AND photo source.** Cranford's cover is a photo of their logo sign; North Park's is a
+marketing banner with their van and (likely) the owner cut out on it — cropped to a gallery tile, captioned without naming
+anyone. FB photo grids at /photos only give 206px thumbs; the full image is on the photo.php viewer page (689px for an
+old upload, 1011px for a cover). Relay via the google.com/robots.txt hash, one fetch per page load.
+
+**Maps "limited view" will not expand review text** ("More"/"See more" buttons do nothing). Quote up to the truncation
+point and cut with an ellipsis — never finish a sentence for the reviewer.
+
+Drops this run: ASAP Pest Control — Google listing with the matching phone and owner (Curtis) is in AUDUBON, page says
+Stuart; city gate fails, flag for a call. G.M. Sipes (4.6/8 but one real sentence of review text), Breckenkamp (3.0/2),
+Woodhouse & Lee (listing is 'Woodhouse Concrete Services', 1 review), SGR (3.7/6, Google phone is the ALT 465-4314),
+Hinz (4.1/8, lead review is a warranty complaint), Eastern Iowa Masonry (no listing), L&C (no reviews), Action Plus
+(Maps returns Practical Plumbing), Elby Smith / Garcia / B & Sons / Papa's / Cover Electric (no matching listing),
+Eash (Maps returns Highway 5 Construction), T&T (2), ACG (Nebraska ACG Construction), Michael Painting (3.5/6),
+Top Quality Roofing (3.3/7, no phone on listing). **Now have websites on Google:** Better Home Improvements (Bettendorf,
+betterhomeimprovementsllc.com) and Kevin Daniels Painting (Champaign, kevindanielspaintinganddrywall.com) — re-check
+before dialing as no-website prospects.
