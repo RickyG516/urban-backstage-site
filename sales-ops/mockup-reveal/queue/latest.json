@@ -2247,10 +2247,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534536155874",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "BRONZE 2026-10-04: 3 verbatim reviews (5.0 from 5) on the page, two name Jiri; logo + photos are labelled placeholders. granitestyledesign.com doesn't exist.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-granite-style-design-8lquwv/",
-   "ai_hook": "Already built Granite Style Design a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Ask for Jiri. OPEN WITH HIS REVIEWS: 'Jiri, one of your Google reviews says you've done 12 countertop installs for the same customer and every one came out perfect - and there's nowhere online for a new customer to see your work.' Then: 'I built you a homepage with your reviews on it. Send me a logo and a few countertop photos and it's finished.' Ask: 'Can I text you the link?'",
    "company_id": 337292108536
   },
   {
@@ -2985,10 +2985,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534514629350",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "GOLD 2026-10-04: own Sierra mountain logo + red sampled, 3 of their own pours (stamped patio w/ fireplace, fire-pit patio, driveway), 5.0 from 8 Google reviews. Their Google listing sends people to a free Google Sites page.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/ia-sierra-construction-nve595/",
-   "ai_hook": "Already built Sierra Construction a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 WEAK RECORD (flagged by QC 2026-08-25): CRM entry is a Lead Prospector import with estimated figures and NO recorded no-website verification. Qualify before claiming anything about their website.",
+   "ai_hook": "Ask for Allan Blanco (owner; Aaron Ochoa handles Spanish at 515-723-6556). OPEN WITH HIS OWN SITE: 'Allan, your Google listing sends people to a free Google Sites page - 78 great photos, but no reviews on it and it looks like a template.' Then: 'I built you a real homepage with your logo, your stamped patio with the fireplace up top, and your 5-star reviews - Alex even mentions you came back to check the cure.' Ask: 'Can I text you the link?' Don't knock the Google Site itself - he built it.",
    "company_id": 318975472371
   },
   {
@@ -3129,10 +3129,10 @@
    "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534528962297",
    "last_touched": null,
    "last_outcome": null,
-   "notes_preview": null,
+   "notes_preview": "BRONZE 2026-10-04: 2 of his own driveway photos + 3 verbatim reviews (4.8 from 12) on the page; logo is an AC placeholder. No website, no FB page found.",
    "pipeline_stage": "Prospect Identified",
    "mockup_url": "https://urbanbackstage.com/demo/il-aldos-concrete-landscaping-5j51rs/",
-   "ai_hook": "Already built Aldo's Concrete & Landscaping a free working homepage \u2014 lead with that, not a review-gap stat. \u26a0 UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+   "ai_hook": "Ask for Aldo. OPEN WITH HIS REVIEWS: 'Aldo, you've got 4.8 stars from 12 Google reviews - one says you tore out their old driveway and poured new, another says you don't cut corners - and nowhere to send people to read them.' Then: 'I built you a homepage with your driveway photos and those reviews on it. Send me your logo and a few more job photos and it's done.' Ask: 'Can I text you the link?'",
    "company_id": 337322846925
   },
   {

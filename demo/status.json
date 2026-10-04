@@ -780,10 +780,12 @@
  "ia-sierra-construction-nve595": {
   "channel": "unknown",
   "fb": "",
-  "note": "",
-  "photos": "generated",
+  "note": "ENRICHED 2026-10-04 -> GOLD. IDENTITY: Google listing 'Sierra construction' (service-area, pin in Des Moines) carries (515) 771-1130 = page phone, 5.0 from 8; its Website field links sites.google.com/view/sierraconstructionllc, whose Contact page lists Allan Blanco (515)-771-1130 (English) and Aaron Ochoa (515)-723-6556 (Espanol), Sierraconstructionaa@gmail.com. REAL: logo (the 'Sierra Construction Concrete' mountain logo from that Google Sites header, kept on its own grey chip in the nav), brand colours sampled (logo red ~#cc240c -> accent #e2533f, lightened same hue for 4.8:1 / 5.0:1 contrast; dark #141012), 3 job photos from the Google Sites work gallery (stamped patio + outdoor fireplace = hero, stamped fire-pit patio, driveway at a brick 2-car garage) - all 78 gallery shots reviewed on a contact sheet, all their own concrete, no other company visible; 3 verbatim Google reviews (Alex D., Franklin J., Erin D.). PLACEHOLDER: none. Copy fixes: page claimed masonry/brickwork + retaining walls (unverified) - replaced with stamped & colored concrete and garage/shed slabs (both shown on their own site); 'bonded' dropped (site says licensed and insured); GC-style FAQ rewritten for concrete incl. a Spanish line for Aaron. NOT A NO-WEBSITE PROSPECT IN THE STRICT SENSE: they have a free Google Sites page - that is the hook, not a disqualifier. FB: their Google Site links a facebook.com/people/Sierra-Co... profile - not opened, not verified, fb left blank.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-04"
  },
  "ia-stufflebeem-llc-k3n7qa": {
   "channel": "phone",
@@ -944,10 +946,12 @@
  "il-aldos-concrete-landscaping-5j51rs": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-04 -> BRONZE. IDENTITY: Google listing \"Aldo's Concrete & Landscaping\", 522 W Lincoln Ave #3404, Belvidere IL, (815) 505-8739 = page phone, 4.8 from 12, 69+ photos, no website field. REAL: 2 job photos (driveway pour = hero; walkway/driveway edge = tile, cropped to remove the customer's house number) - the listing's own header photo + its second labelled tile (Maps limited view, gallery would not open), 3 verbatim Google reviews (Sandy S., Augie Z., B. D.; two cut at Maps' 'More' with an ellipsis). PLACEHOLDER: logo (AC monogram), last work tile (texture.svg). No FB business page found. Owner first name Aldo per Sandy S.'s review. Hero h1 rewritten from the generic 'Done Right' to driveway tear-out-and-pour (Sandy's review).",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-04"
  },
  "il-all-wall-coatings-armstrong": {
   "channel": "phone",
@@ -1140,10 +1144,12 @@
  "il-granite-style-design-8lquwv": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-04 -> BRONZE. IDENTITY: Google listing 'Granite Style Design', 3111 N Rockwell St, Chicago IL 60618, (773) 704-0780 = page phone, 5.0 from 5, 'Kitchen remodeler'; BBB lists 'Granite Style Design Company' at the same address; City of Chicago home-repair licence list carries it too. granitestyledesign.com -> NXDOMAIN (checked live in Chrome 2026-10-04). REAL: 3 verbatim Google reviews (Savanna J. 2024, Erica P. 2020 - '12 countertop installs', Stephanie P. 2020), owner first name Jiri per two reviews. PLACEHOLDER: logo (GS monogram), first + last work tiles (motion.svg, texture.svg). No GBP photos, no FB business page found.",
+  "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-04"
  },
  "il-grape-escape-galena": {
   "channel": "none",

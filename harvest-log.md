@@ -243,3 +243,40 @@ Eash (Maps returns Highway 5 Construction), T&T (2), ACG (Nebraska ACG Construct
 Top Quality Roofing (3.3/7, no phone on listing). **Now have websites on Google:** Better Home Improvements (Bettendorf,
 betterhomeimprovementsllc.com) and Kevin Daniels Painting (Champaign, kevindanielspaintinganddrywall.com) — re-check
 before dialing as no-website prospects.
+
+---
+
+## 2026-10-04 — a GBP "Website" pointing at a free Google Sites page is the best photo source yet
+
+Scanned ~40 BASE pages on Maps (window hidden, Maps in limited view again), enriched 3: Sierra Construction
+(Des Moines IA) GOLD, Aldo's Concrete & Landscaping (Belvidere IL) BRONZE, Granite Style Design (Chicago IL) BRONZE.
+
+**Sierra's Google listing links sites.google.com/view/sierraconstructionllc** — a free Google Sites page with the
+owner's name and the matching phone on its Contact page (identity proof), the logo in its header, and a 78-photo
+work gallery that is entirely their own pours. Sites images are same-origin on sites.google.com, so a canvas contact
+sheet works with no CORS trouble. **sites.google.com allows only ONE automatic download per page load** (second one
+silently dropped, even after a reload). Fix that worked: stash the image URLs in `window.name`, navigate the same tab to
+`https://www.google.com/robots.txt` (same-site, so `window.name` survives), fetch them there (CORS-open) and download
+one packed canvas. A Google Sites page is a hook, not a disqualifier: no reviews on it and it reads as a template.
+
+**Customer house numbers show up in job photos.** Aldo's second driveway shot had the house number on the brick —
+cropped out rather than blurred (a blur box looked worse than the crop).
+
+**Mockup copy from the 2026-07-29 bulk batch over-claims.** Sierra's page sold masonry, brickwork and retaining walls
+and called them "bonded"; their own site says concrete only, licensed and insured. Rewritten to what their site shows.
+
+Drops / thin this run: Snuff Um Out (1 review, Google phone (262) 374-9371 ≠ page), Pro Serve (1), Landgrebe (1),
+Plato (1, listing is 'Plato Electric Shop' (319) 643-2171 ≠ page), Kenneth Janning (1), Armada (1, has a website),
+Allen House (3.0/1), Paint Productions (1, phone ≠), Hard Rock Terrazzo (1, phone ≠), Superior Wood Floors (4.0/2),
+Palace Roofing (3.0/4), Murray Custom Cabinetry (2.6/27), Duran Concrete (3.2/15), Mike Holmes (3.2/5), Budget Rooter
+(4.0/4), R.W. Cardella (4.7/3, not opened), Widick / John Sheehan / Hein / Dewco / A-1 Pest (no reviews), Sean Kollman
+(1), Primetime / A-Team / J's Paint / Jesco / Nova / Midwest Pest / Anderson / J&J Tree / Double D / Kuehl / Pauley
+(no matching listing), Lee Foundation (Maps returned Nashua NH), R.D. Primmer (Maps returned the Tampa namesake),
+Rabalais (Maps returned Live Wire Electric), P&K Termite (listing is P&K Pest, Sheldon, pkpest.com — has a website),
+Thomson Heating (4.8/26 but Google phone (920) 829-5232 ≠ page 715-330-4328, and search shows a site — check).
+**Bear Renovations (Tomahawk WI) is marked PERMANENTLY CLOSED on Google. Johnson Tree Care (Monona) now has a website
+(johnsontreecarellc.com).** Spares with clean reviews and matching phones, reviews-only BRONZE candidates for a later run:
+Masterpiece Painting & Decorating (Racine, 5.0/3 — NB the FB page under that name is a New Jersey namesake),
+Hintermeister Electric (Davenport, 5.0/3, owner Kurt), Arteaga Construction (Milwaukee, 4.6/5, commercial GC).
+Prescott Landscape (Racine, 4.4/28) passed the gate but its lead negative review describes legal action and the owner's
+public reply names the reviewer and calls him a "nut job" — left for Ricky's call.
