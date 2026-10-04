@@ -877,6 +877,14 @@
   "ready": false,
   "stage": "none"
  },
+ "ia-voss-concrete-dexter": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-04 (company 350361894640) | No-website VERIFIED 2026-10-04, search-based only, NO browser on this unattended run. Three tests: (1) BBB profile fetched live has NO 'Visit Website' element and no Additional Websites field; (2) domain-scoped WebSearch across vossconcrete.com / vossconcreteinc.com / vossconcretedexter.com returned ZERO links; (3) plain WebSearch surfaced only levelset, claimspages and BBB \u2014 no first-party domain. No Facebook page found; PHONE ONLY. Confidence HIGH. Owner Brent Voss (President), Teresa Voss (Secretary, and the listed principal + customer contact) per BBB Business Management. REVENUE PROOF: started 1/1/1993 (33 yrs), incorporated 1/23/1996 as an Iowa corporation, BBB A+ accredited since 3/26/2012, BBB file open since 2005, levelset lists 10 projects, works as a foundation sub to homebuilders. DO NOT RAISE: their one BBB review mentions the GC on that job went out of business and never paid them. CALL WARNING: 'John Voss Concrete & Excavating Inc.' of Des Moines IA is a different company.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "ia-weber-construction-electric-wadena-k5m8zp": {
   "channel": "phone",
   "fb": "",
@@ -1431,6 +1439,14 @@
   "ready": true,
   "stage": "none"
  },
+ "il-triple-d-roofing-wyoming": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/roofingtripled",
+  "note": "in HubSpot 2026-10-04 (company 350477001454) | No-website VERIFIED 2026-10-04, search-based only, NO browser on this unattended run. Three tests: (1) BBB 'Visit Website' button points at facebook.com/roofingtripled \u2014 a Facebook page, NOT a website, which per standing rule is not proof on its own, so it was checked independently; (2) domain-scoped WebSearch across tripledroofing.com / tripledroofingil.com / tripled-roofing.com / tripledconstruction.com returned ZERO links; (3) plain WebSearch on name + town + owner surfaced no first-party domain, only directories and unrelated 'Wyoming' companies in MI and CO. Confidence MEDIUM-HIGH (Facebook-as-website is the weaker signal class). Owner Mr. David L Hamilton per BBB Business Management (both principal and customer contact). REVENUE PROOF: started 3/1/2001 (25 yrs), BBB A+ accredited since 5/1/2025, 60-mile service radius across Stark, Peoria, Marshall, Knox and Bureau counties. Sole proprietorship. LICENCE NOT VERIFIED: IL roofing requires IDFPR licensing and that lookup is CAPTCHA-gated \u2014 could not be run unattended, so licence status is unknown, not confirmed. CALL WARNINGS: BBB publishes no street address (town + zip only); five unrelated 'Triple D' construction companies exist in IL, IA, WY and PA \u2014 confirm Wyoming IL and the (309) number.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
  "il-union-roofing-chenoa": {
   "channel": "phone",
   "enrich_level": "BRONZE",
@@ -1715,6 +1731,14 @@
   "channel": "phone",
   "fb": "",
   "note": "in HubSpot 2026-09-28 (company 342484270787 - PRE-EXISTING record created 2026-08-28 with a COMPLETELY EMPTY description, repaired in place this run, not duplicated; the 1 AM pool builder re-added this business as a fresh candidate the same night, so its HubSpot dedupe gave a false negative) | No-website VERIFIED 2026-09-28, search+fetch only - NO BROWSER on this unattended run. (1) BBB profile carries no 'Visit Website' element (live profile HTML fetched by the pool builder at add time, same day). (2) PLAIN WebSearch of name + city + owner surfaced only Nextdoor, D&B, Yelp, YellowPages, BuildZoom, amfibi, sheboyganlife.com, chamberofcommerce.com and all-contractors.com - no first-party domain. (3) UNSCOPED search on the bare domain string klunckmasonry.com returned ZERO links to that domain. Strongest corroboration: the published contact email is klunckmasonry@yahoo.com, which is what a business with no domain uses. Confidence HIGH. Owner Jim Klunck per BBB Business Management plus Nextdoor, Yelp and chamberofcommerce.com. REVENUE PROOF: 3.9 stars from 8 reviewers across Yelp and aggregators - real review volume; approx 2-5 staff per directories; listed on thebluebook.com as a commercial subcontractor, i.e. GCs hire them; published trade hours Mon-Fri 7:00 AM - 5:00 PM; fixed street address at 2704 S 18th St. CALL WARNINGS: UNRESOLVED FOUNDING-YEAR CONFLICT - chamberofcommerce.com says 'Since 1978', other directories say ~1991, and the BBB file was opened 1998 with no start date printed. Do NOT state a founding year or a years-in-business number. BBB profile is thin and Not Rated, so 'still trading' rests on the reviews, the Blue Book listing and the published hours, not on BBB.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-knock-out-property-washburn": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-04 (company 350465403586) | No-website VERIFIED 2026-10-04, search-based only, NO browser on this unattended run. Three tests: (1) BBB profile fetched live has NO 'Visit Website' element and lists no social links; (2) domain-scoped WebSearch across knockoutpropertyservices.com / knockoutproperty.com / knockoutpropertyserviceswi.com returned ZERO links; (3) plain WebSearch on name + owner + county surfaced no first-party domain, only unrelated same-name businesses. No Facebook page found; PHONE ONLY. Confidence HIGH. Owner Dustin B. Roney per BBB Business Management (listed as both principal and customer contact). REVENUE PROOF: started 6/6/2012 (14 yrs), incorporated as an LLC 3/21/2023, BBB A+ accredited since 2/15/2024, six service categories on one profile (painting, siding, remodeling, flooring, lawn care, home repair), BBB lists hours as open 24 hours seven days. CALL WARNINGS: five unrelated same-name businesses exist (Vernon Rockville CT, Austin TX, Loveland CO, Rigby ID, plus an Australian one) \u2014 confirm Washburn WI and the (715) number. He ran unincorporated for a decade before the 2023 LLC \u2014 do not call him a new business.",
   "photos": "generated",
   "ready": true,
   "stage": "none"

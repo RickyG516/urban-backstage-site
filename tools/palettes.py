@@ -219,6 +219,25 @@ PALETTES = [
     dict(name="slate-pacific",    dark="#0f1419", accent="#4f9bd1", off="#f1f5f8", band="blue"),
     dict(name="fern-basalt",      dark="#101513", accent="#63ab79", off="#f2f6f3", band="green"),
     dict(name="clay-ember",       dark="#16110f", accent="#c96f5e", off="#f7f4f2", band="red"),
+    # --- added 2026-10-04 (daily-spec-mockups run) ---
+    # pick_batch(3) raised "pool exhausted" at the start of this run: 93 entries
+    # but only 4 unused, spread over just TWO bands (red, green), so the
+    # distinct-band rule could not be satisfied. Ten added across four bands so
+    # the next ~3 runs are not each blocked on day one. All checked against the
+    # 217 live accents, against the existing pool, and against audit().
+    # The standing note above still holds and is now five runs old: this list
+    # burns ~1 palette per prospect. Stage 2 (LIGHT / MONO hero schemes) is the
+    # actual fix and is still not built.
+    dict(name="slate-harbour",    dark="#0e1219", accent="#598ca6", off="#f1f4f8", band="blue"),
+    dict(name="dusk-blue",        dark="#0e1219", accent="#6787ad", off="#f1f4f8", band="blue"),
+    dict(name="periwinkle-iron",  dark="#0f131a", accent="#7485b4", off="#f2f4f9", band="blue"),
+    dict(name="sea-verdigris",    dark="#0c1517", accent="#59a69c", off="#eff6f6", band="teal"),
+    dict(name="lagoon",           dark="#0c1517", accent="#59a1a6", off="#eff6f6", band="teal"),
+    dict(name="petrol-blue",      dark="#0c1517", accent="#5991a6", off="#eff6f6", band="teal"),
+    dict(name="amethyst-dusk",    dark="#131020", accent="#8e7cb6", off="#f4f3f8", band="violet"),
+    dict(name="heather",          dark="#131020", accent="#9476b2", off="#f4f3f8", band="violet"),
+    dict(name="orchid-slate",     dark="#131020", accent="#a076b2", off="#f4f3f8", band="violet"),
+    dict(name="ash-stone",        dark="#121315", accent="#878382", off="#f4f5f6", band="grey"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
