@@ -2229,10 +2229,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534527380199",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "BRONZE 2026-10-05: 3 of his own GBP job photos on the page (lift work on a historic building, storefront arches, interior brick relaid by hand); logo + reviews are placeholders. GBP has no website; 1 review only.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-gerard-tuck-pointing-0m1wfw/",
-      "ai_hook": "Already built Gerard Tuck Pointing a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+      "ai_hook": "OPEN WITH HIS PHOTOS: 'You've got 90-plus photos of your work on your Google listing - courthouse-sized buildings off a lift, brick relaid by hand - and no website to put them on.' Then: 'I built you a homepage with three of them on it. Send me your logo and I'll finish it.' Qualify the website first (GBP has none, medium confidence). Ask: 'Can I text you the link?'",
       "company_id": 337262785215
     },
     {
@@ -2463,10 +2463,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534568245955",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "BRONZE 2026-10-05: 5.0 from 3 Google reviews, 2 quoted word for word (house exterior, kitchen cabinets); logo + work photos are placeholders. GBP has no website. Reviews are 6-8 years old.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/wi-masterpiece-painting-ii7oii/",
-      "ai_hook": "Already built Masterpiece Painting & Decorating a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+      "ai_hook": "OPEN WITH THE REVIEW: 'One of your customers wrote that they never write reviews, but after you painted their house they felt they had to.' Then: 'I built you a homepage with that on it. Send me your logo and a few job photos - a house, a cabinet job - and it's done.' Owner name unknown - ask for the owner. Reviews are old; don't call them recent. Ask: 'Can I text you the link?'",
       "company_id": 337192184522
     },
     {
@@ -2859,10 +2859,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534576334533",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "BRONZE 2026-10-05: 3 furnace-install photos off his own GBP on the page; logo + reviews placeholders. One 5.0 review, 3 weeks old: a Chicago homeowner's free furnace replacement through the City Dept of Housing program, praising the crew for hand-building the ductwork.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-ii-bulls-mechanical-5cswbm/",
-      "ai_hook": "Already built II Bulls Mechanical Services a free working homepage — lead with that, not a review-gap stat. ⚠ UNVERIFIED RECORD (flagged by QC 2026-08-25): this prospect's HubSpot company record has NO description at all - no owner name, no recorded no-website check, no phone source, no revenue proof. It came from the 2026-07-29 bulk batch, which was created name+phone only and never enriched. DO NOT open with 'you don't have a website' - that claim has never been verified for this business. Qualify first: ask if they have a site, then pivot to the mockup.",
+      "ai_hook": "OPEN WITH THE REVIEW: 'A Chicago homeowner just wrote you a whole paragraph about watching your crew build her ductwork by hand - and right now that's the only place anyone can read about you.' Then: 'I put the photos from that job on a homepage for you. Send me your logo and I'll finish it.' NB the review also credits MIKK Construction - don't call the people in the photos his guys. Ask: 'Can I text you the link?'",
       "company_id": 337338047173
     },
     {

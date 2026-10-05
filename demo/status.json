@@ -1120,10 +1120,12 @@
  "il-gerard-tuck-pointing-0m1wfw": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-05 BRONZE: identity gate PASSED on Google Maps (Gerard Tuck Pointing LLC, 109 N Center St, Oneida IL, (309) 483-2843 = page phone). GBP shows 'Add website' (no website field) and a WebSearch found no first-party domain - no-website now MEDIUM confidence. 92+ photos on the listing, 1 review (5.0, chimney repair, a year old) - too thin for a reviews section. REAL: 3 own-listing GBP photos - hero = crew on a lift at a 3-story historic building (job-courthouse-lift.jpg); tiles = storefront stone arches from the lift (job-arched-facade.jpg, cropped above a smoke-shop sign), interior brick wall relaid by hand (job-brick-rebuild.jpg, cropped off a soda box). REJECTED: a Sunbelt Rentals lift shot (rental company branding) and a storefront row with other businesses' awnings. PLACEHOLDER: logo (GT monogram), reviews section. No FB page found. FAQ rewritten from concrete-pour questions to masonry. Headline: 'Old Brick, Brought Back'.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-05"
  },
  "il-gibbons-masonry-concrete-lgcnhf": {
   "channel": "phone",
@@ -1188,10 +1190,12 @@
  "il-ii-bulls-mechanical-5cswbm": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-05 BRONZE: identity gate PASSED on Google Maps (II BULLS MECHANICAL SERVICES, (312) 877-9102 = page phone; service-area listing with no street address - Chicago confirmed by its only review, a City of Chicago Dept of Housing furnace replacement). GBP shows 'Add website'; WebSearch found no first-party domain. 21 photos, 1 review (5.0, 3 weeks old, long and specific: free furnace replacement through the Chicago program, crew 'building the ductwork from the ground up' in the house) - too thin for a reviews section but the best hook on the record. REAL: 3 photos off the listing from that job - furnace install (hero), burner compartment, sheet metal cut by hand. Faces avoided on purpose: the review credits a joint crew of II Bulls AND MIKK Construction, so the people in the photos are not claimed as his. PLACEHOLDER: logo (IIB monogram), reviews section. Copy fixes: 'day or night' emergency claim and 'South Side' removed (unverified); financing FAQ replaced with the City program FAQ.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-05"
  },
  "il-ja-fritch-and-sons-peoria": {
   "channel": "phone",
@@ -1760,10 +1764,12 @@
  "wi-masterpiece-painting-ii7oii": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-05 BRONZE: identity gate PASSED on Google Maps (Masterpiece Painting & Decorating Inc, 1211 5 Mile Rd, Racine WI, (262) 639-5585 = page phone). GBP shows 'Add website'; WebSearch found no first-party domain. REAL: 5.0 from 3 Google reviews, 2 quoted verbatim (Bill C. ~2020 house exterior, owner replied; Colleen B. ~2019 cabinets in a kitchen remodel). Third review is from a business account, not quoted. Reviews are 6-8 years old - nothing recent. No photos on the listing. PLACEHOLDER: logo (MP monogram), two work tiles (motion.svg, texture.svg marked stock). NB the FB page under this name is a New Jersey namesake - not used. Owner name unknown.",
+  "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-05"
  },
  "wi-midwest-home-improvements-eau-claire": {
   "channel": "fb",

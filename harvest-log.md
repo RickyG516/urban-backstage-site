@@ -280,3 +280,32 @@ Masterpiece Painting & Decorating (Racine, 5.0/3 — NB the FB page under that n
 Hintermeister Electric (Davenport, 5.0/3, owner Kurt), Arteaga Construction (Milwaukee, 4.6/5, commercial GC).
 Prescott Landscape (Racine, 4.4/28) passed the gate but its lead negative review describes legal action and the owner's
 public reply names the reviewer and calls him a "nut job" — left for Ricky's call.
+
+---
+
+## 2026-10-05 — Maps hidden-window workaround: read the place's own `preview/place` response
+
+Ricky's Chrome window was hidden again and the gallery tiles never painted (Chrome AND the built-in pane
+both report `visibilityState: hidden`). What worked: on the place page, re-`fetch` the
+`/maps/preview/place?...` and `batchexecute` URLs already in `performance.getEntriesByType('resource')`
+and regex the `lh3.googleusercontent.com/(gps-cs-s|grass-cs)/…` URLs out of the response body. That
+payload belongs to the listing itself, so it does not carry Recents tiles. Gerard gave 5, II Bulls gave 6
+(one a byte-identical duplicate). Download from a google.com tab at `=w1600-h1200-k-no` (several downloads
+allowed), contact-sheet with PIL, look at it, then crop. Still contact-sheet every one — Gerard's own
+listing had a Sunbelt Rentals lift and two storefront rows full of other businesses' signs.
+
+Enriched 3, all BRONZE: Gerard Tuck Pointing (Oneida IL, 3 own photos), II Bulls Mechanical (Chicago,
+3 furnace-job photos), Masterpiece Painting & Decorating (Racine WI, 2 verbatim reviews 5.0/3).
+
+**A review that credits two companies makes the crew in the photos ambiguous.** II Bulls' only review
+thanks "II Bulls Mechanical Services and MIKK Construction". Faces were kept off the page and nothing
+claims the people are his crew.
+
+Drops/thin this run: Mark's Tree Care (Durango) — Maps returns ExTreem Stump Removal (Dubuque); Sawvell
+(no matching listing); Rich Weiler (Maps returns Ladick Trucking); Seward Masonry (Maps returns Seward
+Construction, Canton, 1.0/1); April Building Services (Maps returns the Dallas TX namesake); RJS
+Snowplowing (no reviews); Arteaga (4.6/5 but one-line reviews only); Hintermeister (5.0/3 but only two
+have text, 5 and 10 years old — still a weak candidate). **Mansfield Electric (Springfield IL) is marked
+PERMANENTLY CLOSED on Google.** Two BASE pages are already excluded/closed in their notes and still sit in
+the BASE count: ia-lewis-electric-sioux-city (has a live website) and il-blondell-plumbing-moline (closed
+after 120 years) — candidates for `.non-prospects`.
