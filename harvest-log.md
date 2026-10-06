@@ -309,3 +309,35 @@ have text, 5 and 10 years old — still a weak candidate). **Mansfield Electric 
 PERMANENTLY CLOSED on Google.** Two BASE pages are already excluded/closed in their notes and still sit in
 the BASE count: ia-lewis-electric-sioux-city (has a live website) and il-blondell-plumbing-moline (closed
 after 120 years) — candidates for `.non-prospects`.
+
+---
+
+## 2026-10-06 — the BASE backlog is nearly mined out; the "not opened" spares from earlier logs carried the run
+
+Started from 137 BASE. Every BASE page with a recorded `fb` had already been tried and dropped, so this run worked
+the spares earlier logs flagged as "not opened". Enriched 3, all BRONZE: Grimm Electric (Morton IL, reviews only),
+Gibbons Masonry & Concrete (Abingdon IL, 3 own FB job photos + reviews), Certified Pest Control (Oskaloosa IA,
+reviews only).
+
+**Recents contamination again, on the first image pulled.** Gibbons' only `gps-cs-s` image on its Maps page was a
+Benson's Heating & Air crew-and-truck photo — Benson's (Eldon IA) was still in the Recents rail. Caught on the
+contact sheet. Gibbons' listing has no gallery of its own.
+
+**A business FB page's own profile picture is not automatically a logo.** Gibbons' page uses a personal photo
+(a man in a cemetery) as its profile image — not used anywhere. Its photo grid also carried an ad tile and a
+BusinessRate "Best of 2025" letter (an auto-generated award mailer) — rejected.
+
+**FB relay, refined.** `window.name` does NOT survive a cross-site navigation (facebook.com → google.com); the
+`robots.txt#<encoded JSON>` hash relay does. One image per relay worked reliably; old FB uploads top out at
+451–720px in the photo.php viewer, so they went in as gallery tiles, not the hero.
+
+**A GBP phone can be the business's alternate line.** Certified Pest's Google listing shows (641) 295-0700; the
+page uses 673-8740. BBB lists 295-0700 as the alternate and Yelp has 673-8740 at the same 2361 265th St address,
+so the gate passed on address + both numbers belonging to one BBB file. Flagged for the call.
+
+Drops this run: R.W. Cardella (4.7/3, one-line reviews, owner reply disputes a reviewer), J.A. Fritch (4.2/5,
+one-line reviews), Genteman Enterprises (3.9/7 — the 5-stars are all family members named Genteman; a second
+listing links gentemanenterprises.com which is NXDOMAIN — a hook for the call), Hartwig Plumbing (no Marshalltown
+listing; Maps returns Hartwig Mechanical / Hartwig P&H in IL/WI). **Remaining BASE pages with an untried,
+matching Google listing are close to zero** — further enrichment needs prospects' own uploads (the swap-notice ask)
+rather than more scraping.

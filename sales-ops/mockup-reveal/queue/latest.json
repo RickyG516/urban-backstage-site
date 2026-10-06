@@ -1582,10 +1582,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/542394083005",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "IBEW Local 34 signatory since 1981, listed in 3 separate sections of the union contractor directory, no website in any of them.",
+      "notes_preview": "BRONZE 2026-10-06: 4.3 from 9 Google reviews, 3 quoted word for word (one names Bob - out the next day, set the job up with Ameren). Logo + 2 work tiles are placeholders. Unclaimed GBP, no website.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-grimm-electric-8fng1x/",
-      "ai_hook": "Lead with the union book: 'You are in the Local 34 directory three times - commercial, residential and signs - and about thirty of the thirty-five shops around you print a website next to their name. You print none.' Two other companies own the obvious domains: a Utah electrician has grimmelectric.com and a New York masonry supplier has grimmbldg.com. NAME CAVEAT: 'Bob Miller' is single-sourced to business aggregators plus an ICC docket - confirm who you are speaking to before using it. DO NOT MENTION: founder Milt Grimm retired in 2010 and died 24 Dec 2020 - do not ask for Milt. Also not George Grimm Electric, a different company."
+      "ai_hook": "OPEN WITH THE REVIEW: 'A customer wrote that she called numerous electricians, got no response, called you once and Bob was out the next day.' Then: 'I put that on a homepage for you. Send me your logo and a few panel or jobsite photos and it is done.' Do NOT raise the two negative reviews (\\$100 minimum charge, parts mark-up) unless he does. DO NOT MENTION founder Milt Grimm, who died Dec 2020."
     },
     {
       "contact_id": "541362697957",
@@ -1635,10 +1635,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/541222000333",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "43 yrs since 1983, husband+wife owners, 8 masonry/concrete specialties, FB only, no website.",
+      "notes_preview": "BRONZE 2026-10-06: 3 of his own job photos off his FB page (stamped patio, flagstone stamp, foundation wall rebuild) + 4.2 from 10 Google reviews, 3 quoted. Logo is the only placeholder. FB page says they're hiring.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-gibbons-masonry-concrete-lgcnhf/",
-      "ai_hook": "Lead with 1983: forty-three years in Abingdon and the only thing online is a Facebook page. Headline is 'Since 1983, the same two names on every job in Abingdon.' Tammy is co-owner - if she answers, she's a decision maker, not a gatekeeper. Don't claim anything about his licence; IL lookups are CAPTCHA-gated and were not run.",
+      "ai_hook": "OPEN WITH HIS OWN WORK: 'I took your stamped patio and that basement wall you rebuilt off your Facebook page and put them on a real homepage with your reviews - one customer says Tom was on his roof within the hour.' Ask: 'Send me your logo and I'll finish it.' Tammy co-owns; if she answers she's a decision maker. Don't claim anything about the licence (IL lookups CAPTCHA-gated) and don't lead with responsiveness - two reviews complain about callbacks.",
       "company_id": "342250578638"
     },
     {
@@ -3327,10 +3327,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/534669085380",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": null,
+      "notes_preview": "BRONZE 2026-10-06: 4.8 from 10 Google reviews, 3 quoted word for word (a Pella customer called 2 others first, Seth called back within hours). Logo + 1 tile placeholders. Google shows (641) 295-0700, page shows 673-8740 - both theirs per BBB.",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/ia-certified-pest-control-sf35ug/",
-      "ai_hook": "Already built Certified Pest Control a free working homepage \u2014 lead with that, not a review-gap stat.",
+      "ai_hook": "OPEN WITH THE REVIEW: 'A guy in Pella called two other pest companies, never heard back, called you and had Seth on the phone in a couple hours. That's on a homepage I built you.' Ask Beth for the logo and a truck photo. Confirm which number they want on the page - Google lists 295-0700, the mockup uses 673-8740.",
       "company_id": 337262803695
     },
     {

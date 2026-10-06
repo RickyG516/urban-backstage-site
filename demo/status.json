@@ -132,10 +132,12 @@
  "ia-certified-pest-control-sf35ug": {
   "channel": "phone",
   "fb": "",
-  "note": "no FB page exists",
-  "photos": "generated",
+  "note": "no FB page exists | ENRICHED 2026-10-06 BRONZE: identity gate - Google Maps 'Certified Pest Control', 2361 265th St Oskaloosa; GBP phone is (641) 295-0700, page phone (641) 673-8740. BBB lists 295-0700 as the ALTERNATE phone and Yelp lists 673-8740 at the same 265th St address - same business, owner Beth Brown, BBB A+ since 2005, started 2003. REAL: 4.8 from 10 Google reviews, 3 quoted verbatim (Tony S. ~2025 Pella, called 2 others first, in touch with Seth within hours; Faith W. ~2022 ants gone; Lynnette L. ~2024). Only sub-5 is a 3-star 'Meh'. GBP shows 'Add a photo' - no gallery; the 2026-08-04 'Atomic Pest Control' storefront is gone and nothing replaced it. No FB page. PLACEHOLDER: logo (CPC monogram), one work tile (seasonal.svg marked stock). CALL FLAG: Google shows 295-0700 - confirm which line they answer.",
+  "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-06"
  },
  "ia-chris-ihrig-lawn-snow-maquoketa": {
   "channel": "phone",
@@ -1129,11 +1131,13 @@
  },
  "il-gibbons-masonry-concrete-lgcnhf": {
   "channel": "phone",
-  "fb": "",
-  "note": "in HubSpot 2026-08-26 (company 342250578638) | no-website VERIFIED in Chrome 2026-08-26: gibbonsmasonry.com and gibbonsmasonryandconcrete.com both error pages; BBB has no Visit Website button (only a Facebook entry under Social Media - exact FB URL not captured, find before any DM) | revenue proof: 43 yrs (since 1/1/1983), BBB A+ since 2014, 0 complaints, 8 distinct trade categories | owners Thomas Gibbons + Tammy J. Gibbons (BBB) | phone from BBB profile | CAVEAT: IL SOS / IDFPR are CAPTCHA-gated, licence + corporate status NOT checked | seed = phone digits + zip 61410 (all 4 phone-seed concrete fingerprints collided with il-duran-concrete-yezui8 et al), variant 3",
-  "photos": "generated",
+  "fb": "https://www.facebook.com/gibbonsmasonry200/",
+  "note": "in HubSpot 2026-08-26 (company 342250578638) | no-website VERIFIED in Chrome 2026-08-26: gibbonsmasonry.com and gibbonsmasonryandconcrete.com both error pages; BBB has no Visit Website button (only a Facebook entry under Social Media - exact FB URL not captured, find before any DM) | revenue proof: 43 yrs (since 1/1/1983), BBB A+ since 2014, 0 complaints, 8 distinct trade categories | owners Thomas Gibbons + Tammy J. Gibbons (BBB) | phone from BBB profile | CAVEAT: IL SOS / IDFPR are CAPTCHA-gated, licence + corporate status NOT checked | seed = phone digits + zip 61410 (all 4 phone-seed concrete fingerprints collided with il-duran-concrete-yezui8 et al), variant 3 | ENRICHED 2026-10-06 BRONZE: identity gate passed twice - Google Maps 'Gibbons Masonry & Concrete', 200 N Cedar St Abingdon, (309) 462-5873; FB business page facebook.com/gibbonsmasonry200 ('Gibbons Concrete & Masonry', about text says company name is actually Gibbons Masonry & Concrete, 40 years, Tom Gibbons; 200 Cedar St Abingdon, same phone). REAL: 3 own job photos off the FB page (stamped ashlar patio around a fountain bed 604px, coloured flagstone stamp close-up 451px, basement foundation wall rebuilt in block 720x960 - worker's back only, no faces); 4.2 from 10 Google reviews, 3 quoted verbatim (Jeremy G. ~2023 'Tom was on my roof within the hour'; 'Puppy Cat' ~2022 new driveway, cited as Google reviewer; A. H. ~2022). Rejected: a selfie, a personal cemetery photo (page profile pic - not a logo), an ad tile, a BusinessRate 'Best of 2025' letter, and a Benson's Heating crew photo that Maps served from Recents. Negatives: Larry J. 1-star ~2022 (quoted June, no-show by Sept, stopped returning calls), Jilly 2-star (never called back) - responsiveness is the soft spot. FB page is HIRING (posted). PLACEHOLDER: logo (GM monogram) only. No real logo exists on FB.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-06"
  },
  "il-gm-sipes-construction-rushville": {
   "channel": "phone",
@@ -1164,10 +1168,12 @@
  "il-grimm-electric-8fng1x": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-28 (company 342484306653) | contact 542394083005 Bob Miller | no-website VERIFIED live in Chrome 2026-08-28: grimmelectric.com is an unrelated Tooele UTAH electrician (801-979-7886), grimmbldg.com is unrelated Grimm Building Materials of Troy NY est 1879, grimmelectricinc.com and grimm-electric.com dead, BBB has no website | revenue: IBEW Local 34/NECA signatory, listed in 3 separate directory sections while ~30 of ~35 neighbours print a website, in business since 1981 | owner name single-sourced to aggregators + an ICC docket - confirm on the call | IL SOS and IDFPR are CAPTCHA-gated, corporate status unverified | DO NOT MENTION founder Milt Grimm died 24 Dec 2020",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-28 (company 342484306653) | contact 542394083005 Bob Miller | no-website VERIFIED live in Chrome 2026-08-28: grimmelectric.com is an unrelated Tooele UTAH electrician (801-979-7886), grimmbldg.com is unrelated Grimm Building Materials of Troy NY est 1879, grimmelectricinc.com and grimm-electric.com dead, BBB has no website | revenue: IBEW Local 34/NECA signatory, listed in 3 separate directory sections while ~30 of ~35 neighbours print a website, in business since 1981 | owner name single-sourced to aggregators + an ICC docket - confirm on the call | IL SOS and IDFPR are CAPTCHA-gated, corporate status unverified | DO NOT MENTION founder Milt Grimm died 24 Dec 2020 | ENRICHED 2026-10-06 BRONZE: identity gate passed on Google Maps (Grimm Electric Inc, 308 S Plum Ave, Morton IL, (309) 266-7012 = page phone; listing unclaimed, 'Add website'). REAL: 4.3 from 9 Google reviews, 3 quoted verbatim (Tonya E. ~2022 - names Bob, Ameren underground line, quote truncated by Maps limited view and cut with an ellipsis; Christopher F. ~2020 used them at both his businesses; Peggy D. ~2019). Two negatives exist (Kortney S. 1-star 2020 over a $100 minimum charge with no work done; Michael S. 3-star 2019 on parts mark-up) - not quoted, know them before the call. No photos on the listing (Street View only); no FB business page found (Google search returns only personal profiles + community-group threads). PLACEHOLDER: logo (GE monogram), two work tiles (motion.svg, texture.svg marked stock).",
+  "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-06"
  },
  "il-haier-plumbing-okawville": {
   "channel": "phone",

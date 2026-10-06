@@ -110,13 +110,26 @@ footer{background:#12101a;color:#9aa3a0;text-align:center;padding:30px 24px;font
   .hero-photo{animation:none} .reveal{opacity:1;transform:none}
   .card,.gg figure,.tcard{break-inside:avoid} .hero{min-height:auto}
 }
+
+/* enrichment 2026-10-06 */
+nav.top .mark{display:inline-flex;align-items:center;gap:10px}
+#reviews{background:#fff}
+#reviews .score{display:table;margin:0 auto 34px;background:var(--dark);color:#fff;font-weight:700;border-radius:999px;padding:.38rem 1rem;font-size:.95rem}
+#reviews .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+#reviews .rcard{background:var(--off);border:1px solid rgba(0,0,0,.08);border-left:4px solid var(--accent);border-radius:8px;padding:22px 22px 18px;margin:0}
+#reviews .rcard .s{color:var(--dark);letter-spacing:.14em;font-size:.95rem}
+#reviews .rcard blockquote{margin:.6rem 0 1rem;font-size:1rem;line-height:1.6;color:var(--dark)}
+#reviews .rcard cite{font-style:normal;font-weight:700;font-size:.93rem}
+#reviews .rcard .when{display:block;font-weight:400;color:#565c63;font-size:.84rem;margin-top:2px}
+.swap-notice{max-width:820px;margin:40px auto 0;padding:1.1rem 1.4rem;border:1px dashed var(--dark);border-radius:8px;font-size:.95rem;line-height:1.6;color:var(--dark);background:rgba(0,0,0,.03)}
+@media print{#reviews .rcard{break-inside:avoid}.swap-notice{border-style:solid}}
 </style>
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark">Gibbons <em>Masonry</em></a>
+  <a href="#" class="mark"><img src="logo-placeholder.svg" data-placeholder="logo" alt="GM monogram, placeholder for the Gibbons Masonry &amp; Concrete logo" height="32" style="height:32px;width:auto;display:block"><span>Gibbons <em>Masonry</em></span></a>
   <div class="links">
-    <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
+    <a href="#services">Services</a><a href="#work">Work</a><a href="#reviews">Reviews</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+13094625873">(309) 462-5873</a>
   </div>
 </nav>
@@ -154,9 +167,19 @@ footer{background:#12101a;color:#9aa3a0;text-align:center;padding:30px 24px;font
     <span class="lab">The work</span>
     <h2 class="st">What forty-three years looks like</h2>
     <div class="gg">
-      <figure><img src="motion.svg" loading="lazy" alt="Animated sequence showing a foundation wall being laid and finished"><figcaption><strong>Set, level, then build</strong>Footing and first course decide whether the wall is right. Everything after is repetition.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Animated map of the service area around Abingdon"><figcaption><strong>Abingdon and Knox County</strong>Galesburg, Avon, London Mills and the towns around them.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Animated pattern showing brick, block and decorative concrete finishes"><figcaption><strong>Brick, block or stamp</strong>The finish is picked before the material is ordered.</figcaption></figure>
+      <figure><img src="job-stamped-patio.jpg" loading="lazy" alt="Stamped concrete patio wrapping a fountain bed beside a brick house"><figcaption><strong>Stamped patio, curved borders</strong>Ashlar-stamped slab with a brick-coloured edge around the planting beds. From your Facebook page.</figcaption></figure><figure><img src="job-stamped-closeup.jpg" loading="lazy" alt="Close-up of coloured flagstone-stamped concrete"><figcaption><strong>Flagstone stamp, coloured</strong>Decorative finish up close &mdash; the colour and joint lines are set in the pour.</figcaption></figure><figure><img src="job-block-wall.jpg" loading="lazy" alt="Basement foundation wall being rebuilt in concrete block with the soil dug back outside"><figcaption><strong>Foundation wall, rebuilt</strong>Outside dug back, house supported on posts, the old wall replaced block by block.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Animated map of the service area around Abingdon"><figcaption><strong>Abingdon and Knox County</strong>Galesburg, Avon, London Mills and the towns around them.</figcaption></figure>
     </div>
-    <p class="ask"><strong>This is where your job photos go.</strong> Send whatever photos you have — a foundation repair, a chimney, a stamped patio — and they go on this page the same week.</p>
+    <p class="ask"><strong>These three are your own jobs,</strong> off your Facebook page. Send the full-size originals and a few more &mdash; a chimney, a driveway &mdash; and the gallery grows the same week.</p>
+  </div>
+</section>
+
+<section id="reviews" data-reviews="real">
+  <div class="wrap" style="max-width:1080px">
+    <span class="lab">In your customers&rsquo; words</span>
+    <h2 class="st">What people say about Gibbons</h2>
+    <p class="ss">Word for word, from your Google profile.</p>
+    <span class="score">4.2 &#9733; from 10 Google reviews</span><div class="rgrid"><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Called and Tom was on my roof within the hour; great service!&rdquo;</blockquote><cite>Jeremy G.<span class="when">Google review, 2023</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;I got a new driveway, beautiful, they did an excellent job! Very professional.&rdquo;</blockquote><cite>Google reviewer<span class="when">Google review, 2022</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Thank you to Gibbons Masonry &amp; Concrete . I really appreciate the prompt reply and work done!&rdquo;</blockquote><cite>A. H.<span class="when">Google review, 2022</span></cite></figure></div>
+    <div class="swap-notice"><p><strong>&#10033; The reviews and the three job photos on this page are yours</strong> &mdash; the reviews word for word from your Google profile, the photos from your Facebook page. One thing is still a placeholder: the &ldquo;GM&rdquo; badge in the top corner. Send your logo file and it goes on the page, usually the same week, with the colors matched to it.</p></div>
   </div>
 </section>
 
