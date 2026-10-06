@@ -779,13 +779,13 @@
  },
  "ia-sierra-construction-nve595": {
   "channel": "unknown",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-04",
   "fb": "",
   "note": "ENRICHED 2026-10-04 -> GOLD. IDENTITY: Google listing 'Sierra construction' (service-area, pin in Des Moines) carries (515) 771-1130 = page phone, 5.0 from 8; its Website field links sites.google.com/view/sierraconstructionllc, whose Contact page lists Allan Blanco (515)-771-1130 (English) and Aaron Ochoa (515)-723-6556 (Espanol), Sierraconstructionaa@gmail.com. REAL: logo (the 'Sierra Construction Concrete' mountain logo from that Google Sites header, kept on its own grey chip in the nav), brand colours sampled (logo red ~#cc240c -> accent #e2533f, lightened same hue for 4.8:1 / 5.0:1 contrast; dark #141012), 3 job photos from the Google Sites work gallery (stamped patio + outdoor fireplace = hero, stamped fire-pit patio, driveway at a brick 2-car garage) - all 78 gallery shots reviewed on a contact sheet, all their own concrete, no other company visible; 3 verbatim Google reviews (Alex D., Franklin J., Erin D.). PLACEHOLDER: none. Copy fixes: page claimed masonry/brickwork + retaining walls (unverified) - replaced with stamped & colored concrete and garage/shed slabs (both shown on their own site); 'bonded' dropped (site says licensed and insured); GC-style FAQ rewritten for concrete incl. a Spanish line for Aaron. NOT A NO-WEBSITE PROSPECT IN THE STRICT SENSE: they have a free Google Sites page - that is the hook, not a disqualifier. FB: their Google Site links a facebook.com/people/Sierra-Co... profile - not opened, not verified, fb left blank.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "GOLD",
-  "enriched": "2026-10-04"
+  "stage": "none"
  },
  "ia-stufflebeem-llc-k3n7qa": {
   "channel": "phone",
@@ -945,13 +945,13 @@
  },
  "il-aldos-concrete-landscaping-5j51rs": {
   "channel": "unknown",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-04",
   "fb": "",
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-04 -> BRONZE. IDENTITY: Google listing \"Aldo's Concrete & Landscaping\", 522 W Lincoln Ave #3404, Belvidere IL, (815) 505-8739 = page phone, 4.8 from 12, 69+ photos, no website field. REAL: 2 job photos (driveway pour = hero; walkway/driveway edge = tile, cropped to remove the customer's house number) - the listing's own header photo + its second labelled tile (Maps limited view, gallery would not open), 3 verbatim Google reviews (Sandy S., Augie Z., B. D.; two cut at Maps' 'More' with an ellipsis). PLACEHOLDER: logo (AC monogram), last work tile (texture.svg). No FB business page found. Owner first name Aldo per Sandy S.'s review. Hero h1 rewritten from the generic 'Done Right' to driveway tear-out-and-pour (Sandy's review).",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-04"
+  "stage": "none"
  },
  "il-all-wall-coatings-armstrong": {
   "channel": "phone",
@@ -1043,13 +1043,13 @@
  },
  "il-cranford-plumbing-dunlap": {
   "channel": "phone",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-03",
   "fb": "https://www.facebook.com/cranfordplumbing",
   "note": "in HubSpot 2026-08-19 (company 341016893132, contact 537719367414) | BBB renders NO Visit Website button on an ACCREDITED profile; Additional Websites field holds only a Facebook URL | cranfordplumbinginc.com tested live in Chrome 2026-08-19 -> dead | NAMESAKE: cranfordplumbing.com IS live but is an unrelated NEW JERSEY company, 908-272-4641 | 49 yrs inc 1977, BBB A+ accredited 2015, UA Local 63, MIMCA, WBE certified, runs Cranford Trenching & Backhoe | only 3 employees on file | alt number 309-697-3484 | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'Cranford Plumbing' (329 E Lake Ave, Peoria) carries (309) 696-7353 = page phone; FB business page facebook.com/cranfordplumbing lists Dunlap IL 61525 (matches UA Local 63 contractor list, PO Box 755 Dunlap); the van photo on that FB page prints 696-7353. REAL: logo (Cranford pipe-C wordmark knocked out of the FB cover photo, white for the dark nav), brand colours sampled (logo navy ~#000830 -> dark #0b1430, accent #7f9bd6 steel blue lightened from the same hue for contrast), 1 photo (the Cranford van with logo and number, FB, 689px), 2 verbatim Google reviews (C. P. and Amy W., both ~Jan 2026, both name Michael), 4.4 from 19. PLACEHOLDER: first work tile (motion.svg). FB has only 5 photos: cover, 2 copies of the van, 2 copies of the logo sign - no job photos anywhere. NEW HOOK: their own FB page 'Links' field still points at cranfordplumbinginc.com, which is dead. Hero copy untouched.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "GOLD",
-  "enriched": "2026-10-03"
+  "stage": "none"
  },
  "il-designed-roofing-springfield": {
   "channel": "phone",
@@ -1119,13 +1119,13 @@
  },
  "il-gerard-tuck-pointing-0m1wfw": {
   "channel": "unknown",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-05",
   "fb": "",
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-05 BRONZE: identity gate PASSED on Google Maps (Gerard Tuck Pointing LLC, 109 N Center St, Oneida IL, (309) 483-2843 = page phone). GBP shows 'Add website' (no website field) and a WebSearch found no first-party domain - no-website now MEDIUM confidence. 92+ photos on the listing, 1 review (5.0, chimney repair, a year old) - too thin for a reviews section. REAL: 3 own-listing GBP photos - hero = crew on a lift at a 3-story historic building (job-courthouse-lift.jpg); tiles = storefront stone arches from the lift (job-arched-facade.jpg, cropped above a smoke-shop sign), interior brick wall relaid by hand (job-brick-rebuild.jpg, cropped off a soda box). REJECTED: a Sunbelt Rentals lift shot (rental company branding) and a storefront row with other businesses' awnings. PLACEHOLDER: logo (GT monogram), reviews section. No FB page found. FAQ rewritten from concrete-pour questions to masonry. Headline: 'Old Brick, Brought Back'.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-05"
+  "stage": "none"
  },
  "il-gibbons-masonry-concrete-lgcnhf": {
   "channel": "phone",
@@ -1145,13 +1145,13 @@
  },
  "il-granite-style-design-8lquwv": {
   "channel": "unknown",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-04",
   "fb": "",
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-04 -> BRONZE. IDENTITY: Google listing 'Granite Style Design', 3111 N Rockwell St, Chicago IL 60618, (773) 704-0780 = page phone, 5.0 from 5, 'Kitchen remodeler'; BBB lists 'Granite Style Design Company' at the same address; City of Chicago home-repair licence list carries it too. granitestyledesign.com -> NXDOMAIN (checked live in Chrome 2026-10-04). REAL: 3 verbatim Google reviews (Savanna J. 2024, Erica P. 2020 - '12 countertop installs', Stephanie P. 2020), owner first name Jiri per two reviews. PLACEHOLDER: logo (GS monogram), first + last work tiles (motion.svg, texture.svg). No GBP photos, no FB business page found.",
   "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-04"
+  "stage": "none"
  },
  "il-grape-escape-galena": {
   "channel": "none",
@@ -1189,13 +1189,13 @@
  },
  "il-ii-bulls-mechanical-5cswbm": {
   "channel": "unknown",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-05",
   "fb": "",
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-05 BRONZE: identity gate PASSED on Google Maps (II BULLS MECHANICAL SERVICES, (312) 877-9102 = page phone; service-area listing with no street address - Chicago confirmed by its only review, a City of Chicago Dept of Housing furnace replacement). GBP shows 'Add website'; WebSearch found no first-party domain. 21 photos, 1 review (5.0, 3 weeks old, long and specific: free furnace replacement through the Chicago program, crew 'building the ductwork from the ground up' in the house) - too thin for a reviews section but the best hook on the record. REAL: 3 photos off the listing from that job - furnace install (hero), burner compartment, sheet metal cut by hand. Faces avoided on purpose: the review credits a joint crew of II Bulls AND MIKK Construction, so the people in the photos are not claimed as his. PLACEHOLDER: logo (IIB monogram), reviews section. Copy fixes: 'day or night' emergency claim and 'South Side' removed (unverified); financing FAQ replaced with the City program FAQ.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-05"
+  "stage": "none"
  },
  "il-ja-fritch-and-sons-peoria": {
   "channel": "phone",
@@ -1281,13 +1281,13 @@
  },
  "il-north-park-heating-i211nr": {
   "channel": "unknown",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-03",
   "fb": "https://www.facebook.com/northparkhvacil/",
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'North Park Heating & Air Conditioning', 912 River Ln, Loves Park, (815) 654-3389 = page; FB business page facebook.com/northparkhvacil same address, its graphics print 815-654-3389. NO-WEBSITE now verified: Google listing has no website; FB 'Links' points at northparkheatingandair.net which is NXDOMAIN (checked live 2026-10-03). REAL: logo ('NORTH PARK Heating AC - Keeping it simple.', FB profile image 283px, shown on a white chip in the nav), brand colours sampled (navy + red; dark stays #111d33, accent red lightened to #f2605c for contrast, dark2 brown -> navy #0a1226), 1 photo (van + man in a navy shirt cropped off their FB cover banner - likely Ron, NOT confirmed, caption does not name him), 2 verbatim Google review excerpts (Chris S. 2024, Karen V. 2022 - Maps limited view would not expand 'More', quotes cut with an ellipsis at the truncation point, words unaltered), 4.4 from 19. Reviews name 'Ron'. PLACEHOLDER: first and last work tiles. COPY FIX: page said 'Since 1993' / 'over three decades' - unverified; replaced with FB's own claim 'over 38 years'. Google AI overview calls them veteran-owned - NOT verified, not on the page.",
   "photos": "real",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "GOLD",
-  "enriched": "2026-10-03"
+  "stage": "none"
  },
  "il-nova-painting-rockford": {
   "channel": "phone",
@@ -1469,13 +1469,13 @@
  },
  "il-willis-electric-eu8wtz": {
   "channel": "unknown",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-03",
   "fb": "",
   "note": " | ENRICHED 2026-10-03 -> BRONZE. IDENTITY: Google listing 'Willis Electric Inc', 3205 E Rene Ave, Chillicothe, (309) 579-2926 = page; BBB profile (A+, accredited 7/1/2025) same address and phone, President Phyllis A Willis, owner Lou Ann Willis Harms, business started 10/25/1993 (page said 'since 1994' / '32 Years' - corrected to 1993). No-website: Google listing has no website, BBB has no Visit Website link. REAL: 3 verbatim Google review excerpts (C. S. 2020 names Don; a 2022 reviewer with only a username; Jennifer L. 2023), 4.3 from 10 - Maps limited view would not expand, quotes cut at the truncation point. PLACEHOLDER: logo (WE monogram - the only logo found is a 200x22 letterhead strip on BBB, red/green/blue wire W, too small to use), first and last work tiles. No business FB page (only mentions on community pages: Chillicothe Veterans Memorial lighting, IVC Tackle Cancer sponsor). Colours left on the pool palette.",
   "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-03"
+  "stage": "none"
  },
  "jeffs-tree-service-sioux-city": {
   "channel": "phone",
@@ -1763,13 +1763,13 @@
  },
  "wi-masterpiece-painting-ii7oii": {
   "channel": "unknown",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-05",
   "fb": "",
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-05 BRONZE: identity gate PASSED on Google Maps (Masterpiece Painting & Decorating Inc, 1211 5 Mile Rd, Racine WI, (262) 639-5585 = page phone). GBP shows 'Add website'; WebSearch found no first-party domain. REAL: 5.0 from 3 Google reviews, 2 quoted verbatim (Bill C. ~2020 house exterior, owner replied; Colleen B. ~2019 cabinets in a kitchen remodel). Third review is from a business account, not quoted. Reviews are 6-8 years old - nothing recent. No photos on the listing. PLACEHOLDER: logo (MP monogram), two work tiles (motion.svg, texture.svg marked stock). NB the FB page under this name is a New Jersey namesake - not used. Owner name unknown.",
   "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-05"
+  "stage": "none"
  },
  "wi-midwest-home-improvements-eau-claire": {
   "channel": "fb",
@@ -1921,6 +1921,30 @@
   "channel": "phone",
   "fb": "",
   "note": "in HubSpot 2026-10-05 (company 350550591209) | No-website VERIFIED 2026-10-05, unattended run, no browser: (1) BBB profile carries no Visit Website button and no social links; (2) domain-scoped WebSearch on reliablehomeimprovementwi.com, reliablehomeimprovementllc.com and reliablehomeimprovementdepere.com returned ZERO links; (3) plain WebSearch on name + owner and on the phone number surfaced only HomeAdvisor/Angi/Houzz category pages and unrelated De Pere flooring firms. CONFIDENCE MEDIUM - generic name, and a Google Business Profile microsite could not be ruled out without a browser. Owner Brett J. Bernard (BBB). Revenue proof: BBB accredited A+, three trade lines (flooring/painting/drywall), Brown + Outagamie + Calumet counties, ~5 yrs. CALL WARNING: unrelated namesake 'Reliable Home Improvement Inc' (GuildQuality, 426 respondents) is NOT this company - do not quote its reviews. Phone source: bbb.org/us/wi/de-pere/profile/flooring-contractors/reliable-home-improvement-0694-1000073062. Generated assets only, 0 real photos.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-may-masonry-ames": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-06 (company 350991615696) | No-website VERIFIED 2026-10-06, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element -- same-session CONTROL profile Primetime Painting Inc (Iowa City IA) DID render a 'Visit Website' button -> primetimepainters.com, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on maymasonry.com, maymasonryllc.com and maymasonryames.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced only angi, downtobid, thumbtack and HomeAdvisor. CONFIDENCE HIGH -- and this is a BBB-ACCREDITED A+ business with no site of its own. Owner Gary / Gary J May (BBB, and BBB's own About copy says 'founded in 2002 by Gary May'). Revenue proof: started 1/1/2002, BBB 'Years in Business: 24', BBB Accredited since 9/23/2025 (paid), A+, LLC incorporated 2/29/2024, carries BOTH Residential and Commercial General Contractor categories plus Prefabricated Masonry Panels, published service area nine towns Ames-to-Waterloo/Des Moines. PHONE ONLY, no social link of any kind. CALL WARNING: zero reviews and zero complaints on file, no review stat to quote. The 10-05 pool row recorded him as not-accredited; the live 10-06 read shows Accredited since 9/23/2025 -- the live read is correct, but do not open on the accreditation detail.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "il-jlm-tree-service-steeleville": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/jlmtreeservice/",
+  "note": "in HubSpot 2026-10-06 (company 350984720078) | No-website VERIFIED 2026-10-06, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element, only tel: + Email Business + Write a Review -- same-session CONTROL profile Primetime Painting Inc (Iowa City IA) DID render a 'Visit Website' button -> primetimepainters.com, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on jlmtreeservice.com, jlmtreeserviceandremoval.com and jlmtree.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced only BBB category pages and out-of-state namesakes. CONFIDENCE HIGH. Owner Mr. Joshua L Moore (BBB principal contact). Revenue proof: sole prop started 12/4/2014, BBB 'Years in Business: 11', service span includes stump grinding (owned grinder). Facebook page listed on BBB as the only social link, NOT as a website. BBB prints city+ZIP only, no street address -- not guessed. CALL WARNING: BBB 'Not Rated' is an insufficient-information rating, not a bad one; zero reviews and zero complaints on file so there is NO review stat to quote. Several same-name tree services exist in other states and in central IL -- confirm Steeleville.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-ae-painting-berlin": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-06 (company 350991615697) | No-website VERIFIED 2026-10-06, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element -- same-session CONTROL profile Primetime Painting Inc (Iowa City IA) DID render a 'Visit Website' button -> primetimepainters.com, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on aepaintingllc.com, aepainting.com and aepaintingwi.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced only unrelated firms (E&A Painting WA, AA Painting New Berlin WI, Everett Painting, CertaPro Waukesha). CONFIDENCE HIGH on the website finding. Owner Alexander P. Ewert (BBB). Revenue proof: LLC started/incorporated 8/11/2022, BBB 'Years in Business: 4', BBB Accredited since 6/11/2024 (paid) and A+, carries the Commercial Painter category, published service area spans FIFTEEN WI counties from a Berlin base, and a BBB reviewer ('phil f') states he found the business ON the BBB site because of the A+ rating. PHONE ONLY, no social link. ASK ON THE CALL: 262 area code but a Berlin (Green Lake County) address roughly 100 miles north -- find out where he is actually based. CALL WARNING: only ONE BBB review exists, do not quote a review count as volume; 4 years is the thinnest revenue proof in this batch, qualify budget on the call.",
   "photos": 0,
   "ready": true,
   "stage": "none"
