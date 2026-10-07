@@ -2032,5 +2032,29 @@
   "stage": "none",
   "enrich_level": "GOLD",
   "enriched": "2026-10-08"
+ },
+ "ia-iowa-insulation-nevada": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-07 (company 351053146839) | No-website VERIFIED 2026-10-07, unattended run, no browser, method = directory signal + domain-scoped search + live fetch: (1) live BBB profile carries NO 'Visit Website' element at all -- same-session CONTROL profile C D Insulation LLC (Williamsburg IA, same BBB insulation category) DID render a 'Visit Website' button -> cdinsulationllc.com, so the absence is real and not a fetch artifact; (2) domain-scoped WebSearch on iowainsulation.com returned exactly ONE stale indexed page, http://www.iowainsulation.com/alliantenergygreen.html; (3) LIVE FETCH of that page AND of the root http://www.iowainsulation.com/ both returned HTTP 404 -- the historic site is gone and nothing serves at the root. CONFIDENCE HIGH. Owner Mr. Michael R Bradley, President (BBB principal contact); Mrs. Keeley Taylor, Office Manager also listed. Revenue proof: started 1/11/1989, BBB 'Years in Business: 37', BBB A+ with no complaints on file, listed under MECHANICAL insulation contracting (commercial pipe/duct/boiler work, not residential attics), fixed premises at 955 W K Ave. No Facebook or social link on the BBB profile -- PHONE ONLY. CALL WARNINGS: (a) BBB displays NO review count and NO star rating, so there is no review stat to quote and the count is unknown, not zero; (b) do NOT open with 'you have no website' -- iowainsulation.com was a real site that now 404s, so the honest framing is 'your site is gone', not 'you never had one'. PAGE NOT LIVE YET: this batch could not be pushed (no push credential reachable on this run) -- flip ready to true once the push lands and the URL loads.",
+  "photos": 0,
+  "ready": false,
+  "stage": "none"
+ },
+ "il-ww-construction-pocahontas": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/wwconstruction62275/",
+  "note": "in HubSpot 2026-10-07 (company 351291363035) | No-website VERIFIED 2026-10-07, unattended run, no browser, method = directory signal + open-name search: (1) live BBB profile carries NO 'Visit Website' element at all, even though it DOES carry a Facebook link -- same-session CONTROL profiles in the same categories DID render 'Visit Website' buttons (Prairie Construction & Contracting LLC Carthage IL -> prairieconstructioncontracting.com; Tad Brown Construction Bluford IL -> tadbrownconstruction.com), so the absence is real; (2) open WebSearch on business name + owner name + town surfaced NO business-owned domain, only directory aggregators (HomeAdvisor, BBB mirror hosts, D&B, levelset) and unrelated same-name firms. No candidate domain was ever surfaced, so no domain fetch was possible. CONFIDENCE MEDIUM-HIGH. FACEBOOK-AS-WEBSITE case -- the FB page is the whole web presence. Owner Wayne Weis (BBB principal contact). Revenue proof: started 6/2/1990, BBB 'Years in Business: 36', same owner same town, BBB A+ and BBB-Accredited since 1/27/2015 (paid accreditation, so not a dormant shell), two phone lines, book spans custom homes down to handyman work. CALL WARNINGS: (a) BBB displays NO review count and NO star rating -- nothing to quote; (b) he HAS a Facebook page and may regard that as his website, so pitch 'a FB page does not rank and does not convert', never 'you have nothing online'; (c) second line (618) 410-3296 is listed as 'other' -- try the primary first. PAGE NOT LIVE YET: this batch could not be pushed (no push credential reachable on this run) -- flip ready to true once the push lands and the URL loads.",
+  "photos": 0,
+  "ready": false,
+  "stage": "none"
+ },
+ "il-jc-construction-gutters-odin": {
+  "channel": "phone",
+  "fb": "https://www.facebook.com/jcconstruction5/",
+  "note": "in HubSpot 2026-10-07 (company 351323312880) | No-website VERIFIED 2026-10-07, unattended run, no browser, method = directory signal + open-name search: (1) live BBB profile carries NO 'Visit Website' element at all, though it DOES carry a Facebook link -- same-session CONTROL profiles in the same categories DID render 'Visit Website' buttons (Niemanns American Flooring Marion IL -> niemannsamericanflooring.com; Whispering Pines Custom Builders Richland Center WI -> wpcustombuilders.com), so the absence is real; (2) open WebSearch on business name + owner surname + town surfaced NO business-owned domain, only aggregators (HomeAdvisor, thebuildermarket, service-partners, BBB mirror hosts). No candidate domain was ever surfaced, so no domain fetch was possible. CONFIDENCE MEDIUM-HIGH. FACEBOOK-AS-WEBSITE case. Owner Mr. Christopher Griffith, President (BBB principal contact). Revenue proof: started 1/1/2003, BBB 'Years in Business: 23', BBB A+ and BBB-Accredited since 10/6/2011 (fifteen straight years of paid accreditation), carries a full exterior book (seamless gutter, siding, soffit/fascia, replacement windows) plus interior remodeling, and does insurance hail/storm work. BBB publishes city + ZIP only (Odin IL 62870) and NO street line -- address deliberately left blank in HubSpot rather than guessed. CALL WARNINGS: (a) BBB displays NO review count and NO star rating -- nothing to quote; (b) do NOT read back a street address, we do not have one, ask for it; (c) he has a Facebook page -- pitch 'FB does not rank', not 'you are invisible'. PAGE NOT LIVE YET: this batch could not be pushed (no push credential reachable on this run) -- flip ready to true once the push lands and the URL loads.",
+  "photos": 0,
+  "ready": false,
+  "stage": "none"
  }
 }
