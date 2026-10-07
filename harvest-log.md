@@ -341,3 +341,32 @@ listing links gentemanenterprises.com which is NXDOMAIN — a hook for the call)
 listing; Maps returns Hartwig Mechanical / Hartwig P&H in IL/WI). **Remaining BASE pages with an untried,
 matching Google listing are close to zero** — further enrichment needs prospects' own uploads (the swap-notice ask)
 rather than more scraping.
+
+---
+
+## 2026-10-07 — the built-in browser pane gets FULL Maps; BBB + a business card cleared a phone-gate drop
+
+Enriched 2, both GOLD: Perfection Painting (Des Moines IA) and Thomson Heating & Cooling (Lena WI). Stopped at two —
+every other untried route this run (FB page search on ~12 BASE names, pane Maps re-checks on 5 "no matching listing"
+drops) came back empty, namesake, or ambiguous.
+
+**Ricky's Chrome still serves Maps in limited view (window hidden), but the built-in browser pane does NOT.** In the pane
+the Reviews tab opens, "More" expands, every review loads, and review-photo tiles carry `Photo N on <reviewer>'s review`
+labels. Read reviews and photo URLs in the pane; download in Chrome from a google.com/robots.txt tab (Downloads folder).
+
+**A phone-gate drop can be cleared with a third source that ties both numbers to one business.** Perfection Painting was
+dropped 2026-09-26 (Google shows 771-8718, page 274-0326). BBB lists 274-0326 at the SAME 500 N Valley Dr #702 address with
+owner Paul Gordon, and the FB cover photo is his business card printing both numbers (office + cell). Gate passed.
+
+**A dealer-locator page counts as a phone source, not as their number.** Thomson's page phone (715) 330-4328 exists only on
+bryant.com's dealer locator; Google, FB and their email all say (920) 829-5232. Same name + Lena + 222 S Rosera St on both,
+so the gate passed — the page CTA now shows the 920 number; HubSpot/queue phone left alone for Ricky to confirm.
+
+**Customer review photos are the best photo source on a thin listing.** Perfection's own gallery was one photo; two customers
+had posted 5 interior shots with their reviews. Thomson's only real photo is a 362px review shot of a new AC unit.
+
+Drops/flags: Benson's Heating (Eldon) — FB search returns BensonsIsBetter = Tallahassee FL namesake. Tree Cutters (Council
+Bluffs) now has two websites (treecutterscb.pro, a vercel page). Big Jim's Tree Service (Canton) — FB latest post just says
+"Closed". Fox's Repair (Freeport) — FB page matches but its floor post credits "Brian's Handyman Service"; photos not used.
+Alcar Roofing — BBB 3006 Maple Dr / 385-8871 vs Google 93 Copeland / 782-1133, 3.8/13 mixed. Eash and Ridge View FB hits are
+KY/TX namesakes. Sewell Brothers — BBB has 0 reviews, still no GBP.

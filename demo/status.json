@@ -64,7 +64,7 @@
  "ia-bensons-heating-ac-eldon": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-09-19 (company 347220595422) | No-website VERIFIED 2026-09-19 by two-test method, no browser on this unattended run: (1) BBB profile fetched live - NO Visit Website button and no Additional Websites field, fully absent, strongest signal tier; independently the PHCC of Iowa member directory shows a blank website field; (2) plain WebSearch returned zero first-party domains and a domain-scoped WebSearch across bensonsheating.com / bensonsheatingandair.com / bensonsheatingac.com / bensonshvac.com returned results ONLY from bensonshvac.com, which is an unrelated Tallahassee FL company founded 1981 - a namesake, not this business. Confidence HIGH on the no-website finding. Owner Jim Benson per BBB Business Management. REVENUE PROOF IS THE WEAK POINT and is MEDIUM confidence: PHCC of Iowa contractor member (paid association) and capital-equipment service lines are solid, but BBB is Not Rated and not accredited, no review count surfaced, and the '28 years' figure is directory aggregation rather than a primary source.",
+  "note": "in HubSpot 2026-09-19 (company 347220595422) | No-website VERIFIED 2026-09-19 by two-test method, no browser on this unattended run: (1) BBB profile fetched live - NO Visit Website button and no Additional Websites field, fully absent, strongest signal tier; independently the PHCC of Iowa member directory shows a blank website field; (2) plain WebSearch returned zero first-party domains and a domain-scoped WebSearch across bensonsheating.com / bensonsheatingandair.com / bensonsheatingac.com / bensonshvac.com returned results ONLY from bensonshvac.com, which is an unrelated Tallahassee FL company founded 1981 - a namesake, not this business. Confidence HIGH on the no-website finding. Owner Jim Benson per BBB Business Management. REVENUE PROOF IS THE WEAK POINT and is MEDIUM confidence: PHCC of Iowa contractor member (paid association) and capital-equipment service lines are solid, but BBB is Not Rated and not accredited, no review count surfaced, and the '28 years' figure is directory aggregation rather than a primary source. | ENRICHMENT ATTEMPT 2026-10-07 - DROPPED: FB search 'Bensons Heating Eldon' returns facebook.com/BensonsIsBetter, which is Benson's Heating & AC of Tallahassee FL (bensonshvac.com) - a namesake, never cite it. No Eldon Google listing with reviews.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -638,10 +638,12 @@
  "ia-perfection-painting-des-moines": {
   "channel": "fb",
   "fb": "https://www.facebook.com/PerfectionPainting515/",
-  "note": "in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources | RE-VERIFIED 2026-08-25 (Chrome): perfectionpaintingllc.com does not resolve, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Perfection Painting LLC', 500 N Valley Dr #702 (matches FB address) lists (515) 771-8718, not (515) 274-0326. 4.7 from 13 Google + FB logo available - if Ricky confirms 771-8718 is theirs, this is a GOLD candidate next run. perfectionpaintingdmi.com (FB link) is dead.",
-  "photos": "generated",
+  "note": "in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources | RE-VERIFIED 2026-08-25 (Chrome): perfectionpaintingllc.com does not resolve, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Perfection Painting LLC', 500 N Valley Dr #702 (matches FB address) lists (515) 771-8718, not (515) 274-0326. 4.7 from 13 Google + FB logo available - if Ricky confirms 771-8718 is theirs, this is a GOLD candidate next run. perfectionpaintingdmi.com (FB link) is dead. | ENRICHED 2026-10-07 GOLD: identity gate PASSED - BBB profile lists Perfection Painting LLC, 500 N Valley Dr Unit 702, (515) 274-0326, owner Paul Gordon, A+, accredited since 11/11/2002, started 1985; their FB cover is Paul's business card printing BOTH 515.274.0326 and Cell 515.771.8718 (the Google/FB/Yelp number). REAL: logo (wordmark knocked out of the business card on the FB cover), 4 job photos (hero living room + bath from Iva M.'s Google review, foyer + staircase from J.L. Warren's Google review - customer-posted photos of Perfection jobs), 3 verbatim Google reviews 4.7/13. Placeholder: none. Brand colours NOT sampled - the card is black-and-white, pool palette kept. Google listing is UNCLAIMED ('Claim this business') and has no website. FB link perfectionpaintingdmi.com is dead.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-07"
  },
  "ia-pk-termite-control-yoilo8": {
   "channel": "unknown",
@@ -850,7 +852,7 @@
  "ia-tree-cutters-council-bluffs-t4x9pb": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-07 (company 338481182457) | added 2026-08-05 | no website, no Facebook page found | 5.0 across 132 reviews | BBB A+ accredited since 2017 | 16-county area IA+NE | cash/check only | phone from BBB profile",
+  "note": "in HubSpot 2026-08-07 (company 338481182457) | added 2026-08-05 | no website, no Facebook page found | 5.0 across 132 reviews | BBB A+ accredited since 2017 | 16-county area IA+NE | cash/check only | phone from BBB profile | 2026-10-07: NOW HAS WEBSITES - treecutterscb.pro and tree-cutters.vercel.app both list (712) 355-1032 (Sep 2026). Not a no-website prospect any more; re-qualify before dialing.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -998,7 +1000,7 @@
  "il-big-jims-tree-service-canton": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-09-27 (company 348859282140) | No-website VERIFIED 2026-09-27 by the three-test method, search+fetch only - NO BROWSER on this unattended run. (1) LIVE web_fetch of the full BBB profile HTML (bbb.org/us/il/canton/profile/tree-service/big-jims-tree-service-0724-90008929): no 'Visit Website' element and no Additional Websites field anywhere on the page - the absence was read off the page, not inferred from a scrape summary. (2) Domain-scoped WebSearch across bigjimstreeservicecanton.com / bigjimstree.com / bigjimstreeserviceil.com returned ZERO links. (3) Plain WebSearch of name + city + owner surfaced only BBB, a Facebook page, YellowPages and D&B. Confidence HIGH. Owner James Kem per BBB Business Management. REVENUE PROOF: BBB 'Years in Business: 27', started 1/1/1999 and started locally 1/1/1999; certified with the State of Illinois AND with Fulton County (two separate certifications); BBB file open since 6/16/2008; two working lines, (309) 668-3264 and (309) 224-1205. CALL WARNINGS: bigjimstreeservice.com is a DIFFERENT Big Jim's Tree Service in Vernal Utah - do not cite it; BBB is 'Not Rated' for insufficient information, not for complaints; a directory summary says 'since 2005' against BBB's 1999, so say 'coming up on thirty years' rather than a hard number.",
+  "note": "in HubSpot 2026-09-27 (company 348859282140) | No-website VERIFIED 2026-09-27 by the three-test method, search+fetch only - NO BROWSER on this unattended run. (1) LIVE web_fetch of the full BBB profile HTML (bbb.org/us/il/canton/profile/tree-service/big-jims-tree-service-0724-90008929): no 'Visit Website' element and no Additional Websites field anywhere on the page - the absence was read off the page, not inferred from a scrape summary. (2) Domain-scoped WebSearch across bigjimstreeservicecanton.com / bigjimstree.com / bigjimstreeserviceil.com returned ZERO links. (3) Plain WebSearch of name + city + owner surfaced only BBB, a Facebook page, YellowPages and D&B. Confidence HIGH. Owner James Kem per BBB Business Management. REVENUE PROOF: BBB 'Years in Business: 27', started 1/1/1999 and started locally 1/1/1999; certified with the State of Illinois AND with Fulton County (two separate certifications); BBB file open since 6/16/2008; two working lines, (309) 668-3264 and (309) 224-1205. CALL WARNINGS: bigjimstreeservice.com is a DIFFERENT Big Jim's Tree Service in Vernal Utah - do not cite it; BBB is 'Not Rated' for insufficient information, not for complaints; a directory summary says 'since 2005' against BBB's 1999, so say 'coming up on thirty years' rather than a hard number. | 2026-10-07: their FB page (profile.php?id=100057039807001, phone + Canton address match) has a latest post reading just 'Closed'. Confirm they are still operating before dialing.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1105,8 +1107,8 @@
  },
  "il-foxs-repair-remodeling-freeport-r9x4bd": {
   "channel": "phone",
-  "fb": "",
-  "note": "in HubSpot 2026-09-01 (company 343318705898) | contact 544351868619 | NO-WEBSITE verified live in Chrome 2026-09-01: foxsrepairandremodeling.com FAILS TO RESOLVE (Chrome error page); foxsrepair.com serves no business site. BBB profile has NO 'Visit Website' button and lists no dedicated domain. REVENUE: 12 yrs, LLC formed 8/11/2014, owner Brian Fox, 1 employee (true owner-operator). THREE positive written customer reviews on the BBB file - bathroom remodel, kitchen remodel, general handyman. BBB categories: remodeling, painting, handyman, drywall, bath/kitchen remodel. NOTE: Freeport IL is already a Fuehrer Painting location-page town, so UNC has content footprint in this market.",
+  "fb": "https://www.facebook.com/foxsrepairandremodeling",
+  "note": "in HubSpot 2026-09-01 (company 343318705898) | contact 544351868619 | NO-WEBSITE verified live in Chrome 2026-09-01: foxsrepairandremodeling.com FAILS TO RESOLVE (Chrome error page); foxsrepair.com serves no business site. BBB profile has NO 'Visit Website' button and lists no dedicated domain. REVENUE: 12 yrs, LLC formed 8/11/2014, owner Brian Fox, 1 employee (true owner-operator). THREE positive written customer reviews on the BBB file - bathroom remodel, kitchen remodel, general handyman. BBB categories: remodeling, painting, handyman, drywall, bath/kitchen remodel. NOTE: Freeport IL is already a Fuehrer Painting location-page town, so UNC has content footprint in this market. | ENRICHMENT ATTEMPT 2026-10-07 - SKIPPED: FB page facebook.com/foxsrepairandremodeling matches name + Freeport + (815) 291-8369, but 1 review, ~10 low-res photos, and the latest floor-install post credits 'Brian's Handyman Service' - photo attribution ambiguous, not used.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1400,7 +1402,7 @@
  "il-sewell-brothers-tree-bartonville": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Sewell-Brothers-Tree-Experts-100089526379977/",
-  "note": "in HubSpot 2026-08-04 | sewellbrothers.com DEAD - domain no longer resolves, BBB lists FB as their web presence | BBB A+ since 1993, est 1963 | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED, nothing harvestable: FB page identity matches (Bartonville, (309) 697-1668) but the profile image is clip-art, posts are shared articles, 2 FB reviews; Google Maps search returns Leveled Up Tree & Crane (a different company) - no Sewell GBP.",
+  "note": "in HubSpot 2026-08-04 | sewellbrothers.com DEAD - domain no longer resolves, BBB lists FB as their web presence | BBB A+ since 1993, est 1963 | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED, nothing harvestable: FB page identity matches (Bartonville, (309) 697-1668) but the profile image is clip-art, posts are shared articles, 2 FB reviews; Google Maps search returns Leveled Up Tree & Crane (a different company) - no Sewell GBP. | 2026-10-07: BBB profile has 0 reviews; Maps by address still returns no Sewell listing. Nothing new.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1586,7 +1588,7 @@
  "wi-alcar-roofing-la-crosse": {
   "channel": "fb",
   "fb": "https://www.facebook.com/profile.php?id=100063951526700",
-  "note": "in HubSpot 2026-08-04 | TWO dead domains alcarservices.com + alcarroofingandhomeimprovement.com - strong website pitch | alt phone (608) 782-1133 | BBB A+ since 1987 | RE-VERIFIED 2026-08-25 (Chrome): alcarservices.com still dead, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Alcar Roofing & Home Improvement', 93 Copeland Ave La Crosse lists (608) 782-1133, not (608) 385-8871; FB page lists no phone. 3.8 from 13.",
+  "note": "in HubSpot 2026-08-04 | TWO dead domains alcarservices.com + alcarroofingandhomeimprovement.com - strong website pitch | alt phone (608) 782-1133 | BBB A+ since 1987 | RE-VERIFIED 2026-08-25 (Chrome): alcarservices.com still dead, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Alcar Roofing & Home Improvement', 93 Copeland Ave La Crosse lists (608) 782-1133, not (608) 385-8871; FB page lists no phone. 3.8 from 13. | 2026-10-07: BBB ties (608) 385-8871 to 3006 Maple Dr; Google listing is 93 Copeland Ave (608) 782-1133, 3.8/13 mixed. Owner appears to be Allen Carder. Still not enriched.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1893,11 +1895,13 @@
  },
  "wi-thomson-heating-cooling-mtt7ps": {
   "channel": "unknown",
-  "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
-  "photos": "generated",
+  "fb": "https://www.facebook.com/profile.php?id=100057222919594",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-07 GOLD: identity gate PASSED on name + Lena + 222 S Rosera St; Google listing, FB page and their email all use (920) 829-5232, the page's old (715) 330-4328 appears only on their Bryant dealer-locator page at the same address - page CTA switched to (920) 829-5232; HubSpot/queue phone NOT changed, confirm on the call. Owners Dennis & Cindy (named in reviews + owner replies). Est. 1947 per their logo. Bryant dealer, NATE certified, geothermal/boilers/heat pumps per FB about. REAL: logo (FB cover - red/black wordmark with vintage truck, 'Serving Northeastern Wisconsin Since 1947'), brand red sampled (#e5484f on #15171a), 3 verbatim Google reviews 4.8/26, 1 customer review photo of a new AC install (362px, small). PLACEHOLDER: 2 gallery tiles (generated SVG, marked). Copy fixed: unverified financing / Mon-Sat / 'Done Right' claims removed. Their only web presence is the Bryant locator page (bryant.com) - Google listing has no website. Namesake: owner reply says 'Thompson in Green Bay' is a different company.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-07"
  },
  "wi-wisconsin-concrete-restoration-boscobel": {
   "channel": "phone",

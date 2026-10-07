@@ -112,19 +112,31 @@ footer{background:#1a1613;color:#9aa3a0;text-align:center;padding:30px 24px;font
 }
 /* ---- layout skeleton L-A ---- */
 
+
+/* enrichment 2026-10-07 */
+nav.top .mark{display:inline-flex;align-items:center;gap:10px}
+#reviews{background:var(--off);color:var(--dark)}
+#reviews .score{display:table;margin:0 auto 34px;background:var(--dark);color:#fff;font-weight:700;border-radius:999px;padding:.38rem 1rem;font-size:.95rem}
+#reviews .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}
+#reviews .rcard{background:#fff;border:1px solid rgba(0,0,0,.09);border-left:4px solid var(--accent);border-radius:8px;padding:22px 22px 18px;margin:0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+#reviews .rcard .s{color:var(--dark);letter-spacing:.14em;font-size:.95rem}
+#reviews .rcard blockquote{margin:.6rem 0 1rem;font-size:1rem;line-height:1.6;color:var(--dark)}
+#reviews .rcard cite{font-style:normal;font-weight:700;font-size:.93rem}
+#reviews .rcard .when{display:block;font-weight:400;color:#5d6663;font-size:.84rem;margin-top:2px}
+@media print{#reviews .rcard{break-inside:avoid}}
 </style>
 </head>
 <body>
 <nav class="top">
-  <a href="#" class="mark">Perfection <em>Painting</em></a>
+  <a href="#" class="mark"><img src="logo.png" data-role="logo" alt="Perfection Painting, LLC logo" height="24" style="height:24px;width:auto;max-width:62vw;display:block"></a>
   <div class="links">
-    <a href="#services">Services</a><a href="#work">Work</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
+    <a href="#services">Services</a><a href="#work">Work</a><a href="#reviews">Reviews</a><a href="#area">Service Area</a><a href="#faq">FAQ</a>
     <a class="call" href="tel:+15152740326">(515) 274-0326</a>
   </div>
 </nav>
 
 <section class="hero">
-  <img class="hero-photo" src="motion-hero.svg" alt="Animated illustration of finish being laid across a wall in even passes">
+  <img class="hero-photo" src="hero-living-room.jpg" alt="Freshly painted living room with white built-ins around a fireplace and new trim">
   <div class="hero-in">
     <span class="kick">Des Moines</span>
     <h1>Forty-one years painting Des Moines, <span>twenty-four of them accredited</span></h1>
@@ -151,14 +163,23 @@ footer{background:#1a1613;color:#9aa3a0;text-align:center;padding:30px 24px;font
   </div>
 </section>
 
+<section id="reviews" data-reviews="real">
+  <div class="wrap">
+    <span class="lab">In your customers&rsquo; words</span>
+    <h2 class="st">What Des Moines says</h2>
+    <p class="ss">Word for word, from your Google profile.</p>
+    <span class="score">4.7 &#9733; from 13 Google reviews</span><div class="rgrid"><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;We reached out to Perfection Painting to paint the full interior of our home just before we listed it for sale. We cannot thank these guys enough! They got the job done in a timely manner and their work is excellent. Our realtor, contractors, and potential buyers have given us loads of compliments on the paint job.&rdquo;</blockquote><cite>Iva M.<span class="when">Google review, 2023</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Paul responded quickly to calls and texts, gave a reasonable quote, and fit us in nearly a week ahead of the scheduled start time. &hellip; They did a fantastic job covering brown paint with pale blue. I&rsquo;m very particular but could find nothing to complain about with their work.&rdquo;</blockquote><cite>T. S.<span class="when">Google review, updated 2024 &mdash; they had you back for the basement</span></cite></figure><figure class="rcard"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;Perfection Painting. The name says it all. Call Paul for an estimate. You won&rsquo;t be sorry with their service and the finished project.&rdquo;</blockquote><cite>J. W.<span class="when">Google review, 2023</span></cite></figure></div>
+  </div>
+</section>
+
 <section id="work" class="gal">
   <div class="wrap">
     <span class="lab">The work</span>
     <h2 class="st">From the field</h2>
     <div class="gg">
-      <figure><img src="motion.svg" loading="lazy" alt="Animated painting coverage sequence"><figcaption><strong>Interior repaint</strong>Full main-floor repaint including trim and ceilings.</figcaption></figure><figure><img src="radius.svg" loading="lazy" alt="Service radius diagram"><figcaption><strong>Exterior refresh</strong>Scraped, primed and finished with the failing areas addressed first.</figcaption></figure><figure><img src="texture.svg" loading="lazy" alt="Layered finish texture pattern"><figcaption><strong>Cabinet refinish</strong>Sprayed finish on solid boxes at a fraction of replacement cost.</figcaption></figure>
+      <figure><img src="job-two-story-foyer.jpg" loading="lazy" alt="Two-storey entry foyer repainted, with crown moulding and a chandelier"><figcaption><strong>Two-storey foyer</strong>Tall walls and crown cut in clean, all the way to the top.</figcaption></figure><figure><img src="job-primary-bath.jpg" loading="lazy" alt="Primary bathroom repainted in a light neutral with white cabinetry"><figcaption><strong>Whole-house interior</strong>Painted top to bottom before the house went on the market.</figcaption></figure><figure><img src="job-staircase-trim.jpg" loading="lazy" alt="Staircase with white balusters and painted trim"><figcaption><strong>Stairs &amp; trim</strong>Balusters, risers and trim in crisp white against the walls.</figcaption></figure>
     </div>
-    <p class="ask"><strong>This is where your job photos go.</strong> Send over 6-10 shots from your last few jobs and this section fills with your actual work.</p>
+    <p class="ask"><strong>These are your jobs,</strong> Paul &mdash; photos your own customers posted with their Google reviews. Send a few of your favourites and the gallery grows.</p>
   </div>
 </section>
 
