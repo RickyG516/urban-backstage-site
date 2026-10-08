@@ -2,6 +2,15 @@ FILING DESTINATION: TECH & SYSTEMS / AI & Automation
 SOURCE: CLAUDE OUTPUT — Ricky Garner
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+> ## ✅ 2026-10-08 — `www.` GAP FIXED. Both hosts are public for mockup slugs.
+>
+> Added `www.urbanbackstage.com/demo/` + the same 8 prefixes (ia-*, il-*, wi-*, landscaping-*, tree-service-*,
+> jeffs-tree-service-sioux-city*, sanders-lawn-care-dubuque*, lfn-lawncare*) to "All Demo Mockups (Public Bypass)"
+> (b4d9271a…), policy still `Public Bypass: bypass`. Verified the same day in the logged-out built-in pane:
+> `www.` slug URLs now serve the page; `www.urbanbackstage.com/demo/` still shows the Access sign-in; no-cookie
+> fetches of /demo/, /demo/index.html, /demo/status.json, /sales-ops/, /playbook/ and / are still locked.
+> A NEW slug prefix still needs adding on BOTH hosts.
+
 > ## ⚠ 2026-10-01 — RE-VERIFIED LOGGED-OUT. BARE DOMAIN IS PUBLIC. `www.` IS NOT.
 >
 > **Tested in the Claude desktop app's built-in browser pane (its own profile, NO Cloudflare Access
