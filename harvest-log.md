@@ -370,3 +370,32 @@ Bluffs) now has two websites (treecutterscb.pro, a vercel page). Big Jim's Tree 
 "Closed". Fox's Repair (Freeport) — FB page matches but its floor post credits "Brian's Handyman Service"; photos not used.
 Alcar Roofing — BBB 3006 Maple Dr / 385-8871 vs Google 93 Copeland / 782-1133, 3.8/13 mixed. Eash and Ridge View FB hits are
 KY/TX namesakes. Sewell Brothers — BBB has 0 reviews, still no GBP.
+
+---
+
+## 2026-10-08 — fresh PRIMED pages beat the mined-out BASE list; the pane's photo viewer works when tiles won't paint
+
+The BASE backlog was exhausted per 10-06/10-07, so this run worked the newest PRIMED pages (built 10-03 to 10-06, never
+harvested). Enriched 3, all GOLD: JLM Tree Service (Steeleville IL), Kennell Electric (Washburn IL), AE Painting (Berlin WI).
+
+**A crew shirt can prove a logo.** JLM's owner gallery had a bare yellow tree mark with no name on it. A customer's
+stump-grinder photo (shot through a window screen, so not used on the page) showed a crew shirt printing JLM + the same mark
++ 618.317.1044. That confirmed the logo. Another customer photo had a different company's lettered pickup in frame and was rejected.
+
+**A Google "Website" button can open a dead site-builder page.** Kennell's links kennellelectricincorporatedil.hibuwebsites.com →
+"SITE NOT FOUND - This site is not published". That's the opening line.
+
+**HomeAdvisor reviews are quotable when Google has none.** Kennell's only Google review is from a family member. The page's 4.87/21
+came from Angi/HomeAdvisor. The HomeAdvisor profile (rated.KennellElectricInc.17733184) loads full review text in Chrome
+from a Google result click. Same address, so the identity gate held.
+
+**Gallery tiles that never paint: step the photo viewer instead.** On AE Painting the "By owner" tiles stayed grey (pane
+hidden). Clicking the first tile, then the viewer's Next button in a JS loop and reading the `!6s` photo URL out of
+`location.href` collected 18 owner photos. It's all from this listing, so there are no Recents tiles.
+
+**Mockup copy can leak the pitch onto the page.** AE's page said "with no website to its name" and an FAQ answered "worth asking
+on the call". Both were rewritten to talk to the customer. Read every page as the contractor's customer would before shipping it.
+
+Drops: **Triple D Roofing (Wyoming IL) now has a live WordPress site, tripledroofing.com** (same phone): no longer a no-website
+prospect. Eric Sebree (Lewistown): 0 reviews, Google phone (309) 547-7412 ≠ page. Voss Concrete (Dexter): 3.7/6 and the top review is a
+complaint. Jeff George Plumbing (Burlington): 3.4/22 mixed, no photos. May Masonry (Ames): no listing.
