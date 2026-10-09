@@ -1,0 +1,13 @@
+{
+  "note": "Topics run top to bottom. Statuses: todo, drafted, published. Add topics freely.",
+  "topics": [
+    {"slug": "permanent-lights-vs-seasonal-dubuque", "title": "Permanent lights vs hanging seasonal lights in Dubuque", "service_page": "/permanent-lights/", "target_keyword": "permanent lights Dubuque", "angle": "What you repeat every year with seasonal lights (ladders, tangles, takedown) vs one install. Fall timing for the holiday season. No prices.", "status": "todo"},
+    {"slug": "when-to-book-holiday-lighting-iowa", "title": "When to book holiday lighting in Iowa", "service_page": "/permanent-lights/", "target_keyword": "holiday lighting Dubuque Iowa", "angle": "Why the calendar fills up, what to decide before the estimate, what a site walk covers.", "status": "todo"},
+    {"slug": "driveway-sealing-iowa-fall-window", "title": "Driveway sealing in Iowa: how to use the fall window", "service_page": "/driveway-sealing/", "target_keyword": "driveway sealing Dubuque", "angle": "Temperature and dry time basics, what prep looks like, when to wait for spring.", "status": "todo"},
+    {"slug": "freeze-thaw-driveway-damage-dubuque", "title": "What freeze and thaw does to a Dubuque driveway", "service_page": "/driveway-sealing/", "target_keyword": "driveway cracks Iowa winter", "angle": "How water gets in, why small cracks grow, what sealing does and does not fix.", "status": "todo"},
+    {"slug": "trash-can-cleaning-worth-it", "title": "Is trash can cleaning worth paying for?", "service_page": "/trash-can-cleaning/", "target_keyword": "trash can cleaning Dubuque", "angle": "Smell, pests, summer heat, route based service. Honest about who it is for.", "status": "todo"},
+    {"slug": "epoxy-garage-floor-vs-paint", "title": "Epoxy garage floor vs garage floor paint", "service_page": "/epoxy-coating/", "target_keyword": "epoxy garage floor Dubuque", "angle": "Prep, durability, hot tire pickup, what to ask a contractor. No brand claims.", "status": "todo"},
+    {"slug": "how-to-pick-an-exterior-contractor-dubuque", "title": "How to pick an exterior contractor in Dubuque", "service_page": "/service-areas/", "target_keyword": "exterior services Dubuque", "angle": "Questions to ask, red flags, why one coordinating point of contact beats juggling five trades.", "status": "todo"},
+    {"slug": "yard-spraying-schedule-iowa-lawns", "title": "A simple yard spraying calendar for Iowa lawns", "service_page": "/yard-spraying/", "target_keyword": "lawn spraying Dubuque", "angle": "General seasonal rhythm only. No product names or rates. Note that application rules and licensing apply.", "status": "todo"}
+  ]
+}
