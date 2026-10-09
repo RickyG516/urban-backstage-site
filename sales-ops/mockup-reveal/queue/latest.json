@@ -105,10 +105,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/564054938340",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "No-website VERIFIED 2026-10-05, search-based only, NO browser on this unattended run. Three tests: (1) BBB profile carries no 'Visit Website' button and no social links; (2) domain-scoped WebSearch on three reliablehomeimprovement* variants returned ZERO links; (3) plain WebSearch on name + owner and on the phone number surfaced only aggregator category pages. Confidence MEDIUM - generic name, GBP microsite not ruled out. Owner Brett J. Bernard. BBB accredited A+. Flooring + painting + drywall across Brown, Outagamie and Calumet counties, ~5 yrs.",
+      "notes_preview": "ENRICHED 2026-10-09 BRONZE - 3 of his own kitchen photos (hero + 2 tiles) and 3 real Google reviews (5.0/8); only the logo is a placeholder. No-website VERIFIED 2026-10-05, search-based only, NO browser on this unattended run. Three tests: (1) BBB profile carries no 'Visit Website' button and no soc",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/wi-reliable-home-improvement-depere/",
-      "ai_hook": "One man doing floors, drywall and paint across three counties with nothing online but a BBB listing. Lead with 'you're the only guy on that file doing all three - that's the pitch, and you've got nowhere to make it.' CAUTION: an unrelated 'Reliable Home Improvement Inc' exists with hundreds of reviews - confirm you have Brett in De Pere before you say anything about reviews. Website finding is MEDIUM confidence, so ask rather than assert that he has no site.",
+      "ai_hook": "Brett has 8 five-star Google reviews and three finished kitchens on his Google profile, and no website to put them on - the page already carries both. Lead with Rebecca's review (new flooring throughout, 'one of the nicest people I have ever met', her mom then had him do a bathroom). The ask is just his logo file. Listing says veteran-owned - fine to acknowledge, don't lean on it. Not the GuildQuality 'Reliable Home Improvement Inc' - never quote those reviews.",
       "company_id": "350550591209"
     },
     {
@@ -285,10 +285,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/562170003141",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "No-website VERIFIED 2026-10-01, NO live browser on this unattended run, three tests: (1) domain-scoped WebSearch(allowed_domains:[deanslightbox.com]) returned ZERO links; (2) plain WebSearch on name + city + owner returned 10 results, ALL third-party (BBB, thebluebook.com, Yahoo Local, YellowPages, ",
+      "notes_preview": "ENRICHED 2026-10-09 BRONZE - 3 real Google reviews (5.0/8) on the page; logo and job photos still placeholders. No-website VERIFIED 2026-10-01, NO live browser on this unattended run, three tests: (1) domain-scoped WebSearch(allowed_domains:[deanslightbox.com]) returned ZERO links; (2) plain WebSear",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/ia-deans-light-box-waverly/",
-      "ai_hook": "Second-generation electrical shop in Waverly since 1977 and they still have no website - lead with the one thing almost no small electrician does in-house: their OWN trencher plus fiber and network cabling, so power, data and the underground run happen on one visit. Ask Jeff (not Dean - Dean is semi-retired) what share of work is commercial subcontract, because the Blue Book and Procore listings say that is real. DO NOT mention local politics; Dean ran for Waverly mayor.",
+      "ai_hook": "Eight Google reviews, every one five stars, and nowhere to show them - one says 'I found my electrician for my home', another got power restored within 2 hrs of calling. The page already carries those reviews word for word. Ask Jeff (not Dean) for a logo file and a few job photos - trencher, panel, fiber - to finish it. Do NOT mention local politics.",
       "company_id": "349845049067"
     },
     {
@@ -321,10 +321,10 @@
       "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/562168867532",
       "last_touched": null,
       "last_outcome": null,
-      "notes_preview": "No-website VERIFIED 2026-10-01, NO live browser on this unattended run. The one candidate domain, solarheatingac.com, is NOT theirs and is a rented third-party lead-gen shell, same pattern as unionroofing.com: its CTA is a toll-free (833) 687-2815 that does NOT match the verified (309) 685-5420; it ",
+      "notes_preview": "ENRICHED 2026-10-09 BRONZE - his own logo + brand red/blue, his lettered van and a condenser job photo; reviews left as a placeholder (Google is 3.0/14). No-website VERIFIED 2026-10-01, NO live browser on this unattended run. The one candidate domain, solarheatingac.com, is NOT theirs and is a rente",
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/il-solar-heating-ac-peoria/",
-      "ai_hook": "Forty-six years in Peoria, same owner, and no website - but do NOT pitch solar, 'Solar' is just the 1980 company name and getting that wrong ends the call. Lead with geothermal: Bruce installs AND services ground-source, which most shops his size will not even quote, and that is the page's whole headline. Second hook is the staffed office - a named assistant answers, which in a January no-heat market is the differentiator. DO NOT say 'your website is outdated'; solarheatingac.com is an unrelated lead-gen shell with a toll-free number.",
+      "ai_hook": "Open with this: the Website button on his Google listing opens a blank parked page (solarheatingac.com/lander), so anyone who clicks it from Maps sees nothing. The mockup already has his red-and-blue SOLAR HEATING & A/C logo and his own van with 685-5420 on the door. Do NOT pitch solar - 'Solar' is the 1980 company name. Do not raise his Google rating (3.0 from 14). Lead with geothermal and the staffed office.",
       "company_id": "349839688390"
     },
     {

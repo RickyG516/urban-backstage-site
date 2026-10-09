@@ -399,3 +399,33 @@ on the call". Both were rewritten to talk to the customer. Read every page as th
 Drops: **Triple D Roofing (Wyoming IL) now has a live WordPress site, tripledroofing.com** (same phone): no longer a no-website
 prospect. Eric Sebree (Lewistown): 0 reviews, Google phone (309) 547-7412 ≠ page. Voss Concrete (Dexter): 3.7/6 and the top review is a
 complaint. Jeff George Plumbing (Burlington): 3.4/22 mixed, no photos. May Masonry (Ames): no listing.
+
+---
+
+## 2026-10-09 — PRIMED pages: a FB cover van proves identity; a GBP Website button can open a parked lander
+
+Worked the untried PRIMED pages (BASE is mined out per 10-06/10-07). Scanned 11, enriched 3, all BRONZE: Solar Heating & A/C
+(Peoria IL — logo, brand colours, 2 own photos), Dean's Light Box (Waverly IA — 3 real reviews 5.0/8), Reliable Home Improvement
+(De Pere WI — 3 own kitchen photos + 3 real reviews 5.0/8).
+
+**A lettered van on the FB cover is an identity proof.** Solar's FB page lists no phone, but the cover photo is their own van
+printing SOLAR HEATING & A/C · 685-5420 · PEORIA, IL — same as the Google listing and the page. Cropped the van out of the cover
+(the Amana dealer box cut away) as a gallery tile.
+
+**A Google "Website" button can open a parked domain.** Solar's listing links solarheatingac.com, which now redirects to a blank
+`/lander` page. The 10-01 note called it a third-party lead-gen shell; either way it is not theirs and shows nothing. Opening line.
+
+**A 3.0 rating is not a reviews section.** Solar is 3.0/14 with harsh 1-stars. Picking the three 5-star quotes off that profile would
+misrepresent it, so the reviews stay an announced placeholder and the rating is a call warning, not a hook.
+
+**A branded pen is another company's branding.** Solar's GBP header photo is a hand writing on a clipboard with a STRUCTURE TECH pen
+(a home-inspection firm). Rejected on the contact sheet.
+
+**passiveassist carries Recents too.** Reliable's `preview/passiveassist` payload held 75 image URLs, including Solar's and Perfect
+Paradise's photos from minutes earlier. Only the three tiles labelled on Reliable's own panel (header, Inside, By owner) shipped.
+
+Drops/flags: **CRC&B Concrete (Iowa City) merged into CONCO Concrete Constructors — live site conco.pro, Casey's 319-930-8370 on it.
+No longer a no-website prospect.** **TLC Tree Service (Fort Dodge) — Google shows a 416 N 18th St listing marked PERMANENTLY CLOSED.**
+Knock Out Property (unclaimed listing, 0 reviews, 0 photos, no FB), AAA Roofing Dells (Maps returns an Adams WI namesake; Yelp phone
+586-6158 ≠ page), Boehm Electrical (Google phone 963-4803 ≠ page, 3.0/4), Perfect Paradise (1 review; only owner photo is a wrecked
+Honda CR-V), Hoddy Gates (5.0/3, one text review — weak spare), Badgerland Bat Removal (5.0/2 — below the floor).
