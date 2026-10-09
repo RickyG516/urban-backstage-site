@@ -645,7 +645,11 @@
   "ready": true,
   "stage": "none",
   "enrich_level": "GOLD",
-  "enriched": "2026-10-07"
+  "enriched": "2026-10-07",
+  "fb_dm": {
+   "staged": "2026-10-09",
+   "variant": "A"
+  }
  },
  "ia-pk-termite-control-yoilo8": {
   "channel": "unknown",
@@ -1052,7 +1056,7 @@
   "enrich_level": "GOLD",
   "enriched": "2026-10-03",
   "fb": "https://www.facebook.com/cranfordplumbing",
-  "note": "in HubSpot 2026-08-19 (company 341016893132, contact 537719367414) | BBB renders NO Visit Website button on an ACCREDITED profile; Additional Websites field holds only a Facebook URL | cranfordplumbinginc.com tested live in Chrome 2026-08-19 -> dead | NAMESAKE: cranfordplumbing.com IS live but is an unrelated NEW JERSEY company, 908-272-4641 | 49 yrs inc 1977, BBB A+ accredited 2015, UA Local 63, MIMCA, WBE certified, runs Cranford Trenching & Backhoe | only 3 employees on file | alt number 309-697-3484 | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'Cranford Plumbing' (329 E Lake Ave, Peoria) carries (309) 696-7353 = page phone; FB business page facebook.com/cranfordplumbing lists Dunlap IL 61525 (matches UA Local 63 contractor list, PO Box 755 Dunlap); the van photo on that FB page prints 696-7353. REAL: logo (Cranford pipe-C wordmark knocked out of the FB cover photo, white for the dark nav), brand colours sampled (logo navy ~#000830 -> dark #0b1430, accent #7f9bd6 steel blue lightened from the same hue for contrast), 1 photo (the Cranford van with logo and number, FB, 689px), 2 verbatim Google reviews (C. P. and Amy W., both ~Jan 2026, both name Michael), 4.4 from 19. PLACEHOLDER: first work tile (motion.svg). FB has only 5 photos: cover, 2 copies of the van, 2 copies of the logo sign - no job photos anywhere. NEW HOOK: their own FB page 'Links' field still points at cranfordplumbinginc.com, which is dead. Hero copy untouched.",
+  "note": "in HubSpot 2026-08-19 (company 341016893132, contact 537719367414) | BBB renders NO Visit Website button on an ACCREDITED profile; Additional Websites field holds only a Facebook URL | cranfordplumbinginc.com tested live in Chrome 2026-08-19 -> dead | NAMESAKE: cranfordplumbing.com IS live but is an unrelated NEW JERSEY company, 908-272-4641 | 49 yrs inc 1977, BBB A+ accredited 2015, UA Local 63, MIMCA, WBE certified, runs Cranford Trenching & Backhoe | only 3 employees on file | alt number 309-697-3484 | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'Cranford Plumbing' (329 E Lake Ave, Peoria) carries (309) 696-7353 = page phone; FB business page facebook.com/cranfordplumbing lists Dunlap IL 61525 (matches UA Local 63 contractor list, PO Box 755 Dunlap); the van photo on that FB page prints 696-7353. REAL: logo (Cranford pipe-C wordmark knocked out of the FB cover photo, white for the dark nav), brand colours sampled (logo navy ~#000830 -> dark #0b1430, accent #7f9bd6 steel blue lightened from the same hue for contrast), 1 photo (the Cranford van with logo and number, FB, 689px), 2 verbatim Google reviews (C. P. and Amy W., both ~Jan 2026, both name Michael), 4.4 from 19. PLACEHOLDER: first work tile (motion.svg). FB has only 5 photos: cover, 2 copies of the van, 2 copies of the logo sign - no job photos anywhere. NEW HOOK: their own FB page 'Links' field still points at cranfordplumbinginc.com, which is dead. Hero copy untouched. | FB-DM 2026-10-09: skipped at identity gate - FB contact info lists (309) 696-7305, page/van/Google show (309) 696-7353 (last two digits differ). Name + Dunlap match, so fb URL kept; confirm which number is current before messaging.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -1655,7 +1659,11 @@
   "note": "in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020 | ENRICHED 2026-09-28 GOLD. Identity gate: FB facebook.com/calderonServices (Calderon Services, concrete, Milwaukee WI, no phone listed, 94% recommend/15) + GBP 'Calderon Services' concrete contractor, (414) 484-4885, service-area business, 4.7 from 28, NO website field. Name + city + phone all match. Reviews name Jonathan throughout. REAL: logo (FB profile image 605px, black saw-blade badge, knocked out to white-on-transparent for the dark nav), 4 photos tied to this listing (stamped patio from RJ B.'s review -> hero; curved walkway from Juli B.'s review; capped block retaining wall from 'By owner'; backyard patio from Jen's review), 3 verbatim Google reviews. REJECTED: Guttuso striped-lawn and Cherry Tree photos (Maps Recents-rail leftovers from this run) and an unattributed 'Google Maps' driveway tile that could not be tied to the listing. Brand colours NOT sampled: logo is monochrome, pool accent kept. PLACEHOLDERS: none. Also fixed contact-form placeholder phone (563) -> (414). Snow removal on the page is from the original HubSpot research (seasonal snow removal); FB 'About' lists concrete services only.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-09",
+   "variant": "C"
+  }
  },
  "wi-davenport-flooring-eau-claire": {
   "channel": "phone",
@@ -1900,7 +1908,7 @@
  "wi-thomson-heating-cooling-mtt7ps": {
   "channel": "unknown",
   "fb": "https://www.facebook.com/profile.php?id=100057222919594",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-07 GOLD: identity gate PASSED on name + Lena + 222 S Rosera St; Google listing, FB page and their email all use (920) 829-5232, the page's old (715) 330-4328 appears only on their Bryant dealer-locator page at the same address - page CTA switched to (920) 829-5232; HubSpot/queue phone NOT changed, confirm on the call. Owners Dennis & Cindy (named in reviews + owner replies). Est. 1947 per their logo. Bryant dealer, NATE certified, geothermal/boilers/heat pumps per FB about. REAL: logo (FB cover - red/black wordmark with vintage truck, 'Serving Northeastern Wisconsin Since 1947'), brand red sampled (#e5484f on #15171a), 3 verbatim Google reviews 4.8/26, 1 customer review photo of a new AC install (362px, small). PLACEHOLDER: 2 gallery tiles (generated SVG, marked). Copy fixed: unverified financing / Mon-Sat / 'Done Right' claims removed. Their only web presence is the Bryant locator page (bryant.com) - Google listing has no website. Namesake: owner reply says 'Thompson in Green Bay' is a different company.",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-07 GOLD: identity gate PASSED on name + Lena + 222 S Rosera St; Google listing, FB page and their email all use (920) 829-5232, the page's old (715) 330-4328 appears only on their Bryant dealer-locator page at the same address - page CTA switched to (920) 829-5232; HubSpot/queue phone NOT changed, confirm on the call. Owners Dennis & Cindy (named in reviews + owner replies). Est. 1947 per their logo. Bryant dealer, NATE certified, geothermal/boilers/heat pumps per FB about. REAL: logo (FB cover - red/black wordmark with vintage truck, 'Serving Northeastern Wisconsin Since 1947'), brand red sampled (#e5484f on #15171a), 3 verbatim Google reviews 4.8/26, 1 customer review photo of a new AC install (362px, small). PLACEHOLDER: 2 gallery tiles (generated SVG, marked). Copy fixed: unverified financing / Mon-Sat / 'Done Right' claims removed. Their only web presence is the Bryant locator page (bryant.com) - Google listing has no website. Namesake: owner reply says 'Thompson in Green Bay' is a different company. | FB-DM 2026-10-09: FB page (profile.php?id=100057222919594, Thomson Heating and Cooling, (920) 829-5232) has NO Message button - Follow/Search only. Not messageable on FB; phone/email lanes only.",
   "photos": "real",
   "ready": true,
   "stage": "none",
@@ -1959,7 +1967,11 @@
   "ready": true,
   "stage": "none",
   "enrich_level": "GOLD",
-  "enriched": "2026-10-08"
+  "enriched": "2026-10-08",
+  "fb_dm": {
+   "staged": "2026-10-09",
+   "variant": "B"
+  }
  },
  "wi-ae-painting-berlin": {
   "channel": "phone",
