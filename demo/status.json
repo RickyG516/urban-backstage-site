@@ -648,7 +648,8 @@
   "enriched": "2026-10-07",
   "fb_dm": {
    "staged": "2026-10-09",
-   "variant": "A"
+   "variant": "A",
+   "sent": "2026-10-09"
   }
  },
  "ia-pk-termite-control-yoilo8": {
@@ -1662,7 +1663,8 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-09",
-   "variant": "C"
+   "variant": "C",
+   "sent": "2026-10-09"
   }
  },
  "wi-davenport-flooring-eau-claire": {
@@ -1970,7 +1972,8 @@
   "enriched": "2026-10-08",
   "fb_dm": {
    "staged": "2026-10-09",
-   "variant": "B"
+   "variant": "B",
+   "sent": "2026-10-09"
   }
  },
  "wi-ae-painting-berlin": {
