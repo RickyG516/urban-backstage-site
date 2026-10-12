@@ -592,10 +592,13 @@
   "enrich_level": "GOLD",
   "enriched": "2026-09-22",
   "fb": "https://www.facebook.com/MullerPlumbingHeating/",
-  "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04. | ENRICHED 2026-09-22 (GOLD): real logo pulled from facebook.com/MullerPlumbingHeating cover banner and used in nav; 2 real job photos harvested from Google Business Profile (hero = storefront exterior w/ Muller Plumbing and Heating awning sign, gallery tile = rough-in plumbing in a framed wall, Feb 2020) -- both photo-level identity-checked, no third-party branding present; 3 verbatim Google reviews (Chuck D., Michael C., Ed F.) pulled from the confirmed GBP listing at 97 Commercial Dr (4.3 avg / 32 reviews); accent recolored to sampled brand red #d75855 (lightened off logo red #c6322e for contrast) with brand-colors:sampled marker. No placeholders left on the page.",
+  "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04. | ENRICHED 2026-09-22 (GOLD): real logo pulled from facebook.com/MullerPlumbingHeating cover banner and used in nav; 2 real job photos harvested from Google Business Profile (hero = storefront exterior w/ Muller Plumbing and Heating awning sign, gallery tile = rough-in plumbing in a framed wall, Feb 2020) -- both photo-level identity-checked, no third-party branding present; 3 verbatim Google reviews (Chuck D., Michael C., Ed F.) pulled from the confirmed GBP listing at 97 Commercial Dr (4.3 avg / 32 reviews); accent recolored to sampled brand red #d75855 (lightened off logo red #c6322e for contrast) with brand-colors:sampled marker. No placeholders left on the page. | FB-DM 2026-10-12: Messenger inbox already shows a thread with Muller Plumbing & Heating (Ricky's own message 'Hey, Ricky here. I build websit...', ~1w old) sent outside this sequence. Excluded from automated first touches; reply handling stays manual.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "status": "manual-outside-sequence"
+  }
  },
  "ia-ness-custom-flooring-k3n7wd": {
   "channel": "phone",
@@ -1302,7 +1305,11 @@
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'North Park Heating & Air Conditioning', 912 River Ln, Loves Park, (815) 654-3389 = page; FB business page facebook.com/northparkhvacil same address, its graphics print 815-654-3389. NO-WEBSITE now verified: Google listing has no website; FB 'Links' points at northparkheatingandair.net which is NXDOMAIN (checked live 2026-10-03). REAL: logo ('NORTH PARK Heating AC - Keeping it simple.', FB profile image 283px, shown on a white chip in the nav), brand colours sampled (navy + red; dark stays #111d33, accent red lightened to #f2605c for contrast, dark2 brown -> navy #0a1226), 1 photo (van + man in a navy shirt cropped off their FB cover banner - likely Ron, NOT confirmed, caption does not name him), 2 verbatim Google review excerpts (Chris S. 2024, Karen V. 2022 - Maps limited view would not expand 'More', quotes cut with an ellipsis at the truncation point, words unaltered), 4.4 from 19. Reviews name 'Ron'. PLACEHOLDER: first and last work tiles. COPY FIX: page said 'Since 1993' / 'over three decades' - unverified; replaced with FB's own claim 'over 38 years'. Google AI overview calls them veteran-owned - NOT verified, not on the page.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-12",
+   "variant": "B"
+  }
  },
  "il-nova-painting-rockford": {
   "channel": "phone",
@@ -1518,7 +1525,11 @@
   "note": "FB: title names Racine WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-28 GOLD. Identity gate passed 3 ways: FB page (Conner Cuts Lawn Care & Exterior Maintenance, Racine WI 53408, (262) 822-0496, connercuts@yahoo.com) and GBP 'Conner Cuts Lawn & Garden, LLC' (same phone, Racine area, identifies as veteran-owned, 4.8 from 73). NO-WEBSITE NOW VERIFIED: GBP website field points at connercutslawncare.com which is DNS_PROBE_FINISHED_NXDOMAIN (loaded in Chrome 2026-09-28) - a dead link on their own profile. REAL: logo (FB profile PNG, 231x116, orange/green wordmark, shown on a white pill in the nav), brand colours sampled (orange #e46e25 accent, logo green #138040), 2 photos from the GBP listing itself (header photo of a striped front lawn -> hero; 'By owner' flower bed along a cedar fence -> about panel), 3 verbatim Google reviews (Lesa, Trygve T., QC & Vonn). Reviews name Conner and Travis. REJECTED: a red spider-lift photo (Konfrst Tree Service, Maps Recents-rail leftover); all FB photos are promo graphics, no job photos. Also fixed: the page's own <header> was hidden by the badgefix rule (no nav at all) - tagged unc-nav. PLACEHOLDERS: none. Name note: GBP now reads 'Conner Cuts Lawn & Garden, LLC'; page keeps the FB/logo name.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-12",
+   "variant": "A"
+  }
  },
  "landscaping-prescott-racine": {
   "channel": "unknown",
@@ -1889,7 +1900,11 @@
   "note": "in HubSpot 2026-08-11 | no website | 4.9 stars across 43 reviews, A+ BBB | opened March 1994, Mark Strong still owner | one reviewer manages 230 apartment units | Tier A, score 77, highest in batch | ENRICHED 2026-10-01 GOLD (Chrome): identity gate PASSED twice - GBP 'Strong's Plumbing & Heating Inc', 219 W 9th St Fond du Lac, (920) 922-6210, 4.8 from 49; FB business page facebook.com/strongsplumbingllc ('Strong's Plumbing, LLC', 188 followers) lists the same phone and address. REAL: logo (FB profile image, black knocked out -> logo.png), 4 photos off the FB page (crew member in a Strong's hoodie in a water-main trench = hero; crew joining new main; commercial urinal install; two logo'd service vans, left edge cropped to remove another org's banner), 3 verbatim Google reviews (Mike G. 230 apartments, Dan R., Steven H.), brand colours sampled from the logo (red #971621 lightened to #e44350 for 4.8:1 contrast, near-black #100c0d). PLACEHOLDER: none. REJECTED: GBP's only photo (a customer's flooded basement), FB photos of a Marine Corps family event (personal), and two trench shots showing BAUMHARDT Sand & Gravel's excavator plus a Cousins Subs / Wisconsin Vision storefront (other companies). CORRECTED: removed 'A+ BBB rating' (BBB lists them Not Accredited; rating not re-verified) and the 4.9/43 figure (now 4.8/49 on Google). Hero no longer names Mark. OWNER FLAG: BBB lists Mark P Strong as owner (Inc); a 2026 Google review summary calls 'Brian' the hands-on owner, and the FB page/logo now say 'Strong's Plumbing & Heating, LLC' - possible handover. Ask for the owner, do not assume Mark. HOOK: their email domain splumbingheating.com does not load (timed out 2026-10-01). FB featured post: replaced the Fairgrounds Park Pool water heater (1M BTU PVI -> two HTP 100-gal). DO NOT RAISE: FB page shared a GoFundMe for a family tragedy.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-12",
+   "variant": "C"
+  }
  },
  "wi-switlick-and-sons-athens": {
   "channel": "phone",
