@@ -2104,5 +2104,29 @@
   "photos": 0,
   "ready": false,
   "stage": "none"
+ },
+ "il-til-masonry-des-plaines": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-12 (company 351865403069) | No-website VERIFIED 2026-10-12, search-based only - unattended scheduled run, NO BROWSER. METHOD: (1) live BBB profile HTML fetched, no 'Visit Website' element and no website URL anywhere; proved meaningful against a same-session CONTROL - the BBB profile for AAA-1 Masonry & Tuckpointing Inc DID render a 'Visit Website' button -> https://www.aaa1masonry.com, so the absence is real not a fetch artifact. (2) domain-scoped WebSearch on tilmasonry.com, tilmasonryinc.com and tilmasonrytuckpointing.com returned ZERO links. (3) BuildZoom contractor profile fetched live: states no contractor website is listed. (4) Manta: no website URL. Four independent sources agree. CONFIDENCE HIGH. OWNER: Roman Balsevic, President (BBB). REVENUE PROOF: 150 permitted projects; active City of Chicago Mason Contractor licence Class B #MC5994, BuildZoom-verified active as of Aug 2026; six-figure commercial permits incl. $600,000 endoscopy-centre remodel 135 Green Bay Rd Wilmette (2017), $126,700 lintel replacement 925 N Leavitt (2020), $120,000 restaurant interior 1335 W Wrightwood (2018), $100,000 dental office 6857 S Pulaski (2019); 21 years, start 1/1/2005; primary fax on file. PHONE ONLY, no social of any kind. CALL WARNINGS: BBB 'Not Rated' and NOT accredited - do not open on BBB. Founding-year conflict (BBB 2005 vs Manta 2010) - say 'two decades'. Manta estimates ~2 employees/$156,340 which contradicts the permit record; Manta is unclaimed - qualify crew size, quote neither figure. Two INACTIVE Chicago mason licences, one noted 'at one point cancelled' - do not raise licensing. IL SOS and IDFPR are CAPTCHA-gated and were NOT run, so corporate standing is UNVERIFIED.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-deutsch-tree-timber-nashua": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-12 (company 351865403070) | No-website VERIFIED 2026-10-12, search-based only - unattended scheduled run, NO BROWSER. METHOD: (1) domain-scoped WebSearch on deutschtreeandtimber.com, deutschtree.com, deutschtreetimber.com and deutschtimber.com returned ZERO links. (2) broad name searches surfaced ONLY the two .gov registries plus unrelated out-of-state timber directories - no first-party domain, no Facebook page. (3) both .gov registries carry an email column and the Deutsch email field is BLANK. No BBB file exists. CONFIDENCE HIGH. Deliberate caveat: absence of a URL on a government registry is NOT by itself evidence of no site - sibling candidate Wilson Custom Tree of Cresco looked identical on the same two registries and HAS a live site, which is why the domain sweep is the load-bearing evidence here. OWNER: Jeremy Deutsch; registry entity string is literally 'Jeremy Deutsch dba Deutsch Tree & Timber'. Second operator Austin Deutsch. REVENUE PROOF: Iowa DNR BONDED timber buyer - requires a posted surety bond - current on the roster dated 10/6/2026 (https://www.iowadnr.gov/media/6839/download); two named operators; separately licensed on the City of Charles City tree-service list dated 6/4/2025 (https://www.cityofcharlescity.org/DocumentCenter/View/5903), i.e. works outside the home county. PHONE ONLY, no social. CALL WARNINGS: no BBB file so no rating and NO review base - do not reference reviews. A secondary number (641) 220-4644 was reported for Austin by one source but the live DNR read shows (641) 220-4721 against both operators - dial the verified one. Unincorporated sole prop, no Iowa SOS entity - do not ask about an LLC.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-greenway-pest-fredonia": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-12 (company 351845077701) | No-website VERIFIED 2026-10-12, search-based only - unattended scheduled run, NO BROWSER. METHOD: (1) live BBB profile HTML fetched, no 'Visit Website' element and no website URL anywhere; proved meaningful against a same-session CONTROL - the BBB profile for AAA-1 Masonry & Tuckpointing Inc DID render a 'Visit Website' button -> https://www.aaa1masonry.com, so the absence is real not a fetch artifact. (2) domain-scoped WebSearch on greenwaypestmanagement.com, greenwaypestmanagementservices.com and greenwaypestwi.com returned ZERO links. (3) the two obvious short domains provably belong to OTHER companies - greenwaypest.com is a Utah operator carrying a 'Spiders in Utah' page, greenwaypestservices.com is 'Green Way Pest Control'; neither mentions Fredonia, Wisconsin or Hecker. (4) MapQuest listing shows no business website. CONFIDENCE HIGH - and this is a BBB-ACCREDITED A+ business with no site of its own. OWNER: Mark A. Hecker, Owner, sole proprietorship (BBB). REVENUE PROOF: 32 years continuous operation, start 3/1/1994; BBB A+ and ACCREDITED WITHOUT A BREAK SINCE 4/5/2007 - 19 straight years of paid accreditation, a real recurring spend; carries both residential AND commercial categories. PHONE ONLY, no social. CALL WARNINGS: NAMESAKE RISK IS THE BIG ONE - at least two unrelated 'Greenway Pest' companies hold the obvious domains (Utah, plus one promoted on a toll-free 855 number); confirm Mark Hecker in Fredonia before pitching and never imply either site is his. A Yelp page exists but is robots-blocked and its review count could NOT be verified - do not quote a review stat. Live BBB hours are Mon-Fri 9:00 AM-6:00 PM, closed weekends; a secondary source claimed Saturday hours - the live read is authoritative. WI DFI corporate status NOT checked.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
  }
 }
