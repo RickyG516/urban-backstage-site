@@ -152,7 +152,7 @@
  "ia-christner-concrete-k4m9tq": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-09-07 (company 344797807346) | contact 548163258081 (Kenneth Christner, Owner) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-07: christnerconcrete.com does not resolve, browser returned an error page. BBB profile has NO 'Visit Website' button (DOM query returned empty array). Independently confirmed dead in Chrome 2026-09-05 by the prior batch. | REVENUE: 19 years - started 3/1/2007, LLC incorporated 7/26/2007. BBB Accredited since 4/30/2018 (8 consecutive paid years), rating A+. | PHONE ONLY, no Facebook page found.",
+  "note": "in HubSpot 2026-09-07 (company 344797807346) | contact 548163258081 (Kenneth Christner, Owner) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-07: christnerconcrete.com does not resolve, browser returned an error page. BBB profile has NO 'Visit Website' button (DOM query returned empty array). Independently confirmed dead in Chrome 2026-09-05 by the prior batch. | REVENUE: 19 years - started 3/1/2007, LLC incorporated 7/26/2007. BBB Accredited since 4/30/2018 (8 consecutive paid years), rating A+. | PHONE ONLY, no Facebook page found. | 2026-10-12 - enrichment: FB 'Christners Concrete and hardscape services' is a PA namesake ((724) 454-0566, 15666); FB 'Christner Concrete' (Cedar Rapids, 7 followers) has no phone or photos - cannot verify. Nothing harvested.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -286,7 +286,7 @@
  "ia-energy-management-network-vjit5t": {
   "channel": "phone",
   "fb": "",
-  "note": "page says Des Moines metro; they are in Williams, IA | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "page says Des Moines metro; they are in Williams, IA | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | 2026-10-12 - enrichment: no matching Google listing (Maps returns Energy Management Consultants, Fennimore WI).",
   "photos": "generated",
   "ready": false,
   "stage": "none"
@@ -416,7 +416,7 @@
  "ia-js-paint-powerwash-42vrxg": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | 2026-10-12 - enrichment: no matching Google listing (Maps returns J's Xterior and Jim Heskje, different phones).",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -484,7 +484,7 @@
  "ia-loomis-plumbing-west-union": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-10-03 (company 350183931579) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile has no Visit Website button. (2) Domain-scoped WebSearch across loomisplumbing.com / loomisplumbingandheating.com / loomisph.com / loomisplumbingheating.com returned ZERO links. (3) Extended WebSearch on name + city + owner surfaced only BBB, Nextdoor, BuildZoom, D&B, Birdeye, YellowPages, whodoyou, Manta, licensed.contractors and a Rheem dealer locator - no first-party domain. Confidence HIGH. OWNER: Bill (William) Loomis per BBB Business Management, corroborated on licensed.contractors. REVENUE PROOF: started 7/1/2002 (24 yrs); BBB ACCREDITED since 5/26/2008 with an A+ rating - 18 straight years of paid accreditation, which also proves the business is actively trading; D&B profile exists; 11-county NE Iowa service area off one shop; three trades under one roof (plumbing, HVAC, appliance). CALL WARNINGS: only 1 public review exists (Birdeye, 5 stars) so do NOT use a review-gap opener - lead with 24 years and the A+; ADDRESS CONFLICT, BBB/Birdeye say 211 S Vine St but licensed.contractors says 116 W Franklin St, so ask rather than assert; do not open with his military service or the Gene Perry purchase (public, but his story to tell).",
+  "note": "in HubSpot 2026-10-03 (company 350183931579) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile has no Visit Website button. (2) Domain-scoped WebSearch across loomisplumbing.com / loomisplumbingandheating.com / loomisph.com / loomisplumbingheating.com returned ZERO links. (3) Extended WebSearch on name + city + owner surfaced only BBB, Nextdoor, BuildZoom, D&B, Birdeye, YellowPages, whodoyou, Manta, licensed.contractors and a Rheem dealer locator - no first-party domain. Confidence HIGH. OWNER: Bill (William) Loomis per BBB Business Management, corroborated on licensed.contractors. REVENUE PROOF: started 7/1/2002 (24 yrs); BBB ACCREDITED since 5/26/2008 with an A+ rating - 18 straight years of paid accreditation, which also proves the business is actively trading; D&B profile exists; 11-county NE Iowa service area off one shop; three trades under one roof (plumbing, HVAC, appliance). CALL WARNINGS: only 1 public review exists (Birdeye, 5 stars) so do NOT use a review-gap opener - lead with 24 years and the A+; ADDRESS CONFLICT, BBB/Birdeye say 211 S Vine St but licensed.contractors says 116 W Franklin St, so ask rather than assert; do not open with his military service or the Gene Perry purchase (public, but his story to tell). | 2026-10-12 - enrichment spare, not built: Google listing 'Loomis Plumbing & Heating' 211 S Vine St West Union (563) 422-5869 matches but has 0 reviews and only Street View; no FB page. HOOK: the listing's Website button opens loomisplumbing.com, a hosting company's default 'UNDER CONSTRUCTION' page - a dead placeholder site, still effectively no website.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -658,7 +658,7 @@
  "ia-pk-termite-control-yoilo8": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | 2026-10-12 - enrichment: Maps returns P & K Pest Control, Sheldon IA, (712) 324-4656, pkpest.com, 3.7/3 - fails city+phone gate; if it IS the same family business it has a website. Re-qualify.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -978,7 +978,7 @@
  "il-allenhouse-xyf77w": {
   "channel": "unknown",
   "fb": "",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | 2026-10-12 - enrichment: Google 'Allen House Inc' 828 E Jackson Macomb (309) 837-1554 matches, but 3.0/1 and no photos - nothing harvestable.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1839,15 +1839,17 @@
  "wi-pleasant-view-forestry-fond-du-lac": {
   "channel": "phone",
   "fb": "https://www.facebook.com/groups/229274974225920/",
-  "note": "in HubSpot 2026-10-03 (company 350219033289) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile HTML fetched live: no Visit Website element and no Additional Websites field, proved meaningful against a same-session control (the Eric Sebree BBB profile DOES render a Visit Website button). (2) Domain-scoped WebSearch across pleasantviewforestry.com / pleasantviewforestryandlandscaping.com / pvforestry.com returned ZERO links. (3) Plain + extended WebSearch on name + city + owner surfaced only BBB, HomeAdvisor/Angi, Birdeye, Yelp, landscape.directory and home8.org - no first-party domain. Only social presence is a Facebook GROUP (not a page), facebook.com/groups/229274974225920. Confidence HIGH. OWNER: 'Jerry' - FIRST NAME ONLY, surname not establishable (BBB lists no principal; WI DFI corporate search returns no entity, consistent with a sole proprietorship). Corroborated across six HomeAdvisor reviews 2018-2023 plus one Birdeye review. REVENUE PROOF: since 1/1/2000 (26 yrs); 4.7/5 over 42 HomeAdvisor jobs and 4.6/5 over 23 Birdeye/Google reviews; runs a crew; owns chipping and flatbed haul capacity; hours 8 AM-9 PM seven days; emergency service. CALL WARNINGS: ask for 'Jerry', do not guess a surname; one 1-star HomeAdvisor review (Jun 2019) over an unfinished wet-weather job with a long public owner reply - leave it alone; founding-year conflict (HomeAdvisor 1997 vs BBB 2000) - say 'since 2000'.",
-  "photos": "generated",
+  "note": "in HubSpot 2026-10-03 (company 350219033289) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile HTML fetched live: no Visit Website element and no Additional Websites field, proved meaningful against a same-session control (the Eric Sebree BBB profile DOES render a Visit Website button). (2) Domain-scoped WebSearch across pleasantviewforestry.com / pleasantviewforestryandlandscaping.com / pvforestry.com returned ZERO links. (3) Plain + extended WebSearch on name + city + owner surfaced only BBB, HomeAdvisor/Angi, Birdeye, Yelp, landscape.directory and home8.org - no first-party domain. Only social presence is a Facebook GROUP (not a page), facebook.com/groups/229274974225920. Confidence HIGH. OWNER: 'Jerry' - FIRST NAME ONLY, surname not establishable (BBB lists no principal; WI DFI corporate search returns no entity, consistent with a sole proprietorship). Corroborated across six HomeAdvisor reviews 2018-2023 plus one Birdeye review. REVENUE PROOF: since 1/1/2000 (26 yrs); 4.7/5 over 42 HomeAdvisor jobs and 4.6/5 over 23 Birdeye/Google reviews; runs a crew; owns chipping and flatbed haul capacity; hours 8 AM-9 PM seven days; emergency service. CALL WARNINGS: ask for 'Jerry', do not guess a surname; one 1-star HomeAdvisor review (Jun 2019) over an unfinished wet-weather job with a long public owner reply - leave it alone; founding-year conflict (HomeAdvisor 1997 vs BBB 2000) - say 'since 2000'. | ENRICHED 2026-10-12 BRONZE: Google listing 'Pleasant View forestry and landscape', 806 A S Marr St Fond du Lac, (920) 375-6383 - name+city+phone match. REAL: 3 own GBP photos (header tree-trim job = hero; Garden landscape bed; By-owner bucket-lift takedown, cropped to cut a rental yard's name off the lift mast) + 3 verbatim Google reviews (Tom M. 2023, Becky S. 2025, Diane K. 2025), Google 4.7/19. One candidate image in the DOM was a byte-identical Gibbons Masonry photo left over from Maps Recents - rejected. PLACEHOLDER: logo (initials badge) - the only social presence is a FB GROUP, no logo exists. Colours stay pool.",
+  "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-12"
  },
  "wi-poss-painting-muskego": {
   "channel": "phone",
   "fb": false,
-  "note": "in HubSpot 2026-08-19 (company 340950972110, contact 537700657870) | BBB renders NO Visit Website button | posspainting.com tested live in Chrome 2026-08-19 -> REDIRECTS TO /lander AND SERVES A PARKED-DOMAIN PAGE with ad tiles - he owns the domain and it is parked | founded 1954, 72 years, LLC inc 2005 | two Muskego locations | no review volume anywhere - do not assume how busy they are | no-website RE-VERIFIED 2026-08-21 in Chrome: posspainting.com redirects to /lander = PARKED DOMAIN (strong hook)",
+  "note": "in HubSpot 2026-08-19 (company 340950972110, contact 537700657870) | BBB renders NO Visit Website button | posspainting.com tested live in Chrome 2026-08-19 -> REDIRECTS TO /lander AND SERVES A PARKED-DOMAIN PAGE with ad tiles - he owns the domain and it is parked | founded 1954, 72 years, LLC inc 2005 | two Muskego locations | no review volume anywhere - do not assume how busy they are | no-website RE-VERIFIED 2026-08-21 in Chrome: posspainting.com redirects to /lander = PARKED DOMAIN (strong hook) | 2026-10-12 - enrichment: Google shows 'Poss Painting Co' Lakeview Dr (414) 425-5760, 0 reviews; a second listing 'Poss Painting Contractors, Llc.' S82w12877 Acker Dr is marked Permanently closed. Nothing harvestable.",
   "photos": 0,
   "ready": true,
   "stage": "none"

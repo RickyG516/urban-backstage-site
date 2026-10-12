@@ -429,3 +429,30 @@ No longer a no-website prospect.** **TLC Tree Service (Fort Dodge) — Google sh
 Knock Out Property (unclaimed listing, 0 reviews, 0 photos, no FB), AAA Roofing Dells (Maps returns an Adams WI namesake; Yelp phone
 586-6158 ≠ page), Boehm Electrical (Google phone 963-4803 ≠ page, 3.0/4), Perfect Paradise (1 review; only owner photo is a wrecked
 Honda CR-V), Hoddy Gates (5.0/3, one text review — weak spare), Badgerland Bat Removal (5.0/2 — below the floor).
+
+---
+
+## 2026-10-12 — Maps Recents survive across SESSIONS in the pane profile; md5 against old harvest files caught one
+
+Enriched 1, BRONZE: Pleasant View Forestry & Landscaping (Fond du Lac WI) — 3 own GBP photos (header tree-trim job =
+hero, Garden landscape bed, By-owner bucket-lift takedown) + 3 verbatim Google reviews, 4.7/19. Logo stays a marked
+placeholder: the only social presence is a FB group.
+
+**The built-in pane's Recents rail carries places from earlier days' runs, not just this session.** Of four `gps-cs-s`
+URLs scraped off Pleasant View's panel, one had no aria-label tying it to the listing. Downloaded, it was byte-identical
+(md5) to `unc-harvest-gibbons-1.jpg` from 2026-10-06. Only ship photos whose DOM element carries this listing's own
+label (`Photo of <name>`, `All`, `Garden`, `By owner`), and md5 new downloads against anything left in Downloads.
+
+**A rental lift is another company's name in frame.** The By-owner takedown photo showed a rental yard's lettering on the
+boom mast; cropped it out (bucket and trees kept). Same rule as the STRUCTURE TECH pen.
+
+**A GBP Website button can open a host's default page.** Loomis Plumbing & Heating (West Union) links loomisplumbing.com,
+which serves a stock "UNDER CONSTRUCTION — replace your index.htm" page. Still effectively no website; strong opener.
+0 reviews and no photos, so not built.
+
+Drops this run (pane, full Maps): J's Paint & Powerwash, Energy Management Network (no matching listing); P&K Termite
+(Maps returns P & K Pest Control, Sheldon, different phone, has pkpest.com); Allenhouse (matches, 3.0/1, no photos);
+Christner (FB hits are a PA namesake and an empty 7-follower page). Pane re-checks of the 10-02 limited-view "no matching
+listing" drops — Davenport Flooring, Don's Concrete, Niklasen, Stufflebeem, Weber, YM, Breon, Klunck, Redmond, KVI — all
+still return other businesses. Poss Painting: two listings, 0 reviews, one permanently closed. **BASE is mined out on
+Google; the remaining path is the swap-notice ask (prospects sending their own logo/photos).**
