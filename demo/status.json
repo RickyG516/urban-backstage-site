@@ -49,7 +49,13 @@
   "note": "in HubSpot 2026-09-17 (company 347150718658) | contact 553878168278 (Bart Pals, Owner) | NO-WEBSITE FINDING: verified 2026-09-17 by THREE non-browser methods (no browser available on this scheduled run - Chrome extension not connected, in-app browser pane requires per-site approval): (1) BBB profile fetched live this session renders NO 'Visit Website' button and carries no website field at all; (2) domain-scoped WebSearch on bartpalsconstruction.com, bartpals.com and bartpalsconstructionllc.com each returned ZERO links; (3) full-name open search surfaces only BBB, Facebook, BuildZoom, FederalPay and Buzzfile - third-party directories only, no owned domain. Confidence HIGH. NOT browser-verified - method is directory absence + search-index absence. | REVENUE: 47 years (started 1/1/1979, LLC incorporated 5/5/2006), BBB Accredited since 12/22/2014 with an A+ rating, SBA PPP loan $17,486.00 Feb 2021, two published phone lines, listed under both Insulation Contractors and General Contractor. 146 Brook Ter, Mason City IA 50401. | CALL WARNING: public results show contractor licence #C106088 expired 03-17-2025 and still expired 11-17-2025 - unverified at source, DO NOT raise it. | Facebook page exists: facebook.com/p/Bart-Pals-Construction-Insulation-61556672190016/ | ENRICHMENT ATTEMPT 2026-09-24 - DROPPED at identity gate: FB page 'Bart Pals Construction & Insulation' has a real logo but lists (641) 420-4220 and 410 N. Monroe Ave, Mason City - BBB (live fetch) has (641) 430-2916 / alt (641) 424-3709 at 146 Brook Ter. Phone and address both disagree; possibly a newer operation under the name. Ask on the call before using anything from that page. | ENRICHMENT ATTEMPT 2026-09-29 - DROPPED at identity gate: FB page (410 N Monroe Ave) lists (641) 420-4220, not (641) 430-2916. GBP 'Pals Construction' same address has no phone, no photos, 2 reviews. If Ricky confirms 420-4220 is Bart's, FB has 1 review + a profile picture worth checking. | ENRICHED 2026-09-30 - SILVER: phone switched to (641) 420-4220 (printed on his own logo + FB page, Ricky confirmed), 430-2916 kept as 'also on file'. Real logo from FB profile pic (house mark + name, phone line cropped), brand red sampled -> accent #d9605f. 3 verbatim reviews: Stacey H. (FB), K. B. (BBB 02/2026), Kristine M. (Google 'Pals Construction'). Photos still placeholders (FB has none usable).",
   "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "sent": "2026-09-30",
+   "manual": true,
+   "link_sent": true,
+   "status": "manual-outside-sequence"
+  }
  },
  "ia-beachy-plumbing-p6x4jc": {
   "channel": "fb",
@@ -592,11 +598,14 @@
   "enrich_level": "GOLD",
   "enriched": "2026-09-22",
   "fb": "https://www.facebook.com/MullerPlumbingHeating/",
-  "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04. | ENRICHED 2026-09-22 (GOLD): real logo pulled from facebook.com/MullerPlumbingHeating cover banner and used in nav; 2 real job photos harvested from Google Business Profile (hero = storefront exterior w/ Muller Plumbing and Heating awning sign, gallery tile = rough-in plumbing in a framed wall, Feb 2020) -- both photo-level identity-checked, no third-party branding present; 3 verbatim Google reviews (Chuck D., Michael C., Ed F.) pulled from the confirmed GBP listing at 97 Commercial Dr (4.3 avg / 32 reviews); accent recolored to sampled brand red #d75855 (lightened off logo red #c6322e for contrast) with brand-colors:sampled marker. No placeholders left on the page. | FB-DM 2026-10-12: Messenger inbox already shows a thread with Muller Plumbing & Heating (Ricky's own message 'Hey, Ricky here. I build websit...', ~1w old) sent outside this sequence. Excluded from automated first touches; reply handling stays manual.",
+  "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04. | ENRICHED 2026-09-22 (GOLD): real logo pulled from facebook.com/MullerPlumbingHeating cover banner and used in nav; 2 real job photos harvested from Google Business Profile (hero = storefront exterior w/ Muller Plumbing and Heating awning sign, gallery tile = rough-in plumbing in a framed wall, Feb 2020) -- both photo-level identity-checked, no third-party branding present; 3 verbatim Google reviews (Chuck D., Michael C., Ed F.) pulled from the confirmed GBP listing at 97 Commercial Dr (4.3 avg / 32 reviews); accent recolored to sampled brand red #d75855 (lightened off logo red #c6322e for contrast) with brand-colors:sampled marker. No placeholders left on the page. | FB-DM 2026-10-12: Messenger inbox already shows a thread with Muller Plumbing & Heating (Ricky's own message with the mockup link, sent 2026-09-30 7:23 PM, unseen as of 2026-10-12) sent outside this sequence. Excluded from automated first touches; reply handling stays manual.",
   "photos": "real",
   "ready": true,
   "stage": "none",
   "fb_dm": {
+   "sent": "2026-09-30",
+   "manual": true,
+   "link_sent": true,
    "status": "manual-outside-sequence"
   }
  },
@@ -606,7 +615,14 @@
   "note": "in HubSpot 2026-09-08 (company 345091294957) | contact 548753991387 Jayden Ness, associated. NO-WEBSITE VERIFIED IN LIVE CHROME 2026-09-08: nesscustomflooring.com and nesscustomflooringllc.com both NXDOMAIN; only web presence is a free Canva subdomain nesscustomflooringllc.my.canva.site (single-scroll template, Canva footer badge, personal gmail contact). His Google profile lists that canva.site URL as its website. REVENUE PROOF UPGRADED 2026-09-08: Google Business Profile 5.0 stars from 14 reviews (all five star), category 'Flooring store', PHYSICAL SHOWROOM at 7869 Commerce Park Dubuque IA 52002, FB post ~3 months ago 'Ness Flooring opens new store in Dubuque'. In business since 2018, 330 FB followers, four product lines incl. full custom tile showers. OWNER NAME CONFIRMED (no longer inferred): a Google review names 'Jayden and Ryan'. Two-man crew. PAGE USES REAL ASSETS: 4 of his own job photos + his own logo, both pulled from his Canva site, plus 3 verbatim Google reviews. CORRECTION: an earlier note on this record said 'FB not yet rated, do not open on reviews' - WRONG, the Google profile is 5.0/14 and reviews are his strongest asset. SOURCED BY RICKY personally 2026-09-08, intends to offer a BARTER (flooring work on his own home for the site) - warm, not a cold dial. | CLOUDFLARE ACCESS BYPASS live 2026-09-08 - Access app 'Ness Custom Flooring Demo (Public Bypass)', path demo/ia-ness-custom-flooring-k3n7wd*, policy Public Bypass. Verified anonymously: mockup 200s for a logged-out visitor, rest of the domain still gated. THIS LINK IS SAFE TO SEND TO THE PROSPECT.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "sent": "2026-09-19",
+   "manual": true,
+   "link_sent": true,
+   "replied": "2026-09-19",
+   "status": "declined"
+  }
  },
  "ia-new-view-landscaping-dbq04": {
   "channel": "in-person",
@@ -652,7 +668,8 @@
   "fb_dm": {
    "staged": "2026-10-09",
    "variant": "A",
-   "sent": "2026-10-09"
+   "sent": "2026-10-09",
+   "seen": "2026-10-09"
   }
  },
  "ia-pk-termite-control-yoilo8": {
@@ -1195,7 +1212,14 @@
   "note": "in HubSpot 2026-08-07 (company 338670190315) | no website | haierplumbing.com serves a hosting-default UNDER CONSTRUCTION placeholder (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1318341 + BBB + SIBA-AGC + CIB AGC | 76 power units / 60 drivers / 1.49M mi 2025 | SAFER safety rating Conditional (2010) — do not raise on the call | ENRICHED 2026-09-25 (GOLD): identity - GBP 'Haier Plumbing & Heating Inc', 301 N Elkton St Okawville, (618) 243-5908, 4.1 from 22 reviews; FB facebook.com/HaierPlumbing shows the same phone. REAL LOGO: FB cover - navy 'HAIER PLUMBING & HEATING, INC.' wordmark with pipe + backhoe art, which has 618.243.5908 | 301 N Elkton St printed in it; trimmed to logo.png on a white pad. BRAND COLOURS: logo navy #111030 -> dark #111030, accent #8380da (navy hue lightened for 4.5:1); generated SVGs recoloured, fingerprints unchanged. 1 REAL PHOTO from FB: triplex Grundfos booster pump package w/ control panel, Amtrol tank, 4in cold water header (only manufacturer labels, no rival contractor) - first work tile; hero + 2 tiles stay generated. REJECTED: holiday/Veterans/Labor Day graphics, a staff portrait in the parts room. 3 VERBATIM GOOGLE REVIEWS: Kyla D. (a year ago, excerpt ending in ellipsis as Google truncates it), Tom D. (5 yrs), Richard M. (6 yrs). DO NOT RAISE: two recent 1-star GBP reviews from residents angry about torn-up roads/yards during a utility job and a broken service line (one threatens BBB + lawsuit). No placeholders left.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "sent": "2026-09-30",
+   "manual": true,
+   "link_sent": true,
+   "seen": "<=2026-10-12",
+   "status": "manual-outside-sequence"
+  }
  },
  "il-hard-rock-terrazzo-f5nrfi": {
   "channel": "unknown",
@@ -1308,7 +1332,9 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-12",
-   "variant": "B"
+   "variant": "B",
+   "sent": "2026-10-12",
+   "auto_reply": "2026-10-12"
   }
  },
  "il-nova-painting-rockford": {
@@ -1528,7 +1554,9 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-12",
-   "variant": "A"
+   "variant": "A",
+   "sent": "2026-10-12",
+   "auto_reply": "2026-10-12"
   }
  },
  "landscaping-prescott-racine": {
@@ -1675,7 +1703,8 @@
   "fb_dm": {
    "staged": "2026-10-09",
    "variant": "C",
-   "sent": "2026-10-09"
+   "sent": "2026-10-09",
+   "seen": "2026-10-09"
   }
  },
  "wi-davenport-flooring-eau-claire": {
@@ -1905,7 +1934,8 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-12",
-   "variant": "C"
+   "variant": "C",
+   "sent": "2026-10-12"
   }
  },
  "wi-switlick-and-sons-athens": {
