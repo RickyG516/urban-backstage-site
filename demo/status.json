@@ -2128,5 +2128,29 @@
   "photos": 0,
   "ready": true,
   "stage": "none"
+ },
+ "wi-kempen-masonry-pewaukee": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-13 (company 351907941063) | No-website VERIFIED 2026-10-13, search-based only - unattended scheduled run, NO BROWSER. METHOD: (1) live BBB profile fetched, no 'Visit Website' element and no website URL anywhere; proved against same-session CONTROL profiles that DID render a 'Visit Website' button - Landworks Lawncare Inc -> landworkslawncare.com and Guentner Lawn Care -> guentnerlawncare.com, both fetched with the same tool in this session, so the absence is real not a fetch artifact. (2) domain-scoped WebSearch on kempenmasonry.com returned ZERO links. (3) Manta listing carries no website. (4) BuildZoom contractor page carries no website. CONFIDENCE HIGH. OWNER: Todd Kempen, Owner (BBB, principal AND customer contact; BuildZoom corroborates). REVENUE PROOF: ~11 employees, estimated annual revenue $628,778 (Manta); 24 yrs, est. 2002; BBB A+ accredited since 18 Jan 2011; WI Building Contractor Registration #1123686 active; 21 BBB trade categories. ALT PHONE (262) 691-4674 (Manta, same name + same address). NOT visually verified - no browser on this run.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "il-sisson-lawn-landscaping-sterling": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-13 (company 351912878798) | No-website VERIFIED 2026-10-13, search-based only - unattended scheduled run, NO BROWSER. METHOD: (1) live BBB profile fetched, no 'Visit Website' element and no website URL anywhere; proved against same-session CONTROL profiles that DID render a 'Visit Website' button - Landworks Lawncare Inc -> landworkslawncare.com and Guentner Lawn Care -> guentnerlawncare.com, BOTH from the same BBB landscape-contractor category in the same session. (2) domain-scoped WebSearch on sissonlawn.com, sissonlawnandlandscaping.com, sissoninc.com and sissonlandscaping.com returned ZERO links on all four. CONFIDENCE HIGH. OWNER: Mark Sisson, Treasurer (BBB principal AND customer contact); Brenda Jo Sisson, President. REVENUE PROOF: 30 yrs, started 1996; incorporated as Sisson Inc. 9 Aug 2005; BBB A+; two corporate officers; dedicated fax (815) 626-4897; 7 trade categories including paving contractor and irrigation install (both need real plant). NOT BBB-accredited - A+ rated only. Illinois SOS lookup is CAPTCHA-gated and was NOT run. NOT visually verified - no browser on this run.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-brecht-construction-norway": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-13 (company 351912858345) | No-website VERIFIED 2026-10-13, search-based only - unattended scheduled run, NO BROWSER. METHOD: (1) live BBB profile fetched, no 'Visit Website' element and no website URL anywhere; proved against same-session CONTROL profiles that DID render a 'Visit Website' button - Lynch Bros. Painting -> lynchbrotherspainting.com and Tri-County Enterprises Inc -> tricounty-iowa.com, both Iowa contractors pulled from the same BBB category listings in this session. (2) domain-scoped WebSearch on brechtconstruction.com, brechtconstructioninc.com, brechtconstructioniowa.com and brecht-construction.com returned ZERO links on all four. CONFIDENCE HIGH. OWNER: Ronald Brecht Jr., President/Owner; Michelle Jordan, VP and BBB customer contact. REVENUE PROOF: 34 yrs, started 1 Oct 1992; incorporated 27 Apr 1999; BBB A+ AND accredited continuously since 5 Feb 2007 (19 straight years); two officers + dedicated fax (319) 538-0411 = staffed office; 6 service lines incl. full additions. CRM NOTE: an unrelated 'Roger Brecht' of R & B Painting, (319) 369-0778, already exists as contact 557335180002 - different person, different business. NOT visually verified - no browser on this run.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
  }
 }
