@@ -456,3 +456,69 @@ Christner (FB hits are a PA namesake and an empty 7-follower page). Pane re-chec
 listing" drops — Davenport Flooring, Don's Concrete, Niklasen, Stufflebeem, Weber, YM, Breon, Klunck, Redmond, KVI — all
 still return other businesses. Poss Painting: two listings, 0 reviews, one permanently closed. **BASE is mined out on
 Google; the remaining path is the swap-notice ask (prospects sending their own logo/photos).**
+
+## 2026-10-15 — BBB's missing "Visit Website" button is NECESSARY BUT NOT SUFFICIENT: 4 false positives caught
+
+Built 3 (BASE): D & L Excavating Inc (Liberty IL, excavating), Brad Bowman Roofing LLC (Shawano WI, roofing),
+Woltil's Heating & Air Conditioning Inc (Kewanee IL, HVAC). Pool unreadable again (private repo, no credential on
+either surface), so these came from the documented dry-pool fallback.
+
+**THE FINDING THAT MATTERS, and it contradicts how this task has been run for weeks.** Two independent research
+passes converged on it: a BBB individual profile that renders NO "Visit Website" button is *not on its own* evidence
+of no website. Four businesses with no BBB button turned out to own full, live, multi-page sites, found only by a
+domain-scoped `WebSearch(allowed_domains:[...])`:
+
+| Business | City | Live site the BBB profile did not show |
+|---|---|---|
+| DeSmit's Heating & Cooling Inc | Kewanee IL | desmitsheating.com — Copyright 2026, contact form, same BBB address |
+| Mark Cardinal Concrete Construction | Fond du Lac WI | markcardinalconcrete.com — Home/About/Residential/Parking Lots |
+| S & H Remodeling, Inc. | Sheboygan WI | shremodelinginc.com AND shremodeling.com, both multi-page |
+| Kohlman Concrete, Inc | Fond du Lac WI | kohlmanconcrete.com |
+
+All four would have shipped as qualified prospects on BBB evidence alone. **The two signals must be paired: BBB
+button-absence THEN a domain-scoped search on the 2-3 obvious spellings.** Every prospect shipped today cleared both.
+Worth adding to the task file's HARD GATE as an ordered two-step rather than a list of three interchangeable signals.
+
+**Confirmed again, now 6 for 6: BBB-accredited ≈ has a website.** Six accredited profiles were fetched as controls and
+all six rendered a website button. Filter accredited out early — the hit rate on accredited category listings is ~0.
+Those same six are what proves a no-button result is real and not a fetch artifact; keep harvesting controls this way.
+
+**BBB *category* pages remain worthless for the website signal** (re-confirmed: the Independence IA accredited roofing
+category page listed 15 businesses, every one accredited, and category pages render no website link for anyone). Use
+them for NAMES only, free via WebFetch, then fetch individual profiles.
+
+Dropped at the gate this run:
+- **J & J Power Washing LLC** (Monona IA) — BBB shows no website button, but its BBB *alternate* business name is
+  "J & J Spot Free Mobile Wash" and `spotfreemobilewash.com` is live and multi-page. Could not establish whether that
+  domain is theirs (robots-disallowed to fetch), so dropped rather than shipped on an unverified claim. Also three
+  namesakes: jandjpowerwashing.com (Delaware), jandjhousewashing.com, and a J&J Power Washing LLC in Oostburg WI.
+- **Wisconsin Insulation Services, Inc.** (Menomonee Falls WI) — 87 years, two locations, President John Ratzow, no
+  BBB website button and a name search returning only aggregators. Genuinely promising, held back only because the
+  batch already had three and trade/geography spread was better without a second WI. **Take this one first next run.**
+- **Hindman Person Heating & Air** (Ottumwa IA) — BBB website button points only to Facebook, so it qualifies cleanly;
+  dropped solely because no owner name could be found. An Iowa SOS lookup would likely settle it.
+- **Northwest Gutters, Inc.** (Belvidere IL) — BBB website button points at a cPanel `suspendedpage.cgi`, i.e. a dead
+  site. Textbook qualifier and the easiest opener there is ("your website is suspended"). **Blocker: BBB lists no
+  phone.** Find a number and this is a strong prospect. Owner Jose Villa, President, 19 years.
+- **Tri-State Seamless Gutters** (Freeport IL) — since 1997, 78 reviews 4.9 on Angi, no website listed. Strongest
+  revenue proof seen all run. Blocker: no owner name and no phone found.
+- Killed by a live owned site: Beneficial Insulation, Wisconsin Spray Foam, Affordable Painting, Pioneer Metal Roofing,
+  Permanent Roofing Specialists, Legacy Roofing of Iowa, Hutchins Excavating, Four Star Roofing, Perfect Pitch Roofing,
+  Mitchell & Sons HVAC, Pella Concrete, Central Illinois Seamless Gutters, Illinois Gutter Pros, Egyptian Exterminating,
+  Carpet One Carroll, Badger Roofing, Rob Giese Construction, Olson Hardwood, Thiele Roofing, Schneider's Wildlife,
+  Antczak Construction, Dun-Rite Exteriors, C & C Services, AA Seamless.
+
+**A geo-domain held by a same-town competitor is a pitch angle worth hunting deliberately.** Freeport Seamless Gutters
+(Jim Wagenknecht, 42 years) does not hold `freeportseamlessgutters.com` — Brian Lynde Seamless Gutters, a direct
+Freeport competitor, does. Keep that prospect for a run with room.
+
+**Batch axis diversity, tightened.** The 2026-10-13 run enforced "no two pages share a (motion, layout) pair", and the
+picker promptly handed all three pages the same *layout* with three different motions — distinct pairs, same sameness.
+Constraint raised to **distinct motions AND distinct layouts** across the batch: radiate/stack, stage/mirror,
+flow/offset. Costs density (best combo fell from 239 to 160 drawn elements) and is worth it. Fold into the engine.
+
+**Hero re-cut: use the native-scale sliding band, not a bbox-derived window.** Deriving `height = content_height*1.12`
+from the svgelements bbox produced viewBoxes up to 4312x1442 on a 1200x900 canvas, because `stack`/`mirror`/`offset`
+layout transforms place copies outside the canvas and the bbox swells to match — which renders the hero as a tiny
+scene in a mostly empty frame. Replaced with a fixed 1200x401 band slid vertically to maximise in-band path points,
+tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (444/654, mid 0.11), 0 (123/212, mid 0.23).
