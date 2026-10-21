@@ -2032,5 +2032,13 @@
   "stage": "none",
   "enrich_level": "GOLD",
   "enriched": "2026-10-08"
+ },
+ "il-ag-lawn-order-coulterville": {
+  "channel": "manual",
+  "fb": "",
+  "note": "Childhood friend of Ricky (Austin G). Built 2026-10-21 from FB page screenshot: logo + lawn cover crop. Phone NOT yet confirmed (placeholder tel). Offer: free mockup, he pays hosting ~$100 + a review. Not a cold prospect.",
+  "photos": "generated",
+  "ready": false,
+  "stage": "none"
  }
 }
