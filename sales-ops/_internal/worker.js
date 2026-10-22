@@ -1866,7 +1866,7 @@ async function handleDelivery(token, cors) {
 
     // Open tasks scheduled in the surrounding week, delivery or not, so the page
     // can lay out a day-by-day board. The page buckets by Central-time calendar day.
-    const weekTasks = all.filter(t => t.days_until !== null && t.days_until >= -7 && t.days_until <= 7)
+    const weekTasks = all.filter(t => t.days_until !== null && t.days_until >= -28 && t.days_until <= 35)
       .sort((a, b) => String(a.due_iso).localeCompare(String(b.due_iso)));
 
     return jsonResp({
