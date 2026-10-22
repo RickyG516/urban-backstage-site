@@ -419,7 +419,7 @@
  "ia-jj-tree-service-dubuque": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-04 | no website, no FB, no owner name found - directory listings only | LOCAL to Dubuque",
+  "note": "in HubSpot 2026-08-04 | no website, no FB, no owner name found - directory listings only | LOCAL to Dubuque | ENRICHMENT ATTEMPT 2026-10-22 - DROPPED: no Maps listing: search returns Trees Plus, Kutsch's, Dubuque Tree Service (1.0/2), none match name/phone (563) 583-7547. Nothing harvestable.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -541,7 +541,7 @@
  "ia-marks-tree-care-durango-t7v3qm": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-09-01 (company 343247463118) | contact 544361391826 | NO-WEBSITE verified live in Chrome 2026-09-01: markstreecare.com resolves to a HugeDomains BROKER 'this domain is for sale' listing (redirects to hugedomains.com/domain_profile.cfm?d=markstreecare.com) - a domain squatter is auctioning his own business name. markstreecaredubuque.com serves no business site. BBB profile has NO 'Visit Website' button. REVENUE: 23 yrs, started 5/17/2003, sole proprietor Mark A Heiderscheit, real customer reviews on the BBB file. Durango is effectively a Dubuque suburb - closest prospect to home base in the library. NAMESAKE WARNING: HubSpot holds an UNRELATED 'Mark's Tree Care' in Rockford IL (815-962-2302, company 335080932071) - do not conflate on the call.",
+  "note": "in HubSpot 2026-09-01 (company 343247463118) | contact 544361391826 | NO-WEBSITE verified live in Chrome 2026-09-01: markstreecare.com resolves to a HugeDomains BROKER 'this domain is for sale' listing (redirects to hugedomains.com/domain_profile.cfm?d=markstreecare.com) - a domain squatter is auctioning his own business name. markstreecaredubuque.com serves no business site. BBB profile has NO 'Visit Website' button. REVENUE: 23 yrs, started 5/17/2003, sole proprietor Mark A Heiderscheit, real customer reviews on the BBB file. Durango is effectively a Dubuque suburb - closest prospect to home base in the library. NAMESAKE WARNING: HubSpot holds an UNRELATED 'Mark's Tree Care' in Rockford IL (815-962-2302, company 335080932071) - do not conflate on the call. | ENRICHMENT ATTEMPT 2026-10-22 - DROPPED: no matching listing: Maps returns ExTreem Stump Removal & Tree Service (Dubuque, (563) 513-6225), a different phone. Nothing harvestable.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -549,7 +549,7 @@
  "ia-mcneals-refrigeration-cedar-rapids": {
   "channel": "phone",
   "fb": "",
-  "note": "in HubSpot 2026-08-04 | no website | since 2001",
+  "note": "in HubSpot 2026-08-04 | no website | since 2001 | ENRICHMENT ATTEMPT 2026-10-22 - DROPPED: identity passes (name, Cedar Rapids, (319) 329-4835) but listing is 4.2/5 with no photos, no website, no logo, reviews thin (one 9 yrs old). Below BRONZE; not built.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -971,7 +971,7 @@
  "ia-woodys-heating-air-west-branch": {
   "channel": "phone",
   "fb": false,
-  "note": "in HubSpot 2026-08-19 (company 340907598566, contact 537719367409) | BBB renders NO Visit Website button | woodysheatingandair.com tested live in Chrome 2026-08-19 -> browser error page, dead | 27 yrs since 1999, BBB A+, 4.32 over 12 reviews | does replacements and remodel work, not just service calls | secondary number 319-430-2743 | no-website RE-VERIFIED 2026-08-21 in Chrome: woodysheatingandair.com = NXDOMAIN",
+  "note": "in HubSpot 2026-08-19 (company 340907598566, contact 537719367409) | BBB renders NO Visit Website button | woodysheatingandair.com tested live in Chrome 2026-08-19 -> browser error page, dead | 27 yrs since 1999, BBB A+, 4.32 over 12 reviews | does replacements and remodel work, not just service calls | secondary number 319-430-2743 | no-website RE-VERIFIED 2026-08-21 in Chrome: woodysheatingandair.com = NXDOMAIN | ENRICHMENT ATTEMPT 2026-10-22 - DROPPED: identity FAIL: Maps 'Woody's Heating and Air Conditioning' is Ottumwa IA, (641) 682-3407, not West Branch (319) 643-4084. Namesake.",
   "photos": 0,
   "ready": true,
   "stage": "none"
@@ -1186,7 +1186,7 @@
  "il-gm-sipes-construction-rushville": {
   "channel": "phone",
   "fb": true,
-  "note": "in HubSpot 2026-08-19 (company 341027490547, contact 537700738770) | BBB website field points at Facebook | gmsipes.com (their staff email domain) tested live in Chrome 2026-08-19 -> RESOLVES but serves an UNDER CONSTRUCTION placeholder: logo, (c) 2026 line, nav links only, no content | FMCSA USDOT 2015080 ACTIVE, 5 power units, 6 drivers, 0 crashes | named on IDOT contract awards | AGC of Illinois member since 2021 | no-website RE-VERIFIED 2026-08-21 in Chrome: gmsipesconstruction.com = NXDOMAIN",
+  "note": "in HubSpot 2026-08-19 (company 341027490547, contact 537700738770) | BBB website field points at Facebook | gmsipes.com (their staff email domain) tested live in Chrome 2026-08-19 -> RESOLVES but serves an UNDER CONSTRUCTION placeholder: logo, (c) 2026 line, nav links only, no content | FMCSA USDOT 2015080 ACTIVE, 5 power units, 6 drivers, 0 crashes | named on IDOT contract awards | AGC of Illinois member since 2021 | no-website RE-VERIFIED 2026-08-21 in Chrome: gmsipesconstruction.com = NXDOMAIN | ENRICHMENT ATTEMPT 2026-10-22 - DROPPED: identity passes (503 E Adams St, Rushville, (217) 322-6543) but 4.6/8 with no photos, no website, reviews mostly one-liners ('Good'). Nothing harvestable.",
   "photos": 0,
   "ready": true,
   "stage": "none"
