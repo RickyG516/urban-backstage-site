@@ -619,7 +619,9 @@
    "sent": "2026-09-30",
    "manual": true,
    "link_sent": true,
-   "status": "manual-outside-sequence"
+   "status": "manual-outside-sequence",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send"
   }
  },
  "ia-ness-custom-flooring-k3n7wd": {
@@ -682,7 +684,9 @@
    "staged": "2026-10-09",
    "variant": "A",
    "sent": "2026-10-09",
-   "seen": "2026-10-09"
+   "seen": "2026-10-09",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send"
   }
  },
  "ia-pk-termite-control-yoilo8": {
@@ -1246,7 +1250,9 @@
    "manual": true,
    "link_sent": true,
    "seen": "<=2026-10-12",
-   "status": "manual-outside-sequence"
+   "status": "manual-outside-sequence",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send"
   }
  },
  "il-hard-rock-terrazzo-f5nrfi": {
@@ -1736,7 +1742,9 @@
    "staged": "2026-10-09",
    "variant": "C",
    "sent": "2026-10-09",
-   "seen": "2026-10-09"
+   "seen": "2026-10-09",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send"
   }
  },
  "wi-davenport-flooring-eau-claire": {
