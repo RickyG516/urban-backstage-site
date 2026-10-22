@@ -1864,16 +1864,24 @@ async function handleDelivery(token, cors) {
     const otherOverdue = all.filter(t => !t.is_delivery && t.overdue)
       .sort((a, b) => (a.days_until || 0) - (b.days_until || 0));
 
+    // Open tasks scheduled in the surrounding week, delivery or not, so the page
+    // can lay out a day-by-day board. The page buckets by Central-time calendar day.
+    const weekTasks = all.filter(t => t.days_until !== null && t.days_until >= -7 && t.days_until <= 7)
+      .sort((a, b) => String(a.due_iso).localeCompare(String(b.due_iso)));
+
     return jsonResp({
       ok: true,
       groups,
       other_overdue: otherOverdue.slice(0, 60),
+      week_tasks: weekTasks,
       totals: {
         delivery_open:    delivery.length,
         delivery_overdue: delivery.filter(t => t.overdue).length,
         delivery_soon:    delivery.filter(t => t.due_soon).length,
         all_open_tasks:   all.length,
         all_overdue:      all.filter(t => t.overdue).length,
+        week_open:        weekTasks.length,
+        tasks_truncated:  all.length >= 300,
         other_overdue:    otherOverdue.length
       },
       fetched_at: new Date().toISOString()
