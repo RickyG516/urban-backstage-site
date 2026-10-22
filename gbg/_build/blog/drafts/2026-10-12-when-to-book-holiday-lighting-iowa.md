@@ -45,7 +45,7 @@ You should leave the walk knowing what is planned, what the install involves, an
 
 ## A simple way to plan ahead
 
-In early fall, walk your house and decide what you want lit. Pick your target date. Then request an estimate while the weather is friendly and calendars still have room. If you wait until the first cold snap, you can still ask. You may just find fewer options.
+In early fall, walk your house and decide what you want lit. Pick your target date. Then request an estimate while the weather is friendly and calendars still have room. If you wait until the first cold snap, you can still ask. You may just find fewer options. If you are still deciding between the two, read [permanent lights vs seasonal lights in Dubuque](/blog/permanent-lights-vs-seasonal-dubuque/).
 
 ## Ready to plan your lights
 

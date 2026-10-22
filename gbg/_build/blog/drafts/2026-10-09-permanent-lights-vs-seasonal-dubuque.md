@@ -46,7 +46,7 @@ Dubuque gets real winter. Roofs shed snow, ice forms along edges, and wind comes
 
 If you are leaning toward permanent lights for this holiday season, fall is when to start the conversation. Installs are scheduled work, not same day work, and the calendar tends to fill as the holidays get closer. Starting in October or early November gives you time for a site walk, a layout you are happy with, and a date that is not squeezed.
 
-If you wait until the first snow, you may still get in. But you will have fewer choices, and you will be deciding fast. If you would rather skip the ladder this year and every year after, now is the time to ask.
+If you wait until the first snow, you may still get in. But you will have fewer choices, and you will be deciding fast. Our guide to [when to book holiday lighting in Iowa](/blog/when-to-book-holiday-lighting-iowa/) covers the timing. If you would rather skip the ladder this year and every year after, now is the time to ask.
 
 At GBG Dubuque we serve homes in Dubuque and across the tri-state area, about 30 miles out into Iowa, Illinois, and Wisconsin. If you want to see whether permanent lights fit your home, book a private estimate and we will walk the property with you. You can start on our [permanent lights page](/permanent-lights/).
 
