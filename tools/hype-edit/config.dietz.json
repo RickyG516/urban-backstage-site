@@ -1,0 +1,53 @@
+{
+  "fps": 30,
+  "music": "/home/claude/hype/work/music.wav",
+  "music_lufs": -19,
+  "timeline": { "beat": 0.625, "lead": 2.5, "caption_swap": 8.75, "proof": 15.0, "proof_len": 5.0, "cta": 30.0, "end": 35.0 },
+  "stills": [0.3, 0.9, 1.6, 2.3, 2.7, 3.4, 6.0, 8.9, 12.0, 14.9, 15.2, 16.2, 17.5, 19.0, 20.1, 22.5, 24.0, 25.2, 27.5, 29.5, 30.3, 31.5, 34.0],
+  "copy": {
+    "hook": ["WE BUILT YOU", "A WEBSITE."],
+    "lead_captions": [["YOUR NEW HOMEPAGE.", "ALREADY BUILT."], ["EVERY SECTION BUILT", "TO GET THE CALL."]],
+    "cta_kick": "{name}, IT'S READY",
+    "cta_big": "WANT IT LIVE?",
+    "cta_sub": "Reply <b>LIVE</b> and we'll walk you through it.",
+    "url": "urbannicheco.com"
+  },
+  "lead": {
+    "name": "Dietz Enterprises",
+    "city": "Dubuque, IA",
+    "frames": "/home/claude/hype/work/clips/lead",
+    "cta_frame": 20,
+    "hook_photos": [
+      "/home/claude/hype/src/urban-backstage-site/demo/ia-dietz-enterprises-dbq02/job-pole-barn-slab.jpg",
+      "/home/claude/hype/src/urban-backstage-site/demo/ia-dietz-enterprises-dbq02/job-stamped-patio.jpg",
+      "/home/claude/hype/src/urban-backstage-site/demo/ia-dietz-enterprises-dbq02/job-steps-retaining-wall.jpg"
+    ]
+  },
+  "proof": [
+    {
+      "kicker": "We built this one too  ·  Dubuque, IA",
+      "name_lines": ["KUTSCH'S", "TREE SERVICE"],
+      "frames": "/home/claude/hype/work/clips/kutsch",
+      "quote_html": "After redoing my website <mark>I received over 20 leads the first month.</mark>",
+      "reviewer": "Matt Kutsch",
+      "business": "Kutsch's Tree Service",
+      "stat": { "big": "20+", "small": "leads in\nmonth one" }
+    },
+    {
+      "kicker": "And this one  ·  Dubuque, IA",
+      "name_lines": ["FUEHRER", "PAINTING"],
+      "frames": "/home/claude/hype/work/clips/fuehrer",
+      "quote_html": "He's <mark>super easy to work with,</mark> very creative and communicates everything in detail step by step.",
+      "reviewer": "Mark Fuehrer",
+      "business": "Fuehrer Painting LLC"
+    },
+    {
+      "kicker": "And this one  ·  Dubuque, IA",
+      "name_lines": ["NEW VIEW", "LANDSCAPING"],
+      "frames": "/home/claude/hype/work/clips/newview",
+      "quote_html": "<mark>I handed him the keys and he delivered.</mark>",
+      "reviewer": "Dallas Rolwes",
+      "business": "New View Landscaping"
+    }
+  ]
+}

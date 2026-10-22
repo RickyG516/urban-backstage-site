@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:'Montserrat';font-weight:700;src:url('./fonts/montserrat-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-weight:800;src:url('./fonts/montserrat-latin-800-normal.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-weight:900;src:url('./fonts/montserrat-latin-900-normal.woff2') format('woff2')}
+@font-face{font-family:'Open Sans';font-weight:400;src:url('./fonts/open-sans-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Open Sans';font-weight:600;src:url('./fonts/open-sans-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Open Sans';font-weight:700;src:url('./fonts/open-sans-latin-700-normal.woff2') format('woff2')}
+:root{--orange:#e36b1e;--orange-lt:#ff8a3d;--ink:#0b0b0c;--char:#1a1a1a;--mut:#9aa1a9}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'Montserrat',sans-serif;color:#fff}
+.abs{position:absolute;left:0;top:0}
+#bg{width:1080px;height:1920px;background:
+  radial-gradient(900px 700px at 50% 12%, rgba(227,107,30,.26), transparent 70%),
+  radial-gradient(700px 900px at 50% 105%, rgba(227,107,30,.16), transparent 70%),
+  var(--ink)}
+#grid{width:1080px;height:2200px;opacity:.07;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:90px 90px}
+
+/* hook */
+#hook{width:1080px;height:1920px}
+.shot{position:absolute;inset:0;background-size:cover;background-position:center;will-change:transform}
+#hookShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.35) 35%,rgba(0,0,0,.78) 100%)}
+#hookText{position:absolute;left:70px;right:70px;top:690px}
+.tag{display:inline-block;background:var(--orange);color:#111;font-weight:900;font-size:40px;letter-spacing:.06em;padding:14px 24px 12px;text-transform:uppercase;white-space:nowrap}
+.slam{font-weight:900;font-size:148px;line-height:.94;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;transform-origin:left center;text-shadow:0 6px 30px rgba(0,0,0,.6)}
+.slam.o{color:var(--orange-lt)}
+#hookBar{height:16px;background:#fff;margin-top:26px;transform-origin:left center}
+
+/* captions */
+.cap{position:absolute;left:60px;right:60px;top:92px;text-align:center}
+.kick{font-weight:800;font-size:34px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange-lt);white-space:nowrap}
+.mask{overflow:hidden;padding:6px 0}
+.line{font-weight:900;font-size:86px;line-height:1;letter-spacing:-.015em;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.line.o{color:var(--orange-lt)}
+
+/* phone */
+.phone{position:absolute;left:150px;top:0;width:780px;height:1560px;border-radius:70px;overflow:hidden;background:#000;
+  box-shadow:0 0 0 14px #19191b,0 0 0 16px #3a3a3e,0 70px 140px rgba(0,0,0,.7),0 0 120px rgba(227,107,30,.22);transform-origin:50% 0;will-change:transform}
+.phone img{display:block;width:780px;height:1560px}
+
+/* review card */
+#card{position:absolute;left:60px;width:960px;top:1290px;background:#fff;color:#151515;border-radius:36px;padding:44px 50px 42px;box-shadow:0 40px 110px rgba(0,0,0,.65);border-bottom:12px solid var(--orange)}
+#card .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+#stars{font-size:54px;letter-spacing:6px;color:#f5a623;line-height:1}
+#src{font-family:'Open Sans';font-weight:700;font-size:27px;color:#6b7078;letter-spacing:.04em;text-transform:uppercase}
+#quote{font-weight:800;font-size:54px;line-height:1.16;letter-spacing:-.01em}
+#quote mark{background:linear-gradient(#ffc9a0,#ffc9a0) no-repeat 0 0/var(--w,0%) 100%;color:inherit;padding:0 4px;margin:0 -4px;border-radius:6px}
+#who{margin-top:26px;font-family:'Open Sans';font-size:32px;color:#4a4e55}
+#who b{color:#151515;font-weight:700}
+
+/* stat sticker */
+#stat{position:absolute;left:690px;top:470px;width:320px;height:320px;border-radius:50%;background:var(--orange);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.55);border:8px solid #fff}
+#stat .big{font-weight:900;font-size:124px;line-height:.9;letter-spacing:-.03em}
+#stat .small{font-weight:900;font-size:31px;line-height:1.08;letter-spacing:.04em;text-transform:uppercase;margin-top:8px;white-space:pre-line}
+
+/* cta */
+#cta{position:absolute;left:60px;right:60px;top:1268px;text-align:center}
+#ctaBig{font-weight:900;font-size:150px;line-height:.95;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap;display:inline-block}
+#ctaSub{font-family:'Open Sans';font-weight:600;font-size:48px;color:#fff;margin-top:26px}
+#ctaSub b{color:var(--orange-lt);font-weight:700}
+#brand{margin-top:70px;display:flex;flex-direction:column;align-items:center;gap:12px}
+#rule{width:120px;height:6px;background:var(--orange)}
+#wordmark{font-weight:900;font-size:50px;letter-spacing:.14em;text-transform:uppercase}
+#wordmark em{font-style:normal;color:var(--orange-lt)}
+#url{font-family:'Open Sans';font-weight:600;font-size:34px;color:var(--mut)}
+#flash{width:1080px;height:1920px;background:#fff;opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg" class="abs"></div>
+  <div id="grid" class="abs"></div>
+
+  <div id="phones"></div>
+
+  <div id="capLead" class="cap">
+    <div class="kick" id="leadKick"></div>
+    <div style="height:18px"></div>
+    <div id="leadHeads"></div>
+  </div>
+  <div id="capProof" class="cap">
+    <div class="kick" id="proofKick"></div>
+    <div style="height:18px"></div>
+    <div class="mask"><div class="line" id="proofName"></div></div>
+    <div class="mask"><div class="line o" id="proofName2"></div></div>
+  </div>
+
+  <div id="stat"><div class="big"></div><div class="small"></div></div>
+
+  <div id="card">
+    <div class="top"><div id="stars">★★★★★</div><div id="src">Google review</div></div>
+    <div id="quote"></div>
+    <div id="who"></div>
+  </div>
+
+  <div id="cta">
+    <div class="kick" id="ctaKick"></div>
+    <div style="height:22px"></div>
+    <div class="mask"><div id="ctaBig"></div></div>
+    <div id="ctaSub"></div>
+    <div id="brand"><div id="rule"></div><div id="wordmark">Urban <em>Niche</em> Co.</div><div id="url"></div></div>
+  </div>
+
+  <div id="hook" class="abs">
+    <div id="shots"></div>
+    <div id="hookShade"></div>
+    <div id="hookText">
+      <div class="tag" id="hookTag"></div>
+      <div style="height:30px"></div>
+      <div class="slam" id="slam1"></div>
+      <div class="slam o" id="slam2"></div>
+      <div id="hookBar"></div>
+    </div>
+  </div>
+
+  <div id="flash" class="abs"></div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, s, d) => clamp((t - s) / d);
+const lerp = (a, b, u) => a + (b - a) * u;
+const outCubic = (u) => 1 - Math.pow(1 - u, 3);
+const outQuint = (u) => 1 - Math.pow(1 - u, 5);
+const inCubic = (u) => u * u * u;
+const outBack = (u) => { const c = 1.55; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+const show = (el, on) => { el.style.display = on ? '' : 'none'; };
+
+let C, T, phones = {}, pending = [];
+
+function fit(el, maxW, startPx) {
+  let s = startPx; el.style.fontSize = s + 'px';
+  while (Math.max(el.scrollWidth, el.offsetWidth) > maxW && s > 30) { s -= 2; el.style.fontSize = s + 'px'; }
+}
+
+function makePhone(key) {
+  const d = document.createElement('div'); d.className = 'phone';
+  const im = document.createElement('img'); d.appendChild(im);
+  $('phones').appendChild(d); phones[key] = { el: d, img: im, cur: -1 };
+}
+function setFrame(key, dir, idx, total) {
+  const p = phones[key]; idx = Math.round(clamp(idx, 0, total - 1));
+  if (p.cur === idx) return; p.cur = idx;
+  p.img.src = dir + '/f_' + String(idx).padStart(5, '0') + '.jpg';
+  pending.push(p.img.decode().catch(() => {}));
+}
+function place(key, x, y, s, rot, on) {
+  const p = phones[key]; show(p.el, on);
+  if (on) p.el.style.transform = `translate(${x}px,${y}px) scale(${s}) rotate(${rot}deg)`;
+}
+
+async function init(cfg) {
+  C = cfg; T = cfg.timeline;
+  await Promise.all(['700','800','900'].map((w) => document.fonts.load(w + ' 80px Montserrat')).concat(['400','600','700'].map((w) => document.fonts.load(w + ' 40px "Open Sans"'))));
+  const L = cfg.lead;
+  // hook
+  L.hook_photos.forEach((src) => { const s = document.createElement('div'); s.className = 'shot'; s.style.backgroundImage = `url("${src}")`; $('shots').appendChild(s); });
+  $('hookTag').textContent = L.name; fit($('hookTag'), 940, 40);
+  $('slam1').textContent = cfg.copy.hook[0]; $('slam2').textContent = cfg.copy.hook[1];
+  fit($('slam1'), 940, 148); fit($('slam2'), 940, 148);
+  // lead captions
+  $('leadKick').textContent = L.name + (L.city ? '  ·  ' + L.city : ''); fit($('leadKick'), 940, 34);
+  cfg.copy.lead_captions.forEach((pair, i) => {
+    const g = document.createElement('div'); g.className = 'abs'; g.style.width = '960px'; g.id = 'lh' + i;
+    pair.forEach((txt, j) => { const m = document.createElement('div'); m.className = 'mask'; const l = document.createElement('div'); l.className = 'line' + (j ? ' o' : ''); l.textContent = txt; m.appendChild(l); g.appendChild(m); });
+    $('leadHeads').appendChild(g);
+    g.querySelectorAll('.line').forEach((l) => fit(l, 950, 86));
+  });
+  $('leadHeads').style.position = 'relative'; $('leadHeads').style.height = '210px';
+  // phones
+  makePhone('lead'); cfg.proof.forEach((_, i) => makePhone('p' + i));
+  // cta
+  $('ctaKick').textContent = cfg.copy.cta_kick.replace('{name}', L.name); fit($('ctaKick'), 940, 34);
+  $('ctaBig').textContent = cfg.copy.cta_big; fit($('ctaBig'), 950, 150);
+  $('ctaSub').innerHTML = cfg.copy.cta_sub;
+  $('url').textContent = cfg.copy.url;
+  await document.fonts.ready;
+  await Promise.all([...document.querySelectorAll('.shot')].map((s) => { const im = new Image(); im.src = s.style.backgroundImage.slice(5, -2); return im.decode().catch(() => {}); }));
+  return true;
+}
+
+let curProof = -1;
+function loadProof(i) {
+  if (curProof === i) return; curProof = i; const P = C.proof[i];
+  $('proofKick').textContent = P.kicker; fit($('proofKick'), 940, 34);
+  $('proofName').textContent = P.name_lines[0]; $('proofName2').textContent = P.name_lines[1] || '';
+  fit($('proofName'), 950, 86); fit($('proofName2'), 950, 86);
+  $('quote').innerHTML = '“' + P.quote_html + '”';
+  $('who').innerHTML = `<b>${P.reviewer}</b> &nbsp;·&nbsp; ${P.business}`;
+  if (P.stat) { $('stat').querySelector('.big').textContent = P.stat.big; $('stat').querySelector('.small').textContent = P.stat.small; }
+}
+
+const PH_Y = 372, PH_S = 0.9;       // resting phone position (screen 702 x 1404)
+const PH_X = 0;
+
+async function render(t) {
+  pending = [];
+  const fps = C.fps, B = T.beat;
+  const inHook = t < T.lead, inLead = t >= T.lead - 0.001 && t < T.proof + 0.35, inProof = t >= T.proof && t < T.cta + 0.35, inCta = t >= T.cta;
+
+  // background drift
+  $('grid').style.transform = `translateY(${-(t * 14) % 90}px)`;
+
+  // ---------- hook ----------
+  show($('hook'), inHook);
+  if (inHook) {
+    const shots = [...document.querySelectorAll('.shot')];
+    const k = Math.min(shots.length - 1, Math.floor(t / B));
+    shots.forEach((s, i) => { show(s, i === k); if (i === k) { const u = (t - i * B) / (B * (i === shots.length - 1 ? 2 : 1)); s.style.transform = `scale(${lerp(1.22, 1.08, outCubic(clamp(u)))}) translateX(${lerp(i % 2 ? 18 : -18, 0, clamp(u))}px)`; } });
+    const a = outQuint(prog(t, 0.04, 0.22));
+    $('hookTag').style.transform = `translateX(${lerp(-60, 0, a)}px)`; $('hookTag').style.opacity = a;
+    const slam = (el, s) => { const u = prog(t, s, 0.2); el.style.opacity = u > 0 ? 1 : 0; el.style.transform = `scale(${lerp(1.5, 1, outQuint(u))})`; };
+    slam($('slam1'), B); slam($('slam2'), 2 * B);
+    $('hookBar').style.transform = `scaleX(${outQuint(prog(t, 3 * B, 0.3))})`;
+  }
+
+  // ---------- lead mockup ----------
+  const leadOn = (inLead || inCta);
+  if (inLead) {
+    const lt = t - T.lead;
+    setFrame('lead', C.lead.frames, lt * fps, C.lead.count);
+    const inU = outBack(prog(lt, 0, 0.6)), outU = inCubic(prog(t, T.proof, 0.32));
+    place('lead', lerp(0, -1150, outU), PH_Y + lerp(1700, 0, inU), PH_S, lerp(5, 0, prog(lt, 0, 0.6)) + lerp(0, -8, outU), true);
+  }
+  show($('capLead'), inLead && t < T.proof + 0.2);
+  if (inLead) {
+    const lt = t - T.lead, swap = T.caption_swap - T.lead, end = T.proof - T.lead;
+    $('leadKick').style.opacity = outCubic(prog(lt, 0.15, 0.3)) * (1 - prog(lt, end - 0.2, 0.2));
+    [[0.2, swap], [swap + 0.12, end]].forEach(([s, e], i) => {
+      [...$('lh' + i).querySelectorAll('.line')].forEach((ln, j) => {
+        const a = outQuint(prog(lt, s + j * 0.09, 0.42)), b = inCubic(prog(lt, e - 0.22 + j * 0.04, 0.2));
+        ln.style.transform = `translateY(${lerp(115, 0, a) - 115 * b}%)`;
+      });
+    });
+  }
+
+  // ---------- proof ----------
+  show($('capProof'), false); show($('card'), false); show($('stat'), false);
+  C.proof.forEach((_, i) => place('p' + i, 0, 0, 1, 0, false));
+  if (inProof) {
+    const i = Math.min(C.proof.length - 1, Math.floor((t - T.proof) / T.proof_len));
+    const s0 = T.proof + i * T.proof_len, st = t - s0, len = T.proof_len;
+    // the outgoing proof phone keeps sliding off for a moment
+    C.proof.forEach((P, j) => {
+      const js = T.proof + j * len, jt = t - js;
+      if (jt < 0 || jt > len + 0.35) return;
+      setFrame('p' + j, P.frames, jt * fps, P.count);
+      const a = outQuint(prog(jt, 0.02, 0.5)), b = inCubic(prog(jt, len, 0.32));
+      place('p' + j, lerp(1150, 0, a) + lerp(0, -1150, b), PH_Y, PH_S, lerp(7, 0, a) + lerp(0, -8, b), true);
+    });
+    if (st <= len) {
+      loadProof(i); const P = C.proof[i];
+      show($('capProof'), true);
+      const out = inCubic(prog(st, len - 0.24, 0.2));
+      $('proofKick').style.opacity = outCubic(prog(st, 0.12, 0.25)) * (1 - out);
+      [$('proofName'), $('proofName2')].forEach((ln, j) => { ln.style.transform = `translateY(${lerp(115, 0, outQuint(prog(st, 0.14 + j * 0.09, 0.42))) - 115 * out}%)`; });
+      // review card
+      const ca = outBack(prog(st, 0.7, 0.5)), cb = inCubic(prog(st, len - 0.3, 0.26));
+      show($('card'), st > 0.7);
+      const h = $('card').offsetHeight; $('card').style.top = (1828 - h) + 'px';
+      $('card').style.transform = `translateY(${lerp(h + 160, 0, ca) + (h + 160) * cb}px) rotate(${lerp(2.5, 0, clamp(ca))}deg)`;
+      const w = outCubic(prog(st, 1.35, 0.55)) * 100;
+      $('quote').querySelectorAll('mark').forEach((m) => m.style.setProperty('--w', w + '%'));
+      const sf = prog(st, 0.95, 0.5);
+      $('stars').style.clipPath = `inset(0 ${100 - sf * 100}% 0 0)`;
+      // stat sticker
+      if (P.stat) {
+        const sa = outBack(prog(st, 1.7, 0.42)), sb = inCubic(prog(st, len - 0.28, 0.22));
+        show($('stat'), st > 1.7);
+        $('stat').style.transform = `scale(${Math.max(0, sa) * (1 - sb)}) rotate(${lerp(-24, 9, clamp(sa))}deg)`;
+      }
+    }
+  }
+
+  // ---------- cta ----------
+  show($('cta'), inCta);
+  if (inCta) {
+    const ct = t - T.cta;
+    setFrame('lead', C.lead.frames, C.lead.cta_frame + ct * fps * 0.2, C.lead.count);
+    const a = outBack(prog(ct, 0.05, 0.6));
+    place('lead', lerp(1150, 0, clamp(a)), lerp(150, 104, outCubic(prog(ct, 0, 5))), 0.68, lerp(9, -3.5, clamp(a)), true);
+    $('ctaKick').style.opacity = outCubic(prog(ct, 0.3, 0.3));
+    const u = prog(ct, 0.42, 0.24);
+    $('ctaBig').style.transform = `translateY(${lerp(115, 0, outQuint(prog(ct, 0.38, 0.45)))}%)`;
+    $('ctaSub').style.opacity = outCubic(prog(ct, 0.9, 0.35)); $('ctaSub').style.transform = `translateY(${lerp(24, 0, outCubic(prog(ct, 0.9, 0.35)))}px)`;
+    $('brand').style.opacity = outCubic(prog(ct, 1.5, 0.45));
+    $('rule').style.transform = `scaleX(${outQuint(prog(ct, 1.5, 0.5))})`;
+  } else if (!inLead) { place('lead', 0, 0, 1, 0, false); }
+
+  // ---------- flashes on the section hits ----------
+  let f = 0;
+  [[T.lead, 0.85], [T.proof, 0.5], [T.cta, 0.6]].concat(C.proof.slice(1).map((_, i) => [T.proof + (i + 1) * T.proof_len, 0.3]))
+    .forEach(([ft, amt]) => { if (t >= ft) f = Math.max(f, amt * (1 - prog(t, ft, 0.26))); });
+  $('flash').style.opacity = f * f;
+
+  await Promise.all(pending);
+  return true;
+}
+</script>
+</body>
+</html>
