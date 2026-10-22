@@ -28,12 +28,50 @@ PACKS = {
  "P11": dict(disp="Big Shoulders Display", body="Libre Franklin", dw="700;800", bw="400;600"),
  "P19": dict(disp="Titillium Web",         body="Mulish",         dw="600;700", bw="400;600"),
  "P18": dict(disp="Cabin Condensed",       body="Merriweather Sans", dw="600;700", bw="400;600"),
+ # ---- added 2026-10-21 (Ricky: more fonts/styles so the library stops looking alike).
+ # Optional per-pack knobs, defaults match every pack above so old pages rebuild
+ # byte-identical:  r = corner radius for buttons/inputs (default 4px),
+ #                  tr = heading letter-spacing (default .02em).
+ "P20": dict(disp="Oswald",           body="Source Sans 3",  dw="600;700",     bw="400;600"),
+ "P21": dict(disp="Barlow Condensed", body="Barlow",         dw="600;700;800", bw="400;600", tr=".03em"),
+ "P22": dict(disp="Rajdhani",         body="Nunito Sans",    dw="600;700",     bw="400;600", r="2px"),
+ "P23": dict(disp="Bebas Neue",       body="Open Sans",      dw="400",         bw="400;600", tr=".04em"),
+ "P24": dict(disp="Montserrat",       body="Lato",           dw="700;800",     bw="400;700", r="999px", tr="0"),
+ "P25": dict(disp="Poppins",          body="Work Sans",      dw="600;700",     bw="400;600", r="10px", tr="0"),
+ "P26": dict(disp="Roboto Slab",      body="Roboto",         dw="700;800",     bw="400;500", r="2px", tr="0"),
+ "P27": dict(disp="Merriweather",     body="Source Sans 3",  dw="700;900",     bw="400;600", r="0", tr="0"),
+ "P28": dict(disp="Playfair Display", body="Lato",           dw="700;800",     bw="400;700", r="0", tr="0"),
+ "P29": dict(disp="Bitter",           body="Inter",          dw="700;800",     bw="400;600", r="3px", tr="0"),
+ "P30": dict(disp="Space Grotesk",    body="DM Sans",        dw="600;700",     bw="400;600", r="8px", tr="-.01em"),
+ "P31": dict(disp="Teko",             body="Hind",           dw="600;700",     bw="400;600", tr=".05em"),
+ "P32": dict(disp="Saira Condensed",  body="Mulish",         dw="600;700",     bw="400;600", r="0", tr=".03em"),
+ "P33": dict(disp="Fjalla One",       body="Noto Sans",      dw="400",         bw="400;600", tr=".03em"),
+ "P34": dict(disp="Lora",             body="Open Sans",      dw="600;700",     bw="400;600", r="6px", tr="0"),
+ "P35": dict(disp="Outfit",           body="Figtree",        dw="600;700;800", bw="400;600", r="14px", tr="-.01em"),
 }
+
+def pack_counts(demo=None):
+    """How many live pages use each pack (read from the style-pack comment)."""
+    import glob, collections
+    out = collections.Counter()
+    for f in glob.glob(os.path.join(demo or DEMO, "*", "index.html")):
+        with open(f, encoding="utf-8") as fh:
+            m = re.match(r"<!-- style-pack: (P\d+)", fh.read(120))
+        if m: out[m.group(1)] += 1
+    return out
+
+def pick_pack():
+    """Least-used pack first, so fonts rotate instead of repeating. Ties by name."""
+    c = pack_counts()
+    return sorted(PACKS, key=lambda k: (c.get(k, 0), k))[0]
 
 def esc(x): return html.escape(x, quote=True)
 
 def build(d):
+    if d.get("pack") in (None, "", "auto"):
+        d["pack"] = pick_pack()
     pk = PACKS[d["pack"]]; slug=d["slug"]; A=d["accent"]; DK=d["dark"]; OFF=d["off"]
+    R = pk.get("r", "4px"); TR = pk.get("tr", ".02em")
     # ---- assets
     # scenes.painting() (and any other builder without a variant axis) does not
     # accept variant=. Every run rediscovered this as a TypeError; handled here
@@ -115,7 +153,7 @@ def build(d):
 *{{box-sizing:border-box;margin:0;padding:0}}
 html{{scroll-behavior:smooth}}
 body{{font-family:'{pk["body"]}',system-ui,sans-serif;background:var(--off);color:var(--dark);line-height:1.65;overflow-x:hidden}}
-h1,h2,h3{{font-family:'{pk["disp"]}',system-ui,sans-serif;font-weight:700;letter-spacing:.02em;line-height:1.1}}
+h1,h2,h3{{font-family:'{pk["disp"]}',system-ui,sans-serif;font-weight:700;letter-spacing:{TR};line-height:1.1}}
 a{{color:inherit;text-decoration:none}}
 img{{display:block;max-width:100%}}
 .wrap{{max-width:1120px;margin:0 auto;padding:0 24px}}
@@ -124,7 +162,7 @@ nav.top{{position:sticky;top:0;z-index:900;display:flex;align-items:center;justi
 nav.top .mark{{font-family:'{pk["disp"]}';font-weight:800;color:#fff;font-size:1.12rem;letter-spacing:.03em}}
 nav.top .mark em{{color:{A};font-style:normal}}
 nav.top .links{{display:flex;gap:20px;align-items:center;font-size:.92rem;color:#dfe3e1}}
-nav.top .call{{background:{A};color:{DK};font-weight:700;padding:9px 18px;border-radius:4px;white-space:nowrap}}
+nav.top .call{{background:{A};color:{DK};font-weight:700;padding:9px 18px;border-radius:{R};white-space:nowrap}}
 @media(max-width:820px){{nav.top .links a:not(.call){{display:none}}}}
 /* ---- HERO ({d["pack"]}) ---- */
 .hero{{position:relative;min-height:86vh;display:flex;align-items:flex-end;overflow:hidden;background:{DK}}}
@@ -141,7 +179,7 @@ nav.top .call{{background:{A};color:{DK};font-weight:700;padding:9px 18px;border
 .hero h1{{font-size:clamp(2.1rem,5.6vw,3.7rem);margin-bottom:16px;text-shadow:0 3px 20px rgba(0,0,0,.45)}}
 .hero h1 span{{color:{A}}}
 .hero p{{font-size:1.12rem;color:#e6eae8;max-width:560px;margin-bottom:30px}}
-.btn{{display:inline-block;background:{A};color:{DK};font-weight:700;padding:15px 34px;border-radius:4px;
+.btn{{display:inline-block;background:{A};color:{DK};font-weight:700;padding:15px 34px;border-radius:{R};
   border:2px solid {A};transition:.2s}}
 .btn:hover{{background:transparent;color:{A}}}
 /* ---- sections ---- */
@@ -185,11 +223,11 @@ section{{padding:82px 0}}
 @media(max-width:820px){{.cwrap{{grid-template-columns:1fr}}}}
 .form{{background:#fff;border:1px solid #e3e6e3;border-radius:8px;padding:28px}}
 .form label{{display:block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 6px;color:#5d6663}}
-.form input,.form textarea,.form select{{width:100%;padding:12px;border:1px solid #d8dcd8;border-radius:4px;font:inherit}}
-.form button{{margin-top:20px;width:100%;background:{A};color:{DK};border:none;padding:15px;border-radius:4px;
+.form input,.form textarea,.form select{{width:100%;padding:12px;border:1px solid #d8dcd8;border-radius:{R};font:inherit}}
+.form button{{margin-top:20px;width:100%;background:{A};color:{DK};border:none;padding:15px;border-radius:{R};
   font-weight:700;font-size:1rem;cursor:pointer}}
 .callbox{{background:{DK};color:#fff;border-radius:8px;padding:30px}}
-.callbox a.big{{display:inline-block;background:{A};color:{DK};font-weight:700;padding:14px 26px;border-radius:4px;margin-top:12px}}
+.callbox a.big{{display:inline-block;background:{A};color:{DK};font-weight:700;padding:14px 26px;border-radius:{R};margin-top:12px}}
 footer{{background:{DK};color:#9aa3a0;text-align:center;padding:30px 24px;font-size:.86rem}}
 /* sticky mobile call bar */
 .sticky{{display:none}}
