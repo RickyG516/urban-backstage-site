@@ -238,6 +238,27 @@ PALETTES = [
     dict(name="heather",          dark="#131020", accent="#9476b2", off="#f4f3f8", band="violet"),
     dict(name="orchid-slate",     dark="#131020", accent="#a076b2", off="#f4f3f8", band="violet"),
     dict(name="ash-stone",        dark="#121315", accent="#878382", off="#f4f5f6", band="grey"),
+    # ---- added 2026-10-08: pool was exhausted (103 entries, every accent was already live).
+    #      Hue, saturation AND lightness deliberately spread so these read as different
+    #      colours, not four shades of one. All pass audit() and collide with no live accent.
+    dict(name="ash-mist",          dark="#141517", accent="#a39e99", off="#f5f5f6", band="grey"),
+    dict(name="pewter-cool",       dark="#101112", accent="#aeb2b7", off="#f5f5f6", band="grey"),
+    dict(name="stone-warm",        dark="#16171a", accent="#9e998a", off="#f5f5f6", band="grey"),
+    dict(name="slate-blue-grey",   dark="#121315", accent="#a0a4b1", off="#f5f5f6", band="grey"),
+    dict(name="iris-haze",         dark="#141019", accent="#ac98cd", off="#f5f3f8", band="violet"),
+    dict(name="wisteria-iron",     dark="#15121a", accent="#a07eb4", off="#f5f3f8", band="violet"),
+    dict(name="orchid-dusk",       dark="#16121b", accent="#bb8ec2", off="#f5f3f8", band="violet"),
+    dict(name="aqua-slate",        dark="#101617", accent="#79b9c3", off="#f0f6f6", band="teal"),
+    dict(name="verdigris",         dark="#111718", accent="#59c5c1", off="#f0f6f6", band="teal"),
+    dict(name="fern-light",        dark="#0f1512", accent="#9bc68b", off="#f2f6f3", band="green"),
+    dict(name="sage-pale",         dark="#111613", accent="#afcbae", off="#f2f6f3", band="green"),
+    dict(name="laurel-deep",       dark="#121514", accent="#74b485", off="#f2f6f3", band="green"),
+    dict(name="meadow-slate",      dark="#101612", accent="#9bb785", off="#f2f6f3", band="green"),
+    dict(name="powder-steel",      dark="#0f141b", accent="#a9bfd1", off="#f1f4f7", band="blue"),
+    dict(name="cadet-mist",        dark="#101419", accent="#8d9ab9", off="#f1f4f7", band="blue"),
+    dict(name="glacier-slate",     dark="#111620", accent="#9c9dc9", off="#f1f4f7", band="blue"),
+    dict(name="rosewood-light",    dark="#161011", accent="#c8939a", off="#f7f3f3", band="red"),
+    dict(name="dusty-rose",        dark="#171213", accent="#d7a9a2", off="#f7f3f3", band="red"),
 ]
 
 # How much of the pool each band may occupy on FUTURE batches. Warm is capped
