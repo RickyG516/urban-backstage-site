@@ -2263,5 +2263,29 @@
   "photos": "generated",
   "ready": true,
   "stage": "none"
+ },
+ "wi-aaa-tree-stump-oshkosh": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-19 (company 353650555639) | No-website VERIFIED 2026-10-19, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element -- same-session CONTROL Stang Tree Service (Oshkosh WI, same tree category, same BBB office 'BBB Serving Wisconsin') DID render a 'Visit Website' button -> stangtreeserviceoshkosh.com, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on aaatreeandstumpservice.com returned ZERO links; (3) aaatreeandstump.com IS live but titled 'AAA Tree Service - Orange Park' = a FLORIDA namesake, not theirs. METHOD: BBB absence + proven same-category control + domain-scoped search. CONFIDENCE HIGH on the website finding. Owner Dave Wilkins (BBB). Revenue proof: BBB file opened 1/11/2006 = 20 YEARS, BBB A+, fixed commercial yard at 2340 Geneva St (not service-area-only). NOT found: reviews, crew size, employees, fleet, commercial contracts -- revenue rests on 20-year longevity + A+ only, MEDIUM. PHONE ONLY, no social. CALL WARNINGS: do NOT tell him he has a website (the live aaatreeandstump.com is a Florida namesake); a BizQuest ad for an unnamed 'Established Tree Service, Modern Fleet' in the Fox Valley surfaced in search but was NOT confirmed to be AAA -- never reference or imply it.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-flooring-images-waterloo": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-19 (company 353702400750) | No-website VERIFIED 2026-10-19, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element -- same-session CONTROL BK Flooring (Cedar Falls IA, flooring category, SAME BBB office 'serving Greater Iowa, Quad Cities and Siouxland') DID render a 'Visit Website' button -> bktile.com, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on flooringimages.com, flooringimagesia.com and flooringimageswaterloo.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced only aggregators (thisoldhouse, homeadvisor, downtobid, a Lowe's install-desk page) and unrelated firms. METHOD: BBB absence + proven same-category/same-office control + domain-scoped search. CONFIDENCE HIGH on the website finding. Owner Adam Ostby (BBB). Revenue proof: BBB file opened 7/3/2013 = 13 YEARS, fixed shop address 2215 Avon Ave (real storefront, not service-area-only). NOT found: reviews, crew size, employees, commercial work. BBB is 'Not Rated' = insufficient info, NOT a negative. MEDIUM-LOW -- qualify budget on the call. PHONE ONLY, no social. CALL WARNINGS: do not compliment his BBB rating, there isn't one; Iowa flooring produced 4 of 4 false BBB website signals in recent prospecting, so do not assume his competitors lack sites.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-covenant-carpentry-omro": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-19 (company 353702400751) | No-website VERIFIED 2026-10-19, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element and offers 'Email Business' instead -- CONTROL Stang Tree Service renders a website button in the SAME BBB office (BBB Serving Wisconsin, 0694) but a DIFFERENT category, so this control is WEAKER than the other two in this batch; (2) domain-scoped WebSearch on covenantcarpentry.com, covenantcarpentryanddesign.com and covenantcarpentrywi.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced only directory aggregators (angi, homeadvisor, BBB category pages). METHOD: BBB absence + same-office (not same-category) control + domain-scoped search + plain search. CONFIDENCE MEDIUM-HIGH on the website finding. Owner Joshua D. Stertz (BBB, re-verified live this run). Revenue proof: started 1/12/2018, BBB file 5/15/2018 = 8 YEARS, registered LLC, BBB A+, carries Custom Home Builder / Home Additions / Stair Builders among 13 categories = structural scope not handyman. NOT found: employees, reviews, crew, commercial work. THINNEST REVENUE PROOF IN THIS BATCH. MEDIUM-LOW. PHONE ONLY, no social. CALL WARNINGS: qualify budget BEFORE pitching a retainer, this may be a one- or two-man shop; do not cite reviews or crew size, neither is known; 'Covenant' reads faith-based, do not comment either way.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
  }
 }
