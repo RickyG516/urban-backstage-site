@@ -254,7 +254,10 @@
   "note": "in HubSpot 2026-08-07 (company 338518286034) | TWO dead domains: dietzenterprises.com is a 'pardon our dust' placeholder AND dietzenterprisesllc.com is a parked GoDaddy ad page (Real Estate / Apartment For Rent / Personals) - his business email runs on that second one. 427 followers. | 2026-08-14 retuned to HIS brand: red/black/silver pulled from his own logo, gold palette removed. Clean transparent logo (white knocked out of his real logo asset) in nav + hero. | owner is DALTON, named in a Facebook review | 4 real reviews total: 3 Facebook recommendations + 1 Google 5.0, all four quoted on the page | FB DM planned 2026-08-15 | 3 REAL job photos on the page (stamped patio, steps + retaining wall, pole barn slab) replacing generated art | chat widget named DOZER and actually wired (library-wide the button was dead) | FB link in nav + footer",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t2_drive": "2026-10-22"
+  }
  },
  "ia-dimmer-brothers-dubuque": {
   "channel": "phone",
@@ -621,7 +624,8 @@
    "link_sent": true,
    "status": "manual-outside-sequence",
    "t2_video": "2026-10-22",
-   "t2_note": "video attached, draft typed, awaiting Ricky send"
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
   }
  },
  "ia-ness-custom-flooring-k3n7wd": {
@@ -686,7 +690,8 @@
    "sent": "2026-10-09",
    "seen": "2026-10-09",
    "t2_video": "2026-10-22",
-   "t2_note": "video attached, draft typed, awaiting Ricky send"
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
   }
  },
  "ia-pk-termite-control-yoilo8": {
@@ -729,7 +734,8 @@
    "replied": "2026-10-21",
    "reply_gist": "only has a Facebook page, not interested in a website right now",
    "t2_video": "2026-10-21",
-   "t2_note": "video sent back same night as the answer to not interested"
+   "t2_note": "video sent back same night as the answer to not interested",
+   "t2_drive": "2026-10-22"
   }
  },
  "ia-rabalais-electric-1nc4aj": {
@@ -1252,7 +1258,8 @@
    "seen": "<=2026-10-12",
    "status": "manual-outside-sequence",
    "t2_video": "2026-10-22",
-   "t2_note": "video attached, draft typed, awaiting Ricky send"
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
   }
  },
  "il-hard-rock-terrazzo-f5nrfi": {
@@ -1744,7 +1751,8 @@
    "sent": "2026-10-09",
    "seen": "2026-10-09",
    "t2_video": "2026-10-22",
-   "t2_note": "video attached, draft typed, awaiting Ricky send"
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
   }
  },
  "wi-davenport-flooring-eau-claire": {
@@ -1977,7 +1985,8 @@
    "variant": "C",
    "sent": "2026-10-12",
    "t2_video": "2026-10-21",
-   "t2_note": "video attached by Claude, sent by Ricky 8:23 PM; first attach attempt failed, second went through"
+   "t2_note": "video attached by Claude, sent by Ricky 8:23 PM; first attach attempt failed, second went through",
+   "t2_drive": "2026-10-22"
   }
  },
  "wi-switlick-and-sons-athens": {

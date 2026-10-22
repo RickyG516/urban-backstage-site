@@ -44,13 +44,45 @@ For each slug:
    - no reply yet: `Figured I'd save you the click. 35 seconds, your homepage start to finish.`
    - they replied: `Appreciate the reply. Made this so you can see it without clicking around. 35 seconds.`
    Messenger keeps the attachment and text as a draft in that thread.
-4. Do not click send. Do not press Enter. Move to the next thread.
+4. Do not click send. Do not press Enter. Move to the next thread BY CLICKING inside
+   Messenger (search box → result row), never by `navigate` to a thread URL.
+   Drafts (video + text) live only in the open tab's memory: a page load wipes them,
+   switching threads in-app keeps them. Verified 2026-10-22.
+5. When all threads are done, LEAVE THE MESSENGER TAB OPEN. Closing or reloading it
+   loses every draft. Tell Ricky to use that tab and not refresh it.
 
 If the first `file_upload` shows "Couldn't send" after Ricky sends, a second attach
 of the same file has worked before. Note it in the summary.
 
 If the Chrome tools are missing or the computer is unreachable: still build the
 videos, then write the list below and stop. Ricky attaches by hand.
+
+## 3b. Save every built video to Google Drive (same Chrome session)
+Folder: REVENUE & GROWTH / Mockup Videos
+https://drive.google.com/drive/folders/1boti0YyWDw2NlHSLvfTj2qLxEiEWZkKp
+Every video that gets built goes here, attached in Messenger or not, named by business.
+
+1. Copy each `-send.mp4` to `/mnt/user-data/outputs/drive/<Business Name> - T2 video YYYY-MM-DD.mp4`
+   (business name from the mockup `<title>`, drop the tagline after the first `|`).
+2. In a NEW tab, `navigate` to the folder URL above. Drive has no `input type=file` in the
+   DOM until the native picker opens, so inject one with `javascript_tool`:
+   ```
+   const i=document.createElement('input');i.type='file';i.multiple=true;i.id='cwUploadInput';
+   i.setAttribute('aria-label','cw upload input');i.style.cssText='position:fixed;top:0;left:0;z-index:99999';
+   document.body.appendChild(i);'ok'
+   ```
+3. `find` "file input labeled cw upload input", `file_upload` the renamed files to that ref
+   (two per call keeps each call under 10 MB).
+4. Fire a synthetic drop so Drive picks them up:
+   ```
+   const inp=document.getElementById('cwUploadInput');const dt=new DataTransfer();
+   [...inp.files].forEach(f=>dt.items.add(f));const x=1000,y=450;const zone=document.elementFromPoint(x,y);
+   const mk=t=>new DragEvent(t,{bubbles:true,cancelable:true,dataTransfer:dt,clientX:x,clientY:y});
+   zone.dispatchEvent(mk('dragenter'));await new Promise(r=>setTimeout(r,300));
+   zone.dispatchEvent(mk('dragover'));await new Promise(r=>setTimeout(r,300));zone.dispatchEvent(mk('drop'));'dropped'
+   ```
+   Screenshot: the "uploads complete" panel must list each file. If a drop does nothing,
+   wait 2 s and fire it again. Repeat 3-4 for the next pair. Close the tab when done.
 
 ## 4. Log
 In `demo/status.json`, for each slug attached set `fb_dm.t2_video` = today
