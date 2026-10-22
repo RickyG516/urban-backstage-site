@@ -292,3 +292,13 @@ footer .legal{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--li
 }
 
 .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.8rem}
+
+/* blog */
+.post-body{margin:0 auto}
+.post-body h2{margin:2.2rem 0 .8rem}
+.post-body ul.ticks{margin:0 0 1.2rem}
+.post-body a{color:var(--accent-hi);text-decoration:underline}
+.post-body strong{color:#fff}
+.post-meta{display:block;font-size:.78rem;color:var(--mute);margin-top:.9rem;letter-spacing:.04em}
+.postlist .mini p{color:#b0aba2}
+@media(max-width:860px){.postlist{grid-template-columns:1fr!important}}

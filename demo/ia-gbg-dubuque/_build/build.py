@@ -227,10 +227,11 @@ def nav(r):
     <div class="menu-col">
       <h4 style="--i:0">Company</h4>
       <a class="sm" href="{r}service-areas/" style="--i:1">Service areas</a>
-      <a class="sm" href="{r}careers/" style="--i:2">Careers</a>
-      <a class="sm" href="{r}#contact" style="--i:3">Request an estimate</a>
-      <a class="mcall" href="tel:{PHONE_TEL}" style="--i:4">{PHONE_DISPLAY}</a>
-      <p class="mnote" style="--i:5">Locally owned. Serving Dubuque and communities within about 30 miles.</p>
+      <a class="sm" href="{r}blog/" style="--i:2">Blog</a>
+      <a class="sm" href="{r}careers/" style="--i:3">Careers</a>
+      <a class="sm" href="{r}#contact" style="--i:4">Request an estimate</a>
+      <a class="mcall" href="tel:{PHONE_TEL}" style="--i:5">{PHONE_DISPLAY}</a>
+      <p class="mnote" style="--i:6">Locally owned. Serving Dubuque and communities within about 30 miles.</p>
     </div>
   </div>
 </div>
@@ -251,7 +252,7 @@ def footer(r):
       </div>
       <div><h4>Services</h4><ul>{svc}</ul></div>
       <div><h4>Areas</h4><ul>{towns}<li><a href="{r}service-areas/">All service areas</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="{r}careers/">Careers</a></li><li><a href="{r}#contact">Request an estimate</a></li><li><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="{r}blog/">Blog</a></li><li><a href="{r}careers/">Careers</a></li><li><a href="{r}#contact">Request an estimate</a></li><li><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li></ul></div>
     </div>
     <div class="legal"><span>&copy; {datetime.date.today().year} GBG Dubuque &middot; Dubuque, Iowa</span><span>Trusted-partner services are coordinated by GBG and performed by independent local businesses.</span></div>
   </div>
@@ -771,9 +772,132 @@ def build_careers():
 ''' + sticky(r) + footer(r)
     write('careers/index.html', h)
 
+# --------------------------------------------------------------------------
+# Blog (drafts live in gbg/_build/blog/drafts/*.md, shared by both site copies)
+# --------------------------------------------------------------------------
+import re as _re, glob as _glob
+
+BLOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'gbg', '_build', 'blog', 'drafts')) \
+    if os.path.isdir(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'gbg', '_build', 'blog', 'drafts')) \
+    else os.path.join(os.path.dirname(__file__), 'blog', 'drafts')
+
+def _inline(t, r):
+    t = esc(t)
+    def link(m):
+        href = m.group(2)
+        if href.startswith('/'): href = r + href.lstrip('/')
+        return f'<a href="{href}">{m.group(1)}</a>'
+    t = _re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', link, t)
+    t = _re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', t)
+    return t
+
+def load_posts():
+    posts = []
+    for path in sorted(_glob.glob(os.path.join(BLOG_DIR, '*.md')), reverse=True):
+        raw = open(path, encoding='utf-8').read()
+        m = _re.match(r'---\n(.*?)\n---\n(.*)', raw, _re.S)
+        if not m: continue
+        meta = {}
+        for line in m.group(1).splitlines():
+            if ':' in line:
+                k, v = line.split(':', 1); meta[k.strip()] = v.strip()
+        body = m.group(2).strip()
+        date = os.path.basename(path)[:10]
+        main, faq = body, []
+        parts = _re.split(r'\n## FAQ\s*\n', body, maxsplit=1)
+        if len(parts) == 2:
+            main = parts[0].strip()
+            for blk in _re.split(r'\n\s*\n', parts[1].strip()):
+                lines = blk.strip().splitlines()
+                q = lines[0].strip().strip('*').strip()
+                a = ' '.join(l.strip() for l in lines[1:])
+                if q and a: faq.append((q, a))
+        meta.update(date=date, main=main, faq=faq)
+        posts.append(meta)
+    return posts
+
+def md_html(md, r):
+    out, para, items = [], [], []
+    def flush():
+        nonlocal para, items
+        if para: out.append('<p>' + _inline(' '.join(para), r) + '</p>'); para = []
+        if items: out.append('<ul class="ticks">' + ''.join(f'<li>{_inline(i, r)}</li>' for i in items) + '</ul>'); items = []
+    for line in md.splitlines():
+        s = line.strip()
+        if not s: flush()
+        elif s.startswith('## '): flush(); out.append('<h2>' + _inline(s[3:], r) + '</h2>')
+        elif s.startswith('- '):
+            if para: flush()
+            items.append(s[2:])
+        else:
+            if items: flush()
+            para.append(s)
+    flush()
+    return '\n'.join(out)
+
+def fmt_date(d):
+    return datetime.date.fromisoformat(d).strftime('%B %-d, %Y')
+
+def build_blog():
+    posts = load_posts()
+    if not posts: return
+    # index
+    r = '../'
+    page = dict(title='Blog: Exterior Care Tips for Dubuque Homeowners | GBG Dubuque',
+                desc='Plain advice on permanent lights, driveway sealing and exterior care for homeowners in Dubuque, Iowa and the tri-state area.',
+                path='blog/', schema=[business_ld(False), crumbs_ld([('Home', url()), ('Blog', url('blog/'))])])
+    cards = ''.join(
+        f'<a class="mini rv d{i%3}" href="{p["slug"]}/"><span class="pill in">{esc(SVC[p["service_page"].strip("/")]["name"]) if p["service_page"].strip("/") in SVC else "Exterior care"}</span>'
+        f'<h3>{esc(p["title"])}</h3><p>{esc(p["meta_description"])}</p><span class="post-meta">{fmt_date(p["date"])}</span><span class="go">Read more &rarr;</span></a>'
+        for i, p in enumerate(posts))
+    h = head(page, r) + svg_defs() + nav(r)
+    h += f"""<main id="main">
+<header class="phero"><div class="wrap">
+  <div class="crumbs rv"><a href="../">Home</a><span>/</span>Blog</div>
+  <div class="eyebrow rv">From the crew &middot; Dubuque, Iowa</div>
+  <h1 class="rv d1">The blog,<br><em>plain advice for your home.</em></h1>
+  <p class="lead rv d2">Straight answers on lighting, driveways and the rest of the exterior, written for Dubuque homeowners.</p>
+</div></header>
+<section class="sec alt"><div class="wrap"><div class="grid6 postlist">{cards}</div></div></section>
+{contact_section('Not sure yet', 'Questions about your home?')}
+</main>
+""" + sticky(r) + footer(r)
+    write('blog/index.html', h)
+    # posts
+    r = '../../'
+    for p in posts:
+        sp = p['service_page'].strip('/')
+        svc_name = SVC[sp]['name'] if sp in SVC else 'Not sure yet'
+        ld_post = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p['title'],
+                   "description": p['meta_description'], "datePublished": p['date'], "dateModified": p['date'],
+                   "mainEntityOfPage": url('blog/%s/' % p['slug']),
+                   "author": {"@type": "Organization", "name": "GBG Dubuque"},
+                   "publisher": {"@type": "Organization", "name": "GBG Dubuque"}}
+        schema = [business_ld(False), ld_post, crumbs_ld([('Home', url()), ('Blog', url('blog/')), (p['title'], url('blog/%s/' % p['slug']))])]
+        if p['faq']: schema.append(faq_ld(p['faq']))
+        page = dict(title=p['title'] + ' | GBG Dubuque', desc=p['meta_description'], path='blog/%s/' % p['slug'], schema=schema)
+        faq = ''
+        if p['faq']:
+            faq = f'<section class="sec alt"><div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">Quick answers.</h2></div>{faq_html(p["faq"])}</div></section>'
+        h = head(page, r) + svg_defs() + nav(r)
+        h += f"""<main id="main">
+<header class="phero"><div class="wrap">
+  <div class="crumbs rv"><a href="../../">Home</a><span>/</span><a href="../">Blog</a><span>/</span>{esc(p['title'])}</div>
+  <div class="eyebrow rv">{fmt_date(p['date'])} &middot; Dubuque, Iowa</div>
+  <h1 class="rv d1" style="font-size:clamp(2.2rem,5vw,3.8rem)">{esc(p['title'])}</h1>
+</div></header>
+<section class="sec"><div class="wrap"><article class="prose post-body">
+{md_html(p['main'], r)}
+</article></div></section>
+{faq}
+{contact_section(svc_name)}
+</main>
+""" + sticky(r) + footer(r)
+        write('blog/%s/index.html' % p['slug'], h)
+
 def build_files():
     write('assets/favicon.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90"><rect width="90" height="90" rx="16" fill="#1a1a1a"/><g fill="#e36b1e"><rect x="8" y="58" width="22" height="22" rx="2"/><rect x="34" y="58" width="22" height="22" rx="2"/><rect x="60" y="58" width="22" height="22" rx="2"/><rect x="21" y="33" width="22" height="22" rx="2"/><rect x="47" y="33" width="22" height="22" rx="2"/><rect x="34" y="8" width="22" height="22" rx="2"/></g></svg>')
-    pages = [('', '1.0')] + [(s['slug'] + '/', '0.9' if i < 2 else '0.7') for i, s in enumerate(SERVICES)] + [('service-areas/', '0.8'), ('careers/', '0.4')]
+    pages = [('', '1.0')] + [(s['slug'] + '/', '0.9' if i < 2 else '0.7') for i, s in enumerate(SERVICES)] + [('service-areas/', '0.8'), ('blog/', '0.6')] + [('blog/%s/' % p['slug'], '0.6') for p in load_posts()] + [('careers/', '0.4')]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for p, pr in pages:
         sm += f'  <url><loc>{url(p.rstrip("/")) if p else BASE + "/"}{"/" if p else ""}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n'
@@ -789,5 +913,6 @@ if __name__ == '__main__':
     for s in SERVICES: build_service(s)
     build_areas()
     build_careers()
+    build_blog()
     build_files()
     print('built', 'PRODUCTION' if PROD else 'STAGING', '->', OUT)
