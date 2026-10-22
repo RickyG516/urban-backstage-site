@@ -2287,5 +2287,29 @@
   "photos": "generated",
   "ready": true,
   "stage": "none"
+ },
+ "ia-pinecrest-construction-hazleton": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-20 (company 353858148077) | No-website VERIFIED 2026-10-20, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element -- same-session, same-BBB-office (0664), same-category CONTROL JSR Construction Inc (Elk Run Heights IA) DID render the button -> jsrconstruction.net, as did Permanent Roofing Specialists, Legacy Roofing of Iowa, T & R Construction and Town & Country Home Improvement, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on pinecrestconstruction.com / pinecrestconstructionllc.com / pinecrestconstructioniowa.com returned ONLY an unrelated Broward County FLORIDA luxury home builder; (3) extended WebSearch on name+city+owner surfaced directories only (BuildZoom, MapQuest, bidroom, CentralIndex, YellowPages, Nextdoor). CONFIDENCE HIGH. Owner Marvin Gingerich (BBB). Revenue: 17 yrs, BBB A+ accredited since 2015 (11 yrs), three exterior trade lines plus additions and post-frame. ADDRESS CONFLICT unresolved: BBB 1592 150th St vs MapQuest/CentralIndex 1345 Isaac Ave. CALL WARNING: pinecrestconstruction.com is a Florida namesake; 'Gingerich Roofing Solutions' Hazleton may be a related entity -- ask, do not assume. PENDING PUSH as of 2026-10-20.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-craft-masonry-slinger": {
+  "channel": "phone+fb",
+  "fb": "https://www.facebook.com/p/Craft-Masonry-Inc-100067734845231/",
+  "note": "in HubSpot 2026-10-20 (company 353929508596) | No-website VERIFIED 2026-10-20, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element -- same-session, same-BBB-office (0694), same-category CONTROL Dale Anderson Masonry Inc (Allenton WI, mason-contractors) DID render the button -> damasonry.com, as did Clare Contracting LLC (Neenah WI), so the absence is real; (2) domain-scoped WebSearch on craftmasonry.com / craftmasonrycompany.com / craftmasonrywi.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced aggregators only (thebuildermarket, levelset, West Bend Area Chamber, BBB). CONFIDENCE HIGH. Owner Wayne Scherwinski, President; Roxanne Lind, VP (BBB). Revenue: 59 yrs (since 1967), two named corporate officers, seven service lines across masonry AND concrete, own excavation equipment, BBB A+ accredited since 2012. Only a PO Box is published -- no street address. CALL WARNING: BBB says 'Craft Masonry Company', the Facebook page says 'Craft Masonry, Inc.' -- unresolved, do not correct him on his own company name. BBB also notes the business does not pull permits; that is answered honestly in the page FAQ, do not pitch it as a problem. PENDING PUSH as of 2026-10-20.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
+ },
+ "wi-jr-rogers-carpentry-plymouth": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-20 (company 353818511062) | No-website VERIFIED 2026-10-20, unattended run, no browser: (1) live BBB profile HTML carries NO website field at all -- same-session, same-BBB-office (0694), same-category CONTROL Clare Contracting LLC (Neenah WI, carpenter) DID render the button -> clarecontractingllc.com, as did Dale Anderson Masonry (Allenton WI), so the absence is real; (2) domain-scoped WebSearch on jrrogerscarpentry.com returned ZERO links; (3) no Facebook page found either. CONFIDENCE HIGH on the website finding. Owner Joseph R. Rogers (BBB). Revenue: 36 yrs in business, BBB A+ accredited since 2005 -- 21 years of continuous accreditation, the strongest signal on the record -- registered WI LLC, six service lines rough-through-finish. WEAKER on depth: no employee count, crew size, review count or contract award is published anywhere findable, so this is a longevity record not a quantified one. Likely a one-to-two man finish shop, which is what the page leans into ('you get Joe'). Only Plymouth WI 53073 published -- no street address. CALL WARNING: the (414) area code is Milwaukee, almost certainly a long-held mobile -- do not suggest he is not local. 'Joe' on the page is our inference from Joseph R. Rogers. PENDING PUSH as of 2026-10-20.",
+  "photos": 0,
+  "ready": true,
+  "stage": "none"
  }
 }
