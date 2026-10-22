@@ -12,7 +12,7 @@ import argparse, asyncio, base64, functools, http.server, json, os, re, socketse
 from urllib.parse import urlparse, parse_qs
 from playwright.async_api import async_playwright
 
-FONT_DIR = "/home/claude/hype/fonts"
+FONT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".fonts")
 VW, VH, DSF = 390, 780, 2
 UA = ("Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 "
       "(KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1")
@@ -35,6 +35,9 @@ def font_pkg(family):
     slug = family.strip().lower().replace(" ", "-")
     pkg = os.path.join(FONT_DIR, "node_modules", "@fontsource", slug)
     if not os.path.isdir(pkg):
+        os.makedirs(FONT_DIR, exist_ok=True)
+        if not os.path.isfile(os.path.join(FONT_DIR, "package.json")):
+            subprocess.run(["npm", "init", "-y"], cwd=FONT_DIR, capture_output=True, timeout=60)
         subprocess.run(["npm", "i", "--silent", f"@fontsource/{slug}"], cwd=FONT_DIR,
                        capture_output=True, timeout=120)
     return slug, pkg

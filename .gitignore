@@ -1,1 +1,5 @@
 __pycache__/
+.proof-sites/
+tools/hype-edit/.fonts/
+tools/hype-edit/work/
+tools/hype-edit/out/

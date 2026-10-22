@@ -713,7 +713,11 @@
   "fb_dm": {
    "staged": "2026-10-21",
    "variant": "C",
-   "sent": "2026-10-21"
+   "sent": "2026-10-21",
+   "replied": "2026-10-21",
+   "reply_gist": "only has a Facebook page, not interested in a website right now",
+   "t2_video": "2026-10-21",
+   "t2_note": "video sent back same night as the answer to not interested"
   }
  },
  "ia-rabalais-electric-1nc4aj": {
@@ -1950,7 +1954,9 @@
   "fb_dm": {
    "staged": "2026-10-12",
    "variant": "C",
-   "sent": "2026-10-12"
+   "sent": "2026-10-12",
+   "t2_video": "2026-10-21",
+   "t2_note": "video attached by Claude, sent by Ricky 8:23 PM; first attach attempt failed, second went through"
   }
  },
  "wi-switlick-and-sons-athens": {
