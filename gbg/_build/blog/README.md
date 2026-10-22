@@ -14,6 +14,9 @@ template is added to build.py when we are ready to publish.
 - End with a soft call to action: book a private estimate. Link to the matching service page path
   (for example /permanent-lights/ or /driveway-sealing/).
 - Include 3 FAQ questions at the bottom with short answers.
+- Link to 1 or 2 earlier posts with [text](/blog/<slug>/), only slugs that already exist in drafts/.
+- Do not mention owners, founders or how many people run the company.
+- Before committing, run: python gbg/_build/blog/check_draft.py <draft path>. It must print OK.
 
 ## Draft file format
 Save as drafts/YYYY-MM-DD-<slug>.md starting with this block:

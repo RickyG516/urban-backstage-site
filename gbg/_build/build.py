@@ -40,7 +40,7 @@ SERVICES = [
        desc='Permanent roofline lighting in Dubuque, Iowa and the tri-state area. Custom-fit, phone-controlled, any color for any holiday. Get a private estimate.',
        h1a='Permanent lights,', h1b='designed around your home.',
        lead='A clean, custom-fit line of light along your eaves and gables. Warm white for everyday elegance, then any color or pattern for every holiday, controlled from your phone. No ladders, no tangled strands, nothing to take down in January.',
-       bullets=['Custom-fit to your home’s exact roofline','Blends into the trim during the day','Change colors, patterns and speed from your phone','One install replaces every seasonal light job','Serving Dubuque and communities within about 30 miles'],
+       bullets=['Custom-fit to your home’s exact roofline','Blends into the trim during the day','Change colors, patterns and speed from your phone','One install replaces every seasonal light job'],
        steps=[('Consult','We walk your property and talk through the look you want.'),('Design','We map your roofline and plan the layout.'),('Install','Clean, careful installation and a walkthrough of your controls.')],
        faqs=[('Do permanent lights have to come down each season?','No. Permanent lights are installed once along your roofline and stay up all year. They are designed to blend into the trim during the day.'),
              ('Can I change the colors and patterns?','Yes. Colors, patterns and schedules are controlled from your phone, so you can switch from warm white to holiday colors in seconds. Try the light studio on this page to preview the idea.'),
@@ -53,11 +53,11 @@ SERVICES = [
        desc='Professional driveway sealing in Dubuque, Iowa and the tri-state area. Deep clean, crack repair and an even sealed finish that protects your driveway.',
        h1a='Driveway sealing,', h1b='the finish that frames the house.',
        lead='A driveway is the first thing people see. We clean it, repair the cracks and seal it to a deep, uniform finish that protects the surface through Iowa freeze-thaw cycles and sharpens the whole property.',
-       bullets=['Deep clean to remove dirt, oil and growth','Cracks repaired before anything is sealed','Even coat with clean edges and no missed corners','Helps protect against water, salt and freeze-thaw wear','Serving Dubuque and communities within about 30 miles'],
+       bullets=['Deep clean to remove dirt, oil and growth','Cracks repaired before anything is sealed','Even coat with clean edges and no missed corners','Helps protect against water, salt and freeze-thaw wear'],
        steps=[('Clean','Deep clean to remove dirt, oil and growth.'),('Repair','Cracks filled before anything is sealed.'),('Seal','Even coat, clean edges, no missed corners.')],
        faqs=[('When is the best time to seal a driveway in Iowa?','Sealing works best in warm, dry weather, typically late spring through early fall. We will recommend timing when we see your driveway.'),
              ('How long until I can drive on a sealed driveway?','Most driveways need roughly 24 to 48 hours to cure depending on weather. We will tell you exactly when yours is ready.'),
-             ('How often should a driveway be sealed?','It depends on the surface, traffic and exposure. During your estimate we will assess the condition and tell you honestly whether it needs sealing now or can wait.'),
+             ('How often should a driveway be sealed?','It depends on the surface, traffic and exposure. During your estimate we will assess the condition and tell you whether it needs sealing now or can wait.'),
              ('Do you seal driveways outside Dubuque?','Yes. We serve Dubuque and communities within roughly 30 miles across Iowa, Illinois and Wisconsin.')],
        kw='driveway sealing Dubuque, driveway sealcoating Dubuque Iowa, asphalt driveway sealing, crack repair Dubuque'),
   dict(slug='yard-spraying', name='Yard Spraying', short='Recurring lawn treatment to keep the yard looking its best all season.',
@@ -66,7 +66,7 @@ SERVICES = [
        desc='Recurring yard spraying in Dubuque, Iowa and nearby towns. Scheduled lawn treatments that keep your yard thick, green and weed-resistant all season.',
        h1a='Yard spraying,', h1b='on a schedule you never think about.',
        lead='A great lawn is built over a season, not a weekend. Our recurring yard spraying program keeps treatments on schedule so your yard stays thick, green and clean-edged from spring through fall.',
-       bullets=['Recurring visits so nothing gets missed','Consistent treatment through the growing season','One team coordinating lawn, driveway and exterior care','Serving Dubuque and communities within about 30 miles'],
+       bullets=['Recurring visits so nothing gets missed','Consistent treatment through the growing season','One team coordinating lawn, driveway and exterior care'],
        steps=[('Assess','We look at your lawn and set a plan.'),('Treat','Scheduled applications through the season.'),('Maintain','Ongoing visits so results build over time.')],
        faqs=[('What does a recurring yard spraying program include?','We will confirm the exact treatments and schedule for your lawn during your estimate, so the plan fits your yard rather than a one-size-fits-all package.'),
              ('How often will you spray?','Recurring programs follow a set schedule through the growing season. We will share the timeline when we quote your yard.'),
@@ -78,7 +78,7 @@ SERVICES = [
        desc='Recurring trash can cleaning in Dubuque, Iowa and nearby towns. Sanitized, deodorized bins on a schedule so your curb stays clean.',
        h1a='Trash can cleaning,', h1b='fresh bins, zero effort.',
        lead='Nobody enjoys scrubbing bins. We clean and deodorize your cans on a recurring schedule so the smell, the grime and the chore all disappear.',
-       bullets=['Recurring schedule that fits your pickup day','Cans cleaned and deodorized','Pairs well with yard spraying and driveway care','Serving Dubuque and communities within about 30 miles'],
+       bullets=['Recurring schedule that fits your pickup day','Cans cleaned and deodorized','Pairs well with yard spraying and driveway care'],
        steps=[('Schedule','Pick a cadence that fits your pickup day.'),('Clean','Bins cleaned and deodorized on site.'),('Repeat','We come back on schedule, automatically.')],
        faqs=[('How often should trash cans be cleaned?','Many households choose a recurring cadence. We will set a schedule that fits your pickup day and how often you would like fresh bins.'),
              ('Do I need to be home?','Not usually. We will confirm the details when you book so the process is easy for you.'),
@@ -90,7 +90,7 @@ SERVICES = [
        desc='Epoxy floor coating for garages in Dubuque, Iowa and nearby towns. A durable, polished finish that resists stains and transforms your garage.',
        h1a='Epoxy coating,', h1b='a garage floor worth parking on.',
        lead='Bare concrete stains, dusts and cracks. A quality epoxy coating turns your garage floor into a durable, polished surface that is easier to clean and a lot better to look at.',
-       bullets=['Durable, polished, easy-to-clean finish','Resists stains and everyday wear','Finish options to match your home','Serving Dubuque and communities within about 30 miles'],
+       bullets=['Durable, polished, easy-to-clean finish','Resists stains and everyday wear','Finish options to match your home'],
        steps=[('Prep','Surface prepared so the coating bonds properly.'),('Coat','Epoxy applied evenly for a smooth, polished look.'),('Cure','Finished floor cures before it goes back into service.')],
        faqs=[('How long does an epoxy garage floor last?','Longevity depends on prep, product and use. We will explain what to expect for your garage when we quote the job.'),
              ('Can epoxy be applied to any garage floor?','Most garage slabs can be coated once properly prepared. We will inspect yours during the estimate and tell you what it needs.'),
@@ -102,7 +102,7 @@ SERVICES = [
        desc='Exterior painting in Dubuque, Iowa coordinated by GBG with a trusted local painting partner. One point of contact from estimate to finished walls.',
        h1a='Exterior painting,', h1b='coordinated by people you already trust.',
        lead='We do not paint in-house, and we would rather tell you that than pretend otherwise. When you need exterior painting, we bring in a vetted local painting partner and coordinate the whole job so you only deal with GBG.',
-       bullets=['A vetted local painting partner, not a random sub','One point of contact from estimate to finish','We coordinate scheduling so it fits around your other exterior work','Serving Dubuque and communities within about 30 miles'],
+       bullets=['A vetted local painting partner, not a random sub','One point of contact from estimate to finish','We coordinate scheduling so it fits around your other exterior work'],
        steps=[('Request','Tell us about the project.'),('Coordinate','We connect you with our trusted painting partner.'),('Finish','We keep the job on track through completion.')],
        faqs=[('Does GBG paint in-house?','No. Painting is handled by a trusted local partner that we coordinate for you. You get one point of contact and we stay involved from estimate to finish.'),
              ('Who do I pay?','We will confirm exactly how billing works when we set up your project so there are no surprises.'),
@@ -114,7 +114,7 @@ SERVICES = [
        desc='Landscape design and installation in Dubuque, Iowa coordinated by GBG with an established local landscaping partner. One point of contact.',
        h1a='Landscaping,', h1b='designed to match the house.',
        lead='Great exterior work works together. For landscape design and installation we coordinate with an established local landscaping team, so your beds, plantings and hardscape fit the rest of the property.',
-       bullets=['An established local landscaping partner','One point of contact from concept to completion','Coordinated with lighting, sealing and other exterior work','Serving Dubuque and communities within about 30 miles'],
+       bullets=['An established local landscaping partner','One point of contact from concept to completion','Coordinated with lighting, sealing and other exterior work'],
        steps=[('Vision','Share what you want the property to feel like.'),('Coordinate','We connect you with our landscaping partner.'),('Install','We keep the project moving to the finish.')],
        faqs=[('Does GBG do landscaping in-house?','No. Landscaping is delivered by a trusted local partner that we coordinate for you, with GBG as your single point of contact.'),
              ('Can landscaping be planned around permanent lighting?','Yes, and it is a good idea. Coordinating them means plantings and lighting complement each other.'),
@@ -126,7 +126,7 @@ SERVICES = [
        desc='Tree trimming and removal in Dubuque, Iowa coordinated by GBG with an experienced local tree service partner. One point of contact.',
        h1a='Tree service,', h1b='handled by experienced hands.',
        lead='Trees are not a DIY job. For trimming and removal we coordinate with an experienced local tree service so the work is done safely, cleanly and on your schedule, with GBG as your single point of contact.',
-       bullets=['An experienced local tree service partner','One point of contact from estimate to cleanup','Coordinated with the rest of your exterior work','Serving Dubuque and communities within about 30 miles'],
+       bullets=['An experienced local tree service partner','One point of contact from estimate to cleanup','Coordinated with the rest of your exterior work'],
        steps=[('Request','Tell us which trees and what you need.'),('Coordinate','We connect you with our tree service partner.'),('Cleanup','We make sure the job is finished properly.')],
        faqs=[('Does GBG remove trees itself?','No. Tree service is delivered by a trusted local partner that we coordinate for you. GBG stays your single point of contact.'),
              ('Can tree work be scheduled around other exterior projects?','Yes. We sequence it so trimming happens before lighting, sealing or landscaping where that makes sense.'),
@@ -134,6 +134,34 @@ SERVICES = [
        kw='tree service Dubuque, tree trimming Dubuque Iowa, tree removal Dubuque'),
 ]
 SVC = {s['slug']: s for s in SERVICES}
+
+# Page-specific "good to know" copy (markdown-style links, rendered by _inline)
+KNOW = {
+  'permanent-lights': ('What to expect when you plan permanent lights', [
+    'It starts with the roofline. We look at your eaves, gables and peaks, decide where the line of light should run, and plan where power and controls will sit. Every Dubuque home is laid out a little differently, so the design comes from your house and not from a template.',
+    'If you are weighing this against hanging strands every fall, read [permanent lights vs seasonal lights](/blog/permanent-lights-vs-seasonal-dubuque/). If you want the lights on for the holidays, see [when to book holiday lighting in Iowa](/blog/when-to-book-holiday-lighting-iowa/).']),
+  'driveway-sealing': ('Sealing a driveway in Dubuque: what matters', [
+    'Sealing only works on a clean, repaired surface, so most of the job is prep. Dirt, oil and loose material come off first, cracks are filled, and only then does the coat go on. Skipped steps are where sealing jobs go wrong.',
+    'Timing matters too, because sealer needs dry weather and moderate temperatures to cure. Our guide to [using the fall window](/blog/driveway-sealing-iowa-fall-window/) covers when to go ahead and when to wait for spring.']),
+  'yard-spraying': ('How recurring yard spraying works', [
+    'A lawn does best with treatments spread across the growing season instead of one big application. A recurring program puts those visits on a schedule so you do not have to remember them.',
+    'Application rules and licensing apply to lawn treatments, and we explain what is planned for your yard before the first visit. Pair it with [driveway sealing](/driveway-sealing/) or [trash can cleaning](/trash-can-cleaning/) and one team covers the curb to the lawn.']),
+  'trash-can-cleaning': ('Why a recurring trash can cleaning makes sense', [
+    'Bins pick up odor and residue after every pickup, and a quick rinse at home rarely gets it all. A recurring clean takes the chore off your list and keeps the curb tidy.',
+    'It is a small service, so it pairs well with [yard spraying](/yard-spraying/) and the rest of our exterior work. One schedule, one team.']),
+  'epoxy-coating': ('What decides how an epoxy floor turns out', [
+    'Prep decides the result. The slab has to be clean, sound and ready to bond before any coating goes on, which is why we inspect your garage floor first and tell you what it needs.',
+    'Cure time and finish options are worth asking about before you commit, and we cover both in your estimate. If you want the garage and the driveway to match, ask about [driveway sealing](/driveway-sealing/) in the same visit.']),
+  'painting': ('How we coordinate exterior painting', [
+    'We do not paint in-house. We bring in a vetted local partner, walk the job with them, and stay involved until the walls are done, so you have one number to call.',
+    'Painting often comes before or after other exterior work, so we help sequence it with [permanent lights](/permanent-lights/), [driveway sealing](/driveway-sealing/) and anything else on your list.']),
+  'landscaping': ('Planning landscaping around the rest of the exterior', [
+    'Plantings, beds and hardscape look best when they are planned alongside the house, the driveway and the lighting. We coordinate with an established local landscaping partner and keep the project moving.',
+    'If you are adding [permanent lights](/permanent-lights/), tell us early. Knowing where the lights will run helps the landscape plan work with them.']),
+  'tree-service': ('Why tree work usually comes first', [
+    'Branches near the roofline get in the way of lighting, painting and sealing, so trimming and removal usually go first. We coordinate with an experienced local tree service partner and sequence the work.',
+    'Tree work near a house is not a DIY job. Tell us what you need and we will set up an estimate with our partner.']),
+}
 
 HOME_FAQ = [
   ('Do permanent lights have to come down each season?','No. Permanent lights are installed once along your roofline and stay up all year, designed to blend into the trim by day.'),
@@ -179,14 +207,18 @@ def head(page, r):
 <meta property="og:site_name" content="GBG Dubuque">
 <meta property="og:title" content="{esc(page['title'])}">
 <meta property="og:description" content="{esc(page['desc'])}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{page.get('og_type', 'website')}">
 <meta property="og:url" content="{canon}">
 <meta property="og:image" content="{BASE}/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GBG Dubuque: permanent lighting and driveway sealing in Dubuque, Iowa">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(page['title'])}">
 <meta name="twitter:description" content="{esc(page['desc'])}">
 <meta name="twitter:image" content="{BASE}/assets/og.png">
+<meta name="twitter:image:alt" content="GBG Dubuque: permanent lighting and driveway sealing in Dubuque, Iowa">
 <meta name="geo.region" content="US-IA">
 <meta name="geo.placename" content="Dubuque">
 <meta name="geo.position" content="{GEO[0]};{GEO[1]}">
@@ -531,6 +563,23 @@ def more_services_grid(r, exclude=()):
 def town_chips():
     return '<div class="towns">' + ''.join(f'<span>{t}, {STATE_ABBR[st]}</span>' for st, ts in TOWNS.items() for t in ts) + '</div>'
 
+def post_card(p, prefix, i=0):
+    sp = p['service_page'].strip('/')
+    pill = esc(SVC[sp]['name']) if sp in SVC else 'Exterior care'
+    return (f'<a class="mini rv d{i%3}" href="{prefix}{p["slug"]}/"><span class="pill in">{pill}</span>'
+            f'<h3>{esc(p["title"])}</h3><p>{esc(p["meta_description"])}</p><span class="post-meta">{fmt_date(p["date"])}</span><span class="go">Read more &rarr;</span></a>')
+
+def blog_strip(prefix, service=None, exclude=None, limit=3, alt=False, heading='From the blog'):
+    """Internal links to posts. With service set, only posts for that service are shown."""
+    posts = [p for p in load_posts() if p['slug'] != exclude]
+    if service:
+        posts = [p for p in posts if p['service_page'].strip('/') == service]
+    posts = posts[:limit]
+    if not posts: return ''
+    cards = ''.join(post_card(p, prefix, i) for i, p in enumerate(posts))
+    return (f'<section class="sec{" alt" if alt else ""}"><div class="wrap"><div class="eyebrow rv">Read more</div>'
+            f'<h2 class="rv d1">{heading}</h2><div class="grid6 postlist">{cards}</div></div></section>')
+
 def build_home():
     r = ''
     page = dict(title='Permanent Lights & Driveway Sealing in Dubuque, IA | GBG',
@@ -625,7 +674,7 @@ def build_home():
     <div class="trio">
       <div class="rv"><div class="k">I</div><h3>One point of contact</h3><p>You talk to the people who own the company, not a call center. Coordinating the whole job is our job.</p></div>
       <div class="rv d1"><div class="k">II</div><h3>Quality first</h3><p>We would rather do fewer jobs beautifully than many jobs quickly. Your home is not a volume game.</p></div>
-      <div class="rv d2"><div class="k">III</div><h3>Plain, honest quotes</h3><p>Clear scope, clear price, no pressure. If we are not the right fit, we will say so.</p></div>
+      <div class="rv d2"><div class="k">III</div><h3>Plain quotes</h3><p>Clear scope, clear price, no pressure. If we are not the right fit, we will say so.</p></div>
     </div>
   </div>
 </section>
@@ -634,6 +683,7 @@ def build_home():
   <div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">Good to know.</h2></div>{faq_html(HOME_FAQ)}</div>
 </section>
 
+{blog_strip('blog/', alt=True, heading='Plain advice for Dubuque homeowners.')}
 {contact_section()}
 </main>
 ''' + sticky(r) + footer(r)
@@ -656,6 +706,7 @@ def build_service(s):
     bullets = ''.join(f'<li>{esc(b)}</li>' for b in s['bullets'])
     steps = ''.join(f'<div class="step"><b>{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in s['steps'])
     related = ''.join(f'<a class="mini" href="../{o["slug"]}/"><span class="pill {"in" if o["inhouse"] else "pt"}">{"In-house" if o["inhouse"] else "Trusted partner"}</span><h3>{esc(o["name"])}</h3><p>{esc(o["short"])}</p><span class="go">Learn more &rarr;</span></a>' for o in others[:3])
+    know = KNOW[s['slug']]
     area_line = ', '.join(f'{t}' for t in ['Dubuque', 'Asbury', 'Peosta', 'Epworth', 'East Dubuque', 'Galena', 'Dyersville', 'Cuba City', 'Platteville'])
     h = head(page, r) + svg_defs() + nav(r)
     h += f'''<main id="main">
@@ -688,10 +739,14 @@ def build_service(s):
 </section>
 
 <section class="sec">
-  <div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">{esc(s['name'])}, answered.</h2></div>{faq_html(s['faqs'])}</div>
+  <div class="wrap"><div class="prose post-body"><div class="eyebrow rv">Good to know</div><h2 class="rv d1">{esc(know[0])}</h2>{''.join('<p>' + _inline(t, r) + '</p>' for t in know[1])}</div></div>
 </section>
 
 <section class="sec alt">
+  <div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">{esc(s['name'])}, answered.</h2></div>{faq_html(s['faqs'])}</div>
+</section>
+
+<section class="sec">
   <div class="wrap">
     <div class="eyebrow rv">Also from GBG</div>
     <h2 class="rv d1">One team for the whole exterior.</h2>
@@ -699,6 +754,7 @@ def build_service(s):
   </div>
 </section>
 
+{blog_strip('../blog/', service=s['slug'], alt=True, heading=esc(s['name']) + ': from the blog')}
 {contact_section(s['name'])}
 </main>
 ''' + sticky(r) + footer(r)
@@ -836,7 +892,18 @@ def md_html(md, r):
     return '\n'.join(out)
 
 def fmt_date(d):
-    return datetime.date.fromisoformat(d).strftime('%B %-d, %Y')
+    dt = datetime.date.fromisoformat(d)
+    return f'{dt.strftime("%B")} {dt.day}, {dt.year}'
+
+def related_posts(p, prefix):
+    """Up to 2 other posts, same service first."""
+    others = [o for o in load_posts() if o['slug'] != p['slug']]
+    others.sort(key=lambda o: o['service_page'] != p['service_page'])
+    others = others[:2]
+    if not others: return ''
+    cards = ''.join(post_card(o, prefix, i) for i, o in enumerate(others))
+    return (f'<section class="sec"><div class="wrap"><div class="eyebrow rv">Keep reading</div>'
+            f'<h2 class="rv d1">More from the blog.</h2><div class="grid6 postlist">{cards}</div></div></section>')
 
 def build_blog():
     posts = load_posts()
@@ -846,10 +913,7 @@ def build_blog():
     page = dict(title='Blog: Exterior Care Tips for Dubuque Homeowners | GBG Dubuque',
                 desc='Plain advice on permanent lights, driveway sealing and exterior care for homeowners in Dubuque, Iowa and the tri-state area.',
                 path='blog/', schema=[business_ld(False), crumbs_ld([('Home', url()), ('Blog', url('blog/'))])])
-    cards = ''.join(
-        f'<a class="mini rv d{i%3}" href="{p["slug"]}/"><span class="pill in">{esc(SVC[p["service_page"].strip("/")]["name"]) if p["service_page"].strip("/") in SVC else "Exterior care"}</span>'
-        f'<h3>{esc(p["title"])}</h3><p>{esc(p["meta_description"])}</p><span class="post-meta">{fmt_date(p["date"])}</span><span class="go">Read more &rarr;</span></a>'
-        for i, p in enumerate(posts))
+    cards = ''.join(post_card(p, '', i) for i, p in enumerate(posts))
     h = head(page, r) + svg_defs() + nav(r)
     h += f"""<main id="main">
 <header class="phero"><div class="wrap">
@@ -870,12 +934,13 @@ def build_blog():
         svc_name = SVC[sp]['name'] if sp in SVC else 'Not sure yet'
         ld_post = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p['title'],
                    "description": p['meta_description'], "datePublished": p['date'], "dateModified": p['date'],
-                   "mainEntityOfPage": url('blog/%s/' % p['slug']),
+                   "mainEntityOfPage": url('blog/%s/' % p['slug']), "url": url('blog/%s/' % p['slug']),
+                   "image": BASE + "/assets/og.png", "inLanguage": "en-US",
                    "author": {"@type": "Organization", "name": "GBG Dubuque"},
                    "publisher": {"@type": "Organization", "name": "GBG Dubuque"}}
         schema = [business_ld(False), ld_post, crumbs_ld([('Home', url()), ('Blog', url('blog/')), (p['title'], url('blog/%s/' % p['slug']))])]
         if p['faq']: schema.append(faq_ld(p['faq']))
-        page = dict(title=p['title'] + ' | GBG Dubuque', desc=p['meta_description'], path='blog/%s/' % p['slug'], schema=schema)
+        page = dict(title=p['title'] + ' | GBG Dubuque', desc=p['meta_description'], path='blog/%s/' % p['slug'], schema=schema, og_type='article')
         faq = ''
         if p['faq']:
             faq = f'<section class="sec alt"><div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">Quick answers.</h2></div>{faq_html(p["faq"])}</div></section>'
@@ -890,6 +955,7 @@ def build_blog():
 {md_html(p['main'], r)}
 </article></div></section>
 {faq}
+{related_posts(p, '../')}
 {contact_section(svc_name)}
 </main>
 """ + sticky(r) + footer(r)
@@ -897,10 +963,12 @@ def build_blog():
 
 def build_files():
     write('assets/favicon.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90"><rect width="90" height="90" rx="16" fill="#1a1a1a"/><g fill="#e36b1e"><rect x="8" y="58" width="22" height="22" rx="2"/><rect x="34" y="58" width="22" height="22" rx="2"/><rect x="60" y="58" width="22" height="22" rx="2"/><rect x="21" y="33" width="22" height="22" rx="2"/><rect x="47" y="33" width="22" height="22" rx="2"/><rect x="34" y="8" width="22" height="22" rx="2"/></g></svg>')
-    pages = [('', '1.0')] + [(s['slug'] + '/', '0.9' if i < 2 else '0.7') for i, s in enumerate(SERVICES)] + [('service-areas/', '0.8'), ('blog/', '0.6')] + [('blog/%s/' % p['slug'], '0.6') for p in load_posts()] + [('careers/', '0.4')]
+    posts = load_posts()
+    pages = [('', '1.0', None)] + [(s['slug'] + '/', '0.9' if i < 2 else '0.7', None) for i, s in enumerate(SERVICES)] + [('service-areas/', '0.8', None), ('blog/', '0.6', posts[0]['date'] if posts else None)] + [('blog/%s/' % p['slug'], '0.6', p['date']) for p in posts] + [('careers/', '0.4', None)]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    for p, pr in pages:
-        sm += f'  <url><loc>{url(p.rstrip("/")) if p else BASE + "/"}{"/" if p else ""}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>\n'
+    for p, pr, lm in pages:
+        stamp = f'<lastmod>{lm}</lastmod>' if lm else ''
+        sm += f'  <url><loc>{url(p.rstrip("/")) if p else BASE + "/"}{"/" if p else ""}</loc>{stamp}<priority>{pr}</priority></url>\n'
     sm += '</urlset>\n'
     write('sitemap.xml', sm)
     if PROD:

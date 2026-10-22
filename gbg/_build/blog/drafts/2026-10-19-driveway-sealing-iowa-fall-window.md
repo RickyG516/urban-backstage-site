@@ -1,7 +1,7 @@
 ---
 title: Driveway sealing in Iowa: how to use the fall window
 slug: driveway-sealing-iowa-fall-window
-meta_description: Fall can be a good time to seal a driveway in Iowa, but only if the weather cooperates. Learn the basics of temperature, dry time, and prep in Dubuque.
+meta_description: Fall can be a good time to seal a driveway in Iowa, but only if the weather cooperates. Learn the basics of temperature, dry time and prep in Dubuque.
 service_page: /driveway-sealing/
 target_keyword: driveway sealing Dubuque
 ---
@@ -56,7 +56,7 @@ Sealing protects the surface. It does not fix structural problems, level a sunke
 
 ## How to get ready
 
-Walk your driveway before you call. Note any cracks, low spots, stains, and places where water sits after rain. That makes the estimate quicker and the plan more accurate.
+Walk your driveway before you call. Note any cracks, low spots, stains, and places where water sits after rain. That makes the estimate quicker and the plan more accurate. If lights are also on your fall list, see [when to book holiday lighting in Iowa](/blog/when-to-book-holiday-lighting-iowa/).
 
 ## Ready to look at your driveway
 
