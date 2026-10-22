@@ -274,6 +274,20 @@ near-black every time. **No template change — `dark`, `accent` and `off` were
 already parameters of `build(d)`.** Nothing in the battle-tested generator was
 rewritten.
 
+### Update 2026-10-21 (Ricky's call): reuse is fine, more fonts and styles
+
+- `palettes.pick()` no longer raises "pool exhausted". When every palette is live in
+  `demo/` it falls back to the LEAST-USED one (warm last), still honouring distinct bands
+  within a batch. Reason: enrichment re-colours each page from the prospect's own logo,
+  so a repeated starter palette is a stand-in, not the final look. The pipeline must not
+  stop for want of a palette.
+- `tools/new_page.py` PACKS grew from 7 to 23 font pairings (P20-P35 new). Packs may set
+  `r` (button/input corner radius, default 4px) and `tr` (heading letter-spacing,
+  default .02em). Existing packs P02-P18 render byte-identical. Pass `"pack": "auto"`
+  (or omit it) and `pick_pack()` takes the least-used pack in the library.
+- Not visually reviewed in a browser yet: spot-check a page from each new pack before
+  relying on it, especially the zero-radius and pill-radius ones.
+
 ### Stage 2 — NOT BUILT. Do not skip it.
 
 Stage 1 widens colour *inside* a dark hero. It does not fix the thing that

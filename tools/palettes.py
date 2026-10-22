@@ -274,6 +274,16 @@ def library_accents(root):
     return out
 
 
+def library_accent_uses(root):
+    """How many demo pages use each accent (lowercased). Used for reuse fallback."""
+    out = collections.Counter()
+    for f in glob.glob(os.path.join(root, "demo", "*", "index.html")):
+        m = re.search(r"accent:\s*(#[0-9a-fA-F]{6})", open(f, encoding="utf-8").read()[:400])
+        if m:
+            out[m.group(1).lower()] += 1
+    return out
+
+
 def library_bands(root):
     return collections.Counter(band_of(a) for a in library_accents(root))
 
@@ -294,7 +304,21 @@ def pick(trade=None, used_accents=(), used_names=(), root=None, avoid_bands=()):
              and p["name"] not in set(used_names)
              and p["band"] not in set(avoid_bands)]
     if not cands:
-        raise ValueError("palette pool exhausted — add more entries to PALETTES")
+        # 2026-10-21 (Ricky's call): reuse is fine. Prospect enrichment re-colours
+        # each page from the prospect's own logo, so a repeated starter palette is
+        # a stand-in, not the final look. Rather than blocking the pipeline when
+        # every palette is live in demo/, fall back to the least-used one.
+        uses = library_accent_uses(root) if root else collections.Counter()
+        names = set(used_names)
+        cands = [p for p in PALETTES
+                 if p["name"] not in names and p["band"] not in set(avoid_bands)]
+        if not cands:   # distinct-band rule cannot be met any more: drop it
+            cands = [p for p in PALETTES if p["name"] not in names]
+        if not cands:
+            raise ValueError("palette pool exhausted — batch is larger than the whole pool")
+        cands.sort(key=lambda p: (p["band"] == "warm", uses.get(p["accent"].lower(), 0),
+                                  counts.get(p["band"], 0), p["name"]))
+        return dict(cands[0])
 
     # least-represented band first; warm always sorts last
     cands.sort(key=lambda p: (p["band"] == "warm", counts.get(p["band"], 0), p["name"]))
