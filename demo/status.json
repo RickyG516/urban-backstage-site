@@ -34,7 +34,9 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-22",
-   "variant": "A"
+   "variant": "A",
+   "sent": "2026-10-22",
+   "auto_reply": "2026-10-22"
   }
  },
  "ia-asap-pest-control-w6nd3p": {
@@ -74,7 +76,7 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-09-23",
   "fb": "https://www.facebook.com/BeachyPlumbing/",
-  "note": "in HubSpot 2026-09-07 (company 344971336398) | contact 548362228412 (Josh Beachy, Owner) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-07: beachyplumbing.com RESOLVES but serves a site-builder placeholder - page content is literally 'BEACHY PLUMBING / Launching Soon' plus the builder's own 'Get 50 free credits' upsell strip. Qualifies as a placeholder. BBB 'Visit Website' button href is facebook.com/BeachyPlumbing, i.e. Facebook-as-website, which also qualifies. | REVENUE: LLC since 2/14/2018 (8 yrs), BBB A+, PHCC contractor member, master plumbing licence 52284-CL. | DO NOT RAISE: BuildZoom lists contractor registration C133421 as inactive - NOT verified against the state database this session (Iowa lookup portal 404'd), treat as unverified scrape. | ENRICHED 2026-09-23 (BRONZE): identity confirmed live on GBP 'Beachy Plumbing' - 1350 Kennel Ct B4, North Liberty IA 52317, (319) 430-2211 (name + city + phone all match). 3 real photos from that GBP gallery, each reviewed individually: hero = framed-wall rough-in (PEX supply, copper stub-outs, PVC drain); gallery = basement mechanical room with two wall-hung tankless heaters (CROPPED to exclude a 'HAUGERS Water Systems' dealer label on the softener tank - another company's name); gallery = freestanding tub with floor-mount filler on patterned tile. Rejected: 'Wichhart Repair' tile (a different business from People-also-search), herringbone shower valve + accessible shower + sewer dig (kept to 3 real photos per the cap). PLACEHOLDERS: logo ('BP' initials badge, data-placeholder=logo - no logo exists anywhere: GBP has none, beachyplumbing.com is still a GoDaddy 'Launching Soon' splash with plain text only) and reviews (GBP 5.0 from only 2 reviews, below the 3-review floor). NOTE: facebook.com/BeachyPlumbing now returns 'This content isn't available right now' (checked live 2026-09-23) - the FB front door is gone or hidden; phone is the channel.",
+  "note": "in HubSpot 2026-09-07 (company 344971336398) | contact 548362228412 (Josh Beachy, Owner) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-07: beachyplumbing.com RESOLVES but serves a site-builder placeholder - page content is literally 'BEACHY PLUMBING / Launching Soon' plus the builder's own 'Get 50 free credits' upsell strip. Qualifies as a placeholder. BBB 'Visit Website' button href is facebook.com/BeachyPlumbing, i.e. Facebook-as-website, which also qualifies. | REVENUE: LLC since 2/14/2018 (8 yrs), BBB A+, PHCC contractor member, master plumbing licence 52284-CL. | DO NOT RAISE: BuildZoom lists contractor registration C133421 as inactive - NOT verified against the state database this session (Iowa lookup portal 404'd), treat as unverified scrape. | ENRICHED 2026-09-23 (BRONZE): identity confirmed live on GBP 'Beachy Plumbing' - 1350 Kennel Ct B4, North Liberty IA 52317, (319) 430-2211 (name + city + phone all match). 3 real photos from that GBP gallery, each reviewed individually: hero = framed-wall rough-in (PEX supply, copper stub-outs, PVC drain); gallery = basement mechanical room with two wall-hung tankless heaters (CROPPED to exclude a 'HAUGERS Water Systems' dealer label on the softener tank - another company's name); gallery = freestanding tub with floor-mount filler on patterned tile. Rejected: 'Wichhart Repair' tile (a different business from People-also-search), herringbone shower valve + accessible shower + sewer dig (kept to 3 real photos per the cap). PLACEHOLDERS: logo ('BP' initials badge, data-placeholder=logo - no logo exists anywhere: GBP has none, beachyplumbing.com is still a GoDaddy 'Launching Soon' splash with plain text only) and reviews (GBP 5.0 from only 2 reviews, below the 3-review floor). NOTE: facebook.com/BeachyPlumbing now returns 'This content isn't available right now' (checked live 2026-09-23) - the FB front door is gone or hidden; phone is the channel. | FB-DM 2026-10-23: skipped, Facebook page shows content not available (per 2026-09-23 note); no Message route.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -607,7 +609,11 @@
   "note": "in HubSpot 2026-09-22 (company 348166820595) | contact 556380441332 (Mark Thompson, owner) | NO-WEBSITE VERIFIED 2026-09-22 by the TWO-TEST method, NO BROWSER on this unattended run: (1) plain WebSearch 'Mark's Pump Sales Sutherland Iowa plumbing' plus a confirming second search returned aggregators ONLY - BBB, Facebook, the Sutherland city business directory, two YellowPages listings, b2bhint, city-data, BuildZoom and the PHCC-IA member profile. No first-party domain anywhere. (2) domain-scoped WebSearch across markspump.com / markspumpsales.com / markspumpsalesandservice.com returned ZERO links. Third signal: sourced from the PHCC of Iowa member directory, a 118-member listing that publishes the website field for every member - this member's field is blank. Confidence HIGH on no-website. | REVENUE PROOF MEDIUM AND THIS IS THE WEAK POINT: PHCC of Iowa CONTRACTOR MEMBER (dues-paying state trade association) is the strongest signal; incorporated Iowa business (entity 563776); Facebook page; city business directory listing. BBB file opened 3/30/2022 but NOT accredited. Years in business could not be established from any public source across three searches - operation size is UNKNOWN, qualify it on the call. Sutherland is a town of ~600. | CALL WARNINGS: address conflict - one YellowPages listing shows 410 South Hiview St, another shows 208 W 2nd St with a different phone (712) 446-3430; street address deliberately left blank on the CRM record rather than guessed. MARK'S PLUMBING LLC (Iowa entity 512860) is a DIFFERENT company. Do not assert how long he has been in business - ask. | ENRICHED 2026-09-23 (BRONZE): identity confirmed live on FB business page facebook.com/p/Marks-Pump-Sales-and-Service-100083485503677 ('Mark's Pump Sales and Service' - 208 W 2nd St, Sutherland IA 51058, (712) 346-7973, markspump2013@gmail.com). Real logo cropped off his business card (FB photos; card reads 'MARK'S Pump Sales & Service / Plumbing, Heating & Air Conditioning / 712-446-3430 - 712-346-7973 / Sutherland, Iowa / Mark Thompson') and cleaned to white - source is a phone photo of a card at 444px, so it is serviceable, not crisp; ask for the original file. Brand colours sampled from the card logo (red + black): accent #e1474c (card red lightened to clear 4.5:1), dark left at #0f1617; generated SVGs recoloured, fingerprints unchanged. PLACEHOLDER: reviews (FB 'Not yet rated (0 reviews)'). Photos: none harvestable - every FB photo is the business card; no GBP under this name. Gallery stays on the generated assets with the existing photo ask. ADDRESS CONFLICT RESOLVED-ISH: the card lists BOTH 712-446-3430 and 712-346-7973, so the 'different phone' on the 208 W 2nd St listing is his second line, not another business. Google Maps shows that 446-3430 number on an unclaimed 'Brad's Pump Sales & Services' listing (116 Pine St, Sutherland, categorised Auto repair) - likely a stale/mislabelled listing for the same shop; unverified, do not raise.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-23",
+   "variant": "C"
+  }
  },
  "ia-marks-tree-care-durango-t7v3qm": {
   "channel": "phone",
@@ -668,7 +674,8 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-22",
-   "variant": "C"
+   "variant": "C",
+   "sent": "2026-10-22"
   }
  },
  "ia-millius-mulch-landscaping-dbq01": {
@@ -808,7 +815,8 @@
    "t2_video": "2026-10-21",
    "t2_note": "video sent back same night as the answer to not interested",
    "t2_drive": "2026-10-22"
-  }
+  },
+  "status": "declined"
  },
  "ia-rabalais-electric-1nc4aj": {
   "channel": "phone",
@@ -860,7 +868,11 @@
   "note": "in HubSpot 2026-08-26 (company 342153841361) | no-website VERIFIED in Chrome 2026-08-26: rubelroofing.com, rubelroofingandconstruction.com, rubelroofingco.com all error pages; BBB has no Visit Website button | second confirmation: Albia Chamber directory lists gmail address and no website | revenue proof: 24 yrs (since 2002), BBB A+ 0 complaints, res+comm+LARGE COMMERCIAL, six-town service area | Owens Corning Preferred per Angi = SECONDARY source, do not assert on call | owner Justin C Rubel (BBB) | phone verified against Albia Chamber Main Street directory | ENRICHED 2026-09-22 (BRONZE): identity re-confirmed on Facebook (facebook.com/people/Rubel-Roofing-Company/100053267936141, name/phone/service-area all matching (641) 777-5365). 2 real job photos harvested from FB (cover photo = branded boom-lift truck with 'RUBEL ROOFING COMPANY 641-777-5365' on the door at a residential job site, used as hero; profile photo = crew member installing shingles, used as a gallery tile) -- both photo-level clean, no other company's branding. 3 verbatim Google reviews added (Jennifer S., Daniel, Gannon S. -- 5.0 avg / 7 reviews). No real logo available: FB page never set a custom profile picture (default silhouette avatar) -- used a labelled 'RR' initials placeholder badge (data-placeholder=logo) in the nav with a swap-notice asking Justin to send the real logo. No distinct brand color found on the truck (plain black lettering on white) so left the pool accent (#4f9fd1) unchanged rather than force a brand-colors claim.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-23",
+   "variant": "A"
+  }
  },
  "ia-rw-cardella-keokuk-k7m2vd": {
   "channel": "phone",
@@ -1707,7 +1719,11 @@
   "note": "in HubSpot 2026-08-19 (company 341027520218) | LEGACY REVIVAL - was archived 'EXCLUDED PENDING MANUAL CHECK'; manual check now done. Chrome 2026-08-19: tooncopainting.com -> www.tooncopainting.com/lander, DOM renders only class='parked-content' = GoDaddy parked lander, NOT a JS site. Domain is email-only. | SIBA-AGC member profile lists no website field, phone (618) 973-2483, Owner/President Eric Toon | contact 537780855483 | commercial proof: Staunton HS reno, Lewis & Clark Confluence Tower reno | IL SOS/IDFPR status NOT checked (CAPTCHA-gated) | no-website re-verified 2026-08-20 (parked domain) | RE-VERIFIED 2026-08-23 in Chrome: tooncopainting.com no longer serves the parked lander - browser ERROR PAGE on https apex, https www and http. DNS is healthy (NS ns45/ns46.domaincontrol.com, A 15.197.148.33 + 3.33.130.190) and MX is LIVE (Microsoft 365 + fortimail.quackcom.com), so the domain is paid-for and running mail while the website serves nothing. Hook updated in the queue: say 'errors out', never 'parked'. | RE-VERIFIED 2026-08-24 in Chrome: domain is PARKED AGAIN - https://tooncopainting.com 302s to /lander, DOM renders only class='parked-content' on a blank dark page (same general-domainparking.com system that serves posspainting.com, but with an empty ad feed). Third state change in six days: parked 08-19, error page 08-23, parked 08-24. Hook rewritten to be wording-agnostic - re-check the domain immediately before dialing. Also 2026-08-24: the 08-23 'urbanbackstage.com is behind Cloudflare Access' warning did not reproduce - /demo/ pages returned 200 with no Access prompt. | ENRICHED 2026-09-26 -> BRONZE: logo (FB profile image, 'ToonCo Painting LLC' wordmark + orange icon on black) in nav; brand colours sampled off it (dark #07090a, accent #df5f23 - their orange, NOT UNC #e36b1e); hero = new ToonCo HQ hallway with metallic epoxy floor (FB post 2024-04-04); gallery tile = metallic epoxy floor (FB post 2023-11-30). Rejected from FB gallery: Rosati's Pizzeria floor (only exists as a LinkedIn screenshot with text), a Tindall Construction shared post (other company), crew/party group shots, a 270px exterior shot. PLACEHOLDER: reviews (only 2 FB reviews, no Google Business Profile found). Other two gallery tiles still generated SVG.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-23",
+   "variant": "B"
+  }
  },
  "il-top-quality-roofing-mount-zion": {
   "channel": "phone",
@@ -1736,7 +1752,8 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-22",
-   "variant": "B"
+   "variant": "B",
+   "sent": "2026-10-22"
   }
  },
  "il-willis-electric-eu8wtz": {
