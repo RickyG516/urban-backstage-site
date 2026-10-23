@@ -2347,5 +2347,29 @@
   "photos": 0,
   "ready": true,
   "stage": "none"
+ },
+ "wi-jjs-roofing-construction-sturgeon-bay": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-23 (company 355165200072, contact 575466494655 James Weber) | from prospect pool (strong, BBB) | NO-WEBSITE: BBB profile shows no Visit Website button (control profiles showed it), plain WebSearch 2026-10-22 found no first-party domain; Google Maps 2026-10-23 shows a 'JJ's Roofing and Construction LLC' with a (574) Indiana number and no website, so no usable Google listing matched (920) 743-5870 | owners James J. and John W. Weber, started 1980 (46 yrs) per BBB | 2026-10-23 BUILT PRIMED: nothing real harvested (no matching GBP, no FB checked); logo/reviews/photos are labelled placeholders with .swap-notice | DO NOT SAY: nothing about reviews, crew size or services beyond roofing/construction",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "il-central-illinois-tree-service-east-peoria": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-23 (company 355409984247, contact 575460081346 David Knaak) | from prospect pool (strong, BBB) | NO-WEBSITE: BBB profile shows no Visit Website button (control profiles showed it), plain WebSearch 2026-10-22 found no first-party domain; Google Maps name+city search 2026-10-23 returned other tree firms (Central Arbor Tree Care etc.) and no matching listing for (309) 648-6460 | owners David L Knaak and Felicia D Gunn, sole prop, started 2014 (12 yrs) per BBB | 2026-10-23 BUILT PRIMED: nothing real harvested; placeholders labelled with .swap-notice | DO NOT SAY: reviews, crew size, equipment",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "il-m-and-m-masonry-quincy": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-23 (company 355267688168) | REBUILD PITCH 2026-10-23: pool row said no website, but mandmmasonryquincy.com is live (4 pages: Home/Services/Contact/FAQ, built by Vibrant Webs template). Identity passes: Google listing 2509 Drake Dr Quincy 5.0 from 4, phone (217) 257-0497 on the site matches BBB. Weak because: thin template, hero and service images are web-template stock (the brick before/after photo is not theirs, so NOT used), tiny 150-380px images, no real job photos, no reviews on page. FB page facebook.com/MMMasonryTuckpointing unavailable. | 2026-10-23 BUILT BRONZE: REAL = logo from their own site (535x221), phone, address area, 20+ years and 100-mile service area as stated on their site; PLACEHOLDER = job photos (drawings), reviews, labelled in .swap-notice | OWNER NAME NOT FOUND, ask | DO NOT SAY: anything about their reviews text, the stock photos being a problem beyond 'send us your own job photos'",
+  "photos": "logo",
+  "ready": true,
+  "stage": "rebuild-target"
  }
 }
