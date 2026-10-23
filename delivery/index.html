@@ -9,6 +9,18 @@
 <link rel="stylesheet" href="/sales-ops/shared/backstage.css">
   <link rel="stylesheet" href="/sales-ops/shared/mobile.css">
   <script src="/sales-ops/shared/mobile-nav.js" defer></script>
+<style>
+  .wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin-bottom:8px}
+  .wk-day{background:#111;border:1px solid #222;border-radius:10px;padding:10px;min-width:0}
+  .wk-day.today{border-color:#e36b1e}
+  .wk-day.past .wk-head{color:#777}
+  .wk-head{font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;color:#fff;display:flex;justify-content:space-between;gap:6px;margin-bottom:8px}
+  .wk-head span{font-weight:500;color:#777}
+  .wk-task{border-top:1px solid #222;padding:7px 0;font-size:12px;line-height:1.35;color:#ddd;word-break:break-word}
+  .wk-task .badge{margin-top:4px;margin-right:4px}
+  .wk-empty{font-size:11px;color:#555;padding:6px 0}
+  @media(max-width:900px){.wk{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <nav class="ub-nav">
@@ -43,6 +55,9 @@
     <div class="card"><div class="label">All Open Tasks</div><div class="val">·</div></div>
   </div>
   <div class="stamp" id="stamp"></div>
+
+  <p class="section-label">This Week <span class="note">every open task by day, Mon–Sun, delivery or not. Past days still holding open tasks are overdue.</span></p>
+  <div id="week"><div class="loading">Loading this week</div></div>
 
   <p class="section-label">Machine Health</p>
   <div class="signals" id="signals"><div class="loading">Checking delivery risk</div></div>
@@ -80,6 +95,56 @@
       card('orange','Due ≤ 2 Days', BS.num(t.delivery_soon), 'closing window') +
       card('','All Open Tasks', BS.num(t.all_open_tasks), t.delivery_open + ' tagged [DELIVERY]');
     BS.stamp('stamp', d.fetched_at);
+
+    // ── the week board, one column per day (Central time) ───────────────
+    var TZ = 'America/Chicago';
+    function ymd(dt){ return new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(dt); }
+    var todayKey = ymd(new Date());
+    var wd = new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short'}).format(new Date());
+    var back = {Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6}[wd];
+    var base = new Date(todayKey + 'T12:00:00Z');
+    var weekTasks = d.week_tasks || null;
+    var offset = 0, MIN = -3, MAX = 4;   // weeks from this one the worker window covers
+    function renderWeek(){
+      if (!weekTasks) { BS.empty('week','Weekly board needs the worker update (week_tasks missing from /delivery).'); return; }
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+        var dt = new Date(base.getTime() + (i - back + offset * 7) * 864e5);
+        days.push({ key: dt.toISOString().slice(0,10), label: dt.toLocaleDateString('en-US',{timeZone:'UTC',weekday:'short'}),
+                    md: dt.toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric'}), tasks: [] });
+      }
+      weekTasks.forEach(function(tk){
+        var k = ymd(new Date(tk.due_iso));
+        for (var j = 0; j < days.length; j++) if (days[j].key === k) { days[j].tasks.push(tk); break; }
+      });
+      var title = offset === 0 ? 'This week' : offset === 1 ? 'Next week' : offset === -1 ? 'Last week'
+                : offset > 0 ? offset + ' weeks ahead' : Math.abs(offset) + ' weeks back';
+      var count = days.reduce(function(n,dy){ return n + dy.tasks.length; }, 0);
+      var btn = 'style="background:#161616;border:1px solid #2a2a2a;color:#ddd;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer"';
+      BS.el('week').innerHTML =
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
+          '<button id="wk-prev" ' + btn + (offset <= MIN ? ' disabled style="opacity:.35"' : '') + '>&larr; Previous week</button>' +
+          '<div style="flex:1;text-align:center;font-size:12.5px;color:#fff;min-width:150px"><b>' + E(title) + '</b> · ' +
+            E(days[0].md) + ' – ' + E(days[6].md) + ' · ' + count + ' task' + (count===1?'':'s') +
+            (offset !== 0 ? ' <a href="#" id="wk-now" style="color:#e36b1e;margin-left:8px">back to this week</a>' : '') + '</div>' +
+          '<button id="wk-next" ' + btn + (offset >= MAX ? ' disabled style="opacity:.35"' : '') + '>Next week &rarr;</button>' +
+        '</div><div class="wk">' + days.map(function(dy){
+        var past = dy.key < todayKey, isToday = dy.key === todayKey;
+        return '<div class="wk-day' + (isToday ? ' today' : '') + (past ? ' past' : '') + '">' +
+          '<div class="wk-head">' + E(dy.label) + '<span>' + E(dy.md) + (isToday ? ' · today' : '') + '</span></div>' +
+          (dy.tasks.length ? dy.tasks.map(function(tk){
+            return '<div class="wk-task">' + E(tk.subject.replace(/^\s*\[DELIVERY\]\s*/i,'')) + '<br>' +
+              (tk.is_delivery ? '<span class="badge warn">delivery</span>' : '') +
+              '<span class="badge">' + E((tk.type||'task').toLowerCase()) + '</span>' +
+              (past ? '<span class="badge crit">overdue</span>' : '') + '</div>';
+          }).join('') : '<div class="wk-empty">Nothing scheduled</div>') + '</div>';
+      }).join('') + '</div>' +
+        (t.tasks_truncated ? '<div style="font-size:11.5px;color:#e36b1e">Task list hit the 300-task read limit; some tasks may be missing.</div>' : '');
+      BS.el('wk-prev').onclick = function(){ if (offset > MIN) { offset--; renderWeek(); } };
+      BS.el('wk-next').onclick = function(){ if (offset < MAX) { offset++; renderWeek(); } };
+      var now = BS.el('wk-now'); if (now) now.onclick = function(e){ e.preventDefault(); offset = 0; renderWeek(); };
+    }
+    renderWeek();
 
     // ── everything else that is overdue ─────────────────────────────────
     var other = d.other_overdue || [];
@@ -128,7 +193,7 @@
             '<td class="num"><span class="badge ' + b + '">' + E(BS.dueLabel(tk.days_until)) + '</span></td></tr>';
         }).join('') + '</tbody></table></div></div>';
     }).join('');
-  }).catch(function(e){ BS.fail('queue', e); BS.fail('other', e); });
+  }).catch(function(e){ BS.fail('queue', e); BS.fail('other', e); BS.fail('week', e); });
 
   function card(cls,label,val,sub){
     return '<div class="card ' + cls + '"><div class="label">' + E(label) + '</div>' +

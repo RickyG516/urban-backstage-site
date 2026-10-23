@@ -1,6 +1,6 @@
 {
   "fps": 30,
-  "music": "/home/claude/hype/work/music.wav",
+  "music": "work/music.wav",
   "music_lufs": -19,
   "timeline": { "beat": 0.625, "lead": 2.5, "caption_swap": 8.75, "proof": 15.0, "proof_len": 5.0, "cta": 30.0, "end": 35.0 },
   "stills": [0.3, 0.9, 1.6, 2.3, 2.7, 3.4, 6.0, 8.9, 12.0, 14.9, 15.2, 16.2, 17.5, 19.0, 20.1, 22.5, 24.0, 25.2, 27.5, 29.5, 30.3, 31.5, 34.0],

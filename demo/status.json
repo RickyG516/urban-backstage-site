@@ -31,7 +31,11 @@
   "note": "in HubSpot 2026-09-25 (company 348457771724) | No-website VERIFIED 2026-09-25 by the two-test method plus a live BBB profile fetch - search-based only, NO BROWSER on this unattended run. (1) Live BBB profile HTML fetched at pool add-time showed NO 'Visit Website' element. (2) Plain WebSearch 'A&M Brothers Landscaping and Painting Cedar Falls Iowa Chris Anderson' returned only aggregators - Nextdoor, BBB, Facebook, Birdeye, Cylex, constructioncompanies.com, VerView, gravel-reviews.com - zero first-party domain. (3) Domain-scoped WebSearch across ambrotherslandscaping.com / ambrothers.com / ambrotherslandscapingandpainting.com / ambrothersiowa.com returned ZERO links. Confidence HIGH on website. Owner Chris Anderson per BBB Business Management, also appears as Chris Anderson-Murphy. REVENUE PROOF IS THE WEAK POINT: started 5/1/2017 - 9 years - six service lines and year-round work (mowing in summer, snow in winter), but BBB is Not Rated (insufficient data), Birdeye carries 1 review, and there is no crew-size, fleet or contract evidence. QUALIFY BUDGET EARLY. CALL WARNINGS: do not congratulate him on a BBB rating - he has none, the profile reads Not Rated. 1409 Clay St is residential, so this is home-based: do not ask about his shop. Surname appears two ways; use 'Chris'. | ENRICHED 2026-09-25 (BRONZE): identity - FB page facebook.com/ambrothersLandscapingAndPainting shows A&M Brothers Landscaping & Painting, 1409 Clay St Cedar Falls, (319) 529-2945 - name + city + phone match. No Google Business Profile exists (Google search shows FB/Nextdoor/LinkedIn only). REAL LOGO: red/green chevron mark knocked out of the business card posted on his FB page (card also lists brother David Anderson, 712 N Barclay St Waterloo, (319) 529-6956 - that is the 'Brothers'). BRAND COLOURS: card red #7d2c30 -> accent #c26f73 (lightened for 4.5:1), card green -> dark #0f1d18, off #f3f4ef. 3 REAL PHOTOS + hero from his FB photos, one job (brick-edged curving path + planting beds under mature trees), each checked, no third-party branding: hero = wide shot of beds/path around two trees; tiles = path with brick edging both sides; brick-edged bed around seating area; hosta bed under oak being planted. Cover collage rejected (composite). PLACEHOLDERS: reviews - FB shows 5.0 from 3 recommendations but only ONE carries text (Leann Abraham, 2019), so reviews treated as unavailable. Ask: paint-job photos + reviews.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-22",
+   "variant": "A"
+  }
  },
  "ia-asap-pest-control-w6nd3p": {
   "channel": "phone",
@@ -298,7 +302,10 @@
   "note": "in HubSpot 2026-08-07 (company 338518286034) | TWO dead domains: dietzenterprises.com is a 'pardon our dust' placeholder AND dietzenterprisesllc.com is a parked GoDaddy ad page (Real Estate / Apartment For Rent / Personals) - his business email runs on that second one. 427 followers. | 2026-08-14 retuned to HIS brand: red/black/silver pulled from his own logo, gold palette removed. Clean transparent logo (white knocked out of his real logo asset) in nav + hero. | owner is DALTON, named in a Facebook review | 4 real reviews total: 3 Facebook recommendations + 1 Google 5.0, all four quoted on the page | FB DM planned 2026-08-15 | 3 REAL job photos on the page (stamped patio, steps + retaining wall, pole barn slab) replacing generated art | chat widget named DOZER and actually wired (library-wide the button was dead) | FB link in nav + footer",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t2_drive": "2026-10-22"
+  }
  },
  "ia-dimmer-brothers-dubuque": {
   "channel": "phone",
@@ -383,7 +390,7 @@
   "enrich_level": "SILVER",
   "enriched": "2026-09-19",
   "fb": "https://www.facebook.com/FreiburgerHVAC",
-  "note": "in HubSpot 2026-08-09 (company 338608589522) | no website: freiburgerhvac.com, freiburgerheatingandcooling.com and freiburgerheating.com all loaded live in browser 2026-08-09 -> Chrome error page, nothing served; PHCC of Iowa directory lists a Facebook URL in the website field and the GBP website field points to facebook.com/freiburgerhvac -> FACEBOOK-AS-WEBSITE | revenue proof: 128 permitted projects on BuildZoom (44 in 2023, 31 in 2024, 28 in 2025), FMCSA USDOT 4455825 ACTIVE with 3 drivers, MCS-150 refiled 04/15/2026, 0 inspections / 0 crashes / no OOS (verified directly on safer.fmcsa.dot.gov 2026-08-09), 4.7 stars across 30 Google reviews, commercial permits incl. 2459 Kerper Blvd (four 115k-BTU furnaces + four A/C units on one job) | phone + address confirmed directly on the FMCSA federal .gov snapshot | Iowa SOS #695063 Active formed 12/17/2021, Iowa contractor reg C142263 active thru 06/30/2029, Iowa Plumbing & Mechanical licence 52826-CL | NOTE FMCSA lists Power Units 0 against 3 drivers - do not overstate as a large fleet | DO NOT RAISE: permit volume is TRENDING DOWN 44->31->28, so no 'looks like you're growing'; their FB returned 'This content isn't available right now' logged-out so the page may be broken/restricted - confirm gently, don't assert it's deleted; LLC is only ~4.5 years old, don't credit decades | ENRICHED 2026-09-19 (SILVER): real GBP logo harvested (flame/house mark, 'Freiburger HEATING & COOLING, Dubuque IA, 563-495-0126') hotlinked into the nav with data-role=\"logo\", and page accent/dark/off resampled from the logo's blue (was UNC-orange-adjacent #d4541f, now #2f8fd6 -- also moves this page off the library's over-represented warm band). 2 real GBP reviews (David B. 5-star emergency AC fix, Ashley C. 5-star 90-degree-weather callout) in a data-reviews=\"real\" section, 4.7/30 aggregate shown. Photo gallery stays the existing generated SVGs (load-curve, service map, pattern) -- no usable real job photos on the GBP ('By owner' category had only the logo), and generated graphics don't require placeholder disclosure per MOCKUP-BASELINE. DO NOT RAISE: a negative 2024 review (Tammy Rector, punctured line during cleaning) with an owner response exists on the profile.",
+  "note": "in HubSpot 2026-08-09 (company 338608589522) | no website: freiburgerhvac.com, freiburgerheatingandcooling.com and freiburgerheating.com all loaded live in browser 2026-08-09 -> Chrome error page, nothing served; PHCC of Iowa directory lists a Facebook URL in the website field and the GBP website field points to facebook.com/freiburgerhvac -> FACEBOOK-AS-WEBSITE | revenue proof: 128 permitted projects on BuildZoom (44 in 2023, 31 in 2024, 28 in 2025), FMCSA USDOT 4455825 ACTIVE with 3 drivers, MCS-150 refiled 04/15/2026, 0 inspections / 0 crashes / no OOS (verified directly on safer.fmcsa.dot.gov 2026-08-09), 4.7 stars across 30 Google reviews, commercial permits incl. 2459 Kerper Blvd (four 115k-BTU furnaces + four A/C units on one job) | phone + address confirmed directly on the FMCSA federal .gov snapshot | Iowa SOS #695063 Active formed 12/17/2021, Iowa contractor reg C142263 active thru 06/30/2029, Iowa Plumbing & Mechanical licence 52826-CL | NOTE FMCSA lists Power Units 0 against 3 drivers - do not overstate as a large fleet | DO NOT RAISE: permit volume is TRENDING DOWN 44->31->28, so no 'looks like you're growing'; their FB returned 'This content isn't available right now' logged-out so the page may be broken/restricted - confirm gently, don't assert it's deleted; LLC is only ~4.5 years old, don't credit decades | ENRICHED 2026-09-19 (SILVER): real GBP logo harvested (flame/house mark, 'Freiburger HEATING & COOLING, Dubuque IA, 563-495-0126') hotlinked into the nav with data-role=\"logo\", and page accent/dark/off resampled from the logo's blue (was UNC-orange-adjacent #d4541f, now #2f8fd6 -- also moves this page off the library's over-represented warm band). 2 real GBP reviews (David B. 5-star emergency AC fix, Ashley C. 5-star 90-degree-weather callout) in a data-reviews=\"real\" section, 4.7/30 aggregate shown. Photo gallery stays the existing generated SVGs (load-curve, service map, pattern) -- no usable real job photos on the GBP ('By owner' category had only the logo), and generated graphics don't require placeholder disclosure per MOCKUP-BASELINE. DO NOT RAISE: a negative 2024 review (Tammy Rector, punctured line during cleaning) with an owner response exists on the profile. | FB-DM 2026-10-22: Ricky already messaged this thread by hand on 2026-10-13 (ask-first, no link); not re-staged.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -577,7 +584,7 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-09-20",
   "fb": "https://www.facebook.com/p/Mai-concrete-construction-LLC-100054216381382/",
-  "note": "in HubSpot 2026-08-10 | no website at all, BBB lists FB page as the website | still running print classifieds | owner Rick Mai, 30 yrs claimed | FLAG: BuildZoom shows license C124995 expired 2020-07-08, BZ score 0 - do not lead with it cold | sourced from in-person encounter in Dubuque | ENRICHED 2026-09-20: harvested from Facebook page (photos + profile logo) via daily-mockup-enrichment. 3 real job photos (commercial parking-lot pour used as hero, driveway + patio as gallery tiles), all identity-gate checked (name+city+phone match, no other business branding visible). Real logo pulled from FB profile photo (shirt logo, cropped as circular nav badge) -- colors sampled from it (lime-green #95b634 on near-black #12150d, contrast audited clean both directions). No Google Business Profile found for this prospect and the FB page has no Reviews tab enabled (0 reviews) -- reviews section shipped as a labelled placeholder with swap-notice. Level: BRONZE (real photo + real logo, reviews placeholder).",
+  "note": "in HubSpot 2026-08-10 | no website at all, BBB lists FB page as the website | still running print classifieds | owner Rick Mai, 30 yrs claimed | FLAG: BuildZoom shows license C124995 expired 2020-07-08, BZ score 0 - do not lead with it cold | sourced from in-person encounter in Dubuque | ENRICHED 2026-09-20: harvested from Facebook page (photos + profile logo) via daily-mockup-enrichment. 3 real job photos (commercial parking-lot pour used as hero, driveway + patio as gallery tiles), all identity-gate checked (name+city+phone match, no other business branding visible). Real logo pulled from FB profile photo (shirt logo, cropped as circular nav badge) -- colors sampled from it (lime-green #95b634 on near-black #12150d, contrast audited clean both directions). No Google Business Profile found for this prospect and the FB page has no Reviews tab enabled (0 reviews) -- reviews section shipped as a labelled placeholder with swap-notice. Level: BRONZE (real photo + real logo, reviews placeholder). | FB-DM 2026-10-22: Ricky already messaged this thread by hand on 2026-10-13 (ask-first, no link); not re-staged.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -587,7 +594,7 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-09-24",
   "fb": "https://www.facebook.com/lukemannconstruction09/",
-  "note": "in HubSpot 2026-09-20 (company 347656611575) | No-website VERIFIED 2026-09-20 by the two-test method, no browser on this unattended run - FACEBOOK-AS-WEBSITE case: the BBB Visit Website button resolves to facebook.com/lukemannconstruction09, a Facebook page, not an owned domain. (1) plain WebSearch 'Mann Construction Eldora Iowa roofing Luke Mann' surfaced no Iowa first-party domain; the only Mann domain in the result set is mannconstruction-wny.com, which is Mann Roofing and Remodeling of BUFFALO NY, an unrelated namesake; (2) domain-scoped WebSearch across lukemannconstruction.com / mannconstructioniowa.com / mannconstructionia.com returned ZERO links. Confidence HIGH on the no-website finding. Owner Luke Mann, sole proprietor, per BBB. REVENUE PROOF is SOLID: 17 years (started 8/1/2009), BBB Accredited A+ since 3/6/2017, six service lines - roofing, siding, windows, decks, bathroom remodel, interior remodel. CALL WARNING: THREE namesakes exist (Buffalo NY, Red Wing MN, and a separate Mann's Construction Facebook page) and the aggregator reviews pool them - one mentions a 'Nick' at Mann Construction when the verified owner here is LUKE. Do not quote a review or use the name Nick. | ENRICHED 2026-09-24 (BRONZE): identity - BBB (Eldora, (641) 751-9969) links to facebook.com/lukemannconstruction09, which carries the same (641) 751-9969, name Mann Construction, and a 'Nice job Luke!!' comment; the FB page lists ALBION, IA (Marshall Co.) not Eldora - same business by phone + BBB link, but ask where he is based now before quoting Eldora on the call. GBP 'Mann Construction' exists with (641) 751-9969 and ZERO reviews. REAL LOGO: trailer decal from his FB profile photo (red 'MANN CONSTRUCTION' arc + black house/hammer/level art) cropped and rebuilt clean red/black on white, logo.png. BRAND COLOURS: decal red -> accent #e34858 (lightened for 4.5:1), dark unchanged #151210; SVGs recoloured, fingerprints unchanged. 2 REAL PHOTOS from his FB 'Waukee deck' album (Aug 2017): raised deck w/ cable-rail stairs; finished deck w/ privacy wall. Hero kept on the generated roof animation - the only real photos are one deck job, and the page is a roofing pitch. PLACEHOLDERS: reviews (none on GBP or FB). Roofing photos are the ask.",
+  "note": "in HubSpot 2026-09-20 (company 347656611575) | No-website VERIFIED 2026-09-20 by the two-test method, no browser on this unattended run - FACEBOOK-AS-WEBSITE case: the BBB Visit Website button resolves to facebook.com/lukemannconstruction09, a Facebook page, not an owned domain. (1) plain WebSearch 'Mann Construction Eldora Iowa roofing Luke Mann' surfaced no Iowa first-party domain; the only Mann domain in the result set is mannconstruction-wny.com, which is Mann Roofing and Remodeling of BUFFALO NY, an unrelated namesake; (2) domain-scoped WebSearch across lukemannconstruction.com / mannconstructioniowa.com / mannconstructionia.com returned ZERO links. Confidence HIGH on the no-website finding. Owner Luke Mann, sole proprietor, per BBB. REVENUE PROOF is SOLID: 17 years (started 8/1/2009), BBB Accredited A+ since 3/6/2017, six service lines - roofing, siding, windows, decks, bathroom remodel, interior remodel. CALL WARNING: THREE namesakes exist (Buffalo NY, Red Wing MN, and a separate Mann's Construction Facebook page) and the aggregator reviews pool them - one mentions a 'Nick' at Mann Construction when the verified owner here is LUKE. Do not quote a review or use the name Nick. | ENRICHED 2026-09-24 (BRONZE): identity - BBB (Eldora, (641) 751-9969) links to facebook.com/lukemannconstruction09, which carries the same (641) 751-9969, name Mann Construction, and a 'Nice job Luke!!' comment; the FB page lists ALBION, IA (Marshall Co.) not Eldora - same business by phone + BBB link, but ask where he is based now before quoting Eldora on the call. GBP 'Mann Construction' exists with (641) 751-9969 and ZERO reviews. REAL LOGO: trailer decal from his FB profile photo (red 'MANN CONSTRUCTION' arc + black house/hammer/level art) cropped and rebuilt clean red/black on white, logo.png. BRAND COLOURS: decal red -> accent #e34858 (lightened for 4.5:1), dark unchanged #151210; SVGs recoloured, fingerprints unchanged. 2 REAL PHOTOS from his FB 'Waukee deck' album (Aug 2017): raised deck w/ cable-rail stairs; finished deck w/ privacy wall. Hero kept on the generated roof animation - the only real photos are one deck job, and the page is a roofing pitch. PLACEHOLDERS: reviews (none on GBP or FB). Roofing photos are the ask. | FB-DM 2026-10-22: FB page lists Albion IA, not Eldora; city does not match, identity gate not met.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -658,14 +665,18 @@
   "note": "in HubSpot 2026-09-18 (company 347254226661) | contact 554388183790 (Terry Milam, Owner) | NO-WEBSITE FINDING, METHOD = search-index absence + domain-scoped search, NOT a live browser load (no Chrome and no in-app browser on this unattended run). (1) Plain name+city WebSearch run twice with different phrasing returned only BBB, BuildZoom, Nextdoor, Yelp, cityof.com and about.me - zero first-party domain. (2) Domain-scoped WebSearch on milamconcrete.com, milamconstruction.com and milamconcreteandconstruction.com returned NO links at all. (3) BBB profile carries no 'Visit Website' button (pool signal 2026-09-07). (4) Corroborating: their published business email is milamconcrete@aol.com. Confidence HIGH. | REVENUE: started 1/1/2003, incorporated in Iowa 3/2/2004 (23 years, same owner); BBB Accredited since 1/10/2011 (15 years) with an A+ rating; Iowa contractor license C000211; active Facebook page posting job photos, plus Nextdoor and a Yelp listing with 14 photos. | ADDRESS CONFLICT: BBB lists PO Box 266; Yelp and BuildZoom list the physical 1505 2nd St. | CALL WARNINGS: none found - no open complaints, no safety flags. | FB: https://www.facebook.com/p/Milam-Concrete-Construction-Inc-100054466720455/ | ENRICHED 2026-09-19 (BRONZE): 3 real GBP job photos harvested + photo-identity-gated live (stamped patio/firepit hero, driveway pour, stamped pool patio) + 2 real GBP reviews (Steve M. 5-star 'first rate work, 4 pours', Jason M. 5-star 'quick, clean, would recommend') pulled into a data-reviews=\"real\" section, 4.4/13 aggregate shown. No usable logo found (FB profile pic is a job photo, not a mark) -- nav carries a labelled MC monogram placeholder (data-placeholder=\"logo\") with a .swap-notice asking Terry to send the real logo file. Palette left on the pool (no logo to sample). DO NOT RAISE: a negative 2025 review (Laurie Shinn, driveway pop-outs) exists on the profile with an owner response -- not featured on the page, flagging for the call.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-22",
+   "variant": "C"
+  }
  },
  "ia-millius-mulch-landscaping-dbq01": {
   "channel": "fb",
   "enrich_level": "GOLD",
   "enriched": "2026-09-20",
   "fb": "https://www.facebook.com/MilliusLandscaping/",
-  "note": "in HubSpot 2026-08-07 (company 338481182456) | 446 followers, 100% recommend / 5 reviews. No website, no GBP. | ENRICHED 2026-09-20: GOLD -- 2 real job photos (a flagstone-and-black-mulch bed built around two backyard trees, two angles) harvested from Facebook, identity-gate checked. Real logo cropped from their own branded T-shirt ('Millius Landscaping' pink script wordmark). Real review: Facebook shows 100% recommend across 5 reviews; pulled the one verbatim quote FB actually renders (Michele Austin) plus the aggregate stat. Colors sampled from the shirt logo (rose pink #d9738f on near-black #12111a, contrast audited clean both directions).",
+  "note": "in HubSpot 2026-08-07 (company 338481182456) | 446 followers, 100% recommend / 5 reviews. No website, no GBP. | ENRICHED 2026-09-20: GOLD -- 2 real job photos (a flagstone-and-black-mulch bed built around two backyard trees, two angles) harvested from Facebook, identity-gate checked. Real logo cropped from their own branded T-shirt ('Millius Landscaping' pink script wordmark). Real review: Facebook shows 100% recommend across 5 reviews; pulled the one verbatim quote FB actually renders (Michele Austin) plus the aggregate stat. Colors sampled from the shirt logo (rose pink #d9738f on near-black #12111a, contrast audited clean both directions). | FB-DM 2026-10-22: Ricky already messaged this thread by hand on 2026-10-13 (ask-first, no link); not re-staged.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -675,16 +686,19 @@
   "enrich_level": "GOLD",
   "enriched": "2026-09-22",
   "fb": "https://www.facebook.com/MullerPlumbingHeating/",
-  "fb_dm": {
-   "link_sent": true,
-   "manual": true,
-   "sent": "2026-09-30",
-   "status": "manual-outside-sequence"
-  },
   "note": "in HubSpot 2026-08-04 | mullerplumbing.com resolves but serves an EMPTY page - PARKED, verified not a real site | owner name order likely scraper-inverted, confirm on call | 20+ employees | RE-VERIFIED 2026-08-25 (Chrome): mullerplumbing.com still 302s to /lander and renders a blank dark GoDaddy parked page, zero text content. Screenshot-confirmed. Unchanged since 2026-08-04. | ENRICHED 2026-09-22 (GOLD): real logo pulled from facebook.com/MullerPlumbingHeating cover banner and used in nav; 2 real job photos harvested from Google Business Profile (hero = storefront exterior w/ Muller Plumbing and Heating awning sign, gallery tile = rough-in plumbing in a framed wall, Feb 2020) -- both photo-level identity-checked, no third-party branding present; 3 verbatim Google reviews (Chuck D., Michael C., Ed F.) pulled from the confirmed GBP listing at 97 Commercial Dr (4.3 avg / 32 reviews); accent recolored to sampled brand red #d75855 (lightened off logo red #c6322e for contrast) with brand-colors:sampled marker. No placeholders left on the page. | FB-DM 2026-10-12: Messenger inbox already shows a thread with Muller Plumbing & Heating (Ricky's own message with the mockup link, sent 2026-09-30 7:23 PM, unseen as of 2026-10-12) sent outside this sequence. Excluded from automated first touches; reply handling stays manual.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "sent": "2026-09-30",
+   "manual": true,
+   "link_sent": true,
+   "status": "manual-outside-sequence",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
+  }
  },
  "ia-ness-custom-flooring-k3n7wd": {
   "channel": "phone",
@@ -735,19 +749,22 @@
  },
  "ia-perfection-painting-des-moines": {
   "channel": "fb",
-  "enrich_level": "GOLD",
-  "enriched": "2026-10-07",
   "fb": "https://www.facebook.com/PerfectionPainting515/",
-  "fb_dm": {
-   "seen": "2026-10-09",
-   "sent": "2026-10-09",
-   "staged": "2026-10-09",
-   "variant": "A"
-  },
   "note": "in HubSpot 2026-08-04 | no website | IA license C084478 active | owner verified on 2 sources | RE-VERIFIED 2026-08-25 (Chrome): perfectionpaintingllc.com does not resolve, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - DROPPED at identity gate: GBP 'Perfection Painting LLC', 500 N Valley Dr #702 (matches FB address) lists (515) 771-8718, not (515) 274-0326. 4.7 from 13 Google + FB logo available - if Ricky confirms 771-8718 is theirs, this is a GOLD candidate next run. perfectionpaintingdmi.com (FB link) is dead. | ENRICHED 2026-10-07 GOLD: identity gate PASSED - BBB profile lists Perfection Painting LLC, 500 N Valley Dr Unit 702, (515) 274-0326, owner Paul Gordon, A+, accredited since 11/11/2002, started 1985; their FB cover is Paul's business card printing BOTH 515.274.0326 and Cell 515.771.8718 (the Google/FB/Yelp number). REAL: logo (wordmark knocked out of the business card on the FB cover), 4 job photos (hero living room + bath from Iva M.'s Google review, foyer + staircase from J.L. Warren's Google review - customer-posted photos of Perfection jobs), 3 verbatim Google reviews 4.7/13. Placeholder: none. Brand colours NOT sampled - the card is black-and-white, pool palette kept. Google listing is UNCLAIMED ('Claim this business') and has no website. FB link perfectionpaintingdmi.com is dead.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "GOLD",
+  "enriched": "2026-10-07",
+  "fb_dm": {
+   "staged": "2026-10-09",
+   "variant": "A",
+   "sent": "2026-10-09",
+   "seen": "2026-10-09",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
+  }
  },
  "ia-pk-termite-control-yoilo8": {
   "channel": "unknown",
@@ -778,15 +795,20 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-09-23",
   "fb": "https://www.facebook.com/www.rbpaintingstucco/",
-  "fb_dm": {
-   "sent": "2026-10-21",
-   "staged": "2026-10-21",
-   "variant": "C"
-  },
   "note": "in HubSpot 2026-09-23 (company 348263364292) | No-website VERIFIED 2026-09-23 by the two-test method, search-based only - no browser on this unattended run. (1) Plain WebSearch 'R & B Painting Cedar Rapids Iowa Roger Brecht' returned only aggregators - BBB, Dun & Bradstreet, BuildZoom, Angi, Yelp, YellowPages, Manta, claimspages, Facebook - and zero first-party domain. (2) Domain-scoped WebSearch across rbpaintingcr.com / rbpainting.com / rbfinishes.com / rbpaintingstucco.com / randbpainting.com returned links for randbpainting.com ONLY, and that site is R and B Painting of the Willamette Valley, OREGON - an unrelated namesake trading since 2008, not this business. Published directory email is rbfinishes@yahoo.com, free webmail, which corroborates. Confidence HIGH. Owner Roger A. Brecht per BBB Business Management, corroborated by the D&B key-principal field. REVENUE PROOF: ~20 years in Cedar Rapids per third-party listings, BBB A+ with file opened 3/30/2022, Iowa contractor licence on file, BuildZoom score 91 (top 37% of Iowa licensed contractors), commercial and light-industrial client base, and a specialty stack - Lotusan high-performance finish, traditional three-coat stucco, EIFS, plaster, window glazing - that needs a trained crew rather than one painter. CALL WARNINGS: trades under two names ('R & B Painting' and 'R & B Stucco, Plaster & Painting'), so confirm which he uses; and do NOT tell him someone took 'his' domain - randbpainting.com is a legitimate unrelated Oregon company. | ENRICHED 2026-09-23 (BRONZE): identity confirmed on FB business page facebook.com/www.rbpaintingstucco ('R& B Stucco, Plaster, and Painting' - 716 Oakland Rd NE Cedar Rapids, (319) 369-0778, rbfinishes@yahoo.com) and GBP 'R&B Stucco, Plaster, Painting, and Caulking' (same address + phone). 3 real photos from the FB page Photos tab, each reviewed individually: hero = crew scaffolding the full elevation of a stone/stucco building; gallery = stucco courtyard job with ladders/sawhorses/drop cloths; gallery = company van lettered 'R&B Stucco Plaster and Painting ... Serving Cedar Rapids & Surrounding Areas Since 1994' (own van, own email). Rejected: owner headshot (profile pic), duplicate van shot, a damaged-soffit close-up. Real logo cropped off the van door decal and cleaned to white for the nav. Brand colours sampled from logo (red + royal blue): dark #111a36 navy, accent #e25061 (logo red lightened to clear 4.5:1). Trust card '~20 years' replaced with 'Since 1994' off his own van. PLACEHOLDER: reviews - GBP has 1 review (1.0 stars) and FB 2, below the 3-review floor. NOTE: van lettering carries a second number 319-360-9530; page uses (319) 369-0778 which matches GBP + FB - ask which he wants on the site.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-21",
+   "variant": "C",
+   "sent": "2026-10-21",
+   "replied": "2026-10-21",
+   "reply_gist": "only has a Facebook page, not interested in a website right now",
+   "t2_video": "2026-10-21",
+   "t2_note": "video sent back same night as the answer to not interested",
+   "t2_drive": "2026-10-22"
+  }
  },
  "ia-rabalais-electric-1nc4aj": {
   "channel": "phone",
@@ -1282,18 +1304,19 @@
  },
  "il-gibbons-masonry-concrete-lgcnhf": {
   "channel": "phone",
-  "enrich_level": "BRONZE",
-  "enriched": "2026-10-06",
   "fb": "https://www.facebook.com/gibbonsmasonry200/",
-  "fb_dm": {
-   "sent": "2026-10-21",
-   "staged": "2026-10-21",
-   "variant": "B"
-  },
   "note": "in HubSpot 2026-08-26 (company 342250578638) | no-website VERIFIED in Chrome 2026-08-26: gibbonsmasonry.com and gibbonsmasonryandconcrete.com both error pages; BBB has no Visit Website button (only a Facebook entry under Social Media - exact FB URL not captured, find before any DM) | revenue proof: 43 yrs (since 1/1/1983), BBB A+ since 2014, 0 complaints, 8 distinct trade categories | owners Thomas Gibbons + Tammy J. Gibbons (BBB) | phone from BBB profile | CAVEAT: IL SOS / IDFPR are CAPTCHA-gated, licence + corporate status NOT checked | seed = phone digits + zip 61410 (all 4 phone-seed concrete fingerprints collided with il-duran-concrete-yezui8 et al), variant 3 | ENRICHED 2026-10-06 BRONZE: identity gate passed twice - Google Maps 'Gibbons Masonry & Concrete', 200 N Cedar St Abingdon, (309) 462-5873; FB business page facebook.com/gibbonsmasonry200 ('Gibbons Concrete & Masonry', about text says company name is actually Gibbons Masonry & Concrete, 40 years, Tom Gibbons; 200 Cedar St Abingdon, same phone). REAL: 3 own job photos off the FB page (stamped ashlar patio around a fountain bed 604px, coloured flagstone stamp close-up 451px, basement foundation wall rebuilt in block 720x960 - worker's back only, no faces); 4.2 from 10 Google reviews, 3 quoted verbatim (Jeremy G. ~2023 'Tom was on my roof within the hour'; 'Puppy Cat' ~2022 new driveway, cited as Google reviewer; A. H. ~2022). Rejected: a selfie, a personal cemetery photo (page profile pic - not a logo), an ad tile, a BusinessRate 'Best of 2025' letter, and a Benson's Heating crew photo that Maps served from Recents. Negatives: Larry J. 1-star ~2022 (quoted June, no-show by Sept, stopped returning calls), Jilly 2-star (never called back) - responsiveness is the soft spot. FB page is HIRING (posted). PLACEHOLDER: logo (GM monogram) only. No real logo exists on FB.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "enrich_level": "BRONZE",
+  "enriched": "2026-10-06",
+  "fb_dm": {
+   "staged": "2026-10-21",
+   "variant": "B",
+   "sent": "2026-10-21",
+   "auto_reply": "2026-10-22"
+  }
  },
  "il-gm-sipes-construction-rushville": {
   "channel": "phone",
@@ -1344,17 +1367,20 @@
   "enrich_level": "GOLD",
   "enriched": "2026-09-25",
   "fb": "https://www.facebook.com/HaierPlumbing/",
-  "fb_dm": {
-   "link_sent": true,
-   "manual": true,
-   "seen": "<=2026-10-12",
-   "sent": "2026-09-30",
-   "status": "manual-outside-sequence"
-  },
   "note": "in HubSpot 2026-08-07 (company 338670190315) | no website | haierplumbing.com serves a hosting-default UNDER CONSTRUCTION placeholder (verified live in browser 2026-08-07) | phone verified on FMCSA SAFER USDOT 1318341 + BBB + SIBA-AGC + CIB AGC | 76 power units / 60 drivers / 1.49M mi 2025 | SAFER safety rating Conditional (2010) — do not raise on the call | ENRICHED 2026-09-25 (GOLD): identity - GBP 'Haier Plumbing & Heating Inc', 301 N Elkton St Okawville, (618) 243-5908, 4.1 from 22 reviews; FB facebook.com/HaierPlumbing shows the same phone. REAL LOGO: FB cover - navy 'HAIER PLUMBING & HEATING, INC.' wordmark with pipe + backhoe art, which has 618.243.5908 | 301 N Elkton St printed in it; trimmed to logo.png on a white pad. BRAND COLOURS: logo navy #111030 -> dark #111030, accent #8380da (navy hue lightened for 4.5:1); generated SVGs recoloured, fingerprints unchanged. 1 REAL PHOTO from FB: triplex Grundfos booster pump package w/ control panel, Amtrol tank, 4in cold water header (only manufacturer labels, no rival contractor) - first work tile; hero + 2 tiles stay generated. REJECTED: holiday/Veterans/Labor Day graphics, a staff portrait in the parts room. 3 VERBATIM GOOGLE REVIEWS: Kyla D. (a year ago, excerpt ending in ellipsis as Google truncates it), Tom D. (5 yrs), Richard M. (6 yrs). DO NOT RAISE: two recent 1-star GBP reviews from residents angry about torn-up roads/yards during a utility job and a broken service line (one threatens BBB + lawsuit). No placeholders left.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "sent": "2026-09-30",
+   "manual": true,
+   "link_sent": true,
+   "seen": "<=2026-10-12",
+   "status": "manual-outside-sequence",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
+  }
  },
  "il-hard-rock-terrazzo-f5nrfi": {
   "channel": "unknown",
@@ -1704,10 +1730,14 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-09-24",
   "fb": "https://www.facebook.com/p/Union-Roofing-Company-Inc-100054439662731/",
-  "note": "in HubSpot 2026-09-14 (company 346291607228) | contact 552058523331 (Rod E. Hoselton, President) | NO-WEBSITE FINDING - FAKE-WEBSITE PATTERN, RE-CONFIRMED LIVE 2026-09-16: BBB DOES render a 'Visit Website' button pointing at https://unionroofing.com/, but that URL 302s to http://www.importantlocalbusinesses.com - a generic third-party 'Support Family Owned Businesses' essay page with no roofing content, no mention of Union Roofing, and a call-to-action number of (847) 720-5807 Ext. 111 that is not theirs. Fetched and read directly this run; the redirect and the page body were both observed, not inferred. Same shell independently seen on Robert L Smith Construction Co (Mount Pleasant IA) - a rented placeholder being used across unrelated small contractors. This QUALIFIES, it is not a rejection. | REVENUE: established 1931 (95 years), incorporated 1979; residential, commercial and industrial roofing including TPO and EPDM single-ply; BBB A+ (not accredited); member, Greater Peoria Contractors & Suppliers Association; registered UST facility with the Illinois State Fire Marshal; listed on Procore and The Blue Book as a subcontractor; 410 N Division St, Chenoa IL 61726. Doug Hoselton VP, Jeffrey M. Hoselton Sec/Treas. | DO NOT RAISE / NAMESAKE: an unrelated 'Union Roofing' in Philadelphia PA (unionroofing.net, 215-464-6425, founded 1981) is a much larger company - do not conflate. | Illinois SOS and IDFPR corporate/licence lookups are CAPTCHA-gated and were NOT run. | ALT PHONE: (309) 828-2741 secondary line. | Facebook page exists. | ENRICHED 2026-09-24 (BRONZE): identity confirmed live - GBP 'Union Roofing Company, Inc.' 410 N Division St, Chenoa IL 61726, (815) 945-2141 (4.4 from 7 reviews); FB page 'Union Roofing Company Inc.' same address, and its Carlock Elementary post quotes 8159452141. REAL LOGO: FB profile image (red 'UR' monogram 'UNION ROOFING COMPANY, INC.', a photo of a printed sheet) knocked out to red on white, logo.png. BRAND COLOURS: logo red -> accent #d1595d (lightened for 4.5:1), dark unchanged; SVGs recoloured, fingerprints unchanged. 3 REAL PHOTOS: hero = Carlock Elementary two-storey brick school after re-roof (FB post by crew member Billy Casner on the company page: 'Carlock Elementary gets a new roof'); tile = rear of the same school with a crew member on the ladder; tile = GBP owner photo of the Chenoa shop with the red company trucks. REJECTED: church steeple aerial (no evidence it was their job), GBP panel images that were other businesses' People-also-search tiles. PLACEHOLDERS: reviews - GBP has 7 reviews but they are one-liners ('Great service', 'Quality maintenance'), not quotable.",
+  "note": "in HubSpot 2026-09-14 (company 346291607228) | contact 552058523331 (Rod E. Hoselton, President) | NO-WEBSITE FINDING - FAKE-WEBSITE PATTERN, RE-CONFIRMED LIVE 2026-09-16: BBB DOES render a 'Visit Website' button pointing at https://unionroofing.com/, but that URL 302s to http://www.importantlocalbusinesses.com - a generic third-party 'Support Family Owned Businesses' essay page with no roofing content, no mention of Union Roofing, and a call-to-action number of (847) 720-5807 Ext. 111 that is not theirs. Fetched and read directly this run; the redirect and the page body were both observed, not inferred. Same shell independently seen on Robert L Smith Construction Co (Mount Pleasant IA) - a rented placeholder being used across unrelated small contractors. This QUALIFIES, it is not a rejection. | REVENUE: established 1931 (95 years), incorporated 1979; residential, commercial and industrial roofing including TPO and EPDM single-ply; BBB A+ (not accredited); member, Greater Peoria Contractors & Suppliers Association; registered UST facility with the Illinois State Fire Marshal; listed on Procore and The Blue Book as a subcontractor; 410 N Division St, Chenoa IL 61726. Doug Hoselton VP, Jeffrey M. Hoselton Sec/Treas. | DO NOT RAISE / NAMESAKE: an unrelated 'Union Roofing' in Philadelphia PA (unionroofing.net, 215-464-6425, founded 1981) is a much larger company - do not conflate. | Illinois SOS and IDFPR corporate/licence lookups are CAPTCHA-gated and were NOT run. | ALT PHONE: (309) 828-2741 secondary line. | Facebook page exists. | ENRICHED 2026-09-24 (BRONZE): identity confirmed live - GBP 'Union Roofing Company, Inc.' 410 N Division St, Chenoa IL 61726, (815) 945-2141 (4.4 from 7 reviews); FB page 'Union Roofing Company Inc.' same address, and its Carlock Elementary post quotes 8159452141. REAL LOGO: FB profile image (red 'UR' monogram 'UNION ROOFING COMPANY, INC.', a photo of a printed sheet) knocked out to red on white, logo.png. BRAND COLOURS: logo red -> accent #d1595d (lightened for 4.5:1), dark unchanged; SVGs recoloured, fingerprints unchanged. 3 REAL PHOTOS: hero = Carlock Elementary two-storey brick school after re-roof (FB post by crew member Billy Casner on the company page: 'Carlock Elementary gets a new roof'); tile = rear of the same school with a crew member on the ladder; tile = GBP owner photo of the Chenoa shop with the red company trucks. REJECTED: church steeple aerial (no evidence it was their job), GBP panel images that were other businesses' People-also-search tiles. PLACEHOLDERS: reviews - GBP has 7 reviews but they are one-liners ('Great service', 'Quality maintenance'), not quotable. | FB-DM 2026-10-22: FB page shows second line (309) 828-2741, not the (815) 945-2141 primary; same name, city and address, confirmed as the same business.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-22",
+   "variant": "B"
+  }
  },
  "il-willis-electric-eu8wtz": {
   "channel": "unknown",
@@ -1912,7 +1942,7 @@
   "enrich_level": "SILVER",
   "enriched": "2026-09-27",
   "fb": "https://www.facebook.com/ZieglerElectrical/",
-  "note": "in HubSpot 2026-08-07 (company 338668336850) | added 2026-08-05 | no site; blazeelectric.org is an unrelated Florida company | bought Ziegler Electrical Services, kept shop/crew/phone | FB page is still under the Ziegler name | Focus on Energy Trade Ally | phone from BBB profile | ENRICHED 2026-09-27 (SILVER): identity confirmed live on GBP 'Blaze Electric LLC', 101 W 5th St N, Ladysmith WI 54848, (715) 532-0112 - name + city + phone all match; owner Scott named in reviews. 5.0 from exactly 3 Google reviews, all 3 quoted verbatim (S., Jeff W., Heidi B.; two are Google-truncated and shown with an ellipsis, not paraphrased). REAL LOGO: orange circle with black dog + 'Blaze Electric LLC', cropped and de-skewed off the shop sign in the GBP photo (sign also reads 'Master Electrician 715-532-0112'), lettering to white for the dark nav. BRAND COLOURS sampled: sign orange-red -> accent #ec6a4a (5.78:1), navy dark #0f1626 unchanged; SVGs recoloured, fingerprints unchanged. NO JOB PHOTOS: the GBP gallery holds only the shop exterior and a street shot; a spider-lift photo in the DOM was the Maps Recents leftover (Konfrst) and a Ziegler shop photo came from 'People also search' - both rejected. Hero and tiles stay on the generated SVGs; the gallery note asks for panel/barn/truck photos. CALL HOOK: the GBP 'Website' field is usmaperx.org, which redirects to usmapinformation.com, a spam business directory - customers who tap Website on his Google listing land on somebody else's directory. FB page is still the predecessor's (Ziegler Electrical Services Inc., same phone/address, pinned post announcing the sale to Blaze) - not a Blaze-named page.",
+  "note": "in HubSpot 2026-08-07 (company 338668336850) | added 2026-08-05 | no site; blazeelectric.org is an unrelated Florida company | bought Ziegler Electrical Services, kept shop/crew/phone | FB page is still under the Ziegler name | Focus on Energy Trade Ally | phone from BBB profile | ENRICHED 2026-09-27 (SILVER): identity confirmed live on GBP 'Blaze Electric LLC', 101 W 5th St N, Ladysmith WI 54848, (715) 532-0112 - name + city + phone all match; owner Scott named in reviews. 5.0 from exactly 3 Google reviews, all 3 quoted verbatim (S., Jeff W., Heidi B.; two are Google-truncated and shown with an ellipsis, not paraphrased). REAL LOGO: orange circle with black dog + 'Blaze Electric LLC', cropped and de-skewed off the shop sign in the GBP photo (sign also reads 'Master Electrician 715-532-0112'), lettering to white for the dark nav. BRAND COLOURS sampled: sign orange-red -> accent #ec6a4a (5.78:1), navy dark #0f1626 unchanged; SVGs recoloured, fingerprints unchanged. NO JOB PHOTOS: the GBP gallery holds only the shop exterior and a street shot; a spider-lift photo in the DOM was the Maps Recents leftover (Konfrst) and a Ziegler shop photo came from 'People also search' - both rejected. Hero and tiles stay on the generated SVGs; the gallery note asks for panel/barn/truck photos. CALL HOOK: the GBP 'Website' field is usmaperx.org, which redirects to usmapinformation.com, a spam business directory - customers who tap Website on his Google listing land on somebody else's directory. FB page is still the predecessor's (Ziegler Electrical Services Inc., same phone/address, pinned post announcing the sale to Blaze) - not a Blaze-named page. | FB-DM 2026-10-22: FB page is still the predecessor Ziegler Electrical name; name gate not met.",
   "photos": "generated",
   "ready": true,
   "stage": "none"
@@ -1930,16 +1960,19 @@
   "enrich_level": "GOLD",
   "enriched": "2026-09-28",
   "fb": "https://www.facebook.com/calderonServices/",
-  "fb_dm": {
-   "seen": "2026-10-09",
-   "sent": "2026-10-09",
-   "staged": "2026-10-09",
-   "variant": "C"
-  },
   "note": "in HubSpot 2026-08-04 | no website - BBB lists FB as their site | also on IG and YouTube | since 2020 | ENRICHED 2026-09-28 GOLD. Identity gate: FB facebook.com/calderonServices (Calderon Services, concrete, Milwaukee WI, no phone listed, 94% recommend/15) + GBP 'Calderon Services' concrete contractor, (414) 484-4885, service-area business, 4.7 from 28, NO website field. Name + city + phone all match. Reviews name Jonathan throughout. REAL: logo (FB profile image 605px, black saw-blade badge, knocked out to white-on-transparent for the dark nav), 4 photos tied to this listing (stamped patio from RJ B.'s review -> hero; curved walkway from Juli B.'s review; capped block retaining wall from 'By owner'; backyard patio from Jen's review), 3 verbatim Google reviews. REJECTED: Guttuso striped-lawn and Cherry Tree photos (Maps Recents-rail leftovers from this run) and an unattributed 'Google Maps' driveway tile that could not be tied to the listing. Brand colours NOT sampled: logo is monochrome, pool accent kept. PLACEHOLDERS: none. Also fixed contact-form placeholder phone (563) -> (414). Snow removal on the page is from the original HubSpot research (seasonal snow removal); FB 'About' lists concrete services only.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-09",
+   "variant": "C",
+   "sent": "2026-10-09",
+   "seen": "2026-10-09",
+   "t2_video": "2026-10-22",
+   "t2_note": "video attached, draft typed, awaiting Ricky send",
+   "t2_drive": "2026-10-22"
+  }
  },
  "wi-concrete-coverings-newlisbon": {
   "channel": "phone",
@@ -2212,15 +2245,18 @@
   "enrich_level": "GOLD",
   "enriched": "2026-10-01",
   "fb": "https://www.facebook.com/strongsplumbingllc",
-  "fb_dm": {
-   "sent": "2026-10-12",
-   "staged": "2026-10-12",
-   "variant": "C"
-  },
   "note": "in HubSpot 2026-08-11 | no website | 4.9 stars across 43 reviews, A+ BBB | opened March 1994, Mark Strong still owner | one reviewer manages 230 apartment units | Tier A, score 77, highest in batch | ENRICHED 2026-10-01 GOLD (Chrome): identity gate PASSED twice - GBP 'Strong's Plumbing & Heating Inc', 219 W 9th St Fond du Lac, (920) 922-6210, 4.8 from 49; FB business page facebook.com/strongsplumbingllc ('Strong's Plumbing, LLC', 188 followers) lists the same phone and address. REAL: logo (FB profile image, black knocked out -> logo.png), 4 photos off the FB page (crew member in a Strong's hoodie in a water-main trench = hero; crew joining new main; commercial urinal install; two logo'd service vans, left edge cropped to remove another org's banner), 3 verbatim Google reviews (Mike G. 230 apartments, Dan R., Steven H.), brand colours sampled from the logo (red #971621 lightened to #e44350 for 4.8:1 contrast, near-black #100c0d). PLACEHOLDER: none. REJECTED: GBP's only photo (a customer's flooded basement), FB photos of a Marine Corps family event (personal), and two trench shots showing BAUMHARDT Sand & Gravel's excavator plus a Cousins Subs / Wisconsin Vision storefront (other companies). CORRECTED: removed 'A+ BBB rating' (BBB lists them Not Accredited; rating not re-verified) and the 4.9/43 figure (now 4.8/49 on Google). Hero no longer names Mark. OWNER FLAG: BBB lists Mark P Strong as owner (Inc); a 2026 Google review summary calls 'Brian' the hands-on owner, and the FB page/logo now say 'Strong's Plumbing & Heating, LLC' - possible handover. Ask for the owner, do not assume Mark. HOOK: their email domain splumbingheating.com does not load (timed out 2026-10-01). FB featured post: replaced the Fairgrounds Park Pool water heater (1M BTU PVI -> two HTP 100-gal). DO NOT RAISE: FB page shared a GoFundMe for a family tragedy.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-12",
+   "variant": "C",
+   "sent": "2026-10-12",
+   "t2_video": "2026-10-21",
+   "t2_note": "video attached by Claude, sent by Ricky 8:23 PM; first attach attempt failed, second went through",
+   "t2_drive": "2026-10-22"
+  }
  },
  "wi-superior-flooring-sheboygan": {
   "channel": "phone",
