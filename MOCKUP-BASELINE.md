@@ -82,6 +82,12 @@ in spec-mockup-engine v2 Step 3. Fold this into the skill.
 
 ## The rule
 
+> **Update 2026-10-23 (Ricky): the 3-photo figure is a MINIMUM, not a cap.** Aim for at least 3 real photos and use more
+> whenever more good ones can be found; rebuild pitches in particular should carry plenty. Every photo still passes the
+> identity gate and the no-image-twice rule, and every page still carries at least one generated animated asset. Rebuild
+> pitches (businesses with a live or weak site) use their own site's photos and logo, set `stage` to `rebuild-target` in
+> status.json and `data-stage="rebuild-target"` on the demo/index.html row.
+
 **Cap real photos at 3 per page. Every page carries at least one generated
 animated asset.** Stock photography is retired — it is manufactured sameness,
 and sameness is the exact failure mode the engine exists to prevent.
