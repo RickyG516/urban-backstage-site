@@ -1438,8 +1438,9 @@
    "staged": "2026-10-09",
    "variant": "B",
    "t2_video": "2026-10-23",
-   "t2_note": "video attached, draft typed, awaiting Ricky send",
-   "t2_drive": "2026-10-23"
+   "t2_note": "video attached by Claude, sent by Ricky 2026-10-23",
+   "t2_drive": "2026-10-23",
+   "t2_sent": "2026-10-23"
   },
   "note": "in HubSpot 2026-10-06 (company 350984720078) | No-website VERIFIED 2026-10-06, unattended run, no browser: (1) live BBB profile HTML carries NO 'Visit Website' element, only tel: + Email Business + Write a Review -- same-session CONTROL profile Primetime Painting Inc (Iowa City IA) DID render a 'Visit Website' button -> primetimepainters.com, so the absence is real not a fetch artifact; (2) domain-scoped WebSearch on jlmtreeservice.com, jlmtreeserviceandremoval.com and jlmtree.com returned ZERO links; (3) plain WebSearch on name+city+owner surfaced only BBB category pages and out-of-state namesakes. CONFIDENCE HIGH. Owner Mr. Joshua L Moore (BBB principal contact). Revenue proof: sole prop started 12/4/2014, BBB 'Years in Business: 11', service span includes stump grinding (owned grinder). Facebook page listed on BBB as the only social link, NOT as a website. BBB prints city+ZIP only, no street address -- not guessed. CALL WARNING: BBB 'Not Rated' is an insufficient-information rating, not a bad one; zero reviews and zero complaints on file so there is NO review stat to quote. Several same-name tree services exist in other states and in central IL -- confirm Steeleville. | ENRICHED 2026-10-08 GOLD. Identity: Google listing 'JLM Tree Service and Removal', 607 N Truman St Steeleville, (618) 317-1044, 'Add website' (none); FB page jlmtreeservice matches name+Steeleville+phone (502 followers, 100% recommend/19). REAL: logo (yellow tree mark off his own GBP 'By owner' upload; confirmed his by a crew shirt in a customer photo printing JLM + the mark + 618.317.1044), brand yellow #d8dc00 sampled (ink #5f6200 for text on light), 3 job photos from his GBP gallery (hero = climber tied in with saw; tiles = pine limbed up beside a house, bucket work over a street) + motion.svg kept as process tile, 3 verbatim Google reviews 5.0/8 (Cheri S., Brenda S., Kathy F.). Rejected: a before-shot with another company's lettered pickup in frame, a stump-grinder shot taken through a window screen. Placeholder: none. Owner Josh Moore; reviews say 'Josh and his crew' so 'sole man on the saw' copy replaced with 'leads the crew and works beside them'. FB lists 24-hour emergency service, insured, free estimates.",
   "photos": "real",
@@ -1541,8 +1542,9 @@
    "staged": "2026-10-12",
    "variant": "B",
    "t2_video": "2026-10-23",
-   "t2_note": "video attached, draft typed, awaiting Ricky send",
-   "t2_drive": "2026-10-23"
+   "t2_note": "video attached by Claude, sent by Ricky 2026-10-23",
+   "t2_drive": "2026-10-23",
+   "t2_sent": "2026-10-23"
   },
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-03 -> GOLD. IDENTITY: Google listing 'North Park Heating & Air Conditioning', 912 River Ln, Loves Park, (815) 654-3389 = page; FB business page facebook.com/northparkhvacil same address, its graphics print 815-654-3389. NO-WEBSITE now verified: Google listing has no website; FB 'Links' points at northparkheatingandair.net which is NXDOMAIN (checked live 2026-10-03). REAL: logo ('NORTH PARK Heating AC - Keeping it simple.', FB profile image 283px, shown on a white chip in the nav), brand colours sampled (navy + red; dark stays #111d33, accent red lightened to #f2605c for contrast, dark2 brown -> navy #0a1226), 1 photo (van + man in a navy shirt cropped off their FB cover banner - likely Ron, NOT confirmed, caption does not name him), 2 verbatim Google review excerpts (Chris S. 2024, Karen V. 2022 - Maps limited view would not expand 'More', quotes cut with an ellipsis at the truncation point, words unaltered), 4.4 from 19. Reviews name 'Ron'. PLACEHOLDER: first and last work tiles. COPY FIX: page said 'Since 1993' / 'over three decades' - unverified; replaced with FB's own claim 'over 38 years'. Google AI overview calls them veteran-owned - NOT verified, not on the page.",
   "photos": "real",
@@ -1815,8 +1817,9 @@
    "staged": "2026-10-12",
    "variant": "A",
    "t2_video": "2026-10-23",
-   "t2_note": "video attached, draft typed, awaiting Ricky send",
-   "t2_drive": "2026-10-23"
+   "t2_note": "video attached by Claude, sent by Ricky 2026-10-23",
+   "t2_drive": "2026-10-23",
+   "t2_sent": "2026-10-23"
   },
   "note": "FB: title names Racine WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-28 GOLD. Identity gate passed 3 ways: FB page (Conner Cuts Lawn Care & Exterior Maintenance, Racine WI 53408, (262) 822-0496, connercuts@yahoo.com) and GBP 'Conner Cuts Lawn & Garden, LLC' (same phone, Racine area, identifies as veteran-owned, 4.8 from 73). NO-WEBSITE NOW VERIFIED: GBP website field points at connercutslawncare.com which is DNS_PROBE_FINISHED_NXDOMAIN (loaded in Chrome 2026-09-28) - a dead link on their own profile. REAL: logo (FB profile PNG, 231x116, orange/green wordmark, shown on a white pill in the nav), brand colours sampled (orange #e46e25 accent, logo green #138040), 2 photos from the GBP listing itself (header photo of a striped front lawn -> hero; 'By owner' flower bed along a cedar fence -> about panel), 3 verbatim Google reviews (Lesa, Trygve T., QC & Vonn). Reviews name Conner and Travis. REJECTED: a red spider-lift photo (Konfrst Tree Service, Maps Recents-rail leftover); all FB photos are promo graphics, no job photos. Also fixed: the page's own <header> was hidden by the badgefix rule (no nav at all) - tagged unc-nav. PLACEHOLDERS: none. Name note: GBP now reads 'Conner Cuts Lawn & Garden, LLC'; page keeps the FB/logo name.",
   "photos": "real",
