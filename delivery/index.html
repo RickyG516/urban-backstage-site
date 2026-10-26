@@ -106,7 +106,7 @@
     var weekTasks = d.week_tasks || null;
     var offset = 0, MIN = -3, MAX = 4;   // weeks from this one the worker window covers
     // AUTOPILOT tasks run on their own; everything else is on Ricky.
-    function isAuto(tk){ return /^\s*AUTOPILOT/i.test(tk.subject || ''); }
+    function isAuto(tk){ return /^\s*AUTOPILOT/i.test(tk.subject || ''); }
     var filter = 'all';
     try { filter = localStorage.getItem('ub-week-filter') || 'all'; } catch (e) {}
     if (filter !== 'manual' && filter !== 'auto') filter = 'all';
