@@ -1,7 +1,7 @@
 {
   "_date": "2026-10-23",
   "_generated_at": "2026-10-20T10:25:00Z",
-  "_session_cap": 254,
+  "_session_cap": 253,
   "prospects": [
     {
       "contact_id": "573173263064",
@@ -20,24 +20,6 @@
       "pipeline_stage": "Prospect Identified",
       "mockup_url": "https://urbanbackstage.com/demo/ia-pinecrest-construction-hazleton/",
       "ai_hook": "Seventeen years out of Hazleton and BBB-accredited since 2015 -- lead with the fact that his roof, siding and deck all come from one contractor, which is what the page is built on. Open with 'Marvin' and with Hazleton. DO NOT mention pinecrestconstruction.com -- that is a Florida luxury builder, not him. Do not read his address back (BBB and MapQuest disagree); ask for it."
-    },
-    {
-      "contact_id": "573077468912",
-      "company_id": "353929508596",
-      "business_name": "Craft Masonry Company",
-      "first_name": "Wayne",
-      "last_name": "Scherwinski",
-      "trade": "Masonry",
-      "phone": "(262) 677-4088",
-      "city": "Slinger",
-      "state": "WI",
-      "hubspot_url": "https://app.hubspot.com/contacts/245833525/record/0-1/573077468912",
-      "last_touched": null,
-      "last_outcome": null,
-      "notes_preview": "Concrete / Masonry, Slinger WI. No own website (verified 2026-10-20, HIGH). Mockup built 2026-10-20.",
-      "pipeline_stage": "Prospect Identified",
-      "mockup_url": "https://urbanbackstage.com/demo/wi-craft-masonry-slinger/",
-      "ai_hook": "Fifty-nine years, since 1967, and he runs his own excavator -- the page headline is 'Since 1967: Brick, Stone, And We Dig It Ourselves', so lead with the longevity and the fact that masonry, concrete and the dig are all his. Ask for Wayne or Roxanne. DO NOT correct the Company/Inc. name mismatch and DO NOT raise the no-permits note."
     },
     {
       "contact_id": "573149368019",
