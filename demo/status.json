@@ -124,7 +124,11 @@
   "note": "in HubSpot 2026-08-04 | no website at all | since 1980 | USDOT 547679 | ENRICHED 2026-09-26 -> BRONZE: FB page identity-gated (Crescent IA, (712) 328-0068). Logo = FB profile image (navy excavator + BLUFFS PAVING AND UTILITY), background knocked out, on white pill in nav; colours sampled (navy #0a1d61 -> dark #0b1438, accent #6f8be4 same hue). Hero = slipform paving train (FB 2021-11-09; GOMACO is the machine maker, not a rival); gallery = curb forming, finished curb, slipform on rural shoulder (FB 2026-04). Rejected: 9/11 memorial image. PLACEHOLDER: reviews - Google shows 2.7 from 7, mostly homeowner lawn-damage complaints on a city curb job; deliberately NOT shown. bluffspaving.com now serves a Bluehost 'coming soon' page (no real site yet).",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-27",
+   "variant": "B"
+  }
  },
  "ia-borer-contracting-5z7f1y": {
   "channel": "phone",
@@ -215,7 +219,7 @@
  "ia-cordes-heating-cooling-bf6wwp": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Cordes-Heating-Cooling-100063490332453/",
-  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified.",
+  "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | FB-DM 2026-10-27: FB page links cordesheatingandcooling.com (HTTP 200, live) and shows no phone; fails website and identity gates.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -326,7 +330,7 @@
  "ia-dolan-concrete-masonry-pm1aag": {
   "channel": "fb",
   "fb": "https://www.facebook.com/p/Mike-Dolan-Concrete-and-Masonry-Owner-and-Operator-100054633090885/",
-  "note": "",
+  "note": "FB-DM 2026-10-27: FB page is a personal-style page (19 followers, no phone, no business contact info); fails identity gate.",
   "photos": "real",
   "ready": true,
   "stage": "none"
@@ -391,7 +395,11 @@
   "note": "in HubSpot 2026-08-09 (company 338802478779) | no website: ezroofing.com loaded live in browser 2026-08-09 -> 301s to ezgeneral.com, a Fort Lauderdale FL firm, NOT theirs; ezroofingllc.com -> live but Caldwell ID firm; ezroofingclinton.com / ezroofingiowa.com / ezroofingia.com / ez-roofing.com / ezroofingqc.com all fail to resolve; BBB profile has NO website field; GBP shows the 'Add website' prompt; FB Intro lists ezroofing2006@gmail.com and no site -> FACEBOOK-AS-WEBSITE | revenue proof: Iowa contractor reg C133608 ACTIVE (BuildZoom Verified License, issued 04-17-2026, expiry 04/24/2027), BBB file open since 7/31/2018, COMMERCIAL permit BLDC24-0089 2018 Waterfront Dr Iowa City 2024-12-30 roof tear-off + replacement, FB 177 followers / 100% recommend across 19 reviews | phone (563) 249-8414 published by the business on its own FB page; ALT (563) 249-9429 on BBB + BuildZoom - lead with 249-8414 | address 2337 13th Ave N per Iowa reg + BBB + BuildZoom; FB says 2301 - use 2337 | sole proprietorship, no Iowa SOS filing (consistent); SEPARATE 'EZ ROOFING, LLC' no. 560866 DeWitt/Cedar Rapids dba 563 GUTTER is a DIFFERENT company, do not merge | UNVERIFIED, do not repeat as fact: reported 53 Google reviews at 5.0 and $23,985 permit BLDC24-0090 - only the FB 19-review figure and permit BLDC24-0089 were independently confirmed | DO NOT RAISE: BBB not accredited / Not Rated; permit BLDC24-0089 status 'expired'; that he is a sole prop not an LLC; that his FB has not posted since July 2025; that other EZ Roofing firms own the .com domains | ENRICHED 2026-09-19 (BRONZE): 3 real GBP job photos harvested + photo-identity-gated live (hero: rooftop overlooking the Mississippi River/train tracks in Clinton -- distinctive to the town; gallery: finished large custom-home reroof with staged shingle bundles, aerial shot of crew mid-job) + 2 real GBP reviews (Wenonah R. 5-star same-day reroof, Bradley S. 5-star on Henry/Jessica's crew) pulled into a data-reviews=\"real\" section, 5.0/53 aggregate shown -- easily the strongest review profile of the three pages this run. Logo: FB cover banner exists ('EZ ROOFING... Make it EZ!! Henry & Jessica Fernandez') but Facebook CDN URLs are signed/referrer-locked and broke instantly when hotlinked outside the FB session (confirmed live -- 'Bad URL hash') -- NOT usable as a reliable hotlink on a public page, so nav carries a labelled EZ monogram placeholder instead with a .swap-notice. Palette left alone (no reliable logo asset sampled).",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-27",
+   "variant": "A"
+  }
  },
  "ia-freiburger-heating-cooling-dubuque": {
   "channel": "fb",
@@ -1613,7 +1621,8 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-10-26",
-   "variant": "A"
+   "variant": "A",
+   "skipped": "2026-10-27"
   }
  },
  "il-r-marit-painting-7jp0a6": {
@@ -1697,7 +1706,7 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-10-09",
   "fb": "https://www.facebook.com/Solar-Heating-AC-161430454008483/",
-  "note": "in HubSpot 2026-10-01 (company 349839688390) | No-website VERIFIED 2026-10-01, NO live browser on this unattended run. The one candidate domain, solarheatingac.com, is NOT theirs and is a rented third-party lead-gen shell, same pattern as unionroofing.com: its CTA is a toll-free (833) 687-2815 that does NOT match the verified (309) 685-5420; it self-describes as a 'network of local HVAC technicians'; a second domain-scoped search for its address returned NO physical location; and two direct web_fetch calls (/ and /how-we-can-help) returned an EMPTY body, i.e. a client-rendered shell. Plain WebSearch on the Peoria business returned only Nextdoor, BBB, Angi, YellowPages x2, Yelp and aggregators. BBB 'Visit Website' points at Facebook, which per standing rule is not evidence on its own. Confidence MEDIUM-HIGH - the business plainly has no first-party site; the residual unknown is whether solarheatingac.com was ever rented in their name, which only a browser could settle. | Owner Bruce Smith, sole proprietor; office assistant Shannon Yearian, from BBB. | Revenue proof: 46 years, since 1980, one owner one market. A STAFFED OFFICE (named assistant) is the strongest signal - payroll beyond the owner. Amana dealer. Does geothermal install AND service, which most shops this size will not quote. Yelp listing carries 21 photos. | Phone (309) 685-5420 from the BBB profile. NO street address verified to a confident standard - field left EMPTY rather than guessed, do not state an address on the call. | Facebook: https://www.facebook.com/Solar-Heating-AC-161430454008483/ | CALL WARNINGS: (1) 'Solar' is the 1980 company name, NOT solar panels - do not pitch solar; (2) never say 'you already have a website', solarheatingac.com belongs to someone else; (3) 46 years in, avoid any 'behind the times' framing. | Pack P19 / layout L-C / palette verdigris #49b09f (teal band). HVAC is family-saturated so this uses compose family (2,'flow','offset') - 96 elements, 80 in-band hero points - with a derived hero viewBox; flow rests visible so no rest-state patch needed. | ENRICHED 2026-10-09 BRONZE (Chrome): identity gate passed on Google listing 'Solar Heating & A/C' 2729 NE Adams St Peoria, (309) 685-5420, AND on the FB page cover photo, their own van lettered SOLAR HEATING & A/C / 685-5420 / PEORIA, IL. Real: logo (400px GBP owner image, dark bg knocked out), 2 photos (van cropped off the FB cover with the Amana dealer box cut away; Goodman condenser with gauges from the GBP 'Machine' tile). Brand colours sampled: logo red #e8194b -> #ef4168 for contrast, charcoal #231f20 -> #1c191a, snowflake blue #0a86c7 on the nav rule. Rejected: GBP header/'All' photo, a clipboard hand shot with a STRUCTURE TECH branded pen (another company). Placeholder: reviews. Google is 3.0 from 14 with harsh 1-star reviews (one says $600 paid and not fixed) - NOT quoted, reviews section left as an announced placeholder. GBP 'Website' button now points at solarheatingac.com which redirects to a blank /lander parked page - their listing sends people to an empty page. FB page lists no phone; FB about says 'past 30 years'. Fixed double-escaped &amp;mdash; throughout the page.",
+  "note": "in HubSpot 2026-10-01 (company 349839688390) | No-website VERIFIED 2026-10-01, NO live browser on this unattended run. The one candidate domain, solarheatingac.com, is NOT theirs and is a rented third-party lead-gen shell, same pattern as unionroofing.com: its CTA is a toll-free (833) 687-2815 that does NOT match the verified (309) 685-5420; it self-describes as a 'network of local HVAC technicians'; a second domain-scoped search for its address returned NO physical location; and two direct web_fetch calls (/ and /how-we-can-help) returned an EMPTY body, i.e. a client-rendered shell. Plain WebSearch on the Peoria business returned only Nextdoor, BBB, Angi, YellowPages x2, Yelp and aggregators. BBB 'Visit Website' points at Facebook, which per standing rule is not evidence on its own. Confidence MEDIUM-HIGH - the business plainly has no first-party site; the residual unknown is whether solarheatingac.com was ever rented in their name, which only a browser could settle. | Owner Bruce Smith, sole proprietor; office assistant Shannon Yearian, from BBB. | Revenue proof: 46 years, since 1980, one owner one market. A STAFFED OFFICE (named assistant) is the strongest signal - payroll beyond the owner. Amana dealer. Does geothermal install AND service, which most shops this size will not quote. Yelp listing carries 21 photos. | Phone (309) 685-5420 from the BBB profile. NO street address verified to a confident standard - field left EMPTY rather than guessed, do not state an address on the call. | Facebook: https://www.facebook.com/Solar-Heating-AC-161430454008483/ | CALL WARNINGS: (1) 'Solar' is the 1980 company name, NOT solar panels - do not pitch solar; (2) never say 'you already have a website', solarheatingac.com belongs to someone else; (3) 46 years in, avoid any 'behind the times' framing. | Pack P19 / layout L-C / palette verdigris #49b09f (teal band). HVAC is family-saturated so this uses compose family (2,'flow','offset') - 96 elements, 80 in-band hero points - with a derived hero viewBox; flow rests visible so no rest-state patch needed. | ENRICHED 2026-10-09 BRONZE (Chrome): identity gate passed on Google listing 'Solar Heating & A/C' 2729 NE Adams St Peoria, (309) 685-5420, AND on the FB page cover photo, their own van lettered SOLAR HEATING & A/C / 685-5420 / PEORIA, IL. Real: logo (400px GBP owner image, dark bg knocked out), 2 photos (van cropped off the FB cover with the Amana dealer box cut away; Goodman condenser with gauges from the GBP 'Machine' tile). Brand colours sampled: logo red #e8194b -> #ef4168 for contrast, charcoal #231f20 -> #1c191a, snowflake blue #0a86c7 on the nav rule. Rejected: GBP header/'All' photo, a clipboard hand shot with a STRUCTURE TECH branded pen (another company). Placeholder: reviews. Google is 3.0 from 14 with harsh 1-star reviews (one says $600 paid and not fixed) - NOT quoted, reviews section left as an announced placeholder. GBP 'Website' button now points at solarheatingac.com which redirects to a blank /lander parked page - their listing sends people to an empty page. FB page lists no phone; FB about says 'past 30 years'. Fixed double-escaped &amp;mdash; throughout the page. | FB-DM 2026-10-27: FB page shows no phone and links peoriaheatingandair.com; fails identity and no-website gates.",
   "photos": "real",
   "ready": true,
   "stage": "none"
