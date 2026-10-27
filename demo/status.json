@@ -2416,5 +2416,21 @@
   "photos": "logo",
   "ready": true,
   "stage": "rebuild-target"
+ },
+ "il-cristal-electric-east-peoria": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-27 (company 356523806438, contact 578119972540 Ruth Crist, President per BBB) | No-website VERIFIED 2026-10-27 in Chrome: Google Maps listing (Cristal Electric Inc, 129 Dupont Ln East Peoria IL, (309) 699-7821, unclaimed) shows NO website, no reviews, no photos; BBB profile has no Visit Website element (pool 2026-10-22); plain search found no first-party domain. Principals per BBB: Ruth, Leroy B., Michael L. and Brett A. Crist. Started 1950 (76 yrs), BBB file 1987, Not Rated. PHOTO HARVEST: Google listing checked, zero photos; Facebook not searched this run (unattended; no matching page recorded in pool). Page is PRIMED: logo = initials placeholder, reviews = placeholder, work row = generated drawings, all disclosed by swap-notice. DO NOT SAY: anything about reviews (none), BBB rating (Not Rated).",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "il-molleck-electric-brimfield": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-27 (company 356523809471, contact 578125549257 placeholder, owner name unknown) | No-website VERIFIED 2026-10-27 in Chrome: Google Maps listing (Molleck Electric, 14926 W Winchester Dr, Brimfield IL, (309) 446-3483, unclaimed) has no website; pool row verified 2026-10-25 by plain WebSearch (no first-party domain) and IBEW Local 34 directory prints no URL. Identity gate: name (directory says 'Molleck Electric Construction'), city and phone match across directory and Google. ENRICHED 2026-10-27, level BRONZE: three real Google reviews verbatim (5 of 8 have text; 4.8 on 8 reviews); logo = initials placeholder, work row = generated drawings, both disclosed by swap-notice. PHOTO HARVEST: Google listing checked, zero photos; Facebook not searched this run (unattended). DO NOT SAY: owner name (unknown; one review mentions 'Phil', unconfirmed); union/IBEW status is from a directory, do not lead with it.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
  }
 }
