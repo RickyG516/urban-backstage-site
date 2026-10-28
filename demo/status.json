@@ -126,8 +126,10 @@
   "ready": true,
   "stage": "none",
   "fb_dm": {
-   "staged": "2026-10-27",
-   "variant": "B"
+   "staged": "2026-10-28",
+   "variant": "A",
+   "prev_staged": "2026-10-27",
+   "prev_skipped": "2026-10-28"
   }
  },
  "ia-borer-contracting-5z7f1y": {
@@ -397,8 +399,10 @@
   "ready": true,
   "stage": "none",
   "fb_dm": {
-   "staged": "2026-10-27",
-   "variant": "A"
+   "staged": "2026-10-28",
+   "variant": "A",
+   "prev_staged": "2026-10-27",
+   "prev_skipped": "2026-10-28"
   }
  },
  "ia-freiburger-heating-cooling-dubuque": {
@@ -2058,7 +2062,11 @@
   "note": "FB: title names Belleville WI — matches | QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-09-27 (BRONZE): identity confirmed live on FB business page facebook.com/p/Daytonwood-Painting-100057800074513 ('Daytonwood Painting', Belleville WI, (608) 438-4449, 'Women owned and operated') - name + city + phone match the page. Their business card (FB photos) lists Doris Diaz 608-438-4449, Bridget Kiefer 608-213-7891, Jill Hubbard (team member). GBP 'Daytonwood Painting LLC' W3175 Daytonwood Rd Belleville exists with a DIFFERENT phone (608) 424-3449 and no website field; 5.0 from only 2 reviews (Leah N., Elisa S.) - below the 3-review floor, so reviews are a labelled placeholder. REAL LOGO: 'Daytonwood Painting, LLC' serif + gold brush, cropped off the business card, card keyed out, lettering to white. BRAND COLOURS sampled: slate navy -> dark #1c2233, brush gold -> accent #cda05a (6.6:1); SVGs recoloured, fingerprints unchanged. 4 REAL PHOTOS from the Aug 30 2026 'Here's the finished home!' post (tagged Bridget Kiefer): hero = open kitchen with white cabinets and dark island; tiles = coffered-ceiling living room, dining/island under vaulted ceiling, two-storey front entry. Each shot appeared twice in the Photos tab; duplicates dropped. Trust card changed from 'Locally Owned' to 'Women Owned & Operated' (FB + card). PLACEHOLDERS: reviews (data-reviews=placeholder + swap-notice addressed to Doris, Bridget and Jill). No-website: GBP has no website field and FB lists none - still not a full two-test verification.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-10-28",
+   "variant": "C"
+  }
  },
  "wi-dons-concrete-racine": {
   "channel": "phone",
@@ -2229,7 +2237,7 @@
   "enrich_level": "BRONZE",
   "enriched": "2026-10-12",
   "fb": "https://www.facebook.com/groups/229274974225920/",
-  "note": "in HubSpot 2026-10-03 (company 350219033289) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile HTML fetched live: no Visit Website element and no Additional Websites field, proved meaningful against a same-session control (the Eric Sebree BBB profile DOES render a Visit Website button). (2) Domain-scoped WebSearch across pleasantviewforestry.com / pleasantviewforestryandlandscaping.com / pvforestry.com returned ZERO links. (3) Plain + extended WebSearch on name + city + owner surfaced only BBB, HomeAdvisor/Angi, Birdeye, Yelp, landscape.directory and home8.org - no first-party domain. Only social presence is a Facebook GROUP (not a page), facebook.com/groups/229274974225920. Confidence HIGH. OWNER: 'Jerry' - FIRST NAME ONLY, surname not establishable (BBB lists no principal; WI DFI corporate search returns no entity, consistent with a sole proprietorship). Corroborated across six HomeAdvisor reviews 2018-2023 plus one Birdeye review. REVENUE PROOF: since 1/1/2000 (26 yrs); 4.7/5 over 42 HomeAdvisor jobs and 4.6/5 over 23 Birdeye/Google reviews; runs a crew; owns chipping and flatbed haul capacity; hours 8 AM-9 PM seven days; emergency service. CALL WARNINGS: ask for 'Jerry', do not guess a surname; one 1-star HomeAdvisor review (Jun 2019) over an unfinished wet-weather job with a long public owner reply - leave it alone; founding-year conflict (HomeAdvisor 1997 vs BBB 2000) - say 'since 2000'. | ENRICHED 2026-10-12 BRONZE: Google listing 'Pleasant View forestry and landscape', 806 A S Marr St Fond du Lac, (920) 375-6383 - name+city+phone match. REAL: 3 own GBP photos (header tree-trim job = hero; Garden landscape bed; By-owner bucket-lift takedown, cropped to cut a rental yard's name off the lift mast) + 3 verbatim Google reviews (Tom M. 2023, Becky S. 2025, Diane K. 2025), Google 4.7/19. One candidate image in the DOM was a byte-identical Gibbons Masonry photo left over from Maps Recents - rejected. PLACEHOLDER: logo (initials badge) - the only social presence is a FB GROUP, no logo exists. Colours stay pool.",
+  "note": "in HubSpot 2026-10-03 (company 350219033289) | No-website VERIFIED 2026-10-03, search-based only - unattended run, NO BROWSER. (1) BBB profile HTML fetched live: no Visit Website element and no Additional Websites field, proved meaningful against a same-session control (the Eric Sebree BBB profile DOES render a Visit Website button). (2) Domain-scoped WebSearch across pleasantviewforestry.com / pleasantviewforestryandlandscaping.com / pvforestry.com returned ZERO links. (3) Plain + extended WebSearch on name + city + owner surfaced only BBB, HomeAdvisor/Angi, Birdeye, Yelp, landscape.directory and home8.org - no first-party domain. Only social presence is a Facebook GROUP (not a page), facebook.com/groups/229274974225920. Confidence HIGH. OWNER: 'Jerry' - FIRST NAME ONLY, surname not establishable (BBB lists no principal; WI DFI corporate search returns no entity, consistent with a sole proprietorship). Corroborated across six HomeAdvisor reviews 2018-2023 plus one Birdeye review. REVENUE PROOF: since 1/1/2000 (26 yrs); 4.7/5 over 42 HomeAdvisor jobs and 4.6/5 over 23 Birdeye/Google reviews; runs a crew; owns chipping and flatbed haul capacity; hours 8 AM-9 PM seven days; emergency service. CALL WARNINGS: ask for 'Jerry', do not guess a surname; one 1-star HomeAdvisor review (Jun 2019) over an unfinished wet-weather job with a long public owner reply - leave it alone; founding-year conflict (HomeAdvisor 1997 vs BBB 2000) - say 'since 2000'. | ENRICHED 2026-10-12 BRONZE: Google listing 'Pleasant View forestry and landscape', 806 A S Marr St Fond du Lac, (920) 375-6383 - name+city+phone match. REAL: 3 own GBP photos (header tree-trim job = hero; Garden landscape bed; By-owner bucket-lift takedown, cropped to cut a rental yard's name off the lift mast) + 3 verbatim Google reviews (Tom M. 2023, Becky S. 2025, Diane K. 2025), Google 4.7/19. One candidate image in the DOM was a byte-identical Gibbons Masonry photo left over from Maps Recents - rejected. PLACEHOLDER: logo (initials badge) - the only social presence is a FB GROUP, no logo exists. Colours stay pool. | FB-DM 2026-10-28: only a Facebook GROUP, not a business page - not messageable.",
   "photos": "real",
   "ready": true,
   "stage": "none"
