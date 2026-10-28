@@ -2447,5 +2447,21 @@
   "photos": "generated",
   "ready": true,
   "stage": "none"
+ },
+ "ia-southern-iowa-painting-ottumwa": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-28 (company 357237192386, contact 579376801483 placeholder, owner name unknown) | No-website VERIFIED 2026-10-28 in Chrome: Google Maps listing (Southern Iowa Painting, Painter, (641) 799-4220, shows 'Add website', no reviews, no photos); BBB and Manta list 313 Lynwood Ave Ottumwa IA 52501 with the same phone; Blue Book lists an alt phone (641) 684-5660 so the main line is unconfirmed. Plain search found no first-party domain. Identity gate: name, city and phone match across BBB, Manta and Google. PHOTO HARVEST: Google listing checked, zero photos; Facebook page search by name+city returned no results. Page is PRIMED: logo = initials placeholder, reviews = placeholder, work row = generated drawings, all disclosed by swap-notice. DO NOT SAY: reviews (none), owner name (unknown), years in business (unknown).",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
+ },
+ "ia-redoy-roofing-siding-bloomfield": {
+  "channel": "phone",
+  "fb": "",
+  "note": "in HubSpot 2026-10-28 (company 357239001804, contact 579032579782 placeholder, owner name unknown) | No-website VERIFIED 2026-10-28 in Chrome: Google Maps listing (REDOY ROOFING AND SIDING LLC, 18951 200th St, Bloomfield IA 52537, (641) 664-2574) shows 'Add website'; BBB profile has no Visit Website element (pool). Identity gate: name, city and phone match Google and the pool row. Google rating 5.0 on 5 reviews, only 2 with text, so reviews stay a labelled placeholder. PHOTO HARVEST: Google photos checked; roof and siding photos exist but are uploaded by a reviewer account and nothing in them ties them to Redoy, so none used. Facebook not searched this run. Page is PRIMED: logo = initials placeholder, reviews = placeholder, work row = generated drawings, all disclosed by swap-notice. DO NOT SAY: owner name (unknown), that the photos on Google are theirs, years in business.",
+  "photos": "generated",
+  "ready": true,
+  "stage": "none"
  }
 }
