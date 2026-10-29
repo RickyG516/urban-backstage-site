@@ -209,6 +209,7 @@ body.landed .here{display:block}
     <button class="beatbtn" id="heartbtn" type="button" aria-label="Tap to feel my heartbeat">
       <svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 84C18 60 4 44 4 27 4 14 14 5 26 5c10 0 19 6 24 15C55 11 64 5 74 5c12 0 22 9 22 22 0 17-14 33-46 57z" fill="#ff8fb3" stroke="#e0568a" stroke-width="3" stroke-linejoin="round"/><path d="M20 24c2-8 8-12 15-11" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/></svg>
     </button>
+    <label id="hlab" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><input type="checkbox" switch id="hsw" tabindex="-1"></label>
     <svg class="ecg" viewBox="0 0 300 60" aria-hidden="true" preserveAspectRatio="none">
       <path class="base" d="M0 32H95L104 32L112 8L122 54L132 32H156L162 25L168 32H300"/>
       <path class="live" pathLength="100" d="M0 32H95L104 32L112 8L122 54L132 32H156L162 25L168 32H300"/>
@@ -222,8 +223,8 @@ body.landed .here{display:block}
   <div class="story">
     <section class="chap rv">
       <p class="kick">Chapter 1</p>
-      <h2>It started this summer</h2>
-      <p>Petra, this summer I found my person. Quiet walks, big laughs, and you covering your face every time I point a camera at you.</p>
+      <h2>Last summer we met. This summer we fell.</h2>
+      <p>We met last summer. This summer is when we fell in love. Quiet walks, big laughs, and you covering your face every time I point a camera at you.</p>
       <div class="pics">
         <figure><img src="img/park.jpg" alt="Selfie in the park, you smiling behind your hand" loading="lazy"><figcaption>Day one energy</figcaption></figure>
         <figure><img src="img/rail.jpg" alt="Us leaning on a stone railing" loading="lazy"><figcaption>You, me, and a view</figcaption></figure>
@@ -247,11 +248,12 @@ body.landed .here{display:block}
     <section class="chap rv">
       <p class="kick">Chapter 3</p>
       <h2>The hard part</h2>
-      <p>Loving each other from far away is not easy. We did it anyway.</p>
+      <p>I dropped you off at the airport and now you're back home in Tirana. The car ride home was quiet. Loving each other from far away is not easy, and we are doing it anyway.</p>
       <ul class="hard">
         <li><b>7</b><span>hours apart. I say good morning when you are going to bed.</span></li>
+        <li><b>&#9992;</b><span>You flew home. I counted every hour until you landed.</span></li>
         <li><b>1</b><span>ocean between us.</span></li>
-        <li><b>&#9825;</b><span>Screens instead of hugs.</span></li>
+        <li><b>&#9825;</b><span>Screens instead of hugs, until December 14.</span></li>
         <li><b>&#8734;</b><span>Waiting, and trusting each other the whole time.</span></li>
       </ul>
       <div class="pics">
@@ -451,11 +453,15 @@ body.landed .here{display:block}
 </script>
 <script>
 (function(){
-  var n=0,el=document.getElementById('beats'),btn=document.getElementById('heartbtn'),buzz=false;
-  function tick(){n++;el.textContent=n.toLocaleString('en-US');if(buzz&&navigator.vibrate){try{navigator.vibrate([70,90,45]);}catch(e){}}}
+  var n=0,el=document.getElementById('beats'),btn=document.getElementById('heartbtn'),lab=document.getElementById('hlab'),buzz=false,note=document.querySelector('.tapnote');
+  function haptic(){
+    if(navigator.vibrate){try{navigator.vibrate([70,90,45]);return;}catch(e){}}
+    try{lab.click();setTimeout(function(){lab.click();},150);}catch(e){}
+  }
+  function tick(){n++;el.textContent=n.toLocaleString('en-US');if(buzz)haptic();}
   setInterval(tick,833);
-  btn.addEventListener('click',function(){buzz=!buzz;if(buzz&&navigator.vibrate){try{navigator.vibrate([70,90,45]);}catch(e){}}});
-})();
+  btn.addEventListener('click',function(){buzz=!buzz;note.textContent=buzz?'Feeling it. Tap again to stop.':'Tap the heart to feel it on your phone';if(buzz)haptic();});
+  })();
 </script>
 </body>
 </html>
