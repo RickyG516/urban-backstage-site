@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffd9e6">
+<title>Petra, I'm Coming to You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ffd9e6; --pink-deep:#ff8fb3; --rose:#e0568a;
+  --lav:#e6defa; --lav-deep:#9a86d6;
+  --sky:#d6ecff; --sky-deep:#6fb2ec;
+  --peach:#ffe8d6; --mint:#d9f5e8;
+  --ink:#4a3552; --ink-soft:#7a6585; --card:#ffffffcc;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;min-height:100dvh;
+  font-family:'Fredoka','Baloo 2','Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,var(--sky) 0%,var(--lav) 45%,var(--pink) 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  display:flex;justify-content:center;
+}
+.sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.cloud{position:absolute;width:150px;height:60px;opacity:.75;animation:drift linear infinite}
+.cloud.c1{top:7%;animation-duration:70s;animation-delay:-20s}
+.cloud.c2{top:30%;width:110px;opacity:.55;animation-duration:95s;animation-delay:-60s}
+.cloud.c3{top:72%;width:190px;opacity:.6;animation-duration:85s;animation-delay:-35s}
+@keyframes drift{from{transform:translateX(-220px)}to{transform:translateX(110vw)}}
+.heart{position:absolute;bottom:-40px;color:var(--pink-deep);opacity:0;animation:rise linear infinite}
+@keyframes rise{
+  0%{transform:translate(0,0) scale(.6);opacity:0}
+  12%{opacity:.8}
+  100%{transform:translate(var(--sway,20px),-110vh) scale(1.1);opacity:0}
+}
+main{position:relative;z-index:1;width:100%;max-width:520px;padding:28px 16px 36px}
+.hello{font-size:1.05rem;color:var(--ink-soft);text-align:center;letter-spacing:.02em}
+h1{
+  font-weight:600;font-size:clamp(1.9rem,8.5vw,2.7rem);line-height:1.1;
+  text-align:center;margin:6px 0 10px;color:var(--rose);
+}
+.landing{
+  text-align:center;font-size:1rem;color:var(--ink);
+  background:var(--card);border-radius:999px;padding:8px 16px;width:fit-content;margin:0 auto 22px;
+  box-shadow:0 2px 0 #fff8,0 6px 18px #9a86d633;
+}
+.card{background:var(--card);border-radius:28px;padding:20px 14px;box-shadow:0 8px 28px #9a86d62e;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile{background:#fff;border-radius:20px;padding:12px 2px 9px;text-align:center;box-shadow:inset 0 -4px 0 var(--pink)}
+.tile:nth-child(2){box-shadow:inset 0 -4px 0 var(--lav)}
+.tile:nth-child(3){box-shadow:inset 0 -4px 0 var(--sky)}
+.tile:nth-child(4){box-shadow:inset 0 -4px 0 var(--peach)}
+.num{display:block;font-weight:600;font-size:clamp(1.9rem,10vw,2.9rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.lbl{display:block;margin-top:5px;font-size:.78rem;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase}
+.route{margin-top:22px}
+.route svg{width:100%;height:auto;display:block;overflow:visible}
+.track{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-dasharray:2 11}
+.done{fill:none;stroke:var(--pink-deep);stroke-width:6;stroke-linecap:round}
+.stop{fill:#fff;stroke:var(--lav-deep);stroke-width:3.5}
+.stop.on{fill:var(--pink-deep);stroke:var(--rose)}
+.city{font-size:11.5px;fill:var(--ink);font-family:inherit;font-weight:500;text-anchor:middle}
+#plane{transition:transform .9s linear}
+#plane .bob{animation:bob 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.status{margin-top:16px;text-align:center;min-height:3.2em}
+.phase{display:inline-block;font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--lav-deep);padding:3px 12px;border-radius:999px}
+.line{margin-top:8px;font-size:1.12rem;line-height:1.35}
+.sign{margin-top:22px;text-align:center;color:var(--ink-soft);font-size:1rem}
+.toggle{
+  display:block;margin:14px auto 0;font:inherit;font-size:.85rem;color:var(--ink-soft);
+  background:#ffffff99;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;min-height:40px;
+}
+:focus-visible{outline:3px solid var(--lav-deep);outline-offset:3px;border-radius:12px}
+.toggle:focus-visible{border-radius:999px}
+body.calm .cloud,body.calm .heart{display:none}
+/* landed */
+body.landed .timer,body.landed .landing{display:none}
+.here{display:none;text-align:center;padding:10px 0 4px}
+body.landed .here{display:block}
+.here b{display:block;font-weight:600;font-size:clamp(2.6rem,15vw,4rem);color:var(--rose);line-height:1;animation:pop .8s cubic-bezier(.2,1.6,.4,1) both}
+.here span{display:block;margin-top:8px;font-size:1.15rem}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .cloud,.heart,#plane .bob,.here b{animation:none}
+  .heart{display:none}
+  #plane{transition:none}
+}
+@media print{.sky{display:none}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true" id="sky">
+  <svg class="cloud c1" viewBox="0 0 150 60"><use href="#cloudshape"/></svg>
+  <svg class="cloud c2" viewBox="0 0 150 60"><use href="#cloudshape"/></svg>
+  <svg class="cloud c3" viewBox="0 0 150 60"><use href="#cloudshape"/></svg>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><symbol id="cloudshape" viewBox="0 0 150 60"><path fill="#fff" d="M30 56a22 22 0 0 1-2-43.9A30 30 0 0 1 85 8a26 26 0 0 1 36 22 20 20 0 0 1-4 26z"/></symbol></defs>
+</svg>
+
+<main>
+  <p class="hello">Hi Petra</p>
+  <h1>I'm coming to you</h1>
+  <p class="landing" id="landing">Landing in Tirana, Monday, Dec 14, 1:10 PM</p>
+
+  <section class="card" aria-label="Countdown to landing in Tirana">
+    <div class="timer" id="timer" role="timer" aria-label="Time until I land in Tirana">
+      <div class="tile"><span class="num" id="d">--</span><span class="lbl">days</span></div>
+      <div class="tile"><span class="num" id="h">--</span><span class="lbl">hours</span></div>
+      <div class="tile"><span class="num" id="m">--</span><span class="lbl">mins</span></div>
+      <div class="tile"><span class="num" id="s">--</span><span class="lbl">secs</span></div>
+    </div>
+    <div class="here" id="here"><b>He's here!</b><span>Landed in Tirana. Come find me.</span></div>
+
+    <div class="route">
+      <svg viewBox="0 0 360 120" role="img" aria-labelledby="routeTitle">
+        <title id="routeTitle">Flight path from Chicago to Toronto to London to Tirana</title>
+        <path id="path" class="track" d="M28 82 C 80 20, 130 20, 120 66 S 220 110, 240 60 S 300 20, 332 50"/>
+        <path id="doneP" class="done" d="M28 82"/>
+        <g id="stops"></g>
+        <g id="plane"><g class="bob">
+          <path transform="scale(1.05)" d="M16 0C16-2 12-3 8-3L-2-3-10-14-14-14-9-3-14-3-17-7-19-7-17 0-19 7-17 7-14 3-9 3-14 14-10 14-2 3 8 3C12 3 16 2 16 0Z" fill="#fff" stroke="#e0568a" stroke-width="1.8" stroke-linejoin="round"/>
+        </g></g>
+      </svg>
+    </div>
+
+    <div class="status" aria-live="polite">
+      <span class="phase" id="phase">Waiting</span>
+      <p class="line" id="line"></p>
+    </div>
+  </section>
+
+  <p class="sign">Love, Ricky</p>
+  <button class="toggle" id="toggle" type="button" aria-pressed="false">Turn off the floaty stuff</button>
+</main>
+
+<script>
+(function(){
+  var TARGET = Date.parse('2026-12-14T12:10:00Z');
+  var PH = [
+    {k:'leg1', from:'2026-12-13T17:45:00Z', to:'2026-12-13T19:42:00Z', a:0, b:1, label:'Flight 1', line:"Wheels up from Chicago. I'm on my way to you."},
+    {k:'lay1', from:'2026-12-13T19:42:00Z', to:'2026-12-13T23:05:00Z', a:1, b:1, label:'Toronto layover', line:"Quick stop in Toronto. Snacks, a stretch, then back in the air."},
+    {k:'leg2', from:'2026-12-13T23:05:00Z', to:'2026-12-14T06:15:00Z', a:1, b:2, label:'Flight 2', line:"Crossing the ocean overnight. I'm thinking about you the whole way."},
+    {k:'lay2', from:'2026-12-14T06:15:00Z', to:'2026-12-14T09:05:00Z', a:2, b:2, label:'London layover', line:"London. One more flight and I'm yours."},
+    {k:'leg3', from:'2026-12-14T09:05:00Z', to:'2026-12-14T12:10:00Z', a:2, b:3, label:'Last flight', line:"Final stretch. Next stop is you."}
+  ].map(function(p){p.f=Date.parse(p.from);p.t=Date.parse(p.to);return p;});
+  var CITIES = ['Chicago','Toronto','London','Tirana'];
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function(id){return document.getElementById(id);};
+
+  // Landing time in Tirana time
+  try{
+    var t = new Date(TARGET);
+    var day = new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Tirane',weekday:'long',month:'short',day:'numeric'}).format(t);
+    var tm = new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Tirane',hour:'numeric',minute:'2-digit'}).format(t);
+    $('landing').textContent = 'Landing in Tirana, ' + day + ', ' + tm + ' Tirana time';
+  }catch(e){}
+
+  // Route geometry
+  var path = $('path'), L = path.getTotalLength(), stopsG = $('stops'), stopLen = [0, L/3, 2*L/3, L];
+  CITIES.forEach(function(name,i){
+    var p = path.getPointAtLength(stopLen[i]);
+    var c = document.createElementNS(NS,'circle');
+    c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r',7);c.setAttribute('class','stop');c.id='stop'+i;
+    var tx = document.createElementNS(NS,'text');
+    tx.setAttribute('x',p.x);tx.setAttribute('y',p.y+(i===1?-14:24));tx.setAttribute('class','city');tx.textContent=name;
+    stopsG.appendChild(c);stopsG.appendChild(tx);
+  });
+
+  // Clock: ?t= override, else server Date header offset, else device clock
+  var qs = new URLSearchParams(location.search);
+  var override = qs.get('t') ? Date.parse(qs.get('t')) : NaN;
+  var hasOverride = !isNaN(override);
+  var offset = 0, t0 = Date.now();
+  function now(){ return hasOverride ? override + (Date.now()-t0) : Date.now() + offset; }
+  if(!hasOverride && window.fetch){
+    var sent = Date.now();
+    fetch(location.pathname,{method:'HEAD',cache:'no-store',redirect:'manual'}).then(function(r){
+      var h = r.headers && r.headers.get('date');
+      var srv = h ? Date.parse(h) : NaN;
+      if(!isNaN(srv)){ var rtt = Date.now()-sent; offset = srv + rtt/2 - Date.now(); }
+    }).catch(function(){});
+  }
+
+  function pad(n){return n<10?'0'+n:''+n;}
+  function phaseAt(ms){
+    for(var i=0;i<PH.length;i++) if(ms>=PH[i].f && ms<PH[i].t) return PH[i];
+    return null;
+  }
+  var lastKey = '';
+  function render(){
+    var ms = now(), diff = TARGET - ms;
+    var landed = diff <= 0;
+    document.body.classList.toggle('landed', landed);
+    var key, frac, pos, doneTo, onStop;
+    if(landed){
+      key='landed'; pos = L; doneTo = L; onStop = 3;
+    }else{
+      var s = Math.floor(diff/1000);
+      $('d').textContent = Math.floor(s/86400);
+      $('h').textContent = pad(Math.floor(s%86400/3600));
+      $('m').textContent = pad(Math.floor(s%3600/60));
+      $('s').textContent = pad(s%60);
+      var ph = phaseAt(ms);
+      if(!ph){ key='wait'; pos=0; doneTo=0; onStop=0; }
+      else{
+        key=ph.k; frac = (ms-ph.f)/(ph.t-ph.f);
+        pos = stopLen[ph.a] + (stopLen[ph.b]-stopLen[ph.a])*frac;
+        doneTo = pos; onStop = ph.a===ph.b ? ph.a : -1;
+      }
+    }
+    // plane + trail
+    var p = path.getPointAtLength(pos), q = path.getPointAtLength(Math.min(L,pos+2)), r = path.getPointAtLength(Math.max(0,pos-2));
+    var ang = Math.atan2(q.y-r.y, q.x-r.x)*180/Math.PI;
+    $('plane').setAttribute('transform','translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+') rotate('+ang.toFixed(1)+')');
+    if(key!==lastKey || true){
+      // trail drawn by sampling the path up to doneTo
+      var d='M'+path.getPointAtLength(0).x+' '+path.getPointAtLength(0).y, steps=Math.max(1,Math.ceil(doneTo/6));
+      for(var i=1;i<=steps;i++){var pt=path.getPointAtLength(doneTo*i/steps);d+=' L'+pt.x.toFixed(1)+' '+pt.y.toFixed(1);}
+      $('doneP').setAttribute('d',d);
+    }
+    if(key!==lastKey){
+      lastKey = key;
+      for(var j=0;j<4;j++){
+        var passed = landed ? true : (key==='wait' ? j===0 : (function(){var ph2=phaseAt(ms);return stopLen[j] <= stopLen[ph2.a];})());
+        $('stop'+j).setAttribute('class','stop'+(passed?' on':''));
+      }
+      var phEl=$('phase'), ln=$('line');
+      if(landed){ phEl.textContent='Landed'; ln.textContent="Wheels down in Tirana. I made it to you."; hearts(34); }
+      else if(key==='wait'){ phEl.textContent='Not yet'; ln.textContent="I haven't left yet. Bags are almost packed and my heart is already there."; }
+      else{ var cur=phaseAt(ms); phEl.textContent=cur.label; ln.textContent=cur.line; }
+      document.title = landed ? "He's here!" : "Petra, I'm Coming to You";
+    }
+  }
+
+  // Floating hearts
+  var sky = $('sky');
+  function hearts(n){
+    for(var i=0;i<n;i++){
+      var h = document.createElement('span');
+      h.className='heart';h.textContent='♥';
+      h.style.left=(Math.random()*100)+'%';
+      h.style.fontSize=(14+Math.random()*22)+'px';
+      h.style.animationDuration=(9+Math.random()*9)+'s';
+      h.style.animationDelay=(-Math.random()*14)+'s';
+      h.style.setProperty('--sway',(Math.random()*60-30)+'px');
+      sky.appendChild(h);
+    }
+  }
+  hearts(12);
+
+  var tg = $('toggle');
+  tg.addEventListener('click',function(){
+    var calm = document.body.classList.toggle('calm');
+    tg.setAttribute('aria-pressed',calm?'true':'false');
+    tg.textContent = calm ? 'Bring back the floaty stuff' : 'Turn off the floaty stuff';
+  });
+
+  render();
+  setInterval(render,1000);
+})();
+</script>
+</body>
+</html>
