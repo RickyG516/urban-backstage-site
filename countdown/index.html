@@ -218,7 +218,7 @@ body.landed .here{display:block}
     <h2>My heart beats for you</h2>
     <p>Open this page any time you miss me. It never stops.</p>
     <p class="count"><b id="beats">0</b> beats since you opened this page</p>
-    <p class="tapnote">Tap the heart to feel it on your phone</p>
+    <p class="tapnote">Tap the heart to feel my heartbeat</p>
   </section>
 
   <div class="story">
@@ -465,14 +465,20 @@ body.landed .here{display:block}
 </script>
 <script>
 (function(){
-  var n=0,el=document.getElementById('beats'),btn=document.getElementById('heartbtn'),lab=document.getElementById('hlab'),buzz=false,note=document.querySelector('.tapnote');
-  function haptic(){
-    if(navigator.vibrate){try{navigator.vibrate([70,90,45]);return;}catch(e){}}
-    try{lab.click();setTimeout(function(){lab.click();},150);}catch(e){}
+  var n=0,el=document.getElementById('beats'),btn=document.getElementById('heartbtn'),lab=document.getElementById('hlab'),on=false,ac=null,note=document.querySelector('.tapnote');
+  function thump(t,f,g){var o=ac.createOscillator(),v=ac.createGain();o.type='sine';o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(40,t+.16);v.gain.setValueAtTime(0.0001,t);v.gain.exponentialRampToValueAtTime(g,t+.012);v.gain.exponentialRampToValueAtTime(0.0001,t+.2);o.connect(v);v.connect(ac.destination);o.start(t);o.stop(t+.22);}
+  function lubdub(){
+    if(ac){var t=ac.currentTime+.01;thump(t,95,.9);thump(t+.2,80,.65);}
+    if(navigator.vibrate){try{navigator.vibrate([70,90,45]);}catch(e){}}
+    else{try{lab.click();setTimeout(function(){lab.click();},150);}catch(e){}}
   }
-  function tick(){n++;el.textContent=n.toLocaleString('en-US');if(buzz)haptic();}
+  function tick(){n++;el.textContent=n.toLocaleString('en-US');if(on)lubdub();}
   setInterval(tick,833);
-  btn.addEventListener('click',function(){buzz=!buzz;note.textContent=buzz?'Feeling it. Tap again to stop.':'Tap the heart to feel it on your phone';if(buzz)haptic();});
+  btn.addEventListener('click',function(){
+    on=!on;
+    if(on){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();}catch(e){ac=null;}lubdub();}
+    note.textContent=on?'Feel it? Turn your volume up. Tap again to stop.':'Tap the heart to feel my heartbeat';
+  });
   })();
 </script>
 </body>
