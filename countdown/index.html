@@ -401,7 +401,7 @@ body.landed .here{display:block}
       }
       var phEl=$('phase'), ln=$('line');
       if(landed){ phEl.textContent='Landed'; ln.textContent="Wheels down in Tirana. I made it to you."; hearts(34); }
-      else if(key==='wait'){ phEl.textContent='Not yet'; ln.textContent="I haven't left yet. Bags are almost packed and my heart is already there."; }
+      else if(key==='wait'){ phEl.textContent='Not yet'; ln.textContent="I haven't started packing my bags yet, but I am already thinking about what I will put in them."; }
       else{ var cur=phaseAt(ms); phEl.textContent=cur.label; ln.textContent=cur.line; }
       document.title = landed ? "He's here!" : "Petra, I'm Coming to You";
     }
