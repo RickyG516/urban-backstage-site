@@ -132,6 +132,21 @@ body.landed .here{display:block}
   .hero{animation:none;transform:none}.frame img.on{animation:none}.frame img{transition:none}
   .rv{opacity:1;transform:none;transition:none}.finale .heartbig{animation:none}
 }
+
+/* heartbeat keepsake */
+.beat{text-align:center;overflow:hidden;background:linear-gradient(180deg,#fff,#ffe9f1)}
+.beatbtn{display:block;margin:6px auto 0;border:0;background:none;cursor:pointer;padding:6px;border-radius:50%;font:inherit;-webkit-tap-highlight-color:transparent}
+.beatbtn svg{width:clamp(120px,38vw,170px);height:auto;display:block;filter:drop-shadow(0 8px 14px #e0568a55);animation:lub .833s ease-in-out infinite;transform-origin:50% 55%}
+@keyframes lub{0%{transform:scale(1)}14%{transform:scale(1.2)}28%{transform:scale(1.02)}42%{transform:scale(1.14)}70%,100%{transform:scale(1)}}
+.ecg{width:100%;height:auto;display:block;margin-top:6px}
+.ecg .base{fill:none;stroke:#ffc2d6;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.ecg .live{fill:none;stroke:var(--rose);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:22 78;animation:sweep 2.5s linear infinite}
+@keyframes sweep{from{stroke-dashoffset:22}to{stroke-dashoffset:-78}}
+.beat h2{font-size:clamp(1.7rem,8vw,2.2rem)}
+.count{margin-top:12px;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-size:.95rem}
+.count b{color:var(--rose);font-weight:600;font-size:1.15rem}
+.tapnote{font-size:.85rem;color:var(--ink-soft);margin-top:4px}
+@media (prefers-reduced-motion:reduce){.beatbtn svg,.ecg .live{animation:none}.ecg .live{stroke-dasharray:none}}
 @media print{.sky{display:none}}
 </style>
 </head>
@@ -189,6 +204,20 @@ body.landed .here{display:block}
     </div>
   </section>
 
+
+  <section class="chap beat rv" aria-label="My heart beats for you">
+    <button class="beatbtn" id="heartbtn" type="button" aria-label="Tap to feel my heartbeat">
+      <svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 84C18 60 4 44 4 27 4 14 14 5 26 5c10 0 19 6 24 15C55 11 64 5 74 5c12 0 22 9 22 22 0 17-14 33-46 57z" fill="#ff8fb3" stroke="#e0568a" stroke-width="3" stroke-linejoin="round"/><path d="M20 24c2-8 8-12 15-11" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/></svg>
+    </button>
+    <svg class="ecg" viewBox="0 0 300 60" aria-hidden="true" preserveAspectRatio="none">
+      <path class="base" d="M0 32H95L104 32L112 8L122 54L132 32H156L162 25L168 32H300"/>
+      <path class="live" pathLength="100" d="M0 32H95L104 32L112 8L122 54L132 32H156L162 25L168 32H300"/>
+    </svg>
+    <h2>My heart beats for you</h2>
+    <p>Open this page any time you miss me. It never stops.</p>
+    <p class="count"><b id="beats">0</b> beats since you opened this page</p>
+    <p class="tapnote">Tap the heart to feel it on your phone</p>
+  </section>
 
   <div class="story">
     <section class="chap rv">
@@ -418,6 +447,14 @@ body.landed .here{display:block}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(r){io.observe(r);});
   }else rv.forEach(function(r){r.classList.add('in');});
+})();
+</script>
+<script>
+(function(){
+  var n=0,el=document.getElementById('beats'),btn=document.getElementById('heartbtn'),buzz=false;
+  function tick(){n++;el.textContent=n.toLocaleString('en-US');if(buzz&&navigator.vibrate){try{navigator.vibrate([70,90,45]);}catch(e){}}}
+  setInterval(tick,833);
+  btn.addEventListener('click',function(){buzz=!buzz;if(buzz&&navigator.vibrate){try{navigator.vibrate([70,90,45]);}catch(e){}}});
 })();
 </script>
 </body>
