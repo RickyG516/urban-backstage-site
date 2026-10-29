@@ -127,6 +127,11 @@ body.landed .here{display:block}
 .other p+p{margin-top:12px}.sign2{margin-top:14px;text-align:center;font-weight:500;color:var(--ink-soft)}
 .smirk{display:block;width:150px;margin:12px auto 0;border-radius:14px}
 .finale{text-align:center}
+.faith{text-align:center}
+.faith p+p{margin-top:12px}
+.faith .song{margin-top:18px;font-size:.88rem;color:var(--ink-soft)}
+.faith .player{position:relative;width:100%;aspect-ratio:16/9;margin-top:8px;border-radius:18px;overflow:hidden;box-shadow:0 6px 20px #9a86d62e;background:#fff}
+.faith .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .finale .heartbig{display:inline-block;color:var(--pink-deep);font-size:2.6rem;animation:beat 1.4s ease-in-out infinite}
 @keyframes beat{15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
 @media (prefers-reduced-motion:reduce){
@@ -170,7 +175,7 @@ body.landed .here{display:block}
     <span class="tape" aria-hidden="true"></span>
     <div class="polaroid"><div class="frame" id="frame">
       <img src="img/park.jpg" alt="You covering your smile while we squeeze into a selfie in the park" data-cap="Us, this summer">
-      <img src="img/bean.jpg" alt="Us in front of the Bean in Chicago" data-cap="Chicago, you and me" loading="lazy">
+      <img src="img/bean.jpg" alt="Us in front of the Bean in Chicago" data-cap="chicago freestyle" loading="lazy">
       <img src="img/bridge.jpg" alt="Us on a bridge over the Chicago River, wind in your hair" data-cap="Windy and perfect" loading="lazy">
       <img src="img/rail.jpg" alt="You and me leaning on a stone railing downtown" data-cap="My favorite view" loading="lazy">
       <img src="img/river.jpg" alt="Me in a hood, you smiling with your eyes closed by the river" data-cap="Happy" loading="lazy">
@@ -205,6 +210,13 @@ body.landed .here{display:block}
     </div>
   </section>
 
+  <section class="chap rv faith" aria-label="Our faith">
+    <h2>Our faith comes first</h2>
+    <p>Our faith is at the center of us. We walk with God's guidance and pray for each other.</p>
+    <p>And when I visit, we're going to the Vatican together. I can't wait.</p>
+    <p class="song">Press play. This one's for you.</p>
+    <div class="player"><iframe src="https://www.youtube-nocookie.com/embed/x-skFgrV59A" title="Lonestar, Amazed" loading="lazy" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+  </section>
 
   <section class="chap beat rv" aria-label="My heart beats for you">
     <button class="beatbtn" id="heartbtn" type="button" aria-label="Tap to feel my heartbeat">
