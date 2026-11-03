@@ -522,3 +522,9 @@ from the svgelements bbox produced viewBoxes up to 4312x1442 on a 1200x900 canva
 layout transforms place copies outside the canvas and the bbox swells to match — which renders the hero as a tiny
 scene in a mostly empty frame. Replaced with a fixed 1200x401 band slid vertically to maximise in-band path points,
 tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (444/654, mid 0.11), 0 (123/212, mid 0.23).
+
+## 2026-11-03 nightly: 1 rebuild pitch, 0 enrichments
+- Screened 4 PRIMED pages (Cristal Electric, Redoy Roofing, Southern Iowa Painting, B & B Construction): Facebook searched, no matching page for any. Left PRIMED.
+- Built REBUILD PITCH wi-far-from-famous-masonry-manitowoc (BRONZE). Their own site fffmasonry.com is a one-page DeepSite build with no phone/address; logo and 7 job photos came from the site and FB page (identity: logo prints (920) 242-8798). Skipped an AdobeStock image and a scaffold shot with a dumpster logo.
+- Pool candidates that pass the identity gate on Facebook but need screenshot photo capture (next run): Kramer Built (Walker IA, 319-540-0883, FB KramerBuilt), Eric Farwell Construction (Plymouth IL, 309-333-9464, FB EricFarwellConstruction), Boyd's Tree Service (Shawano WI, FB boydstrees, 94% of 23 reviews).
+- gate.sh over all 272 pages now exceeds 2 minutes on this machine; run it per slug (bash gate.sh <slug>).
