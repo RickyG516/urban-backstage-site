@@ -528,3 +528,10 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - Built REBUILD PITCH wi-far-from-famous-masonry-manitowoc (BRONZE). Their own site fffmasonry.com is a one-page DeepSite build with no phone/address; logo and 7 job photos came from the site and FB page (identity: logo prints (920) 242-8798). Skipped an AdobeStock image and a scaffold shot with a dumpster logo.
 - Pool candidates that pass the identity gate on Facebook but need screenshot photo capture (next run): Kramer Built (Walker IA, 319-540-0883, FB KramerBuilt), Eric Farwell Construction (Plymouth IL, 309-333-9464, FB EricFarwellConstruction), Boyd's Tree Service (Shawano WI, FB boydstrees, 94% of 23 reviews).
 - gate.sh over all 272 pages now exceeds 2 minutes on this machine; run it per slug (bash gate.sh <slug>).
+
+## 2026-11-04 nightly: built 2 (spec), 0 enrichments
+- Built ia-kramer-built-walker (Kramer Built LLC, Walker IA, spray foam/remodel) and il-eric-farwell-construction-plymouth (Eric Farwell Construction, Plymouth IL, roofing), both BRONZE from their own Facebook pages (identity: phone on page and on logo/trailer). 3 and 4 real photos plus real logo. Reviews are labelled placeholders.
+- Photo capture method that worked: open the photo viewer from the grid (click), wait 5s, tiny screenshot, then zoom with save_to_disk on the viewer region. Pressing Left/Right in the viewer, or batching several captures, makes the next capture time out; navigate and click fresh for each photo.
+- kramerbuilthomes.com is a different Kramer Built (Parma, Idaho). Google Maps for "Kramer Built Walker IA" returns Cramer's Construction.
+- Boyd's Tree Service (Shawano WI): FB page shows no phone on the main view and the recent posts are family tribute content with people; not built, needs the About tab phone check.
+- Did not reach Part 1 enrichment screening of PRIMED pages (time went to photo capture).
