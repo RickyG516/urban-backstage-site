@@ -535,3 +535,9 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - kramerbuilthomes.com is a different Kramer Built (Parma, Idaho). Google Maps for "Kramer Built Walker IA" returns Cramer's Construction.
 - Boyd's Tree Service (Shawano WI): FB page shows no phone on the main view and the recent posts are family tribute content with people; not built, needs the About tab phone check.
 - Did not reach Part 1 enrichment screening of PRIMED pages (time went to photo capture).
+
+## 2026-11-05 nightly: 0 built, 0 enriched (no sendable pages)
+- Pool screen (Maps + Facebook, identity by name/city/phone): Concrete Connections LLC (Sioux City) and Rob Kannegieter Construction (Cherokee IA) have no matching listing on Maps or Facebook: rejected. Thompson Construction & Sons (Ellsworth IA) has a good current site (thompsoniowa.com): rejected, not a weak-site qualifier.
+- Mac's Ltd. (Quincy IL) and LeRoy Morford Construction (Marshalltown IA): Maps name/city/phone match and no website, but no Maps photos and no Facebook page found, so the 3-photo minimum cannot be met. Left unused with notes.
+- Boyd's Tree Service (Shawano WI): Maps matches phone (715) 805-8733, Facebook boydstrees About tab shows no phone or city, so FB identity is unconfirmed. Not built.
+- Remaining strong pool rows are thin (no website, tiny web footprint); photo-less rows will not clear BRONZE.
