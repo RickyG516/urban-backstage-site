@@ -1859,8 +1859,11 @@
   "fb_dm": {
    "staged": "2026-11-02",
    "variant": "B",
-   "sent": "2026-11-02"
-  }
+   "sent": "2026-11-02",
+   "replied": "2026-11-04",
+   "reply_gist": "No thanks"
+  },
+  "status": "declined"
  },
  "jeffs-tree-service-sioux-city": {
   "channel": "phone",
@@ -2528,7 +2531,11 @@
   "note": "in HubSpot 2026-11-04 (company 359689295575, contact 584717510368 Clayton Kramer per BBB) | from prospect pool (weak, BBB; BBB Visit Website points to Facebook) | NO-WEBSITE VERIFIED 2026-11-04 in Chrome: kramerbuilthomes.com is a different Kramer Built (Parma, Idaho), not theirs; Google Maps name+city search returned Cramer's Construction (different phone), no matching GBP. IDENTITY GATE passed on Facebook: 'Kramer Built' page lists (319) 540-0883, Robins/Cedar Rapids/Center Point/Troy Mills/Urbana/Monticello/Palo/Coggon, logo prints the phone. PHOTO HARVEST: Facebook photos tab checked by eye, captured as screenshots of the photo viewer; used spray-foam pole building and two pergola jobs (3 real photos) plus the real logo; rejected holiday/greeting graphics, and photos showing a person posing. Google Business Profile: none matched. PAGE LEVEL BRONZE: real logo + real photos; reviews labelled placeholder (FB shows only 1 review). Owner Clayton Kramer, started 7/1/2018, BBB accredited 2/2024 (pool/BBB). DO NOT SAY: reviews, crew size, equipment, years beyond 2018.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-11-05",
+   "variant": "A"
+  }
  },
  "il-eric-farwell-construction-plymouth": {
   "channel": "phone",
@@ -2536,6 +2543,10 @@
   "note": "in HubSpot 2026-11-04 (company 359868739295, contact 584681424574 Eric Farwell per BBB) | from prospect pool (medium, BBB; BBB Visit Website points to Facebook) | NO-WEBSITE: pool search 2026-10-03 found no first-party domain; Facebook page lists no website. IDENTITY GATE passed on Facebook: 'Eric Farwell Construction' page lists (309) 333-9464 and the cover photo of the company trailer prints (309) 333-9464 and (309) 333-6668. PHOTO HARVEST: Facebook photos tab checked by eye (all roofing/house shots, no other company branding); used 3 roof/house photos plus the trailer cover photo (4 real photos) and the logo cropped from the trailer. Rejected a person at the left edge of one photo by cropping. Google Business Profile not checked this run. PAGE LEVEL BRONZE: real logo + real photos; reviews labelled placeholder. Owner Eric T Farwell, started 2015, BBB accredited 11/2023 (pool/BBB). DO NOT SAY: reviews, crew size, license number, years beyond 2015.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-11-05",
+   "variant": "B"
+  }
  }
 }
