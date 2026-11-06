@@ -541,3 +541,9 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - Mac's Ltd. (Quincy IL) and LeRoy Morford Construction (Marshalltown IA): Maps name/city/phone match and no website, but no Maps photos and no Facebook page found, so the 3-photo minimum cannot be met. Left unused with notes.
 - Boyd's Tree Service (Shawano WI): Maps matches phone (715) 805-8733, Facebook boydstrees About tab shows no phone or city, so FB identity is unconfirmed. Not built.
 - Remaining strong pool rows are thin (no website, tiny web footprint); photo-less rows will not clear BRONZE.
+
+## 2026-11-06 nightly: 0 built, 0 enriched (no sendable pages; capture blocked)
+- Pool screen: Small Town Heating & Cooling (Ellsworth IA, 1527 Dewitt St, (515) 836-4600) passes the identity gate on Facebook (name, city, phone on the About view). Its Photos tab holds many real Goodman furnace-install photos, no other company's branding seen. Good build candidate.
+- Blocker: Chrome screenshot capture timed out repeatedly on the first tab, and in a fresh tab the viewport stayed about 528x540 after resize_window, so a viewer photo captures at roughly 200x330 px. That is below the adequate-resolution bar, so no photos were shipped.
+- Not screened tonight: A.C.E Roofing (Abingdon IL), Country Concrete (Derby IA), Irlmeier Construction (Adair IA), Jirak Construction and Roofing (Waucoma IA), Mendez & Son. No PRIMED enrichment screening done.
+- Next run: start with Small Town Heating & Cooling once the browser viewport can be enlarged (or use the built-in browser pane for capture).
