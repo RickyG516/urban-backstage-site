@@ -2533,8 +2533,10 @@
   "ready": true,
   "stage": "none",
   "fb_dm": {
-   "staged": "2026-11-05",
-   "variant": "A"
+   "staged": "2026-11-06",
+   "variant": "A",
+   "prev_staged": "2026-11-05",
+   "prev_skipped": "2026-11-06"
   }
  },
  "il-eric-farwell-construction-plymouth": {
@@ -2545,8 +2547,10 @@
   "ready": true,
   "stage": "none",
   "fb_dm": {
-   "staged": "2026-11-05",
-   "variant": "B"
+   "staged": "2026-11-06",
+   "variant": "B",
+   "prev_staged": "2026-11-05",
+   "prev_skipped": "2026-11-06"
   }
  }
 }
