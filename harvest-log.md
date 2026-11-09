@@ -547,3 +547,8 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - Blocker: Chrome screenshot capture timed out repeatedly on the first tab, and in a fresh tab the viewport stayed about 528x540 after resize_window, so a viewer photo captures at roughly 200x330 px. That is below the adequate-resolution bar, so no photos were shipped.
 - Not screened tonight: A.C.E Roofing (Abingdon IL), Country Concrete (Derby IA), Irlmeier Construction (Adair IA), Jirak Construction and Roofing (Waucoma IA), Mendez & Son. No PRIMED enrichment screening done.
 - Next run: start with Small Town Heating & Cooling once the browser viewport can be enlarged (or use the built-in browser pane for capture).
+
+## 2026-11-09 nightly: 0 built, 0 enriched (no sendable pages; capture still blocked)
+- Chrome connected but the viewport is about 1536x639 and the Facebook search URL returned "Not Found" (no checkpoint or warning shown). Maps for "Small Town Heating & Cooling Ellsworth IA" fuzzy-matched to unrelated companies in other states (VA, NC area numbers), so Maps identity was not established.
+- Small Town Heating & Cooling remains the best candidate (FB identity passed 2026-11-06) but photo capture at adequate resolution is still unresolved. Needs the built-in browser pane or a larger Chrome window.
+- Audits at start of run: enrich_audit clean, enrich_level placeholders clean. Counts unchanged: GOLD 20, SILVER 3, BRONZE 66, PRIMED 51, BASE 135.
