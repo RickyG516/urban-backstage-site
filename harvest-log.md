@@ -552,3 +552,8 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - Chrome connected but the viewport is about 1536x639 and the Facebook search URL returned "Not Found" (no checkpoint or warning shown). Maps for "Small Town Heating & Cooling Ellsworth IA" fuzzy-matched to unrelated companies in other states (VA, NC area numbers), so Maps identity was not established.
 - Small Town Heating & Cooling remains the best candidate (FB identity passed 2026-11-06) but photo capture at adequate resolution is still unresolved. Needs the built-in browser pane or a larger Chrome window.
 - Audits at start of run: enrich_audit clean, enrich_level placeholders clean. Counts unchanged: GOLD 20, SILVER 3, BRONZE 66, PRIMED 51, BASE 135.
+
+## 2026-11-10 nightly: 0 built, 0 enriched (no sendable pages; capture still blocked)
+- Audits at start: gate.sh exit 0, enrich_audit clean, added_dates clean, enrich_level placeholders clean. Counts unchanged: GOLD 20, SILVER 3, BRONZE 66, PRIMED 51, BASE 135; 140 of 275 sendable.
+- Screened 1 candidate only: Small Town Heating & Cooling (Ellsworth IA). Maps search again fuzzy-matched to unrelated companies in other states (VA, NC, NH area codes), so Maps identity was not established. Chrome viewport about 1536x695; photo capture at adequate resolution was already blocked on 11-06 and 11-09. Not built.
+- Prospect pool, PRIMED enrichment screening and fallback sources were not worked tonight. Next run: use the built-in browser pane for capture, start with Small Town Heating & Cooling (FB identity passed 2026-11-06).
