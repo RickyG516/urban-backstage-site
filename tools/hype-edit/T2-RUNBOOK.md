@@ -18,8 +18,10 @@ Playwright's Chromium is preinstalled in the cloud container (do not run `playwr
 python3 tools/hype-edit/select.py --days 4 --cap 5 --json
 ```
 Rule: Touch 1 sent on Messenger, 4+ days ago with no real reply, OR any real reply
-(auto-replies do not count), no `t2_video` stamp yet, status not declined/closed,
-mockup exists. Replies come first, then oldest Touch 1. Cap 5 a day.
+(auto-replies do not count), no `t2_video` / `t2_video_built` / `t2_sent` stamp yet,
+neither `fb_dm.status` nor the record-level `status` is declined/closed, mockup
+exists. Replies come first, then oldest Touch 1. Cap 5 a day. Each row carries
+`photos` (usable hook photos in the mockup folder); 0 is fine, build.py falls back.
 
 ## 2. Build each video
 ```
@@ -28,7 +30,11 @@ python3 tools/hype-edit/build.py <slug>
 Output: `tools/hype-edit/out/<slug>-send.mp4` (810x1440, ~4-5 MB, under the 10 MB
 Messenger upload limit). First build on a machine also clones and records the three
 proof sites and synthesizes the music; later builds reuse them. ~4 min per video.
-If build.py exits with "no usable photos", skip that slug and note it.
+Hook photos: build.py uses job jpg/png files from the mockup folder (names with
+"job", "photo", "work" rank first; logo/icon/og files are ignored). Since 2026-11-10,
+a mockup with no such photos is NOT skipped: the hook falls back to three stills
+from the recorded mobile scroll (`"hook": "mockup-stills"` in the build output).
+Real job photos still look better, so drop 1-3 into `demo/<slug>/` when you have them.
 
 ## 3. Attach in Messenger (Claude in Chrome, Ricky's computer)
 Load the chrome tools, `tabs_context_mcp`, open a new tab at `https://www.facebook.com/messages/`.
@@ -56,6 +62,11 @@ of the same file has worked before. Note it in the summary.
 
 If the Chrome tools are missing or the computer is unreachable: still build the
 videos, then write the list below and stop. Ricky attaches by hand.
+
+If facebook.com/messages/ redirects to a login page, Ricky's Chrome is logged out of
+Facebook (happened 2026-11-10; it also silently stops the nightly DM job). Never type
+a password. Build the videos, send them into the chat, still do step 3b (Drive is a
+separate login), stamp `t2_video_built`, and tell Ricky plainly to log back in.
 
 ## 3b. Save every built video to Google Drive (same Chrome session)
 Folder: REVENUE & GROWTH / Mockup Videos

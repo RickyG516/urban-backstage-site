@@ -77,6 +77,42 @@ def hook_photos(folder):
     return pics[:3]
 
 
+def mockup_stills(frames_dir, slug, at=(0.06, 0.45, 0.82)):
+    """Pick three frames from the recorded lead scroll to stand in for job photos."""
+    names = sorted(f for f in os.listdir(frames_dir) if f.startswith("f_") and f.endswith(".jpg")) if os.path.isdir(frames_dir) else []
+    if not names:
+        return []
+    dst = os.path.join(WORK, "hook", slug)
+    os.makedirs(dst, exist_ok=True)
+
+    # Score candidate frames so we avoid empty photo placeholders (big black boxes)
+    # and prefer busy, colorful sections. Pick the best frame within each third.
+    def score(path):
+        try:
+            from PIL import Image, ImageStat
+            im = Image.open(path).convert("L").resize((60, 120))
+            px = list(im.getdata())
+            dark = sum(1 for v in px if v < 24) / len(px)
+            return ImageStat.Stat(im).stddev[0] * (1 - dark) - 40 * dark
+        except Exception:
+            return 0
+
+    last = len(names) - 1
+    picks = []
+    for frac in at:
+        lo, hi = max(0, int(round((frac - 0.14) * last))), min(last, int(round((frac + 0.14) * last)))
+        cands = list(range(lo, hi + 1, max(1, (hi - lo) // 6 or 1)))
+        picks.append(max(cands, key=lambda k: score(os.path.join(frames_dir, names[k]))))
+    out = []
+    for i, k in enumerate(picks):
+        src = os.path.join(frames_dir, names[k])
+        p = os.path.join(dst, f"still-{i + 1}.jpg")
+        with open(src, "rb") as a, open(p, "wb") as b:
+            b.write(a.read())
+        out.append(p)
+    return out
+
+
 def main(slug, full=False, days_hint=""):
     folder = os.path.join(ROOT, "demo", slug)
     index = os.path.join(folder, "index.html")
@@ -86,14 +122,22 @@ def main(slug, full=False, days_hint=""):
     ensure_proof()
     music = ensure_music()
     name, city = title_parts(index)
-    pics = hook_photos(folder)
-    if len(pics) < 3:
-        pics = (pics * 3)[:3] if pics else []
-    if not pics:
-        sys.exit(f"{slug}: no usable photos in the mockup folder, skip (hook needs photos)")
     frames = os.path.join(WORK, "clips", slug)
     if not os.path.isfile(os.path.join(frames, "meta.json")):
         run([PY, os.path.join(HERE, "record.py"), folder, frames, "--seconds", "12.5", "--max-speed", "560"])
+    pics = hook_photos(folder)
+    hook_mode = "photos"
+    if len(pics) < 3:
+        pics = (pics * 3)[:3] if pics else []
+    if not pics:
+        # Photo-less fallback (2026-11-10): most mockups are SVG/logo only. Use three
+        # stills from the recorded mobile scroll (top, middle, lower) as the hook shots
+        # so the video still opens on THEIR site instead of being skipped.
+        pics = mockup_stills(frames, slug)
+        hook_mode = "mockup-stills"
+        if not pics:
+            sys.exit(f"{slug}: no usable photos and no recorded frames to fall back on, skip")
+        print(f"{slug}: no job photos in mockup folder, hook falls back to mockup stills", flush=True)
     base = json.load(open(os.path.join(HERE, "config.dietz.json")))
     base["music"] = music
     base["lead"] = {"name": name, "city": city, "frames": frames, "cta_frame": 20, "hook_photos": pics}
@@ -110,7 +154,8 @@ def main(slug, full=False, days_hint=""):
     if not full:
         os.remove(master)
     size = os.path.getsize(send)
-    print(json.dumps({"slug": slug, "name": name, "city": city, "send": send, "bytes": size, "photos": [os.path.basename(p) for p in pics]}))
+    print(json.dumps({"slug": slug, "name": name, "city": city, "send": send, "bytes": size, "hook": hook_mode,
+                      "photos": [os.path.basename(p) for p in pics]}))
     if size > 9_500_000:
         sys.exit("send file over the 10 MB Messenger upload limit, lower crf")
 
