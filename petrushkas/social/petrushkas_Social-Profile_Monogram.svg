@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Petrushka's profile image">
+  <rect width="1080" height="1080" fill="#1B6A8F"/>
+  <g transform="translate(240 240) scale(2.4)">
+    <path d="M70 160 L70 40 M70 40 H112 C150 40 150 112 112 112 H70" fill="none" stroke="#FBF6EE" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M70 160 C58 186 100 192 110 172 C118 156 98 150 94 166" fill="none" stroke="#FBF6EE" stroke-width="7" stroke-linecap="round"/>
+    <g transform="translate(138 74)">
+      <circle cx="0" cy="-9" r="6" fill="#F2B5C4"/><circle cx="8" cy="-3" r="6" fill="#F2B5C4"/><circle cx="5" cy="7" r="6" fill="#F2B5C4"/><circle cx="-5" cy="7" r="6" fill="#F2B5C4"/><circle cx="-8" cy="-3" r="6" fill="#F2B5C4"/><circle cx="0" cy="0" r="5" fill="#F4B43C"/>
+    </g>
+  </g>
+</svg>
