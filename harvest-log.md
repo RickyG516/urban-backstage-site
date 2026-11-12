@@ -557,3 +557,9 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - Audits at start: gate.sh exit 0, enrich_audit clean, added_dates clean, enrich_level placeholders clean. Counts unchanged: GOLD 20, SILVER 3, BRONZE 66, PRIMED 51, BASE 135; 140 of 275 sendable.
 - Screened 1 candidate only: Small Town Heating & Cooling (Ellsworth IA). Maps search again fuzzy-matched to unrelated companies in other states (VA, NC, NH area codes), so Maps identity was not established. Chrome viewport about 1536x695; photo capture at adequate resolution was already blocked on 11-06 and 11-09. Not built.
 - Prospect pool, PRIMED enrichment screening and fallback sources were not worked tonight. Next run: use the built-in browser pane for capture, start with Small Town Heating & Cooling (FB identity passed 2026-11-06).
+
+## 2026-11-12 nightly: 0 built, 0 enriched (no sendable pages)
+- Chrome and Facebook worked tonight (logged in, no checkpoint or warning, viewport 1536x695).
+- Small Town Heating & Cooling (Ellsworth IA): FB page smalltownheatingandcooling matches name, city, street (1527 Dewitt St) and is a real HVAC page, logo is a sun mascot. Photos tab holds only dark, vertical phone shots of furnaces (sample dated Oct 2015); viewer capture would be about 390x695 and poor. Not built; weak imagery, not a resolution blocker alone.
+- A.C.E Roofing and Construction (Abingdon IL): identity passes (Google listing and FB (309) 703-4100, 100 S Western Ave), good roofing photos on FB, BUT it has a current, polished own site (aceroofingconstruction.com, (c) 2026, service-area pages, quote form). Not a weak-site qualifier: rejected as a prospect. Pool row should be marked rejected.
+- Pool file not edited tonight. Remaining unused pool rows are mostly weak (no site, thin footprint). Source 2 and 3 and PRIMED screening not reached.
