@@ -128,6 +128,14 @@ footer.site .wm-name{color:var(--cream)}
 @keyframes sun{50%{transform:scale(1.08)}}
 @media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}.draw,.stem{stroke-dashoffset:0}.reveal{opacity:1;transform:none}}
 
+
+.garden-map{width:100%;height:auto;display:block}
+.seasons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:22px}
+.season{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
+.season small{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;color:var(--head)}
+.season h3{margin:6px 0 10px}
+.season .pill-list{gap:8px}.season .pill{padding:7px 14px;font-size:.92rem}
+@media (max-width:900px){.seasons{grid-template-columns:1fr}}
 /* themes */
 body.t-micro{--bg:#16231B;--fg:#E9F0E1;--head:#CFE3BF;--accent:var(--mari);--card:#1E3125;--line:#2E4636;--muted:#A9BBA0}
 body.t-micro body::before{mix-blend-mode:screen}
