@@ -1,26 +1,40 @@
 #!/usr/bin/env python3
-"""Pick the Facebook DM threads that are due for a Touch 2 video.
+"""Pick the Facebook prospects that are due a Touch 1 VIDEO (the video IS the first touch).
+
+Rewritten 2026-11-18: the old text-only Touch 1 / Touch 2 video sequence is retired.
+The hype-edit video now goes out as the very first message in the thread.
 
 Reads demo/status.json. A slug is due when all of these hold:
-  * fb_dm.sent exists (Touch 1 went out on Messenger)
-  * fb_dm.t2_video / t2_sent is not set (no video attached or sent yet)
-  * neither fb_dm.status nor the record-level status is declined / closed / dnc
-  * EITHER the prospect replied (fb_dm.replied, a real reply, not auto_reply)
-    OR Touch 1 is at least MIN_DAYS old with no reply
+  * rec.fb is set (we know the Facebook page)
   * the mockup folder exists with index.html
+  * rec.ready is not false
+  * rec.stage is not live / building / rebuild-target (existing-site pitches are a
+    different play; the T1 line is written for businesses with no findable website)
+  * fb_dm has no sent / t1_video / t1_video_built / t2_* stamp (nothing went out yet)
+  * neither fb_dm.status nor the record-level status is declined / closed / dnc / client
+  * rec.note carries none of the skip phrases (identity failed, dropped, excluded,
+    rebuild pitch, personal contact, hand-worked website-build prospects)
 
-Each row also reports `photos` (count of usable hook photos in the mockup folder,
-same rule as build.py). 0 means build.py will fall back to mockup screenshots for
-the hook. `--require-photos` drops those rows instead.
+Rows are ordered real job photos first (better hook), then generated, then the rest.
+Each row carries `photos` (usable hook photos in the mockup folder; 0 is fine, build.py
+falls back to mockup stills), `name` (from the mockup <title>, tagline dropped) and `fb`.
 
-usage: select.py [--days 4] [--cap 5] [--json] [--require-photos]
+The Messenger-side guard lives in the runbook: the thread must be EMPTY (no messages
+either way) or the slug is skipped at attach time.
+
+usage: select.py [--cap 5] [--json] [--require-photos] [--all]
 """
-import argparse, datetime as dt, json, os, sys
+import argparse, html, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 STATUS = os.path.join(ROOT, "demo", "status.json")
-SKIP_STATUS = {"declined", "closed", "dnc", "do-not-contact", "lost", "client", "unsubscribed"}
+SKIP_STATUS = {"declined", "closed", "dnc", "do-not-contact", "lost", "client", "unsubscribed",
+               "manual-outside-sequence"}
+SKIP_STAGE = {"live", "building", "rebuild-target"}
+SKIP_NOTE = ("identity failed", "fails identity", "dropped", "excluded", "no longer a no-website",
+             "rebuild pitch", "personal contact", "website build prospect", "do not contact")
+PHOTO_RANK = {"real": 0, "generated": 1}
 
 sys.path.insert(0, HERE)
 try:
@@ -38,58 +52,87 @@ def photo_count(folder):
         return -1
 
 
-def due(days=4, cap=5, require_photos=False):
-    today = dt.date.today()
+def mockup_name(folder):
+    try:
+        head = open(os.path.join(folder, "index.html"), encoding="utf-8", errors="ignore").read(4000)
+        m = re.search(r"<title>(.*?)</title>", head, re.S | re.I)
+        if m:
+            return html.unescape(m.group(1)).split("|")[0].strip()
+    except OSError:
+        pass
+    return ""
+
+
+STOP = {"llc", "inc", "co", "and", "the", "of", "services", "service", "company"}
+
+
+def identity_hint(name, fburl):
+    """'ok' when the FB vanity slug shares a word with the business name, else 'check'
+    (profile.php / numeric ids / unrelated slugs). A 'check' row still runs: the runbook's
+    Messenger search + empty-thread rule is the real gate, this just warns."""
+    slug = fburl.rstrip("/").split("facebook.com/")[-1].split("?")[0].lower()
+    slug = slug.replace("p/", "", 1) if slug.startswith("p/") else slug
+    words = [w for w in re.findall(r"[a-z]+", name.lower()) if w not in STOP and len(w) > 2]
+    return "ok" if any(w in slug for w in words) else "check"
+
+
+def due(cap=5, require_photos=False, everything=False):
     data = json.load(open(STATUS))
     out = []
     for slug, rec in data.items():
-        fb = rec.get("fb_dm")
-        if not isinstance(fb, dict) or not fb.get("sent"):
+        fburl = rec.get("fb")
+        if not isinstance(fburl, str) or "facebook.com" not in fburl or "/groups/" in fburl:
+            continue  # need a real page URL; groups cannot be messaged
+        if rec.get("ready") is False:
             continue
-        if fb.get("t2_video") or fb.get("t2_video_built") or fb.get("t2_sent"):
-            continue
-        if str(fb.get("status", "")).lower() in SKIP_STATUS:
+        if str(rec.get("stage", "")).lower() in SKIP_STAGE:
             continue
         if str(rec.get("status", "")).lower() in SKIP_STATUS:
-            continue  # record-level decline (e.g. "No thanks" reply logged by nightly DMs)
+            continue
+        note = str(rec.get("note", "")).lower()
+        if any(p in note for p in SKIP_NOTE):
+            continue
+        fb = rec.get("fb_dm") or {}
+        if not isinstance(fb, dict):
+            fb = {}
+        if str(fb.get("status", "")).lower() in SKIP_STATUS:
+            continue
+        if any(fb.get(k) for k in ("sent", "t1_video", "t1_video_built", "t1_skipped",
+                                   "t2_video", "t2_video_built", "t2_sent", "link_sent")):
+            continue
         folder = os.path.join(ROOT, "demo", slug)
         if not os.path.isfile(os.path.join(folder, "index.html")):
             continue
         photos = photo_count(folder)
         if require_photos and photos == 0:
             continue
-        try:
-            sent = dt.date.fromisoformat(str(fb["sent"])[:10])
-        except ValueError:
-            continue
-        age = (today - sent).days
-        replied = bool(fb.get("replied"))
-        if replied:
-            reason = f"replied {fb['replied']}"
-        elif age >= days:
-            reason = f"T1 {age}d old, no reply"
-        else:
-            continue
-        out.append({"slug": slug, "sent": str(fb["sent"]), "age_days": age, "replied": replied,
-                    "reason": reason, "photos": photos, "fb": rec.get("fb", "")})
-    # replies first, then oldest Touch 1 first
-    out.sort(key=lambda r: (not r["replied"], -r["age_days"]))
-    return out[:cap]
+        ptype = str(rec.get("photos", "")).lower()
+        name = mockup_name(folder)
+        out.append({"slug": slug, "name": name, "photos": photos,
+                    "photo_type": ptype, "fb": fburl,
+                    "identity": identity_hint(name, fburl),
+                    "reason": "T1 video (first touch)",
+                    "_rank": PHOTO_RANK.get(ptype, 2)})
+    out.sort(key=lambda r: (r["_rank"], -max(r["photos"], 0), r["slug"]))
+    for r in out:
+        r.pop("_rank", None)
+    return out if everything else out[:cap]
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--days", type=int, default=4)
     ap.add_argument("--cap", type=int, default=5)
+    ap.add_argument("--days", type=int, default=0, help="ignored (kept for old callers)")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--all", action="store_true", help="show the whole eligible pool, ignore --cap")
     ap.add_argument("--require-photos", action="store_true",
                     help="drop rows whose mockup has no usable hook photos")
     a = ap.parse_args()
-    rows = due(a.days, a.cap, a.require_photos)
+    rows = due(a.cap, a.require_photos, a.all)
     if a.json:
         print(json.dumps(rows, indent=1))
     else:
         for r in rows:
-            print(f"{r['slug']:48s} {r['reason']:24s} photos={r['photos']:<2d} {r['fb']}")
+            print(f"{r['slug']:46s} {r['name'][:30]:30s} photos={r['photos']:<2d} {r['photo_type']:10s} id={r['identity']:5s} {r['fb']}")
         if not rows:
             print("nothing due", file=sys.stderr)
