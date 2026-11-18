@@ -127,7 +127,7 @@ export default {
         if (!s(b.title)) return json(req, { ok: false, error: 'title required' }, 400);
         const r = await DB.prepare('INSERT INTO tasks (title,owner,due,area,notes,job_id,key_date,source) VALUES (?,?,?,?,?,?,?,?)')
           .bind(s(b.title), ['ricky', 'doug', 'both'].includes(b.owner) ? b.owner : who, s(b.due), s(b.area), s(b.notes), b.job_id || null, b.key_date ? 1 : 0, 'Added by ' + who).run();
-        await log(env, who, 'task_add', 'task', r.meta.last_row_id, b.title);
+        await log(env, who, 'task_add', b.job_id ? 'job' : 'task', b.job_id || r.meta.last_row_id, b.title);
         return json(req, { ok: true, id: r.meta.last_row_id });
       }
       let m = p.match(/^\/tasks\/(\d+)$/);
@@ -146,7 +146,7 @@ export default {
         await DB.prepare('UPDATE tasks SET title=?,owner=?,due=?,notes=?,status=?,done_at=?,done_by=? WHERE id=?')
           .bind(n.title, n.owner, n.due, n.notes, n.status, doneAt, n.status === 'done' ? (cur.done_by || who) : null, id).run();
         const kind = n.status !== cur.status ? (n.status === 'done' ? 'task_done' : 'task_reopen') : 'task_edit';
-        await log(env, who, kind, 'task', id, n.title);
+        await log(env, who, kind, cur.job_id ? 'job' : 'task', cur.job_id || id, n.title);
         return json(req, { ok: true });
       }
 
@@ -155,7 +155,9 @@ export default {
         const qs = url.searchParams.get('q');
         const r = qs
           ? await DB.prepare("SELECT * FROM contacts WHERE name LIKE ? OR phone LIKE ? OR address LIKE ? ORDER BY id DESC LIMIT 100").bind('%' + qs + '%', '%' + qs + '%', '%' + qs + '%').all()
-          : await DB.prepare('SELECT * FROM contacts ORDER BY id DESC LIMIT 200').all();
+          : await DB.prepare(`SELECT c.*, (SELECT COUNT(*) FROM jobs j WHERE j.contact_id=c.id) jobs,
+              (SELECT stage FROM jobs j WHERE j.contact_id=c.id ORDER BY j.id DESC LIMIT 1) last_stage
+              FROM contacts c ORDER BY c.updated_at DESC, c.id DESC LIMIT 300`).all();
         return json(req, { ok: true, contacts: r.results });
       }
       if (p === '/contacts' && req.method === 'POST') {
@@ -198,10 +200,51 @@ export default {
             b.partner !== undefined ? s(b.partner) : cur.partner, b.scheduled_for !== undefined ? s(b.scheduled_for) : cur.scheduled_for,
             b.notes !== undefined ? s(b.notes) : cur.notes, id).run();
         if (stage !== cur.stage) await log(env, who, 'job_stage', 'job', id, cur.stage + ' to ' + stage);
+        else await log(env, who, 'job_edit', 'job', id, null);
         if (stage === 'done' && cur.stage !== 'done') {
           await DB.prepare("INSERT INTO tasks (title,owner,due,area,source,job_id) VALUES (?,?,?,?,?,?)")
             .bind('Closeout: photos, thank you card, review ask (job #' + id + ')', cur.owner || who, today(), 'sales', 'Closeout SOP', id).run();
         }
+        return json(req, { ok: true });
+      }
+
+      m = p.match(/^\/contacts\/(\d+)$/);
+      if (m && req.method === 'GET') {
+        const id = +m[1];
+        const c = await DB.prepare('SELECT * FROM contacts WHERE id=?').bind(id).first();
+        if (!c) return json(req, { ok: false, error: 'not found' }, 404);
+        const jobs = await DB.prepare('SELECT * FROM jobs WHERE contact_id=? ORDER BY id DESC').bind(id).all();
+        const ids = jobs.results.map(j => j.id);
+        const act = await DB.prepare(`SELECT * FROM activity WHERE (ref_type='contact' AND ref_id=?)` +
+          (ids.length ? ` OR (ref_type='job' AND ref_id IN (${ids.map(() => '?').join(',')}))` : '') + ' ORDER BY id DESC LIMIT 100').bind(id, ...ids).all();
+        return json(req, { ok: true, contact: c, jobs: jobs.results, activity: act.results });
+      }
+      if (m && req.method === 'PATCH') {
+        const id = +m[1], b = await body(req);
+        const cur = await DB.prepare('SELECT * FROM contacts WHERE id=?').bind(id).first();
+        if (!cur) return json(req, { ok: false, error: 'not found' }, 404);
+        const f = ['name', 'phone', 'email', 'address', 'neighborhood', 'source', 'kind', 'notes'];
+        const v = f.map(k => b[k] !== undefined ? s(b[k]) : cur[k]);
+        if (!v[0]) return json(req, { ok: false, error: 'name required' }, 400);
+        await DB.prepare("UPDATE contacts SET name=?,phone=?,email=?,address=?,neighborhood=?,source=?,kind=?,notes=?,updated_at=datetime('now') WHERE id=?").bind(...v, id).run();
+        await log(env, who, 'contact_edit', 'contact', id, v[0]);
+        return json(req, { ok: true });
+      }
+      m = p.match(/^\/jobs\/(\d+)$/);
+      if (m && req.method === 'GET') {
+        const id = +m[1];
+        const j = await DB.prepare('SELECT * FROM jobs WHERE id=?').bind(id).first();
+        if (!j) return json(req, { ok: false, error: 'not found' }, 404);
+        const c = j.contact_id ? await DB.prepare('SELECT * FROM contacts WHERE id=?').bind(j.contact_id).first() : null;
+        const t = await DB.prepare('SELECT * FROM tasks WHERE job_id=? ORDER BY status, due').bind(id).all();
+        const a = await DB.prepare("SELECT * FROM activity WHERE (ref_type='job' AND ref_id=?) OR (ref_type='contact' AND ref_id=?) ORDER BY id DESC LIMIT 100").bind(id, j.contact_id || -1).all();
+        return json(req, { ok: true, job: j, contact: c, tasks: t.results, activity: a.results });
+      }
+      if (p === '/notes' && req.method === 'POST') {
+        const b = await body(req);
+        if (!['job', 'contact', 'task'].includes(b.ref_type) || !b.ref_id || !s(b.note)) return json(req, { ok: false, error: 'note required' }, 400);
+        await log(env, who, 'note', b.ref_type, +b.ref_id, b.note);
+        if (b.ref_type === 'job') await DB.prepare("UPDATE jobs SET updated_at=datetime('now') WHERE id=?").bind(+b.ref_id).run();
         return json(req, { ok: true });
       }
 

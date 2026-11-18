@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Contacts | GBG OS</title>
+<link rel="icon" href="/gbg-os/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gbg-os/assets/os.css?v=7">
+<script src="/gbg-os/assets/os.js?v=7"></script>
+<script src="/gbg-os/assets/api.js?v=7"></script>
+</head>
+<body data-venture="gbg" data-page="contacts">
+<nav class="os-nav" id="os-nav"></nav>
+<div class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Contacts</p>
+    <h1>Every <span>person</span></h1>
+    <p>Customers, partners and vendors. Click a name to open the full record.</p>
+  </section>
+  <input class="search" data-search placeholder="Search name, phone, or address">
+  <div class="card"><div data-live="contacts"><p class="loading">Loading…</p></div></div>
+  <div class="sh"><h2>Add a contact</h2><div class="rule"></div></div>
+  <form class="card form" data-form="contact">
+    <input name="name" placeholder="Name" required><input name="phone" placeholder="Phone"><input name="email" placeholder="Email">
+    <input name="address" placeholder="Address"><input name="neighborhood" placeholder="Neighborhood">
+    <select name="kind"><option value="customer">Customer</option><option value="partner">Partner</option><option value="vendor">Vendor</option></select>
+    <input name="notes" placeholder="Notes" class="wide">
+    <button type="submit">Add contact</button>
+  </form>
+  <div class="note"><b>Customers, partners, vendors, suppliers.</b> Click anyone to edit them, see their jobs, and read every note and change.</div>
+
+  <footer>GBG DUBUQUE | Internal ops, not indexed. Amounts, ownership and anything personal live in Drive, never on these pages.</footer>
+</div>
+</body>
+</html>

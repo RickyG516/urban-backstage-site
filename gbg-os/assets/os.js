@@ -16,6 +16,7 @@
       { id: 'launch',   name: 'Launch',   href: '/gbg-os/launch/' },
       { id: 'services', name: 'Services', href: '/gbg-os/services/' },
       { id: 'jobs',     name: 'Jobs',     href: '/gbg-os/jobs/' },
+      { id: 'contacts', name: 'Contacts', href: '/gbg-os/contacts/' },
       { id: 'playbook', name: 'Playbook', href: '/gbg-os/playbook/' },
       { id: 'web',      name: 'Website & Content', href: '/gbg-os/web/' },
       { id: 'finance',  name: 'Finance',  href: '/gbg-os/finance/' }

@@ -88,10 +88,11 @@
     var q = '/tasks?status=' + status + (owner === 'mine' ? '&owner=' + me : owner !== 'all' ? '&owner=' + owner : '');
     el.innerHTML = '<p class="loading">Loading…</p>';
     api(q).then(function (d) {
-      var T = d.tasks, today = d.today, wk = new Date(new Date(today + 'T12:00:00').getTime() + 7 * 864e5).toISOString().slice(0, 10);
+      var T = d.tasks; T.forEach(function (t) { TASKS[t.id] = t; }); var today = d.today, wk = new Date(new Date(today + 'T12:00:00').getTime() + 7 * 864e5).toISOString().slice(0, 10);
       if (status === 'done') {
+        T.forEach(function (t) { TASKS[t.id] = t; });
         el.innerHTML = T.length ? '<ul class="tasks">' + T.map(function (t) { return taskRow(t, today); }).join('') + '</ul>' : '<p class="loading">Nothing done yet.</p>';
-        bindTicks(el, function () { renderTasks(el); }); return;
+        bindTicks(el, function () { renderTasks(el); }); bindTaskOpen(el); return;
       }
       var groups = [['Overdue', function (t) { return t.due && t.due < today; }],
         ['This week', function (t) { return t.due && t.due >= today && t.due <= wk; }],
@@ -106,7 +107,7 @@
           rows.map(function (t) { return taskRow(t, today); }).join('') + '</ul></div>';
       });
       el.innerHTML = html || '<p class="loading">' + (el.dataset.short ? 'Nothing due this week.' : 'Nothing open. Nice.') + '</p>';
-      bindTicks(el, null);
+      bindTicks(el, null); bindTaskOpen(el);
     }).catch(function (e) { if (e.message !== 'locked') el.innerHTML = '<p class="loading">Could not load tasks.</p>'; });
   }
 
@@ -147,6 +148,9 @@
               '<button data-to="lost" class="lost">Lost</button></div></div>';
           }).join('') : '<div class="empty">None</div>') + '</div>';
       }).join('');
+      board.querySelectorAll('.job').forEach(function (card) {
+        card.addEventListener('click', function (e) { if (e.target.closest('button,a')) return; openJob(+card.dataset.id); });
+      });
       board.querySelectorAll('.job button').forEach(function (b) {
         b.addEventListener('click', function () {
           var id = b.closest('.job').dataset.id;
@@ -155,6 +159,145 @@
             .catch(function () { toast('Could not save'); });
         });
       });
+    }).catch(function () {});
+  }
+
+  /* ---------- drawers: job, contact, task ---------- */
+  var TASKS = {};
+  var SERVICES = ['Permanent lights', 'Driveway sealing', 'Yard spraying', 'Trash can cleaning', 'Epoxy', 'Junk removal', 'Painting (partner)', 'Landscaping (partner)', 'Tree work (partner)'];
+  var PARTNERS = ['', 'Fuehrer Painting', 'New View Landscaping', 'Kutsch Tree Service'];
+  function opt(list, cur, labels) { return list.map(function (v, i) { return '<option value="' + esc(v) + '"' + (v === (cur || '') ? ' selected' : '') + '>' + esc(labels ? labels[i] : (v || 'None')) + '</option>'; }).join(''); }
+  function fld(label, html) { return '<label class="f"><span>' + label + '</span>' + html + '</label>'; }
+  function inp(name, val, type) { return '<input name="' + name + '" type="' + (type || 'text') + '" value="' + esc(val || '') + '">'; }
+  function when(a) { var d = new Date((a || '').replace(' ', 'T') + (a && a.length <= 19 ? 'Z' : '')); return isNaN(d) ? '' : d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
+  function timeline(A) {
+    if (!A || !A.length) return '<p class="loading">No history yet.</p>';
+    return '<ul class="tl">' + A.map(function (a) {
+      return '<li class="' + (a.kind === 'note' ? 'nt' : '') + '"><div class="tlh"><b>' + esc(NAME[a.who] || a.who) + '</b> ' +
+        esc(a.kind === 'note' ? 'added a note' : a.kind.replace('_', ' ')) + '<span>' + when(a.at) + '</span></div>' +
+        (a.note ? '<div class="tlb">' + esc(a.note) + '</div>' : '') + '</li>';
+    }).join('') + '</ul>';
+  }
+  function drawer(title, html, onClose) {
+    var old = document.querySelector('.drawer-wrap'); if (old) old.remove();
+    var w = document.createElement('div'); w.className = 'drawer-wrap';
+    w.innerHTML = '<div class="drawer-bg"></div><aside class="drawer"><div class="dh"><h2>' + title + '</h2><button class="dx" aria-label="Close">&times;</button></div><div class="db">' + html + '</div></aside>';
+    document.body.appendChild(w);
+    function close() { w.remove(); if (onClose) onClose(); }
+    w.querySelector('.dx').onclick = close; w.querySelector('.drawer-bg').onclick = close;
+    document.addEventListener('keydown', function k(e) { if (e.key === 'Escape') { document.removeEventListener('keydown', k); close(); } });
+    return w.querySelector('.db');
+  }
+  function formData(f) { var b = {}; new FormData(f).forEach(function (v, k) { b[k] = v; }); return b; }
+  function refreshAll() { renderJobs(); renderHub(); document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); renderContacts(); }
+  function noteBox(ref, id, after) {
+    return { html: '<form class="notef"><textarea name="note" rows="2" placeholder="Add a note: called, left voicemail, quoted $X…"></textarea><button>Add note</button></form>',
+      bind: function (root) {
+        var f = root.querySelector('.notef'); if (!f) return;
+        f.addEventListener('submit', function (e) { e.preventDefault(); var n = f.note.value.trim(); if (!n) return;
+          api('/notes', { method: 'POST', body: { ref_type: ref, ref_id: id, note: n } }).then(function () { toast('Note added'); after(); }).catch(function () { toast('Could not save'); }); });
+      } };
+  }
+
+  function openJob(id) {
+    var body = drawer('Job', '<p class="loading">Loading…</p>', refreshAll);
+    api('/jobs/' + id).then(function (d) {
+      var j = d.job, c = d.contact || {}, nb = noteBox('job', id, function () { openJob(id); });
+      body.innerHTML =
+        '<form class="dform" data-f="contact">' +
+          '<h3>Customer' + (c.id ? ' <button type="button" class="linkbtn" data-open-contact="' + c.id + '">Open profile</button>' : '') + '</h3>' +
+          fld('Name', inp('name', c.name)) + fld('Phone', inp('phone', c.phone, 'tel')) + fld('Email', inp('email', c.email, 'email')) + fld('Address', inp('address', c.address)) +
+          (c.phone ? '<a class="callbtn" href="tel:' + esc(c.phone) + '">Call ' + esc(c.phone) + '</a>' : '') +
+        '</form>' +
+        '<form class="dform" data-f="job"><h3>Job</h3>' +
+          fld('Stage', '<select name="stage">' + opt(['lead', 'consult', 'estimate', 'booked', 'done', 'review', 'lost'], j.stage, ['Lead', 'Consult', 'Estimate sent', 'Booked', 'Done', 'Review asked', 'Lost']) + '</select>') +
+          fld('Service', '<select name="service"><option value="">Not set</option>' + opt(SERVICES, j.service) + '</select>') +
+          fld('Owner', '<select name="owner">' + opt(['ricky', 'doug'], j.owner, ['Ricky', 'Doug']) + '</select>') +
+          fld('Partner', '<select name="partner">' + opt(PARTNERS, j.partner) + '</select>') +
+          fld('Scheduled for', inp('scheduled_for', j.scheduled_for, 'date')) +
+          fld('Job notes', '<textarea name="notes" rows="3">' + esc(j.notes || '') + '</textarea>') +
+          '<button class="save">Save changes</button></form>' +
+        '<h3>Follow ups</h3><ul class="tasks">' + (d.tasks.length ? d.tasks.map(function (t) { TASKS[t.id] = t; return taskRow(t, new Date().toISOString().slice(0, 10)); }).join('') : '') + '</ul>' +
+        '<form class="dform inline" data-f="fu">' + inp('title', '') + '<input name="due" type="date"><select name="owner">' + opt(['ricky', 'doug', 'both'], j.owner || ls(LS_USER), ['Ricky', 'Doug', 'Both']) + '</select><button>Add follow up</button></form>' +
+        '<h3>History</h3>' + nb.html + timeline(d.activity);
+      body.querySelector('[data-f=fu] input[name=title]').placeholder = 'Call back, send estimate…';
+      nb.bind(body); bindTicks(body, function () { openJob(id); }); bindTaskOpen(body);
+      var oc = body.querySelector('[data-open-contact]'); if (oc) oc.onclick = function () { openContact(+oc.dataset.openContact); };
+      body.querySelector('[data-f=job]').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var cf = formData(body.querySelector('[data-f=contact]')), jf = formData(e.target);
+        var jobs = [api('/jobs/' + id, { method: 'PATCH', body: jf })];
+        if (c.id) jobs.push(api('/contacts/' + c.id, { method: 'PATCH', body: cf }));
+        Promise.all(jobs).then(function () { toast('Saved'); openJob(id); }).catch(function (err) { toast(err.message === 'name required' ? 'Name is required' : 'Could not save'); });
+      });
+      body.querySelector('[data-f=fu]').addEventListener('submit', function (e) {
+        e.preventDefault(); var b = formData(e.target); if (!b.title.trim()) return; b.job_id = id; b.area = 'sales';
+        api('/tasks', { method: 'POST', body: b }).then(function () { toast('Follow up added'); openJob(id); }).catch(function () { toast('Could not save'); });
+      });
+    }).catch(function () { body.innerHTML = '<p class="loading">Could not load this job.</p>'; });
+  }
+
+  function openContact(id) {
+    var body = drawer('Contact', '<p class="loading">Loading…</p>', refreshAll);
+    api('/contacts/' + id).then(function (d) {
+      var c = d.contact, nb = noteBox('contact', id, function () { openContact(id); });
+      body.innerHTML = '<form class="dform" data-f="c">' +
+        fld('Name', inp('name', c.name)) + fld('Phone', inp('phone', c.phone, 'tel')) + fld('Email', inp('email', c.email, 'email')) +
+        fld('Address', inp('address', c.address)) + fld('Neighborhood', inp('neighborhood', c.neighborhood)) +
+        fld('Type', '<select name="kind">' + opt(['customer', 'partner', 'vendor'], c.kind, ['Customer', 'Partner', 'Vendor']) + '</select>') +
+        fld('Found us through', '<select name="source">' + opt(['', 'hanger', 'facebook', 'referral', 'phone', 'form', 'other'], c.source, ['Not set', 'Door hanger', 'Facebook', 'Referral', 'Called in', 'Website', 'Other']) + '</select>') +
+        fld('Notes', '<textarea name="notes" rows="3">' + esc(c.notes || '') + '</textarea>') +
+        (c.phone ? '<a class="callbtn" href="tel:' + esc(c.phone) + '">Call ' + esc(c.phone) + '</a>' : '') +
+        '<button class="save">Save changes</button></form>' +
+        '<h3>Jobs</h3>' + (d.jobs.length ? '<ul class="mini jl">' + d.jobs.map(function (j) { return '<li data-job="' + j.id + '"><span>' + esc(STAGE[j.stage]) + '</span>' + esc(j.service || 'Service not set') + '</li>'; }).join('') + '</ul>' : '<p class="loading">No jobs yet.</p>') +
+        '<button class="ghost" data-newjob>New job for ' + esc(c.name) + '</button>' +
+        '<h3>History</h3>' + nb.html + timeline(d.activity);
+      nb.bind(body);
+      body.querySelectorAll('[data-job]').forEach(function (li) { li.onclick = function () { openJob(+li.dataset.job); }; });
+      body.querySelector('[data-newjob]').onclick = function () {
+        api('/jobs', { method: 'POST', body: { contact_id: id, stage: 'lead' } }).then(function (r) { toast('Job created'); openJob(r.id); });
+      };
+      body.querySelector('[data-f=c]').addEventListener('submit', function (e) {
+        e.preventDefault();
+        api('/contacts/' + id, { method: 'PATCH', body: formData(e.target) }).then(function () { toast('Saved'); openContact(id); })
+          .catch(function (err) { toast(err.message === 'name required' ? 'Name is required' : 'Could not save'); });
+      });
+    }).catch(function () { body.innerHTML = '<p class="loading">Could not load this contact.</p>'; });
+  }
+
+  function openTask(t) {
+    var body = drawer('Task', '', function () { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); renderHub(); });
+    body.innerHTML = '<form class="dform" data-f="t">' + fld('Task', '<textarea name="title" rows="2">' + esc(t.title) + '</textarea>') +
+      fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'both'], t.owner, ['Ricky', 'Doug', 'Both']) + '</select>') +
+      fld('Due', inp('due', t.due, 'date')) + fld('Notes', '<textarea name="notes" rows="4" placeholder="Who you talked to, what they said…">' + esc(t.notes || '') + '</textarea>') +
+      '<div class="meta">' + (t.source ? 'From: ' + esc(t.source) : '') + (t.gate ? ' &middot; Gate ' + esc(t.gate) : '') + (t.done_by ? ' &middot; Done by ' + esc(NAME[t.done_by] || t.done_by) : '') + '</div>' +
+      '<div class="row"><button class="save">Save</button><button type="button" class="ghost" data-toggle>' + (t.status === 'done' ? 'Reopen' : 'Mark done') + '</button>' +
+      (t.job_id ? '<button type="button" class="ghost" data-job>Open job</button>' : '') + '</div></form>';
+    var f = body.querySelector('form');
+    f.addEventListener('submit', function (e) { e.preventDefault();
+      api('/tasks/' + t.id, { method: 'PATCH', body: formData(f) }).then(function () { toast('Saved'); document.querySelector('.dx').click(); }).catch(function () { toast('Could not save'); }); });
+    body.querySelector('[data-toggle]').onclick = function () {
+      api('/tasks/' + t.id, { method: 'PATCH', body: { status: t.status === 'done' ? 'open' : 'done' } }).then(function () { toast(t.status === 'done' ? 'Reopened' : 'Done'); document.querySelector('.dx').click(); });
+    };
+    var jb = body.querySelector('[data-job]'); if (jb) jb.onclick = function () { openJob(t.job_id); };
+  }
+  function bindTaskOpen(root) {
+    root.querySelectorAll('.task .tbody').forEach(function (b) {
+      b.style.cursor = 'pointer';
+      b.addEventListener('click', function () { var t = TASKS[b.closest('.task').dataset.id]; if (t) openTask(t); });
+    });
+  }
+
+  /* ---------- contacts page ---------- */
+  function renderContacts() {
+    var el = document.querySelector('[data-live=contacts]'); if (!el) return;
+    var q = (document.querySelector('[data-search]') || {}).value || '';
+    api('/contacts' + (q ? '?q=' + encodeURIComponent(q) : '')).then(function (d) {
+      el.innerHTML = d.contacts.length ? '<table class="ct"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Type</th><th>Latest</th></tr></thead><tbody>' +
+        d.contacts.map(function (c) {
+          return '<tr data-c="' + c.id + '"><td><b>' + esc(c.name) + '</b></td><td>' + esc(c.phone || '') + '</td><td>' + esc(c.address || '') + '</td><td>' + esc(c.kind || '') + '</td><td>' + esc(c.last_stage ? STAGE[c.last_stage] : '') + '</td></tr>';
+        }).join('') + '</tbody></table>' : '<p class="loading">' + (q ? 'No match.' : 'No contacts yet. Add one below or wait for the first website lead.') + '</p>';
+      el.querySelectorAll('tr[data-c]').forEach(function (tr) { tr.onclick = function () { openContact(+tr.dataset.c); }; });
     }).catch(function () {});
   }
 
@@ -183,13 +326,21 @@
         renderTasks(el);
       });
     });
+    var cf = document.querySelector('form[data-form=contact]');
+    if (cf) cf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      api('/contacts', { method: 'POST', body: formData(cf) }).then(function (r) { cf.reset(); toast('Contact added'); renderContacts(); openContact(r.id); })
+        .catch(function (err) { toast(err.message === 'name required' ? 'Name is required' : 'Could not save'); });
+    });
+    var sb = document.querySelector('[data-search]'), st;
+    if (sb) sb.addEventListener('input', function () { clearTimeout(st); st = setTimeout(renderContacts, 250); });
     var out = document.querySelector('[data-signout]');
     if (out) out.addEventListener('click', function () { ls(LS_KEY, null); location.reload(); });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     if (!ls(LS_KEY)) { lock(); return; }
-    renderHub(); renderJobs();
+    renderHub(); renderJobs(); renderContacts();
     document.querySelectorAll('[data-live=tasks]').forEach(renderTasks);
     bindForms();
   });

@@ -9,8 +9,11 @@
 ## Redeploy
 Multipart PUT from a Chrome tab logged into dash.cloudflare.com to
 `/api/v4/accounts/<account>/workers/scripts/gbg-os-api`.
-ALWAYS send `keep_bindings: ["secret_text","plain_text","d1"]` in the metadata, or the PINs and the
-database binding get wiped. Bindings to keep: DB (d1).
+Metadata that worked on 2026-11-18:
+`{"main_module":"worker.js","compatibility_date":"2026-11-01","keep_bindings":["secret_text","plain_text"],
+"bindings":[{"type":"d1","name":"DB","id":"71288793-c6e3-4999-9683-d224f1ae08a6"}]}`
+Leave out keep_bindings and the PINs get wiped. Leave out the d1 binding and the database disconnects.
+After a deploy, test: /pin with a real PIN, then /contacts with the key.
 
 ## Change a PIN
 Set a new secret_text value for PIN_RICKY or PIN_DOUG. Changing TOKEN_SECRET logs every device out.
@@ -18,3 +21,7 @@ Set a new secret_text value for PIN_RICKY or PIN_DOUG. Changing TOKEN_SECRET log
 ## Website leads
 POST /inbound?token=FORM_TOKEN with the Netlify form payload. Creates a contact, a Lead job,
 and a "Respond to new website lead" task due today.
+
+## Endpoints
+GET /summary, GET/POST /tasks, PATCH /tasks/:id, GET/POST /contacts, GET/PATCH /contacts/:id,
+GET/POST /jobs, GET/PATCH /jobs/:id, POST /notes, GET /activity, POST /inbound?token=

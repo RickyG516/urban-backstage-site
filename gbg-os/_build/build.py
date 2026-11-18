@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "6"  # cache bust, bump on every os.css / os.js change
+V = "7"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -91,7 +91,7 @@ hub = sh("Pulse") + f"""  <div class="stats">
     <div class="card"><div class="card-top"><h3>Due now</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
     <div class="card"><div class="card-top"><h3>Key dates</h3></div><ul class="mini" data-live="keydates"></ul>
       <h3 style="margin-top:18px">Recent activity</h3><ul class="mini" data-live="recent"></ul>
-      <p class="whoami"><span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
+      <p class="whoami">Click any task to edit it. <span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
   </div>
 """ + sh("Sections") + f"""  <div class="grid">
     <a class="card" href="/gbg-os/tasks/"><div class="card-top"><h3>Tasks</h3><span class="tag or">Live</span></div><p>Every launch to do with an owner and a date. Check them off as you go.</p></a>
@@ -205,7 +205,22 @@ jobs = sh("Pipeline") + """  <div class="board" data-live="board"><p class="load
   </div>
 """
 page("jobs", "jobs", "Jobs", "Jobs", "Job <span>pipeline</span>",
-     "Lead to review asked. Mark a job done and the closeout task shows up on its own.", jobs)
+     "Click any card to open it: edit details, add notes and follow ups, see the history. Mark a job done and the closeout task shows up on its own.", jobs)
+
+# ---------- CONTACTS ----------
+contacts = """  <input class="search" data-search placeholder="Search name, phone, or address">
+  <div class="card"><div data-live="contacts"><p class="loading">Loading…</p></div></div>
+""" + sh("Add a contact") + """  <form class="card form" data-form="contact">
+    <input name="name" placeholder="Name" required><input name="phone" placeholder="Phone"><input name="email" placeholder="Email">
+    <input name="address" placeholder="Address"><input name="neighborhood" placeholder="Neighborhood">
+    <select name="kind"><option value="customer">Customer</option><option value="partner">Partner</option><option value="vendor">Vendor</option></select>
+    <input name="notes" placeholder="Notes" class="wide">
+    <button type="submit">Add contact</button>
+  </form>
+  <div class="note"><b>Customers, partners, vendors, suppliers.</b> Click anyone to edit them, see their jobs, and read every note and change.</div>
+"""
+page("contacts", "contacts", "Contacts", "Contacts", "Every <span>person</span>",
+     "Customers, partners and vendors. Click a name to open the full record.", contacts)
 
 # ---------- TASKS ----------
 tasks = """  <div class="filters" data-filter>
