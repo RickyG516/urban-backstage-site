@@ -121,7 +121,7 @@
     var ws = $('ws');
     if (ls('unc_worker_key')) {
       ws.hidden = false;
-      ws.innerHTML = '<a href="/">Urban Backstage</a><a class="on" href="/queen/">Petrushka\'s</a><span class="soon" title="Coming soon">GBG Services</span>';
+      ws.innerHTML = '<a href="/">Urban Backstage</a><a class="on" href="/queen/">Petrushka\'s</a><a href="/gbg-os/">GBG Services</a>';
     }
     var who = $('who');
     who.hidden = false;
