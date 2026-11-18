@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 500" width="440" height="500" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="440" height="500" fill="#ffffff"/>
+  <text x="40" y="26" font-size="15" font-weight="bold">Micro Greens Grow Room: Garage Layout (planning drawing)</text>
+  <text x="40" y="42" font-size="11" fill="#444">Garage 30 x 27 ft, 16 ft ceiling. Scale: 1 ft = 12 px. Dimensions from notes, verify by tape measure.</text>
+  <text x="40" y="496" font-size="8" fill="#666">FILING DESTINATION: EXECUTIVE COMMAND / Garage HQ | SOURCE: CLAUDE OUTPUT, Ricky Garner</text>
+  <!-- outer walls -->
+  <rect x="40" y="50" width="360" height="324" fill="none" stroke="#111" stroke-width="3"/>
+  <!-- entry door, north wall -->
+  <rect x="350" y="47" width="24" height="6" fill="#ffffff"/>
+  <text x="352" y="44" font-size="9">Entry</text>
+  <!-- exhaust fan, north wall -->
+  <circle cx="200" cy="50" r="8" fill="#ffffff" stroke="#111"/>
+  <text x="172" y="38" font-size="9">Exhaust fan</text>
+  <!-- garage door, south wall -->
+  <rect x="124" y="366" width="192" height="8" fill="#d9d9d9" stroke="#111"/>
+  <text x="150" y="388" font-size="10">Garage door, 16 ft (location assumed, verify)</text>
+  <rect x="112" y="324" width="216" height="36" fill="none" stroke="#999" stroke-dasharray="4 3"/>
+  <text x="180" y="346" font-size="9" fill="#666">3 ft clear zone</text>
+  <!-- grow zone: rack banks -->
+  <rect x="52" y="62" width="24" height="48" fill="#e8f1e4" stroke="#2e6b2e"/><text x="58" y="90" font-size="10">R1</text>
+  <rect x="52" y="116" width="24" height="48" fill="#e8f1e4" stroke="#2e6b2e"/><text x="58" y="144" font-size="10">R2</text>
+  <rect x="52" y="170" width="24" height="48" fill="#e8f1e4" stroke="#2e6b2e"/><text x="58" y="198" font-size="10">R3</text>
+  <rect x="100" y="62" width="24" height="48" fill="#e8f1e4" stroke="#2e6b2e"/><text x="106" y="90" font-size="10">R4</text>
+  <rect x="100" y="116" width="24" height="48" fill="#e8f1e4" stroke="#2e6b2e"/><text x="106" y="144" font-size="10">R5</text>
+  <rect x="100" y="170" width="24" height="48" fill="#e8f1e4" stroke="#2e6b2e"/><text x="106" y="198" font-size="10">R6</text>
+  <text x="52" y="226" font-size="9" fill="#2e6b2e">Racks: 6 x (4 ft wide, 2 ft deep, 4 shelves, 2 trays per shelf)</text>
+  <text x="52" y="238" font-size="9" fill="#2e6b2e">Tray slots: 48. Lights: 12 fixtures, 960 W, 16 hr timer.</text>
+  <!-- blackout zone -->
+  <rect x="52" y="256" width="72" height="36" fill="#f0f0f0" stroke="#555" stroke-dasharray="5 3"/>
+  <text x="58" y="278" font-size="9">Blackout (covered, dark)</text>
+  <!-- wash and pack zone -->
+  <rect x="150" y="62" width="108" height="36" fill="#e3eefb" stroke="#1f4e9e"/>
+  <text x="156" y="84" font-size="10">Wash station (9 ft counter)</text>
+  <rect x="150" y="110" width="72" height="24" fill="#e3eefb" stroke="#1f4e9e"/>
+  <text x="156" y="126" font-size="9">Harvest and pack</text>
+  <rect x="226" y="110" width="32" height="24" fill="#e3eefb" stroke="#1f4e9e"/>
+  <text x="229" y="126" font-size="8">Cooler</text>
+  <rect x="150" y="146" width="72" height="18" fill="#e3eefb" stroke="#1f4e9e"/>
+  <text x="156" y="159" font-size="9">Scale and supplies</text>
+  <rect x="150" y="226" width="24" height="18" fill="#f5f5f5" stroke="#777"/>
+  <text x="152" y="238" font-size="8">Dehu</text>
+  <!-- electrical panel -->
+  <rect x="42" y="300" width="8" height="16" fill="#ffcc66" stroke="#8a6d00"/>
+  <text x="56" y="312" font-size="9">Panel (verify location)</text>
+  <!-- food vs gym partition -->
+  <line x1="262" y1="50" x2="262" y2="110" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="272" y="110" width="128" height="264" fill="#fbf3f3" stroke="#c0392b" stroke-dasharray="6 4"/>
+  <text x="280" y="134" font-size="10" fill="#8a1f16">Gym zone (existing)</text>
+  <text x="280" y="148" font-size="9" fill="#8a1f16">Partition or curtain</text>
+  <text x="280" y="162" font-size="9" fill="#8a1f16">keeps gear away</text>
+  <text x="280" y="176" font-size="9" fill="#8a1f16">from food zone</text>
+  <!-- scale bar -->
+  <line x1="40" y1="410" x2="160" y2="410" stroke="#111" stroke-width="2"/>
+  <line x1="40" y1="406" x2="40" y2="414" stroke="#111"/>
+  <line x1="160" y1="406" x2="160" y2="414" stroke="#111"/>
+  <text x="62" y="426" font-size="10">10 ft</text>
+  <!-- notes -->
+  <text x="40" y="450" font-size="10" fill="#222">Notes:</text>
+  <text x="40" y="464" font-size="9" fill="#333">1. Planning drawing for the MG build. Not a permit set. Not stamped.</text>
+  <text x="40" y="477" font-size="9" fill="#333">2. Electrical and plumbing need licensed trades and permits. Wash sink needs hot and cold water and drain.</text>
+  <text x="40" y="490" font-size="9" fill="#333">3. Wash, pack, and cooler stay away from the gym zone. Keep the 3 ft clear zone at the garage door.</text>
+</svg>

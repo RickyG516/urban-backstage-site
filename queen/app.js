@@ -17,6 +17,9 @@
   var VIEWS = [
     { slug: 'today', name: 'Today' },
     { slug: 'build', name: 'Build', only: ['home', 'flowers'] },
+    { slug: 'setup', name: 'Setup', only: ['greens'] },
+    { slug: 'buy', name: 'Buy', only: ['greens', 'flowers', 'gazebo', 'airbnb', 'home'] },
+    { slug: 'accounts', name: 'Accounts', only: ['greens'] },
     { slug: 'projects', name: 'Projects' },
     { slug: 'calendar', name: 'Calendar' },
     { slug: 'money', name: 'Money' }
@@ -134,7 +137,8 @@
     $('ventures').innerHTML = VENTURES.map(function (v) {
       var n = v.code === 'home' ? Object.keys(counts).reduce(function (a, k) { return a + counts[k]; }, 0) : (counts[v.code] || 0);
       var target = route.project ? 'projects' : (route.section ? 'build' : view);
-      if (target === 'build' && ['home', 'flowers'].indexOf(v.slug) < 0) target = 'today';
+      var tv = VIEWS.filter(function (x) { return x.slug === target; })[0];
+      if (tv && tv.only && tv.only.indexOf(v.slug) < 0) target = 'today';
       return '<a href="#/' + v.slug + '/' + target + '"' + (v.slug === vs ? ' class="on"' : '') + '>' + esc(v.name) + (n ? '<span class="n">' + n + '</span>' : '') + '</a>';
     }).join('');
     $('views').innerHTML = VIEWS.filter(function (w) { return !w.only || w.only.indexOf(vs) >= 0; }).map(function (w) {
@@ -147,7 +151,9 @@
     if (h[0] === 'p' && h[1]) return { project: decodeURIComponent(h[1]), v: h[2] || 'home' };
     if (h[0] === 's' && h[1]) return { section: decodeURIComponent(h[1]), v: h[2] || 'flowers', view: 'build' };
     var v = ventureBySlug(h[0]) ? h[0] : 'home';
-    var view = ['today', 'build', 'projects', 'calendar', 'money'].indexOf(h[1]) >= 0 ? h[1] : 'today';
+    var view = ['today', 'build', 'setup', 'buy', 'accounts', 'projects', 'calendar', 'money'].indexOf(h[1]) >= 0 ? h[1] : 'today';
+    var vw = VIEWS.filter(function (x) { return x.slug === view; })[0];
+    if (vw && vw.only && vw.only.indexOf(v) < 0) view = 'today';
     return { v: v, view: view };
   }
 
@@ -159,7 +165,10 @@
     if (r.project) return viewProject(r.project, r.v);
     if (r.section) return viewSection(r.section, r.v);
     var v = ventureBySlug(r.v);
-    if (r.view === 'build') return viewBuild(v);
+    if (r.view === 'build') return viewBuild(v, 'garden');
+    if (r.view === 'setup') return viewBuild(v, 'greens');
+    if (r.view === 'buy') return viewBuy(v);
+    if (r.view === 'accounts') return viewAccounts(v);
     if (r.view === 'today') return viewToday(v);
     if (r.view === 'projects') return viewProjects(v);
     return viewSoon(v, r.view);
@@ -231,9 +240,9 @@
         '<p class="sub">' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + (w.now != null ? ' · ' + w.now + '° now' : '') + '</p>' +
         wx +
         (d.working && d.working.length ? '<section><h2>Working on now</h2><div class="card">' + d.working.map(function (w) {
-          return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(w.id) + '/flowers">' +
+          return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(w.id) + '/' + (w.map === 'greens' ? 'greens' : 'flowers') + '">' +
             '<span class="pin s' + w.stage + '">' + esc(w.marker) + '</span><div class="body"><div class="title">' + esc(w.name) + '</div>' +
-            '<div class="meta"><span class="pill st' + w.stage + '">' + esc(d.stages[w.stage]) + '</span> · ' + w.open_tasks + ' open</div></div></a>';
+            '<div class="meta"><span class="pill st' + w.stage + '">' + esc(w.stage_name) + '</span> · ' + w.open_tasks + ' open</div></div></a>';
         }).join('') + '</div></section>' : '') +
         '<div class="cols">' +
         sec('Overdue', d.overdue, 'Nothing late.') +
@@ -377,78 +386,88 @@
   }
 
 
-  /* ── Build map ── */
+  /* ── Build map (garden) and Setup map (greens) ── */
   var STAGE_FILL = [['#6f6a60', .82], ['#F2B5C4', .78], ['#F4B43C', .72], ['#8a6a48', .7], ['#1B6A8F', .5], ['#5E7D52', 0]];
-  var TIER_NAME = { t1: 'Tier 1: garage end', t2: 'Tier 2: middle and pool', t3: 'Tier 3: upper', t4: 'Tier 4: front yard', gazebo: 'Tier 2: middle and pool' };
+  var MAPS = {
+    garden: { title: 'Garden build', sub: 'Full Site Plan v4', img: '/queen/map.webp', box: [-44, -44, 170, 89], view: 'build', home: 'flowers', pad: 6, minW: 24, minH: 14, pinR: 1.6, font: 1.5, stroke: 0.25, pointR: 2,
+      fill: STAGE_FILL, groups: [['t1', 'Tier 1: garage end'], ['t2', 'Tier 2: middle and pool'], ['gazebo', 'Tier 2: middle and pool'], ['t3', 'Tier 3: upper'], ['t4', 'Tier 4: front yard']] },
+    greens: { title: 'Grow room setup', sub: 'Garage grow room layout, 30 x 27 ft. Rack 1 starts in the apartment', img: '/queen/greens-room.svg', box: [0, 0, 440, 500], crop: [32, 30, 376, 352], view: 'setup', home: 'greens', pad: 30, minW: 170, minH: 110, pinR: 8, font: 8, stroke: 1.2, pointR: 9,
+      fill: [['#6f6a60', .5], ['#F2B5C4', .7], ['#F4B43C', .65], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['garage', 'Grow room']] }
+  };
   var mapMode = 'progress';
+  function stFill(M, st) { return M.fill[Math.min(st || 0, M.fill.length - 1)]; }
+  function isLast(M, st) { return (st || 0) === M.fill.length - 1; }
 
-  function shapeSvg(s, mode, focus) {
-    var g = s.geom, st = s.stage || 0, f = STAGE_FILL[st];
-    var fill = mode === 'plan' ? 'transparent' : f[0];
-    var op = mode === 'plan' ? 0 : f[1];
-    var stroke = focus ? '#F4B43C' : (mode === 'plan' ? 'transparent' : (st === 5 ? '#5E7D52' : 'rgba(255,255,255,.55)'));
-    var sw = focus ? 0.6 : 0.25;
+  function shapeSvg(M, s, mode, focus) {
+    var g = s.geom, st = s.stage || 0, f = stFill(M, st), last = isLast(M, st);
+    var fill = mode === 'plan' ? 'transparent' : f[0], op = mode === 'plan' ? 0 : f[1];
+    var stroke = focus ? '#F4B43C' : (mode === 'plan' ? 'transparent' : (last ? '#5E7D52' : 'rgba(255,255,255,.6)'));
+    var sw = focus ? M.stroke * 2.4 : M.stroke;
     var out = '<g class="sec" data-id="' + esc(s.id) + '">';
     (g.r || []).forEach(function (r) {
       out += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + (r[2] - r[0]) + '" height="' + (r[3] - r[1]) + '" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
     });
     if (g.d) {
-      out += '<path d="' + g.d + '" fill="none" stroke="' + (mode === 'plan' ? 'transparent' : f[0]) + '" stroke-opacity="' + (mode === 'plan' ? 0 : f[1]) + '" stroke-width="' + (g.w || 4) + '" stroke-linecap="round"/>';
-      if (focus) out += '<path d="' + g.d + '" fill="none" stroke="#F4B43C" stroke-width="0.6"/>';
+      out += '<path d="' + g.d + '" fill="none" stroke="' + (mode === 'plan' ? 'transparent' : f[0]) + '" stroke-opacity="' + op + '" stroke-width="' + (g.w || 4) + '" stroke-linecap="round"/>';
+      if (focus) out += '<path d="' + g.d + '" fill="none" stroke="#F4B43C" stroke-width="' + sw + '"/>';
       out += '<path d="' + g.d + '" fill="none" stroke="transparent" stroke-width="' + (g.w || 4) + '"/>';
     }
     (g.p || []).forEach(function (p) {
-      out += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+      out += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + M.pointR + '" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
     });
     return out + '</g>';
   }
-  function pinSvg(s) {
-    var c = STAGE_FILL[s.stage || 0][0];
-    if ((s.stage || 0) === 5) c = '#5E7D52';
-    var r = s.marker.length > 2 ? 2.2 : 1.6;
-    return '<g class="sec" data-id="' + esc(s.id) + '"><circle cx="' + s.mx + '" cy="' + s.my + '" r="' + r + '" fill="' + c + '" stroke="#fff" stroke-width=".35"/>' +
-      '<text x="' + s.mx + '" y="' + (s.my + 0.55) + '" font-size="' + (s.marker.length > 2 ? 1.1 : 1.5) + '" font-weight="700" fill="#fff" text-anchor="middle" font-family="DM Sans,Arial">' + esc(s.marker) + '</text>' +
-      (s.working ? '<circle cx="' + s.mx + '" cy="' + s.my + '" r="' + (r + 0.6) + '" fill="none" stroke="#F4B43C" stroke-width=".45"/>' : '') + '</g>';
+  function pinSvg(M, s) {
+    var st = s.stage || 0, c = isLast(M, st) ? '#5E7D52' : stFill(M, st)[0];
+    if (st === 1 && c === '#F2B5C4') c = '#E07A95';
+    var long = s.marker.length > 2, r = long ? M.pinR * 1.4 : M.pinR;
+    return '<g class="sec" data-id="' + esc(s.id) + '"><circle cx="' + s.mx + '" cy="' + s.my + '" r="' + r + '" fill="' + c + '" stroke="#fff" stroke-width="' + (M.pinR * 0.22) + '"/>' +
+      '<text x="' + s.mx + '" y="' + (s.my + M.font * 0.36) + '" font-size="' + (long ? M.font * 0.72 : M.font) + '" font-weight="700" fill="#fff" text-anchor="middle" font-family="DM Sans,Arial">' + esc(s.marker) + '</text>' +
+      (s.working ? '<circle cx="' + s.mx + '" cy="' + s.my + '" r="' + (r * 1.4) + '" fill="none" stroke="#F4B43C" stroke-width="' + (M.pinR * 0.28) + '"/>' : '') + '</g>';
   }
   function bbox(g) {
     var xs = [], ys = [];
     (g.r || []).forEach(function (r) { xs.push(r[0], r[2]); ys.push(r[1], r[3]); });
-    (g.p || []).forEach(function (p) { xs.push(p[0] - 2, p[0] + 2); ys.push(p[1] - 2, p[1] + 2); });
+    (g.p || []).forEach(function (p) { xs.push(p[0], p[0]); ys.push(p[1], p[1]); });
     if (g.d) { var n = g.d.match(/-?[\d.]+/g).map(Number); for (var i = 0; i < n.length; i += 2) { xs.push(n[i]); ys.push(n[i + 1]); } }
     return [Math.min.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, xs), Math.max.apply(null, ys)];
   }
-  function mapSvg(sections, mode, focusId, vb) {
-    return '<svg class="map" viewBox="' + (vb || '-44 -44 170 89') + '" xmlns="http://www.w3.org/2000/svg">' +
-      '<image href="/queen/map.webp" x="-44" y="-44" width="170" height="89" preserveAspectRatio="none"/>' +
-      sections.map(function (s) { return shapeSvg(s, mode, s.id === focusId); }).join('') +
-      (mode === 'progress' ? sections.map(pinSvg).join('') : '') + '</svg>';
+  function mapSvg(M, sections, mode, focusId, vb) {
+    var c = M.crop || M.box;
+    return '<svg class="map" viewBox="' + (vb || c.join(' ')) + '" xmlns="http://www.w3.org/2000/svg">' +
+      '<image href="' + M.img + '" x="' + M.box[0] + '" y="' + M.box[1] + '" width="' + M.box[2] + '" height="' + M.box[3] + '" preserveAspectRatio="none"/>' +
+      sections.map(function (s) { return shapeSvg(M, s, mode, s.id === focusId); }).join('') +
+      (mode === 'progress' ? sections.map(function (s) { return pinSvg(M, s); }).join('') : '') + '</svg>';
   }
+  function stageLabelClass(M, st) { return 'st' + (isLast(M, st) ? 5 : Math.min(st || 0, 4)); }
 
-  function viewBuild(v) {
+  function viewBuild(v, mapName) {
+    var M = MAPS[mapName];
     app.innerHTML = '<p class="muted">Loading the map…</p>';
-    api('/sections').then(function (d) {
+    api('/sections?map=' + mapName).then(function (d) {
       var secs = d.sections, stages = d.stages;
       var tally = stages.map(function (_, i) { return secs.filter(function (s) { return (s.stage || 0) === i; }).length; });
       var done = secs.reduce(function (a, s) { return a + (s.stage || 0); }, 0), max = secs.length * (stages.length - 1);
-      var groups = {};
-      secs.forEach(function (s) { var k = TIER_NAME[s.area_id] || 'Other'; (groups[k] = groups[k] || []).push(s); });
+      var seen = {};
       app.innerHTML =
-        '<h1>Garden build</h1><p class="sub">Full Site Plan v4. Tap a section to open it. ' + Math.round(100 * done / max) + '% of the build done.</p>' +
+        '<h1>' + M.title + '</h1><p class="sub">' + M.sub + '. Tap a section to open it. ' + Math.round(100 * done / Math.max(max, 1)) + '% done.</p>' +
         '<div class="toolbar"><button class="btn small ' + (mapMode === 'progress' ? '' : 'ghost') + '" data-m="progress">Progress</button>' +
         '<button class="btn small ' + (mapMode === 'plan' ? '' : 'ghost') + '" data-m="plan">Plan</button></div>' +
         '<div class="legend">' + stages.map(function (n, i) {
-          return '<span><i style="background:' + STAGE_FILL[i][0] + (i === 5 ? ';border:2px solid #5E7D52;background:transparent' : '') + '"></i>' + n + ' <b>' + tally[i] + '</b></span>';
+          var f = stFill(M, i), last = isLast(M, i);
+          return '<span><i style="background:' + (last ? 'transparent;border:2px solid #5E7D52' : f[0]) + '"></i>' + n + ' <b>' + tally[i] + '</b></span>';
         }).join('') + '</div>' +
-        '<div class="mapwrap">' + mapSvg(secs, mapMode) + '</div>' +
-        Object.keys(TIER_NAME).filter(function (k, i, a) { return a.indexOf(k) === i && k !== 'gazebo'; }).map(function (k) {
-          var list = groups[TIER_NAME[k]] || [];
-          return '<section><h2>' + TIER_NAME[k] + '</h2><div class="card">' + list.map(function (s) {
+        '<div class="mapwrap' + (mapName === 'greens' ? ' room' : '') + '">' + mapSvg(M, secs, mapMode) + '</div>' +
+        M.groups.filter(function (gp) { if (seen[gp[1]]) return false; seen[gp[1]] = 1; return true; }).map(function (gp) {
+          var list = secs.filter(function (s) { return M.groups.some(function (x) { return x[0] === s.area_id && x[1] === gp[1]; }); });
+          if (!list.length) return '';
+          return '<section><h2>' + gp[1] + '</h2><div class="card">' + list.map(function (s) {
             return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(s.id) + '/' + v.slug + '">' +
-              '<span class="pin s' + (s.stage || 0) + '">' + esc(s.marker) + '</span><div class="body"><div class="title">' + esc(s.name) + (s.working ? ' <span class="pill doing">Working on it</span>' : '') + '</div>' +
-              '<div class="meta"><span class="pill st' + (s.stage || 0) + '">' + esc(stages[s.stage || 0]) + '</span> · ' + s.open_tasks + ' open of ' + s.total_tasks + '</div></div></a>';
+              '<span class="pin s' + (isLast(M, s.stage) ? 5 : Math.min(s.stage || 0, 4)) + '">' + esc(s.marker) + '</span><div class="body"><div class="title">' + esc(s.name) + (s.working ? ' <span class="pill doing">Working on it</span>' : '') + '</div>' +
+              '<div class="meta"><span class="pill ' + stageLabelClass(M, s.stage) + '">' + esc(stages[s.stage || 0]) + '</span> · ' + s.open_tasks + ' open of ' + s.total_tasks + '</div></div></a>';
           }).join('') + '</div></section>';
         }).join('');
-      app.querySelectorAll('[data-m]').forEach(function (b) { b.onclick = function () { mapMode = b.getAttribute('data-m'); viewBuild(v); }; });
+      app.querySelectorAll('[data-m]').forEach(function (b) { b.onclick = function () { mapMode = b.getAttribute('data-m'); viewBuild(v, mapName); }; });
       app.querySelectorAll('svg.map .sec').forEach(function (g) {
         g.style.cursor = 'pointer';
         g.onclick = function () { location.hash = '#/s/' + encodeURIComponent(g.getAttribute('data-id')) + '/' + v.slug; };
@@ -458,28 +477,31 @@
 
   function viewSection(id, vslug) {
     app.innerHTML = '<p class="muted">Loading…</p>';
-    Promise.all([api('/sections/' + encodeURIComponent(id)), api('/sections')]).then(function (res) {
-      var d = res[0], all = res[1].sections, s = d.section, stages = d.stages, byId = {};
+    api('/sections/' + encodeURIComponent(id)).then(function (d) {
+      var mapName = d.section.map === 'greens' ? 'greens' : 'garden', M = MAPS[mapName];
+      return api('/sections?map=' + mapName).then(function (all) { return [d, all.sections, M]; });
+    }).then(function (res) {
+      var d = res[0], all = res[1], M = res[2], s = d.section, stages = d.stages, byId = {};
       d.tasks.forEach(function (t) { byId[t.id] = t; });
-      var b = bbox(s.geom), pad = 6;
-      var w = Math.max(b[2] - b[0] + pad * 2, 24), h = Math.max(b[3] - b[1] + pad * 2, 14);
+      var b = bbox(s.geom), pad = M.pad;
+      var w = Math.max(b[2] - b[0] + pad * 2, M.minW), h = Math.max(b[3] - b[1] + pad * 2, M.minH);
       var cx = (b[0] + b[2]) / 2, cy = (b[1] + b[3]) / 2;
       var vb = (cx - w / 2) + ' ' + (cy - h / 2) + ' ' + w + ' ' + h;
-      var st = s.stage || 0;
+      var st = s.stage || 0, grp = (M.groups.filter(function (x) { return x[0] === s.area_id; })[0] || [0, s.area_name || ''])[1];
       app.innerHTML =
-        '<a class="back" href="#/' + esc(vslug) + '/build">← Build map</a>' +
+        '<a class="back" href="#/' + esc(vslug) + '/' + M.view + '">← ' + M.title + '</a>' +
         '<div class="card">' +
-        '<div style="display:flex;gap:12px;align-items:center"><span class="pin big s' + st + '">' + esc(s.marker) + '</span><div><h1>' + esc(s.name) + '</h1>' +
-        '<p class="sub">' + esc(TIER_NAME[s.area_id] || s.area_name || '') + '</p></div></div>' +
-        '<div class="mapwrap close">' + mapSvg(all, 'progress', s.id, vb) + '</div>' +
+        '<div style="display:flex;gap:12px;align-items:center"><span class="pin big s' + (isLast(M, st) ? 5 : Math.min(st, 4)) + '">' + esc(s.marker) + '</span><div><h1>' + esc(s.name) + '</h1>' +
+        '<p class="sub">' + esc(grp) + '</p></div></div>' +
+        '<div class="mapwrap close">' + mapSvg(M, all, 'progress', s.id, vb) + '</div>' +
         (s.plants_note ? '<p class="summary">' + esc(s.plants_note) + '</p>' : '') +
-        '<h3 style="margin-top:14px">Stage</h3><div class="stepper">' + stages.map(function (n, i) {
+        '<h3 style="margin-top:14px">Stage</h3><div class="stepper n' + stages.length + '">' + stages.map(function (n, i) {
           return '<button type="button" data-st="' + i + '" class="' + (i === st ? 'on ' : '') + (i < st ? 'past' : '') + '">' + (i < st ? '✓ ' : '') + n + '</button>';
         }).join('') + '</div>' +
         '<label class="toggle"><input type="checkbox" id="working"' + (s.working ? ' checked' : '') + '> Working on this now (shows on Today)</label>' +
         '</div>' +
         '<section class="card phase"><h3>Checklist</h3>' +
-        (d.tasks.length ? d.tasks.map(function (t) { return taskRow(t, { editable: false }); }).join('') : '<div class="empty">No tasks yet for this section.</div>') +
+        (d.tasks.length ? d.tasks.map(function (t) { return taskRow(t, {}); }).join('') : '<div class="empty">No tasks yet for this section.</div>') +
         '<form class="add" id="addtask"><input placeholder="Add a task for this section" maxlength="300"><button class="btn small" type="submit">Add</button></form></section>' +
         '<section class="card"><h3>Notes</h3><textarea id="snotes" rows="3" style="width:100%;margin-top:8px" placeholder="Measurements, what you found, what is next">' + esc(s.notes || '') + '</textarea>' +
         '<div class="toolbar"><button class="btn small" id="savenotes">Save notes</button></div></section>' +
@@ -509,6 +531,82 @@
       app.querySelectorAll('svg.map .sec').forEach(function (g) {
         g.style.cursor = 'pointer';
         g.onclick = function () { var to = g.getAttribute('data-id'); if (to !== id) location.hash = '#/s/' + encodeURIComponent(to) + '/' + vslug; };
+      });
+    }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
+  }
+
+  /* ── Buy list ── */
+  var PSTAT = { to_buy: 'To buy', ordered: 'Ordered', arrived: 'Arrived', skip: 'Skip' };
+  var NEXT = { to_buy: 'ordered', ordered: 'arrived', arrived: 'to_buy', skip: 'to_buy' };
+  function money(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function viewBuy(v) {
+    app.innerHTML = '<p class="muted">Loading the buy list…</p>';
+    api('/purchases?v=' + v.code).then(function (d) {
+      var list = d.purchases, groups = {}, order = [];
+      list.forEach(function (p) { var g = p.grp || 'Other'; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(p); });
+      order.sort();
+      var line = function (p) { return (p.unit_price != null && p.qty != null) ? p.unit_price * p.qty : null; };
+      var sum = function (arr, f) { return arr.reduce(function (a, p) { var l = line(p); return a + (l != null && f(p) ? l : 0); }, 0); };
+      app.innerHTML = '<h1>' + (v.code === 'home' ? 'Everything to buy' : esc(v.name) + ': buy list') + '</h1>' +
+        '<p class="sub">Tap the box to move an item: to buy, ordered, arrived. Prices marked Verified were checked online; re-check at checkout.</p>' +
+        (list.length ? '' : '<p class="empty">Nothing on the list yet.</p>') +
+        order.map(function (g) {
+          var items = groups[g], vendors = {}, vo = [];
+          items.forEach(function (p) { var k = p.vendor || 'Any'; if (!vendors[k]) { vendors[k] = []; vo.push(k); } vendors[k].push(p); });
+          var total = sum(items, function () { return true; }), left = sum(items, function (p) { return p.status === 'to_buy'; });
+          var unpriced = items.filter(function (p) { return line(p) == null; }).length;
+          return '<section><h2>' + esc(g.replace(/^\d+\.\s*/, '')) + '</h2>' +
+            '<div class="buysum"><span>Total <b>' + money(total) + '</b></span><span>Still to buy <b>' + money(left) + '</b></span>' + (unpriced ? '<span>' + unpriced + ' need a price</span>' : '') + '<span class="muted">before tax</span></div>' +
+            vo.map(function (vn) {
+              return '<div class="card"><h3>' + esc(vn) + '</h3>' + vendors[vn].map(function (p) {
+                var l = line(p);
+                return '<div class="task buy ' + p.status + '" data-id="' + esc(p.id) + '"><button class="chk b" type="button" aria-label="Change status"></button>' +
+                  '<div class="body"><div class="title">' + (p.link ? '<a href="' + esc(p.link) + '" target="_blank" rel="noopener">' + esc(p.item) + '</a>' : esc(p.item)) + '</div>' +
+                  '<div class="meta"><span class="pill ' + p.status + '">' + PSTAT[p.status] + '</span>' +
+                  (p.qty != null ? ' · ' + p.qty + (p.unit_price != null ? ' × ' + money(p.unit_price) + ' = <b>' + money(l) + '</b>' : '') : '') +
+                  (p.price_status ? ' · ' + esc(p.price_status) : '') + (p.why ? ' · ' + esc(p.why) : '') + '</div></div></div>';
+              }).join('') + '</div>';
+            }).join('') + '</section>';
+        }).join('');
+      var byId = {}; list.forEach(function (p) { byId[p.id] = p; });
+      app.querySelectorAll('.task.buy .chk').forEach(function (b) {
+        b.onclick = function () {
+          var row = b.closest('.task'), p = byId[row.getAttribute('data-id')], next = NEXT[p.status] || 'ordered';
+          api('/purchases/' + encodeURIComponent(p.id), { method: 'PATCH', body: { status: next } })
+            .then(function () { toast(p.item.slice(0, 40) + ': ' + PSTAT[next]); viewBuy(v); }).catch(fail);
+        };
+      });
+    }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
+  }
+
+  /* ── Accounts ── */
+  var ASTAT = ['Not contacted', 'Called', 'Tasting dropped', 'Trial order', 'Weekly account', 'Not now'];
+  function viewAccounts(v) {
+    app.innerHTML = '<p class="muted">Loading accounts…</p>';
+    api('/customers?v=' + v.code).then(function (d) {
+      var list = d.customers, tiers = {}, order = [];
+      list.forEach(function (c) { var t = c.tier || 'Other'; if (!tiers[t]) { tiers[t] = []; order.push(t); } tiers[t].push(c); });
+      order.sort();
+      var counts = ASTAT.map(function (s) { return list.filter(function (c) { return (c.status || 'Not contacted') === s; }).length; });
+      app.innerHTML = '<h1>Accounts</h1><p class="sub">Restaurant targets from Google, Nov 10. Fit is a judgment, not confirmed with the business.</p>' +
+        '<div class="legend">' + ASTAT.map(function (s, i) { return '<span>' + s + ' <b>' + counts[i] + '</b></span>'; }).join('') + '</div>' +
+        order.map(function (t) {
+          return '<section><h2>' + esc(t.replace(/^\d+\s*/, '') + (t === '0 Warm' ? '' : ' fit')) + '</h2><div class="card">' + tiers[t].map(function (c) {
+            return '<div class="task acct" data-id="' + esc(c.id) + '"><div class="body"><div class="title">' + esc(c.name) + (c.rating ? ' <span class="muted" style="font-weight:400">★ ' + c.rating + '</span>' : '') + '</div>' +
+              '<div class="meta">' + (c.phone ? '<a href="tel:' + esc(c.phone.replace(/[^\d+]/g, '')) + '">' + esc(c.phone.replace('+1 ', '')) + '</a> · ' : '') + esc(c.address || '') + '</div>' +
+              (c.notes ? '<div class="meta">' + esc(c.notes) + '</div>' : '') +
+              '<div class="acct-edit"><select data-k="status">' + ASTAT.map(function (s) { return '<option' + (s === (c.status || 'Not contacted') ? ' selected' : '') + '>' + s + '</option>'; }).join('') + '</select>' +
+              '<input data-k="next_step" value="' + esc(c.next_step || '') + '" placeholder="Next step"></div></div></div>';
+          }).join('') + '</div></section>';
+        }).join('');
+      app.querySelectorAll('.task.acct').forEach(function (row) {
+        var id = row.getAttribute('data-id');
+        row.querySelectorAll('[data-k]').forEach(function (el) {
+          el.onchange = function () {
+            var body = {}; body[el.getAttribute('data-k')] = el.value;
+            api('/customers/' + encodeURIComponent(id), { method: 'PATCH', body: body }).then(function () { toast('Saved.'); }).catch(fail);
+          };
+        });
       });
     }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
   }

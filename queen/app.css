@@ -129,3 +129,17 @@ svg.map .sec:hover rect,svg.map .sec:hover circle{stroke:#F4B43C;stroke-width:.6
 @media (min-width:760px){.stepper{grid-template-columns:repeat(6,1fr)}}
 .toggle{display:flex;gap:8px;align-items:center;margin-top:12px;font-weight:500}
 .toggle input{width:20px;height:20px}
+.mapwrap.room{background:#fff}
+.mapwrap.room svg.map{min-width:0;max-width:640px;margin:0 auto}
+.stepper.n5{grid-template-columns:repeat(3,1fr)}
+@media (min-width:760px){.stepper.n5{grid-template-columns:repeat(5,1fr)}}
+.buysum{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;margin:-4px 0 6px}
+.chk.b{border-radius:50%}
+.task.buy.ordered .chk{background:var(--mari);border-color:var(--mari)}
+.task.buy.ordered .chk::after{content:'…';color:#fff;font-weight:700}
+.task.buy.arrived .chk{background:var(--sage-deep);border-color:var(--sage-deep)}
+.task.buy.arrived .chk::after{content:'✓';color:#fff;font-weight:700}
+.task.buy.arrived .title{color:var(--muted)}
+.pill.to_buy{background:#ebe8e2;color:#55514a}.pill.ordered{background:#fff4dc;color:#8a5a00}.pill.arrived{background:#e7f0e1;color:var(--sage-deep)}.pill.skip{background:#eee;color:#888}
+.acct-edit{display:grid;grid-template-columns:auto 1fr;gap:8px;margin-top:8px}
+.acct-edit select,.acct-edit input{font-size:13.5px;padding:7px 8px;min-width:0}
