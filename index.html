@@ -36,6 +36,15 @@
   .hero h1{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:32px;margin:0 0 8px;
            color:var(--white);letter-spacing:-.01em}
   .hero h1 span{color:var(--orange)}
+  .hero-top{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:0 0 8px}
+  .hero-top h1{margin:0}
+  .ws-switch{display:flex;gap:6px;flex-wrap:wrap}
+  .ws-switch a,.ws-switch span{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;
+           padding:8px 14px;border-radius:999px;text-decoration:none;border:1px solid #333;color:#cfcfcf}
+  .ws-switch a.on{background:var(--orange);border-color:var(--orange);color:#0f0f0f}
+  .ws-switch a.pk{border-color:#1B6A8F;color:#cfe6f1}
+  .ws-switch a.pk:hover{background:#1B6A8F;color:#FBF6EE}
+  .ws-switch span{opacity:.45;cursor:default}
   .hero p{margin:0;color:#8e8e8e;font-size:14.5px;max-width:660px;line-height:1.6}
 
   /* quick launch */
@@ -103,7 +112,14 @@
 <div class="wrap">
 
   <section class="hero">
-    <h1>Urban <span>Backstage</span></h1>
+    <div class="hero-top">
+      <h1>Urban <span>Backstage</span></h1>
+      <nav class="ws-switch" aria-label="Workspaces">
+        <a class="on" href="/">Urban Backstage</a>
+        <a class="pk" href="/queen/">Petrushka's</a>
+        <span title="Coming soon">GBG Services</span>
+      </nav>
+    </div>
     <p>One front door to every system that runs Urban Niche Co. Organized the same way the
        Drive and the weekly executive reports are &mdash; six departments, one mental model.
        Links only, no passwords stored. Whole domain is noindexed.</p>

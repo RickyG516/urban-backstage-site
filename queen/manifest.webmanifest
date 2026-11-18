@@ -1,0 +1,13 @@
+{
+  "name": "Petrushka's OS",
+  "short_name": "Petrushka's",
+  "start_url": "/queen/#/home/today",
+  "scope": "/queen/",
+  "display": "standalone",
+  "background_color": "#FBF6EE",
+  "theme_color": "#1B6A8F",
+  "icons": [
+    { "src": "/queen/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/queen/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
