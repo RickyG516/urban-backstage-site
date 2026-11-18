@@ -107,3 +107,25 @@ input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:10
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .cols h2{margin-top:14px}
 }
+
+/* build map */
+.mapwrap{margin:12px 0;border:1px solid var(--line);border-radius:12px;overflow:auto;background:#e8e4d8;-webkit-overflow-scrolling:touch}
+.mapwrap svg.map{display:block;width:100%;min-width:760px;height:auto}
+.mapwrap.close svg.map{min-width:0}
+svg.map .sec:hover rect,svg.map .sec:hover circle{stroke:#F4B43C;stroke-width:.6}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin:10px 0 0}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+.legend b{color:var(--ink)}
+.pin{flex:0 0 30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.pin.big{flex-basis:46px;height:46px;font-size:16px}
+.pin.s0{background:#6f6a60}.pin.s1{background:#E07A95}.pin.s2{background:#d9971a}.pin.s3{background:#8a6a48}.pin.s4{background:var(--ocean)}.pin.s5{background:var(--sage-deep)}
+.pill.st0{background:#ebe8e2;color:#55514a}.pill.st1{background:#fdecef;color:#8a2f47}.pill.st2{background:#fff4dc;color:#8a5a00}
+.pill.st3{background:#efe4d8;color:#5b4332}.pill.st4{background:#e3eef4;color:var(--ocean-deep)}.pill.st5{background:#e7f0e1;color:var(--sage-deep)}
+.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.stepper button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 6px;font-weight:700;font-size:13px;color:var(--ink)}
+.stepper button.past{background:#f3efe6;color:var(--muted)}
+.stepper button.on{background:var(--ocean);border-color:var(--ocean);color:#fff}
+@media (min-width:760px){.stepper{grid-template-columns:repeat(6,1fr)}}
+.toggle{display:flex;gap:8px;align-items:center;margin-top:12px;font-weight:500}
+.toggle input{width:20px;height:20px}

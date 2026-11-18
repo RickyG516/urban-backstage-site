@@ -16,6 +16,7 @@
   var CODE_NAME = { FLWR: 'Flowers', MCRG: 'Greens', GZBO: 'Gazebo', ABNB: 'Airbnb', SHRD: 'Shared' };
   var VIEWS = [
     { slug: 'today', name: 'Today' },
+    { slug: 'build', name: 'Build', only: ['home', 'flowers'] },
     { slug: 'projects', name: 'Projects' },
     { slug: 'calendar', name: 'Calendar' },
     { slug: 'money', name: 'Money' }
@@ -132,9 +133,11 @@
     var vs = route.v || 'home', view = route.view || 'today';
     $('ventures').innerHTML = VENTURES.map(function (v) {
       var n = v.code === 'home' ? Object.keys(counts).reduce(function (a, k) { return a + counts[k]; }, 0) : (counts[v.code] || 0);
-      return '<a href="#/' + v.slug + '/' + (route.project ? 'projects' : view) + '"' + (v.slug === vs ? ' class="on"' : '') + '>' + esc(v.name) + (n ? '<span class="n">' + n + '</span>' : '') + '</a>';
+      var target = route.project ? 'projects' : (route.section ? 'build' : view);
+      if (target === 'build' && ['home', 'flowers'].indexOf(v.slug) < 0) target = 'today';
+      return '<a href="#/' + v.slug + '/' + target + '"' + (v.slug === vs ? ' class="on"' : '') + '>' + esc(v.name) + (n ? '<span class="n">' + n + '</span>' : '') + '</a>';
     }).join('');
-    $('views').innerHTML = VIEWS.map(function (w) {
+    $('views').innerHTML = VIEWS.filter(function (w) { return !w.only || w.only.indexOf(vs) >= 0; }).map(function (w) {
       return '<a href="#/' + vs + '/' + w.slug + '"' + (!route.project && w.slug === view ? ' class="on"' : '') + '>' + w.name + '</a>';
     }).join('');
   }
@@ -142,8 +145,9 @@
   function parseRoute() {
     var h = location.hash.replace(/^#\/?/, '').split('/');
     if (h[0] === 'p' && h[1]) return { project: decodeURIComponent(h[1]), v: h[2] || 'home' };
+    if (h[0] === 's' && h[1]) return { section: decodeURIComponent(h[1]), v: h[2] || 'flowers', view: 'build' };
     var v = ventureBySlug(h[0]) ? h[0] : 'home';
-    var view = ['today', 'projects', 'calendar', 'money'].indexOf(h[1]) >= 0 ? h[1] : 'today';
+    var view = ['today', 'build', 'projects', 'calendar', 'money'].indexOf(h[1]) >= 0 ? h[1] : 'today';
     return { v: v, view: view };
   }
 
@@ -153,7 +157,9 @@
     renderChrome(r);
     window.scrollTo(0, 0);
     if (r.project) return viewProject(r.project, r.v);
+    if (r.section) return viewSection(r.section, r.v);
     var v = ventureBySlug(r.v);
+    if (r.view === 'build') return viewBuild(v);
     if (r.view === 'today') return viewToday(v);
     if (r.view === 'projects') return viewProjects(v);
     return viewSoon(v, r.view);
@@ -224,6 +230,11 @@
         '<h1>' + (v.code === 'home' ? 'Today at Queen St' : esc(v.name) + ' today') + '</h1>' +
         '<p class="sub">' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + (w.now != null ? ' · ' + w.now + '° now' : '') + '</p>' +
         wx +
+        (d.working && d.working.length ? '<section><h2>Working on now</h2><div class="card">' + d.working.map(function (w) {
+          return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(w.id) + '/flowers">' +
+            '<span class="pin s' + w.stage + '">' + esc(w.marker) + '</span><div class="body"><div class="title">' + esc(w.name) + '</div>' +
+            '<div class="meta"><span class="pill st' + w.stage + '">' + esc(d.stages[w.stage]) + '</span> · ' + w.open_tasks + ' open</div></div></a>';
+        }).join('') + '</div></section>' : '') +
         '<div class="cols">' +
         sec('Overdue', d.overdue, 'Nothing late.') +
         sec('Due this week', d.this_week, 'Nothing due this week.') +
@@ -361,6 +372,143 @@
         };
         el.onclick = open;
         el.onkeydown = function (ev) { if (ev.key === 'Enter') open(); };
+      });
+    }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
+  }
+
+
+  /* ── Build map ── */
+  var STAGE_FILL = [['#6f6a60', .82], ['#F2B5C4', .78], ['#F4B43C', .72], ['#8a6a48', .7], ['#1B6A8F', .5], ['#5E7D52', 0]];
+  var TIER_NAME = { t1: 'Tier 1: garage end', t2: 'Tier 2: middle and pool', t3: 'Tier 3: upper', t4: 'Tier 4: front yard', gazebo: 'Tier 2: middle and pool' };
+  var mapMode = 'progress';
+
+  function shapeSvg(s, mode, focus) {
+    var g = s.geom, st = s.stage || 0, f = STAGE_FILL[st];
+    var fill = mode === 'plan' ? 'transparent' : f[0];
+    var op = mode === 'plan' ? 0 : f[1];
+    var stroke = focus ? '#F4B43C' : (mode === 'plan' ? 'transparent' : (st === 5 ? '#5E7D52' : 'rgba(255,255,255,.55)'));
+    var sw = focus ? 0.6 : 0.25;
+    var out = '<g class="sec" data-id="' + esc(s.id) + '">';
+    (g.r || []).forEach(function (r) {
+      out += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + (r[2] - r[0]) + '" height="' + (r[3] - r[1]) + '" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+    });
+    if (g.d) {
+      out += '<path d="' + g.d + '" fill="none" stroke="' + (mode === 'plan' ? 'transparent' : f[0]) + '" stroke-opacity="' + (mode === 'plan' ? 0 : f[1]) + '" stroke-width="' + (g.w || 4) + '" stroke-linecap="round"/>';
+      if (focus) out += '<path d="' + g.d + '" fill="none" stroke="#F4B43C" stroke-width="0.6"/>';
+      out += '<path d="' + g.d + '" fill="none" stroke="transparent" stroke-width="' + (g.w || 4) + '"/>';
+    }
+    (g.p || []).forEach(function (p) {
+      out += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+    });
+    return out + '</g>';
+  }
+  function pinSvg(s) {
+    var c = STAGE_FILL[s.stage || 0][0];
+    if ((s.stage || 0) === 5) c = '#5E7D52';
+    var r = s.marker.length > 2 ? 2.2 : 1.6;
+    return '<g class="sec" data-id="' + esc(s.id) + '"><circle cx="' + s.mx + '" cy="' + s.my + '" r="' + r + '" fill="' + c + '" stroke="#fff" stroke-width=".35"/>' +
+      '<text x="' + s.mx + '" y="' + (s.my + 0.55) + '" font-size="' + (s.marker.length > 2 ? 1.1 : 1.5) + '" font-weight="700" fill="#fff" text-anchor="middle" font-family="DM Sans,Arial">' + esc(s.marker) + '</text>' +
+      (s.working ? '<circle cx="' + s.mx + '" cy="' + s.my + '" r="' + (r + 0.6) + '" fill="none" stroke="#F4B43C" stroke-width=".45"/>' : '') + '</g>';
+  }
+  function bbox(g) {
+    var xs = [], ys = [];
+    (g.r || []).forEach(function (r) { xs.push(r[0], r[2]); ys.push(r[1], r[3]); });
+    (g.p || []).forEach(function (p) { xs.push(p[0] - 2, p[0] + 2); ys.push(p[1] - 2, p[1] + 2); });
+    if (g.d) { var n = g.d.match(/-?[\d.]+/g).map(Number); for (var i = 0; i < n.length; i += 2) { xs.push(n[i]); ys.push(n[i + 1]); } }
+    return [Math.min.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, xs), Math.max.apply(null, ys)];
+  }
+  function mapSvg(sections, mode, focusId, vb) {
+    return '<svg class="map" viewBox="' + (vb || '-44 -44 170 89') + '" xmlns="http://www.w3.org/2000/svg">' +
+      '<image href="/queen/map.webp" x="-44" y="-44" width="170" height="89" preserveAspectRatio="none"/>' +
+      sections.map(function (s) { return shapeSvg(s, mode, s.id === focusId); }).join('') +
+      (mode === 'progress' ? sections.map(pinSvg).join('') : '') + '</svg>';
+  }
+
+  function viewBuild(v) {
+    app.innerHTML = '<p class="muted">Loading the map…</p>';
+    api('/sections').then(function (d) {
+      var secs = d.sections, stages = d.stages;
+      var tally = stages.map(function (_, i) { return secs.filter(function (s) { return (s.stage || 0) === i; }).length; });
+      var done = secs.reduce(function (a, s) { return a + (s.stage || 0); }, 0), max = secs.length * (stages.length - 1);
+      var groups = {};
+      secs.forEach(function (s) { var k = TIER_NAME[s.area_id] || 'Other'; (groups[k] = groups[k] || []).push(s); });
+      app.innerHTML =
+        '<h1>Garden build</h1><p class="sub">Full Site Plan v4. Tap a section to open it. ' + Math.round(100 * done / max) + '% of the build done.</p>' +
+        '<div class="toolbar"><button class="btn small ' + (mapMode === 'progress' ? '' : 'ghost') + '" data-m="progress">Progress</button>' +
+        '<button class="btn small ' + (mapMode === 'plan' ? '' : 'ghost') + '" data-m="plan">Plan</button></div>' +
+        '<div class="legend">' + stages.map(function (n, i) {
+          return '<span><i style="background:' + STAGE_FILL[i][0] + (i === 5 ? ';border:2px solid #5E7D52;background:transparent' : '') + '"></i>' + n + ' <b>' + tally[i] + '</b></span>';
+        }).join('') + '</div>' +
+        '<div class="mapwrap">' + mapSvg(secs, mapMode) + '</div>' +
+        Object.keys(TIER_NAME).filter(function (k, i, a) { return a.indexOf(k) === i && k !== 'gazebo'; }).map(function (k) {
+          var list = groups[TIER_NAME[k]] || [];
+          return '<section><h2>' + TIER_NAME[k] + '</h2><div class="card">' + list.map(function (s) {
+            return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(s.id) + '/' + v.slug + '">' +
+              '<span class="pin s' + (s.stage || 0) + '">' + esc(s.marker) + '</span><div class="body"><div class="title">' + esc(s.name) + (s.working ? ' <span class="pill doing">Working on it</span>' : '') + '</div>' +
+              '<div class="meta"><span class="pill st' + (s.stage || 0) + '">' + esc(stages[s.stage || 0]) + '</span> · ' + s.open_tasks + ' open of ' + s.total_tasks + '</div></div></a>';
+          }).join('') + '</div></section>';
+        }).join('');
+      app.querySelectorAll('[data-m]').forEach(function (b) { b.onclick = function () { mapMode = b.getAttribute('data-m'); viewBuild(v); }; });
+      app.querySelectorAll('svg.map .sec').forEach(function (g) {
+        g.style.cursor = 'pointer';
+        g.onclick = function () { location.hash = '#/s/' + encodeURIComponent(g.getAttribute('data-id')) + '/' + v.slug; };
+      });
+    }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
+  }
+
+  function viewSection(id, vslug) {
+    app.innerHTML = '<p class="muted">Loading…</p>';
+    Promise.all([api('/sections/' + encodeURIComponent(id)), api('/sections')]).then(function (res) {
+      var d = res[0], all = res[1].sections, s = d.section, stages = d.stages, byId = {};
+      d.tasks.forEach(function (t) { byId[t.id] = t; });
+      var b = bbox(s.geom), pad = 6;
+      var w = Math.max(b[2] - b[0] + pad * 2, 24), h = Math.max(b[3] - b[1] + pad * 2, 14);
+      var cx = (b[0] + b[2]) / 2, cy = (b[1] + b[3]) / 2;
+      var vb = (cx - w / 2) + ' ' + (cy - h / 2) + ' ' + w + ' ' + h;
+      var st = s.stage || 0;
+      app.innerHTML =
+        '<a class="back" href="#/' + esc(vslug) + '/build">← Build map</a>' +
+        '<div class="card">' +
+        '<div style="display:flex;gap:12px;align-items:center"><span class="pin big s' + st + '">' + esc(s.marker) + '</span><div><h1>' + esc(s.name) + '</h1>' +
+        '<p class="sub">' + esc(TIER_NAME[s.area_id] || s.area_name || '') + '</p></div></div>' +
+        '<div class="mapwrap close">' + mapSvg(all, 'progress', s.id, vb) + '</div>' +
+        (s.plants_note ? '<p class="summary">' + esc(s.plants_note) + '</p>' : '') +
+        '<h3 style="margin-top:14px">Stage</h3><div class="stepper">' + stages.map(function (n, i) {
+          return '<button type="button" data-st="' + i + '" class="' + (i === st ? 'on ' : '') + (i < st ? 'past' : '') + '">' + (i < st ? '✓ ' : '') + n + '</button>';
+        }).join('') + '</div>' +
+        '<label class="toggle"><input type="checkbox" id="working"' + (s.working ? ' checked' : '') + '> Working on this now (shows on Today)</label>' +
+        '</div>' +
+        '<section class="card phase"><h3>Checklist</h3>' +
+        (d.tasks.length ? d.tasks.map(function (t) { return taskRow(t, { editable: false }); }).join('') : '<div class="empty">No tasks yet for this section.</div>') +
+        '<form class="add" id="addtask"><input placeholder="Add a task for this section" maxlength="300"><button class="btn small" type="submit">Add</button></form></section>' +
+        '<section class="card"><h3>Notes</h3><textarea id="snotes" rows="3" style="width:100%;margin-top:8px" placeholder="Measurements, what you found, what is next">' + esc(s.notes || '') + '</textarea>' +
+        '<div class="toolbar"><button class="btn small" id="savenotes">Save notes</button></div></section>' +
+        (d.history.length ? '<section class="card"><h3>History</h3>' + d.history.map(function (e) {
+          return '<div class="task"><div class="body"><div class="title">' + esc(e.note) + '</div><div class="meta">' + esc(USERS[e.by_user] || e.by_user || '') + ' · ' + new Date(e.at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + '</div></div></div>';
+        }).join('') + '</section>' : '');
+      var reload = function () { viewSection(id, vslug); };
+      wireChecks(app, byId);
+      app.querySelectorAll('[data-st]').forEach(function (btn) {
+        btn.onclick = function () {
+          var n = +btn.getAttribute('data-st');
+          api('/sections/' + encodeURIComponent(id), { method: 'PATCH', body: { stage: n } })
+            .then(function () { toast(s.name + ': ' + stages[n]); reload(); }).catch(fail);
+        };
+      });
+      $('working').onchange = function () {
+        api('/sections/' + encodeURIComponent(id), { method: 'PATCH', body: { working: this.checked } }).then(function () { toast('Saved.'); }).catch(fail);
+      };
+      $('addtask').onsubmit = function (ev) {
+        ev.preventDefault();
+        var title = this.querySelector('input').value.trim(); if (!title) return;
+        api('/tasks', { method: 'POST', body: { unit_id: id, title: title } }).then(reload).catch(fail);
+      };
+      $('savenotes').onclick = function () {
+        api('/sections/' + encodeURIComponent(id), { method: 'PATCH', body: { notes: $('snotes').value } }).then(function () { toast('Notes saved.'); }).catch(fail);
+      };
+      app.querySelectorAll('svg.map .sec').forEach(function (g) {
+        g.style.cursor = 'pointer';
+        g.onclick = function () { var to = g.getAttribute('data-id'); if (to !== id) location.hash = '#/s/' + encodeURIComponent(to) + '/' + vslug; };
       });
     }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
   }
