@@ -82,21 +82,63 @@ function buildHouse(svg,viewBox){
   [[580,340,440,180],[170,390,410,130],[1020,390,410,130]].forEach(function(r){
     el('rect',{x:r[0],y:r[1],width:r[2],height:r[3],fill:'url(#wallglow)'},svg);
   });
-  el('rect',{'class':'wall',x:905,y:200,width:44,height:90},svg);
+  el('polygon',{'class':'wall',points:'905,200 949,200 949,278.7 905,240.7'},svg);
   el('rect',{'class':'trim',x:899,y:194,width:56,height:8},svg);
   var W=[[625,380,44,70],[705,380,44,70],[851,380,44,70],[931,380,44,70],[228,428,44,60],[328,428,44,60],[428,428,44,60]];
-  var seed=3;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
-  function win(x,y,w,h,off){
-    el('rect',{'class':'win'+(off?' off':''),x:x,y:y,width:w,height:h,rx:2},svg);
+  var WALK_AT=[705,931,328];
+  function win(x,y,w,h){
+    var sh=w*.3,gap=5,sy=y-h*.04,shh=h*1.08;
+    el('rect',{'class':'shutter',x:x-sh-gap,y:sy,width:sh,height:shh,rx:1.5},svg);
+    el('rect',{'class':'shutter',x:x+w+gap,y:sy,width:sh,height:shh,rx:1.5},svg);
+    el('line',{'class':'shutter-line',x1:x-gap-sh*.5,y1:sy+4,x2:x-gap-sh*.5,y2:sy+shh-4},svg);
+    el('line',{'class':'shutter-line',x1:x+w+gap+sh*.5,y1:sy+4,x2:x+w+gap+sh*.5,y2:sy+shh-4},svg);
+    el('rect',{'class':'win',x:x,y:y,width:w,height:h,rx:2},svg);
     el('line',{'class':'mull',x1:x+w/2,y1:y,x2:x+w/2,y2:y+h},svg);
     el('line',{'class':'mull',x1:x,y1:y+h*.5,x2:x+w,y2:y+h*.5},svg);
+    el('rect',{'class':'sill',x:x-4,y:y+h,width:w+8,height:4},svg);
   }
-  W.forEach(function(w){win(w[0],w[1],w[2],w[3],rnd()>.62);if(w[0]<560)win(1600-w[0]-w[2],w[1],w[2],w[3],rnd()>.62)});
+  var walkSeq=0;
+  function addWalker(x,y,w,h){
+    var clipId='wclip'+(walkSeq++);
+    var clip=el('clipPath',{id:clipId},svg);
+    el('rect',{x:x,y:y,width:w,height:h},clip);
+    var headR=h*.11,bodyH=h*.46,bodyW=headR*1.7;
+    var startX=x-bodyW*1.6,dist=(w+bodyW*3.2).toFixed(1);
+    var footY=y+h-2,topY=footY-bodyH-headR*1.7,cx=startX+bodyW/2;
+    var dur=(22+Math.random()*14).toFixed(1),delay=(-Math.random()*dur).toFixed(1);
+    var g=el('g',{'class':'walker','clip-path':'url(#'+clipId+')',style:'animation-duration:'+dur+'s;animation-delay:'+delay+'s;--dist:'+dist+'px'},svg);
+    el('circle',{cx:cx,cy:topY+headR,r:headR,fill:'#07070a','fill-opacity':'.82'},g);
+    el('rect',{x:cx-bodyW/2,y:topY+headR*1.75,width:bodyW,height:bodyH,rx:bodyW/2,fill:'#07070a','fill-opacity':'.82'},g);
+  }
+  W.forEach(function(w){
+    win(w[0],w[1],w[2],w[3]);
+    if(WALK_AT.indexOf(w[0])!==-1)addWalker(w[0],w[1],w[2],w[3]);
+    if(w[0]<560){
+      var mx=1600-w[0]-w[2];
+      win(mx,w[1],w[2],w[3]);
+      if(WALK_AT.indexOf(w[0])!==-1)addWalker(mx,w[1],w[2],w[3]);
+    }
+  });
   el('circle',{'class':'win',cx:800,cy:242,r:22},svg);
   el('line',{'class':'mull',x1:778,y1:242,x2:822,y2:242},svg);
   el('line',{'class':'mull',x1:800,y1:220,x2:800,y2:264},svg);
   el('path',{'class':'door',d:'M772 520 V468 a28 28 0 0 1 56 0 V520 Z'},svg);
+  el('circle',{cx:748,cy:478,r:10,fill:'#f2b25c',opacity:.35,filter:'url(#bloom)'},svg);
+  el('circle',{cx:748,cy:478,r:3.2,fill:'#ffdca0'},svg);
+  el('circle',{cx:852,cy:478,r:10,fill:'#f2b25c',opacity:.35,filter:'url(#bloom)'},svg);
+  el('circle',{cx:852,cy:478,r:3.2,fill:'#ffdca0'},svg);
   el('rect',{'class':'trim',x:-3000,y:518,width:7600,height:2},svg);
+
+  function addShrub(cx,groundY,scale){
+    var r=22*scale,cy=groundY-r*.62;
+    el('ellipse',{cx:cx-r*.55,cy:cy+r*.25,rx:r*.68,ry:r*.55,'class':'shrub'},svg);
+    el('ellipse',{cx:cx+r*.55,cy:cy+r*.25,rx:r*.68,ry:r*.55,'class':'shrub'},svg);
+    el('ellipse',{cx:cx,cy:cy-r*.15,rx:r*.82,ry:r*.68,'class':'shrub'},svg);
+    el('ellipse',{cx:cx,cy:cy-r*.2,rx:r*.7,ry:r*.5,fill:'url(#wallglow)',opacity:.5},svg);
+  }
+  [[150,.95],[300,.8],[460,.95],[680,.85],[870,.85],[1100,.95],[1300,.8],[1450,.95]].forEach(function(s){
+    addShrub(s[0],520,s[1]);
+  });
 
   function along(pts){
     var out=[];
@@ -250,7 +292,7 @@ LightShow.prototype.stop=function(){this.running=false;cancelAnimationFrame(this
 CFG.shows=CFG.shows||[];window.GBG=CFG;
 var heroSvg=$('#heroHouse');
 if(heroSvg){
-  buildHouse(heroSvg,window.innerWidth<700?'230 110 1140 490':'0 0 1600 600');
+  buildHouse(heroSvg,window.innerWidth<700?'230 90 1140 440':'110 70 1380 480');
   var heroNow=$('#heroNow');
   var hs=new LightShow(heroSvg,{onTheme:function(c){if(heroNow)heroNow.textContent=c.name}});
   var start=seasonalId();

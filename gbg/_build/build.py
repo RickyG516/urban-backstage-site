@@ -227,7 +227,7 @@ def head(page, r):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{r}assets/site.css">
+<link rel="stylesheet" href="{r}assets/site.css?v=3">
 {ld}</head>
 <body>
 <script>document.documentElement.classList.add('js');window.GBG={{email:{json.dumps(EMAIL)}}}</script>
@@ -289,7 +289,7 @@ def footer(r):
     <div class="legal"><span>&copy; {datetime.date.today().year} GBG Dubuque &middot; Dubuque, Iowa</span><span>Trusted-partner services are coordinated by GBG and performed by independent local businesses.</span></div>
   </div>
 </footer>
-<script src="{r}assets/site.js" defer></script>
+<script src="{r}assets/site.js?v=3" defer></script>
 </body>
 </html>
 '''
@@ -591,13 +591,15 @@ def build_home():
     h += f'''<main id="main">
 <header class="hero" id="top">
   <div class="stars" data-stars="70"></div>
-  <div class="hero-copy wrap">
+  <div class="hero-top wrap">
     <div class="eyebrow rv">Dubuque, Iowa &middot; Permanent Lighting &middot; Driveway Sealing</div>
     <h1 class="rv d1">Your home,<br><em>lit like it deserves.</em></h1>
+  </div>
+  <div class="hero-house"><svg class="house" id="heroHouse" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Illustration of an estate with permanent lights cycling through colors and patterns"></svg></div>
+  <div class="hero-bottom wrap">
     <p class="sub rv d2">Permanent lighting and flawless driveway sealing for Dubuque and communities within 30 miles. Done once. Done right.</p>
     <div class="cta rv d3"><a href="#contact" class="btn btn-primary">Request a private estimate</a><a href="#lights" class="btn btn-ghost">Design your lights</a></div>
   </div>
-  <div class="hero-house"><svg class="house" id="heroHouse" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Illustration of an estate with permanent lights cycling through colors and patterns"></svg></div>
   <div class="now"><span>Now showing&nbsp;<b id="heroNow"></b></span><a href="#lights">Customize it &rarr;</a></div>
 </header>
 
