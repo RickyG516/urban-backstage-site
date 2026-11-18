@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "4"  # cache bust, bump on every os.css / os.js change
+V = "6"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -58,6 +58,7 @@ def page(slug, pid, title, eyebrow, h1, lede, body):
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/gbg-os/assets/os.css?v={V}">
 <script src="/gbg-os/assets/os.js?v={V}"></script>
+<script src="/gbg-os/assets/api.js?v={V}"></script>
 </head>
 <body data-venture="gbg" data-page="{pid}">
 <nav class="os-nav" id="os-nav"></nav>
@@ -70,7 +71,6 @@ def page(slug, pid, title, eyebrow, h1, lede, body):
 {body}
   <footer>GBG DUBUQUE | Internal ops, not indexed. Amounts, ownership and anything personal live in Drive, never on these pages.</footer>
 </div>
-<script src="/sales-ops/shared/unc-key.js"></script>
 </body>
 </html>
 """
@@ -83,14 +83,21 @@ def sh(t): return f'  <div class="sh"><h2>{t}</h2><div class="rule"></div></div>
 # ---------- HUB ----------
 hub = sh("Pulse") + f"""  <div class="stats">
     <div class="stat"><div class="k">Days to launch</div><div class="v or" data-countdown>&nbsp;</div><div class="s">Target April 1, 2027</div></div>
-    <div class="stat"><div class="k">Website</div><div class="v">Live</div><div class="s">gbgdubuque.com since Nov 11</div></div>
-    <div class="stat"><div class="k">In house services</div><div class="v">6</div><div class="s">Plus 3 partner trades</div></div>
-    <div class="stat"><div class="k">Jobs booked</div><div class="v">0</div><div class="s">Pipeline opens at launch</div></div>
+    <div class="stat"><div class="k">Your open tasks</div><div class="v" data-k="mine">&middot;</div><div class="s"><span data-k="open">&middot;</span> open for the team</div></div>
+    <div class="stat"><div class="k">Overdue</div><div class="v" data-k="overdue">&middot;</div><div class="s"><span data-k="week">&middot;</span> due in the next 7 days</div></div>
+    <div class="stat"><div class="k">Jobs in pipeline</div><div class="v" data-k="jobs">&middot;</div><div class="s"><span data-k="booked">&middot;</span> booked</div></div>
+  </div>
+  <div class="grid" style="margin-top:14px" data-live="hub">
+    <div class="card"><div class="card-top"><h3>Due now</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
+    <div class="card"><div class="card-top"><h3>Key dates</h3></div><ul class="mini" data-live="keydates"></ul>
+      <h3 style="margin-top:18px">Recent activity</h3><ul class="mini" data-live="recent"></ul>
+      <p class="whoami"><span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
   </div>
 """ + sh("Sections") + f"""  <div class="grid">
-    <a class="card" href="/gbg-os/launch/"><div class="card-top"><h3>Launch</h3><span class="tag or">Now</span></div><p>Roadmap to April 1, next actions, open decisions, and everything to verify before the first job.</p></a>
+    <a class="card" href="/gbg-os/tasks/"><div class="card-top"><h3>Tasks</h3><span class="tag or">Live</span></div><p>Every launch to do with an owner and a date. Check them off as you go.</p></a>
+    <a class="card" href="/gbg-os/launch/"><div class="card-top"><h3>Launch</h3></div><p>Roadmap to April 1, next actions, open decisions, and everything to verify before the first job.</p></a>
     <a class="card" href="/gbg-os/services/"><div class="card-top"><h3>Services</h3></div><p>What we do in house, what goes to partners, and the gate each service has to clear before it books.</p></a>
-    <a class="card" href="/gbg-os/jobs/"><div class="card-top"><h3>Jobs</h3><span class="tag wait">Skeleton</span></div><p>Lead to review pipeline. Empty until launch, wired to live data later.</p></a>
+    <a class="card" href="/gbg-os/jobs/"><div class="card-top"><h3>Jobs</h3><span class="tag or">Live</span></div><p>Lead to review pipeline. Add leads, move jobs, site form leads land here.</p></a>
     <a class="card" href="/gbg-os/playbook/"><div class="card-top"><h3>Playbook</h3></div><p>Operating rules, brand, and every SOP in one spot.</p></a>
     <a class="card" href="/gbg-os/web/"><div class="card-top"><h3>Website &amp; Content</h3></div><p>Site, repo, hosting, social pages, blog drafts.</p></a>
     <a class="card" href="/gbg-os/finance/"><div class="card-top"><h3>Finance</h3></div><p>Budget, equipment and launch gate trackers. Links to Drive only.</p></a>
@@ -130,13 +137,7 @@ launch = sh("Roadmap") + """  <div class="phases">
       <li>Ideas: detailing, carpet and upholstery, fence staining</li><li>More trades under GBG</li></ul></div>
   </div>
 """ + '  <div class="grid" style="margin-top:14px">\n' + \
-f"""    <div class="card"><div class="card-top"><h3>Next actions</h3></div>{checklist([
-        ("Domain bought, site live on gbgdubuque.com", True),
-        ("Facebook page and Instagram set up, first posts live", True),
-        ("IG bio link (phone app), Messenger auto reply, page username, second page admin", False),
-        ("Local 563 number and the GBG email, then swap placeholders on site and print", False),
-        ("Book the lawyer consult", False),
-        ("Compliance calls from the checklist", False)])}</div>
+f"""    <div class="card"><div class="card-top"><h3>Due now, everyone</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="all" data-short="1"></div></div>
     <div class="card"><div class="card-top"><h3>Verify before launch</h3><span class="tag stop">Blocks booking</span></div>{checklist([
         ("Licensing and insurance for each service", False),
         ("Yard spraying: pesticide applicator certification (confirm with IDALS)", False),
@@ -188,19 +189,41 @@ page("services", "services", "Services", "Services", "What we <span>run</span>",
      "In house work, partner trades, and the gate each one has to clear before it books.", services)
 
 # ---------- JOBS ----------
-stages = [("Lead", "Call, form, or DM came in"), ("Consult", "Walkthrough or call booked"),
-          ("Estimate sent", "Quote out, follow up per SOP"), ("Booked", "Date set, now buy what the job needs"),
-          ("Done", "Work finished, paid"), ("Review asked", "Closeout and review request sent")]
-cols = "".join(f'<div class="col"><h4>{n}<b>0</b></h4><p class="hint">{h}</p><div class="empty">No jobs yet</div></div>' for n, h in stages)
-jobs = sh("Pipeline") + f'  <div class="board">{cols}</div>\n' + \
-    f"""  <div class="note"><b>Skeleton.</b> No customer data goes in this page's HTML, since backstage is publicly readable. Live jobs come later through the Worker, the same way the UNC cockpit gets HubSpot data.</div>
+jobs = sh("Pipeline") + """  <div class="board" data-live="board"><p class="loading">Loading…</p></div>
+""" + sh("Add a lead") + """  <form class="card form" data-form="lead">
+    <input name="name" placeholder="Name" required><input name="phone" placeholder="Phone"><input name="email" placeholder="Email">
+    <input name="address" placeholder="Address or street">
+    <select name="service"><option value="">Service</option><option>Permanent lights</option><option>Driveway sealing</option><option>Yard spraying</option><option>Trash can cleaning</option><option>Epoxy</option><option>Junk removal</option><option>Painting (partner)</option><option>Landscaping (partner)</option><option>Tree work (partner)</option></select>
+    <select name="source"><option value="other">How they found us</option><option value="hanger">Door hanger</option><option value="facebook">Facebook</option><option value="referral">Referral</option><option value="phone">Called in</option><option value="form">Website</option><option value="other">Other</option></select>
+    <input name="notes" placeholder="Notes" class="wide">
+    <button type="submit">Add lead</button>
+  </form>
+  <div class="note"><b>Website leads land here on their own.</b> Customer details live in the CRM database behind your PIN, never in this page's HTML.</div>
 """ + sh("How a job moves") + f"""  <div class="chips">
     {chip("Lead response SOP", D["sop_lead"], "drive")}{chip("Sales consult and estimate SOP", D["sop_consult"], "drive")}
     {chip("Closeout and review SOP", D["sop_closeout"], "drive")}{chip("Street log", D["street"], "drive")}
   </div>
 """
 page("jobs", "jobs", "Jobs", "Jobs", "Job <span>pipeline</span>",
-     "Lead to review. Opens at launch.", jobs)
+     "Lead to review asked. Mark a job done and the closeout task shows up on its own.", jobs)
+
+# ---------- TASKS ----------
+tasks = """  <div class="filters" data-filter>
+    <button class="on" data-owner="mine">Mine</button><button data-owner="all">Everyone</button>
+    <button data-owner="ricky">Ricky</button><button data-owner="doug">Doug</button>
+    <span class="sep"></span><button data-status="open">Open</button><button data-status="done">Done</button>
+  </div>
+  <div class="card"><div data-live="tasks" data-owner="mine" data-status="open"></div></div>
+""" + sh("Add a task") + """  <form class="card form" data-form="task">
+    <input name="title" placeholder="What needs doing" required class="wide">
+    <select name="owner"><option value="ricky">Ricky</option><option value="doug">Doug</option><option value="both">Both</option></select>
+    <input name="due" type="date">
+    <select name="area"><option value="">Area</option><option>compliance</option><option>legal</option><option>admin</option><option>finance</option><option>marketing</option><option>website</option><option>partners</option><option>ops</option><option>sales</option></select>
+    <button type="submit">Add task</button>
+  </form>
+"""
+page("tasks", "tasks", "Tasks", "Tasks", "Who does <span>what</span>",
+     "Every to do from the launch plan, the gates, the compliance list and the SOPs, dated back from April 1.", tasks)
 
 # ---------- PLAYBOOK ----------
 playbook = sh("Operating rules") + """  <div class="grid">

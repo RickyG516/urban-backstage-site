@@ -12,6 +12,7 @@
     color: '#e36b1e',
     sections: [
       { id: 'hub',      name: 'Hub',      href: '/gbg-os/' },
+      { id: 'tasks',    name: 'Tasks',    href: '/gbg-os/tasks/' },
       { id: 'launch',   name: 'Launch',   href: '/gbg-os/launch/' },
       { id: 'services', name: 'Services', href: '/gbg-os/services/' },
       { id: 'jobs',     name: 'Jobs',     href: '/gbg-os/jobs/' },

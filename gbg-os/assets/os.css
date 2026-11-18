@@ -133,3 +133,56 @@ footer{color:var(--dim);font-size:11.5px;border-top:1px solid #3a3b3f;margin-top
   .hero h1{font-size:24px}
   .grid{grid-template-columns:1fr}
 }
+
+/* ---------- live CRM ---------- */
+.loading{color:#7a7a7a;font-size:13px;margin:6px 0}
+.tgroup{margin-bottom:14px}
+.tgroup h4{font-family:'Montserrat',Arial,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a8a8a;margin:4px 0 6px}
+.tgroup h4 b{color:var(--orange);margin-left:4px}
+.tgroup.over h4,.tgroup.over h4 b{color:var(--stop)}
+.tasks{list-style:none;margin:0;padding:0}
+.task{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #303135}
+.task:last-child{border-bottom:0}
+.tick{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid #555;background:transparent;cursor:pointer;margin-top:1px;padding:0}
+.tick:hover{border-color:var(--orange)}
+.task.done .tick{background:var(--ok);border-color:var(--ok)}
+.task.done .ttl{color:#6a6a6a;text-decoration:line-through}
+.ttl{color:#e6e6e6;font-size:13.5px;line-height:1.45}
+.tmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;font-size:11.5px;color:#8a8a8a}
+.tmeta .who{font-weight:700;font-family:'Montserrat',Arial,sans-serif}
+.tmeta .who.ricky{color:var(--orange)} .tmeta .who.doug{color:#8ab4f8} .tmeta .who.both{color:#c8c8c8}
+.task.late .due{color:var(--stop);font-weight:600}
+.tmeta .area{text-transform:capitalize}
+.tmeta .key{color:var(--warn)}
+.mini{list-style:none;margin:8px 0 0;padding:0}
+.mini li{font-size:12.5px;color:#a8a8a8;padding:5px 0;border-bottom:1px solid #2c2d31;line-height:1.45}
+.mini li span{display:inline-block;min-width:58px;color:var(--orange);font-weight:600;margin-right:8px}
+.whoami{font-size:12px;color:#7a7a7a;margin:16px 0 0}
+.linkbtn{background:none;border:0;color:#8ab4f8;cursor:pointer;font:inherit;padding:0}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;align-items:center}
+.filters button{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:12.5px;padding:7px 13px;border-radius:999px;border:1px solid #444;background:transparent;color:#cfcfcf;cursor:pointer}
+.filters button.on{background:var(--orange);border-color:var(--orange);color:#111}
+.filters .sep{width:1px;height:20px;background:#444;margin:0 4px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;align-items:center}
+.form .wide{grid-column:1/-1}
+.form input,.form select{background:#17181b;border:1px solid #3a3b3f;border-radius:8px;color:#eee;padding:10px 12px;font:inherit;font-size:13.5px;width:100%}
+.form input:focus,.form select:focus{outline:none;border-color:var(--orange)}
+.form button,.lock-card button{background:var(--orange);color:#111;border:0;border-radius:8px;padding:11px 16px;font-family:'Montserrat',Arial,sans-serif;font-weight:700;cursor:pointer}
+.board .col{min-height:160px}
+.job{background:#2a2b2e;border:1px solid #3a3b3f;border-radius:8px;padding:10px;margin-bottom:8px}
+.jn{color:#fff;font-weight:600;font-size:13px}
+.js{color:#9a9a9a;font-size:12px;margin-top:2px}
+.jp{display:inline-block;color:#8ab4f8;font-size:12px;margin-top:4px}
+.jm{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.jm button{font-size:11px;padding:4px 8px;border-radius:6px;border:1px solid #4a4b4f;background:transparent;color:#ddd;cursor:pointer}
+.jm button:hover{border-color:var(--orange)}
+.jm button.lost{color:#9a6a6a}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;border:1px solid var(--orange);padding:10px 18px;border-radius:999px;font-size:13px;z-index:100}
+.lock{position:fixed;inset:0;background:rgba(20,21,24,.94);display:flex;align-items:center;justify-content:center;z-index:90;padding:20px}
+.lock-card{background:#1e1f22;border:1px solid #3a3b3f;border-top:3px solid var(--orange);border-radius:12px;padding:28px;width:100%;max-width:340px;display:grid;gap:14px}
+.lock-logo{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:22px;color:#fff;letter-spacing:.06em}
+.lock-logo span{color:var(--orange)}
+.lock-card p{margin:0;color:#9a9a9a;font-size:13px;line-height:1.5}
+.lock-card .who{display:flex;gap:16px;color:#ddd;font-size:14px}
+.lock-card .pin{background:#17181b;border:1px solid #3a3b3f;border-radius:8px;color:#fff;padding:12px;font-size:16px}
+.lock-card .err{color:var(--stop);font-size:12.5px;min-height:16px}

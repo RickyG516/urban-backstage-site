@@ -9,8 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/gbg-os/assets/os.css?v=4">
-<script src="/gbg-os/assets/os.js?v=4"></script>
+<link rel="stylesheet" href="/gbg-os/assets/os.css?v=6">
+<script src="/gbg-os/assets/os.js?v=6"></script>
+<script src="/gbg-os/assets/api.js?v=6"></script>
 </head>
 <body data-venture="gbg" data-page="hub">
 <nav class="os-nav" id="os-nav"></nav>
@@ -23,15 +24,22 @@
   <div class="sh"><h2>Pulse</h2><div class="rule"></div></div>
   <div class="stats">
     <div class="stat"><div class="k">Days to launch</div><div class="v or" data-countdown>&nbsp;</div><div class="s">Target April 1, 2027</div></div>
-    <div class="stat"><div class="k">Website</div><div class="v">Live</div><div class="s">gbgdubuque.com since Nov 11</div></div>
-    <div class="stat"><div class="k">In house services</div><div class="v">6</div><div class="s">Plus 3 partner trades</div></div>
-    <div class="stat"><div class="k">Jobs booked</div><div class="v">0</div><div class="s">Pipeline opens at launch</div></div>
+    <div class="stat"><div class="k">Your open tasks</div><div class="v" data-k="mine">&middot;</div><div class="s"><span data-k="open">&middot;</span> open for the team</div></div>
+    <div class="stat"><div class="k">Overdue</div><div class="v" data-k="overdue">&middot;</div><div class="s"><span data-k="week">&middot;</span> due in the next 7 days</div></div>
+    <div class="stat"><div class="k">Jobs in pipeline</div><div class="v" data-k="jobs">&middot;</div><div class="s"><span data-k="booked">&middot;</span> booked</div></div>
+  </div>
+  <div class="grid" style="margin-top:14px" data-live="hub">
+    <div class="card"><div class="card-top"><h3>Due now</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
+    <div class="card"><div class="card-top"><h3>Key dates</h3></div><ul class="mini" data-live="keydates"></ul>
+      <h3 style="margin-top:18px">Recent activity</h3><ul class="mini" data-live="recent"></ul>
+      <p class="whoami"><span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
   </div>
   <div class="sh"><h2>Sections</h2><div class="rule"></div></div>
   <div class="grid">
-    <a class="card" href="/gbg-os/launch/"><div class="card-top"><h3>Launch</h3><span class="tag or">Now</span></div><p>Roadmap to April 1, next actions, open decisions, and everything to verify before the first job.</p></a>
+    <a class="card" href="/gbg-os/tasks/"><div class="card-top"><h3>Tasks</h3><span class="tag or">Live</span></div><p>Every launch to do with an owner and a date. Check them off as you go.</p></a>
+    <a class="card" href="/gbg-os/launch/"><div class="card-top"><h3>Launch</h3></div><p>Roadmap to April 1, next actions, open decisions, and everything to verify before the first job.</p></a>
     <a class="card" href="/gbg-os/services/"><div class="card-top"><h3>Services</h3></div><p>What we do in house, what goes to partners, and the gate each service has to clear before it books.</p></a>
-    <a class="card" href="/gbg-os/jobs/"><div class="card-top"><h3>Jobs</h3><span class="tag wait">Skeleton</span></div><p>Lead to review pipeline. Empty until launch, wired to live data later.</p></a>
+    <a class="card" href="/gbg-os/jobs/"><div class="card-top"><h3>Jobs</h3><span class="tag or">Live</span></div><p>Lead to review pipeline. Add leads, move jobs, site form leads land here.</p></a>
     <a class="card" href="/gbg-os/playbook/"><div class="card-top"><h3>Playbook</h3></div><p>Operating rules, brand, and every SOP in one spot.</p></a>
     <a class="card" href="/gbg-os/web/"><div class="card-top"><h3>Website &amp; Content</h3></div><p>Site, repo, hosting, social pages, blog drafts.</p></a>
     <a class="card" href="/gbg-os/finance/"><div class="card-top"><h3>Finance</h3></div><p>Budget, equipment and launch gate trackers. Links to Drive only.</p></a>
@@ -51,6 +59,5 @@
 
   <footer>GBG DUBUQUE | Internal ops, not indexed. Amounts, ownership and anything personal live in Drive, never on these pages.</footer>
 </div>
-<script src="/sales-ops/shared/unc-key.js"></script>
 </body>
 </html>
