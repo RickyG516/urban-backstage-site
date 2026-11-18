@@ -19,6 +19,10 @@ PHONE_DISPLAY = '(515) 344-4053'
 PHONE_TEL = '+15153444053'
 EMAIL = 'info@gbgdubuque.com'
 GEO = (42.5006, -90.6646)
+# Real profile URLs only. Leave empty until the profile exists; links and schema sameAs appear automatically.
+# e.g. 'Facebook': 'https://www.facebook.com/<page>', 'Instagram': 'https://www.instagram.com/<handle>/',
+#      'Google Business Profile': 'https://g.page/<id>', 'Nextdoor': '...', 'YouTube': '...'
+SOCIAL = {}
 RADIUS_M = 48280  # 30 miles
 
 def esc(s): return html.escape(s, quote=True)
@@ -135,6 +139,23 @@ SERVICES = [
 ]
 SVC = {s['slug']: s for s in SERVICES}
 
+EXTRA_FAQ = {
+  'permanent-lights': [('What is the difference between permanent and seasonal lights?', 'Seasonal lights go up and come down every year. Permanent lights are installed once and stay on the house, so there is no yearly hanging or takedown.'),
+                       ('How do I get a permanent lighting estimate?', 'Request a private estimate or call us. We schedule a visit, look at your roofline and talk through the look you want before anything is planned.')],
+  'driveway-sealing': [('Does sealing fix cracks?', 'Cracks are cleaned and filled before the sealer goes on. Sealing then protects the surface, but it does not repair damage underneath.'),
+                       ('How do I get a driveway sealing estimate?', 'Request a private estimate or call us. We look at the condition of your driveway and tell you whether it needs sealing now or can wait.')],
+  'yard-spraying': [('How do I start a recurring yard program?', 'Request a private estimate or call us. We look at your yard, confirm the plan and set the schedule before the first visit.')],
+  'trash-can-cleaning': [('What is the difference between rinsing at home and a recurring clean?', 'A hose rinses off loose debris. A recurring service cleans and deodorizes your cans on a schedule, so you do not have to remember it or do the work.'),
+                         ('How do I sign up for trash can cleaning?', 'Request an estimate or call us. We confirm your pickup day and set a schedule that fits.')],
+  'epoxy-coating': [('Do I need to empty my garage first?', 'We will tell you what needs to be cleared before the day, so the floor is ready for prep.'),
+                    ('How do I get an epoxy estimate?', 'Request a private estimate or call us. We inspect your garage floor and talk through finish options before quoting the job.')],
+  'painting': [('Why go through GBG instead of hiring a painter directly?', 'You get one point of contact, scheduling that fits around your other exterior work, and a team that stays involved until the job is finished.')],
+  'landscaping': [('Why go through GBG instead of hiring a landscaper directly?', 'You get one point of contact, scheduling that fits around your other exterior work, and a team that stays involved until the job is finished.')],
+  'tree-service': [('Why go through GBG instead of hiring a tree service directly?', 'You get one point of contact, scheduling that fits around your other exterior work, and a team that stays involved until the job is finished.')],
+}
+for _slug, _qs in EXTRA_FAQ.items():
+    SVC[_slug]['faqs'] = SVC[_slug]['faqs'] + _qs
+
 # Page-specific "good to know" copy (markdown-style links, rendered by _inline)
 KNOW = {
   'permanent-lights': ('What to expect when you plan permanent lights', [
@@ -169,6 +190,9 @@ HOME_FAQ = [
   ('When is the best time to seal a driveway in Iowa?','Warm, dry weather works best, typically late spring through early fall. We will recommend timing once we have seen your driveway.'),
   ('How long until I can drive on a sealed driveway?','Most driveways need roughly 24 to 48 hours to cure depending on weather. We will tell you exactly when yours is ready.'),
   ('What areas do you serve?','Dubuque and communities within roughly 30 miles, including parts of Iowa, Illinois and Wisconsin. See our service areas page or call to confirm your address.'),
+  ('What is the difference between permanent and seasonal lights?','Seasonal lights go up and come down every year. Permanent lights are installed once and stay on the house, so there is no yearly hanging or takedown.'),
+  ('Do you do painting, landscaping and tree work?','Yes, through trusted local partners that we coordinate for you, so you deal with one team from estimate to finish. Permanent lights, driveway sealing, yard spraying, trash can cleaning and epoxy coating are our in-house services.'),
+  ('How do I get a private estimate?',f'Use the form on this page or call {PHONE_DISPLAY}. We follow up personally to schedule a visit to your home.'),
 ]
 
 # --------------------------------------------------------------------------
@@ -192,8 +216,16 @@ def svg_defs():
 def head(page, r):
     """page: dict(title, desc, path, og_type, schema[list of dicts], kw)"""
     canon = url(page['path'])
-    robots = '<meta name="robots" content="index,follow,max-image-preview:large">' if PROD else '<meta name="robots" content="noindex,nofollow">'
-    ld = ''.join('<script type="application/ld+json">%s</script>\n' % json.dumps(s, ensure_ascii=False, separators=(',', ':')) for s in page['schema'])
+    robots = '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">' if PROD and not page.get('noindex') else '<meta name="robots" content="noindex,nofollow">'
+    nodes = list(page['schema'])
+    if not any(n.get('@type') == 'WebSite' for n in nodes):
+        nodes.insert(0, website_ld())
+    wp = {"@context": "https://schema.org", "@type": page.get('page_type', 'WebPage'), "@id": canon + '#webpage', "url": canon,
+          "name": page['title'], "description": page['desc'], "inLanguage": "en-US",
+          "isPartOf": {"@id": BASE + "/#website"}, "about": {"@id": BASE + "/#business"}}
+    if page.get('main'): wp["mainEntity"] = {"@id": page['main']}
+    if not page.get('noindex'): nodes.insert(1, wp)
+    ld = ''.join('<script type="application/ld+json">%s</script>\n' % json.dumps(n, ensure_ascii=False, separators=(',', ':')) for n in nodes)
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -224,6 +256,11 @@ def head(page, r):
 <meta name="geo.position" content="{GEO[0]};{GEO[1]}">
 <meta name="ICBM" content="{GEO[0]}, {GEO[1]}">
 <link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{r}assets/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
+<link rel="manifest" href="{r}site.webmanifest">
+<meta name="application-name" content="GBG Dubuque">
+{page.get('extra_head', '')}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -272,6 +309,11 @@ def nav(r):
 def sticky(r):
     return f'<div class="sticky"><a class="btn btn-ghost" href="tel:{PHONE_TEL}">Call</a><a class="btn btn-primary" href="{r}#contact">Free estimate</a></div>\n'
 
+def social_html():
+    if not SOCIAL: return ''
+    links = ' &middot; '.join(f'<a href="{esc(u)}" rel="me noopener" target="_blank">{esc(n)}</a>' for n, u in SOCIAL.items())
+    return f'<p style="margin-top:1rem">Follow us: {links}</p>'
+
 def footer(r):
     svc = ''.join(f'<li><a href="{r}{s["slug"]}/">{esc(s["name"])}</a></li>' for s in SERVICES)
     towns = ''.join(f'<li><a href="{r}service-areas/">{t}, {STATE_ABBR[st]}</a></li>' for t in ['Dubuque', 'Asbury', 'Peosta', 'East Dubuque', 'Galena', 'Dyersville'] for st in TOWNS if t in TOWNS[st])
@@ -281,6 +323,7 @@ def footer(r):
       <div>
         <a class="brand" href="{r or './'}">{LOGO}<div><b>GBG</b><span>DUBUQUE</span></div></a>
         <p style="margin-top:1rem;max-width:22rem">Permanent lighting and driveway sealing for Dubuque, Iowa and communities within about 30 miles. Locally owned. Built in North Dubuque.</p>
+        {social_html()}
       </div>
       <div><h4>Services</h4><ul>{svc}</ul></div>
       <div><h4>Areas</h4><ul>{towns}<li><a href="{r}service-areas/">All service areas</a></li></ul></div>
@@ -356,15 +399,25 @@ def all_cities():
             out.append({"@type": "City", "name": f"{t}, {STATE_ABBR[st]}", "containedInPlace": {"@type": "AdministrativeArea", "name": st}})
     return out
 
+def website_ld():
+    return {"@context": "https://schema.org", "@type": "WebSite", "@id": BASE + "/#website", "url": BASE + "/", "name": "GBG Dubuque",
+            "inLanguage": "en-US", "publisher": {"@id": BASE + "/#business"}}
+
 def business_ld(full=False):
     d = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "@id": BASE + "/#business",
          "name": "GBG Dubuque", "url": BASE + "/", "telephone": PHONE_TEL, "email": EMAIL,
-         "image": BASE + "/assets/og.png", "logo": BASE + "/assets/favicon.svg",
+         "image": BASE + "/assets/og.png",
+         "logo": {"@type": "ImageObject", "url": BASE + "/assets/logo-512.png", "width": 512, "height": 512},
+         "slogan": "Permanent lighting and driveway sealing in Dubuque, Iowa",
+         "contactPoint": {"@type": "ContactPoint", "contactType": "customer service", "telephone": PHONE_TEL, "email": EMAIL,
+                          "areaServed": "US", "availableLanguage": "English"},
          "description": "Permanent lighting and driveway sealing for Dubuque, Iowa and communities within about 30 miles. Also yard spraying, trash can cleaning and epoxy coating, with trusted partners for painting, landscaping and tree service.",
          "address": {"@type": "PostalAddress", "addressLocality": "Dubuque", "addressRegion": "IA", "addressCountry": "US"},
          "geo": {"@type": "GeoCoordinates", "latitude": GEO[0], "longitude": GEO[1]},
          "areaServed": [{"@type": "GeoCircle", "geoMidpoint": {"@type": "GeoCoordinates", "latitude": GEO[0], "longitude": GEO[1]}, "geoRadius": RADIUS_M}] + all_cities(),
          "knowsAbout": ["Permanent lighting", "Driveway sealing", "Yard spraying", "Epoxy coating"]}
+    if SOCIAL:
+        d["sameAs"] = list(SOCIAL.values())
     if full:
         d["hasOfferCatalog"] = {"@type": "OfferCatalog", "name": "GBG Dubuque services",
             "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": s['name'], "url": url(s['slug'] + '/')}} for s in SERVICES]}
@@ -374,6 +427,7 @@ def service_ld(s):
     return {"@context": "https://schema.org", "@type": "Service", "@id": url(s['slug'] + '/') + '#service',
             "name": s['name'] + ' in Dubuque, Iowa', "serviceType": s['name'], "description": s['desc'],
             "url": url(s['slug'] + '/'), "provider": {"@id": BASE + "/#business"},
+            "audience": {"@type": "Audience", "audienceType": "Homeowners"},
             "areaServed": [{"@type": "GeoCircle", "geoMidpoint": {"@type": "GeoCoordinates", "latitude": GEO[0], "longitude": GEO[1]}, "geoRadius": RADIUS_M}] + all_cities()}
 
 # --------------------------------------------------------------------------
@@ -586,7 +640,9 @@ def build_home():
         desc='Permanent roofline lighting and driveway sealing in Dubuque, Iowa and within 30 miles. Locally owned, custom colors and patterns. Get a private estimate.',
         path='', schema=[business_ld(True),
             {"@context": "https://schema.org", "@type": "WebSite", "@id": BASE + "/#website", "url": BASE + "/", "name": "GBG Dubuque", "publisher": {"@id": BASE + "/#business"}},
-            faq_ld(HOME_FAQ)])
+            faq_ld(HOME_FAQ),
+            {"@context": "https://schema.org", "@type": "ItemList", "name": "GBG Dubuque services",
+             "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": sv['name'], "url": url(sv['slug'] + '/')} for i, sv in enumerate(SERVICES)]}])
     h = head(page, r) + svg_defs() + nav(r)
     h += f'''<main id="main">
 <header class="hero" id="top">
@@ -694,7 +750,7 @@ def build_home():
 def build_service(s):
     r = '../'
     others = [x for x in SERVICES if x['slug'] != s['slug']]
-    page = dict(title=s['title'], desc=s['desc'], path=s['slug'] + '/',
+    page = dict(title=s['title'], desc=s['desc'], path=s['slug'] + '/', main=url(s['slug'] + '/') + '#service',
         schema=[business_ld(False), service_ld(s), faq_ld(s['faqs']),
                 crumbs_ld([('Home', url()), (s['name'], url(s['slug'] + '/'))])])
     if s['art'] == 'lights':
@@ -766,7 +822,7 @@ def build_areas():
     r = '../'
     title = 'Service Areas: Dubuque, IA and Nearby Towns | GBG Dubuque'
     desc = 'GBG Dubuque serves Dubuque, Iowa and communities within about 30 miles across eastern Iowa, northwest Illinois and southwest Wisconsin. Find your town.'
-    page = dict(title=title, desc=desc, path='service-areas/',
+    page = dict(title=title, desc=desc, path='service-areas/', page_type='CollectionPage',
                 schema=[business_ld(True), crumbs_ld([('Home', url()), ('Service areas', url('service-areas/'))])])
     blurbs = {
         'Iowa': 'Home base. We are in North Dubuque and reach the whole Dubuque County area, plus nearby Delaware and Jackson County communities.',
@@ -907,6 +963,25 @@ def related_posts(p, prefix):
     return (f'<section class="sec"><div class="wrap"><div class="eyebrow rv">Keep reading</div>'
             f'<h2 class="rv d1">More from the blog.</h2><div class="grid6 postlist">{cards}</div></div></section>')
 
+RSS_LINK = f'<link rel="alternate" type="application/rss+xml" title="GBG Dubuque blog" href="{BASE}/blog/feed.xml">'
+
+def blog_ld(posts):
+    return {"@context": "https://schema.org", "@type": "Blog", "@id": url('blog/') + '#blog', "name": "GBG Dubuque blog",
+            "url": url('blog/'), "inLanguage": "en-US", "publisher": {"@id": BASE + "/#business"},
+            "blogPost": [{"@type": "BlogPosting", "@id": url('blog/%s/' % q['slug']) + '#post', "headline": q['title'], "url": url('blog/%s/' % q['slug'])} for q in posts]}
+
+def build_feed(posts):
+    from email.utils import format_datetime
+    def rfc(d):
+        dt = datetime.datetime.fromisoformat(d + 'T12:00:00').replace(tzinfo=datetime.timezone.utc)
+        return format_datetime(dt)
+    items = ''.join(
+        f'<item><title>{esc(q["title"])}</title><link>{url("blog/%s/" % q["slug"])}</link><guid isPermaLink="true">{url("blog/%s/" % q["slug"])}</guid>'
+        f'<pubDate>{rfc(q["date"])}</pubDate><description>{esc(q["meta_description"])}</description></item>' for q in posts)
+    write('blog/feed.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>GBG Dubuque blog</title>'
+          f'<link>{url("blog/")}</link><description>Plain advice on permanent lights, driveway sealing and exterior care for Dubuque homeowners.</description>'
+          f'<language>en-us</language>{items}</channel></rss>\n')
+
 def build_blog():
     posts = load_posts()
     if not posts: return
@@ -914,7 +989,8 @@ def build_blog():
     r = '../'
     page = dict(title='Blog: Exterior Care Tips for Dubuque Homeowners | GBG Dubuque',
                 desc='Plain advice on permanent lights, driveway sealing and exterior care for homeowners in Dubuque, Iowa and the tri-state area.',
-                path='blog/', schema=[business_ld(False), crumbs_ld([('Home', url()), ('Blog', url('blog/'))])])
+                path='blog/', page_type='CollectionPage', extra_head=RSS_LINK,
+                schema=[business_ld(False), blog_ld(posts), crumbs_ld([('Home', url()), ('Blog', url('blog/'))])])
     cards = ''.join(post_card(p, '', i) for i, p in enumerate(posts))
     h = head(page, r) + svg_defs() + nav(r)
     h += f"""<main id="main">
@@ -929,12 +1005,15 @@ def build_blog():
 </main>
 """ + sticky(r) + footer(r)
     write('blog/index.html', h)
+    build_feed(posts)
     # posts
     r = '../../'
     for p in posts:
         sp = p['service_page'].strip('/')
         svc_name = SVC[sp]['name'] if sp in SVC else 'Not sure yet'
-        ld_post = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p['title'],
+        ld_post = {"@context": "https://schema.org", "@type": "BlogPosting", "@id": url('blog/%s/' % p['slug']) + '#post', "headline": p['title'],
+                   "keywords": p.get('target_keyword', ''), "articleSection": svc_name if sp in SVC else 'Exterior care',
+                   "wordCount": len(p['main'].split()), "isPartOf": {"@type": "Blog", "@id": url('blog/') + '#blog', "name": "GBG Dubuque blog", "url": url('blog/')},
                    "description": p['meta_description'], "datePublished": p['date'], "dateModified": p['date'],
                    "mainEntityOfPage": url('blog/%s/' % p['slug']), "url": url('blog/%s/' % p['slug']),
                    "image": BASE + "/assets/og.png", "inLanguage": "en-US",
@@ -942,7 +1021,8 @@ def build_blog():
                    "publisher": {"@type": "Organization", "name": "GBG Dubuque"}}
         schema = [business_ld(False), ld_post, crumbs_ld([('Home', url()), ('Blog', url('blog/')), (p['title'], url('blog/%s/' % p['slug']))])]
         if p['faq']: schema.append(faq_ld(p['faq']))
-        page = dict(title=p['title'] + ' | GBG Dubuque', desc=p['meta_description'], path='blog/%s/' % p['slug'], schema=schema, og_type='article')
+        extra = RSS_LINK + (f'\n<meta property="article:published_time" content="{p["date"]}">\n<meta property="article:section" content="{esc(svc_name if sp in SVC else "Exterior care")}">')
+        page = dict(title=p['title'] + ' | GBG Dubuque', desc=p['meta_description'], path='blog/%s/' % p['slug'], schema=schema, og_type='article', extra_head=extra)
         faq = ''
         if p['faq']:
             faq = f'<section class="sec alt"><div class="wrap"><div style="text-align:center"><div class="eyebrow rv">Questions</div><h2 class="rv d1">Quick answers.</h2></div>{faq_html(p["faq"])}</div></section>'
@@ -963,6 +1043,21 @@ def build_blog():
 """ + sticky(r) + footer(r)
         write('blog/%s/index.html' % p['slug'], h)
 
+def build_404():
+    r = BASE + '/'
+    page = dict(title='Page not found | GBG Dubuque', desc='That page is not here. Head back to GBG Dubuque.', path='404.html', schema=[business_ld(False)], noindex=True)
+    h = head(page, r) + svg_defs() + nav(r)
+    h += f'''<main id="main">
+<header class="phero"><div class="wrap">
+  <div class="eyebrow">Page not found</div>
+  <h1>That page<br><em>is not here.</em></h1>
+  <p class="lead">The link may be old or mistyped. Start from the home page, or call us and we will point you in the right direction.</p>
+  <div class="cta"><a class="btn btn-primary" href="{r}">Back to home</a><a class="btn btn-ghost" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a></div>
+</div></header>
+</main>
+''' + footer(r)
+    write('404.html', h)
+
 def build_files():
     write('assets/favicon.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90"><rect width="90" height="90" rx="16" fill="#1a1a1a"/><g fill="#e36b1e"><rect x="8" y="58" width="22" height="22" rx="2"/><rect x="34" y="58" width="22" height="22" rx="2"/><rect x="60" y="58" width="22" height="22" rx="2"/><rect x="21" y="33" width="22" height="22" rx="2"/><rect x="47" y="33" width="22" height="22" rx="2"/><rect x="34" y="8" width="22" height="22" rx="2"/></g></svg>')
     posts = load_posts()
@@ -973,6 +1068,9 @@ def build_files():
         sm += f'  <url><loc>{url(p.rstrip("/")) if p else BASE + "/"}{"/" if p else ""}</loc>{stamp}<priority>{pr}</priority></url>\n'
     sm += '</urlset>\n'
     write('sitemap.xml', sm)
+    write('site.webmanifest', json.dumps({"name": "GBG Dubuque", "short_name": "GBG", "start_url": "./", "display": "browser",
+          "background_color": "#0c0c0e", "theme_color": "#0c0c0e",
+          "icons": [{"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "assets/logo-512.png", "sizes": "512x512", "type": "image/png"}]}, indent=2) + "\n")
     if PROD:
         write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
     else:
@@ -984,5 +1082,6 @@ if __name__ == '__main__':
     build_areas()
     build_careers()
     build_blog()
+    build_404()
     build_files()
     print('built', 'PRODUCTION' if PROD else 'STAGING', '->', OUT)

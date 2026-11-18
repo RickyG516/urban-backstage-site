@@ -20,3 +20,8 @@ urbanbackstage.com is noindexed site-wide (see repo README), so /gbg/ here can n
 6. Confirm the service-area town list and 30-mile radius in build.py (TOWNS, RADIUS_M).
 7. Confirm copy flagged in the handoff (phone-app control claim, cure times, 2027 booking line,
    careers roles) and the info@gbgdubuque.com inbox works.
+8. Social profiles: create them with the same name, phone and service list as the site, then put the real URLs in
+   the SOCIAL dict at the top of build.py (Facebook, Instagram, Nextdoor, YouTube, Google Business Profile).
+   Footer links and schema sameAs appear on the next build. Never add a profile that does not exist yet.
+9. After launch: request indexing for the home page and each service page in Search Console, add the site to
+   Bing Webmaster Tools, and ask for real reviews on the Google Business Profile once jobs are done.
