@@ -85,7 +85,12 @@
   "note": "in HubSpot 2026-09-07 (company 344971336398) | contact 548362228412 (Josh Beachy, Owner) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-07: beachyplumbing.com RESOLVES but serves a site-builder placeholder - page content is literally 'BEACHY PLUMBING / Launching Soon' plus the builder's own 'Get 50 free credits' upsell strip. Qualifies as a placeholder. BBB 'Visit Website' button href is facebook.com/BeachyPlumbing, i.e. Facebook-as-website, which also qualifies. | REVENUE: LLC since 2/14/2018 (8 yrs), BBB A+, PHCC contractor member, master plumbing licence 52284-CL. | DO NOT RAISE: BuildZoom lists contractor registration C133421 as inactive - NOT verified against the state database this session (Iowa lookup portal 404'd), treat as unverified scrape. | ENRICHED 2026-09-23 (BRONZE): identity confirmed live on GBP 'Beachy Plumbing' - 1350 Kennel Ct B4, North Liberty IA 52317, (319) 430-2211 (name + city + phone all match). 3 real photos from that GBP gallery, each reviewed individually: hero = framed-wall rough-in (PEX supply, copper stub-outs, PVC drain); gallery = basement mechanical room with two wall-hung tankless heaters (CROPPED to exclude a 'HAUGERS Water Systems' dealer label on the softener tank - another company's name); gallery = freestanding tub with floor-mount filler on patterned tile. Rejected: 'Wichhart Repair' tile (a different business from People-also-search), herringbone shower valve + accessible shower + sewer dig (kept to 3 real photos per the cap). PLACEHOLDERS: logo ('BP' initials badge, data-placeholder=logo - no logo exists anywhere: GBP has none, beachyplumbing.com is still a GoDaddy 'Launching Soon' splash with plain text only) and reviews (GBP 5.0 from only 2 reviews, below the 3-review floor). NOTE: facebook.com/BeachyPlumbing now returns 'This content isn't available right now' (checked live 2026-09-23) - the FB front door is gone or hidden; phone is the channel. | FB-DM 2026-10-23: skipped, Facebook page shows content not available (per 2026-09-23 note); no Message route.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-18",
+   "t1_note": "Messenger: no Page row in search; only match is a profile with no composer (\"can't access this chat yet\", E2EE) - attach by hand from the FB page",
+   "t1_drive": "2026-11-18"
+  }
  },
  "ia-bensons-heating-ac-eldon": {
   "channel": "phone",
@@ -325,7 +330,10 @@
   "ready": true,
   "stage": "none",
   "fb_dm": {
-   "t2_drive": "2026-10-22"
+   "t2_drive": "2026-10-22",
+   "t1_skipped": "2026-11-18",
+   "t1_note": "thread not empty: Ricky sent text + video 2026-10-13 (old touch never logged here)",
+   "t1_drive": "2026-11-18"
   }
  },
  "ia-dimmer-brothers-dubuque": {
@@ -618,7 +626,12 @@
   "note": "in HubSpot 2026-08-10 | no website at all, BBB lists FB page as the website | still running print classifieds | owner Rick Mai, 30 yrs claimed | FLAG: BuildZoom shows license C124995 expired 2020-07-08, BZ score 0 - do not lead with it cold | sourced from in-person encounter in Dubuque | ENRICHED 2026-09-20: harvested from Facebook page (photos + profile logo) via daily-mockup-enrichment. 3 real job photos (commercial parking-lot pour used as hero, driveway + patio as gallery tiles), all identity-gate checked (name+city+phone match, no other business branding visible). Real logo pulled from FB profile photo (shirt logo, cropped as circular nav badge) -- colors sampled from it (lime-green #95b634 on near-black #12150d, contrast audited clean both directions). No Google Business Profile found for this prospect and the FB page has no Reviews tab enabled (0 reviews) -- reviews section shipped as a labelled placeholder with swap-notice. Level: BRONZE (real photo + real logo, reviews placeholder). | FB-DM 2026-10-22: Ricky already messaged this thread by hand on 2026-10-13 (ask-first, no link); not re-staged. | FB-DM 2026-10-30: Messenger thread already holds a message from Ricky (rule 8); skipped.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-18",
+   "t1_note": "thread not empty: Ricky sent text T1 2026-10-13 (never logged here)",
+   "t1_drive": "2026-11-18"
+  }
  },
  "ia-mann-construction-eldora": {
   "channel": "phone",
@@ -2559,7 +2572,10 @@
    "staged": "2026-11-06",
    "variant": "A",
    "prev_staged": "2026-11-05",
-   "prev_skipped": "2026-11-06"
+   "prev_skipped": "2026-11-06",
+   "t1_skipped": "2026-11-18",
+   "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
+   "t1_drive": "2026-11-18"
   }
  },
  "il-eric-farwell-construction-plymouth": {
@@ -2573,7 +2589,10 @@
    "staged": "2026-11-06",
    "variant": "B",
    "prev_staged": "2026-11-05",
-   "prev_skipped": "2026-11-06"
+   "prev_skipped": "2026-11-06",
+   "t1_skipped": "2026-11-18",
+   "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
+   "t1_drive": "2026-11-18"
   }
  }
 }
