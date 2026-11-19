@@ -563,3 +563,8 @@ tie-breaking on the lowest middle-third share: y0 435 (135/252, mid 0.44), 345 (
 - Small Town Heating & Cooling (Ellsworth IA): FB page smalltownheatingandcooling matches name, city, street (1527 Dewitt St) and is a real HVAC page, logo is a sun mascot. Photos tab holds only dark, vertical phone shots of furnaces (sample dated Oct 2015); viewer capture would be about 390x695 and poor. Not built; weak imagery, not a resolution blocker alone.
 - A.C.E Roofing and Construction (Abingdon IL): identity passes (Google listing and FB (309) 703-4100, 100 S Western Ave), good roofing photos on FB, BUT it has a current, polished own site (aceroofingconstruction.com, (c) 2026, service-area pages, quote form). Not a weak-site qualifier: rejected as a prospect. Pool row should be marked rejected.
 - Pool file not edited tonight. Remaining unused pool rows are mostly weak (no site, thin footprint). Source 2 and 3 and PRIMED screening not reached.
+
+## 2026-11-19 nightly: 0 built, 0 enriched (no sendable pages; run cut short)
+- Screened 1 candidate: Southwest Iowa Roofing (Glenwood IA). Its Facebook page lists (402) 515-2622 and swiaroofing.com, while the pool row has (402) 676-2591, so phone identity failed. The built-in pane refused to open swiaroofing.com (site approval not available on an unattended run), so a rebuild screen could not be done. Not built.
+- Pool file not edited. Other pool rows, PRIMED enrichment, Source 2 and Source 3 were not worked. Unscreened strong candidates with a Facebook page: Country Concrete (Derby IA), Al4u Mechanical (Clinton IA), Brookhart Electric (Wayland IA), Boge Mechanical (Dyersville IA).
+- Tip: unattended runs cannot approve new sites in the built-in pane; Facebook and Google Maps worked, other domains were denied.
