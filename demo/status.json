@@ -236,7 +236,13 @@
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | FB-DM 2026-10-27: FB page links cordesheatingandcooling.com (HTTP 200, live) and shows no phone; fails website and identity gates.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-19",
+   "t1_video_built": "2026-11-19",
+   "t1_drive": "2026-11-19",
+   "t1_note": "page not found in Messenger search (tried Cordes Heating / Cordes Heating & Cooling)"
+  }
  },
  "ia-crcb-concrete-iowa-city": {
   "channel": "phone",
@@ -432,7 +438,13 @@
   "note": "in HubSpot 2026-08-09 (company 338608589522) | no website: freiburgerhvac.com, freiburgerheatingandcooling.com and freiburgerheating.com all loaded live in browser 2026-08-09 -> Chrome error page, nothing served; PHCC of Iowa directory lists a Facebook URL in the website field and the GBP website field points to facebook.com/freiburgerhvac -> FACEBOOK-AS-WEBSITE | revenue proof: 128 permitted projects on BuildZoom (44 in 2023, 31 in 2024, 28 in 2025), FMCSA USDOT 4455825 ACTIVE with 3 drivers, MCS-150 refiled 04/15/2026, 0 inspections / 0 crashes / no OOS (verified directly on safer.fmcsa.dot.gov 2026-08-09), 4.7 stars across 30 Google reviews, commercial permits incl. 2459 Kerper Blvd (four 115k-BTU furnaces + four A/C units on one job) | phone + address confirmed directly on the FMCSA federal .gov snapshot | Iowa SOS #695063 Active formed 12/17/2021, Iowa contractor reg C142263 active thru 06/30/2029, Iowa Plumbing & Mechanical licence 52826-CL | NOTE FMCSA lists Power Units 0 against 3 drivers - do not overstate as a large fleet | DO NOT RAISE: permit volume is TRENDING DOWN 44->31->28, so no 'looks like you're growing'; their FB returned 'This content isn't available right now' logged-out so the page may be broken/restricted - confirm gently, don't assert it's deleted; LLC is only ~4.5 years old, don't credit decades | ENRICHED 2026-09-19 (SILVER): real GBP logo harvested (flame/house mark, 'Freiburger HEATING & COOLING, Dubuque IA, 563-495-0126') hotlinked into the nav with data-role=\"logo\", and page accent/dark/off resampled from the logo's blue (was UNC-orange-adjacent #d4541f, now #2f8fd6 -- also moves this page off the library's over-represented warm band). 2 real GBP reviews (David B. 5-star emergency AC fix, Ashley C. 5-star 90-degree-weather callout) in a data-reviews=\"real\" section, 4.7/30 aggregate shown. Photo gallery stays the existing generated SVGs (load-curve, service map, pattern) -- no usable real job photos on the GBP ('By owner' category had only the logo), and generated graphics don't require placeholder disclosure per MOCKUP-BASELINE. DO NOT RAISE: a negative 2024 review (Tammy Rector, punctured line during cleaning) with an owner response exists on the profile. | FB-DM 2026-10-22: Ricky already messaged this thread by hand on 2026-10-13 (ask-first, no link); not re-staged. | FB-DM 2026-10-26: Ricky already messaged this thread by hand on 2026-10-13; not re-staged. | FB-DM 2026-10-30: Messenger thread already holds a message from Ricky (rule 8); skipped.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-19",
+   "t1_video_built": "2026-11-19",
+   "t1_drive": "2026-11-19",
+   "t1_note": "thread not empty: Ricky sent a text on 2026-10-13 (homepage pitch to Jed); video in Drive for manual follow-up"
+  }
  },
  "ia-greg-wirth-electric-lucodo": {
   "channel": "phone",
@@ -743,7 +755,13 @@
   "note": "in HubSpot 2026-08-07 (company 338481182456) | 446 followers, 100% recommend / 5 reviews. No website, no GBP. | ENRICHED 2026-09-20: GOLD -- 2 real job photos (a flagstone-and-black-mulch bed built around two backyard trees, two angles) harvested from Facebook, identity-gate checked. Real logo cropped from their own branded T-shirt ('Millius Landscaping' pink script wordmark). Real review: Facebook shows 100% recommend across 5 reviews; pulled the one verbatim quote FB actually renders (Michele Austin) plus the aggregate stat. Colors sampled from the shirt logo (rose pink #d9738f on near-black #12111a, contrast audited clean both directions). | FB-DM 2026-10-22: Ricky already messaged this thread by hand on 2026-10-13 (ask-first, no link); not re-staged. | FB-DM 2026-10-30: Messenger thread already holds a message from Ricky (rule 8); skipped.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-19",
+   "t1_video_built": "2026-11-19",
+   "t1_drive": "2026-11-19",
+   "t1_note": "thread not empty: Ricky sent a text on 2026-10-13 (homepage pitch); video in Drive for manual follow-up"
+  }
  },
  "ia-muller-plumbing-heating-iowa-city": {
   "channel": "fb",
@@ -1684,7 +1702,11 @@
   "fb_dm": {
    "staged": "2026-10-26",
    "variant": "A",
-   "skipped": "2026-10-27"
+   "skipped": "2026-10-27",
+   "t1_skipped": "2026-11-19",
+   "t1_video_built": "2026-11-19",
+   "t1_drive": "2026-11-19",
+   "t1_note": "page not found in Messenger search (tried R. Maquet Plumbing / Maquet Plumbing / RMaquet; only personal profiles)"
   }
  },
  "il-r-marit-painting-7jp0a6": {
@@ -2439,7 +2461,13 @@
   "note": "QC 2026-08-25: HubSpot record has no description - unenriched 2026-07-29 bulk batch. No-website claim NOT verified. | ENRICHED 2026-10-07 GOLD: identity gate PASSED on name + Lena + 222 S Rosera St; Google listing, FB page and their email all use (920) 829-5232, the page's old (715) 330-4328 appears only on their Bryant dealer-locator page at the same address - page CTA switched to (920) 829-5232; HubSpot/queue phone NOT changed, confirm on the call. Owners Dennis & Cindy (named in reviews + owner replies). Est. 1947 per their logo. Bryant dealer, NATE certified, geothermal/boilers/heat pumps per FB about. REAL: logo (FB cover - red/black wordmark with vintage truck, 'Serving Northeastern Wisconsin Since 1947'), brand red sampled (#e5484f on #15171a), 3 verbatim Google reviews 4.8/26, 1 customer review photo of a new AC install (362px, small). PLACEHOLDER: 2 gallery tiles (generated SVG, marked). Copy fixed: unverified financing / Mon-Sat / 'Done Right' claims removed. Their only web presence is the Bryant locator page (bryant.com) - Google listing has no website. Namesake: owner reply says 'Thompson in Green Bay' is a different company. | FB-DM 2026-10-09: FB page (profile.php?id=100057222919594, Thomson Heating and Cooling, (920) 829-5232) has NO Message button - Follow/Search only. Not messageable on FB; phone/email lanes only. | FB-DM 2026-10-26: no Message button on the FB page (only Follow/Search).",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-19",
+   "t1_video_built": "2026-11-19",
+   "t1_drive": "2026-11-19",
+   "t1_note": "page not found: Messenger \"Thomson Heating\" result is profile 100074152584036, record is 100057222919594 (identity mismatch)"
+  }
  },
  "wi-wisconsin-concrete-restoration-boscobel": {
   "channel": "phone",
