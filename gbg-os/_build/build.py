@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "7"  # cache bust, bump on every os.css / os.js change
+V = "8"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -90,6 +90,7 @@ hub = sh("Pulse") + f"""  <div class="stats">
   <div class="grid" style="margin-top:14px" data-live="hub">
     <div class="card"><div class="card-top"><h3>Due now</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
     <div class="card"><div class="card-top"><h3>Key dates</h3></div><ul class="mini" data-live="keydates"></ul>
+      <h3 style="margin-top:18px">Recently closed</h3><div data-live="closed"></div>
       <h3 style="margin-top:18px">Recent activity</h3><ul class="mini" data-live="recent"></ul>
       <p class="whoami">Click any task to edit it. <span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
   </div>
@@ -226,7 +227,7 @@ page("contacts", "contacts", "Contacts", "Contacts", "Every <span>person</span>"
 tasks = """  <div class="filters" data-filter>
     <button class="on" data-owner="mine">Mine</button><button data-owner="all">Everyone</button>
     <button data-owner="ricky">Ricky</button><button data-owner="doug">Doug</button>
-    <span class="sep"></span><button data-status="open">Open</button><button data-status="done">Done</button>
+    <span class="sep"></span><button data-status="open">Open</button><button data-status="done">Closed, last 30 days</button>
   </div>
   <div class="card"><div data-live="tasks" data-owner="mine" data-status="open"></div></div>
 """ + sh("Add a task") + """  <form class="card form" data-form="task">

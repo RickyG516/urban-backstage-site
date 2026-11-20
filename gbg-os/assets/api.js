@@ -21,9 +21,14 @@
       }).then(function (d) { if (!d.ok) throw new Error(d.error || 'failed'); return d; });
   }
 
-  function toast(msg) {
+  function toast(msg, undo) {
+    document.querySelectorAll('.toast').forEach(function (x) { x.remove(); });
     var t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
-    document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2600);
+    if (undo) {
+      var b = document.createElement('button'); b.className = 'undo'; b.textContent = 'Undo';
+      b.onclick = function () { t.remove(); undo(); }; t.appendChild(b);
+    }
+    document.body.appendChild(t); setTimeout(function () { t.remove(); }, undo ? 6500 : 2600);
   }
 
   /* lock screen */
@@ -68,15 +73,25 @@
       '<span class="who ' + esc(t.owner) + '">' + NAME[t.owner] + '</span>' +
       '<span class="due">' + (late ? 'Overdue, ' : '') + fmt(t.due) + '</span>' +
       (t.area ? '<span class="area">' + esc(t.area) + '</span>' : '') +
-      (t.key_date ? '<span class="key">Key date</span>' : '') + '</div></div></li>';
+      (t.key_date ? '<span class="key">Key date</span>' : '') +
+      (t.status === 'done' && t.done_at ? '<span class="closed">Closed by ' + esc(NAME[t.done_by] || t.done_by || '?') + ', ' + stamp(t.done_at) + '</span>' : '') +
+      '</div></div></li>';
   }
+  function stamp(iso) { var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
+  function setStatus(id, st) { return api('/tasks/' + id, { method: 'PATCH', body: { status: st } }); }
+  function refreshTaskViews() { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); renderClosed(); renderHub(); }
   function bindTicks(root, reload) {
     root.querySelectorAll('.task .tick').forEach(function (b) {
       b.addEventListener('click', function () {
         var li = b.closest('.task'), done = li.classList.contains('done');
         li.classList.toggle('done');
-        api('/tasks/' + li.dataset.id, { method: 'PATCH', body: { status: done ? 'open' : 'done' } })
-          .then(function () { toast(done ? 'Reopened' : 'Done'); if (reload) reload(); })
+        var id = li.dataset.id;
+        setStatus(id, done ? 'open' : 'done')
+          .then(function () {
+            if (done) { toast('Reopened'); }
+            else toast('Done', function () { setStatus(id, 'open').then(function () { toast('Reopened'); refreshTaskViews(); }); });
+            if (reload) reload(); else renderClosed();
+          })
           .catch(function (e) { li.classList.toggle('done'); if (e.message !== 'locked') toast('Could not save'); });
       });
     });
@@ -90,8 +105,9 @@
     api(q).then(function (d) {
       var T = d.tasks; T.forEach(function (t) { TASKS[t.id] = t; }); var today = d.today, wk = new Date(new Date(today + 'T12:00:00').getTime() + 7 * 864e5).toISOString().slice(0, 10);
       if (status === 'done') {
-        T.forEach(function (t) { TASKS[t.id] = t; });
-        el.innerHTML = T.length ? '<ul class="tasks">' + T.map(function (t) { return taskRow(t, today); }).join('') + '</ul>' : '<p class="loading">Nothing done yet.</p>';
+        var cut = Date.now() - 30 * 864e5;
+        T = T.filter(function (t) { return t.done_at && new Date(t.done_at).getTime() >= cut; });
+        el.innerHTML = T.length ? '<p class="hint2">Closed in the last 30 days, newest first. Tap the green box to reopen.</p><ul class="tasks">' + T.map(function (t) { return taskRow(t, today); }).join('') + '</ul>' : '<p class="loading">Nothing closed in the last 30 days.</p>';
         bindTicks(el, function () { renderTasks(el); }); bindTaskOpen(el); return;
       }
       var groups = [['Overdue', function (t) { return t.due && t.due < today; }],
@@ -129,6 +145,15 @@
       var hi = document.querySelector('[data-live=hello]'); if (hi) hi.textContent = 'Signed in as ' + NAME[d.user];
     }).catch(function () {});
     function set(k, v) { var e = document.querySelector('[data-k=' + k + ']'); if (e) e.textContent = v; }
+  }
+
+  function renderClosed() {
+    var el = document.querySelector('[data-live=closed]'); if (!el) return;
+    api('/tasks?status=done').then(function (d) {
+      var T = d.tasks.slice(0, 5); T.forEach(function (t) { TASKS[t.id] = t; });
+      el.innerHTML = T.length ? '<ul class="tasks">' + T.map(function (t) { return taskRow(t, d.today); }).join('') + '</ul>' : '<p class="loading">Nothing closed yet.</p>';
+      bindTicks(el, function () { refreshTaskViews(); }); bindTaskOpen(el);
+    }).catch(function () {});
   }
 
   /* ---------- jobs board ---------- */
@@ -277,7 +302,12 @@
     f.addEventListener('submit', function (e) { e.preventDefault();
       api('/tasks/' + t.id, { method: 'PATCH', body: formData(f) }).then(function () { toast('Saved'); document.querySelector('.dx').click(); }).catch(function () { toast('Could not save'); }); });
     body.querySelector('[data-toggle]').onclick = function () {
-      api('/tasks/' + t.id, { method: 'PATCH', body: { status: t.status === 'done' ? 'open' : 'done' } }).then(function () { toast(t.status === 'done' ? 'Reopened' : 'Done'); document.querySelector('.dx').click(); });
+      var was = t.status;
+      setStatus(t.id, was === 'done' ? 'open' : 'done').then(function () {
+        document.querySelector('.dx').click();
+        if (was === 'done') toast('Reopened');
+        else toast('Done', function () { setStatus(t.id, 'open').then(function () { toast('Reopened'); refreshTaskViews(); }); });
+      });
     };
     var jb = body.querySelector('[data-job]'); if (jb) jb.onclick = function () { openJob(t.job_id); };
   }
@@ -340,7 +370,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     if (!ls(LS_KEY)) { lock(); return; }
-    renderHub(); renderJobs(); renderContacts();
+    renderHub(); renderJobs(); renderContacts(); renderClosed();
     document.querySelectorAll('[data-live=tasks]').forEach(renderTasks);
     bindForms();
   });
