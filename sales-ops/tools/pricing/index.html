@@ -118,35 +118,50 @@
     const WORKER_KEY  = (function(){try{var k=localStorage.getItem('unc_worker_key');return (k&&k.trim())||'';}catch(e){return '';}})();
 
     // ââ CANONICAL PRICING DATA âââââââââââââââââââââââââââââââââââââââââââââ
-    // Source: urbannicheco.com/pricing | Updated: 2026-05-21
+    // Source: locked price book 2026-11-20 (pricing-calculator skill) | Updated: 2026-11-20
     // NEVER quote from memory â use this tool.
 
     const BUNDLES = [
       {
+        id: 'geturban_launch',
+        name: 'GetUrban Launch',
+        price: 500,
+        includes: ['$1,000 build, 5 pages', '6 month term', 'Posting done for you'],
+        fullIncludes: ['5 page custom website, hosted ($1,000 one-time build)', '1 blog post a month', '8 social posts a month with captions', '2 Google Business Profile posts a month', 'Review replies', 'Monthly report of what we shipped', '6 month term, then month to month'],
+        services: {}
+      },
+      {
+        id: 'geturban_momentum',
+        name: 'GetUrban Momentum',
+        price: 700,
+        includes: ['$1,500 build, 8 pages + GBP setup', '12 month term', 'Posting done for you'],
+        fullIncludes: ['8 page custom website, hosted ($1,500 one-time build)', 'Google Business Profile setup', '2 blog posts a month', '12 social posts a month with captions', '4 Google Business Profile posts a month', 'Review replies', 'Monthly report plus quarterly call', '12 month term, then month to month'],
+        services: {}
+      },
+      {
         id: 'local_authority',
         name: 'Local Authority',
-        price: 2800,
-        includes: ['SEO Foundation', 'GBP Authority', 'Reputation Foundation'],
-        // Full deliverable list per urbannicheco.com/pricing â used in written quotes
-        fullIncludes: ['SEO Foundation', 'GBP Authority management', 'Reputation Foundation', 'Monthly performance report', 'Direct line to Ricky'],
-        services: { seo: 0, gbp: 1, rep: 0 }  // tier indices
+        price: 1200,
+        includes: ['SEO Core', 'GBP Authority (includes reviews)'],
+        fullIncludes: ['Local SEO Core: your town + 2 nearby', 'GBP Authority: weekly branded posts, review kit, review replies, Q&A, listings', 'Monthly performance report', 'Direct line to Ricky'],
+        services: { seo: 0, gbp: 0 }
       },
       {
         id: 'market_growth',
         name: 'Market Growth',
         badge: 'MOST POPULAR',
-        price: 4500,
-        includes: ['Everything in Local Authority', 'Content Pack Growth', 'Email Foundation'],
-        fullIncludes: ['Everything in Local Authority', 'Content Pack Growth â 12 posts/mo FB + IG', 'Email Marketing Foundation â 2 campaigns/mo', 'Bi-weekly strategy check-ins'],
-        services: { seo: 0, gbp: 1, rep: 0, content: 1, email: 0 }
+        price: 2200,
+        includes: ['Everything in Local Authority', 'Content Pro', 'Email Marketing'],
+        fullIncludes: ['Everything in Local Authority', 'Content Pro, posted for you', 'Email Marketing', 'Bi-weekly strategy check-ins'],
+        services: { seo: 0, gbp: 0, content: 0, email: 0 }
       },
       {
         id: 'total_domination',
         name: 'Total Domination',
-        price: 7500,
-        includes: ['Everything in Market Growth', 'PPC Standard', 'AI Lead Capture Full Stack'],
-        fullIncludes: ['Everything in Market Growth', 'PPC Standard â up to $5K ad spend managed', 'AI Lead Capture Full Stack', 'Weekly strategy calls', 'Priority support'],
-        services: { seo: 0, gbp: 1, rep: 0, content: 1, email: 0, ppc: 0, ai: 1 }
+        price: 3300,
+        includes: ['Everything in Market Growth', 'PPC up to $3K spend', 'AI Full Stack'],
+        fullIncludes: ['Everything in Market Growth', 'PPC management, up to $3K/mo ad spend', 'AI Full Stack: chat, AI phone, follow-up', 'Weekly strategy calls', 'Priority support'],
+        services: { seo: 0, gbp: 0, content: 0, email: 0, ppc: 0, ai: 1 }
       }
     ];
 
@@ -156,38 +171,26 @@
         name: 'Local SEO',
         billing: 'mo',
         tiers: [
-          { label: 'Foundation', price: 1500 },
-          { label: 'Growth',     price: 2500 },
-          { label: 'Domination', price: 3500 }
+          { label: 'Core (town + 2 nearby)', price: 900 },
+          { label: 'Plus (county or radius)', price: 1500 }
         ]
       },
       {
         id: 'gbp',
-        name: 'GBP Management',
+        name: 'GBP Authority',
         billing: 'mo',
         tiers: [
-          { label: 'Authority', price: 500 }
+          { label: 'Authority', price: 450 }
         ],
-        note: 'Setup $250 one-time (billed separately)'
-      },
-      {
-        id: 'rep',
-        name: 'Reputation Management',
-        billing: 'mo',
-        tiers: [
-          { label: 'Foundation', price: 400 },
-          { label: 'Authority',  price: 750 }
-        ]
+        note: 'Includes review management. Setup $250 one-time (billed separately)'
       },
       {
         id: 'content',
-        name: 'Content Pack',
+        name: 'Content Pro',
         billing: 'mo',
-        note: '"We build it, you post it"',
+        note: 'Posted for you',
         tiers: [
-          { label: 'Starter',   price: 400 },
-          { label: 'Growth',    price: 700 },
-          { label: 'Authority', price: 1200 }
+          { label: 'Content Pro', price: 800 }
         ]
       },
       {
@@ -195,19 +198,17 @@
         name: 'Email Marketing',
         billing: 'mo',
         tiers: [
-          { label: 'Foundation', price: 500 },
-          { label: 'Authority',  price: 1000 }
+          { label: 'Email', price: 400 }
         ]
       },
       {
         id: 'ppc',
         name: 'PPC Management',
         billing: 'mo',
-        note: 'Flat mgmt fee â ad spend goes direct to Google, never marked up',
+        note: 'Flat mgmt fee. Ad spend goes direct to Google, never marked up. Above $8K spend: quote.',
         tiers: [
-          { label: 'Standard', price: 1200 },
-          { label: 'Power',    price: 2000 },
-          { label: 'Dynamic',  price: 3500 }
+          { label: 'Up to $3K spend', price: 500 },
+          { label: 'Up to $8K spend', price: 900 }
         ]
       },
       {
@@ -215,8 +216,17 @@
         name: 'AI Lead Capture',
         billing: 'mo',
         tiers: [
-          { label: 'Smart Follow-Up', price: 750 },
-          { label: 'Full AI Stack',   price: 1500 }
+          { label: 'AI Chat (Kobe)', price: 300 },
+          { label: 'AI Full Stack',  price: 750 }
+        ]
+      },
+      {
+        id: 'care',
+        name: 'Site Care',
+        billing: 'mo',
+        note: 'Hosting, updates, security',
+        tiers: [
+          { label: 'Site Care', price: 150 }
         ]
       }
     ];
@@ -227,10 +237,21 @@
         name: 'Website Design',
         billing: 'one-time',
         tiers: [
-          { label: 'Landing',       price: 1000 },
-          { label: 'HTML Starter',  price: 3000 },
-          { label: 'HTML Standard', price: 5500 },
-          { label: 'HTML Advanced', price: 8500 }
+          { label: 'Starter, 12 pages', price: 2500 },
+          { label: 'Standard, 25 pages', price: 3500 },
+          { label: 'Advanced, 40 pages', price: 5000 }
+        ]
+      },
+      {
+        id: 'geturban_build',
+        name: 'GetUrban Build',
+        billing: 'one-time',
+        note: 'With a GetUrban plan. Build-only is 50% more.',
+        tiers: [
+          { label: 'Launch, 5 pages', price: 1000 },
+          { label: 'Momentum, 8 pages', price: 1500 },
+          { label: 'Build-only, 5 pages', price: 1500 },
+          { label: 'Build-only, 8 pages', price: 2250 }
         ]
       },
       {
@@ -248,7 +269,7 @@
         note: 'Discovery call is free â custom builds scoped individually',
         tiers: [
           { label: 'Consulting Hour', price: 500 },
-          { label: 'Custom Build',    price: 2500 }
+          { label: 'Custom Build (scoped, min)', price: 2500 }
         ]
       }
     ];

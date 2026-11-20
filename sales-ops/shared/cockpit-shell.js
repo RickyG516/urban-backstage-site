@@ -1847,7 +1847,7 @@
         { id:'audit', name:'Website Audit \u2014 Same Day', tag:'Cold Follow-Up', subject:'Your site audit + proposal \u2014 {biz}', body:'Hey {first},\n\nSent over the audit and proposal. The issues I flagged are fixable in about two weeks.\n\nKitsch Tree Service link is in there so you can see the work firsthand.\n\nQuestions? {rep_phone}.\n\n{rep_sig}' },
         { id:'d3', name:'Follow-Up \u2014 Day 3', tag:'Cold Follow-Up', subject:'Still worth a look \u2014 {biz}', body:'Hey {first},\n\nCircling back on the proposal. Ranking top 3 statewide for contractor SEO in Iowa on pages less than a month old. Contractors getting sites built now are getting ahead.\n\nNo pressure \u2014 just making sure you saw it.\n\n{rep_phone}\n\n{rep_sig}' },
         { id:'d7', name:'Follow-Up \u2014 Day 7', tag:'Cold Follow-Up', subject:'Last follow-up \u2014 {biz}', body:'Hey {first},\n\nLast one, promise. If timing is not right, totally get it. If you know another contractor who needs this \u2014 I would appreciate the intro.\n\n{rep_sig}' },
-        { id:'hot', name:'HOT Lead Proposal', tag:'Proposal', subject:'Your website proposal \u2014 {biz}', body:'Hey {first},\n\nGreat talking with you. Here is the proposal.\n\nPay $1,500 deposit to get started:\n{rep_stripe}\n\nOnce the deposit lands I will send the intake form. 14 days from assets received, you are live.\n\n{rep_sig}\nurbannicheco.com' },
+        { id:'hot', name:'HOT Lead Proposal', tag:'Proposal', subject:'Your website proposal \u2014 {biz}', body:'Hey {first},\n\nGreat talking with you. Here is the proposal.\n\nPay your deposit (50% of the build) to get started:\n{rep_stripe}\n\nOnce the deposit lands I will send the intake form. 14 days from assets received, you are live.\n\n{rep_sig}\nurbannicheco.com' },
         { id:'intake', name:'Intake Form', tag:'Onboarding', subject:'Your intake form \u2014 {biz} website build', body:'Hey {first},\n\nDeposit received. Fill this out \u2014 10 minutes. 14-day clock starts when I have everything.\n\nhttps://urbannicheco.com/client-intake/\n\n{rep_sig}' },
         { id:'disco', name:'Discovery Call Confirm', tag:'Discovery', subject:'Confirmed: Discovery Call \u2014 {biz}', body:'Hey {first},\n\nConfirming our discovery call. We will cover your online presence, biggest gaps, and whether there is a fit. No sales pressure.\n\nSee you then.\n\n{rep_sig}\n{rep_phone}' }
       ];
@@ -1901,33 +1901,30 @@
     // PRICING — click service to add to calc
     function renderPricing() {
       const BUNDLES = [
-        { name:'Local Authority',  price:2800, once:false },
-        { name:'Market Growth', price:4500, once:false, star:true },
-        { name:'Total Domination', price:7500, once:false }
+        { name:'GetUrban Launch',   price:500,  once:false },
+        { name:'GetUrban Momentum', price:700,  once:false },
+        { name:'Local Authority',  price:1200, once:false },
+        { name:'Market Growth', price:2200, once:false, star:true },
+        { name:'Total Domination', price:3300, once:false }
       ];
       const SERVICES = [
-        { name:'SEO Foundation',            price:1500, once:false },
-        { name:'SEO Growth',                price:2500, once:false },
-        { name:'SEO Domination',            price:3500, once:false },
+        { name:'GetUrban Launch Build',     price:1000, once:true  },
+        { name:'GetUrban Momentum Build',   price:1500, once:true  },
+        { name:'SEO Core',                  price:900,  once:false },
+        { name:'SEO Plus',                  price:1500, once:false },
         { name:'GBP Setup',                 price:250,  once:true  },
-        { name:'GBP Authority',             price:500,  once:false },
-        { name:'Reputation Foundation',     price:400,  once:false },
-        { name:'Reputation Authority',      price:750,  once:false },
-        { name:'Content Pack Starter',      price:400,  once:false },
-        { name:'Content Pack Growth',       price:700,  once:false },
-        { name:'Content Pack Authority',    price:1200, once:false },
-        { name:'Email Foundation',          price:500,  once:false },
-        { name:'Email Authority',           price:1000, once:false },
-        { name:'PPC Standard',              price:1200, once:false },
-        { name:'PPC Power',                 price:2000, once:false },
-        { name:'PPC Dynamic',               price:3500, once:false },
-        { name:'AI Lead Capture Smart',     price:750,  once:false },
-        { name:'AI Lead Capture Full Stack',price:1500, once:false },
+        { name:'GBP Authority',             price:450,  once:false },
+        { name:'Content Pro',               price:800,  once:false },
+        { name:'Email Marketing',           price:400,  once:false },
+        { name:'PPC up to $3K spend',       price:500,  once:false },
+        { name:'PPC up to $8K spend',       price:900,  once:false },
+        { name:'AI Chat (Kobe)',            price:300,  once:false },
+        { name:'AI Full Stack',             price:750,  once:false },
         { name:'AI Consulting Hour',        price:500,  once:true  },
-        { name:'Website Landing',           price:1000, once:true  },
-        { name:'Website HTML Starter',      price:3000, once:true  },
-        { name:'Website HTML Standard',     price:5500, once:true  },
-        { name:'Website HTML Advanced',     price:8500, once:true  }
+        { name:'Site Care',                 price:150,  once:false },
+        { name:'Website Starter (12 pg)',   price:2500, once:true  },
+        { name:'Website Standard (25 pg)',  price:3500, once:true  },
+        { name:'Website Advanced (40 pg)',  price:5000, once:true  }
       ];
 
       let selectedItems = []; // accumulates clicked services

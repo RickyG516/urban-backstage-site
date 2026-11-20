@@ -204,14 +204,14 @@ const OV_SCRIPTS = {
       '📍 "When we see a gap in a market, we fill it" — that\'s the frame',
       '📦 Position the offer: flat monthly, no markup, no long contract — remove friction',
       '📧 Ask for the email for the free audit — don\'t pitch pricing on call one',
-      '💬 If they ask price: "Depends on what the audit shows — most clients start at $1,500–$2,500/mo"'
+      '💬 If they ask price: "Depends on what the audit shows — most clients start between $500 and $1,200/mo"'
     ],
     freestyle:
       '<b>KEY ANGLES</b><br>' +
       '• Marketing agency — we work across industries, spot gaps and fill them<br>' +
       '• "Spotted a gap" — [the specific thing you actually saw]<br>' +
       '• Lost revenue angle: "going to whoever shows up instead"<br>' +
-      '• Starting range if asked: $1,500–$2,500/mo<br>' +
+      '• Starting range if asked: $500–$1,200/mo<br>' +
       '• Time to results: GMB 2–4 weeks / SEO 60–90 days<br><br>' +
       '<b>ONE-LINE CLOSE</b><br>' +
       '"Businesses winning in [city] right now aren\'t spending more — they just got there first. Let me send you what I found."'

@@ -55,22 +55,22 @@
     "_note": "Current service → natural next pitch",
     "SEO": [
       "Add PPC to capture demand SEO can't reach fast enough",
-      "Add Reputation Management to compound the review trust signal",
+      "Add GBP Authority to compound the review trust signal",
       "Add Content Pack to feed fresh content to the SEO engine"
     ],
     "Google Ads": [
       "Add SEO so you stop renting traffic permanently",
       "Add Website rebuild to improve conversion rate on the ad landing pages",
-      "Add Reputation Management to improve quality score and ad performance"
+      "Add GBP Authority to grow reviews and improve ad performance"
     ],
     "Content Pack": [
-      "Add Reputation Management for review velocity",
+      "Add GBP Authority for review velocity",
       "Add Email Marketing to capture the leads the content generates",
       "Add GBP Management to get the content working for map pack too"
     ],
     "Website": [
       "Add SEO retainer — the site is built, now get people to it",
-      "Add Reputation Management to populate the review widgets on the site",
+      "Add GBP Authority to populate the review widgets on the site",
       "Add Email Marketing to capture form fills and nurture them"
     ]
   },
@@ -81,7 +81,7 @@
     },
     "SEO_to_Reputation": {
       "trigger": "Ranking is improving but review count is still low",
-      "script": "You're ranking better — that's working. Here's what's holding the map pack back: your review count. You're at {gbp_review_count} right now. When a homeowner sees you at position 2 with {gbp_review_count} reviews and position 3 has 80 reviews, they click position 3. The ranking work is getting wasted without the reviews to back it up. Our reputation system fixes that automatically — review requests go out after every job, you do nothing. Adds $400 a month. Worth it?"
+      "script": "You're ranking better — that's working. Here's what's holding the map pack back: your review count. You're at {gbp_review_count} right now. When a homeowner sees you at position 2 with {gbp_review_count} reviews and position 3 has 80 reviews, they click position 3. The ranking work is getting wasted without the reviews to back it up. GBP Authority fixes that — review requests go out after every job, you do nothing. Adds $450 a month and covers your whole Google profile too. Worth it?"
     }
   }
 }

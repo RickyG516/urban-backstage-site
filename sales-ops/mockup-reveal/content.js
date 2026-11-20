@@ -658,7 +658,7 @@
           const body = encodeURIComponent(
             'Hey ' + firstName + ',\n\n' +
             'Great talking with you. As promised, here is the proposal for your new website.\n\n' +
-            'Pay $1,500 deposit to get started: ' + (Shell._currentRep ? (Shell._currentRep().stripe_link || 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N') : 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N') + '\n\n' +
+            'Pay your deposit (50% of the build) to get started: ' + (Shell._currentRep ? (Shell._currentRep().stripe_link || 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N') : 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N') + '\n\n' +
             'Once the deposit lands I will send over the intake form - takes about 10 minutes to fill out, and from there you are live in 14 days.\n\n' +
             'Any questions just reply here or text me at ' + (Shell._currentRep ? (Shell._currentRep().phone || '(515) 344-4053') : '(515) 344-4053') + '.\n\n' +
             (Shell._currentRep ? (Shell._currentRep().signature || '- Ricky, UNC') : '- Ricky, UNC') + '\nurbannicheco.com'

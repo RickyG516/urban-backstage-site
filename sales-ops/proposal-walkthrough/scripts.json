@@ -36,7 +36,7 @@
         "Always say their revenue leak number before you give your price",
         "Give the monthly number — not annual. Annual sounds bigger and makes it harder to say yes.",
         "If they react to the number: 'What were you expecting?' Let them tell you their anchor.",
-        "Payment terms: monthly retainer, month-to-month unless they want the annual discount"
+        "Payment terms: monthly retainer, month-to-month (GetUrban plans have a 6 or 12 month term)"
       ],
       "training_note": "The order of operations matters more than the actual number. Value first, then price. Every time."
     },
@@ -55,7 +55,7 @@
     "guarantees": {
       "label": "Guarantees & Terms",
       "goal": "Make saying yes feel safe — lower perceived risk",
-      "script": "Few things I want to be upfront about. First — it's month-to-month. No long-term contract unless you want the annual discount. Second — if the month-one deliverables don't match what I've outlined here, that month is on me. Third — you get my direct number, {rep_phone}. You text me, I respond. No account manager.",
+      "script": "Few things I want to be upfront about. First — it's month-to-month. No long-term contract. Second — if the month-one deliverables don't match what I've outlined here, that month is on me. Third — you get my direct number, {rep_phone}. You text me, I respond. No account manager.",
       "talking_points": [
         "Lead with month-to-month — watch their body language change",
         "Month-1 deliverable guarantee — if setup misses, first month is free",

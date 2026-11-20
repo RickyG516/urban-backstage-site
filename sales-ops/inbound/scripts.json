@@ -20,7 +20,7 @@
     },
     "Q3": {
       "label": "BUDGET — Are we in the ballpark?",
-      "script": "Last quick one — most contractors we work with invest $1,500 to $7,500 a month depending on how aggressive they want to be. Does that range feel in the neighborhood for where {business_name} is at?",
+      "script": "Last quick one — most contractors we work with invest somewhere between $500 and $3,300 a month depending on how aggressive they want to be. Does that range feel in the neighborhood for where {business_name} is at?",
       "training_note": "Say the range flat and confident, then stop talking. The range does the qualifying for you. If they flinch, that's information, not rejection — the objection rail has the spend-reframe ready."
     }
   },

@@ -193,7 +193,7 @@
     if (!activeBundle && !activeService) activeBundle = 'market_growth';
     const rec = activeBundle ? scripts.bundles[activeBundle] : null;
     const why = tokens().quick_win
-      ? `It's the exact fit for what you told me — ${tokens().quick_win} is precisely what the SEO + GBP + reputation stack fixes.`
+      ? `It's the exact fit for what you told me — ${tokens().quick_win} is precisely what the SEO + Google profile + reviews stack fixes.`
       : `It's what most of the contractors I work with run on — complete coverage without paying for pieces you don't need yet.`;
     renderScreen(html`
       <div class="screen__eyebrow">② Recommendation — one call, made with conviction</div>
@@ -256,7 +256,7 @@
         <ul style="margin:0.2rem 0 0;padding-left:1.4rem;line-height:1.85">
           ${list.map(x => `<li style="color:var(--color-white);font-size:0.92rem">${esc(x)}</li>`).join('')}
         </ul>
-        <div class="script-panel__line" style="margin-top:0.8rem;font-style:italic;opacity:0.85"><b>Proof:</b> ${esc(item.social_proof || 'Kutsch Tree got 25 leads month one. Mark at Fuehrer got a qualified lead in 24 hours.')}</div>
+        <div class="script-panel__line" style="margin-top:0.8rem;font-style:italic;opacity:0.85"><b>Proof:</b> ${esc(item.social_proof || 'Kutsch Tree Service is at 50+ website leads since the rebuild. Fuehrer Painting is #1 for painters near me in Dubuque with 29 Google reviews at 4.7 stars.')}</div>
         <div class="script-panel__line" style="margin-top:0.8rem;padding-top:0.7rem;border-top:1px solid var(--color-border,#2a2a2a)"><b>Investment:</b> <span style="color:var(--color-accent);font-size:1.15rem;font-weight:700">${price}</span></div>
         ${trainingNote("Never explain HOW it works — describe what the car does, not the engine. Say the price plainly at the end, then go straight to the money anchor before it can hang in the air.")}
       </div>
@@ -283,9 +283,10 @@
     const ppj = profitPerJob();
     const rows = [];
     const tiers = [
-      { k: 'local_authority', label: 'Local Authority', price: 2800 },
-      { k: 'market_growth', label: 'Market Growth', price: 4500 },
-      { k: 'total_domination', label: 'Total Domination', price: 7500 }
+      { k: 'geturban_momentum', label: 'GetUrban Momentum', price: 700 },
+      { k: 'local_authority', label: 'Local Authority', price: 1200 },
+      { k: 'market_growth', label: 'Market Growth', price: 2200 },
+      { k: 'total_domination', label: 'Total Domination', price: 3300 }
     ];
     tiers.forEach(t => {
       let jobs = '—';
