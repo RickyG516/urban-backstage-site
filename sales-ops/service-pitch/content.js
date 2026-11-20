@@ -440,7 +440,7 @@
         <div style="margin-top:0.8rem;padding:0.7rem;background:var(--color-dark-2,#141414);border-radius:8px;font-size:0.85rem">
           <div style="color:var(--color-accent);font-weight:700;margin-bottom:0.3rem">SEND AFTER THE CALL</div>
           <div>📋 Intake: <span style="color:var(--color-accent)">urbannicheco.com/start</span></div>
-          <div>💳 Deposit: <span style="color:var(--color-accent)">Stripe link (from close-and-collect)</span></div>
+          <div>🧾 Agreement + invoice: <span style="color:var(--color-accent)">sent by Ricky (collections-engine)</span></div>
         </div>
       </div>
       <div class="branches">${branchBtn('1', 'branch-btn--green', '🟢 Back to the pitch', '')}</div>
