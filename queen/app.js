@@ -17,7 +17,7 @@
   var VIEWS = [
     { slug: 'today', name: 'Today' },
     { slug: 'build', name: 'Build', only: ['home', 'flowers'] },
-    { slug: 'setup', name: 'Setup', only: ['greens', 'gazebo'] },
+    { slug: 'setup', name: 'Setup', only: ['greens', 'gazebo', 'airbnb'] },
     { slug: 'buy', name: 'Buy', only: ['greens', 'flowers', 'gazebo', 'airbnb', 'home'] },
     { slug: 'accounts', name: 'Accounts', only: ['greens', 'gazebo'] },
     { slug: 'projects', name: 'Projects' },
@@ -166,7 +166,7 @@
     if (r.section) return viewSection(r.section, r.v);
     var v = ventureBySlug(r.v);
     if (r.view === 'build') return viewBuild(v, 'garden');
-    if (r.view === 'setup') return viewBuild(v, v.slug === 'gazebo' ? 'gazebo' : 'greens');
+    if (r.view === 'setup') return viewBuild(v, v.slug === 'gazebo' ? 'gazebo' : v.slug === 'airbnb' ? 'airbnb' : 'greens');
     if (r.view === 'buy') return viewBuy(v);
     if (r.view === 'accounts') return viewAccounts(v);
     if (r.view === 'today') return viewToday(v);
@@ -240,7 +240,7 @@
         '<p class="sub">' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + (w.now != null ? ' · ' + w.now + '° now' : '') + '</p>' +
         wx +
         (d.working && d.working.length ? '<section><h2>Working on now</h2><div class="card">' + d.working.map(function (w) {
-          return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(w.id) + '/' + (w.map === 'greens' ? 'greens' : 'flowers') + '">' +
+          return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(w.id) + '/' + ({ greens: 'greens', gazebo: 'gazebo', airbnb: 'airbnb' }[w.map] || 'flowers') + '">' +
             '<span class="pin s' + w.stage + '">' + esc(w.marker) + '</span><div class="body"><div class="title">' + esc(w.name) + '</div>' +
             '<div class="meta"><span class="pill st' + w.stage + '">' + esc(w.stage_name) + '</span> · ' + w.open_tasks + ' open</div></div></a>';
         }).join('') + '</div></section>' : '') +
@@ -394,7 +394,9 @@
     greens: { title: 'Grow room setup', sub: 'Garage grow room layout, 30 x 27 ft. Rack 1 starts in the apartment', img: '/queen/greens-room.svg', box: [0, 0, 440, 500], crop: [32, 30, 376, 352], view: 'setup', home: 'greens', pad: 30, minW: 170, minH: 110, pinR: 8, font: 8, stroke: 1.2, pointR: 9,
       fill: [['#6f6a60', .5], ['#F2B5C4', .7], ['#F4B43C', .65], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['garage', 'Grow room']] },
     gazebo: { title: 'Glass Gazebo build', sub: 'Blueprint sheet A-2, 14 x 12 ft, 18 salvaged windows', img: '/queen/gazebo-blueprint.svg?v=a2', box: [0, 0, 1400, 1020], crop: [60, 92, 1300, 760], view: 'setup', home: 'gazebo', pad: 60, minW: 420, minH: 260, pinR: 16, font: 15, stroke: 2.5, pointR: 18,
-      fill: [['#9a958b', .6], ['#F4B43C', .6], ['#1B6A8F', .55], ['#5E7D52', 0]], groups: [['gazebo', 'Build steps'], ['t2', 'Around the gazebo']] }
+      fill: [['#9a958b', .6], ['#F4B43C', .6], ['#1B6A8F', .55], ['#5E7D52', 0]], groups: [['gazebo', 'Build steps'], ['t2', 'Around the gazebo']] },
+    airbnb: { title: 'Units setup', sub: 'Unit A bottom level, Unit B floors 2 and 3, shared laundry and yard. Room sizes are placeholders until measured', img: '/queen/airbnb-units.svg?v=1', box: [0, 0, 940, 960], crop: [40, 70, 860, 820], view: 'setup', home: 'airbnb', pad: 40, minW: 300, minH: 200, pinR: 14, font: 12, stroke: 2, pointR: 14,
+      fill: [['#9a958b', .45], ['#F2B5C4', .6], ['#F4B43C', .55], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['down', 'Unit A: bottom level'], ['up', 'Unit B: floors 2 and 3'], ['yard', 'Shared yard']] }
   };
   var mapMode = 'progress';
   function stFill(M, st) { return M.fill[Math.min(st || 0, M.fill.length - 1)]; }
@@ -462,7 +464,7 @@
           var f = stFill(M, i), last = isLast(M, i);
           return '<span><i style="background:' + (last ? 'transparent;border:2px solid #5E7D52' : f[0]) + '"></i>' + n + ' <b>' + tally[i] + '</b></span>';
         }).join('') + '</div>' +
-        '<div class="mapwrap' + (mapName === 'greens' ? ' room' : mapName === 'gazebo' ? ' gz' : '') + '">' + mapSvg(M, secs, mapMode) + '</div>' +
+        '<div class="mapwrap' + ((mapName === 'greens' || mapName === 'airbnb') ? ' room' : mapName === 'gazebo' ? ' gz' : '') + '">' + mapSvg(M, secs, mapMode) + '</div>' +
         M.groups.filter(function (gp) { if (seen[gp[1]]) return false; seen[gp[1]] = 1; return true; }).map(function (gp) {
           var list = secs.filter(function (s) { return M.groups.some(function (x) { return x[0] === s.area_id && x[1] === gp[1]; }); });
           if (!list.length) return '';
