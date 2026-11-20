@@ -17,9 +17,9 @@
   var VIEWS = [
     { slug: 'today', name: 'Today' },
     { slug: 'build', name: 'Build', only: ['home', 'flowers'] },
-    { slug: 'setup', name: 'Setup', only: ['greens'] },
+    { slug: 'setup', name: 'Setup', only: ['greens', 'gazebo'] },
     { slug: 'buy', name: 'Buy', only: ['greens', 'flowers', 'gazebo', 'airbnb', 'home'] },
-    { slug: 'accounts', name: 'Accounts', only: ['greens'] },
+    { slug: 'accounts', name: 'Accounts', only: ['greens', 'gazebo'] },
     { slug: 'projects', name: 'Projects' },
     { slug: 'calendar', name: 'Calendar' },
     { slug: 'money', name: 'Money' }
@@ -166,7 +166,7 @@
     if (r.section) return viewSection(r.section, r.v);
     var v = ventureBySlug(r.v);
     if (r.view === 'build') return viewBuild(v, 'garden');
-    if (r.view === 'setup') return viewBuild(v, 'greens');
+    if (r.view === 'setup') return viewBuild(v, v.slug === 'gazebo' ? 'gazebo' : 'greens');
     if (r.view === 'buy') return viewBuy(v);
     if (r.view === 'accounts') return viewAccounts(v);
     if (r.view === 'today') return viewToday(v);
@@ -392,7 +392,9 @@
     garden: { title: 'Garden build', sub: 'Full Site Plan v4', img: '/queen/map.webp', box: [-44, -44, 170, 89], view: 'build', home: 'flowers', pad: 6, minW: 24, minH: 14, pinR: 1.6, font: 1.5, stroke: 0.25, pointR: 2,
       fill: STAGE_FILL, groups: [['t1', 'Tier 1: garage end'], ['t2', 'Tier 2: middle and pool'], ['gazebo', 'Tier 2: middle and pool'], ['t3', 'Tier 3: upper'], ['t4', 'Tier 4: front yard']] },
     greens: { title: 'Grow room setup', sub: 'Garage grow room layout, 30 x 27 ft. Rack 1 starts in the apartment', img: '/queen/greens-room.svg', box: [0, 0, 440, 500], crop: [32, 30, 376, 352], view: 'setup', home: 'greens', pad: 30, minW: 170, minH: 110, pinR: 8, font: 8, stroke: 1.2, pointR: 9,
-      fill: [['#6f6a60', .5], ['#F2B5C4', .7], ['#F4B43C', .65], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['garage', 'Grow room']] }
+      fill: [['#6f6a60', .5], ['#F2B5C4', .7], ['#F4B43C', .65], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['garage', 'Grow room']] },
+    gazebo: { title: 'Glass Gazebo build', sub: 'Blueprint sheet A-1, 14 x 12 ft. Steps match the build manual', img: '/queen/gazebo-blueprint.svg', box: [0, 0, 1400, 1020], crop: [60, 92, 1240, 530], view: 'setup', home: 'gazebo', pad: 60, minW: 420, minH: 260, pinR: 16, font: 15, stroke: 2.5, pointR: 18,
+      fill: [['#9a958b', .6], ['#F4B43C', .6], ['#1B6A8F', .55], ['#5E7D52', 0]], groups: [['gazebo', 'Build steps'], ['t2', 'Around the gazebo']] }
   };
   var mapMode = 'progress';
   function stFill(M, st) { return M.fill[Math.min(st || 0, M.fill.length - 1)]; }
@@ -407,6 +409,9 @@
     (g.r || []).forEach(function (r) {
       out += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + (r[2] - r[0]) + '" height="' + (r[3] - r[1]) + '" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
     });
+    if (g.f) {
+      out += '<path d="' + g.f + '" fill="' + fill + '" fill-opacity="' + op + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+    }
     if (g.d) {
       out += '<path d="' + g.d + '" fill="none" stroke="' + (mode === 'plan' ? 'transparent' : f[0]) + '" stroke-opacity="' + op + '" stroke-width="' + (g.w || 4) + '" stroke-linecap="round"/>';
       if (focus) out += '<path d="' + g.d + '" fill="none" stroke="#F4B43C" stroke-width="' + sw + '"/>';
@@ -429,7 +434,7 @@
     var xs = [], ys = [];
     (g.r || []).forEach(function (r) { xs.push(r[0], r[2]); ys.push(r[1], r[3]); });
     (g.p || []).forEach(function (p) { xs.push(p[0], p[0]); ys.push(p[1], p[1]); });
-    if (g.d) { var n = g.d.match(/-?[\d.]+/g).map(Number); for (var i = 0; i < n.length; i += 2) { xs.push(n[i]); ys.push(n[i + 1]); } }
+    [g.d, g.f].forEach(function (dd) { if (dd) { var n = dd.match(/-?[\d.]+/g).map(Number); for (var i = 0; i < n.length; i += 2) { xs.push(n[i]); ys.push(n[i + 1]); } } });
     return [Math.min.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, xs), Math.max.apply(null, ys)];
   }
   function mapSvg(M, sections, mode, focusId, vb) {
@@ -457,7 +462,7 @@
           var f = stFill(M, i), last = isLast(M, i);
           return '<span><i style="background:' + (last ? 'transparent;border:2px solid #5E7D52' : f[0]) + '"></i>' + n + ' <b>' + tally[i] + '</b></span>';
         }).join('') + '</div>' +
-        '<div class="mapwrap' + (mapName === 'greens' ? ' room' : '') + '">' + mapSvg(M, secs, mapMode) + '</div>' +
+        '<div class="mapwrap' + (mapName === 'greens' ? ' room' : mapName === 'gazebo' ? ' gz' : '') + '">' + mapSvg(M, secs, mapMode) + '</div>' +
         M.groups.filter(function (gp) { if (seen[gp[1]]) return false; seen[gp[1]] = 1; return true; }).map(function (gp) {
           var list = secs.filter(function (s) { return M.groups.some(function (x) { return x[0] === s.area_id && x[1] === gp[1]; }); });
           if (!list.length) return '';
@@ -478,7 +483,7 @@
   function viewSection(id, vslug) {
     app.innerHTML = '<p class="muted">Loading…</p>';
     api('/sections/' + encodeURIComponent(id)).then(function (d) {
-      var mapName = d.section.map === 'greens' ? 'greens' : 'garden', M = MAPS[mapName];
+      var mapName = MAPS[d.section.map] ? d.section.map : 'garden', M = MAPS[mapName];
       return api('/sections?map=' + mapName).then(function (all) { return [d, all.sections, M]; });
     }).then(function (res) {
       var d = res[0], all = res[1], M = res[2], s = d.section, stages = d.stages, byId = {};
@@ -588,7 +593,7 @@
       list.forEach(function (c) { var t = c.tier || 'Other'; if (!tiers[t]) { tiers[t] = []; order.push(t); } tiers[t].push(c); });
       order.sort();
       var counts = ASTAT.map(function (s) { return list.filter(function (c) { return (c.status || 'Not contacted') === s; }).length; });
-      app.innerHTML = '<h1>Accounts</h1><p class="sub">Restaurant targets from Google, Nov 10. Fit is a judgment, not confirmed with the business.</p>' +
+      app.innerHTML = '<h1>Accounts</h1><p class="sub">' + (v.code === 'GZBO' ? 'Photographer and creator targets. Parked until spring 2027.' : 'Restaurant targets from Google, Nov 10. Fit is a judgment, not confirmed with the business.') + '</p>' +
         '<div class="legend">' + ASTAT.map(function (s, i) { return '<span>' + s + ' <b>' + counts[i] + '</b></span>'; }).join('') + '</div>' +
         order.map(function (t) {
           return '<section><h2>' + esc(t.replace(/^\d+\s*/, '') + (t === '0 Warm' ? '' : ' fit')) + '</h2><div class="card">' + tiers[t].map(function (c) {

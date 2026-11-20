@@ -143,3 +143,6 @@ svg.map .sec:hover rect,svg.map .sec:hover circle{stroke:#F4B43C;stroke-width:.6
 .pill.to_buy{background:#ebe8e2;color:#55514a}.pill.ordered{background:#fff4dc;color:#8a5a00}.pill.arrived{background:#e7f0e1;color:var(--sage-deep)}.pill.skip{background:#eee;color:#888}
 .acct-edit{display:grid;grid-template-columns:auto 1fr;gap:8px;margin-top:8px}
 .acct-edit select,.acct-edit input{font-size:13.5px;padding:7px 8px;min-width:0}
+.stepper.n4{grid-template-columns:repeat(2,1fr)}
+@media (min-width:760px){.stepper.n4{grid-template-columns:repeat(4,1fr)}}
+.mapwrap.gz{background:#0f0f0f}
