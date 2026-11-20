@@ -393,7 +393,7 @@
       fill: STAGE_FILL, groups: [['t1', 'Tier 1: garage end'], ['t2', 'Tier 2: middle and pool'], ['gazebo', 'Tier 2: middle and pool'], ['t3', 'Tier 3: upper'], ['t4', 'Tier 4: front yard']] },
     greens: { title: 'Grow room setup', sub: 'Garage grow room layout, 30 x 27 ft. Rack 1 starts in the apartment', img: '/queen/greens-room.svg', box: [0, 0, 440, 500], crop: [32, 30, 376, 352], view: 'setup', home: 'greens', pad: 30, minW: 170, minH: 110, pinR: 8, font: 8, stroke: 1.2, pointR: 9,
       fill: [['#6f6a60', .5], ['#F2B5C4', .7], ['#F4B43C', .65], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['garage', 'Grow room']] },
-    gazebo: { title: 'Glass Gazebo build', sub: 'Blueprint sheet A-2, 14 x 12 ft, 18 salvaged windows', img: '/queen/gazebo-blueprint.svg', box: [0, 0, 1400, 1020], crop: [60, 92, 1360, 840], view: 'setup', home: 'gazebo', pad: 60, minW: 420, minH: 260, pinR: 16, font: 15, stroke: 2.5, pointR: 18,
+    gazebo: { title: 'Glass Gazebo build', sub: 'Blueprint sheet A-2, 14 x 12 ft, 18 salvaged windows', img: '/queen/gazebo-blueprint.svg?v=a2', box: [0, 0, 1400, 1020], crop: [60, 92, 1300, 760], view: 'setup', home: 'gazebo', pad: 60, minW: 420, minH: 260, pinR: 16, font: 15, stroke: 2.5, pointR: 18,
       fill: [['#9a958b', .6], ['#F4B43C', .6], ['#1B6A8F', .55], ['#5E7D52', 0]], groups: [['gazebo', 'Build steps'], ['t2', 'Around the gazebo']] }
   };
   var mapMode = 'progress';
