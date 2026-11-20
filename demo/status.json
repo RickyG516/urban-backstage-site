@@ -512,7 +512,12 @@
   "note": "in HubSpot 2026-09-21 (company 347818459868) | contact 555786700530 (Kenny Hunt, owner-operator) | NO-WEBSITE VERIFIED 2026-09-21 by the TWO-TEST method, NO BROWSER on this unattended run: (1) plain WebSearch 'Hunt Construction Alburnett Iowa concrete' returned zero first-party domains - only HomeAdvisor, Nextdoor, BBB, Procore, Yelp, YellowPages, BuildZoom, Porch, Manta and LoadWrap, plus their Facebook page; (2) domain-scoped WebSearch across huntconstructionco.com / huntconstructioniowa.com / huntconstructioninc.com / huntconcrete.com returned ONLY out-of-state namesakes - Hunt Concrete and Design LLC (Maineville OH), Hunt Construction Inc (Jackson WY, sealcoating), Hunt Construction Co (Florida, remodeling). None is this business. BBB 'Visit Website' resolves to Facebook, not an owned domain - Facebook-as-website case. Confidence HIGH. | REVENUE PROOF STRONG: 4.82-4.83/5 across 28-33 published reviews, 27-29 job photos on Yelp, incorporated 2013 (12 yrs) with owner carrying 15+ yrs concrete experience, BBB A+ accredited since 2022, USDOT #2592495 registered motor carrier (own trucks, own haul-off), listed on the Procore network. | CALL WARNING: three out-of-state namesakes plus Hunt Construction Group, the large national builder - say 'Alburnett' early or he will assume wrong number. Closed Sunday; on a pour most of the working day. | ENRICHMENT ATTEMPT 2026-09-24 - SKIPPED: no GBP found (Maps fuzzy-matched to Jason Smith Concrete at 2915 Arabian Rd - a different business); FB page has 3 followers, no posts, no profile image; Yelp shows 3.0 from 2 reviews and all 27 Yelp photos are close-ups of cracked/failed concrete uploaded with a complaint - DO NOT use them, and be aware a negative Yelp review with defect photos exists before quoting reviews on the call. | ENRICHED 2026-09-25 (BRONZE): identity - HomeAdvisor 'Hunt Construction Co' (rated.HuntConstructionCo.40842017), 2990 Arabian Rd Alburnett, owner Kenny Hunt; same address carries (563) 543-1467 on Yelp/BBB and on the FB page facebook.com/p/Hunt-Construction-100089466177539 (also kenneth.huntconstruction@yahoo.com). NO Google Business Profile - the '4.8 across 28' stat is HomeAdvisor. 3 VERBATIM HOMEADVISOR REVIEWS (all 5.0): Lorna R. (Aug 2018, patio), Russell M. (Aug 2016, driveway/sidewalks), Shelby L. (May 2016, patio). 93% of 28 are 5-star. NOTE: newest HomeAdvisor review is Feb 2021 - they are old; do not call them recent. PLACEHOLDERS: logo (dashed 'HC' monogram, monogram.svg) - FB avatar is plain white text on a teal circle, not a real logo. PHOTOS: none usable - FB has only a cover shot of a brick house that reads as stock and cannot be tied to his work; REJECTED. Work tiles remain generated SVG, disclosed in the swap notice. Palette unchanged (no logo to sample). FB page has 3 followers and no posts. Yelp shows 3.0 from 2 - do not raise.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-20",
+   "t1_note": "thread not empty: Ricky already messaged Hunt Construction (Thu 9:47 PM, 2026-11-19); video built + in Drive",
+   "t1_drive": "2026-11-20"
+  }
  },
  "ia-iowa-insulation-nevada": {
   "channel": "phone",
@@ -1381,7 +1386,12 @@
   "note": "in HubSpot 2026-09-01 (company 343318705898) | contact 544351868619 | NO-WEBSITE verified live in Chrome 2026-09-01: foxsrepairandremodeling.com FAILS TO RESOLVE (Chrome error page); foxsrepair.com serves no business site. BBB profile has NO 'Visit Website' button and lists no dedicated domain. REVENUE: 12 yrs, LLC formed 8/11/2014, owner Brian Fox, 1 employee (true owner-operator). THREE positive written customer reviews on the BBB file - bathroom remodel, kitchen remodel, general handyman. BBB categories: remodeling, painting, handyman, drywall, bath/kitchen remodel. NOTE: Freeport IL is already a Fuehrer Painting location-page town, so UNC has content footprint in this market. | ENRICHMENT ATTEMPT 2026-10-07 - SKIPPED: FB page facebook.com/foxsrepairandremodeling matches name + Freeport + (815) 291-8369, but 1 review, ~10 low-res photos, and the latest floor-install post credits 'Brian's Handyman Service' - photo attribution ambiguous, not used.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-20",
+   "t1_note": "page not found in Messenger search (tried name, no-apostrophe, username); video built + in Drive",
+   "t1_drive": "2026-11-20"
+  }
  },
  "il-garcia-roofing-peoria": {
   "channel": "phone",
@@ -1759,7 +1769,12 @@
   "note": "in HubSpot 2026-08-04 | no website | co-owner implies 2nd principal, possibly Hulisses/Ulises Serrano | since 2001 | RE-VERIFIED 2026-08-25 (Chrome): serranosconcrete.com does not resolve, browser error page. | ENRICHMENT ATTEMPT 2026-09-26 - SKIPPED: FB page empty; GBP 3.7 from 3 incl. a complaint; only asset is a ~300px photo of a business card - too low-res for a logo.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-20",
+   "t1_note": "page not found in Messenger search (only a personal profile \"Serrano's Concrete Works\" appeared, not the /p/ page); video built + in Drive",
+   "t1_drive": "2026-11-20"
+  }
  },
  "il-seward-masonry-taylor-springs": {
   "channel": "fb",
@@ -1767,7 +1782,12 @@
   "note": "in HubSpot 2026-08-09 (company 338767896305) | no website: sewardmasonryinc.com loaded live in browser 2026-08-09 -> RESOLVES, title 'Seward Masonry Inc.', body is literally the two words 'Under Construction' (hosting placeholder); sewardmasonry.com -> does not resolve; FB Intro lists phone + email, no website link. They own the domain (company email runs on it) and never built a site. Found via the http://NULL inverted signal in the CIB AGC website field | revenue proof: Bricklayers Local 8 UNION SIGNATORY listed in the 2025 Construction Contractors Directory, member of TWO trade associations (CIB AGC + Southern Illinois Builders Association), listed on Procore and ConstructConnect, FB 148 followers / 100% recommend across 5 reviews with a 2026-07-16 post drawing 107 reactions | phone, fax, address, owner and the http://NULL field all confirmed directly on https://cibagc.org/cm-business/seward-masonry-inc/ 2026-08-09 | IL SOS File #71044874 CORP ACTIVE eff. 01-11-2017, agent BRETT A. SEWARD | CORRECTED: Procore lists 798 Park St, correct address is 812 Park St. CIB AGC lists them as ASSOCIATE member, not full contractor member | DO NOT RAISE: don't assert years in business (SOS incorporation 2017 but firm reads older); a recent widely-shared FB post honours 'Joann Seward' as 'one of the best all around masons and mason tenders' - reads celebratory not memorial, but DO NOT assume and DO NOT bring it up cold | ENRICHMENT ATTEMPT 2026-10-21 - SKIPPED: FB identity passes (Seward Masonry Inc., Taylor Springs, (217) 532-3213, 5 FB reviews) but no logo, no GBP checked, and the only job photos (scaffold on a brick school, foundation dig) are retrievable only as ~700px screen captures. Not built.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-20",
+   "t1_note": "page not found in Messenger search (fb url is a personal profile /2018brett/); video built + in Drive",
+   "t1_drive": "2026-11-20"
+  }
  },
  "il-sewell-brothers-tree-bartonville": {
   "channel": "fb",
@@ -2107,7 +2127,12 @@
   "note": "in HubSpot 2026-08-07 (company 338668336850) | added 2026-08-05 | no site; blazeelectric.org is an unrelated Florida company | bought Ziegler Electrical Services, kept shop/crew/phone | FB page is still under the Ziegler name | Focus on Energy Trade Ally | phone from BBB profile | ENRICHED 2026-09-27 (SILVER): identity confirmed live on GBP 'Blaze Electric LLC', 101 W 5th St N, Ladysmith WI 54848, (715) 532-0112 - name + city + phone all match; owner Scott named in reviews. 5.0 from exactly 3 Google reviews, all 3 quoted verbatim (S., Jeff W., Heidi B.; two are Google-truncated and shown with an ellipsis, not paraphrased). REAL LOGO: orange circle with black dog + 'Blaze Electric LLC', cropped and de-skewed off the shop sign in the GBP photo (sign also reads 'Master Electrician 715-532-0112'), lettering to white for the dark nav. BRAND COLOURS sampled: sign orange-red -> accent #ec6a4a (5.78:1), navy dark #0f1626 unchanged; SVGs recoloured, fingerprints unchanged. NO JOB PHOTOS: the GBP gallery holds only the shop exterior and a street shot; a spider-lift photo in the DOM was the Maps Recents leftover (Konfrst) and a Ziegler shop photo came from 'People also search' - both rejected. Hero and tiles stay on the generated SVGs; the gallery note asks for panel/barn/truck photos. CALL HOOK: the GBP 'Website' field is usmaperx.org, which redirects to usmapinformation.com, a spam business directory - customers who tap Website on his Google listing land on somebody else's directory. FB page is still the predecessor's (Ziegler Electrical Services Inc., same phone/address, pinned post announcing the sale to Blaze) - not a Blaze-named page. | FB-DM 2026-10-22: FB page is still the predecessor Ziegler Electrical name; name gate not met. | FB-DM 2026-10-30: FB page is still named Ziegler Electrical, business name does not match; skipped.",
   "photos": "generated",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-20",
+   "t1_note": "page not found in Messenger search (tried Blaze Electric and Ziegler Electrical); video built + in Drive",
+   "t1_drive": "2026-11-20"
+  }
  },
  "wi-brad-bowman-roofing-shawano": {
   "channel": "phone",
