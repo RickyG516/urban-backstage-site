@@ -1918,7 +1918,6 @@
         { name:'Email Marketing',           price:400,  once:false },
         { name:'PPC up to $3K spend',       price:500,  once:false },
         { name:'PPC up to $8K spend',       price:900,  once:false },
-        { name:'AI Receptionist',             price:750,  once:false },
         { name:'AI Consulting Hour',        price:500,  once:true  },
         { name:'Site Care',                 price:150,  once:false },
         { name:'Website Starter (12 pg)',   price:2500, once:true  },

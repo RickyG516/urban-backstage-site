@@ -141,11 +141,11 @@
       "training_note": "Most contractors lose leads not because the lead said no — but because they went cold and forgot who called them. Email solves that automatically."
     },
     "AI Lead Capture": {
-      "label": "AI Lead Capture",
+      "label": "Custom AI Flows",
       "tagline": "Answer every lead instantly — even at 11 PM on a Sunday",
-      "price_min": 750,
-      "price_max": 750,
-      "billing": "monthly: AI Receptionist $750 (AI phone answering + follow-up). The Kobe website chatbot is free with every website build.",
+      "price_min": 0,
+      "price_max": 0,
+      "billing": "priced by package after a free discovery call. Kobe website chatbot is free with every website build.",
       "features": [
         "AI chatbot on your site — answers questions and captures lead info 24/7",
         "Instant follow-up text to every new form submission",
@@ -260,7 +260,7 @@
       "includes": [
         "Everything in Market Growth",
         "PPC management up to $3K/mo spend ($500 value)",
-        "AI Receptionist: chat, AI phone, follow-up ($750 value)"
+        "One custom AI flow built and managed (AI receptionist, follow-up, or booking)"
       ],
       "on_phone": "Total Domination adds Google Ads and an AI system that answers every lead instantly on top of everything in Market Growth. $3,300 a month, plus whatever you put into ad spend, which goes straight to Google.",
       "training_note": "Only pitch this to contractors who are already doing volume and want to scale, or who've described a high-volume growth goal. Don't lead with it to someone who seems budget-conscious."

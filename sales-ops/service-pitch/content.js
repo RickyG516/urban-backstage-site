@@ -245,7 +245,7 @@
     const isB = !!activeBundle;
     const item = isB ? scripts.bundles[activeBundle] : scripts.services[activeService];
     if (!item) return goTo('selector');
-    const price = isB ? `$${item.price.toLocaleString()}/mo` : `$${item.price_min.toLocaleString()}–$${item.price_max.toLocaleString()}`;
+    const price = isB ? `$${item.price.toLocaleString()}/mo` : (item.price_max ? `$${item.price_min.toLocaleString()}–$${item.price_max.toLocaleString()}` : 'Quoted');
     const list = isB ? item.includes : item.benefits;
     renderScreen(html`
       <div class="screen__eyebrow">③ Value stack — outcomes, not mechanics · ${esc(item.label)}</div>
@@ -350,7 +350,7 @@
     const isB = !!activeBundle;
     const item = isB ? scripts.bundles[activeBundle] : (activeService ? scripts.services[activeService] : null);
     const label = item ? item.label : 'this';
-    const price = isB ? `$${item.price.toLocaleString()}/mo` : (item ? `$${item.price_min.toLocaleString()}–$${item.price_max.toLocaleString()}` : '');
+    const price = isB ? `$${item.price.toLocaleString()}/mo` : (item ? (item.price_max ? `$${item.price_min.toLocaleString()}–$${item.price_max.toLocaleString()}` : 'Quoted') : '');
     renderScreen(html`
       <div class="screen__eyebrow">⑤ The ask — trial close, then assumptive</div>
       <div class="script-panel">
@@ -428,7 +428,7 @@
   SCREENS.quote = () => {
     const isB = !!activeBundle;
     const item = isB ? scripts.bundles[activeBundle] : (activeService ? scripts.services[activeService] : scripts.bundles.market_growth);
-    const price = isB ? `$${item.price.toLocaleString()}/mo` : (item.price_min ? `$${item.price_min.toLocaleString()}–$${item.price_max.toLocaleString()}` : '');
+    const price = isB ? `$${item.price.toLocaleString()}/mo` : (item.price_min ? (item.price_max ? `$${item.price_min.toLocaleString()}–$${item.price_max.toLocaleString()}` : 'Quoted') : '');
     const list = isB ? item.includes : (item.features || []);
     const ppj = profitPerJob();
     renderScreen(html`
