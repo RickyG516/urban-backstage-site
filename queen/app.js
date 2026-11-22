@@ -16,6 +16,7 @@
   var CODE_NAME = { FLWR: 'Flowers', MCRG: 'Greens', GZBO: 'Gazebo', ABNB: 'Airbnb', SHRD: 'Shared' };
   var VIEWS = [
     { slug: 'today', name: 'Today' },
+    { slug: 'tasks', name: 'Tasks' },
     { slug: 'build', name: 'Build', only: ['home', 'flowers'] },
     { slug: 'setup', name: 'Setup', only: ['greens', 'gazebo', 'airbnb'] },
     { slug: 'buy', name: 'Buy', only: ['greens', 'flowers', 'gazebo', 'airbnb', 'home'] },
@@ -151,7 +152,7 @@
     if (h[0] === 'p' && h[1]) return { project: decodeURIComponent(h[1]), v: h[2] || 'home' };
     if (h[0] === 's' && h[1]) return { section: decodeURIComponent(h[1]), v: h[2] || 'flowers', view: 'build' };
     var v = ventureBySlug(h[0]) ? h[0] : 'home';
-    var view = ['today', 'build', 'setup', 'buy', 'accounts', 'projects', 'calendar', 'money'].indexOf(h[1]) >= 0 ? h[1] : 'today';
+    var view = VIEWS.map(function (x) { return x.slug; }).indexOf(h[1]) >= 0 ? h[1] : 'today';
     var vw = VIEWS.filter(function (x) { return x.slug === view; })[0];
     if (vw && vw.only && vw.only.indexOf(v) < 0) view = 'today';
     return { v: v, view: view };
@@ -170,6 +171,7 @@
     if (r.view === 'buy') return viewBuy(v);
     if (r.view === 'accounts') return viewAccounts(v);
     if (r.view === 'today') return viewToday(v);
+    if (r.view === 'tasks') return viewTasks(v);
     if (r.view === 'projects') return viewProjects(v);
     return viewSoon(v, r.view);
   }
@@ -206,6 +208,60 @@
   function loadCounts(d) {
     counts = {};
     (d.counts || []).forEach(function (c) { counts[c.venture] = c.open; });
+  }
+
+  /* ── Tasks: every open task, grouped by when it is due ── */
+  var taskStatus = 'open';
+  function effDue(t) {
+    if (!t.due) return null;
+    if (t.due_precision !== 'month') return t.due;
+    var d = new Date(t.due.slice(0, 7) + '-01T12:00:00'); d.setMonth(d.getMonth() + 1); d.setDate(0);
+    return d.toISOString().slice(0, 10);
+  }
+  function viewTasks(v) {
+    var all = v.code === 'home';
+    app.innerHTML = '<p class="muted">Loading tasks…</p>';
+    Promise.all([api('/tasks?status=' + taskStatus + (all ? '' : '&v=' + v.code)), api('/projects' + (all ? '' : '?v=' + v.code))]).then(function (res) {
+      var d = res[0], P = (res[1].projects || []).filter(function (p) { return p.status !== 'done'; });
+      var T = d.tasks, today = d.today, byId = {};
+      T.forEach(function (t) { byId[t.id] = t; });
+      var wk = new Date(new Date(today + 'T12:00:00').getTime() + 7 * 864e5).toISOString().slice(0, 10);
+      var m30 = new Date(new Date(today + 'T12:00:00').getTime() + 30 * 864e5).toISOString().slice(0, 10);
+      var groups = taskStatus === 'done' ? [['Closed in the last 30 days', function () { return true; }]] : [
+        ['Overdue', function (t) { var e = effDue(t); return e && e < today; }],
+        ['This week', function (t) { var e = effDue(t); return e && e >= today && e <= wk; }],
+        ['Next 30 days', function (t) { var e = effDue(t); return e && e > wk && e <= m30; }],
+        ['Later', function (t) { var e = effDue(t); return e && e > m30; }],
+        ['No date yet', function (t) { return !t.due; }]];
+      var used = {}, html = '';
+      groups.forEach(function (g) {
+        var rows = T.filter(function (t) { if (used[t.id]) return false; if (g[1](t)) { used[t.id] = 1; return true; } return false; });
+        if (!rows.length) return;
+        html += '<section class="card phase' + (g[0] === 'Overdue' ? ' over' : '') + '"><h3>' + g[0] + ' <span class="muted">' + rows.length + '</span></h3>' +
+          rows.map(function (t) {
+            var r = taskRow(t, { showProject: true, showVenture: all, vslug: v.slug });
+            if (t.unit_id) r = r.replace('<div class="meta">', '<div class="meta"><a href="#/s/' + encodeURIComponent(t.unit_id) + '/' + ({ greens: 'greens', gazebo: 'gazebo', airbnb: 'airbnb' }[t.unit_map] || 'flowers') + '">' + esc(t.unit_name || 'Section') + '</a> · ');
+            return r;
+          }).join('') + '</section>';
+      });
+      app.innerHTML =
+        '<h1>' + (all ? 'All tasks' : esc(v.name) + ': tasks') + '</h1>' +
+        '<p class="sub">' + (taskStatus === 'open' ? T.length + ' open. Tap the box when it is done.' : 'Tap the box to reopen.') + '</p>' +
+        '<div class="toolbar"><button type="button" data-s="open" class="btn small ' + (taskStatus === 'open' ? '' : 'ghost') + '">Open</button><button type="button" data-s="done" class="btn small ' + (taskStatus === 'done' ? '' : 'ghost') + '">Closed</button></div>' +
+        (html || '<p class="muted">Nothing here. Nice.</p>') +
+        '<section class="card"><h3>Add a task</h3><form id="tadd" class="add" style="flex-wrap:wrap">' +
+        '<input name="title" placeholder="What needs doing" required style="flex:2 1 220px">' +
+        '<select name="project_id" required style="flex:1 1 160px">' + P.map(function (p) { return '<option value="' + esc(p.id) + '">' + (all ? esc(CODE_NAME[p.venture] || p.venture) + ': ' : '') + esc(p.name) + '</option>'; }).join('') + '</select>' +
+        '<input name="due" type="date" style="flex:0 1 150px"><button class="btn small" type="submit">Add</button></form></section>';
+      app.querySelectorAll('.toolbar button[data-s]').forEach(function (b) { b.onclick = function () { taskStatus = b.getAttribute('data-s'); viewTasks(v); }; });
+      wireChecks(app, byId, null);
+      $('tadd').onsubmit = function (e) {
+        e.preventDefault();
+        var f = e.target, b = { title: f.title.value.trim(), project_id: f.project_id.value };
+        if (f.due.value) b.due = f.due.value;
+        api('/tasks', { method: 'POST', body: b }).then(function () { toast('Task added'); viewTasks(v); }).catch(fail);
+      };
+    }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load tasks: ' + esc(e.message) + '</p>'; });
   }
 
   /* ── Today ── */

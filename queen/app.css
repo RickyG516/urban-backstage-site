@@ -146,3 +146,4 @@ svg.map .sec:hover rect,svg.map .sec:hover circle{stroke:#F4B43C;stroke-width:.6
 .stepper.n4{grid-template-columns:repeat(2,1fr)}
 @media (min-width:760px){.stepper.n4{grid-template-columns:repeat(4,1fr)}}
 .mapwrap.gz{background:#0f0f0f}
+.phase.over h3{color:#b3261e}
