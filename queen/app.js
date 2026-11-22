@@ -395,7 +395,7 @@
       fill: [['#6f6a60', .5], ['#F2B5C4', .7], ['#F4B43C', .65], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['garage', 'Grow room']] },
     gazebo: { title: 'Glass Gazebo build', sub: 'Blueprint sheet A-2, 14 x 12 ft, 18 salvaged windows', img: '/queen/gazebo-blueprint.svg?v=a2', box: [0, 0, 1400, 1020], crop: [60, 92, 1300, 760], view: 'setup', home: 'gazebo', pad: 60, minW: 420, minH: 260, pinR: 16, font: 15, stroke: 2.5, pointR: 18,
       fill: [['#9a958b', .6], ['#F4B43C', .6], ['#1B6A8F', .55], ['#5E7D52', 0]], groups: [['gazebo', 'Build steps'], ['t2', 'Around the gazebo']] },
-    airbnb: { title: 'Units setup', sub: 'Unit A bottom level, Unit B floors 2 and 3, shared laundry and yard. Room sizes are placeholders until measured', img: '/queen/airbnb-units.svg?v=1', box: [0, 0, 940, 960], crop: [40, 70, 860, 820], view: 'setup', home: 'airbnb', pad: 40, minW: 300, minH: 200, pinR: 14, font: 12, stroke: 2, pointR: 14,
+    airbnb: { title: 'Units setup', sub: 'Unit A efficiency on the bottom level, Unit B on the two floors above, laundry in the connecting stairs. Room sizes are placeholders until measured', img: '/queen/airbnb-units.svg?v=2', box: [0, 0, 940, 960], crop: [40, 70, 860, 820], view: 'setup', home: 'airbnb', pad: 40, minW: 300, minH: 200, pinR: 14, font: 12, stroke: 2, pointR: 14,
       fill: [['#9a958b', .45], ['#F2B5C4', .6], ['#F4B43C', .55], ['#1B6A8F', .45], ['#5E7D52', 0]], groups: [['down', 'Unit A: bottom level'], ['up', 'Unit B: floors 2 and 3'], ['yard', 'Shared yard']] }
   };
   var mapMode = 'progress';
