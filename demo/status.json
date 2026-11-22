@@ -2647,5 +2647,37 @@
    "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
    "t1_drive": "2026-11-18"
   }
+ },
+ "ia-petrushkas-dubuque": {
+  "channel": "n/a",
+  "fb": "",
+  "note": "Petrushka's - one of ours (client row, building), hand-built site (built 2026-11-12). Not a prospect, not dialled, not in HubSpot. Excluded via demo/.client-sites.",
+  "photos": "real",
+  "ready": false,
+  "stage": "building"
+ },
+ "ia-petrushkas-flowers-dubuque": {
+  "channel": "n/a",
+  "fb": "",
+  "note": "Petrushka's - one of ours (client row, building), hand-built site (built 2026-11-12). Not a prospect, not dialled, not in HubSpot. Excluded via demo/.client-sites.",
+  "photos": "real",
+  "ready": false,
+  "stage": "building"
+ },
+ "ia-petrushkas-gazebo-dubuque": {
+  "channel": "n/a",
+  "fb": "",
+  "note": "Petrushka's - one of ours (client row, building), hand-built site (built 2026-11-12). Not a prospect, not dialled, not in HubSpot. Excluded via demo/.client-sites.",
+  "photos": "real",
+  "ready": false,
+  "stage": "building"
+ },
+ "ia-petrushkas-microgreens-dubuque": {
+  "channel": "n/a",
+  "fb": "",
+  "note": "Petrushka's - one of ours (client row, building), hand-built site (built 2026-11-12). Not a prospect, not dialled, not in HubSpot. Excluded via demo/.client-sites.",
+  "photos": "real",
+  "ready": false,
+  "stage": "building"
  }
 }
