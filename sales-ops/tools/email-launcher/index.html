@@ -196,7 +196,7 @@ Urban Niche Co.
   let selectedTemplate = TEMPLATES[0];
 
   // Load active rep from reps.json — keyed to localStorage current_rep_id
-  let _rep = { display_name: 'Ricky', signature: '\u2014 Ricky, UNC', phone: '(515) 344-4053', stripe_link: 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N', booking_url: 'https://urbannicheco.com/audit' };
+  let _rep = { display_name: 'Ricky', signature: '\u2014 Ricky, UNC', phone: '(515) 344-4053', booking_url: 'https://urbannicheco.com/audit' };
   (async function loadRep() {
     try {
       const data = await fetch('/sales-ops/shared/reps.json', { cache: 'no-cache' }).then(r => r.json());
@@ -217,7 +217,6 @@ Urban Niche Co.
       finding: document.getElementById('p-finding').value.trim() || 'slow load time, no quote form, not ranking locally',
       rep:        _rep.signature    || ('\u2014 ' + _rep.display_name + ', UNC'),
       rep_phone:  _rep.phone        || '(515) 344-4053',
-      rep_stripe: _rep.stripe_link  || 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N',
       rep_booking_url: _rep.booking_url || 'https://urbannicheco.com/audit'
     };
   }

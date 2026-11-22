@@ -1841,7 +1841,6 @@
       const rep = Shell && Shell._currentRep ? Shell._currentRep() : {};
       const repPhone = rep.phone || '(515) 344-4053';
       const repSig = rep.signature || ('\u2014 ' + (rep.display_name || 'Ricky') + ', UNC');
-      const repStripe = rep.stripe_link || 'https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N';
       const repBookingUrl = rep.booking_url || 'https://urbannicheco.com/audit';
       const TMPLS = [
         { id:'audit', name:'Website Audit \u2014 Same Day', tag:'Cold Follow-Up', subject:'Your site audit + proposal \u2014 {biz}', body:'Hey {first},\n\nSent over the audit and proposal. The issues I flagged are fixable in about two weeks.\n\nKitsch Tree Service link is in there so you can see the work firsthand.\n\nQuestions? {rep_phone}.\n\n{rep_sig}' },
@@ -1863,7 +1862,6 @@
           .replace(/\{biz\}/g, biz)
           .replace(/\{rep_phone\}/g, repPhone)
           .replace(/\{rep_sig\}/g, repSig)
-          .replace(/\{rep_stripe\}/g, repStripe)
           .replace(/\{rep_booking_url\}/g, repBookingUrl);
       }
 

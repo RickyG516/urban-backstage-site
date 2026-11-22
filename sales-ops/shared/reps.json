@@ -4,7 +4,6 @@
   "_field_notes": {
     "email": "Rep email — used in daily summary send and email signatures",
     "phone": "Rep direct phone — interpolated as {rep_phone} across all script surfaces",
-    "stripe_link": "Rep-specific payment link — interpolated as {rep_stripe_link} in HOT proposal emails and email launcher",
     "booking_url": "Rep booking URL — audit landing page. Points to /audit, /discovery, or /booking"
   },
   "reps": [
@@ -18,7 +17,6 @@
       "role": "Founder",
       "email": "ricky@urbannicheco.com",
       "phone": "(515) 344-4053",
-      "stripe_link": "https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N",
       "booking_url": "https://urbannicheco.com/audit",
       "dial_target": 10,
       "ramp_targets": [5, 10, 15, 20, 25],
@@ -34,7 +32,6 @@
       "role": "Sales Rep",
       "email": "tyler@urbannicheco.com",
       "phone": "(563) 580-9181",
-      "stripe_link": "https://buy.stripe.com/eVq5kD3Rq37vfSzbhJ6sw0N",
       "booking_url": "https://urbannicheco.com/audit",
       "dial_target": 10,
       "ramp_targets": [5, 10, 15, 20, 25],
