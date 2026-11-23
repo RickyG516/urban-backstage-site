@@ -22,7 +22,7 @@ GEO = (42.5006, -90.6646)
 # Real profile URLs only. Leave empty until the profile exists; links and schema sameAs appear automatically.
 # e.g. 'Facebook': 'https://www.facebook.com/<page>', 'Instagram': 'https://www.instagram.com/<handle>/',
 #      'Google Business Profile': 'https://g.page/<id>', 'Nextdoor': '...', 'YouTube': '...'
-SOCIAL = {}
+SOCIAL = {'Facebook': 'https://www.facebook.com/gbgdubuque'}
 RADIUS_M = 48280  # 30 miles
 
 def esc(s): return html.escape(s, quote=True)
