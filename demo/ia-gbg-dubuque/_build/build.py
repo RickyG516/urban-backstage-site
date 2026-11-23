@@ -728,7 +728,7 @@ def build_home():
     <div class="eyebrow rv">One call covers it all</div>
     <h2 class="rv d1">Everything exterior, handled.</h2>
     <p class="lead rv d2">We handle most work directly. For specialized jobs, we coordinate with trusted local partners so you only ever deal with one team.</p>
-    {more_services_grid(r, ('permanent-lights','driveway-sealing'))}
+    {more_services_grid(r)}
   </div>
 </section>
 
