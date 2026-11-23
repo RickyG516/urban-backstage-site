@@ -22,7 +22,7 @@ GEO = (42.5006, -90.6646)
 # Real profile URLs only. Leave empty until the profile exists; links and schema sameAs appear automatically.
 # e.g. 'Facebook': 'https://www.facebook.com/<page>', 'Instagram': 'https://www.instagram.com/<handle>/',
 #      'Google Business Profile': 'https://g.page/<id>', 'Nextdoor': '...', 'YouTube': '...'
-SOCIAL = {'Facebook': 'https://www.facebook.com/gbgdubuque'}
+SOCIAL = {'Facebook': 'https://www.facebook.com/gbgdubuque', 'Instagram': 'https://www.instagram.com/gbgdubuque/'}
 RADIUS_M = 48280  # 30 miles
 
 def esc(s): return html.escape(s, quote=True)
@@ -328,8 +328,16 @@ def sticky(r):
 
 def social_html():
     if not SOCIAL: return ''
-    links = ' &middot; '.join(f'<a href="{esc(u)}" rel="me noopener" target="_blank">{esc(n)}</a>' for n, u in SOCIAL.items())
-    return f'<p style="margin-top:1rem">Follow us: {links}</p>'
+    icons = {
+        'Facebook': '<path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>',
+        'Instagram': '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>',
+    }
+    box = 'display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:50%;color:#f2efe9;margin-right:10px'
+    links = ''
+    for n, u in SOCIAL.items():
+        inner = f'<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">{icons[n]}</svg>' if n in icons else esc(n)
+        links += f'<a href="{esc(u)}" rel="me noopener" target="_blank" aria-label="GBG Dubuque on {esc(n)}" title="{esc(n)}" style="{box}">{inner}</a>'
+    return f'<p style="margin-top:1rem;display:flex;align-items:center;flex-wrap:wrap">{links}</p>'
 
 def footer(r):
     svc = ''.join(f'<li><a href="{r}{s["slug"]}/">{esc(s["name"])}</a></li>' for s in SERVICES)
@@ -624,7 +632,8 @@ def write(path, content):
 def more_services_grid(r, exclude=()):
     out = '<div class="grid6">'
     n = 0
-    for s in SERVICES:
+    order = ['permanent-lights', 'driveway-sealing', 'junk-removal', 'trash-can-cleaning', 'epoxy-coating', 'painting', 'landscaping', 'tree-service', 'yard-spraying']
+    for s in sorted(SERVICES, key=lambda x: order.index(x['slug']) if x['slug'] in order else len(order)):
         if s['slug'] in exclude: continue
         tag = '<span class="pill in">In-house</span>' if s['inhouse'] else '<span class="pill pt">Trusted partner</span>'
         out += f'<a class="mini rv d{n%3}" href="{r}{s["slug"]}/">{tag}<h3>{esc(s["name"])}</h3><p>{esc(s["short"])}</p><span class="go">Learn more &rarr;</span></a>'
