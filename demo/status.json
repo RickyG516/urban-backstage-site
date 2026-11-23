@@ -1108,7 +1108,13 @@
   "note": "in HubSpot 2026-09-09 (company 345413033718) | contact 549195911867 (Randy Van't Hof, President) | NO-WEBSITE VERIFIED LIVE IN CHROME 2026-09-09: vanthofconcrete.com AND www.vanthofconcrete.com both resolve but serve a bare hosting-default page whose entire body is '404 / Page not found!'; vanthofconcreteinc.com does not resolve (browser error page). BBB profile has NO 'Visit Website' button - control profile loaded in the SAME session (Will's Way Consolidated, Iowa City) DID show the button, so the absence is real, not a scrape artifact. Sioux Center Chamber directory listing carries no website field either. | REVENUE: incorporated 4/25/1989 (37 yrs), BBB Accredited A+ since 6/23/2003, moved into a larger Highway 75 facility in 2019 (nwestiowa.com), ~60-mile radius across four counties, Procore contractor-network listing. | ADDRESS CONFLICT: BBB and Chamber now both say 1245 N Main Ave; Yelp and older directories still print 369 6th Ave NW, which is the pre-2019 address. Use 1245 N Main Ave. | FB https://www.facebook.com/vhconcrete/ + IG @vanthofconcrete. | ENRICHED 2026-09-22 (BRONZE): real logo pulled from Facebook (facebook.com/vhconcrete, via graph.facebook.com/vhconcrete/picture) and used in nav, accent recolored to sampled brand red #c46259 (lightened off logo red for contrast, was pool blue #4c9bcd) with brand-colors:sampled marker. Reviews placeholder: GBP shows only 3.5/2 at the confirmed address (1245 N Main Ave) — below the 3-review floor, so left as labelled placeholder, not real. Photos placeholder: GBP gallery is Street-View-only (no owner photos), FB gated further content behind login wall after cover photo (which shows a third-party-branded APEX CONCRETE PUMPING truck, so was not used). Existing generated-SVG gallery (motion.svg/radius.svg/texture.svg) left as-is per MOCKUP-BASELINE (SVG art is not stock, no placeholder marker needed). swap-notice addressed to Randy Van't Hof (confirmed owner/president) asking him to send a reviews link and job photos. | FB-DM 2026-10-21: skipped - vanthofconcrete.com now serves a live WordPress site (no longer the 404 the hook assumed). Not a no-website prospect.",
   "photos": "stock-placeholder",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_skipped": "2026-11-23",
+   "t1_video_built": "2026-11-23",
+   "t1_drive": "2026-11-23",
+   "t1_note": "page not found in Messenger search (searched \"Van't Hof Concrete\" and \"VH Concrete\"; people only, no Page row); video built and saved to Drive | WARNING: record note says vanthofconcrete.com has served a live WordPress site since 2026-10-21, so the no-website hook does not apply; selector did not catch this - do not send without checking"
+  }
  },
  "ia-vogel-irrigation-waterloo": {
   "channel": "phone",
@@ -2691,7 +2697,11 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-11-23",
-   "variant": "B"
+   "variant": "B",
+   "t1_skipped": "2026-11-23",
+   "t1_video_built": "2026-11-23",
+   "t1_drive": "2026-11-23",
+   "t1_note": "page not found in Messenger search (searched \"Irlmeier Construction\" and \"Irlmeier\"; people only, no Page row); video built and saved to Drive"
   }
  }
 }
