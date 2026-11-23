@@ -2628,7 +2628,8 @@
    "prev_skipped": "2026-11-06",
    "t1_skipped": "2026-11-18",
    "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
-   "t1_drive": "2026-11-18"
+   "t1_drive": "2026-11-18",
+   "sent": "2026-11-06"
   }
  },
  "il-eric-farwell-construction-plymouth": {
@@ -2645,7 +2646,8 @@
    "prev_skipped": "2026-11-06",
    "t1_skipped": "2026-11-18",
    "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
-   "t1_drive": "2026-11-18"
+   "t1_drive": "2026-11-18",
+   "sent": "2026-11-06"
   }
  },
  "ia-petrushkas-dubuque": {
@@ -2686,6 +2688,10 @@
   "note": "in HubSpot 2026-11-16 (company 366632977143, contact 595134417630 David Irlmeier per BBB) | from prospect pool (medium, BBB; BBB Visit Website points to Facebook) | NO-WEBSITE: pool search 2026-10-04 found no first-party domain; Google search 2026-11-16 shows a Google listing 'Irlmeier Construction Repair' with no Website button and the Facebook page lists no site. IDENTITY GATE passed on Facebook (Irlmeier Construction, 1135 Cedar Ave, Adair IA, +1 641-740-0390) and on the Google listing (same address and phone). PHOTO HARVEST: Facebook Photos tab checked by eye (post-frame building construction shots, no other company branding seen; a dash-cam edge and a distant truck at the left edge of one photo were cropped out); used 3 job photos plus the Facebook cover photo (4 real) and the real logo (EST. 2002) cropped from the profile picture. Google Business Profile photos were not opened this run. PAGE LEVEL BRONZE: real logo + real photos; reviews labelled placeholder (Google shows 3 reviews, Facebook 4, not harvested). DO NOT SAY: reviews, crew size, license, years beyond the est. 2002 on the logo, owner name beyond BBB. Facebook says they are hiring carpenters.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "staged": "2026-11-23",
+   "variant": "B"
+  }
  }
 }
