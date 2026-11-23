@@ -730,7 +730,7 @@ def build_home():
     <div class="eyebrow rv">The GBG standard</div>
     <h2 class="rv d1">Locally owned. Built in North Dubuque.</h2>
     <div class="trio">
-      <div class="rv"><div class="k">I</div><h3>One point of contact</h3><p>You talk to the people who own the company, not a call center. Coordinating the whole job is our job.</p></div>
+      <div class="rv"><div class="k">I</div><h3>One point of contact</h3><p>You talk to the same people from the first call to the last day, not a call center. Coordinating the whole job is our job.</p></div>
       <div class="rv d1"><div class="k">II</div><h3>Quality first</h3><p>We would rather do fewer jobs beautifully than many jobs quickly. Your home is not a volume game.</p></div>
       <div class="rv d2"><div class="k">III</div><h3>Plain quotes</h3><p>Clear scope, clear price, no pressure. If we are not the right fit, we will say so.</p></div>
     </div>
@@ -872,7 +872,7 @@ def build_careers():
   <div class="eyebrow rv">Why GBG</div><h2 class="rv d1">Work you can point at.</h2>
   <div class="trio">
     <div class="rv"><div class="k">I</div><h3>Craft over volume</h3><p>Permanent lighting and driveway sealing reward care. We build our reputation one clean finish at a time.</p></div>
-    <div class="rv d1"><div class="k">II</div><h3>Owners on the job</h3><p>You will work alongside the people who own the company, not a distant management layer.</p></div>
+    <div class="rv d1"><div class="k">II</div><h3>The same crew, start to finish</h3><p>One crew takes your job from the estimate to the last day, with no handoffs between strangers.</p></div>
     <div class="rv d2"><div class="k">III</div><h3>Room to grow</h3><p>We are early. People who show up and do great work grow with the company as it expands.</p></div>
   </div>
 </div></section>
