@@ -129,8 +129,13 @@ Legacy values seen in the wild, and what they map to. Emit the right-hand value:
 
 ### `state` — two-letter USPS code only
 
-`IA`, `IL`, `WI`. Never `Iowa`, `Wisconsin`, `Illinois`. The 2026-08-09 batch
-mixed both forms and 20 records had to be corrected in HubSpot after the fact.
+`IA`, `IL`, `WI`, `MN`, `MO`, `NE`, `SD`, `ND`, `KS`, `IN`, `MI`, `OH`. Never
+`Iowa`, `Wisconsin`, `Illinois`, etc. The 2026-08-09 batch mixed both forms and
+20 records had to be corrected in HubSpot after the fact. The 9 states added
+2026-11-23 match the `/demo/[state]-*` destinations already live on the
+`All Demo Mockups (Public Bypass)` Cloudflare Access application — a mockup
+built with one of these state codes publishes straight to a public path with
+no further Cloudflare work needed.
 
 ### `contact_id` vs `company_id`
 
