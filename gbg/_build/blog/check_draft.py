@@ -11,7 +11,7 @@ import os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SERVICE_PAGES = ['/permanent-lights/', '/driveway-sealing/', '/yard-spraying/', '/trash-can-cleaning/',
-                 '/epoxy-coating/', '/painting/', '/landscaping/', '/tree-service/', '/service-areas/']
+                 '/epoxy-coating/', '/painting/', '/landscaping/', '/junk-removal/', '/tree-service/', '/service-areas/']
 FIELDS = ['title', 'slug', 'meta_description', 'service_page', 'target_keyword']
 BANNED = ['genuinely', 'honestly', 'straightforward', 'elevate', 'seamless', 'game changer', 'game-changer']
 # Facts GBG cannot back up before launch

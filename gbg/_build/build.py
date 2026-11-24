@@ -22,7 +22,7 @@ GEO = (42.5006, -90.6646)
 # Real profile URLs only. Leave empty until the profile exists; links and schema sameAs appear automatically.
 # e.g. 'Facebook': 'https://www.facebook.com/<page>', 'Instagram': 'https://www.instagram.com/<handle>/',
 #      'Google Business Profile': 'https://g.page/<id>', 'Nextdoor': '...', 'YouTube': '...'
-SOCIAL = {'Facebook': 'https://www.facebook.com/gbgdubuque'}
+SOCIAL = {'Facebook': 'https://www.facebook.com/gbgdubuque', 'Instagram': 'https://www.instagram.com/gbgdubuque/'}
 RADIUS_M = 48280  # 30 miles
 
 def esc(s): return html.escape(s, quote=True)
@@ -88,6 +88,20 @@ SERVICES = [
              ('Do I need to be home?','Not usually. We will confirm the details when you book so the process is easy for you.'),
              ('Do you serve towns outside Dubuque?','Yes, within roughly 30 miles of Dubuque across Iowa, Illinois and Wisconsin. Check the service areas page.')],
        kw='trash can cleaning Dubuque, bin cleaning Dubuque Iowa, recurring trash can cleaning'),
+  dict(slug='junk-removal', name='Junk Removal', short='Furniture, appliances and accessible cleanouts, quoted from photos before we load.',
+       inhouse=True, art='trash',
+       title='Junk Removal in Dubuque, IA | GBG Dubuque',
+       desc='Junk and furniture removal in Dubuque, Iowa and nearby towns. Single items, appliances and accessible cleanouts. We quote from photos before we load.',
+       h1a='Junk removal,', h1b='gone in one trip.',
+       lead='The couch nobody wants to carry. The appliance in the garage. The pile in the basement. We load it, haul it and leave the space clear.',
+       bullets=['Furniture, appliances, mattresses and single-item pickups','Garage, basement, shed and attic cleanouts where items are reachable','Move-out and estate loads of household goods','Priced by how much space it takes in the trailer, quoted before we load','Reusable items go to donation and metal goes to scrap where we can','Serving Dubuque and communities within about 30 miles'],
+       steps=[('Send photos','Text or upload a few shots of the pile. We quote from what we can see.'),('Agree the price','You get the number before anyone shows up. No surprises on the day.'),('We load and go','We carry it out, sweep the space and haul it away.')],
+       faqs=[('How do you price junk removal?','By how much space the load takes in the trailer, not by the hour. We quote from photos first so you know the number before we arrive. Very heavy material like concrete or soil is priced separately because disposal is charged by weight.'),
+             ('What will you not take?','Hoarder cleanouts, biohazard situations such as animal waste, rot or mold, and hazardous material like paint, solvents, chemicals, asbestos, propane and motor oil. We also do not handle construction and demolition debris. We will tell you before booking rather than on the day.'),
+             ('Do I need to move everything outside first?','No. We carry it out. We only ask that the items are reachable and that we are not working around a space that needs a specialist.'),
+             ('Does any of it get donated?','Where an item is in usable shape we try to route it to donation, and metal goes to scrap. Not everything qualifies, but it keeps loads out of the landfill where we can.'),
+             ('Do you serve towns outside Dubuque?','Yes, within roughly 30 miles of Dubuque across Iowa, Illinois and Wisconsin. Check the service areas page.')],
+       kw='junk removal Dubuque, furniture removal Dubuque Iowa, appliance removal, garage cleanout Dubuque'),
   dict(slug='epoxy-coating', name='Epoxy Coating', short='Durable, polished floors for garages and more.',
        inhouse=True, art='epoxy',
        title='Epoxy Garage Floor Coating in Dubuque, IA | GBG Dubuque',
@@ -170,6 +184,9 @@ KNOW = {
   'trash-can-cleaning': ('Why a recurring trash can cleaning makes sense', [
     'Bins pick up odor and residue after every pickup, and a quick rinse at home rarely gets it all. A recurring clean takes the chore off your list and keeps the curb tidy.',
     'It is a small service, so it pairs well with [yard spraying](/yard-spraying/) and the rest of our exterior work. One schedule, one team.']),
+  'junk-removal': ('What we do not take', [
+    'We are not set up for hoarder cleanouts, biohazard situations such as animal waste, rot or mold, or hazardous material like paint, solvents, chemicals, asbestos, propane and motor oil. We also do not take construction and demolition debris.',
+    'If a job turns out to be one of these, we will say so up front and point you to someone equipped for it. Planning a bigger project? See our [service areas](/service-areas/) or ask about [trash can cleaning](/trash-can-cleaning/) for the curb.']),
   'epoxy-coating': ('What decides how an epoxy floor turns out', [
     'Prep decides the result. The slab has to be clean, sound and ready to bond before any coating goes on, which is why we inspect your garage floor first and tell you what it needs.',
     'Cure time and finish options are worth asking about before you commit, and we cover both in your estimate. If you want the garage and the driveway to match, ask about [driveway sealing](/driveway-sealing/) in the same visit.']),
@@ -311,8 +328,16 @@ def sticky(r):
 
 def social_html():
     if not SOCIAL: return ''
-    links = ' &middot; '.join(f'<a href="{esc(u)}" rel="me noopener" target="_blank">{esc(n)}</a>' for n, u in SOCIAL.items())
-    return f'<p style="margin-top:1rem">Follow us: {links}</p>'
+    icons = {
+        'Facebook': '<path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>',
+        'Instagram': '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>',
+    }
+    box = 'display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:50%;color:#f2efe9;margin-right:10px'
+    links = ''
+    for n, u in SOCIAL.items():
+        inner = f'<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">{icons[n]}</svg>' if n in icons else esc(n)
+        links += f'<a href="{esc(u)}" rel="me noopener" target="_blank" aria-label="GBG Dubuque on {esc(n)}" title="{esc(n)}" style="{box}">{inner}</a>'
+    return f'<p style="margin-top:1rem;display:flex;align-items:center;flex-wrap:wrap">{links}</p>'
 
 def footer(r):
     svc = ''.join(f'<li><a href="{r}{s["slug"]}/">{esc(s["name"])}</a></li>' for s in SERVICES)
@@ -607,7 +632,8 @@ def write(path, content):
 def more_services_grid(r, exclude=()):
     out = '<div class="grid6">'
     n = 0
-    for s in SERVICES:
+    order = ['permanent-lights', 'driveway-sealing', 'junk-removal', 'trash-can-cleaning', 'epoxy-coating', 'painting', 'landscaping', 'tree-service', 'yard-spraying']
+    for s in sorted(SERVICES, key=lambda x: order.index(x['slug']) if x['slug'] in order else len(order)):
         if s['slug'] in exclude: continue
         tag = '<span class="pill in">In-house</span>' if s['inhouse'] else '<span class="pill pt">Trusted partner</span>'
         out += f'<a class="mini rv d{n%3}" href="{r}{s["slug"]}/">{tag}<h3>{esc(s["name"])}</h3><p>{esc(s["short"])}</p><span class="go">Learn more &rarr;</span></a>'
@@ -653,7 +679,7 @@ def build_home():
   </div>
   <div class="hero-house"><svg class="house" id="heroHouse" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Illustration of an estate with permanent lights cycling through colors and patterns"></svg></div>
   <div class="hero-bottom wrap">
-    <p class="sub rv d2">Permanent lighting and flawless driveway sealing for Dubuque and communities within 30 miles. Done once. Done right.</p>
+    <p class="sub rv d2">Permanent lighting and flawless driveway sealing for Dubuque and communities within 30 miles. Plus junk removal, epoxy and more. Done once. Done right.</p>
     <div class="cta rv d3"><a href="#contact" class="btn btn-primary">Request a private estimate</a><a href="#lights" class="btn btn-ghost">Design your lights</a></div>
   </div>
   <div class="now"><span>Now showing&nbsp;<b id="heroNow"></b></span><a href="#lights">Customize it &rarr;</a></div>
@@ -711,7 +737,7 @@ def build_home():
     <div class="eyebrow rv">One call covers it all</div>
     <h2 class="rv d1">Everything exterior, handled.</h2>
     <p class="lead rv d2">We handle most work directly. For specialized jobs, we coordinate with trusted local partners so you only ever deal with one team.</p>
-    {more_services_grid(r, ('permanent-lights','driveway-sealing'))}
+    {more_services_grid(r)}
   </div>
 </section>
 
