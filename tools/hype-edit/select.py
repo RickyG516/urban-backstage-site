@@ -10,7 +10,13 @@ Reads demo/status.json. A slug is due when all of these hold:
   * rec.ready is not false
   * rec.stage is not live / building / rebuild-target (existing-site pitches are a
     different play; the T1 line is written for businesses with no findable website)
-  * fb_dm has no sent / t1_video / t1_video_built / t2_* stamp (nothing went out yet)
+  * no VIDEO has gone out yet: fb_dm has no t1_video / t2_video / t2_sent / link_sent
+    stamp, and fb_dm.replied is not set. A plain text touch (fb_dm.sent) does NOT block:
+    since 2026-11-24 the video also goes into threads that hold only Ricky's own
+    outbound text with no reply (rule change by Ricky). t1_video_built alone does not
+    block either (built but never delivered).
+  * fb_dm.t1_skipped blocks (page not found / they replied) EXCEPT legacy skips whose
+    t1_note says "thread not empty" (those were Ricky's-own-text threads, now eligible)
   * neither fb_dm.status nor the record-level status is declined / closed / dnc / client
   * rec.note carries none of the skip phrases (identity failed, dropped, excluded,
     rebuild pitch, personal contact, hand-worked website-build prospects)
@@ -19,8 +25,8 @@ Rows are ordered real job photos first (better hook), then generated, then the r
 Each row carries `photos` (usable hook photos in the mockup folder; 0 is fine, build.py
 falls back to mockup stills), `name` (from the mockup <title>, tagline dropped) and `fb`.
 
-The Messenger-side guard lives in the runbook: the thread must be EMPTY (no messages
-either way) or the slug is skipped at attach time.
+The Messenger-side guard lives in the runbook: the thread must hold NO message FROM THE
+PROSPECT (empty, or only Ricky's own outbound text) or the slug is skipped at attach time.
 
 usage: select.py [--cap 5] [--json] [--require-photos] [--all]
 """
@@ -97,9 +103,11 @@ def due(cap=5, require_photos=False, everything=False):
             fb = {}
         if str(fb.get("status", "")).lower() in SKIP_STATUS:
             continue
-        if any(fb.get(k) for k in ("sent", "t1_video", "t1_video_built", "t1_skipped",
-                                   "t2_video", "t2_video_built", "t2_sent", "link_sent")):
-            continue
+        if any(fb.get(k) for k in ("t1_video", "t2_video", "t2_sent", "link_sent", "replied")):
+            continue  # a video already went out, or they answered: not a T1 video target
+        if fb.get("t1_skipped") and "thread not empty" not in str(fb.get("t1_note", "")).lower():
+            continue  # page not found / they replied; legacy my-text-only skips are eligible again
+        prior_text = fb.get("sent") or (fb.get("t1_skipped") and "thread not empty" in str(fb.get("t1_note", "")).lower())
         folder = os.path.join(ROOT, "demo", slug)
         if not os.path.isfile(os.path.join(folder, "index.html")):
             continue
@@ -111,9 +119,11 @@ def due(cap=5, require_photos=False, everything=False):
         out.append({"slug": slug, "name": name, "photos": photos,
                     "photo_type": ptype, "fb": fburl,
                     "identity": identity_hint(name, fburl),
-                    "reason": "T1 video (first touch)",
+                    "reason": (f"T1 video (follow-up: Ricky's own text already in thread, sent {fb.get('sent') or 'see t1_note'})"
+                               if prior_text else "T1 video (first touch)"),
+                    "prior_text": bool(prior_text),
                     "_rank": PHOTO_RANK.get(ptype, 2)})
-    out.sort(key=lambda r: (r["_rank"], -max(r["photos"], 0), r["slug"]))
+    out.sort(key=lambda r: (r["_rank"], r["prior_text"], -max(r["photos"], 0), r["slug"]))
     for r in out:
         r.pop("_rank", None)
     return out if everything else out[:cap]

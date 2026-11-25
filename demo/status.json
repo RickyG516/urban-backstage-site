@@ -339,7 +339,9 @@
    "t2_drive": "2026-10-22",
    "t1_skipped": "2026-11-18",
    "t1_note": "thread not empty: Ricky sent text + video 2026-10-13 (old touch never logged here)",
-   "t1_drive": "2026-11-18"
+   "t1_drive": "2026-11-18",
+   "t2_video": "2026-10-13",
+   "t2_note": "video sent by Ricky by hand 2026-10-13 (per 11-19 skip note); stamped 2026-11-24 so the loosened T1 selector does not re-pick it"
   }
  },
  "ia-dimmer-brothers-dubuque": {
