@@ -53,3 +53,4 @@ ALTER TABLE tasks ADD COLUMN repeat TEXT;
 ALTER TABLE tasks ADD COLUMN role_id INTEGER;
 ALTER TABLE tasks ADD COLUMN next_id INTEGER;
 CREATE TABLE IF NOT EXISTS checkin_notes (week TEXT PRIMARY KEY, notes TEXT, updated_by TEXT, updated_at TEXT);
+ALTER TABLE role_scores ADD COLUMN vote TEXT;

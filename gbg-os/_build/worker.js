@@ -427,7 +427,7 @@ export default {
         const ids = new Set(roles.map(r => r.id));
         const sc = (await DB.prepare('SELECT * FROM role_scores').all()).results.filter(x => ids.has(x.role_id));
         const progress = {};
-        for (const u of USERS) progress[u] = sc.filter(x => x.user === u && x.skill && x.want).length;
+        for (const u of USERS) progress[u] = sc.filter(x => x.user === u && x.skill && x.want && x.vote).length;
         let revealed = !!(await DB.prepare("SELECT v FROM settings WHERE k='roles_revealed'").first());
         if (!revealed && roles.length && USERS.every(u => progress[u] >= roles.length)) {
           await DB.prepare("INSERT OR REPLACE INTO settings (k,v) VALUES ('roles_revealed', datetime('now'))").run();
@@ -450,12 +450,13 @@ export default {
         const cur = await DB.prepare('SELECT * FROM role_scores WHERE role_id=? AND user=?').bind(id, who).first();
         const skill = b.skill !== undefined ? n(b.skill) : (cur ? cur.skill : null);
         const want = b.want !== undefined ? n(b.want) : (cur ? cur.want : null);
-        await DB.prepare("INSERT INTO role_scores (role_id,user,skill,want) VALUES (?,?,?,?) ON CONFLICT(role_id,user) DO UPDATE SET skill=excluded.skill, want=excluded.want, at=datetime('now')")
-          .bind(id, who, skill, want).run();
+        const vote = b.vote !== undefined ? (USERS.includes(b.vote) ? b.vote : null) : (cur ? cur.vote : null);
+        await DB.prepare("INSERT INTO role_scores (role_id,user,skill,want,vote) VALUES (?,?,?,?,?) ON CONFLICT(role_id,user) DO UPDATE SET skill=excluded.skill, want=excluded.want, vote=excluded.vote, at=datetime('now')")
+          .bind(id, who, skill, want, vote).run();
         const tot = await DB.prepare('SELECT COUNT(*) n FROM roles WHERE active=1').first();
-        const mineDone = await DB.prepare('SELECT COUNT(*) n FROM role_scores s JOIN roles r ON r.id=s.role_id WHERE r.active=1 AND s.user=? AND s.skill IS NOT NULL AND s.want IS NOT NULL').bind(who).first();
-        const wasDone = cur && cur.skill && cur.want;
-        if (!wasDone && skill && want && mineDone.n === tot.n) await log(env, who, 'roles_done', null, null, 'Finished rating every role');
+        const mineDone = await DB.prepare('SELECT COUNT(*) n FROM role_scores s JOIN roles r ON r.id=s.role_id WHERE r.active=1 AND s.user=? AND s.skill IS NOT NULL AND s.want IS NOT NULL AND s.vote IS NOT NULL').bind(who).first();
+        const wasDone = cur && cur.skill && cur.want && cur.vote;
+        if (!wasDone && skill && want && vote && mineDone.n === tot.n) await log(env, who, 'roles_done', null, null, 'Finished rating every role');
         return json(req, { ok: true, done: mineDone.n, total: tot.n });
       }
       m = p.match(/^\/roles\/(\d+)$/);
@@ -490,7 +491,7 @@ export default {
         const over = (await DB.prepare("SELECT id,title,due,owner,area FROM tasks WHERE status='open' AND due < ? ORDER BY due").bind(t).all()).results;
         const leads = (await DB.prepare("SELECT COUNT(*) n FROM jobs WHERE substr(created_at,1,10) >= ?").bind(since).first()).n;
         const roles = (await DB.prepare('SELECT COUNT(*) n FROM roles WHERE active=1').first()).n;
-        const rated = (await DB.prepare("SELECT s.user, COUNT(*) n FROM role_scores s JOIN roles r ON r.id=s.role_id WHERE r.active=1 AND s.skill IS NOT NULL AND s.want IS NOT NULL GROUP BY s.user").all()).results;
+        const rated = (await DB.prepare("SELECT s.user, COUNT(*) n FROM role_scores s JOIN roles r ON r.id=s.role_id WHERE r.active=1 AND s.skill IS NOT NULL AND s.want IS NOT NULL AND s.vote IS NOT NULL GROUP BY s.user").all()).results;
         const revealed = !!(await DB.prepare("SELECT v FROM settings WHERE k='roles_revealed'").first());
         const notes = (await DB.prepare('SELECT * FROM checkin_notes ORDER BY week DESC LIMIT 6').all()).results;
         return json(req, { ok: true, user: who, today: t, week: wk, closed, due, overdue: over, new_leads: leads, roles: { total: roles, rated, revealed }, notes });

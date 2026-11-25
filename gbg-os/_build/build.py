@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "16"  # cache bust, bump on every os.css / os.js change
+V = "17"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -268,7 +268,7 @@ page("gear", "gear", "Gear", "Gear", "What we <span>have</span>",
 
 # ---------- ROLES ----------
 roles = """  <div class="rprog" data-live="rprog"><p class="loading">Loading…</p></div>
-  <div class="note" style="margin-top:12px"><b>How this works.</b> Rate every role twice: how good you'd be at it, and how bad you want it. Be honest, nobody can see your scores until Ricky, Doug and Kevin have all finished. Then everyone's scores show up, we talk it through, and Ricky makes the final call if we can't agree. Change a score any time by tapping a different number.</div>
+  <div class="note" style="margin-top:12px"><b>How this works.</b> Rate every role twice: how good you'd be at it, and how bad you want it. Then vote for who should own it. Be honest, nobody can see your scores or votes until Ricky, Doug and Kevin have all finished. Then everyone's scores show up, we talk it through, and Ricky makes the final call if we can't agree. Change a score any time by tapping a different number.</div>
   <div data-live="roles"></div>
 """ + sh("Did we miss a role?") + """  <form class="card form" data-form="rolesug">
     <input name="name" placeholder="Role name" required class="wide">

@@ -542,14 +542,17 @@
         return '<div class="rp' + (done ? ' done' : '') + '"><div class="rk">' + NAME[u] + (u === me ? ' (you)' : '') + '</div><div class="rv">' + n + ' of ' + d.total + '</div><div class="bar"><i style="width:' + (d.total ? Math.round(n / d.total * 100) : 0) + '%"></i></div><div class="rs">' + (done ? 'Done' : 'Still rating') + '</div></div>';
       }).join('') + '<div class="rp state"><div class="rk">Scores</div><div class="rv">' + (d.revealed ? 'Open' : 'Hidden') + '</div><div class="rs">' + (d.revealed ? 'Everyone finished. Talk it through, Ricky locks owners.' : 'They open when all three finish.') + '</div></div>';
       el.innerHTML = d.roles.map(function (r) {
-        var m = mine[r.id] || {}, rated = m.skill && m.want;
+        var m = mine[r.id] || {}, rated = m.skill && m.want && m.vote;
         var res = '';
         if (d.revealed) {
           var a = all[r.id] || {};
           res = '<div class="rres">' + RWHO.map(function (u) {
             var x = a[u];
-            return '<div class="rr ' + u + '"><b>' + NAME[u] + '</b><span>Good at it <i>' + (x && x.skill || '?') + '</i></span><span>Want it <i>' + (x && x.want || '?') + '</i></span></div>';
+            return '<div class="rr ' + u + '"><b>' + NAME[u] + '</b><span>Good at it <i>' + (x && x.skill || '?') + '</i></span><span>Want it <i>' + (x && x.want || '?') + '</i></span><span>Voted for <i>' + (x && x.vote ? NAME[x.vote] : '?') + '</i></span></div>';
           }).join('') + '</div>';
+          var vc = {}; RWHO.forEach(function (u) { var x = a[u]; if (x && x.vote) vc[x.vote] = (vc[x.vote] || 0) + 1; });
+          var vl = RWHO.filter(function (u) { return vc[u]; }).sort(function (p, q) { return vc[q] - vc[p]; }).map(function (u) { return '<b class="who ' + u + '">' + NAME[u] + '</b> ' + vc[u]; }).join(' &middot; ');
+          res += '<div class="rvotes">Votes: ' + (vl || 'none') + '</div>';
           var ownerTxt = r.owner ? (r.owner === 'shared' ? 'Shared' : NAME[r.owner]) : 'Not decided';
           res += '<div class="rown">Owner: ' + (me === 'ricky'
             ? '<select data-owner="' + r.id + '">' + opt(['', 'ricky', 'doug', 'kevin', 'shared'], r.owner, ['Not decided', 'Ricky', 'Doug', 'Kevin', 'Shared']) + '</select>'
@@ -559,13 +562,24 @@
         return '<div class="card role' + (rated ? ' rated' : '') + '"><div class="card-top"><h3>' + esc(r.name) + '</h3>' + (rated ? '<span class="tag go">Rated</span>' : '<span class="tag wait">To rate</span>') + '</div>' +
           (r.blurb ? '<p>' + esc(r.blurb) + '</p>' : '') + (r.tasks_open ? '<p class="rtasks">' + r.tasks_open + ' open task' + (r.tasks_open === 1 ? '' : 's') + ' belong to this role' + (r.tasks_unassigned ? ', ' + r.tasks_unassigned + ' waiting for an owner' : '') + '</p>' : '') +
           '<div class="rq"><span>How good would I be?</span>' + scale(r.id, 'skill', m.skill) + '</div>' +
-          '<div class="rq"><span>How bad do I want it?</span>' + scale(r.id, 'want', m.want) + '</div>' + res + '</div>';
+          '<div class="rq"><span>How bad do I want it?</span>' + scale(r.id, 'want', m.want) + '</div>' +
+          '<div class="rq"><span>Who should own this? You can pick yourself.</span><div class="vote" data-r="' + r.id + '">' + RWHO.map(function (u) { return '<button type="button" data-v="' + u + '"' + (m.vote === u ? ' class="on"' : '') + '>' + NAME[u] + '</button>'; }).join('') + '</div></div>' + res + '</div>';
       }).join('');
       el.querySelectorAll('.scale button').forEach(function (b) {
         b.addEventListener('click', function () {
           var sc = b.parentNode, body = {}; body[sc.dataset.k] = +b.dataset.v;
           sc.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
           api('/roles/' + sc.dataset.r + '/score', { method: 'POST', body: body }).then(function (r) {
+            if (r.done === r.total) toast('All ' + r.total + ' rated. Nice.');
+            renderRoles();
+          }).catch(function () { toast('Could not save'); renderRoles(); });
+        });
+      });
+      el.querySelectorAll('.vote button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var vt = b.parentNode;
+          vt.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+          api('/roles/' + vt.dataset.r + '/score', { method: 'POST', body: { vote: b.dataset.v } }).then(function (r) {
             if (r.done === r.total) toast('All ' + r.total + ' rated. Nice.');
             renderRoles();
           }).catch(function () { toast('Could not save'); renderRoles(); });
