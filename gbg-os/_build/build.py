@@ -289,7 +289,7 @@ page("playbook", "playbook", "Playbook", "Playbook", "How we <span>work</span>",
 web = sh("Website") + f"""  <div class="grid">
     <div class="card"><div class="card-top"><h3>gbgdubuque.com</h3><span class="tag go">Live</span></div><ul>
       <li>Source: RickyG516/gbg-dubuque-site, main</li><li>Netlify auto deploys on push, so batch pushes</li>
-      <li>Phone and email are still placeholders</li></ul>
+      <li>Phone is set (563) 500-2494. Email is still a placeholder</li></ul>
       <div class="chips">{chip("Open site", "https://gbgdubuque.com/")}{chip("Repo", "https://github.com/RickyG516/gbg-dubuque-site")}{chip("Netlify", "https://app.netlify.com/")}</div></div>
     <div class="card"><div class="card-top"><h3>Older copies here</h3><span class="tag wait">Legacy</span></div><ul>
       <li>/demo/ia-gbg-dubuque/ staging and /gbg/ in this repo</li><li>Production moved to its own repo Nov 13</li></ul>

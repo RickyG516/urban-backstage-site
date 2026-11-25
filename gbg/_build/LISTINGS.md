@@ -6,7 +6,7 @@ Do not vary the spelling. Do not publish a street address: GBG is a service-area
 | Field | Value |
 |---|---|
 | Business name | GBG Dubuque |
-| Phone | (515) 344-4053 |
+| Phone | (563) 500-2494 |
 | Website | https://gbgdubuque.com/ |
 | Email | info@gbgdubuque.com |
 | Address | Hidden. Service-area business based in Dubuque, IA |
@@ -20,7 +20,7 @@ Do not vary the spelling. Do not publish a street address: GBG is a service-area
 Permanent lights and driveway sealing in Dubuque, IA. Plus junk removal, epoxy floors and trash can cleaning. Free private estimates.
 
 ## Long description (under 750 characters, fits Google)
-GBG Dubuque handles the outside of your home with one team. We install permanent roofline lighting that stays up all year and changes color for every holiday. We clean, repair and seal driveways. We also offer junk removal, epoxy garage floors and recurring trash can cleaning, and we coordinate painting, landscaping and tree work through trusted local partners. We serve Dubuque and communities within about 30 miles across Iowa, Illinois and Wisconsin. Request a private estimate at gbgdubuque.com or call (515) 344-4053.
+GBG Dubuque handles the outside of your home with one team. We install permanent roofline lighting that stays up all year and changes color for every holiday. We clean, repair and seal driveways. We also offer junk removal, epoxy garage floors and recurring trash can cleaning, and we coordinate painting, landscaping and tree work through trusted local partners. We serve Dubuque and communities within about 30 miles across Iowa, Illinois and Wisconsin. Request a private estimate at gbgdubuque.com or call (563) 500-2494.
 
 ## Services to list
 Permanent Lights, Driveway Sealing, Junk Removal, Trash Can Cleaning, Epoxy Coating, Yard Spraying, Painting, Landscaping, Tree Service

@@ -15,8 +15,8 @@ BASE = 'https://gbgdubuque.com' if PROD else 'https://urbanbackstage.com/gbg'
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 TODAY = datetime.date.today().isoformat()
 
-PHONE_DISPLAY = '(515) 344-4053'
-PHONE_TEL = '+15153444053'
+PHONE_DISPLAY = '(563) 500-2494'
+PHONE_TEL = '+15635002494'
 EMAIL = 'info@gbgdubuque.com'
 GEO = (42.5006, -90.6646)
 # Real profile URLs only. Leave empty until the profile exists; links and schema sameAs appear automatically.
