@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Tools Library | Urban Backstage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #0f0f0f;
+    --orange: #e36b1e;
+    --white: #ffffff;
+    --charcoal: #1a1a1a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--dark);
+    color: #f5f5f5;
+    font-family: 'Open Sans', Arial, sans-serif;
+  }
+  header {
+    padding: 28px 32px 18px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  h1 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    margin: 0 0 6px;
+    font-size: 26px;
+    color: var(--white);
+  }
+  .sub { color: #999; font-size: 14px; margin: 0; }
+  .controls {
+    padding: 18px 32px;
+    background: var(--charcoal);
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 56px;
+  }
+  input[type="search"] {
+    width: 100%;
+    max-width: 420px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #111;
+    color: var(--white);
+    font-size: 14px;
+  }
+  input[type="search"]:focus { outline: 2px solid var(--orange); }
+  main { padding: 24px 32px 60px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    display: block;
+    background: var(--charcoal);
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 18px;
+    text-decoration: none;
+    transition: border-color .15s;
+  }
+  .card:hover { border-color: var(--orange); }
+  .card-label {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .card-trade { color: #e36b1e; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+  .card-path { color: #888; font-size: 12px; }
+  footer {
+    padding: 18px 32px;
+    border-top: 1px solid #2a2a2a;
+    color: #666;
+    font-size: 12px;
+  }
+
+  /* -- shared backstage nav -- */
+  .ub-nav{display:flex;align-items:center;gap:8px;padding:0 28px;height:56px;
+          background:#0f0f0f;border-bottom:1px solid #262626;position:sticky;top:0;z-index:60}
+  .ub-brand{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;
+            letter-spacing:.14em;color:#fff;text-decoration:none;white-space:nowrap;margin-right:16px}
+  .ub-brand span{color:#e36b1e}
+  .ub-links{display:flex;gap:4px}
+  .ub-links a{font-family:'Montserrat',Arial,sans-serif;font-weight:600;font-size:13px;
+              color:#9a9a9a;text-decoration:none;padding:8px 14px;border-radius:6px;
+              transition:color .12s,background .12s}
+  .ub-links a:hover{color:#fff;background:#1a1a1a}
+  .ub-links a.active{color:#e36b1e;background:rgba(227,107,30,.12)}
+  .ub-flag{margin-left:auto;font-size:10px;letter-spacing:.12em;color:#5a5a5a;
+           border:1px solid #2a2a2a;padding:4px 10px;border-radius:99px;white-space:nowrap}
+</style>
+  <link rel="stylesheet" href="/sales-ops/shared/mobile.css">
+  <script src="/sales-ops/shared/mobile-nav.js" defer></script>
+</head>
+<body>
+<nav class="ub-nav">
+  <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
+  <div class="ub-links">
+    <a href="/">Home</a>
+    <a href="/sales-ops/workspace/">Cockpit</a>
+    <a href="/sales/">Sales</a>
+    <a href="/clients/">Clients</a>
+    <a href="/delivery/">Delivery</a>
+    <a href="/finance/">Finance</a>
+    <a href="/team/">Team</a>
+    <a href="/playbook/">Playbook</a>
+    <a href="/demo/">Demos</a>
+    <a href="/verticals/">Verticals</a>
+    <a href="/tools/" class="active">Tools</a>
+  </div>
+  <span class="ub-flag">INTERNAL · NOT INDEXED</span>
+</nav>
+
+<header>
+  <h1>Tools Library</h1>
+  <p class="sub">Resellable add-on tools UNC builds for client sites &mdash; instant quote calculators and similar. Each one is a working demo, generic/UNC-branded, ready to pitch to any client in that trade.</p>
+</header>
+<div class="controls">
+  <input type="search" id="searchBox" placeholder="Search tools...">
+</div>
+<main>
+  <div class="grid" id="grid">
+
+    <a class="card" href="/tools/instant-quote-painting/" target="_blank" rel="noopener" data-search="instant quote tool painting instant-quote-painting">
+      <div class="card-trade">Painting</div>
+      <div class="card-label">Instant Quote Tool</div>
+      <div class="card-path">/tools/instant-quote-painting/</div>
+    </a>
+
+  </div>
+</main>
+<footer>
+  URBAN NICHE CO. | urbannicheco.com | (515) 344-4053 &mdash; Marketing built for contractors. Let's build something.
+</footer>
+<script>
+  const searchBox = document.getElementById('searchBox');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  searchBox.addEventListener('input', () => {
+    const q = searchBox.value.trim().toLowerCase();
+    cards.forEach(c => {
+      c.style.display = (!q || c.dataset.search.includes(q)) ? '' : 'none';
+    });
+  });
+</script>
+</body>
+</html>
