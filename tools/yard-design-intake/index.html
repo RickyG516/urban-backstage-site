@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#1f3d2b">
+<title>Yard Design Planner | Draft for New View Landscaping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1f3d2b;--leaf:#3f7d4f;--lime:#8fbf5a;--cream:#f6f3ea;--ink:#1c241e;--mute:#6b756d;--line:#dcd8cb;--orange:#e36b1e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Open Sans',Arial,sans-serif;font-size:15px;line-height:1.55}
+.demo-bar{background:#0f0f0f;color:#cfcfcf;font-size:12.5px;text-align:center;padding:8px 12px}
+.demo-bar b{color:var(--orange)}
+header{background:var(--green);color:#fff;padding:34px 20px 30px;text-align:center}
+header .brand{font:700 12px Montserrat,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin:0 0 10px}
+header h1{font:700 30px Montserrat,sans-serif;margin:0 0 8px}
+header p{margin:0 auto;max-width:560px;color:#d6e2d8}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 60px}
+.steps{display:flex;gap:6px;margin:22px 0 18px}
+.steps i{flex:1;height:6px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--leaf)}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px;box-shadow:0 2px 10px rgba(31,61,43,.05)}
+.step-n{font:700 11px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--leaf);margin:0 0 4px}
+h2{font:700 21px Montserrat,sans-serif;margin:0 0 6px;color:var(--green)}
+.hint{color:var(--mute);font-size:13.5px;margin:0 0 16px}
+.q{font:600 13.5px Montserrat,sans-serif;color:var(--green);margin:18px 0 8px}
+.q small{font:400 12.5px 'Open Sans',sans-serif;color:var(--mute);margin-left:6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.tile{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:12px 12px;text-align:left;cursor:pointer;font:600 13.5px 'Open Sans',sans-serif;color:var(--ink);transition:border-color .12s,background .12s}
+.tile small{display:block;font-weight:400;color:var(--mute);font-size:12px;margin-top:2px}
+.tile:hover{border-color:var(--leaf)}
+.tile.on{border-color:var(--leaf);background:#eef6ee;box-shadow:inset 0 0 0 1px var(--leaf)}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;font:600 13px 'Open Sans',sans-serif;color:var(--ink)}
+.pill.on{border-color:var(--leaf);background:var(--leaf);color:#fff}
+.look{height:54px;border-radius:7px;margin-bottom:8px}
+.look.clean{background:linear-gradient(90deg,#3f7d4f 0 22%,#cfc9b8 22% 28%,#3f7d4f 28% 50%,#cfc9b8 50% 56%,#3f7d4f 56% 78%,#cfc9b8 78%)}
+.look.cottage{background:radial-gradient(circle at 15% 60%,#d9668a 0 9px,transparent 10px),radial-gradient(circle at 38% 35%,#e9b949 0 8px,transparent 9px),radial-gradient(circle at 60% 65%,#8f6fc4 0 9px,transparent 10px),radial-gradient(circle at 82% 40%,#f2f2f2 0 8px,transparent 9px),#4c8a57}
+.look.modern{background:linear-gradient(90deg,#2b2f2c 0 30%,#8a8f88 30% 34%,#6f9a74 34% 70%,#8a8f88 70% 74%,#2b2f2c 74%)}
+.look.native{background:repeating-linear-gradient(100deg,#a8b56a 0 6px,#6f9a5a 6px 12px,#c9b56f 12px 17px)}
+.sw{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw.on{box-shadow:0 0 0 3px var(--leaf)}
+.swrow{display:flex;gap:10px;flex-wrap:wrap}
+.area{border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:14px 0;background:#fcfbf7}
+.area-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.area-top b{font:700 15px Montserrat,sans-serif;color:var(--green)}
+.area-top button{background:none;border:0;color:#a44;font-size:12.5px;cursor:pointer}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ph{position:relative;aspect-ratio:4/3;border:1.5px dashed #b9c4b4;border-radius:10px;background:#f1f4ec;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;overflow:hidden;font-size:12px;color:var(--mute);padding:6px}
+.ph b{font:600 12.5px Montserrat,sans-serif;color:var(--green)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph input{display:none}
+.ph.has{border-style:solid;border-color:var(--leaf)}
+.ph .x{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:0;border-radius:50%;width:22px;height:22px;cursor:pointer;z-index:2;line-height:1}
+.guide{display:flex;gap:12px;align-items:center;background:#eef6ee;border:1px solid #cfe2cf;border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:13px;color:#2f4a37}
+.guide svg{flex:none}
+.add-area{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.add-area .pill{border-style:dashed}
+input[type=text],input[type=tel],input[type=email],textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,textarea:focus{outline:2px solid var(--lime);border-color:var(--leaf)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.btn{background:var(--leaf);color:#fff;border:0;border-radius:10px;padding:13px 22px;font:700 14px Montserrat,sans-serif;cursor:pointer}
+.btn:hover{background:var(--green)}
+.btn.ghost{background:transparent;color:var(--mute);border:1.5px solid var(--line)}
+.err{color:#b23;font-size:13px;margin:10px 0 0;min-height:18px}
+.note{background:#fff8e6;border:1px solid #ecdca8;border-radius:10px;padding:10px 12px;font-size:13px;color:#5d5022;margin-top:16px}
+.done{text-align:center;padding:8px 0 4px}
+.done .ok{width:54px;height:54px;border-radius:50%;background:var(--leaf);color:#fff;display:grid;place-items:center;margin:0 auto 10px;font-size:26px}
+.brief{margin-top:22px}
+.brief-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.brief-h span{font:700 11px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+.bsec{border-top:1px solid var(--line);padding:12px 0}
+.bsec h4{font:700 14px Montserrat,sans-serif;color:var(--green);margin:0 0 6px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:13.5px}
+.kv span{color:var(--mute)}
+.bph{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.bph div{aspect-ratio:4/3;border-radius:8px;background:#e9ece3 center/cover;display:grid;place-items:center;font-size:11.5px;color:var(--mute)}
+.dots{display:inline-flex;gap:4px;vertical-align:middle}.dots i{width:14px;height:14px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.15)}
+footer{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 16px 40px;border-top:1px solid var(--line);margin-top:30px}
+[hidden]{display:none!important}
+@media (max-width:560px){header h1{font-size:24px}.card{padding:18px 16px}.two{grid-template-columns:1fr}.tiles{grid-template-columns:1fr 1fr}.kv{grid-template-columns:104px 1fr}}
+@media print{.demo-bar,header,.steps,.nav,.done,footer,.brief-h button{display:none}.card{border:0;box-shadow:none;padding:0}}
+</style>
+</head>
+<body>
+<div class="demo-bar"><b>DRAFT</b> built by Urban Niche Co. for New View Landscaping. Nothing here is sent anywhere yet. Photos stay on this device.</div>
+<header>
+  <p class="brand">New View Landscaping</p>
+  <h1>Plan Your Yard From Your Phone</h1>
+  <p>Snap a few photos, tell us what you like, and we start on a design before we ever pull in the driveway.</p>
+</header>
+
+<div class="wrap">
+  <div class="steps" id="steps"><i></i><i></i><i></i><i></i><i></i></div>
+
+  <!-- 1 -->
+  <section class="card" data-step="1">
+    <p class="step-n">Step 1 of 5</p>
+    <h2>What are we working on?</h2>
+    <p class="hint">Pick everything that fits. Not sure is a fine answer.</p>
+    <div class="tiles" data-multi="project">
+      <button class="tile" data-v="New planting beds">New planting beds<small>Start from grass or bare ground</small></button>
+      <button class="tile" data-v="Refresh existing beds">Refresh what's there<small>Tired, overgrown or patchy</small></button>
+      <button class="tile" data-v="Front yard makeover">Front yard makeover<small>Curb appeal, top to bottom</small></button>
+      <button class="tile" data-v="Backyard and patio area">Backyard or patio area<small>Where you spend time</small></button>
+      <button class="tile" data-v="Trees and privacy">Trees and privacy<small>Shade, screening, a view to block</small></button>
+      <button class="tile" data-v="Not sure, design it for me">Not sure yet<small>Show me what's possible</small></button>
+    </div>
+    <p class="err" data-err></p>
+    <div class="nav"><span></span><button class="btn" data-next>Next: your yard</button></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="card" data-step="2" hidden>
+    <p class="step-n">Step 2 of 5</p>
+    <h2>Show us each part of the yard</h2>
+    <p class="hint">Add one card for each spot you want worked on. Photos are what let us design without a first visit.</p>
+    <div class="guide">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none"><rect x="15" y="6" width="16" height="30" rx="3" stroke="#3f7d4f" stroke-width="2"/><circle cx="23" cy="31" r="1.6" fill="#3f7d4f"/><path d="M4 41h38" stroke="#3f7d4f" stroke-width="2" stroke-linecap="round"/><path d="M7 37l-3 4 3 4M39 37l3 4-3 4" stroke="#3f7d4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -4)"/></svg>
+      <div><b>How to take the photos:</b> stand about 20 feet back (7 or 8 big steps), hold the phone level, and get the whole area in the frame. One straight on, then one from each side if you can.</div>
+    </div>
+    <div id="areas"></div>
+    <p class="q">Add a part of the yard</p>
+    <div class="add-area" id="addArea">
+      <button class="pill" data-a="Front of the house">+ Front of the house</button>
+      <button class="pill" data-a="Front walkway or entry">+ Walkway or entry</button>
+      <button class="pill" data-a="Mailbox or driveway edge">+ Mailbox or driveway</button>
+      <button class="pill" data-a="Side yard">+ Side yard</button>
+      <button class="pill" data-a="Back of the house">+ Back of the house</button>
+      <button class="pill" data-a="Patio or deck area">+ Patio or deck</button>
+      <button class="pill" data-a="Fence or property line">+ Fence or property line</button>
+      <button class="pill" data-a="Around a tree">+ Around a tree</button>
+      <button class="pill" data-a="Other spot">+ Other</button>
+    </div>
+    <p class="err" data-err></p>
+    <div class="nav"><button class="btn ghost" data-back>Back</button><button class="btn" data-next>Next: your style</button></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="card" data-step="3" hidden>
+    <p class="step-n">Step 3 of 5</p>
+    <h2>What do you want it to look like?</h2>
+    <p class="hint">No plant knowledge needed. We pick plants that will actually live where you want them.</p>
+    <p class="q">The overall look</p>
+    <div class="tiles" data-single="look">
+      <button class="tile" data-v="Clean and simple"><div class="look clean"></div>Clean and simple<small>Tidy rows, trimmed shrubs</small></button>
+      <button class="tile" data-v="Full and flowery"><div class="look cottage"></div>Full and flowery<small>Lots of color, layered</small></button>
+      <button class="tile" data-v="Modern"><div class="look modern"></div>Modern<small>Rock, grasses, sharp lines</small></button>
+      <button class="tile" data-v="Natural and native"><div class="look native"></div>Natural and native<small>Loose, prairie feel</small></button>
+    </div>
+    <p class="q">What should be in it? <small>pick any</small></p>
+    <div class="pills" data-multi="plants">
+      <button class="pill" data-v="Flowers that come back every year">Flowers that come back</button>
+      <button class="pill" data-v="Seasonal color">Seasonal color</button>
+      <button class="pill" data-v="Shrubs">Shrubs</button>
+      <button class="pill" data-v="Evergreens for winter">Evergreens for winter</button>
+      <button class="pill" data-v="Ornamental trees">Ornamental trees</button>
+      <button class="pill" data-v="Shade trees">Shade trees</button>
+      <button class="pill" data-v="Ornamental grasses">Grasses</button>
+      <button class="pill" data-v="Privacy screening">Privacy screening</button>
+      <button class="pill" data-v="Rock or stone accents">Rock or stone</button>
+      <button class="pill" data-v="Edging and mulch">Edging and mulch</button>
+    </div>
+    <p class="q">Flower colors you like <small>pick any</small></p>
+    <div class="swrow" data-multi="colors">
+      <button class="sw" data-v="White" style="background:#f7f7f2" title="White"></button>
+      <button class="sw" data-v="Yellow" style="background:#f2c230" title="Yellow"></button>
+      <button class="sw" data-v="Orange" style="background:#ee8a2c" title="Orange"></button>
+      <button class="sw" data-v="Red" style="background:#c8352f" title="Red"></button>
+      <button class="sw" data-v="Pink" style="background:#e77fa6" title="Pink"></button>
+      <button class="sw" data-v="Purple" style="background:#8a63c7" title="Purple"></button>
+      <button class="sw" data-v="Blue" style="background:#4f7fd1" title="Blue"></button>
+      <button class="sw" data-v="Mostly green" style="background:#4c8a57" title="Mostly green"></button>
+    </div>
+    <p class="q">How much upkeep do you want?</p>
+    <div class="pills" data-single="upkeep">
+      <button class="pill" data-v="I like to garden">I like to garden</button>
+      <button class="pill" data-v="A little now and then">A little now and then</button>
+      <button class="pill" data-v="As close to none as possible">As close to none as possible</button>
+    </div>
+    <p class="q">Anything we should plan around? <small>pick any</small></p>
+    <div class="pills" data-multi="flags">
+      <button class="pill" data-v="Dogs">Dogs</button>
+      <button class="pill" data-v="Kids play here">Kids play here</button>
+      <button class="pill" data-v="Deer or rabbits">Deer or rabbits</button>
+      <button class="pill" data-v="Allergies">Allergies</button>
+      <button class="pill" data-v="Wet or soggy spots">Wet or soggy spots</button>
+      <button class="pill" data-v="Steep slope">Steep slope</button>
+      <button class="pill" data-v="HOA rules">HOA rules</button>
+    </div>
+    <p class="err" data-err></p>
+    <div class="nav"><button class="btn ghost" data-back>Back</button><button class="btn" data-next>Next: budget and timing</button></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="card" data-step="4" hidden>
+    <p class="step-n">Step 4 of 5</p>
+    <h2>Budget and timing</h2>
+    <p class="hint">A rough range keeps the design realistic. It is not a commitment.</p>
+    <p class="q">Rough budget for this project</p>
+    <div class="pills" data-single="budget" id="budgetPills"></div>
+    <p class="q">When do you want it done?</p>
+    <div class="pills" data-single="timing">
+      <button class="pill" data-v="As soon as the ground allows">As soon as the ground allows</button>
+      <button class="pill" data-v="This spring">This spring</button>
+      <button class="pill" data-v="This summer">This summer</button>
+      <button class="pill" data-v="This fall">This fall</button>
+      <button class="pill" data-v="Just planning for now">Just planning for now</button>
+    </div>
+    <p class="q">Anything else? <small>optional</small></p>
+    <textarea id="notes" rows="3" placeholder="A plant you love or hate, a view you want to hide, something a neighbor has that you like"></textarea>
+    <p class="err" data-err></p>
+    <div class="nav"><button class="btn ghost" data-back>Back</button><button class="btn" data-next>Next: where to send it</button></div>
+  </section>
+
+  <!-- 5 -->
+  <section class="card" data-step="5" hidden>
+    <p class="step-n">Step 5 of 5</p>
+    <h2>Where should we send your design?</h2>
+    <p class="hint">Dallas looks over your photos and reaches out with ideas and next steps.</p>
+    <div class="two">
+      <div><p class="q" style="margin-top:0">Your name</p><input type="text" id="name" autocomplete="name"></div>
+      <div><p class="q" style="margin-top:0">Phone</p><input type="tel" id="phone" autocomplete="tel"></div>
+    </div>
+    <p class="q">Email <small>optional</small></p><input type="email" id="email" autocomplete="email">
+    <p class="q">Property address</p><input type="text" id="addr" autocomplete="street-address" placeholder="Street and town">
+    <p class="err" data-err></p>
+    <div class="nav"><button class="btn ghost" data-back>Back</button><button class="btn" data-next>Send my yard to New View</button></div>
+  </section>
+
+  <!-- done -->
+  <section class="card" data-step="6" hidden>
+    <div class="done">
+      <div class="ok">&#10003;</div>
+      <h2>Got it. Your yard is in.</h2>
+      <p class="hint" style="margin:0">In the live version this goes straight to Dallas. Below is what lands in his inbox.</p>
+    </div>
+    <div class="brief" id="brief"></div>
+    <div class="nav"><button class="btn ghost" id="restart">Start over</button><button class="btn" onclick="window.print()">Print the brief</button></div>
+  </section>
+</div>
+
+<footer>
+  URBAN NICHE CO. | urbannicheco.com | (515) 344-4053<br>
+  Marketing built for contractors. Let's build something.
+</footer>
+
+<script>
+(function () {
+  // Budget ranges are placeholders for Dallas to set. Left as open choices on purpose: no real prices in the draft.
+  var BUDGETS = ['Smaller project', 'Mid size project', 'Larger project', 'Whole yard', 'Not sure, tell me what is realistic'];
+  var S = { project: [], look: '', plants: [], colors: [], upkeep: '', flags: [], budget: '', timing: '', areas: [] };
+  var step = 1, aid = 0;
+  var $ = function (q, r) { return (r || document).querySelector(q); }, $$ = function (q, r) { return [].slice.call((r || document).querySelectorAll(q)); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  $('#budgetPills').innerHTML = BUDGETS.map(function (b) { return '<button class="pill" data-v="' + esc(b) + '">' + esc(b) + '</button>'; }).join('');
+
+  // pick lists
+  $$('[data-multi]').forEach(function (g) {
+    g.addEventListener('click', function (e) { var b = e.target.closest('[data-v]'); if (!b) return;
+      var k = g.dataset.multi, v = b.dataset.v, i = S[k].indexOf(v);
+      if (i > -1) S[k].splice(i, 1); else S[k].push(v); b.classList.toggle('on', i === -1); });
+  });
+  $$('[data-single]').forEach(function (g) {
+    g.addEventListener('click', function (e) { var b = e.target.closest('[data-v]'); if (!b) return;
+      S[g.dataset.single] = b.dataset.v; $$('[data-v]', g).forEach(function (x) { x.classList.toggle('on', x === b); }); });
+  });
+
+  // yard areas
+  var SLOTS = ['Straight on', 'From the left', 'From the right'];
+  function drawAreas() {
+    $('#areas').innerHTML = S.areas.map(function (a) {
+      return '<div class="area" data-id="' + a.id + '"><div class="area-top"><b>' + esc(a.name) + '</b><button data-rm>Remove</button></div>' +
+        '<p class="q">Photos <small>from about 20 feet back</small></p><div class="photos">' + SLOTS.map(function (s, i) {
+          var p = a.photos[i];
+          return '<label class="ph' + (p ? ' has' : '') + '">' + (p ? '<img src="' + p + '" alt=""><button class="x" data-x="' + i + '" type="button">&times;</button>' : '<b>' + s + '</b>Tap to add') +
+            '<input type="file" accept="image/*" data-slot="' + i + '"></label>'; }).join('') + '</div>' +
+        pick(a, 'sun', 'How much sun does it get?', ['Sun most of the day', 'Sun part of the day', 'Mostly shade', 'Not sure']) +
+        pick(a, 'size', 'About how big?', ['Small (a few steps wide)', 'Medium (10 or so steps)', 'Large (20 steps or more)']) +
+        pick(a, 'existing', "What's there now?", ['Nothing, bare or grass', 'Plants I want to keep', 'Plants I want gone', 'A mix']) +
+        '<p class="q">Anything specific about this spot? <small>optional</small></p><input type="text" data-note value="' + esc(a.note || '') + '" placeholder="Downspout drains here, want to hide the AC unit, etc."></div>';
+    }).join('');
+  }
+  function pick(a, key, label, opts) {
+    return '<p class="q">' + label + '</p><div class="pills" data-ak="' + key + '">' + opts.map(function (o) { return '<button class="pill' + (a[key] === o ? ' on' : '') + '" data-v="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div>';
+  }
+  $('#addArea').addEventListener('click', function (e) { var b = e.target.closest('[data-a]'); if (!b) return;
+    var n = b.dataset.a, c = S.areas.filter(function (x) { return x.name.indexOf(n) === 0; }).length;
+    S.areas.push({ id: ++aid, name: c ? n + ' ' + (c + 1) : n, photos: [], sun: '', size: '', existing: '', note: '' }); drawAreas();
+    var last = $('#areas').lastElementChild; if (last) last.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+  $('#areas').addEventListener('click', function (e) {
+    var card = e.target.closest('.area'); if (!card) return; var a = S.areas.filter(function (x) { return x.id == card.dataset.id; })[0];
+    if (e.target.closest('[data-rm]')) { S.areas = S.areas.filter(function (x) { return x !== a; }); drawAreas(); return; }
+    var x = e.target.closest('[data-x]'); if (x) { e.preventDefault(); a.photos[+x.dataset.x] = null; drawAreas(); return; }
+    var p = e.target.closest('[data-ak] [data-v]'); if (p) { a[p.parentNode.dataset.ak] = p.dataset.v; $$('[data-v]', p.parentNode).forEach(function (y) { y.classList.toggle('on', y === p); }); }
+  });
+  $('#areas').addEventListener('input', function (e) { if (!e.target.matches('[data-note]')) return;
+    var card = e.target.closest('.area'); S.areas.filter(function (x) { return x.id == card.dataset.id; })[0].note = e.target.value; });
+  $('#areas').addEventListener('change', function (e) {
+    if (!e.target.matches('input[type=file]')) return; var f = e.target.files[0]; if (!f) return;
+    var card = e.target.closest('.area'), a = S.areas.filter(function (x) { return x.id == card.dataset.id; })[0], slot = +e.target.dataset.slot;
+    shrink(f, function (url) { a.photos[slot] = url; drawAreas(); });
+  });
+  // shrink phone photos in the browser so the live version uploads fast on weak signal
+  function shrink(file, cb) {
+    var img = new Image(), u = URL.createObjectURL(file);
+    img.onload = function () { var m = 1400, s = Math.min(1, m / Math.max(img.width, img.height)), c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(u); cb(c.toDataURL('image/jpeg', 0.8)); };
+    img.onerror = function () { URL.revokeObjectURL(u); };
+    img.src = u;
+  }
+
+  // steps
+  function check() {
+    if (step === 1 && !S.project.length) return 'Pick at least one.';
+    if (step === 2) { if (!S.areas.length) return 'Add at least one part of the yard.';
+      if (!S.areas.some(function (a) { return a.photos.filter(Boolean).length; })) return 'Add at least one photo so we have something to design from.'; }
+    if (step === 3 && !S.look) return 'Pick an overall look.';
+    if (step === 5) { if (!$('#name').value.trim()) return 'Add your name.'; if ($('#phone').value.replace(/\D/g, '').length < 10) return 'Add a phone number we can reach you at.'; }
+    return '';
+  }
+  function show(n) {
+    step = n; $$('[data-step]').forEach(function (s) { s.hidden = +s.dataset.step !== n; });
+    $$('#steps i').forEach(function (d, i) { d.classList.toggle('on', i < Math.min(n, 5)); });
+    $('#steps').hidden = n === 6; if (n === 6) brief(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-next]')) { var m = check(), er = $('[data-step="' + step + '"] [data-err]'); if (er) er.textContent = m; if (!m) show(step + 1); }
+    if (e.target.closest('[data-back]')) show(step - 1);
+  });
+  $('#restart').onclick = function () { location.reload(); };
+
+  var HEX = { White: '#f7f7f2', Yellow: '#f2c230', Orange: '#ee8a2c', Red: '#c8352f', Pink: '#e77fa6', Purple: '#8a63c7', Blue: '#4f7fd1', 'Mostly green': '#4c8a57' };
+  function brief() {
+    var n = S.areas.reduce(function (t, a) { return t + a.photos.filter(Boolean).length; }, 0);
+    var kv = function (k, v) { return '<span>' + k + '</span><div>' + (v || '<i style="color:#9a9a9a">not answered</i>') + '</div>'; };
+    $('#brief').innerHTML = '<div class="brief-h"><span>New yard design request</span><small style="color:#6b756d">' + new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) + '</small></div>' +
+      '<div class="bsec"><h4>' + esc($('#name').value.trim()) + '</h4><div class="kv">' + kv('Phone', esc($('#phone').value)) + kv('Email', esc($('#email').value)) + kv('Address', esc($('#addr').value)) + '</div></div>' +
+      '<div class="bsec"><h4>The project</h4><div class="kv">' + kv('Wants', esc(S.project.join(', '))) + kv('Budget', esc(S.budget)) + kv('Timing', esc(S.timing)) + kv('Notes', esc($('#notes').value)) + '</div></div>' +
+      '<div class="bsec"><h4>Style</h4><div class="kv">' + kv('Look', esc(S.look)) + kv('Include', esc(S.plants.join(', '))) +
+        kv('Colors', S.colors.length ? '<span class="dots">' + S.colors.map(function (c) { return '<i style="background:' + HEX[c] + '" title="' + c + '"></i>'; }).join('') + '</span> ' + esc(S.colors.join(', ')) : '') +
+        kv('Upkeep', esc(S.upkeep)) + kv('Plan around', esc(S.flags.join(', '))) + '</div></div>' +
+      '<div class="bsec"><h4>Yard areas (' + S.areas.length + ') and photos (' + n + ')</h4></div>' +
+      S.areas.map(function (a) {
+        return '<div class="bsec"><h4>' + esc(a.name) + '</h4><div class="kv">' + kv('Sun', esc(a.sun)) + kv('Size', esc(a.size)) + kv('There now', esc(a.existing)) + kv('Note', esc(a.note)) + '</div>' +
+          '<div class="bph">' + SLOTS.map(function (s, i) { return a.photos[i] ? '<div style="background-image:url(' + a.photos[i] + ')"></div>' : '<div>' + s + ': none</div>'; }).join('') + '</div></div>'; }).join('');
+  }
+  show(1);
+})();
+</script>
+</body>
+</html>
