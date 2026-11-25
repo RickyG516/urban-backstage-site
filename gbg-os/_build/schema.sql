@@ -41,3 +41,10 @@ CREATE TABLE IF NOT EXISTS activity (
 );
 CREATE INDEX IF NOT EXISTS idx_tasks_due ON tasks(status, due);
 CREATE INDEX IF NOT EXISTS idx_jobs_stage ON jobs(stage);
+
+CREATE TABLE IF NOT EXISTS gear (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, services TEXT, category TEXT, priority TEXT DEFAULT 'must', qty TEXT, est_low REAL, est_high REAL, buy_status TEXT DEFAULT 'need', buy_by TEXT, notes TEXT, sort INTEGER DEFAULT 0, created_at TEXT DEFAULT (datetime('now')), updated_at TEXT DEFAULT (datetime('now')));
+CREATE TABLE IF NOT EXISTS gear_owners (gear_id INTEGER NOT NULL, user TEXT NOT NULL, note TEXT, at TEXT DEFAULT (datetime('now')), PRIMARY KEY (gear_id, user));
+CREATE TABLE IF NOT EXISTS roles (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, blurb TEXT, sort INTEGER DEFAULT 0, owner TEXT, notes TEXT, active INTEGER NOT NULL DEFAULT 1, created_at TEXT DEFAULT (datetime('now')));
+CREATE TABLE IF NOT EXISTS role_scores (role_id INTEGER NOT NULL, user TEXT NOT NULL, skill INTEGER, want INTEGER, at TEXT DEFAULT (datetime('now')), PRIMARY KEY (role_id, user));
+CREATE TABLE IF NOT EXISTS role_suggestions (id INTEGER PRIMARY KEY AUTOINCREMENT, who TEXT NOT NULL, name TEXT NOT NULL, note TEXT, status TEXT NOT NULL DEFAULT 'open', role_id INTEGER, at TEXT DEFAULT (datetime('now')), decided_at TEXT);
+CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT);

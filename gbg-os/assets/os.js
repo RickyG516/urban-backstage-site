@@ -12,11 +12,14 @@
     color: '#e36b1e',
     sections: [
       { id: 'hub',      name: 'Hub',      href: '/gbg-os/' },
+      { id: 'start',    name: 'Start here', href: '/gbg-os/start/' },
+      { id: 'roles',    name: 'Roles',    href: '/gbg-os/roles/' },
       { id: 'tasks',    name: 'Tasks',    href: '/gbg-os/tasks/' },
       { id: 'launch',   name: 'Launch',   href: '/gbg-os/launch/' },
       { id: 'services', name: 'Services', href: '/gbg-os/services/' },
       { id: 'jobs',     name: 'Jobs',     href: '/gbg-os/jobs/' },
       { id: 'contacts', name: 'Contacts', href: '/gbg-os/contacts/' },
+      { id: 'gear',     name: 'Gear',     href: '/gbg-os/gear/' },
       { id: 'playbook', name: 'Playbook', href: '/gbg-os/playbook/' },
       { id: 'web',      name: 'Website & Content', href: '/gbg-os/web/' },
       { id: 'finance',  name: 'Finance',  href: '/gbg-os/finance/' }

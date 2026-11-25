@@ -1,11 +1,12 @@
 /* gbg-os-api: GBG Dubuque CRM backend.
  * D1 binding: DB (gbg-os). Email Service binding: EMAIL (sends from gbg.urbanbackstage.com).
- * Secrets: PIN_RICKY, PIN_DOUG, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN.
+ * Secrets: PIN_RICKY, PIN_DOUG, PIN_KEVIN, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN.
  * No secrets live in this file. Browser sends x-gbg-user + x-gbg-key (HMAC of user).
  * Deploy runbook: gbg-os/_build/WORKER.md */
 
 const ORIGINS = ['https://urbanbackstage.com', 'http://localhost:8765'];
-const USERS = ['ricky', 'doug'];
+const USERS = ['ricky', 'doug', 'kevin'];
+const OWNERS = ['ricky', 'doug', 'kevin', 'both'];
 const STAGES = ['lead', 'consult', 'estimate', 'booked', 'done', 'review', 'lost'];
 const LAUNCH = '2027-04-01';
 const ALERT_FROM = 'alerts@gbg.urbanbackstage.com';
@@ -158,7 +159,7 @@ export default {
       if (p === '/pin' && req.method === 'POST') {
         const b = await body(req);
         const u = String(b.user || '').toLowerCase();
-        const want = u === 'ricky' ? env.PIN_RICKY : u === 'doug' ? env.PIN_DOUG : null;
+        const want = u === 'ricky' ? env.PIN_RICKY : u === 'doug' ? env.PIN_DOUG : u === 'kevin' ? env.PIN_KEVIN : null;
         if (!want || !same(String(b.pin || ''), want)) {
           await new Promise(r => setTimeout(r, 1500));
           return json(req, { ok: false, error: 'wrong PIN' }, 401);
@@ -198,7 +199,8 @@ export default {
         const owner = url.searchParams.get('owner');
         let sql = 'SELECT * FROM tasks WHERE 1=1', a = [];
         if (st !== 'all') { sql += ' AND status=?'; a.push(st); }
-        if (owner && owner !== 'all') { sql += " AND (owner=? OR owner='both')"; a.push(owner); }
+        if (owner === 'kevin') { sql += " AND owner='kevin'"; }
+        else if (owner && owner !== 'all') { sql += " AND (owner=? OR owner='both')"; a.push(owner); }
         const tq = s(url.searchParams.get('q'));
         if (tq) { sql += ' AND (title LIKE ? OR notes LIKE ? OR area LIKE ? OR source LIKE ?)'; const l = '%' + tq + '%'; a.push(l, l, l, l); }
         sql += st === 'done' ? ' ORDER BY done_at DESC LIMIT 200' : st === 'all' ? " ORDER BY status='done', due IS NULL, due, id LIMIT 500" : ' ORDER BY due IS NULL, due, id LIMIT 500';
@@ -209,7 +211,7 @@ export default {
         const b = await body(req);
         if (!s(b.title)) return json(req, { ok: false, error: 'title required' }, 400);
         const r = await DB.prepare('INSERT INTO tasks (title,owner,due,area,notes,job_id,key_date,source) VALUES (?,?,?,?,?,?,?,?)')
-          .bind(s(b.title), ['ricky', 'doug', 'both'].includes(b.owner) ? b.owner : who, s(b.due), s(b.area), s(b.notes), b.job_id || null, b.key_date ? 1 : 0, 'Added by ' + who).run();
+          .bind(s(b.title), OWNERS.includes(b.owner) ? b.owner : who, s(b.due), s(b.area), s(b.notes), b.job_id || null, b.key_date ? 1 : 0, 'Added by ' + who).run();
         await log(env, who, 'task_add', b.job_id ? 'job' : 'task', b.job_id || r.meta.last_row_id, b.title);
         return json(req, { ok: true, id: r.meta.last_row_id });
       }
@@ -220,7 +222,7 @@ export default {
         if (!cur) return json(req, { ok: false, error: 'not found' }, 404);
         const n = {
           title: b.title !== undefined ? s(b.title) : cur.title,
-          owner: ['ricky', 'doug', 'both'].includes(b.owner) ? b.owner : cur.owner,
+          owner: OWNERS.includes(b.owner) ? b.owner : cur.owner,
           due: b.due !== undefined ? s(b.due) : cur.due,
           notes: b.notes !== undefined ? s(b.notes) : cur.notes,
           status: ['open', 'done'].includes(b.status) ? b.status : cur.status
@@ -357,6 +359,132 @@ export default {
         if (!['job', 'contact', 'task'].includes(b.ref_type) || !b.ref_id || !s(b.note)) return json(req, { ok: false, error: 'note required' }, 400);
         await log(env, who, 'note', b.ref_type, +b.ref_id, b.note);
         if (b.ref_type === 'job') await DB.prepare("UPDATE jobs SET updated_at=datetime('now') WHERE id=?").bind(+b.ref_id).run();
+        return json(req, { ok: true });
+      }
+
+      /* roles: blind 1-10 ratings, Ricky locks owners */
+      if (p === '/roles' && req.method === 'GET') {
+        const roles = (await DB.prepare('SELECT * FROM roles WHERE active=1 ORDER BY sort, id').all()).results;
+        const ids = new Set(roles.map(r => r.id));
+        const sc = (await DB.prepare('SELECT * FROM role_scores').all()).results.filter(x => ids.has(x.role_id));
+        const progress = {};
+        for (const u of USERS) progress[u] = sc.filter(x => x.user === u && x.skill && x.want).length;
+        let revealed = !!(await DB.prepare("SELECT v FROM settings WHERE k='roles_revealed'").first());
+        if (!revealed && roles.length && USERS.every(u => progress[u] >= roles.length)) {
+          await DB.prepare("INSERT OR REPLACE INTO settings (k,v) VALUES ('roles_revealed', datetime('now'))").run();
+          await log(env, 'system', 'roles_reveal', null, null, 'Everyone finished rating roles');
+          revealed = true;
+        }
+        const sug = (await DB.prepare('SELECT * FROM role_suggestions ORDER BY id DESC LIMIT 100').all()).results;
+        return json(req, { ok: true, user: who, roles, total: roles.length, progress, revealed,
+          mine: sc.filter(x => x.user === who), scores: revealed ? sc : [], suggestions: sug });
+      }
+      m = p.match(/^\/roles\/(\d+)\/score$/);
+      if (m && req.method === 'POST') {
+        const id = +m[1], b = await body(req);
+        const r = await DB.prepare('SELECT id FROM roles WHERE id=? AND active=1').bind(id).first();
+        if (!r) return json(req, { ok: false, error: 'not found' }, 404);
+        const n = v => { const x = parseInt(v, 10); return x >= 1 && x <= 10 ? x : null; };
+        const cur = await DB.prepare('SELECT * FROM role_scores WHERE role_id=? AND user=?').bind(id, who).first();
+        const skill = b.skill !== undefined ? n(b.skill) : (cur ? cur.skill : null);
+        const want = b.want !== undefined ? n(b.want) : (cur ? cur.want : null);
+        await DB.prepare("INSERT INTO role_scores (role_id,user,skill,want) VALUES (?,?,?,?) ON CONFLICT(role_id,user) DO UPDATE SET skill=excluded.skill, want=excluded.want, at=datetime('now')")
+          .bind(id, who, skill, want).run();
+        const tot = await DB.prepare('SELECT COUNT(*) n FROM roles WHERE active=1').first();
+        const mineDone = await DB.prepare('SELECT COUNT(*) n FROM role_scores s JOIN roles r ON r.id=s.role_id WHERE r.active=1 AND s.user=? AND s.skill IS NOT NULL AND s.want IS NOT NULL').bind(who).first();
+        const wasDone = cur && cur.skill && cur.want;
+        if (!wasDone && skill && want && mineDone.n === tot.n) await log(env, who, 'roles_done', null, null, 'Finished rating every role');
+        return json(req, { ok: true, done: mineDone.n, total: tot.n });
+      }
+      m = p.match(/^\/roles\/(\d+)$/);
+      if (m && req.method === 'PATCH') {
+        if (who !== 'ricky') return json(req, { ok: false, error: 'Ricky makes the final call' }, 403);
+        const id = +m[1], b = await body(req);
+        const cur = await DB.prepare('SELECT * FROM roles WHERE id=?').bind(id).first();
+        if (!cur) return json(req, { ok: false, error: 'not found' }, 404);
+        const owner = b.owner !== undefined ? (USERS.includes(b.owner) || b.owner === 'shared' ? b.owner : null) : cur.owner;
+        const active = b.active !== undefined ? (b.active ? 1 : 0) : cur.active;
+        await DB.prepare('UPDATE roles SET owner=?, notes=?, active=? WHERE id=?').bind(owner, b.notes !== undefined ? s(b.notes) : cur.notes, active, id).run();
+        if (owner !== cur.owner) await log(env, who, 'role_owner', 'role', id, cur.name + ': ' + (owner ? (owner === 'shared' ? 'shared' : owner) : 'open'));
+        if (active !== cur.active) await log(env, who, active ? 'role_restore' : 'role_remove', 'role', id, cur.name);
+        return json(req, { ok: true });
+      }
+      if (p === '/roles/suggest' && req.method === 'POST') {
+        const b = await body(req);
+        if (!s(b.name)) return json(req, { ok: false, error: 'name required' }, 400);
+        const r = await DB.prepare('INSERT INTO role_suggestions (who,name,note) VALUES (?,?,?)').bind(who, s(b.name).slice(0, 120), s(b.note)).run();
+        await log(env, who, 'role_suggest', 'role_suggestion', r.meta.last_row_id, b.name);
+        return json(req, { ok: true, id: r.meta.last_row_id });
+      }
+      m = p.match(/^\/roles\/suggest\/(\d+)$/);
+      if (m && req.method === 'PATCH') {
+        if (who !== 'ricky') return json(req, { ok: false, error: 'Ricky makes the final call' }, 403);
+        const id = +m[1], b = await body(req);
+        const sg = await DB.prepare('SELECT * FROM role_suggestions WHERE id=?').bind(id).first();
+        if (!sg) return json(req, { ok: false, error: 'not found' }, 404);
+        if (!['added', 'passed', 'open'].includes(b.status)) return json(req, { ok: false, error: 'bad status' }, 400);
+        let roleId = sg.role_id;
+        if (b.status === 'added' && !roleId) {
+          const r = await DB.prepare('INSERT INTO roles (name,blurb,sort) VALUES (?,?,(SELECT IFNULL(MAX(sort),0)+1 FROM roles))').bind(sg.name, sg.note).run();
+          roleId = r.meta.last_row_id;
+        }
+        await DB.prepare("UPDATE role_suggestions SET status=?, role_id=?, decided_at=datetime('now') WHERE id=?").bind(b.status, roleId, id).run();
+        await log(env, who, 'role_suggest_' + b.status, 'role_suggestion', id, sg.name);
+        return json(req, { ok: true, role_id: roleId });
+      }
+
+      /* gear inventory */
+      if (p === '/gear' && req.method === 'GET') {
+        const items = await DB.prepare('SELECT * FROM gear ORDER BY sort, id').all();
+        const own = await DB.prepare('SELECT gear_id, user, note, at FROM gear_owners').all();
+        const by = {};
+        for (const o of own.results) (by[o.gear_id] = by[o.gear_id] || []).push(o);
+        return json(req, { ok: true, items: items.results.map(i => ({ ...i, owners: by[i.id] || [] })) });
+      }
+      if (p === '/gear' && req.method === 'POST') {
+        const b = await body(req);
+        if (!s(b.name)) return json(req, { ok: false, error: 'name required' }, 400);
+        const svc = ',' + (Array.isArray(b.services) ? b.services : String(b.services || 'shared').split(',')).map(x => String(x).trim()).filter(Boolean).join(',') + ',';
+        const r = await DB.prepare('INSERT INTO gear (name,services,category,priority,qty,notes,sort) VALUES (?,?,?,?,?,?,999)')
+          .bind(s(b.name), svc, s(b.category) || 'Other', b.priority === 'nice' ? 'nice' : 'must', s(b.qty), s(b.notes)).run();
+        await log(env, who, 'gear_add', 'gear', r.meta.last_row_id, b.name);
+        return json(req, { ok: true, id: r.meta.last_row_id });
+      }
+      m = p.match(/^\/gear\/(\d+)\/have$/);
+      if (m && req.method === 'POST') {
+        const id = +m[1], b = await body(req);
+        const g = await DB.prepare('SELECT name FROM gear WHERE id=?').bind(id).first();
+        if (!g) return json(req, { ok: false, error: 'not found' }, 404);
+        if (b.have) {
+          await DB.prepare("INSERT INTO gear_owners (gear_id,user,note) VALUES (?,?,?) ON CONFLICT(gear_id,user) DO UPDATE SET note=excluded.note, at=datetime('now')").bind(id, who, s(b.note)).run();
+          await log(env, who, 'gear_have', 'gear', id, g.name);
+        } else {
+          await DB.prepare('DELETE FROM gear_owners WHERE gear_id=? AND user=?').bind(id, who).run();
+          await log(env, who, 'gear_unhave', 'gear', id, g.name);
+        }
+        return json(req, { ok: true });
+      }
+      m = p.match(/^\/gear\/(\d+)$/);
+      if (m && req.method === 'PATCH') {
+        const id = +m[1], b = await body(req);
+        const cur = await DB.prepare('SELECT * FROM gear WHERE id=?').bind(id).first();
+        if (!cur) return json(req, { ok: false, error: 'not found' }, 404);
+        const num = v => (v === '' || v === null) ? null : (isNaN(+v) ? null : +v);
+        const svc = b.services !== undefined ? ',' + (Array.isArray(b.services) ? b.services : String(b.services).split(',')).map(x => String(x).trim()).filter(Boolean).join(',') + ',' : cur.services;
+        const bs = ['need', 'buying', 'bought'].includes(b.buy_status) ? b.buy_status : cur.buy_status;
+        await DB.prepare("UPDATE gear SET name=?,services=?,category=?,priority=?,qty=?,est_low=?,est_high=?,buy_status=?,buy_by=?,notes=?,updated_at=datetime('now') WHERE id=?")
+          .bind(b.name !== undefined ? (s(b.name) || cur.name) : cur.name, svc, b.category !== undefined ? s(b.category) : cur.category,
+            b.priority === 'nice' || b.priority === 'must' ? b.priority : cur.priority, b.qty !== undefined ? s(b.qty) : cur.qty,
+            b.est_low !== undefined ? num(b.est_low) : cur.est_low, b.est_high !== undefined ? num(b.est_high) : cur.est_high,
+            bs, bs !== cur.buy_status ? who : cur.buy_by, b.notes !== undefined ? s(b.notes) : cur.notes, id).run();
+        await log(env, who, bs !== cur.buy_status ? 'gear_' + bs : 'gear_edit', 'gear', id, cur.name);
+        return json(req, { ok: true });
+      }
+      if (m && req.method === 'DELETE') {
+        const g = await DB.prepare('SELECT name FROM gear WHERE id=?').bind(+m[1]).first();
+        if (!g) return json(req, { ok: false, error: 'not found' }, 404);
+        await DB.batch([DB.prepare('DELETE FROM gear_owners WHERE gear_id=?').bind(+m[1]), DB.prepare('DELETE FROM gear WHERE id=?').bind(+m[1])]);
+        await log(env, who, 'gear_delete', null, null, g.name);
         return json(req, { ok: true });
       }
 

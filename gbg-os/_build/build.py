@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "9"  # cache bust, bump on every os.css / os.js change
+V = "11"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -95,6 +95,9 @@ hub = sh("Pulse") + f"""  <div class="stats">
       <p class="whoami">Click any task to edit it. <span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
   </div>
 """ + sh("Sections") + f"""  <div class="grid">
+    <a class="card" href="/gbg-os/start/"><div class="card-top"><h3>Start here</h3><span class="tag or">New</span></div><p>How everything works and every tool we use, in one place.</p></a>
+    <a class="card" href="/gbg-os/roles/"><div class="card-top"><h3>Roles</h3><span class="tag or">New</span></div><p>Rate every role 1 to 10. Scores stay hidden until all three of us finish.</p></a>
+    <a class="card" href="/gbg-os/gear/"><div class="card-top"><h3>Gear</h3><span class="tag or">Live</span></div><p>Check off the tools you own. See which service is cheapest to start.</p></a>
     <a class="card" href="/gbg-os/tasks/"><div class="card-top"><h3>Tasks</h3><span class="tag or">Live</span></div><p>Every launch to do with an owner and a date. Check them off as you go.</p></a>
     <a class="card" href="/gbg-os/launch/"><div class="card-top"><h3>Launch</h3></div><p>Roadmap to April 1, next actions, open decisions, and everything to verify before the first job.</p></a>
     <a class="card" href="/gbg-os/services/"><div class="card-top"><h3>Services</h3></div><p>What we do in house, what goes to partners, and the gate each service has to clear before it books.</p></a>
@@ -237,17 +240,101 @@ contacts = """  <div class="stats">
 page("contacts", "contacts", "Contacts", "Contacts", "Every <span>person</span>",
      "Customers, partners and vendors. Click a name to open the full record.", contacts)
 
+# ---------- GEAR ----------
+gear = """  <div class="readiness" data-live="readiness"><p class="loading">Loading…</p></div>
+  <div class="note" data-live="bestbet" style="margin-top:12px"></div>
+  <div class="ctools">
+    <div class="filters" data-gshow><button class="on" data-show="all">Everything</button><button data-show="need">Still need</button><button data-show="have">We have</button></div>
+    <p class="hint2" style="margin:0">Tap a service card to switch lists. Check <b>I have it</b> for anything you own. More than one person can check the same item.</p>
+  </div>
+  <div class="card"><div data-live="gear"></div></div>
+""" + sh("Add an item to this list") + """  <form class="card form" data-form="gear">
+    <input name="name" placeholder="Item" required class="wide">
+    <input name="category" placeholder="Category (Tools, Materials, Safety…)">
+    <input name="qty" placeholder="How many">
+    <select name="priority"><option value="must">Must have to start</option><option value="nice">Nice to have</option></select>
+    <button type="submit">Add item</button>
+  </form>
+  <div class="note"><b>How the numbers work.</b> A must have counts as covered when anyone has it or it was bought for GBG. Open any item to add a low and high quote. The service cards then show what is left to spend, so we start with whatever costs the least to get going. Book jobs first, buy after.</div>
+"""
+page("gear", "gear", "Gear", "Gear", "What we <span>have</span>",
+     "Everything we need to start driveway sealing and permanent lights, plus junk removal and trash cans for comparison.", gear)
+
+# ---------- ROLES ----------
+roles = """  <div class="rprog" data-live="rprog"><p class="loading">Loading…</p></div>
+  <div class="note" style="margin-top:12px"><b>How this works.</b> Rate every role twice: how good you'd be at it, and how bad you want it. Be honest, nobody can see your scores until Ricky, Doug and Kevin have all finished. Then everyone's scores show up, we talk it through, and Ricky makes the final call if we can't agree. Change a score any time by tapping a different number.</div>
+  <div data-live="roles"></div>
+""" + sh("Did we miss a role?") + """  <form class="card form" data-form="rolesug">
+    <input name="name" placeholder="Role name" required class="wide">
+    <input name="note" placeholder="What it covers" class="wide">
+    <button type="submit">Suggest it</button>
+  </form>
+  <div data-live="rolesug"></div>
+"""
+page("roles", "roles", "Roles", "Roles", "Who does <span>what</span>",
+     "Every job in the business, rated by each of us. This is how we start handing things off.", roles)
+
+# ---------- START HERE ----------
+def tool(name, href, what, who):
+    link = f'<div class="chips">{chip("Open", href)}</div>' if href else ""
+    return f'<div class="card tool"><div class="card-top"><h3>{name}</h3>{link}</div><p>{what}</p><p class="access">{who}</p></div>'
+start = sh("Logging in") + """  <div class="grid">
+    <div class="card"><h3>First time on a device</h3><ol class="steps">
+      <li>Go to <b>urbanbackstage.com/gbg-os</b> (no www).</li>
+      <li>Type your email. Cloudflare emails you a code. Type the code.</li>
+      <li>On the orange GBG screen pick your name and enter your PIN. Ricky sends PINs by text, never in a doc.</li>
+      <li>That device stays logged in. Use Sign out on the Hub if it is a shared device.</li>
+    </ol></div>
+    <div class="card"><h3>If it won't let you in</h3><ul>
+      <li>Make sure it says urbanbackstage.com, not www.</li>
+      <li>No code? Check junk mail. Codes come from Cloudflare.</li>
+      <li>Wrong PIN wait is a couple seconds. Try again or text Ricky.</li>
+    </ul></div>
+  </div>
+""" + sh("What each page is for") + """  <div class="grid">
+    <a class="card" href="/gbg-os/"><h3>Hub</h3><p>Your tasks due now, key dates, what just got done, and who did what.</p></a>
+    <a class="card" href="/gbg-os/tasks/"><h3>Tasks</h3><p>Everything with an owner and a date. Tap the box to finish it (Undo is there if you misclick). Tap the words to change the date, owner or add notes like who you talked to. Search at the top.</p></a>
+    <a class="card" href="/gbg-os/jobs/"><h3>Jobs</h3><p>Every lead from the phone line and the website lands here. Tap a card to see the customer, add notes, set a follow up, move it along. Marking a job Done creates the closeout task on its own.</p></a>
+    <a class="card" href="/gbg-os/contacts/"><h3>Contacts</h3><p>Customers, partners and vendors. Search, open anyone, archive or delete. The EXAMPLE entries show how a filled out record looks.</p></a>
+    <a class="card" href="/gbg-os/roles/"><h3>Roles</h3><p>Rate every role on how good you'd be and how bad you want it. Nobody sees anyone's scores until all three finish. Think we missed a role? Use the suggestion box at the bottom.</p></a>
+    <a class="card" href="/gbg-os/gear/"><h3>Gear</h3><p>Check off the tools you already own. Add quotes. The cards show which service is cheapest to start.</p></a>
+    <a class="card" href="/gbg-os/launch/"><h3>Launch, Services, Playbook</h3><p>The road to April, what we offer and the rules for how we work.</p></a>
+  </div>
+""" + sh("Rules") + """  <div class="card"><ul>
+    <li><b>Money:</b> nobody spends GBG money without both owners agreeing first. No one gets paid yet. Starter money is held in UNC or a personal savings account until the GBG bank account opens in March.</li>
+    <li><b>Buying gear:</b> book the job first, buy the gear after. Check the Gear page before buying so we don't double up.</li>
+    <li><b>What we say in public:</b> no made up reviews, prices, job counts, years in business or licenses. Ever.</li>
+    <li><b>Leads:</b> call back the same day when you can. Log what happened as a note on the job.</li>
+    <li><b>Sunday 8:30 PM check in:</b> 20 minutes. Last week, this week, anything stuck.</li>
+  </ul></div>
+""" + sh("Every tool we use") + f"""  <div class="grid">
+    {tool("GBG OS", "/gbg-os/", "This site. Tasks, jobs, contacts, gear, everything.", "Ricky, Doug, Kevin")}
+    {tool("Phone line (563) 500-2494", "", "AI receptionist answers 24/7. Real calls become a lead in Jobs plus a Call back task, and email Ricky and Doug. Spam gets skipped.", "Set up by Ricky")}
+    {tool("Website", "https://gbgdubuque.com/", "gbgdubuque.com. Changes go through Ricky.", "Ricky edits")}
+    {tool("Facebook page", "https://www.facebook.com/gbgdubuque", "Posts are scheduled through Feb. Like and share, answer messages.", "Ricky, Doug (accept the Meta invite)")}
+    {tool("Instagram", "https://www.instagram.com/gbgdubuque/", "@gbgdubuque. Messages land in the Facebook inbox.", "Ricky")}
+    {tool("Meta Business Suite", "https://business.facebook.com/", "Where posts get scheduled and messages get answered.", "Ricky, Doug after the invite")}
+    {tool("Google Business Profile", "https://business.google.com/", "Created, not verified yet. Needs a short video of the truck, magnet and gear.", "Ricky")}
+    {tool("GBG Drive", D["root"], "SOPs, trackers, legal and money docs. Organized by department.", "Ricky, Doug")}
+    {tool("Marketing files", D["f_unc_client"], "Print files, social graphics, brand assets. Use the 2026-11-24 print files.", "Ricky, Doug")}
+    {tool("Google Calendar", "https://calendar.google.com/", "Sunday 8:30 PM check in and the key dates.", "Ricky")}
+  </div>
+  <div class="note"><b>No passwords on this page or anywhere in the OS.</b> If you need into something, ask Ricky.</div>
+"""
+page("start", "start", "Start here", "Start here", "Start <span>here</span>",
+     "One place for how everything works and where everything lives. Bookmark this page.", start)
+
 # ---------- TASKS ----------
 tasks = """  <input class="search" data-tsearch placeholder="Search tasks: DIAL, insurance, Mark, sealer…">
   <div class="filters" data-filter>
     <button class="on" data-owner="mine">Mine</button><button data-owner="all">Everyone</button>
-    <button data-owner="ricky">Ricky</button><button data-owner="doug">Doug</button>
+    <button data-owner="ricky">Ricky</button><button data-owner="doug">Doug</button><button data-owner="kevin">Kevin</button>
     <span class="sep"></span><button data-status="open">Open</button><button data-status="done">Closed, last 30 days</button>
   </div>
   <div class="card"><div data-live="tasks" data-owner="mine" data-status="open"></div></div>
 """ + sh("Add a task") + """  <form class="card form" data-form="task">
     <input name="title" placeholder="What needs doing" required class="wide">
-    <select name="owner"><option value="ricky">Ricky</option><option value="doug">Doug</option><option value="both">Both</option></select>
+    <select name="owner"><option value="ricky">Ricky</option><option value="doug">Doug</option><option value="kevin">Kevin</option><option value="both">Both</option></select>
     <input name="due" type="date">
     <select name="area"><option value="">Area</option><option>compliance</option><option>legal</option><option>admin</option><option>finance</option><option>marketing</option><option>website</option><option>partners</option><option>ops</option><option>sales</option></select>
     <button type="submit">Add task</button>

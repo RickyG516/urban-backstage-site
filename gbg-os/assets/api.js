@@ -39,7 +39,8 @@
     el.innerHTML = '<form class="lock-card"><div class="lock-logo">GBG <span>OS</span></div>' +
       '<p>Pick your name and enter your PIN. This device stays unlocked after.</p>' +
       '<div class="who"><label><input type="radio" name="u" value="ricky"' + (who === 'ricky' ? ' checked' : '') + '> Ricky</label>' +
-      '<label><input type="radio" name="u" value="doug"' + (who === 'doug' ? ' checked' : '') + '> Doug</label></div>' +
+      '<label><input type="radio" name="u" value="doug"' + (who === 'doug' ? ' checked' : '') + '> Doug</label>' +
+      '<label><input type="radio" name="u" value="kevin"' + (who === 'kevin' ? ' checked' : '') + '> Kevin</label></div>' +
       '<input class="pin" name="pin" type="password" autocomplete="current-password" placeholder="PIN" required>' +
       '<button type="submit">Unlock</button><div class="err"></div></form>';
     document.body.appendChild(el);
@@ -59,7 +60,7 @@
     });
   }
 
-  var NAME = { ricky: 'Ricky', doug: 'Doug', both: 'Both' };
+  var NAME = { ricky: 'Ricky', doug: 'Doug', kevin: 'Kevin', both: 'Both', website: 'Website', 'gbg-receptionist': 'Phone line', system: 'System' };
   var STAGE = { lead: 'Lead', consult: 'Consult', estimate: 'Estimate sent', booked: 'Booked', done: 'Done', review: 'Review asked', lost: 'Lost' };
   function fmt(d) { if (!d) return 'No date'; var x = new Date(d + 'T12:00:00'); return x.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
   function daysBetween(a, b) { return Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 864e5); }
@@ -146,7 +147,7 @@
   function renderHub() {
     var box = document.querySelector('[data-live=hub]'); if (!box) return;
     api('/summary').then(function (d) {
-      var mine = 0; d.open.forEach(function (o) { if (o.owner === d.user || o.owner === 'both') mine += o.n; });
+      var mine = 0; d.open.forEach(function (o) { if (o.owner === d.user || (o.owner === 'both' && d.user !== 'kevin')) mine += o.n; });
       var total = 0; d.open.forEach(function (o) { total += o.n; });
       var jobs = 0, booked = 0; d.stages.forEach(function (s) { if (s.stage !== 'lost') jobs += s.n; if (s.stage === 'booked') booked = s.n; });
       set('open', total); set('mine', mine); set('overdue', d.overdue); set('week', d.this_week); set('jobs', jobs); set('booked', booked); set('done', d.done);
@@ -252,13 +253,13 @@
         '<form class="dform" data-f="job"><h3>Job</h3>' +
           fld('Stage', '<select name="stage">' + opt(['lead', 'consult', 'estimate', 'booked', 'done', 'review', 'lost'], j.stage, ['Lead', 'Consult', 'Estimate sent', 'Booked', 'Done', 'Review asked', 'Lost']) + '</select>') +
           fld('Service', '<select name="service"><option value="">Not set</option>' + opt(SERVICES, j.service) + '</select>') +
-          fld('Owner', '<select name="owner">' + opt(['ricky', 'doug'], j.owner, ['Ricky', 'Doug']) + '</select>') +
+          fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'kevin'], j.owner, ['Ricky', 'Doug', 'Kevin']) + '</select>') +
           fld('Partner', '<select name="partner">' + opt(PARTNERS, j.partner) + '</select>') +
           fld('Scheduled for', inp('scheduled_for', j.scheduled_for, 'date')) +
           fld('Job notes', '<textarea name="notes" rows="3">' + esc(j.notes || '') + '</textarea>') +
           '<button class="save">Save changes</button></form>' +
         '<h3>Follow ups</h3><ul class="tasks">' + (d.tasks.length ? d.tasks.map(function (t) { TASKS[t.id] = t; return taskRow(t, new Date().toISOString().slice(0, 10)); }).join('') : '') + '</ul>' +
-        '<form class="dform inline" data-f="fu">' + inp('title', '') + '<input name="due" type="date"><select name="owner">' + opt(['ricky', 'doug', 'both'], j.owner || ls(LS_USER), ['Ricky', 'Doug', 'Both']) + '</select><button>Add follow up</button></form>' +
+        '<form class="dform inline" data-f="fu">' + inp('title', '') + '<input name="due" type="date"><select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], j.owner || ls(LS_USER), ['Ricky', 'Doug', 'Kevin', 'Both']) + '</select><button>Add follow up</button></form>' +
         '<h3>History</h3>' + nb.html + timeline(d.activity);
       body.querySelector('[data-f=fu] input[name=title]').placeholder = 'Call back, send estimate…';
       nb.bind(body); bindTicks(body, function () { openJob(id); }); bindTaskOpen(body);
@@ -321,7 +322,7 @@
   function openTask(t) {
     var body = drawer('Task', '', function () { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); renderHub(); });
     body.innerHTML = '<form class="dform" data-f="t">' + fld('Task', '<textarea name="title" rows="2">' + esc(t.title) + '</textarea>') +
-      fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'both'], t.owner, ['Ricky', 'Doug', 'Both']) + '</select>') +
+      fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], t.owner, ['Ricky', 'Doug', 'Kevin', 'Both']) + '</select>') +
       fld('Due', inp('due', t.due, 'date')) + fld('Notes', '<textarea name="notes" rows="4" placeholder="Who you talked to, what they said…">' + esc(t.notes || '') + '</textarea>') +
       '<div class="meta">' + (t.source ? 'From: ' + esc(t.source) : '') + (t.gate ? ' &middot; Gate ' + esc(t.gate) : '') + (t.done_by ? ' &middot; Done by ' + esc(NAME[t.done_by] || t.done_by) : '') + '</div>' +
       '<div class="row"><button class="save">Save</button><button type="button" class="ghost" data-toggle>' + (t.status === 'done' ? 'Reopen' : 'Mark done') + '</button>' +
@@ -402,7 +403,168 @@
     });
   }
 
+  /* ---------- roles ---------- */
+  var RWHO = ['ricky', 'doug', 'kevin'];
+  function scale(id, field, cur) {
+    var h = '<div class="scale" data-r="' + id + '" data-k="' + field + '">';
+    for (var i = 1; i <= 10; i++) h += '<button type="button" data-v="' + i + '"' + (cur === i ? ' class="on"' : '') + '>' + i + '</button>';
+    return h + '</div>';
+  }
+  function renderRoles() {
+    var el = document.querySelector('[data-live=roles]'); if (!el) return;
+    api('/roles').then(function (d) {
+      var me = d.user, mine = {}, all = {};
+      d.mine.forEach(function (x) { mine[x.role_id] = x; });
+      d.scores.forEach(function (x) { (all[x.role_id] = all[x.role_id] || {})[x.user] = x; });
+      var pg = document.querySelector('[data-live=rprog]');
+      if (pg) pg.innerHTML = RWHO.map(function (u) {
+        var n = d.progress[u] || 0, done = n >= d.total;
+        return '<div class="rp' + (done ? ' done' : '') + '"><div class="rk">' + NAME[u] + (u === me ? ' (you)' : '') + '</div><div class="rv">' + n + ' of ' + d.total + '</div><div class="bar"><i style="width:' + (d.total ? Math.round(n / d.total * 100) : 0) + '%"></i></div><div class="rs">' + (done ? 'Done' : 'Still rating') + '</div></div>';
+      }).join('') + '<div class="rp state"><div class="rk">Scores</div><div class="rv">' + (d.revealed ? 'Open' : 'Hidden') + '</div><div class="rs">' + (d.revealed ? 'Everyone finished. Talk it through, Ricky locks owners.' : 'They open when all three finish.') + '</div></div>';
+      el.innerHTML = d.roles.map(function (r) {
+        var m = mine[r.id] || {}, rated = m.skill && m.want;
+        var res = '';
+        if (d.revealed) {
+          var a = all[r.id] || {};
+          res = '<div class="rres">' + RWHO.map(function (u) {
+            var x = a[u];
+            return '<div class="rr ' + u + '"><b>' + NAME[u] + '</b><span>Good at it <i>' + (x && x.skill || '?') + '</i></span><span>Want it <i>' + (x && x.want || '?') + '</i></span></div>';
+          }).join('') + '</div>';
+          var ownerTxt = r.owner ? (r.owner === 'shared' ? 'Shared' : NAME[r.owner]) : 'Not decided';
+          res += '<div class="rown">Owner: ' + (me === 'ricky'
+            ? '<select data-owner="' + r.id + '">' + opt(['', 'ricky', 'doug', 'kevin', 'shared'], r.owner, ['Not decided', 'Ricky', 'Doug', 'Kevin', 'Shared']) + '</select>'
+            : '<b>' + ownerTxt + '</b>') + '</div>';
+        }
+        return '<div class="card role' + (rated ? ' rated' : '') + '"><div class="card-top"><h3>' + esc(r.name) + '</h3>' + (rated ? '<span class="tag go">Rated</span>' : '<span class="tag wait">To rate</span>') + '</div>' +
+          (r.blurb ? '<p>' + esc(r.blurb) + '</p>' : '') +
+          '<div class="rq"><span>How good would I be?</span>' + scale(r.id, 'skill', m.skill) + '</div>' +
+          '<div class="rq"><span>How bad do I want it?</span>' + scale(r.id, 'want', m.want) + '</div>' + res + '</div>';
+      }).join('');
+      el.querySelectorAll('.scale button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var sc = b.parentNode, body = {}; body[sc.dataset.k] = +b.dataset.v;
+          sc.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+          api('/roles/' + sc.dataset.r + '/score', { method: 'POST', body: body }).then(function (r) {
+            if (r.done === r.total) toast('All ' + r.total + ' rated. Nice.');
+            renderRoles();
+          }).catch(function () { toast('Could not save'); renderRoles(); });
+        });
+      });
+      el.querySelectorAll('[data-owner]').forEach(function (sel) {
+        sel.addEventListener('change', function () {
+          api('/roles/' + sel.dataset.owner, { method: 'PATCH', body: { owner: sel.value || null } }).then(function () { toast('Owner saved'); }).catch(function () { toast('Could not save'); });
+        });
+      });
+      var sg = document.querySelector('[data-live=rolesug]');
+      if (sg) {
+        var open = d.suggestions.filter(function (x) { return x.status === 'open'; }), past = d.suggestions.filter(function (x) { return x.status !== 'open'; });
+        sg.innerHTML = (open.length || past.length) ? '<div class="card"><h3>Suggestions</h3>' + open.concat(past).map(function (x) {
+          return '<div class="sug ' + x.status + '"><div><b>' + esc(x.name) + '</b>' + (x.note ? ' <span>' + esc(x.note) + '</span>' : '') + '<div class="tmeta">' + NAME[x.who] + ' &middot; ' + when(x.at) +
+            (x.status === 'added' ? ' &middot; Added as a role' : x.status === 'passed' ? ' &middot; Passed on' : '') + '</div></div>' +
+            (me === 'ricky' && x.status === 'open' ? '<div class="sugb"><button data-sug="' + x.id + '" data-st="added">Add role</button><button class="ghost" data-sug="' + x.id + '" data-st="passed">Pass</button></div>' : '') + '</div>';
+        }).join('') + '</div>' : '';
+        sg.querySelectorAll('[data-sug]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            api('/roles/suggest/' + b.dataset.sug, { method: 'PATCH', body: { status: b.dataset.st } }).then(function () { toast(b.dataset.st === 'added' ? 'Role added' : 'Passed'); renderRoles(); }).catch(function () { toast('Could not save'); });
+          });
+        });
+      }
+    }).catch(function () {});
+  }
+
+  /* ---------- gear inventory ---------- */
+  var GSVC = { sealing: 'Driveway sealing', lights: 'Permanent lights', junk: 'Junk removal', trash: 'Trash can cleaning', proof: 'Proof of business', shared: 'Shared basics' };
+  var GVIEW = { svc: 'sealing', show: 'all' }, GEAR = [];
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function gHas(g) { return g.owners.length > 0 || g.buy_status === 'bought'; }
+  function renderGear() {
+    var el = document.querySelector('[data-live=gear]'); if (!el) return;
+    api('/gear').then(function (d) {
+      GEAR = d.items;
+      var me = ls(LS_USER);
+      // readiness per service
+      var rd = document.querySelector('[data-live=readiness]');
+      if (rd) {
+        var stats = ['sealing', 'lights', 'junk', 'trash', 'proof'].map(function (k) {
+          var must = GEAR.filter(function (g) { return g.services.indexOf(',' + k + ',') > -1 && g.priority === 'must'; });
+          var have = must.filter(gHas), need = must.filter(function (g) { return !gHas(g); });
+          var lo = 0, hi = 0, priced = 0;
+          need.forEach(function (g) { if (g.est_low != null || g.est_high != null) { priced++; lo += (g.est_low != null ? g.est_low : g.est_high); hi += (g.est_high != null ? g.est_high : g.est_low); } });
+          return { k: k, total: must.length, have: have.length, need: need.length, lo: lo, hi: hi, priced: priced, pct: must.length ? Math.round(have.length / must.length * 100) : 0 };
+        });
+        var ranked = stats.filter(function (x) { return x.k !== 'proof'; }).slice().sort(function (a, b) { return b.pct - a.pct || a.need - b.need; });
+        rd.innerHTML = stats.map(function (x) {
+          var cost = x.need === 0 ? 'Ready on gear' : x.priced ? 'Still to buy: ' + money(x.lo) + (x.hi !== x.lo ? ' to ' + money(x.hi) : '') + (x.priced < x.need ? ' + ' + (x.need - x.priced) + ' unpriced' : '') : x.need + ' items, no prices entered yet';
+          return '<button class="ready' + (GVIEW.svc === x.k ? ' on' : '') + '" data-gsvc="' + x.k + '"><div class="rk">' + GSVC[x.k] + '</div><div class="rv">' + x.pct + '%</div>' +
+            '<div class="bar"><i style="width:' + x.pct + '%"></i></div><div class="rs">' + x.have + ' of ' + x.total + ' must haves covered</div><div class="rs">' + cost + '</div></button>';
+        }).join('');
+        var svcs = stats.filter(function (x) { return x.k !== 'proof'; });
+        var allPriced = svcs.every(function (x) { return x.priced === x.need; });
+        if (allPriced) ranked = svcs.slice().sort(function (a, b) { return a.lo - b.lo || b.pct - a.pct; });
+        var top = ranked[0], bp = document.querySelector('[data-live=bestbet]');
+        if (bp) bp.innerHTML = !top ? '' : allPriced
+          ? '<b>Cheapest to start: ' + GSVC[top.k] + '.</b> ' + (top.need ? money(top.lo) + (top.hi !== top.lo ? ' to ' + money(top.hi) : '') + ' left to buy, ' + top.need + ' items.' : 'Everything is covered.')
+          : '<b>Closest to ready: ' + GSVC[top.k] + '.</b> ' + top.have + ' of ' + top.total + ' must haves covered' + (top.need ? ', ' + top.need + ' left.' : '.') + ' Add quotes to the items you still need and this switches to real dollars.';
+        rd.querySelectorAll('[data-gsvc]').forEach(function (b) { b.onclick = function () { GVIEW.svc = b.dataset.gsvc; renderGear(); }; });
+      }
+      var list = GEAR.filter(function (g) { return g.services.indexOf(',' + GVIEW.svc + ',') > -1; });
+      if (GVIEW.show === 'need') list = list.filter(function (g) { return !gHas(g); });
+      if (GVIEW.show === 'have') list = list.filter(gHas);
+      var cats = []; list.forEach(function (g) { if (cats.indexOf(g.category) < 0) cats.push(g.category); });
+      el.innerHTML = '<h3 class="gtitle">' + GSVC[GVIEW.svc] + ' <span>' + list.length + ' items</span></h3>' + (list.length ? cats.map(function (c) {
+        return '<div class="gcat"><h4>' + esc(c || 'Other') + '</h4>' + list.filter(function (g) { return g.category === c; }).map(function (g) {
+          var mine = g.owners.some(function (o) { return o.user === me; });
+          return '<div class="gi' + (gHas(g) ? ' has' : '') + '" data-g="' + g.id + '">' +
+            '<label class="ihave"><input type="checkbox" data-have="' + g.id + '"' + (mine ? ' checked' : '') + '> I have it</label>' +
+            '<div class="gb"><div class="gn">' + esc(g.name) + (g.qty ? ' <span class="gq">x ' + esc(g.qty) + '</span>' : '') + (g.priority === 'nice' ? ' <span class="nice">Nice to have</span>' : '') + '</div>' +
+            '<div class="gm">' + (g.owners.length ? g.owners.map(function (o) { return '<span class="who ' + esc(o.user) + '">' + esc(NAME[o.user] || o.user) + ' has it' + (o.note ? ': ' + esc(o.note) : '') + '</span>'; }).join('') : '<span class="nobody">Nobody yet</span>') +
+            (g.buy_status !== 'need' ? '<span class="bs ' + g.buy_status + '">' + (g.buy_status === 'buying' ? 'Buying' : 'Bought') + (g.buy_by ? ' by ' + esc(NAME[g.buy_by] || g.buy_by) : '') + '</span>' : '') +
+            (g.est_low != null || g.est_high != null ? '<span class="est">' + (g.est_low != null ? money(g.est_low) : '') + (g.est_low != null && g.est_high != null && g.est_high !== g.est_low ? ' to ' : '') + (g.est_high != null && g.est_high !== g.est_low ? money(g.est_high) : '') + '</span>' : '') +
+            '</div></div></div>';
+        }).join('') + '</div>';
+      }).join('') : '<p class="loading">Nothing here.</p>');
+      el.querySelectorAll('[data-have]').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          api('/gear/' + cb.dataset.have + '/have', { method: 'POST', body: { have: cb.checked } }).then(function () { toast(cb.checked ? 'Marked: you have it' : 'Unmarked'); renderGear(); })
+            .catch(function () { cb.checked = !cb.checked; toast('Could not save'); });
+        });
+      });
+      el.querySelectorAll('.gi .gb').forEach(function (b) { b.addEventListener('click', function () { openGear(+b.closest('.gi').dataset.g); }); });
+    }).catch(function () {});
+  }
+  function openGear(id) {
+    var g = GEAR.filter(function (x) { return x.id === id; })[0]; if (!g) return;
+    var svcs = g.services.split(',').filter(Boolean);
+    var body = drawer('Gear', '', renderGear);
+    body.innerHTML = '<form class="dform" data-f="g">' + fld('Item', inp('name', g.name)) +
+      '<div class="f"><span>Used for</span><div class="svcpick">' + Object.keys(GSVC).map(function (k) { return '<label><input type="checkbox" name="svc" value="' + k + '"' + (svcs.indexOf(k) > -1 ? ' checked' : '') + '> ' + GSVC[k] + '</label>'; }).join('') + '</div></div>' +
+      fld('Category', inp('category', g.category)) + fld('How many', inp('qty', g.qty)) +
+      fld('Priority', '<select name="priority">' + opt(['must', 'nice'], g.priority, ['Must have to start', 'Nice to have']) + '</select>') +
+      '<div class="row2">' + fld('Quote low ($)', inp('est_low', g.est_low, 'number')) + fld('Quote high ($)', inp('est_high', g.est_high, 'number')) + '</div>' +
+      fld('Buying status', '<select name="buy_status">' + opt(['need', 'buying', 'bought'], g.buy_status, ['Still need it', 'Buying it now', 'Bought for GBG']) + '</select>') +
+      fld('Notes', '<textarea name="notes" rows="3" placeholder="Brand, where to get it, who is lending it…">' + esc(g.notes || '') + '</textarea>') +
+      '<div class="meta">' + (g.owners.length ? 'Owned by: ' + g.owners.map(function (o) { return esc(NAME[o.user] || o.user); }).join(', ') : 'Nobody has marked this yet') + '</div>' +
+      '<div class="row"><button class="save">Save</button><button type="button" class="ghost danger" data-gdel>Remove item</button></div></form>';
+    var f = body.querySelector('form');
+    f.addEventListener('submit', function (e) {
+      e.preventDefault(); var b = formData(f); delete b.svc;
+      b.services = [].slice.call(f.querySelectorAll('input[name=svc]:checked')).map(function (x) { return x.value; });
+      if (!b.services.length) b.services = ['shared'];
+      api('/gear/' + id, { method: 'PATCH', body: b }).then(function () { toast('Saved'); document.querySelector('.dx').click(); }).catch(function () { toast('Could not save'); });
+    });
+    var del = body.querySelector('[data-gdel]');
+    del.onclick = function () {
+      if (del.dataset.armed !== '1') { del.dataset.armed = '1'; del.textContent = 'Yes, remove it'; setTimeout(function () { if (del.isConnected) { del.dataset.armed = ''; del.textContent = 'Remove item'; } }, 5000); return; }
+      api('/gear/' + id, { method: 'DELETE' }).then(function () { toast('Removed'); document.querySelector('.dx').click(); });
+    };
+  }
+
   function bindForms() {
+    var rsf = document.querySelector('[data-form=rolesug]');
+    if (rsf) rsf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      api('/roles/suggest', { method: 'POST', body: formData(rsf) }).then(function () { rsf.reset(); toast('Suggestion sent to Ricky'); renderRoles(); }).catch(function () { toast('Could not save'); });
+    });
     var lf = document.querySelector('form[data-form=lead]');
     if (lf) lf.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -443,6 +605,16 @@
         renderContacts();
       });
     });
+    document.querySelectorAll('[data-gshow]').forEach(function (bar) {
+      bar.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return;
+        GVIEW.show = b.dataset.show; bar.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); renderGear(); });
+    });
+    var gf = document.querySelector('form[data-form=gear]');
+    if (gf) gf.addEventListener('submit', function (e) {
+      e.preventDefault(); var b = formData(gf);
+      b.services = [GVIEW.svc];
+      api('/gear', { method: 'POST', body: b }).then(function () { gf.reset(); toast('Added to ' + GSVC[GVIEW.svc]); renderGear(); }).catch(function () { toast('Could not save'); });
+    });
     var ts = document.querySelector('[data-tsearch]'), tt;
     if (ts) ts.addEventListener('input', function () { clearTimeout(tt); tt = setTimeout(function () { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); }, 250); });
     var out = document.querySelector('[data-signout]');
@@ -451,7 +623,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     if (!ls(LS_KEY)) { lock(); return; }
-    renderHub(); renderJobs(); renderContacts(); renderClosed();
+    renderHub(); renderJobs(); renderContacts(); renderClosed(); renderGear(); renderRoles();
     document.querySelectorAll('[data-live=tasks]').forEach(renderTasks);
     bindForms();
   });
