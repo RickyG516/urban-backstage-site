@@ -42,11 +42,20 @@
       '<label><input type="radio" name="u" value="doug"' + (who === 'doug' ? ' checked' : '') + '> Doug</label>' +
       '<label><input type="radio" name="u" value="kevin"' + (who === 'kevin' ? ' checked' : '') + '> Kevin</label></div>' +
       '<input class="uname" name="username" type="text" autocomplete="username" value="' + who + '" tabindex="-1" aria-hidden="true">' +
-      '<input class="pin" name="pin" type="password" autocomplete="current-password" placeholder="PIN" required>' +
+      '<div class="pinwrap"><input class="pin" name="pin" type="password" autocomplete="current-password" placeholder="PIN" required>' +
+      '<button type="button" class="peek">Show</button></div>' +
       '<button type="submit">Unlock</button><div class="err"></div></form>';
     document.body.appendChild(el);
     var f = el.querySelector('form');
     f.pin.focus();
+    // show/hide the PIN so it can be checked before submitting
+    var peek = el.querySelector('.peek');
+    peek.addEventListener('click', function () {
+      var hidden = f.pin.type === 'password';
+      f.pin.type = hidden ? 'text' : 'password';
+      peek.textContent = hidden ? 'Hide' : 'Show';
+      f.pin.focus();
+    });
     // keeps the saved-password username in step with the name picked, so phones offer to save and autofill each PIN
     f.querySelectorAll('input[name=u]').forEach(function (r) { r.addEventListener('change', function () { f.username.value = r.value; }); });
     f.addEventListener('submit', function (e) {

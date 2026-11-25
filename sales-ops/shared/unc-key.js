@@ -58,10 +58,14 @@
         // inputmode was "numeric" — that forces a digits-only keypad on mobile, which makes
         // an alphanumeric PIN impossible to type on a phone. "text" allows letters everywhere.
         // The worker hashes whatever string it receives; it never required digits.
+        '<div style="position:relative;margin-bottom:12px">' +
         '<input id="uncKeyPin" type="password" inputmode="text" autocomplete="off" ' +
-        'placeholder="PIN" style="width:100%;padding:11px;background:#0f0f0f;color:#f5f5f5;' +
+        'placeholder="PIN" style="width:100%;padding:11px 62px 11px 11px;background:#0f0f0f;color:#f5f5f5;' +
         'border:1px solid #444;border-radius:6px;font-size:17px;letter-spacing:.3em;' +
-        'text-align:center;margin-bottom:12px">' +
+        'text-align:center;box-sizing:border-box">' +
+        '<button type="button" id="uncKeyPeek" style="position:absolute;right:6px;top:50%;' +
+        'transform:translateY(-50%);background:none;border:0;color:#888;font-size:12px;' +
+        'font-weight:700;cursor:pointer;padding:6px 8px">SHOW</button></div>' +
         '<button id="uncKeyGo" style="width:100%;background:#e36b1e;color:#0f0f0f;border:0;' +
         'border-radius:6px;padding:12px;font-weight:700;font-size:14px;cursor:pointer;' +
         "font-family:'Montserrat',sans-serif\">UNLOCK</button>" +
@@ -77,6 +81,14 @@
     var rep = wrap.querySelector('#uncKeyRep');
     var pin = wrap.querySelector('#uncKeyPin');
     var go  = wrap.querySelector('#uncKeyGo');
+    var peek = wrap.querySelector('#uncKeyPeek');
+    // show/hide the PIN so it can be checked before submitting
+    peek.addEventListener('click', function () {
+      var hidden = pin.type === 'password';
+      pin.type = hidden ? 'text' : 'password';
+      peek.textContent = hidden ? 'HIDE' : 'SHOW';
+      pin.focus();
+    });
     var msg = wrap.querySelector('#uncKeyMsg');
 
     try { rep.value = savedRep(); } catch (e) {}

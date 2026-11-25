@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "17"  # cache bust, bump on every os.css / os.js change
+V = "18"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
