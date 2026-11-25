@@ -63,7 +63,7 @@
     });
   }
 
-  var NAME = { ricky: 'Ricky', doug: 'Doug', kevin: 'Kevin', both: 'Both', website: 'Website', 'gbg-receptionist': 'Phone line', system: 'System' };
+  var NAME = { ricky: 'Ricky', doug: 'Doug', kevin: 'Kevin', both: 'All owners', website: 'Website', 'gbg-receptionist': 'Phone line', system: 'System' };
   var STAGE = { lead: 'Lead', consult: 'Consult', estimate: 'Estimate sent', booked: 'Booked', done: 'Done', review: 'Review asked', lost: 'Lost' };
   function fmt(d) { if (!d) return 'No date'; var x = new Date(d + 'T12:00:00'); return x.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
   function daysBetween(a, b) { return Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 864e5); }
@@ -150,7 +150,7 @@
   function renderHub() {
     var box = document.querySelector('[data-live=hub]'); if (!box) return;
     api('/summary').then(function (d) {
-      var mine = 0; d.open.forEach(function (o) { if (o.owner === d.user || (o.owner === 'both' && d.user !== 'kevin')) mine += o.n; });
+      var mine = 0; d.open.forEach(function (o) { if (o.owner === d.user || o.owner === 'both') mine += o.n; });
       var total = 0; d.open.forEach(function (o) { total += o.n; });
       var jobs = 0, booked = 0; d.stages.forEach(function (s) { if (s.stage !== 'lost') jobs += s.n; if (s.stage === 'booked') booked = s.n; });
       set('open', total); set('mine', mine); set('overdue', d.overdue); set('week', d.this_week); set('jobs', jobs); set('booked', booked); set('done', d.done);
@@ -262,7 +262,7 @@
           fld('Job notes', '<textarea name="notes" rows="3">' + esc(j.notes || '') + '</textarea>') +
           '<button class="save">Save changes</button></form>' +
         '<h3>Follow ups</h3><ul class="tasks">' + (d.tasks.length ? d.tasks.map(function (t) { TASKS[t.id] = t; return taskRow(t, new Date().toISOString().slice(0, 10)); }).join('') : '') + '</ul>' +
-        '<form class="dform inline" data-f="fu">' + inp('title', '') + '<input name="due" type="date"><select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], j.owner || ls(LS_USER), ['Ricky', 'Doug', 'Kevin', 'Both']) + '</select><button>Add follow up</button></form>' +
+        '<form class="dform inline" data-f="fu">' + inp('title', '') + '<input name="due" type="date"><select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], j.owner || ls(LS_USER), ['Ricky', 'Doug', 'Kevin', 'All owners']) + '</select><button>Add follow up</button></form>' +
         '<h3>History</h3>' + nb.html + timeline(d.activity);
       body.querySelector('[data-f=fu] input[name=title]').placeholder = 'Call back, send estimate…';
       nb.bind(body); bindTicks(body, function () { openJob(id); }); bindTaskOpen(body);
@@ -325,7 +325,7 @@
   function openTask(t) {
     var body = drawer('Task', '', function () { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); renderHub(); });
     body.innerHTML = '<form class="dform" data-f="t">' + fld('Task', '<textarea name="title" rows="2">' + esc(t.title) + '</textarea>') +
-      fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], t.owner, ['Ricky', 'Doug', 'Kevin', 'Both']) + '</select>') +
+      fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], t.owner, ['Ricky', 'Doug', 'Kevin', 'All owners']) + '</select>') +
       fld('Due', inp('due', t.due, 'date')) + fld('Notes', '<textarea name="notes" rows="4" placeholder="Who you talked to, what they said…">' + esc(t.notes || '') + '</textarea>') +
       '<div class="meta">' + (t.source ? 'From: ' + esc(t.source) : '') + (t.gate ? ' &middot; Gate ' + esc(t.gate) : '') + (t.done_by ? ' &middot; Done by ' + esc(NAME[t.done_by] || t.done_by) : '') + '</div>' +
       '<div class="row"><button class="save">Save</button><button type="button" class="ghost" data-toggle>' + (t.status === 'done' ? 'Reopen' : 'Mark done') + '</button>' +

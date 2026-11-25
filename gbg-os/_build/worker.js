@@ -6,7 +6,7 @@
 
 const ORIGINS = ['https://urbanbackstage.com', 'http://localhost:8765'];
 const USERS = ['ricky', 'doug', 'kevin'];
-const OWNERS = ['ricky', 'doug', 'kevin', 'both'];
+const OWNERS = ['ricky', 'doug', 'kevin', 'both']; // 'both' = all owners (label only, kept for old rows)
 const STAGES = ['lead', 'consult', 'estimate', 'booked', 'done', 'review', 'lost'];
 const LAUNCH = '2027-04-01';
 const ALERT_FROM = 'alerts@gbg.urbanbackstage.com';
@@ -199,8 +199,7 @@ export default {
         const owner = url.searchParams.get('owner');
         let sql = 'SELECT * FROM tasks WHERE 1=1', a = [];
         if (st !== 'all') { sql += ' AND status=?'; a.push(st); }
-        if (owner === 'kevin') { sql += " AND owner='kevin'"; }
-        else if (owner && owner !== 'all') { sql += " AND (owner=? OR owner='both')"; a.push(owner); }
+        if (owner && owner !== 'all') { sql += " AND (owner=? OR owner='both')"; a.push(owner); }
         const tq = s(url.searchParams.get('q'));
         if (tq) { sql += ' AND (title LIKE ? OR notes LIKE ? OR area LIKE ? OR source LIKE ?)'; const l = '%' + tq + '%'; a.push(l, l, l, l); }
         sql += st === 'done' ? ' ORDER BY done_at DESC LIMIT 200' : st === 'all' ? " ORDER BY status='done', due IS NULL, due, id LIMIT 500" : ' ORDER BY due IS NULL, due, id LIMIT 500';

@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "13"  # cache bust, bump on every os.css / os.js change
+V = "14"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -302,7 +302,7 @@ start = sh("Logging in") + """  <div class="grid">
     <a class="card" href="/gbg-os/launch/"><h3>Launch, Services, Playbook</h3><p>The road to April, what we offer and the rules for how we work.</p></a>
   </div>
 """ + sh("Rules") + """  <div class="card"><ul>
-    <li><b>Money:</b> nobody spends GBG money without both owners agreeing first. No one gets paid yet. Starter money is held in UNC or a personal savings account until the GBG bank account opens in March.</li>
+    <li><b>Money:</b> nobody spends GBG money without all owners agreeing first. No one gets paid yet. Starter money is held in UNC or a personal savings account until the GBG bank account opens in March.</li>
     <li><b>Buying gear:</b> book the job first, buy the gear after. Check the Gear page before buying so we don't double up.</li>
     <li><b>What we say in public:</b> no made up reviews, prices, job counts, years in business or licenses. Ever.</li>
     <li><b>Leads:</b> call back the same day when you can. Log what happened as a note on the job.</li>
@@ -335,7 +335,7 @@ tasks = """  <input class="search" data-tsearch placeholder="Search tasks: DIAL,
   <div class="card"><div data-live="tasks" data-owner="mine" data-status="open"></div></div>
 """ + sh("Add a task") + """  <form class="card form" data-form="task">
     <input name="title" placeholder="What needs doing" required class="wide">
-    <select name="owner"><option value="ricky">Ricky</option><option value="doug">Doug</option><option value="kevin">Kevin</option><option value="both">Both</option></select>
+    <select name="owner"><option value="ricky">Ricky</option><option value="doug">Doug</option><option value="kevin">Kevin</option><option value="both">All owners</option></select>
     <input name="due" type="date">
     <select name="area"><option value="">Area</option><option>compliance</option><option>legal</option><option>admin</option><option>finance</option><option>marketing</option><option>website</option><option>partners</option><option>ops</option><option>sales</option></select>
     <button type="submit">Add task</button>
