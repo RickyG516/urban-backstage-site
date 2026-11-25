@@ -170,9 +170,10 @@
     if (r.view === 'setup') return viewBuild(v, v.slug === 'gazebo' ? 'gazebo' : v.slug === 'airbnb' ? 'airbnb' : 'greens');
     if (r.view === 'buy') return viewBuy(v);
     if (r.view === 'accounts') return viewAccounts(v);
-    if (r.view === 'today') return viewToday(v);
+    if (r.view === 'today') return v.code === 'home' ? viewHub(v) : viewToday(v);
     if (r.view === 'tasks') return viewTasks(v);
     if (r.view === 'projects') return viewProjects(v);
+    if (r.view === 'money') return viewMoney(v);
     return viewSoon(v, r.view);
   }
 
@@ -309,6 +310,218 @@
       wireChecks(app, byId);
     }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
   }
+
+  /* ── Home hub: command center across all four ventures ── */
+  var HUB_HEADLINE = 'p-down';   // the milestone the big number counts down to (Unit A opening, first revenue)
+  var V_COLOR = { FLWR: '#E08AA2', MCRG: '#5E7D52', GZBO: '#D99A1E', ABNB: '#1B6A8F', SHRD: '#8a8f94' };
+  var V_SLUG = { FLWR: 'flowers', MCRG: 'greens', GZBO: 'gazebo', ABNB: 'airbnb', SHRD: 'home' };
+  var hubAt = 0, hubTimer = null;
+  function hubAgo(iso) {
+    var s = (Date.now() - Date.parse(iso)) / 1000;
+    if (s < 90) return 'just now';
+    if (s < 3600) return Math.round(s / 60) + ' min ago';
+    if (s < 86400) return Math.round(s / 3600) + ' hr ago';
+    var d = Math.round(s / 86400); return d === 1 ? 'yesterday' : d + ' days ago';
+  }
+  function daysBetween(a, b) { return Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 864e5); }
+  function usd(n) { return '$' + Math.round(Math.abs(n)).toLocaleString('en-US'); }
+  function budgetLine(m, bought) {   // plain words for over or under
+    var vv = bought ? m.bought_variance : m.variance;
+    if (Math.abs(vv) < 1) return '<span class="bv even">on budget</span>';
+    return '<span class="bv ' + (vv > 0 ? 'under' : 'over') + '">' + usd(vv) + (vv > 0 ? ' under' : ' over') + '</span>';
+  }
+  function onHub() { var r = parseRoute(); return !r.project && !r.section && r.v === 'home' && r.view === 'today'; }
+  function hubRefresh() { if (onHub() && ls(LS_KEY) && Date.now() - hubAt > 60000 && !document.querySelector('#hadd input:focus')) viewHub(ventureBySlug('home'), true); }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) hubRefresh(); });
+  window.addEventListener('focus', hubRefresh);
+
+  function viewHub(v, silent) {
+    if (!silent) app.innerHTML = '<p class="muted">Loading the hub…</p>';
+    if (hubTimer) clearInterval(hubTimer);
+    hubTimer = setInterval(function () { if (!document.hidden) hubRefresh(); }, 5 * 60000);
+    api('/hub?headline=' + HUB_HEADLINE).then(function (d) {
+      if (!onHub()) return;
+      hubAt = Date.now();
+      var me = d.user, meName = cap(me), P = d.projects || [], M = d.money, C = d.counts;
+      loadCounts({ counts: d.by_venture }); renderChrome(parseRoute());
+      var today = d.date, hr = new Date().getHours(), greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+      var dt = new Date(today + 'T12:00:00');
+      var byId = {}; d.moves.forEach(function (t) { byId[t.id] = t; });
+      var pe = function (p) { return effDue({ due: p.target, due_precision: p.target_precision }); };
+      var openAll = (d.by_venture || []).reduce(function (a, c) { return a + c.open; }, 0);
+
+      // headline: days to the key milestone, with a road bar that shows pace
+      var head = P.filter(function (p) { return p.id === HUB_HEADLINE && p.target && p.status !== 'done'; })[0];
+      var hd = head ? pe(head) : null;
+      if (!hd || hd < today) {
+        head = P.filter(function (p) { return p.target && p.status !== 'done' && pe(p) >= today; }).sort(function (a, b) { return pe(a) < pe(b) ? -1 : 1; })[0];
+        hd = head ? pe(head) : null;
+      }
+      var headN = hd ? daysBetween(today, hd) : null;
+      var headLabel = head ? (head.id === 'p-down' ? 'Unit A opens' : head.name) : 'No target set';
+      var road = '';
+      var steps = (d.road && head && d.road.project === head.id) ? d.road.steps : [];
+      if (hd && steps.length) {
+        var start = steps.reduce(function (a, x) { var c = (x.created_at || '').slice(0, 10); return c && c < a ? c : a; }, today);
+        if (start > steps[0].due) start = steps[0].due;
+        var span = Math.max(1, daysBetween(start, hd)), nowPct = Math.max(0, Math.min(100, daysBetween(start, today) / span * 100));
+        var doneN = steps.filter(function (x) { return x.status === 'done'; }).length;
+        var late = steps.filter(function (x) { return x.status !== 'done' && effDue(x) < today; }).length;
+        var nextStep = steps.filter(function (x) { return x.status !== 'done'; })[0];
+        road = '<div class="hub-road"><div class="hr-head"><span>Road to ' + esc(headLabel.replace(/ opens$/, '')) + '</span><b class="' + (late ? 'late' : 'ok') + '">' + doneN + ' of ' + steps.length + ' steps done · ' + (late ? late + ' behind' : 'on pace') + '</b></div>' +
+          '<div class="hr-bar"><i style="width:' + nowPct.toFixed(1) + '%"></i>' + steps.map(function (x) {
+            var pc = Math.max(0, Math.min(100, daysBetween(start, effDue(x)) / span * 100));
+            return '<u class="' + (x.status === 'done' ? 'done' : effDue(x) < today ? 'late' : '') + '" style="left:' + pc.toFixed(1) + '%" title="' + esc(fmtDue(x.due, x.due_precision) + ': ' + x.title) + '"></u>';
+          }).join('') + '<em style="left:' + nowPct.toFixed(1) + '%"></em></div>' +
+          '<div class="hr-ends"><span>' + new Date(start + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '</span>' +
+          (nextStep ? '<span class="hr-next">Next: ' + esc(nextStep.title.length > 64 ? nextStep.title.slice(0, 62) + '…' : nextStep.title) + ' · ' + fmtDue(nextStep.due, nextStep.due_precision) + '</span>' : '') +
+          '<span>' + new Date(hd + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '</span></div></div>';
+      }
+
+      // weather, with plain word nudges
+      var w = d.weather || {}, wx = '', nudges = [];
+      var dayName = function (ds) { return ds === today ? 'tonight' : new Date(ds + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long' }); };
+      if (w.days && w.days.length) {
+        var flagBy = {}; (w.flags || []).forEach(function (f) { (flagBy[f.date] = flagBy[f.date] || []).push(f); });
+        wx = '<div class="hub-wx">' + w.days.map(function (x, i) {
+          var name = i === 0 ? 'Today' : new Date(x.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short' });
+          var fl = flagBy[x.date] || [];
+          return '<div class="hub-day' + (x.lo <= 32 ? ' cold' : '') + '" title="' + esc(fl.map(function (f) { return f.text; }).join(', ')) + '"><b>' + name + '</b><span>' + x.hi + '°</span><small>' + x.lo + '°</small>' +
+            (x.rain_pct != null ? '<em>' + x.rain_pct + '%</em>' : '') +
+            fl.map(function (f) { return '<i class="hub-flag ' + f.level + '"></i>'; }).join('') + '</div>';
+        }).join('') + '</div>';
+        var fz = (w.flags || []).filter(function (f) { return f.level === 'hard'; })[0] || (w.flags || []).filter(function (f) { return f.level === 'freeze'; })[0];
+        var rn = (w.flags || []).filter(function (f) { return f.level === 'rain'; })[0];
+        var wd = (w.flags || []).filter(function (f) { return f.level === 'wind'; })[0];
+        var outdoor = d.moves.filter(function (t) { return t.venture === 'FLWR' && effDue(t) <= w.days[w.days.length - 1].date; });
+        if (fz) nudges.push((fz.level === 'hard' ? 'Hard freeze ' : 'Freeze ') + dayName(fz.date) + ' (' + fz.text.replace(/^.*low /, 'low ') + '). Hoses off, and nothing that can\'t freeze stays out' +
+          (outdoor.length ? '. ' + outdoor.length + ' garden task' + (outdoor.length === 1 ? '' : 's') + ' due this week: ' + esc(outdoor[0].title) : '') + '.');
+        if (rn) nudges.push('Heavy rain ' + dayName(rn.date) + '. Do outside work before then.');
+        if (wd) nudges.push(esc(wd.text) + ' ' + dayName(wd.date) + '. Tie down plastic and anything loose.');
+        if (!nudges.length) { var fr = (w.flags || []).filter(function (f) { return f.level === 'frost'; })[0]; if (fr) nudges.push('Frost risk ' + dayName(fr.date) + ' (' + fr.text.replace(/^.*low /, 'low ') + ').'); }
+        if (nudges.length) wx += '<ul class="hub-nudge">' + nudges.slice(0, 2).map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>';
+      } else wx = '<p class="hub-note">Weather is unavailable right now.</p>';
+
+      // numbers
+      var kp = [['overdue', 'Overdue', C.overdue, 'open'], ['week', 'Due this week', C.week, 'open'], ['doing', 'In progress', C.doing, 'open'], ['blocked', 'Blocked', C.blocked, 'open'], ['closed', 'Closed, 7 days', C.closed7, 'done']];
+      var kpis = '<div class="hub-kpis">' + kp.map(function (k) {
+        return '<a class="hub-kpi' + (k[0] === 'overdue' && k[2] > 0 ? ' bad' : '') + (k[0] === 'closed' ? ' good' : '') + '" href="#/home/tasks" data-ts="' + k[3] + '"><span class="k">' + k[1] + '</span><span class="v">' + k[2] + '</span></a>';
+      }).join('') + '</div>';
+
+      // your next moves, with quick add
+      var movesHtml = d.moves.length ? d.moves.map(function (t) {
+        var r = taskRow(t, { showProject: true, showVenture: true, vslug: V_SLUG[t.venture] || 'home' });
+        return r.replace('class="task', 'style="--vc:' + (V_COLOR[t.venture] || '#8a8f94') + '" class="task hub-t');
+      }).join('') : '<div class="empty">Nothing dated. Add due dates so the hub can line them up.</div>';
+      var openP = P.filter(function (p) { return p.status !== 'done'; });
+      var lastP = ls('queen_hub_proj');
+      var quick = '<form id="hadd" class="hub-add"><input name="title" placeholder="Quick add: what needs doing" maxlength="300" required>' +
+        '<select name="project_id">' + openP.map(function (p) { return '<option value="' + esc(p.id) + '"' + (p.id === lastP ? ' selected' : '') + '>' + esc(CODE_NAME[p.venture] || '') + ': ' + esc(p.name) + '</option>'; }).join('') + '</select>' +
+        '<input name="due" type="date" aria-label="Due date"><button class="btn small" type="submit">Add</button></form>';
+
+      // venture tiles: the ring tracks the project you're actually on
+      var cnt = {}; (d.by_venture || []).forEach(function (c) { cnt[c.venture] = c.open; });
+      var tiles = ['FLWR', 'MCRG', 'GZBO', 'ABNB'].map(function (code) {
+        var nx = d.next_by_venture[code];
+        var ps = P.filter(function (p) { return p.venture === code && p.status !== 'done'; });
+        var focus = (nx && ps.filter(function (p) { return p.id === nx.project_id; })[0]) || ps.filter(function (p) { return p.status === 'active'; })[0] || ps[0];
+        var pct = focus && focus.task_total ? Math.round(focus.task_done / focus.task_total * 100) : 0;
+        var mv = M.by_venture[code];
+        return '<a class="hub-vt" style="--vc:' + V_COLOR[code] + '" href="#/' + V_SLUG[code] + '/tasks">' +
+          '<div class="hub-ring" style="--p:' + pct + '"><span>' + pct + '%</span></div>' +
+          '<div class="hub-vb"><b>' + CODE_NAME[code] + '</b>' +
+          (focus ? '<small>' + esc(focus.name) + ': ' + focus.task_done + ' of ' + focus.task_total + '</small>' : '') +
+          '<small>' + (cnt[code] || 0) + ' open in all' + (mv && mv.bought_items ? ' · ' + budgetLine(mv, true) : '') + '</small>' +
+          (nx ? '<em>Next: ' + esc(nx.title.length > 52 ? nx.title.slice(0, 50) + '…' : nx.title) + ' · ' + fmtDue(nx.due, nx.due_precision) + '</em>' : '<em>No dated tasks</em>') + '</div></a>';
+      }).join('');
+
+      // money: the launch number first, then the live budget check
+      var T = M.total, hp = M.by_project.filter(function (x) { return head && x.project_id === head.id; })[0];
+      var buy = '<a class="card hub-panel" href="#/home/money"><div class="hub-ph"><h3>Money</h3><span>budget vs paid, live</span></div>' +
+        '<div class="hub-buy">' +
+        (hp ? '<div><b>' + usd(hp.left_est) + '</b><small>left to buy for ' + esc(headLabel.replace(/ opens$/, '')) + ', ' + hp.left_items + ' items</small></div>' : '') +
+        '<div><b>' + usd(T.bought_paid) + '</b><small>spent so far, ' + T.bought_items + ' item' + (T.bought_items === 1 ? '' : 's') + '</small></div>' +
+        '<div><b class="' + (T.variance > 0.5 ? 'under' : T.variance < -0.5 ? 'over' : '') + '">' + (Math.abs(T.variance) < 1 ? 'Even' : usd(T.variance)) + '</b><small>' + (T.variance > 0.5 ? 'under budget so far' : T.variance < -0.5 ? 'over budget so far' : 'with the budget') + '</small></div></div>' +
+        '<p class="hub-fine">Whole plan: ' + usd(T.budget) + ' budget, on track to land at ' + usd(T.projected) + '. ' + T.left_items + ' items still to buy' + (T.no_price ? ', ' + T.no_price + ' need a price' : '') + (T.ordered_items ? ', ' + T.ordered_items + ' on the way' : '') + '.</p></a>';
+
+      // working on now
+      var working = '<div class="card hub-panel"><div class="hub-ph"><h3>Working on now</h3></div>' + (d.working && d.working.length ? d.working.map(function (x) {
+        return '<a class="task" style="text-decoration:none;color:inherit" href="#/s/' + encodeURIComponent(x.id) + '/' + ({ greens: 'greens', gazebo: 'gazebo', airbnb: 'airbnb' }[x.map] || 'flowers') + '">' +
+          '<span class="pin s' + x.stage + '">' + esc(x.marker) + '</span><div class="body"><div class="title">' + esc(x.name) + '</div>' +
+          '<div class="meta"><span class="pill st' + x.stage + '">' + esc(x.stage_name) + '</span> · ' + x.open_tasks + ' open</div></div></a>';
+      }).join('') : '<div class="empty">Nothing flagged. Open a section on a map and tap "Working on this".</div>') + '</div>';
+
+      // targets
+      var tg = P.filter(function (p) { return p.target && p.status !== 'done' && pe(p) >= today; }).sort(function (a, b) { return pe(a) < pe(b) ? -1 : 1; }).slice(0, 6);
+      var targets = tg.length ? tg.map(function (p) {
+        var e = pe(p), n = daysBetween(today, e), x = new Date(e + 'T12:00:00');
+        return '<a class="hub-tg" style="--vc:' + (V_COLOR[p.venture] || '#8a8f94') + '" href="#/p/' + encodeURIComponent(p.id) + '/' + (V_SLUG[p.venture] || 'home') + '">' +
+          '<div class="hub-cal"><span>' + x.toLocaleDateString('en-US', { month: 'short' }) + '</span><b>' + x.getDate() + '</b></div>' +
+          '<div><b>' + esc(p.name) + '</b><small>' + (n === 0 ? 'today' : 'in ' + n + ' day' + (n === 1 ? '' : 's')) + (p.target_precision === 'month' ? ', end of month' : '') + '</small></div></a>';
+      }).join('') : '<div class="empty">No upcoming targets.</div>';
+
+      // live feed
+      var feedHtml = d.feed.length ? d.feed.map(function (f) {
+        var who = f.who ? '<b>' + esc(cap(f.who)) + '</b> ' : '';
+        var txt = f.kind === 'done' ? who + 'closed ' + esc(f.text)
+          : f.kind === 'stage' ? who + 'moved <b>' + esc(f.text) + '</b> to ' + esc(f.note || 'the next stage')
+          : who + (f.kind === 'arrived' ? 'got ' : 'ordered ') + '<b>' + esc(f.text) + '</b>' +
+            (f.paid != null && f.budget != null && Math.abs(f.budget - f.paid) >= 1 ? ', ' + usd(f.budget - f.paid) + (f.budget > f.paid ? ' under' : ' over') + ' budget' : '');
+        return '<li><i class="hub-dot" style="background:' + (V_COLOR[f.venture] || '#8a8f94') + '"></i><div>' + txt + '</div><em>' + hubAgo(f.at) + '</em></li>';
+      }).join('') : '<li class="empty">Nothing yet. Close a task and it shows up here.</li>';
+
+      var keep = $('hadd') && silent ? { t: $('hadd').title.value, d: $('hadd').due.value } : null;
+      var y = window.scrollY;
+      app.innerHTML =
+        '<section class="hub-hero"><div class="hub-hl">' +
+          '<p class="hub-eye">' + greet + ', ' + esc(meName) + ' · ' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + '</p>' +
+          '<div class="hub-big"><span>' + (headN == null ? '·' : headN) + '</span><small>days until<br>' + esc(headLabel) + '</small></div>' +
+          '<p class="hub-sub">' + openAll + ' open across the four ventures' + (hd ? ' · target ' + new Date(hd + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '') + '</p>' +
+        '</div><div class="hub-wxbox"><div class="hub-now">' + (w.now != null ? '<b>' + w.now + '°</b><span>now in Dubuque</span>' : '<span>Dubuque</span>') + '</div>' + wx + '</div>' + road + '</section>' +
+        kpis +
+        '<div class="hub-grid"><div class="card hub-moves"><div class="hub-ph"><h3>Your next moves</h3><a href="#/home/tasks">All tasks (' + C.mine + ')</a></div>' + quick + movesHtml + '</div>' +
+        '<div class="hub-stack"><div class="hub-vts">' + tiles + '</div>' + buy + working + '</div></div>' +
+        '<div class="hub-grid2"><div class="card hub-panel"><div class="hub-ph"><h3>Coming up</h3><a href="#/home/projects">Projects</a></div><div class="hub-tgs">' + targets + '</div></div>' +
+        '<div class="card hub-panel"><div class="hub-ph"><h3>Live feed</h3></div><ul class="hub-feed">' + feedHtml + '</ul></div></div>' +
+        '<p class="hub-links"><a href="/tasks/">All businesses board: UNC, GBG and Petrushka\'s together</a></p>';
+      if (keep) { $('hadd').title.value = keep.t; $('hadd').due.value = keep.d; }
+      if (silent) window.scrollTo(0, y);
+
+      app.querySelectorAll('.hub-kpi').forEach(function (a) { a.onclick = function () { taskStatus = a.getAttribute('data-ts'); }; });
+      wireChecks(app, byId, function () { setTimeout(function () { if (onHub()) viewHub(v, true); }, 900); });
+      $('hadd').onsubmit = function (e) {
+        e.preventDefault();
+        var f = e.target, b = { title: f.title.value.trim(), project_id: f.project_id.value };
+        if (!b.title) return;
+        if (f.due.value) b.due = f.due.value;
+        ls('queen_hub_proj', b.project_id);
+        api('/tasks', { method: 'POST', body: b }).then(function () { f.title.value = ''; toast(b.due ? 'Added' : 'Added. No date, so it lives in All tasks'); viewHub(v, true); }).catch(fail);
+      };
+    }).catch(function (e) { if (e.message !== 'locked' && !silent) app.innerHTML = '<p class="muted">Could not load the hub: ' + esc(e.message) + '</p>'; });
+  }
+
+  /* ── Money: budget vs paid for every project ── */
+  function viewMoney(v) {
+    app.innerHTML = '<p class="muted">Loading the money…</p>';
+    api('/money').then(function (d) {
+      var all = v.code === 'home', rows = d.by_project.filter(function (r) { return all || r.venture === v.code; });
+      var T = all ? d.total : (d.by_venture[v.code] || { budget: 0, bought_budget: 0, bought_paid: 0, left_est: 0, projected: 0, variance: 0, bought_variance: 0, bought_items: 0, left_items: 0 });
+      var stat = function (k, val, cls) { return '<div class="mstat"><span>' + k + '</span><b class="' + (cls || '') + '">' + val + '</b></div>'; };
+      var vcls = function (n) { return n > 0.5 ? 'under' : n < -0.5 ? 'over' : ''; };
+      var vtxt = function (n) { return Math.abs(n) < 1 ? 'Even' : usd(n) + (n > 0 ? ' under' : ' over'); };
+      app.innerHTML = '<h1>' + (all ? 'Money: budget vs paid' : esc(v.name) + ': money') + '</h1>' +
+        '<p class="sub">Budget is the price a line had when it went on the list. Mark an item ordered on the Buy tab and type what you paid; this updates right away.</p>' +
+        '<div class="mstats">' + stat('Budget', usd(T.budget)) + stat('Spent so far', usd(T.bought_paid)) + stat('Budget for what you bought', usd(T.bought_budget)) +
+          stat('So far', vtxt(T.bought_variance), vcls(T.bought_variance)) + stat('Still to buy', usd(T.left_est)) + stat('On track to land at', usd(T.projected), vcls(T.variance)) + '</div>' +
+        '<div class="card"><table class="mtable"><thead><tr><th>Project</th><th>Budget</th><th>Spent</th><th>Left to buy</th><th>Tracking</th></tr></thead><tbody>' +
+        rows.map(function (r) {
+          return '<tr><td><i class="hub-dot" style="background:' + (V_COLOR[r.venture] || '#8a8f94') + '"></i> ' + esc(r.project_name || CODE_NAME[r.venture] || 'Other') + '</td><td>' + usd(r.budget) + '</td><td>' + usd(r.bought_paid) +
+            (r.bought_items ? '<small> of ' + usd(r.bought_budget) + '</small>' : '') + '</td><td>' + usd(r.left_est) + '</td><td class="' + vcls(r.variance) + '">' + vtxt(r.variance) + '</td></tr>';
+        }).join('') + '</tbody></table></div>' +
+        '<p class="muted" style="font-size:13px">Before tax. Skipped items are left out. "Tracking" compares the budget to what you paid plus current prices for what is left.</p>';
+    }).catch(function (e) { if (e.message !== 'locked') app.innerHTML = '<p class="muted">Could not load: ' + esc(e.message) + '</p>'; });
+  }
+  function cap(s) { return s ? String(s).charAt(0).toUpperCase() + String(s).slice(1) : ''; }
 
   /* ── Projects list ── */
   function viewProjects(v) {
@@ -627,11 +840,22 @@
                   '<div class="body"><div class="title">' + (p.link ? '<a href="' + esc(p.link) + '" target="_blank" rel="noopener">' + esc(p.item) + '</a>' : esc(p.item)) + '</div>' +
                   '<div class="meta"><span class="pill ' + p.status + '">' + PSTAT[p.status] + '</span>' +
                   (p.qty != null ? ' · ' + p.qty + (p.unit_price != null ? ' × ' + money(p.unit_price) + ' = <b>' + money(l) + '</b>' : '') : '') +
-                  (p.price_status ? ' · ' + esc(p.price_status) : '') + (p.why ? ' · ' + esc(p.why) : '') + '</div></div></div>';
+                  (p.price_status ? ' · ' + esc(p.price_status) : '') + (p.why ? ' · ' + esc(p.why) : '') + '</div>' +
+                  ((p.status === 'ordered' || p.status === 'arrived') ? '<div class="paidrow"><label>Paid $ <input class="paid" type="number" inputmode="decimal" step="0.01" min="0" value="' + (p.paid != null ? p.paid : '') + '" placeholder="' + (l != null ? l.toFixed(2) : 'total') + '"></label>' +
+                    (p.budget != null ? '<span class="muted">budget ' + money(p.budget) + '</span>' : '') +
+                    (p.paid != null && p.budget != null && Math.abs(p.budget - p.paid) >= 0.5 ? '<span class="bv ' + (p.budget > p.paid ? 'under' : 'over') + '">' + money(Math.abs(p.budget - p.paid)) + (p.budget > p.paid ? ' under' : ' over') + '</span>' : '') + '</div>' : '') +
+                  '</div></div>';
               }).join('') + '</div>';
             }).join('') + '</section>';
         }).join('');
       var byId = {}; list.forEach(function (p) { byId[p.id] = p; });
+      app.querySelectorAll('.task.buy input.paid').forEach(function (inp) {
+        inp.onchange = function () {
+          var p = byId[inp.closest('.task').getAttribute('data-id')];
+          api('/purchases/' + encodeURIComponent(p.id), { method: 'PATCH', body: { paid: inp.value === '' ? null : Number(inp.value) } })
+            .then(function () { toast('Saved what you paid'); viewBuy(v); }).catch(fail);
+        };
+      });
       app.querySelectorAll('.task.buy .chk').forEach(function (b) {
         b.onclick = function () {
           var row = b.closest('.task'), p = byId[row.getAttribute('data-id')], next = NEXT[p.status] || 'ordered';
