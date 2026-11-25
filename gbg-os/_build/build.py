@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "8"  # cache bust, bump on every os.css / os.js change
+V = "9"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -209,7 +209,21 @@ page("jobs", "jobs", "Jobs", "Jobs", "Job <span>pipeline</span>",
      "Click any card to open it: edit details, add notes and follow ups, see the history. Mark a job done and the closeout task shows up on its own.", jobs)
 
 # ---------- CONTACTS ----------
-contacts = """  <input class="search" data-search placeholder="Search name, phone, or address">
+contacts = """  <div class="stats">
+    <div class="stat"><div class="k">Customers</div><div class="v or" data-cc="customers">&middot;</div></div>
+    <div class="stat"><div class="k">Partners</div><div class="v" data-cc="partners">&middot;</div></div>
+    <div class="stat"><div class="k">Vendors</div><div class="v" data-cc="vendors">&middot;</div></div>
+    <div class="stat"><div class="k">Archived</div><div class="v" data-cc="archived">&middot;</div></div>
+  </div>
+  <div class="ctools">
+    <input class="search" data-search placeholder="Search name, phone, email, address, city, notes">
+    <div class="filters" data-cview>
+      <button class="on" data-view="active">Active</button><button data-view="archived">Archived</button><button data-view="all">All</button>
+      <span class="sep"></span>
+      <button class="on" data-kind="">Everyone</button><button data-kind="customer">Customers</button><button data-kind="partner">Partners</button><button data-kind="vendor">Vendors</button>
+    </div>
+  </div>
+  <div class="bulk" data-bulk hidden></div>
   <div class="card"><div data-live="contacts"><p class="loading">Loading…</p></div></div>
 """ + sh("Add a contact") + """  <form class="card form" data-form="contact">
     <input name="name" placeholder="Name" required><input name="phone" placeholder="Phone"><input name="email" placeholder="Email">
@@ -218,13 +232,14 @@ contacts = """  <input class="search" data-search placeholder="Search name, phon
     <input name="notes" placeholder="Notes" class="wide">
     <button type="submit">Add contact</button>
   </form>
-  <div class="note"><b>Customers, partners, vendors, suppliers.</b> Click anyone to edit them, see their jobs, and read every note and change.</div>
+  <div class="note"><b>Tick the boxes to archive or delete in bulk.</b> Archive hides someone and their jobs, and you can bring them back. Delete is for test entries and mistakes: it removes the contact, their jobs and the tasks on those jobs.</div>
 """
 page("contacts", "contacts", "Contacts", "Contacts", "Every <span>person</span>",
      "Customers, partners and vendors. Click a name to open the full record.", contacts)
 
 # ---------- TASKS ----------
-tasks = """  <div class="filters" data-filter>
+tasks = """  <input class="search" data-tsearch placeholder="Search tasks: DIAL, insurance, Mark, sealer…">
+  <div class="filters" data-filter>
     <button class="on" data-owner="mine">Mine</button><button data-owner="all">Everyone</button>
     <button data-owner="ricky">Ricky</button><button data-owner="doug">Doug</button>
     <span class="sep"></span><button data-status="open">Open</button><button data-status="done">Closed, last 30 days</button>

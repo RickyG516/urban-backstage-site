@@ -100,7 +100,22 @@
   function renderTasks(el) {
     var owner = el.dataset.owner || 'mine', status = el.dataset.status || 'open';
     var me = ls(LS_USER);
-    var q = '/tasks?status=' + status + (owner === 'mine' ? '&owner=' + me : owner !== 'all' ? '&owner=' + owner : '');
+    var tsb = el.dataset.short ? null : document.querySelector('[data-tsearch]');
+    var term = tsb ? tsb.value.trim() : '';
+    var q = '/tasks?status=' + (term ? 'all' : status) + (owner === 'mine' ? '&owner=' + me : owner !== 'all' ? '&owner=' + owner : '') + (term ? '&q=' + encodeURIComponent(term) : '');
+    if (term) {
+      el.innerHTML = '<p class="loading">Searching…</p>';
+      api(q).then(function (d) {
+        var T = d.tasks; T.forEach(function (t) { TASKS[t.id] = t; });
+        var open = T.filter(function (t) { return t.status === 'open'; }), done = T.filter(function (t) { return t.status === 'done'; });
+        var html = '<p class="hint2">' + T.length + ' match' + (T.length === 1 ? '' : 'es') + ' for "' + esc(term) + '"' + (owner !== 'all' ? ' in ' + (owner === 'mine' ? 'your tasks' : NAME[owner] + "'s tasks") + '. Tap Everyone to search all.' : '.') + '</p>';
+        if (open.length) html += '<div class="tgroup"><h4>Open <b>' + open.length + '</b></h4><ul class="tasks">' + open.map(function (t) { return taskRow(t, d.today); }).join('') + '</ul></div>';
+        if (done.length) html += '<div class="tgroup"><h4>Closed <b>' + done.length + '</b></h4><ul class="tasks">' + done.map(function (t) { return taskRow(t, d.today); }).join('') + '</ul></div>';
+        el.innerHTML = html;
+        bindTicks(el, function () { renderTasks(el); }); bindTaskOpen(el);
+      }).catch(function (e) { if (e.message !== 'locked') el.innerHTML = '<p class="loading">Could not search.</p>'; });
+      return;
+    }
     el.innerHTML = '<p class="loading">Loading…</p>';
     api(q).then(function (d) {
       var T = d.tasks; T.forEach(function (t) { TASKS[t.id] = t; }); var today = d.today, wk = new Date(new Date(today + 'T12:00:00').getTime() + 7 * 864e5).toISOString().slice(0, 10);
@@ -276,9 +291,22 @@
         '<button class="save">Save changes</button></form>' +
         '<h3>Jobs</h3>' + (d.jobs.length ? '<ul class="mini jl">' + d.jobs.map(function (j) { return '<li data-job="' + j.id + '"><span>' + esc(STAGE[j.stage]) + '</span>' + esc(j.service || 'Service not set') + '</li>'; }).join('') + '</ul>' : '<p class="loading">No jobs yet.</p>') +
         '<button class="ghost" data-newjob>New job for ' + esc(c.name) + '</button>' +
+        '<div class="danger-zone"><button class="ghost" data-arch>' + (c.archived ? 'Unarchive' : 'Archive') + '</button><button class="ghost danger" data-del>Delete for good</button>' +
+        '<p>Archive hides them and their jobs from the board. You can bring them back. Delete removes them, their jobs and the tasks on those jobs.</p></div>' +
         '<h3>History</h3>' + nb.html + timeline(d.activity);
       nb.bind(body);
       body.querySelectorAll('[data-job]').forEach(function (li) { li.onclick = function () { openJob(+li.dataset.job); }; });
+      body.querySelector('[data-arch]').onclick = function () {
+        api('/contacts/' + id, { method: 'PATCH', body: { archived: c.archived ? 0 : 1 } }).then(function () {
+          toast(c.archived ? 'Restored' : 'Archived'); document.querySelector('.dx').click(); });
+      };
+      var del = body.querySelector('[data-del]');
+      del.onclick = function () {
+        if (del.dataset.armed !== '1') { del.dataset.armed = '1'; del.textContent = 'Yes, delete ' + c.name + ' for good';
+          setTimeout(function () { if (del.isConnected) { del.dataset.armed = ''; del.textContent = 'Delete for good'; } }, 5000); return; }
+        api('/contacts/' + id, { method: 'DELETE' }).then(function () { toast('Deleted ' + c.name); document.querySelector('.dx').click(); })
+          .catch(function () { toast('Could not delete'); });
+      };
       body.querySelector('[data-newjob]').onclick = function () {
         api('/jobs', { method: 'POST', body: { contact_id: id, stage: 'lead' } }).then(function (r) { toast('Job created'); openJob(r.id); });
       };
@@ -319,16 +347,59 @@
   }
 
   /* ---------- contacts page ---------- */
+  var CVIEW = { view: 'active', kind: '' }, CSEL = {};
   function renderContacts() {
     var el = document.querySelector('[data-live=contacts]'); if (!el) return;
     var q = (document.querySelector('[data-search]') || {}).value || '';
-    api('/contacts' + (q ? '?q=' + encodeURIComponent(q) : '')).then(function (d) {
-      el.innerHTML = d.contacts.length ? '<table class="ct"><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Type</th><th>Latest</th></tr></thead><tbody>' +
-        d.contacts.map(function (c) {
-          return '<tr data-c="' + c.id + '"><td><b>' + esc(c.name) + '</b></td><td>' + esc(c.phone || '') + '</td><td>' + esc(c.address || '') + '</td><td>' + esc(c.kind || '') + '</td><td>' + esc(c.last_stage ? STAGE[c.last_stage] : '') + '</td></tr>';
-        }).join('') + '</tbody></table>' : '<p class="loading">' + (q ? 'No match.' : 'No contacts yet. Add one below or wait for the first website lead.') + '</p>';
-      el.querySelectorAll('tr[data-c]').forEach(function (tr) { tr.onclick = function () { openContact(+tr.dataset.c); }; });
+    var qs = '?view=' + CVIEW.view + (CVIEW.kind ? '&kind=' + CVIEW.kind : '') + (q ? '&q=' + encodeURIComponent(q) : '');
+    api('/contacts' + qs).then(function (d) {
+      var k = d.counts || {};
+      ['customers', 'partners', 'vendors', 'archived'].forEach(function (n) { var x = document.querySelector('[data-cc=' + n + ']'); if (x) x.textContent = k[n] || 0; });
+      CSEL = {};
+      var C = d.contacts;
+      el.innerHTML = C.length ? '<table class="ct"><thead><tr><th class="cb"><input type="checkbox" data-all aria-label="Select all"></th><th>Name</th><th>Phone</th><th>Area</th><th>Type</th><th>Latest job</th><th>Open tasks</th><th>Added</th></tr></thead><tbody>' +
+        C.map(function (c) {
+          return '<tr data-c="' + c.id + '"' + (c.archived ? ' class="arch"' : '') + '><td class="cb"><input type="checkbox" data-sel="' + c.id + '" aria-label="Select ' + esc(c.name) + '"></td>' +
+            '<td><b>' + esc(c.name) + '</b>' + (c.archived ? ' <span class="atag">Archived</span>' : '') + (c.email ? '<div class="sub">' + esc(c.email) + '</div>' : '') + '</td>' +
+            '<td>' + (c.phone ? '<a href="tel:' + esc(c.phone) + '">' + esc(c.phone) + '</a>' : '') + '</td>' +
+            '<td>' + esc(c.neighborhood || c.address || '') + '</td><td class="cap">' + esc(c.kind || '') + '</td>' +
+            '<td>' + esc(c.last_stage ? STAGE[c.last_stage] : '') + '</td><td>' + (c.open_tasks ? '<b class="ot">' + c.open_tasks + '</b>' : '') + '</td>' +
+            '<td class="dim">' + esc(fmt((c.created_at || '').slice(0, 10))) + '</td></tr>';
+        }).join('') + '</tbody></table>'
+        : '<p class="loading">' + (q ? 'No match for "' + esc(q) + '".' : CVIEW.view === 'archived' ? 'Nothing archived.' : 'No contacts yet. Add one below, or they show up on their own from the website form and the phone line.') + '</p>';
+      el.querySelectorAll('tr[data-c]').forEach(function (tr) {
+        tr.addEventListener('click', function (e) { if (e.target.closest('input,a')) return; openContact(+tr.dataset.c); });
+      });
+      el.querySelectorAll('[data-sel]').forEach(function (cb) { cb.addEventListener('change', function () { if (cb.checked) CSEL[cb.dataset.sel] = 1; else delete CSEL[cb.dataset.sel]; bulkBar(); }); });
+      var all = el.querySelector('[data-all]');
+      if (all) all.addEventListener('change', function () { el.querySelectorAll('[data-sel]').forEach(function (cb) { cb.checked = all.checked; if (all.checked) CSEL[cb.dataset.sel] = 1; else delete CSEL[cb.dataset.sel]; }); bulkBar(); });
+      bulkBar();
     }).catch(function () {});
+  }
+  function bulkBar() {
+    var bar = document.querySelector('[data-bulk]'); if (!bar) return;
+    var ids = Object.keys(CSEL), n = ids.length;
+    if (!n) { bar.hidden = true; bar.innerHTML = ''; return; }
+    bar.hidden = false;
+    var arch = CVIEW.view === 'archived';
+    bar.innerHTML = '<span><b>' + n + '</b> selected</span>' +
+      '<button data-b="' + (arch ? 'unarchive' : 'archive') + '">' + (arch ? 'Unarchive' : 'Archive') + '</button>' +
+      '<button data-b="delete" class="danger">Delete</button><button data-b="clear" class="plain">Clear</button>';
+    bar.querySelectorAll('button').forEach(function (b) {
+      b.onclick = function () {
+        var act = b.dataset.b;
+        if (act === 'clear') { renderContacts(); return; }
+        if (act === 'delete' && b.dataset.armed !== '1') {
+          b.dataset.armed = '1'; b.textContent = 'Yes, delete ' + n + ' for good';
+          setTimeout(function () { if (b.isConnected) { b.dataset.armed = ''; b.textContent = 'Delete'; } }, 5000);
+          return;
+        }
+        api('/contacts/bulk', { method: 'POST', body: { ids: ids, action: act } }).then(function (r) {
+          toast((act === 'delete' ? 'Deleted ' : act === 'archive' ? 'Archived ' : 'Restored ') + r.changed);
+          renderContacts(); renderJobs(); renderHub();
+        }).catch(function () { toast('Could not save'); });
+      };
+    });
   }
 
   function bindForms() {
@@ -364,6 +435,16 @@
     });
     var sb = document.querySelector('[data-search]'), st;
     if (sb) sb.addEventListener('input', function () { clearTimeout(st); st = setTimeout(renderContacts, 250); });
+    document.querySelectorAll('[data-cview]').forEach(function (bar) {
+      bar.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        if (b.dataset.view) { CVIEW.view = b.dataset.view; bar.querySelectorAll('[data-view]').forEach(function (x) { x.classList.toggle('on', x === b); }); }
+        if (b.dataset.kind !== undefined) { CVIEW.kind = b.dataset.kind; bar.querySelectorAll('[data-kind]').forEach(function (x) { x.classList.toggle('on', x === b); }); }
+        renderContacts();
+      });
+    });
+    var ts = document.querySelector('[data-tsearch]'), tt;
+    if (ts) ts.addEventListener('input', function () { clearTimeout(tt); tt = setTimeout(function () { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); }, 250); });
     var out = document.querySelector('[data-signout]');
     if (out) out.addEventListener('click', function () { ls(LS_KEY, null); location.reload(); });
   }

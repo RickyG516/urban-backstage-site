@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/gbg-os/assets/os.css?v=8">
-<script src="/gbg-os/assets/os.js?v=8"></script>
-<script src="/gbg-os/assets/api.js?v=8"></script>
+<link rel="stylesheet" href="/gbg-os/assets/os.css?v=9">
+<script src="/gbg-os/assets/os.js?v=9"></script>
+<script src="/gbg-os/assets/api.js?v=9"></script>
 </head>
 <body data-venture="gbg" data-page="contacts">
 <nav class="os-nav" id="os-nav"></nav>
@@ -21,7 +21,21 @@
     <h1>Every <span>person</span></h1>
     <p>Customers, partners and vendors. Click a name to open the full record.</p>
   </section>
-  <input class="search" data-search placeholder="Search name, phone, or address">
+  <div class="stats">
+    <div class="stat"><div class="k">Customers</div><div class="v or" data-cc="customers">&middot;</div></div>
+    <div class="stat"><div class="k">Partners</div><div class="v" data-cc="partners">&middot;</div></div>
+    <div class="stat"><div class="k">Vendors</div><div class="v" data-cc="vendors">&middot;</div></div>
+    <div class="stat"><div class="k">Archived</div><div class="v" data-cc="archived">&middot;</div></div>
+  </div>
+  <div class="ctools">
+    <input class="search" data-search placeholder="Search name, phone, email, address, city, notes">
+    <div class="filters" data-cview>
+      <button class="on" data-view="active">Active</button><button data-view="archived">Archived</button><button data-view="all">All</button>
+      <span class="sep"></span>
+      <button class="on" data-kind="">Everyone</button><button data-kind="customer">Customers</button><button data-kind="partner">Partners</button><button data-kind="vendor">Vendors</button>
+    </div>
+  </div>
+  <div class="bulk" data-bulk hidden></div>
   <div class="card"><div data-live="contacts"><p class="loading">Loading…</p></div></div>
   <div class="sh"><h2>Add a contact</h2><div class="rule"></div></div>
   <form class="card form" data-form="contact">
@@ -31,7 +45,7 @@
     <input name="notes" placeholder="Notes" class="wide">
     <button type="submit">Add contact</button>
   </form>
-  <div class="note"><b>Customers, partners, vendors, suppliers.</b> Click anyone to edit them, see their jobs, and read every note and change.</div>
+  <div class="note"><b>Tick the boxes to archive or delete in bulk.</b> Archive hides someone and their jobs, and you can bring them back. Delete is for test entries and mistakes: it removes the contact, their jobs and the tasks on those jobs.</div>
 
   <footer>GBG DUBUQUE | Internal ops, not indexed. Amounts, ownership and anything personal live in Drive, never on these pages.</footer>
 </div>

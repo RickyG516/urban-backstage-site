@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS contacts (
   phone TEXT, email TEXT, address TEXT, neighborhood TEXT,
   source TEXT,              -- form, hanger, facebook, referral, phone, other
   kind TEXT DEFAULT 'customer', -- customer, partner, vendor
+  archived INTEGER NOT NULL DEFAULT 0,
   notes TEXT,
   created_at TEXT DEFAULT (datetime('now')),
   updated_at TEXT DEFAULT (datetime('now'))

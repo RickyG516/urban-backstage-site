@@ -1,5 +1,6 @@
 /* gbg-os-api: GBG Dubuque CRM backend.
- * D1 binding: DB (gbg-os). Secrets: PIN_RICKY, PIN_DOUG, TOKEN_SECRET, FORM_TOKEN.
+ * D1 binding: DB (gbg-os). Email Service binding: EMAIL (sends from gbg.urbanbackstage.com).
+ * Secrets: PIN_RICKY, PIN_DOUG, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN.
  * No secrets live in this file. Browser sends x-gbg-user + x-gbg-key (HMAC of user).
  * Deploy runbook: gbg-os/_build/WORKER.md */
 
@@ -7,13 +8,15 @@ const ORIGINS = ['https://urbanbackstage.com', 'http://localhost:8765'];
 const USERS = ['ricky', 'doug'];
 const STAGES = ['lead', 'consult', 'estimate', 'booked', 'done', 'review', 'lost'];
 const LAUNCH = '2027-04-01';
+const ALERT_FROM = 'alerts@gbg.urbanbackstage.com';
+const ALERT_TO = ['ricky@urbannicheco.com', 'Jaxt3@icloud.com'];
 
 function cors(req) {
   const o = req.headers.get('Origin') || '';
   return {
     'Access-Control-Allow-Origin': ORIGINS.includes(o) ? o : ORIGINS[0],
     'Access-Control-Allow-Headers': 'Content-Type, x-gbg-user, x-gbg-key',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
     'Vary': 'Origin'
   };
 }
@@ -46,6 +49,23 @@ async function log(env, who, kind, ref_type, ref_id, note) {
 }
 async function body(req) { try { return await req.json(); } catch (e) { return {}; } }
 
+async function sendCallAlert(env, { name, phone, city, svc, notes }) {
+  if (!env.EMAIL) return;
+  const subject = 'GBG call: ' + name + (svc ? ' (' + svc + ')' : '');
+  const text = [
+    'Name: ' + name,
+    phone ? 'Phone: ' + phone : null,
+    city ? 'City: ' + city : null,
+    svc ? 'Need: ' + svc : null,
+    notes ? '' : null,
+    notes || null
+  ].filter(v => v !== null).join('\n');
+  for (const to of ALERT_TO) {
+    try { await env.EMAIL.send({ to, from: ALERT_FROM, subject, text }); }
+    catch (e) { /* email failure never blocks the CRM write */ }
+  }
+}
+
 /* ---------- inbound lead (Netlify form webhook) ---------- */
 async function inbound(req, env, url) {
   if (!env.FORM_TOKEN || !same(url.searchParams.get('token') || '', env.FORM_TOKEN)) return json(req, { ok: false, error: 'forbidden' }, 403);
@@ -64,6 +84,66 @@ async function inbound(req, env, url) {
   return json(req, { ok: true });
 }
 
+/* ---------- inbound call (Retell AI post-call webhook) ---------- */
+async function inboundCall(req, env, url) {
+  if (!env.RETELL_TOKEN || !same(url.searchParams.get('token') || '', env.RETELL_TOKEN)) return json(req, { ok: false, error: 'forbidden' }, 403);
+  const b = await body(req);
+  if (b.event && b.event !== 'call_analyzed') return json(req, { ok: true, skipped: b.event || 'no event' });
+  const call = b.call || b;
+  const ca = call.call_analysis || {};
+  const d = ca.custom_analysis_data || call.custom_analysis_data || {};
+  const callerType = s(d.caller_type) || 'other';
+  if (['wrong_number', 'spam'].includes(callerType)) {
+    await log(env, 'gbg-receptionist', 'call_skip', null, null, callerType);
+    return json(req, { ok: true, skipped: callerType });
+  }
+  const name = s(d.caller_name) || 'Phone caller';
+  const phone = s(d.callback_number) || s(call.from_number);
+  const city = s(d.city);
+  const need = s(d.need);
+  const notes = [s(ca.call_summary), need ? 'Need: ' + need : null, d.best_time ? 'Best time: ' + s(d.best_time) : null,
+    d.urgent ? 'Urgent: ' + s(d.urgent) : null, callerType === 'partner_inquiry' ? 'Asked about painting/landscaping/tree (partner referral)' : null]
+    .filter(Boolean).join('\n') || null;
+  const c = await env.DB.prepare('INSERT INTO contacts (name,phone,neighborhood,source,notes) VALUES (?,?,?,?,?)')
+    .bind(name, phone, city, 'phone', notes).run();
+  const cid = c.meta.last_row_id;
+  const svc = callerType === 'partner_inquiry' ? (need || 'partner referral') : need;
+  const j = await env.DB.prepare("INSERT INTO jobs (contact_id,service,stage,notes) VALUES (?,?,'lead',?)").bind(cid, svc, notes).run();
+  await env.DB.prepare("INSERT INTO tasks (title,owner,due,area,source,job_id) VALUES (?,?,?,?,?,?)")
+    .bind('Call back: ' + name + (svc ? ' (' + svc + ')' : ''), 'both', today(), 'sales', 'GBG phone', j.meta.last_row_id).run();
+  await log(env, 'gbg-receptionist', 'call_lead', 'job', j.meta.last_row_id, name + (svc ? ' (' + svc + ')' : ''));
+  await sendCallAlert(env, { name, phone, city, svc, notes });
+  return json(req, { ok: true });
+}
+
+/* ---------- contact archive / delete ---------- */
+async function contactAction(env, DB, who, id, action) {
+  const c = await DB.prepare('SELECT id,name,archived FROM contacts WHERE id=?').bind(id).first();
+  if (!c) return false;
+  if (action === 'archive' || action === 'unarchive') {
+    const v = action === 'archive' ? 1 : 0;
+    if (c.archived === v) return true;
+    await DB.prepare("UPDATE contacts SET archived=?, updated_at=datetime('now') WHERE id=?").bind(v, id).run();
+    await log(env, who, action === 'archive' ? 'contact_archive' : 'contact_unarchive', 'contact', id, c.name);
+    return true;
+  }
+  if (action === 'delete') {
+    const jobs = await DB.prepare('SELECT id FROM jobs WHERE contact_id=?').bind(id).all();
+    const jids = jobs.results.map(j => j.id);
+    const stmts = [];
+    if (jids.length) {
+      const ph = jids.map(() => '?').join(',');
+      stmts.push(DB.prepare('DELETE FROM tasks WHERE job_id IN (' + ph + ')').bind(...jids));
+      stmts.push(DB.prepare('DELETE FROM jobs WHERE id IN (' + ph + ')').bind(...jids));
+    }
+    stmts.push(DB.prepare('DELETE FROM contacts WHERE id=?').bind(id));
+    await DB.batch(stmts);
+    await log(env, who, 'contact_delete', null, null, c.name + (jids.length ? ' (+' + jids.length + ' job' + (jids.length > 1 ? 's' : '') + ')' : ''));
+    return true;
+  }
+  return false;
+}
+
 /* ---------- routes ---------- */
 export default {
   async fetch(req, env) {
@@ -73,6 +153,7 @@ export default {
     try {
       if (p === '/') return json(req, { ok: true, service: 'gbg-os-api' });
       if (p === '/inbound' && req.method === 'POST') return inbound(req, env, url);
+      if (p === '/inbound-call' && req.method === 'POST') return inboundCall(req, env, url);
 
       if (p === '/pin' && req.method === 'POST') {
         const b = await body(req);
@@ -98,8 +179,8 @@ export default {
           q("SELECT owner, COUNT(*) n FROM tasks WHERE status='open' GROUP BY owner"),
           q("SELECT COUNT(*) n FROM tasks WHERE status='open' AND due < ?", t),
           q("SELECT COUNT(*) n FROM tasks WHERE status='open' AND due >= ? AND due <= ?", t, wk),
-          q("SELECT stage, COUNT(*) n FROM jobs GROUP BY stage"),
-          q("SELECT COUNT(*) n FROM contacts WHERE kind='customer'"),
+          q("SELECT j.stage, COUNT(*) n FROM jobs j LEFT JOIN contacts c ON c.id=j.contact_id WHERE IFNULL(c.archived,0)=0 GROUP BY j.stage"),
+          q("SELECT COUNT(*) n FROM contacts WHERE kind='customer' AND archived=0"),
           q("SELECT id,title,due,owner,status FROM tasks WHERE key_date=1 AND status='open' ORDER BY due LIMIT 5"),
           q("SELECT at,who,kind,note FROM activity ORDER BY id DESC LIMIT 8")
         ]);
@@ -118,7 +199,9 @@ export default {
         let sql = 'SELECT * FROM tasks WHERE 1=1', a = [];
         if (st !== 'all') { sql += ' AND status=?'; a.push(st); }
         if (owner && owner !== 'all') { sql += " AND (owner=? OR owner='both')"; a.push(owner); }
-        sql += st === 'done' ? ' ORDER BY done_at DESC LIMIT 200' : ' ORDER BY due IS NULL, due, id LIMIT 500';
+        const tq = s(url.searchParams.get('q'));
+        if (tq) { sql += ' AND (title LIKE ? OR notes LIKE ? OR area LIKE ? OR source LIKE ?)'; const l = '%' + tq + '%'; a.push(l, l, l, l); }
+        sql += st === 'done' ? ' ORDER BY done_at DESC LIMIT 200' : st === 'all' ? " ORDER BY status='done', due IS NULL, due, id LIMIT 500" : ' ORDER BY due IS NULL, due, id LIMIT 500';
         const r = await DB.prepare(sql).bind(...a).all();
         return json(req, { ok: true, today: today(), tasks: r.results });
       }
@@ -152,13 +235,33 @@ export default {
 
       /* contacts */
       if (p === '/contacts' && req.method === 'GET') {
-        const qs = url.searchParams.get('q');
-        const r = qs
-          ? await DB.prepare("SELECT * FROM contacts WHERE name LIKE ? OR phone LIKE ? OR address LIKE ? ORDER BY id DESC LIMIT 100").bind('%' + qs + '%', '%' + qs + '%', '%' + qs + '%').all()
-          : await DB.prepare(`SELECT c.*, (SELECT COUNT(*) FROM jobs j WHERE j.contact_id=c.id) jobs,
-              (SELECT stage FROM jobs j WHERE j.contact_id=c.id ORDER BY j.id DESC LIMIT 1) last_stage
-              FROM contacts c ORDER BY c.updated_at DESC, c.id DESC LIMIT 300`).all();
-        return json(req, { ok: true, contacts: r.results });
+        const qs = s(url.searchParams.get('q'));
+        const view = url.searchParams.get('view') || 'active';
+        const kind = url.searchParams.get('kind');
+        let where = ' WHERE 1=1', a = [];
+        if (view === 'active') where += ' AND c.archived=0';
+        else if (view === 'archived') where += ' AND c.archived=1';
+        if (kind && ['customer', 'partner', 'vendor'].includes(kind)) { where += ' AND c.kind=?'; a.push(kind); }
+        if (qs) {
+          const l = '%' + qs + '%';
+          where += ' AND (c.name LIKE ? OR c.phone LIKE ? OR c.email LIKE ? OR c.address LIKE ? OR c.neighborhood LIKE ? OR c.notes LIKE ?)';
+          a.push(l, l, l, l, l, l);
+        }
+        const r = await DB.prepare(`SELECT c.*, (SELECT COUNT(*) FROM jobs j WHERE j.contact_id=c.id) jobs,
+            (SELECT stage FROM jobs j WHERE j.contact_id=c.id ORDER BY j.id DESC LIMIT 1) last_stage,
+            (SELECT COUNT(*) FROM tasks t JOIN jobs j ON j.id=t.job_id WHERE j.contact_id=c.id AND t.status='open') open_tasks
+            FROM contacts c` + where + ' ORDER BY c.updated_at DESC, c.id DESC LIMIT 500').bind(...a).all();
+        const counts = await DB.prepare(`SELECT SUM(archived=0 AND kind='customer') customers, SUM(archived=0 AND kind='partner') partners,
+            SUM(archived=0 AND kind='vendor') vendors, SUM(archived=1) archived FROM contacts`).first();
+        return json(req, { ok: true, contacts: r.results, counts });
+      }
+      if (p === '/contacts/bulk' && req.method === 'POST') {
+        const b = await body(req);
+        const ids = (Array.isArray(b.ids) ? b.ids : []).map(Number).filter(n => n > 0).slice(0, 200);
+        if (!ids.length || !['archive', 'unarchive', 'delete'].includes(b.action)) return json(req, { ok: false, error: 'bad request' }, 400);
+        let n = 0;
+        for (const id of ids) n += (await contactAction(env, DB, who, id, b.action)) ? 1 : 0;
+        return json(req, { ok: true, changed: n });
       }
       if (p === '/contacts' && req.method === 'POST') {
         const b = await body(req);
@@ -171,8 +274,9 @@ export default {
 
       /* jobs */
       if (p === '/jobs' && req.method === 'GET') {
-        const r = await DB.prepare(`SELECT j.*, c.name, c.phone, c.email, c.address, c.source
-          FROM jobs j LEFT JOIN contacts c ON c.id=j.contact_id ORDER BY j.updated_at DESC LIMIT 300`).all();
+        const all = url.searchParams.get('all') === '1';
+        const r = await DB.prepare(`SELECT j.*, c.name, c.phone, c.email, c.address, c.source, c.archived
+          FROM jobs j LEFT JOIN contacts c ON c.id=j.contact_id` + (all ? '' : ' WHERE IFNULL(c.archived,0)=0') + ' ORDER BY j.updated_at DESC LIMIT 300').all();
         return json(req, { ok: true, stages: STAGES, jobs: r.results });
       }
       if (p === '/jobs' && req.method === 'POST') {
@@ -219,10 +323,18 @@ export default {
           (ids.length ? ` OR (ref_type='job' AND ref_id IN (${ids.map(() => '?').join(',')}))` : '') + ' ORDER BY id DESC LIMIT 100').bind(id, ...ids).all();
         return json(req, { ok: true, contact: c, jobs: jobs.results, activity: act.results });
       }
+      if (m && req.method === 'DELETE') {
+        const ok = await contactAction(env, DB, who, +m[1], 'delete');
+        return ok ? json(req, { ok: true }) : json(req, { ok: false, error: 'not found' }, 404);
+      }
       if (m && req.method === 'PATCH') {
         const id = +m[1], b = await body(req);
         const cur = await DB.prepare('SELECT * FROM contacts WHERE id=?').bind(id).first();
         if (!cur) return json(req, { ok: false, error: 'not found' }, 404);
+        if (b.archived !== undefined && Object.keys(b).length === 1) {
+          await contactAction(env, DB, who, id, b.archived ? 'archive' : 'unarchive');
+          return json(req, { ok: true });
+        }
         const f = ['name', 'phone', 'email', 'address', 'neighborhood', 'source', 'kind', 'notes'];
         const v = f.map(k => b[k] !== undefined ? s(b[k]) : cur[k]);
         if (!v[0]) return json(req, { ok: false, error: 'name required' }, 400);
