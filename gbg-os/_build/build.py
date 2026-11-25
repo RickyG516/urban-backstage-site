@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "15"  # cache bust, bump on every os.css / os.js change
+V = "16"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -43,7 +43,7 @@ def chip(label, href, cls=""):
     ext = f" {EXT}" if href.startswith("http") else ""
     return f'<a{c} href="{href}"{ext}>{label}</a>'
 
-def page(slug, pid, title, eyebrow, h1, lede, body):
+def page(slug, pid, title, eyebrow, h1, lede, body, bare=False):
     depth = "../" if slug else ""
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -63,12 +63,12 @@ def page(slug, pid, title, eyebrow, h1, lede, body):
 <body data-venture="gbg" data-page="{pid}">
 <nav class="os-nav" id="os-nav"></nav>
 <div class="wrap">
-  <section class="hero">
+{"" if bare else f"""  <section class="hero">
     <p class="eyebrow">{eyebrow}</p>
     <h1>{h1}</h1>
     <p>{lede}</p>
   </section>
-{body}
+"""}{body}
   <footer>GBG DUBUQUE | Internal ops, not indexed. Amounts, ownership and anything personal live in Drive, never on these pages.</footer>
 </div>
 </body>
@@ -80,47 +80,52 @@ def page(slug, pid, title, eyebrow, h1, lede, body):
 
 def sh(t): return f'  <div class="sh"><h2>{t}</h2><div class="rule"></div></div>\n'
 
-# ---------- HUB ----------
-hub = sh("Pulse") + f"""  <div class="stats">
-    <div class="stat"><div class="k">Days to launch</div><div class="v or" data-countdown>&nbsp;</div><div class="s">Target April 1, 2027</div></div>
-    <div class="stat"><div class="k">Your open tasks</div><div class="v" data-k="mine">&middot;</div><div class="s"><span data-k="open">&middot;</span> open for the team</div></div>
-    <div class="stat"><div class="k">Overdue</div><div class="v" data-k="overdue">&middot;</div><div class="s"><span data-k="week">&middot;</span> due in the next 7 days</div></div>
-    <div class="stat"><div class="k">Jobs in pipeline</div><div class="v" data-k="jobs">&middot;</div><div class="s"><span data-k="booked">&middot;</span> booked</div></div>
+# ---------- HUB (command center) ----------
+hub = """  <section class="cmd">
+    <div class="cmd-top">
+      <div>
+        <p class="eyebrow" data-live="greet">GBG Dubuque</p>
+        <div class="cmd-count"><span data-countdown>&nbsp;</span><small>days to<br>launch</small></div>
+        <p class="cmd-sub">Exterior services &middot; Built in North Dubuque &middot; Launch April 1, 2027</p>
+      </div>
+      <div class="runway">
+        <div class="rw-head"><span>Road to launch</span><b data-live="rwpct"></b></div>
+        <div class="rw-bar"><i data-live="runway"></i><em data-live="rwnow"></em></div>
+        <div class="rw-ticks" data-live="ticks"></div>
+        <div class="rw-ends"><span>Nov 1</span><span>Apr 1</span></div>
+      </div>
+    </div>
+    <div class="kpis">
+      <a class="kpi" href="/gbg-os/tasks/"><div class="k">Your open</div><div class="v" data-k="mine">&middot;</div><div class="s"><span data-k="open">&middot;</span> for the team</div></a>
+      <a class="kpi" href="/gbg-os/checkin/" data-kpi="overdue"><div class="k">Overdue</div><div class="v" data-k="overdue">&middot;</div><div class="s">team wide</div></a>
+      <a class="kpi" href="/gbg-os/tasks/"><div class="k">Due next 7 days</div><div class="v" data-k="week">&middot;</div><div class="s">team wide</div></a>
+      <a class="kpi" href="/gbg-os/jobs/"><div class="k">Leads, 7 days</div><div class="v" data-k="leads7">&middot;</div><div class="s"><span data-k="jobs">&middot;</span> jobs open</div></a>
+      <a class="kpi" href="/gbg-os/checkin/"><div class="k">Closed, 7 days</div><div class="v or" data-k="closed7">&middot;</div><div class="s">by all three</div></a>
+    </div>
+  </section>
+  <div class="cmd-grid" data-live="hub">
+    <div class="card cmd-due"><div class="card-top"><h3>Your next moves</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
+    <div class="cmd-stack">
+      <div class="card"><div class="card-top"><h3>Last 7 days</h3><a class="tag or" href="/gbg-os/checkin/">Check in</a></div><div class="sboard" data-live="scoreboard"></div></div>
+      <div class="cmd-pair">
+        <a class="card panel" href="/gbg-os/jobs/"><h3>Pipeline</h3><div class="pipe" data-live="pipe"></div></a>
+        <a class="card panel" href="/gbg-os/roles/"><h3>Roles</h3><div data-live="hroles"></div></a>
+      </div>
+      <a class="card panel" href="/gbg-os/gear/"><div class="card-top"><h3>Gear ready</h3><span class="hint2" style="margin:0">must haves covered</span></div><div class="gready" data-live="hgear"></div></a>
+    </div>
   </div>
-  <div class="card board-card" style="margin-top:14px"><div class="card-top"><h3>Last 7 days</h3><a class="tag or" href="/gbg-os/checkin/">Check in</a></div><div class="sboard" data-live="scoreboard"></div></div>
-  <div class="grid" style="margin-top:14px" data-live="hub">
-    <div class="card"><div class="card-top"><h3>Due now</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
-    <div class="card"><div class="card-top"><h3>Key dates</h3></div><ul class="mini" data-live="keydates"></ul>
-      <h3 style="margin-top:18px">Recently closed</h3><div data-live="closed"></div>
-      <h3 style="margin-top:18px">Recent activity</h3><ul class="mini" data-live="recent"></ul>
-      <p class="whoami">Click any task to edit it. <span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p></div>
+  <div class="cmd-grid2">
+    <div class="card"><div class="card-top"><h3>Key dates</h3><a class="tag or" href="/gbg-os/launch/">Launch</a></div><ul class="kd" data-live="keydates"></ul></div>
+    <div class="card"><div class="card-top"><h3>Live feed</h3></div><ul class="feed" data-live="recent"></ul></div>
   </div>
-""" + sh("Sections") + f"""  <div class="grid">
-    <a class="card" href="/gbg-os/start/"><div class="card-top"><h3>Start here</h3><span class="tag or">New</span></div><p>How everything works and every tool we use, in one place.</p></a>
-    <a class="card" href="/gbg-os/roles/"><div class="card-top"><h3>Roles</h3><span class="tag or">New</span></div><p>Rate every role 1 to 10. Scores stay hidden until all three of us finish.</p></a>
-    <a class="card" href="/gbg-os/gear/"><div class="card-top"><h3>Gear</h3><span class="tag or">Live</span></div><p>Check off the tools you own. See which service is cheapest to start.</p></a>
-    <a class="card" href="/gbg-os/tasks/"><div class="card-top"><h3>Tasks</h3><span class="tag or">Live</span></div><p>Every launch to do with an owner and a date. Check them off as you go.</p></a>
-    <a class="card" href="/gbg-os/launch/"><div class="card-top"><h3>Launch</h3></div><p>Roadmap to April 1, next actions, open decisions, and everything to verify before the first job.</p></a>
-    <a class="card" href="/gbg-os/services/"><div class="card-top"><h3>Services</h3></div><p>What we do in house, what goes to partners, and the gate each service has to clear before it books.</p></a>
-    <a class="card" href="/gbg-os/jobs/"><div class="card-top"><h3>Jobs</h3><span class="tag or">Live</span></div><p>Lead to review pipeline. Add leads, move jobs, site form leads land here.</p></a>
-    <a class="card" href="/gbg-os/playbook/"><div class="card-top"><h3>Playbook</h3></div><p>Operating rules, brand, and every SOP in one spot.</p></a>
-    <a class="card" href="/gbg-os/web/"><div class="card-top"><h3>Website &amp; Content</h3></div><p>Site, repo, hosting, social pages, blog drafts.</p></a>
-    <a class="card" href="/gbg-os/finance/"><div class="card-top"><h3>Finance</h3></div><p>Budget, equipment and launch gate trackers. Links to Drive only.</p></a>
+""" + f"""  <div class="quick">
+    <span class="ql">Quick launch</span><div class="chips" style="margin:0">
+    {chip("GBG Drive", D["root"], "drive")}{chip("Master launch plan", D["master"], "drive")}{chip("Launch HQ", D["hq"], "drive")}
+    {chip("gbgdubuque.com", "https://gbgdubuque.com/")}{chip("Facebook", "https://www.facebook.com/profile.php?id=61596672201884")}{chip("Instagram", "https://www.instagram.com/gbgdubuque/")}</div>
   </div>
-""" + sh("Quick launch") + f"""  <div class="chips">
-    {chip("Launch HQ index", D["hq"], "drive")}
-    {chip("Master launch plan", D["master"], "drive")}
-    {chip("GBG Drive", D["root"], "drive")}
-    {chip("UNC marketing folder", D["f_unc_client"], "drive")}
-    {chip("gbgdubuque.com", "https://gbgdubuque.com/")}
-    {chip("Facebook page", "https://www.facebook.com/profile.php?id=61596672201884")}
-    {chip("Instagram", "https://www.instagram.com/gbgdubuque/")}
-    {chip("Repo", "https://github.com/RickyG516/gbg-dubuque-site")}
-    {chip("Netlify", "https://app.netlify.com/")}
-  </div>
+  <p class="whoami"><span data-live="hello"></span> &middot; <button class="linkbtn" data-signout>Sign out</button></p>
 """
-page("", "hub", "Hub", "GBG Dubuque", "GBG <span>OS</span>",
-     "One front door to everything that runs GBG. Exterior services, Dubuque, target launch April 1, 2027.", hub)
+page("", "hub", "Hub", "GBG Dubuque", "GBG <span>OS</span>", "", hub, bare=True)
 
 # ---------- LAUNCH ----------
 def checklist(items):

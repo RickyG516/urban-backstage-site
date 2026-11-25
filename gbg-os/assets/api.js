@@ -147,21 +147,50 @@
     }).catch(function (e) { if (e.message !== 'locked') el.innerHTML = '<p class="loading">Could not load tasks.</p>'; });
   }
 
-  /* ---------- hub ---------- */
+  /* ---------- hub (command center) ---------- */
+  var VERB = { task_done: 'closed', task_add: 'added', task_edit: 'updated', task_reopen: 'reopened', login: 'signed in', note: 'added a note',
+    contact_add: 'added a contact', contact_edit: 'updated a contact', contact_archive: 'archived', contact_delete: 'deleted', job_add: 'added a job',
+    job_stage: 'moved a job', job_edit: 'updated a job', lead: 'new lead', call_lead: 'new call', gear_have: 'has', gear_unhave: 'unchecked',
+    gear_add: 'added gear', gear_edit: 'updated gear', gear_bought: 'bought', gear_buying: 'is buying', roles_done: 'finished rating roles',
+    role_suggest: 'suggested a role', role_owner: 'set a role owner', role_assign: 'handed off', roles_reveal: 'scores are open',
+    checkin_notes: 'saved check in notes', digest: 'sent', role_suggest_added: 'added a role' };
+  function ago(a) {
+    var d = new Date((a || '').replace(' ', 'T') + (a && a.length <= 19 ? 'Z' : '')); if (isNaN(d)) return '';
+    var m = Math.round((Date.now() - d) / 6e4);
+    return m < 1 ? 'now' : m < 60 ? m + 'm' : m < 1440 ? Math.round(m / 60) + 'h' : Math.round(m / 1440) + 'd';
+  }
   function renderHub() {
     var box = document.querySelector('[data-live=hub]'); if (!box) return;
     api('/summary').then(function (d) {
       var mine = 0; d.open.forEach(function (o) { if (o.owner === d.user || o.owner === 'both') mine += o.n; });
       var total = 0; d.open.forEach(function (o) { total += o.n; });
-      var jobs = 0, booked = 0; d.stages.forEach(function (s) { if (s.stage !== 'lost') jobs += s.n; if (s.stage === 'booked') booked = s.n; });
-      set('open', total); set('mine', mine); set('overdue', d.overdue); set('week', d.this_week); set('jobs', jobs); set('booked', booked); set('done', d.done);
-      var od = document.querySelector('[data-k=overdue]'); if (od) od.classList.toggle('bad', d.overdue > 0);
+      var jobs = 0, booked = 0; d.stages.forEach(function (s) { if (s.stage !== 'lost' && s.stage !== 'done' && s.stage !== 'review') jobs += s.n; if (s.stage === 'booked') booked = s.n; });
+      var closed7 = 0; (d.board || []).forEach(function (x) { if (x.done_by !== 'system') closed7 += x.n; });
+      set('open', total); set('mine', mine); set('overdue', d.overdue); set('week', d.this_week); set('jobs', jobs); set('booked', booked); set('done', d.done); set('closed7', closed7);
+      var od = document.querySelector('[data-kpi=overdue]'); if (od) od.classList.toggle('bad', d.overdue > 0);
+      // greeting
+      var h = new Date().getHours(), g = document.querySelector('[data-live=greet]');
+      if (g) g.textContent = (h < 12 ? 'Morning' : h < 17 ? 'Afternoon' : 'Evening') + ', ' + NAME[d.user] + ' · ' + new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      // runway
+      var t0 = new Date('2026-11-01T12:00:00').getTime(), t1 = new Date('2027-04-01T12:00:00').getTime(), now = Date.now();
+      var pos = function (iso) { return Math.max(0, Math.min(100, (new Date(iso + 'T12:00:00').getTime() - t0) / (t1 - t0) * 100)); };
+      var pct = Math.max(0, Math.min(100, (now - t0) / (t1 - t0) * 100));
+      var rw = document.querySelector('[data-live=runway]'); if (rw) rw.style.width = pct + '%';
+      var rn = document.querySelector('[data-live=rwnow]'); if (rn) rn.style.left = pct + '%';
+      var rp = document.querySelector('[data-live=rwpct]'); if (rp) rp.textContent = Math.round(pct) + '% of the runway used';
+      var tk = document.querySelector('[data-live=ticks]');
+      if (tk) tk.innerHTML = d.key_dates.filter(function (t) { return t.due; }).map(function (t, i) {
+        return '<span class="rwt' + (i % 2 ? ' lo' : '') + '" style="left:' + pos(t.due) + '%" title="' + esc(t.title) + '"><i></i><b>' + fmt(t.due) + '</b></span>'; }).join('');
       var kd = document.querySelector('[data-live=keydates]');
-      if (kd) kd.innerHTML = d.key_dates.map(function (t) { return '<li><span>' + fmt(t.due) + '</span>' + esc(t.title) + '</li>'; }).join('') || '<li>None open</li>';
+      if (kd) kd.innerHTML = d.key_dates.map(function (t) {
+        var n = daysBetween(d.today, t.due);
+        return '<li><div class="kdd"><b>' + fmt(t.due).split(' ')[1] + '</b><span>' + fmt(t.due).split(' ')[0] + '</span></div><div class="kdt">' + esc(t.title) +
+          '<small>' + (n < 0 ? (-n) + ' days late' : n === 0 ? 'today' : 'in ' + n + ' day' + (n === 1 ? '' : 's')) + ' &middot; ' + esc(NAME[t.owner] || t.owner) + '</small></div></li>'; }).join('') || '<li class="none">No key dates open.</li>';
       var ra = document.querySelector('[data-live=recent]');
       if (ra) ra.innerHTML = d.recent.map(function (a) {
-        return '<li><span>' + esc(NAME[a.who] || a.who) + '</span>' + esc(a.kind.replace('_', ' ')) + (a.note ? ': ' + esc(a.note) : '') + '</li>';
-      }).join('');
+        return '<li><i class="dot ' + esc(a.who) + '"></i><div><b>' + esc(NAME[a.who] || a.who) + '</b> ' + esc(VERB[a.kind] || a.kind.replace(/_/g, ' ')) +
+          (a.note ? ' <span>' + esc(a.note) + '</span>' : '') + '</div><em>' + ago(a.at) + '</em></li>';
+      }).join('') || '<li class="none">Quiet so far.</li>';
       var hi = document.querySelector('[data-live=hello]'); if (hi) hi.textContent = 'Signed in as ' + NAME[d.user];
       var bd = document.querySelector('[data-live=scoreboard]');
       if (bd) {
@@ -172,8 +201,39 @@
           return '<div class="bp ' + u + (u === d.user ? ' me' : '') + '"><div class="bn">' + NAME[u] + '</div><div class="bv">' + n + '</div><div class="bar"><i style="width:' + Math.round(n / top * 100) + '%"></i></div><div class="bs">task' + (n === 1 ? '' : 's') + ' closed</div></div>';
         }).join('');
       }
+      renderHubPanels(d);
     }).catch(function () {});
     function set(k, v) { var e = document.querySelector('[data-k=' + k + ']'); if (e) e.textContent = v; }
+  }
+  function renderHubPanels(sum) {
+    var pipe = document.querySelector('[data-live=pipe]'); if (!pipe) return;
+    var order = ['lead', 'consult', 'estimate', 'booked', 'done', 'review'], sm = {};
+    sum.stages.forEach(function (s) { sm[s.stage] = s.n; });
+    var mx = Math.max(1, Math.max.apply(null, order.map(function (k) { return sm[k] || 0; })));
+    pipe.innerHTML = order.map(function (k) { var n = sm[k] || 0;
+      return '<div class="pr"><span>' + STAGE[k] + '</span><div class="pb"><i style="width:' + (n ? Math.max(6, n / mx * 100) : 0) + '%"></i></div><b>' + n + '</b></div>'; }).join('');
+    api('/jobs').then(function (d) {
+      var cut = new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10), n = d.jobs.filter(function (j) { return (j.created_at || '').slice(0, 10) >= cut; }).length;
+      var e = document.querySelector('[data-k=leads7]'); if (e) e.textContent = n;
+    }).catch(function () {});
+    api('/roles').then(function (d) {
+      var el = document.querySelector('[data-live=hroles]'); if (!el) return;
+      if (d.revealed) {
+        var owned = d.roles.filter(function (r) { return r.owner; }).length;
+        el.innerHTML = '<div class="big">' + owned + '<small>/' + d.total + '</small></div><p class="hint2">roles have an owner. Scores are open.</p>'; return;
+      }
+      el.innerHTML = RWHO.map(function (u) { var n = d.progress[u] || 0;
+        return '<div class="pr"><span class="who ' + u + '">' + NAME[u] + '</span><div class="pb"><i style="width:' + (d.total ? n / d.total * 100 : 0) + '%"></i></div><b>' + n + '/' + d.total + '</b></div>'; }).join('') +
+        '<p class="hint2" style="margin-top:8px">Scores open when all three finish.</p>';
+    }).catch(function () {});
+    api('/gear').then(function (d) {
+      var el = document.querySelector('[data-live=hgear]'); if (!el) return;
+      el.innerHTML = ['sealing', 'lights', 'junk', 'trash', 'proof'].map(function (k) {
+        var must = d.items.filter(function (g) { return g.services.indexOf(',' + k + ',') > -1 && g.priority === 'must'; });
+        var have = must.filter(gHas).length, pct = must.length ? Math.round(have / must.length * 100) : 0;
+        return '<div class="gr"><div class="ring" style="--p:' + pct + '"><span>' + pct + '%</span></div><div class="gl">' + GSVC[k] + '<small>' + have + ' of ' + must.length + '</small></div></div>';
+      }).join('');
+    }).catch(function () {});
   }
 
   function renderClosed() {
