@@ -14,11 +14,12 @@
       { id: 'hub',      name: 'Hub',      href: '/gbg-os/' },
       { id: 'start',    name: 'Start here', href: '/gbg-os/start/' },
       { id: 'tasks',    name: 'Tasks',    href: '/gbg-os/tasks/' },
+      { id: 'checkin',  name: 'Check in', href: '/gbg-os/checkin/' },
       { id: 'jobs',     name: 'Jobs',     href: '/gbg-os/jobs/' },
       { id: 'contacts', name: 'Contacts', href: '/gbg-os/contacts/' },
       { id: 'services', name: 'Services', href: '/gbg-os/services/' },
       { id: 'playbook', name: 'Playbook', href: '/gbg-os/playbook/' },
-      { id: 'web',      name: 'Website & Content', href: '/gbg-os/web/' },
+      { id: 'web',      name: 'Web & Content', href: '/gbg-os/web/' },
       { id: 'finance',  name: 'Finance',  href: '/gbg-os/finance/' }
     ],
     // Launch prep pages: temporary, shown in the left column until launch

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Check in | GBG OS</title>
+<link rel="icon" href="/gbg-os/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gbg-os/assets/os.css?v=15">
+<script src="/gbg-os/assets/os.js?v=15"></script>
+<script src="/gbg-os/assets/api.js?v=15"></script>
+</head>
+<body data-venture="gbg" data-page="checkin">
+<nav class="os-nav" id="os-nav"></nav>
+<div class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Sunday check in</p>
+    <h1>Sunday <span>8:30</span></h1>
+    <p>20 minutes. What got done, what's stuck, what's next. This page builds the agenda by itself.</p>
+  </section>
+  <div class="stats" data-live="cistats"></div>
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><h3>1. What got done</h3><p class="hint2">Closed in the last 7 days, by person.</p><div data-live="ci-done"></div></div>
+    <div class="card"><h3>2. What's stuck</h3><p class="hint2">Overdue. Pick a new date, a new owner, or kill it.</p><div data-live="ci-over"></div></div>
+  </div>
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><h3>3. This week</h3><p class="hint2">Due in the next 7 days, by person.</p><div data-live="ci-due"></div></div>
+    <div class="card"><h3>4. Roles</h3><div data-live="ci-roles"></div></div>
+  </div>
+  <div class="sh"><h2>Notes</h2><div class="rule"></div></div>
+  <form class="card" data-form="cinotes">
+    <p class="hint2" data-live="ci-week">This week</p>
+    <textarea name="notes" rows="7" class="cinotes" placeholder="Decisions, who took what, anything to remember next Sunday"></textarea>
+    <div class="row" style="margin-top:10px"><button type="submit">Save notes</button><span class="hint2" data-live="ci-saved"></span></div>
+  </form>
+  <div data-live="ci-past"></div>
+  <div data-live="ci-test"></div>
+
+  <footer>GBG DUBUQUE | Internal ops, not indexed. Amounts, ownership and anything personal live in Drive, never on these pages.</footer>
+</div>
+</body>
+</html>

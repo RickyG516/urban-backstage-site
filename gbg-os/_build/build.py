@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "14"  # cache bust, bump on every os.css / os.js change
+V = "15"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -87,6 +87,7 @@ hub = sh("Pulse") + f"""  <div class="stats">
     <div class="stat"><div class="k">Overdue</div><div class="v" data-k="overdue">&middot;</div><div class="s"><span data-k="week">&middot;</span> due in the next 7 days</div></div>
     <div class="stat"><div class="k">Jobs in pipeline</div><div class="v" data-k="jobs">&middot;</div><div class="s"><span data-k="booked">&middot;</span> booked</div></div>
   </div>
+  <div class="card board-card" style="margin-top:14px"><div class="card-top"><h3>Last 7 days</h3><a class="tag or" href="/gbg-os/checkin/">Check in</a></div><div class="sboard" data-live="scoreboard"></div></div>
   <div class="grid" style="margin-top:14px" data-live="hub">
     <div class="card"><div class="card-top"><h3>Due now</h3><a class="tag or" href="/gbg-os/tasks/">All tasks</a></div><div data-live="tasks" data-owner="mine" data-short="1"></div></div>
     <div class="card"><div class="card-top"><h3>Key dates</h3></div><ul class="mini" data-live="keydates"></ul>
@@ -294,6 +295,7 @@ start = sh("Logging in") + """  <div class="grid">
   </div>
 """ + sh("What each page is for") + """  <div class="grid">
     <a class="card" href="/gbg-os/"><h3>Hub</h3><p>Your tasks due now, key dates, what just got done, and who did what.</p></a>
+    <a class="card" href="/gbg-os/checkin/"><h3>Check in</h3><p>The Sunday 8:30 PM agenda builds itself here: what got done, what's stuck, what's due. Write the notes at the bottom.</p></a>
     <a class="card" href="/gbg-os/tasks/"><h3>Tasks</h3><p>Everything with an owner and a date. Tap the box to finish it (Undo is there if you misclick). Tap the words to change the date, owner or add notes like who you talked to. Search at the top.</p></a>
     <a class="card" href="/gbg-os/jobs/"><h3>Jobs</h3><p>Every lead from the phone line and the website lands here. Tap a card to see the customer, add notes, set a follow up, move it along. Marking a job Done creates the closeout task on its own.</p></a>
     <a class="card" href="/gbg-os/contacts/"><h3>Contacts</h3><p>Customers, partners and vendors. Search, open anyone, archive or delete. The EXAMPLE entries show how a filled out record looks.</p></a>
@@ -338,11 +340,33 @@ tasks = """  <input class="search" data-tsearch placeholder="Search tasks: DIAL,
     <select name="owner"><option value="ricky">Ricky</option><option value="doug">Doug</option><option value="kevin">Kevin</option><option value="both">All owners</option></select>
     <input name="due" type="date">
     <select name="area"><option value="">Area</option><option>compliance</option><option>legal</option><option>admin</option><option>finance</option><option>marketing</option><option>website</option><option>partners</option><option>ops</option><option>sales</option></select>
+    <select name="repeat"><option value="">Does not repeat</option><option value="weekly">Repeats weekly</option><option value="monthly">Repeats monthly</option></select>
     <button type="submit">Add task</button>
   </form>
 """
 page("tasks", "tasks", "Tasks", "Tasks", "Who does <span>what</span>",
      "Every to do from the launch plan, the gates, the compliance list and the SOPs, dated back from April 1.", tasks)
+
+# ---------- CHECK IN ----------
+checkin = """  <div class="stats" data-live="cistats"></div>
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><h3>1. What got done</h3><p class="hint2">Closed in the last 7 days, by person.</p><div data-live="ci-done"></div></div>
+    <div class="card"><h3>2. What's stuck</h3><p class="hint2">Overdue. Pick a new date, a new owner, or kill it.</p><div data-live="ci-over"></div></div>
+  </div>
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><h3>3. This week</h3><p class="hint2">Due in the next 7 days, by person.</p><div data-live="ci-due"></div></div>
+    <div class="card"><h3>4. Roles</h3><div data-live="ci-roles"></div></div>
+  </div>
+""" + sh("Notes") + """  <form class="card" data-form="cinotes">
+    <p class="hint2" data-live="ci-week">This week</p>
+    <textarea name="notes" rows="7" class="cinotes" placeholder="Decisions, who took what, anything to remember next Sunday"></textarea>
+    <div class="row" style="margin-top:10px"><button type="submit">Save notes</button><span class="hint2" data-live="ci-saved"></span></div>
+  </form>
+  <div data-live="ci-past"></div>
+  <div data-live="ci-test"></div>
+"""
+page("checkin", "checkin", "Check in", "Sunday check in", "Sunday <span>8:30</span>",
+     "20 minutes. What got done, what's stuck, what's next. This page builds the agenda by itself.", checkin)
 
 # ---------- PLAYBOOK ----------
 playbook = sh("Operating rules") + """  <div class="grid">

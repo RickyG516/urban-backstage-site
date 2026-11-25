@@ -371,3 +371,26 @@ body.has-side .wrap{margin-left:220px;margin-right:auto}
 }
 
 .lock .uname{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
+
+/* scoreboard */
+.sboard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.bp{background:#17181b;border-radius:10px;padding:12px 14px}
+.bp .bn{font:700 12px Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.bp.ricky .bn{color:var(--orange)}.bp.doug .bn{color:#8ab4f8}.bp.kevin .bn{color:#7fd19b}
+.bp .bv{font:700 26px Montserrat,sans-serif;color:#fff;margin:2px 0 6px}
+.bp .bar{height:5px;background:#2c2d31;border-radius:4px;overflow:hidden}.bp .bar i{display:block;height:100%;background:var(--orange)}
+.bp .bs{font-size:12px;color:#8e8e8e;margin-top:5px}.bp.me{outline:1px solid rgba(227,107,30,.4)}
+/* check in */
+.ci-p{margin-top:10px}.ci-p h4{margin:0 0 4px;font:600 13px Montserrat,sans-serif}.ci-p h4 b{color:#8e8e8e;font-weight:600}
+.ci-p .who.ricky{color:var(--orange)}.ci-p .who.doug{color:#8ab4f8}.ci-p .who.kevin{color:#7fd19b}.ci-p .who.both{color:#c8c8c8}
+.cinotes{width:100%;background:#17181b;border:1px solid #3a3b3f;border-radius:8px;color:#eee;padding:12px;font:inherit;font-size:14px;resize:vertical}
+.ci-past{border-top:1px solid #303135;padding-top:10px;margin-top:10px}.ci-past h4{margin:0 0 4px;font:600 13px Montserrat,sans-serif;color:var(--orange)}.ci-past p{margin:0;color:#c8c8c8;font-size:13.5px}
+.stat .v.bad{color:var(--stop)}
+.tmeta .rep{color:#c9a3ff}
+.rtasks{font-size:12.5px;color:#c9a3ff !important;margin:2px 0 0 !important}
+.assign{margin-left:8px;background:var(--orange);border:0;color:#111;border-radius:7px;padding:6px 10px;font-weight:600;cursor:pointer}
+.lnk{color:var(--orange);text-decoration:underline}
+@media (max-width:760px){.sboard{grid-template-columns:1fr 1fr 1fr;gap:6px}.bp{padding:10px}.bp .bv{font-size:20px}.bp .bs{font-size:11px}}
+[data-form=cinotes] .row{display:flex;align-items:center;gap:12px}
+[data-form=cinotes] button{background:var(--orange);border:0;color:#111;border-radius:8px;padding:10px 18px;font:700 13px Montserrat,sans-serif;cursor:pointer}
+[data-form=cinotes] .hint2{margin:0}

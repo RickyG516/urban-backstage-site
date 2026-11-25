@@ -3,7 +3,7 @@
 - Worker: `gbg-os-api` at https://gbg-os-api.ricky-a17.workers.dev
 - Database: D1 `gbg-os` (id 71288793-c6e3-4999-9683-d224f1ae08a6), schema in `schema.sql`
 - Source: `worker.js` in this folder. No secrets in it.
-- Secrets (set on the Worker, never in a file or repo): PIN_RICKY, PIN_DOUG, PIN_KEVIN, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN
+- Secrets (set on the Worker, never in a file or repo): PIN_RICKY, PIN_DOUG, PIN_KEVIN, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN, USER_EMAILS (JSON of each owner's email for the Monday email)
 - Email binding: EMAIL (send_email), used for phone-call alerts
 - ALWAYS pull the live code before editing (another session edits this Worker too). The repo copy can lag.
 - Pages call it from `gbg-os/assets/api.js`. CORS only allows urbanbackstage.com.
@@ -34,3 +34,9 @@ POST /roles/suggest {name, note}, PATCH /roles/suggest/:id {status: added|passed
 ## Roles rules
 Scores stay hidden until every user has rated every active role. Then settings.roles_revealed is set and stays open.
 Only Ricky can set an owner or act on a suggestion.
+GET /checkin, POST /checkin/notes {week, notes}, POST /digest/test (Ricky only), POST /roles/:id/assign (Ricky only)
+Tasks take repeat (weekly|monthly). Closing a repeating task creates the next one; Undo removes it.
+
+## Schedule
+Cron trigger `0 13 * * 1` (Mondays 7 AM Central) sends each owner their week by email. Set via PUT /workers/scripts/gbg-os-api/schedules.
+A Claude scheduled task backs up every table to Drive weekly (GBG SERVICES / TECH & SYSTEMS).

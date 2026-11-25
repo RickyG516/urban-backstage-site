@@ -78,6 +78,7 @@
       '<span class="due">' + (late ? 'Overdue, ' : '') + fmt(t.due) + '</span>' +
       (t.area ? '<span class="area">' + esc(t.area) + '</span>' : '') +
       (t.key_date ? '<span class="key">Key date</span>' : '') +
+      (t.repeat ? '<span class="rep">Repeats ' + esc(t.repeat) + '</span>' : '') +
       (t.status === 'done' && t.done_at ? '<span class="closed">Closed by ' + esc(NAME[t.done_by] || t.done_by || '?') + ', ' + stamp(t.done_at) + '</span>' : '') +
       '</div></div></li>';
   }
@@ -162,6 +163,15 @@
         return '<li><span>' + esc(NAME[a.who] || a.who) + '</span>' + esc(a.kind.replace('_', ' ')) + (a.note ? ': ' + esc(a.note) : '') + '</li>';
       }).join('');
       var hi = document.querySelector('[data-live=hello]'); if (hi) hi.textContent = 'Signed in as ' + NAME[d.user];
+      var bd = document.querySelector('[data-live=scoreboard]');
+      if (bd) {
+        var bm = {}; (d.board || []).forEach(function (x) { bm[x.done_by] = x.n; });
+        var top = Math.max(1, Math.max.apply(null, ['ricky', 'doug', 'kevin'].map(function (u) { return bm[u] || 0; })));
+        bd.innerHTML = ['ricky', 'doug', 'kevin'].map(function (u) {
+          var n = bm[u] || 0;
+          return '<div class="bp ' + u + (u === d.user ? ' me' : '') + '"><div class="bn">' + NAME[u] + '</div><div class="bv">' + n + '</div><div class="bar"><i style="width:' + Math.round(n / top * 100) + '%"></i></div><div class="bs">task' + (n === 1 ? '' : 's') + ' closed</div></div>';
+        }).join('');
+      }
     }).catch(function () {});
     function set(k, v) { var e = document.querySelector('[data-k=' + k + ']'); if (e) e.textContent = v; }
   }
@@ -326,7 +336,7 @@
     var body = drawer('Task', '', function () { document.querySelectorAll('[data-live=tasks]').forEach(renderTasks); renderHub(); });
     body.innerHTML = '<form class="dform" data-f="t">' + fld('Task', '<textarea name="title" rows="2">' + esc(t.title) + '</textarea>') +
       fld('Owner', '<select name="owner">' + opt(['ricky', 'doug', 'kevin', 'both'], t.owner, ['Ricky', 'Doug', 'Kevin', 'All owners']) + '</select>') +
-      fld('Due', inp('due', t.due, 'date')) + fld('Notes', '<textarea name="notes" rows="4" placeholder="Who you talked to, what they said…">' + esc(t.notes || '') + '</textarea>') +
+      fld('Due', inp('due', t.due, 'date')) + fld('Repeats', '<select name="repeat">' + opt(['', 'weekly', 'monthly'], t.repeat || '', ['No', 'Weekly', 'Monthly']) + '</select>') + fld('Notes', '<textarea name="notes" rows="4" placeholder="Who you talked to, what they said…">' + esc(t.notes || '') + '</textarea>') +
       '<div class="meta">' + (t.source ? 'From: ' + esc(t.source) : '') + (t.gate ? ' &middot; Gate ' + esc(t.gate) : '') + (t.done_by ? ' &middot; Done by ' + esc(NAME[t.done_by] || t.done_by) : '') + '</div>' +
       '<div class="row"><button class="save">Save</button><button type="button" class="ghost" data-toggle>' + (t.status === 'done' ? 'Reopen' : 'Mark done') + '</button>' +
       (t.job_id ? '<button type="button" class="ghost" data-job>Open job</button>' : '') + '</div></form>';
@@ -406,6 +416,53 @@
     });
   }
 
+  /* ---------- sunday check in ---------- */
+  function renderCheckin() {
+    var root = document.querySelector('[data-live=ci-done]'); if (!root) return;
+    api('/checkin').then(function (d) {
+      var byU = function (rows, key) { var m = {}; rows.forEach(function (r) { (m[r[key]] = m[r[key]] || []).push(r); }); return m; };
+      var sx = document.querySelector('[data-live=cistats]');
+      if (sx) sx.innerHTML = [['Closed last 7 days', d.closed.length], ['Overdue', d.overdue.length], ['Due next 7 days', d.due.length], ['New leads last 7 days', d.new_leads]].map(function (x, i) {
+        return '<div class="stat"><div class="k">' + x[0] + '</div><div class="v' + (i === 1 && x[1] ? ' bad' : '') + '">' + x[1] + '</div></div>'; }).join('');
+      var people = ['ricky', 'doug', 'kevin', 'both'];
+      var cm = byU(d.closed, 'done_by');
+      root.innerHTML = ['ricky', 'doug', 'kevin'].map(function (u) {
+        var L = cm[u] || [];
+        return '<div class="ci-p"><h4><span class="who ' + u + '">' + NAME[u] + '</span> <b>' + L.length + '</b></h4>' + (L.length ? '<ul class="mini">' + L.map(function (t) { return '<li>' + esc(t.title) + '</li>'; }).join('') + '</ul>' : '<p class="hint2">Nothing closed.</p>') + '</div>';
+      }).join('');
+      var ov = document.querySelector('[data-live=ci-over]');
+      ov.innerHTML = d.overdue.length ? '<ul class="tasks">' + d.overdue.map(function (t) { t.status = 'open'; TASKS[t.id] = t; return taskRow(t, d.today); }).join('') + '</ul>' : '<p class="hint2">Nothing overdue. Nice.</p>';
+      bindTicks(ov, renderCheckin); bindTaskOpen(ov);
+      var dm = byU(d.due, 'owner'), du = document.querySelector('[data-live=ci-due]');
+      du.innerHTML = people.map(function (u) {
+        var L = dm[u] || []; if (!L.length) return '';
+        return '<div class="ci-p"><h4><span class="who ' + u + '">' + NAME[u] + '</span> <b>' + L.length + '</b></h4><ul class="mini">' + L.map(function (t) { return '<li><span>' + fmt(t.due) + '</span>' + esc(t.title) + '</li>'; }).join('') + '</ul></div>';
+      }).join('') || '<p class="hint2">Nothing due this week.</p>';
+      var rr = document.querySelector('[data-live=ci-roles]'), rm = {};
+      d.roles.rated.forEach(function (x) { rm[x.user] = x.n; });
+      rr.innerHTML = d.roles.revealed ? '<p>Scores are open. Go through them together and lock owners on the <a href="/gbg-os/roles/" class="lnk">Roles page</a>.</p>'
+        : '<p class="hint2">Scores open when all three finish.</p><ul class="mini">' + ['ricky', 'doug', 'kevin'].map(function (u) { return '<li><span>' + NAME[u] + '</span>' + (rm[u] || 0) + ' of ' + d.roles.total + ' rated</li>'; }).join('') + '</ul>';
+      var wkl = document.querySelector('[data-live=ci-week]'); if (wkl) wkl.textContent = 'Check in for Sunday, ' + fmt(d.week);
+      var f = document.querySelector('[data-form=cinotes]');
+      var cur = d.notes.filter(function (n) { return n.week === d.week; })[0];
+      if (f && !f.dataset.bound) {
+        f.dataset.week = d.week; f.notes.value = cur ? cur.notes : ''; f.dataset.bound = '1';
+        f.addEventListener('submit', function (e) { e.preventDefault();
+          api('/checkin/notes', { method: 'POST', body: { week: f.dataset.week, notes: f.notes.value } }).then(function () {
+            toast('Notes saved'); var sv = document.querySelector('[data-live=ci-saved]'); if (sv) sv.textContent = 'Saved by ' + NAME[ls(LS_USER)];
+          }).catch(function () { toast('Could not save'); }); });
+      }
+      if (cur && cur.updated_by) { var sv = document.querySelector('[data-live=ci-saved]'); if (sv && !sv.textContent) sv.textContent = 'Last saved by ' + (NAME[cur.updated_by] || cur.updated_by) + ', ' + when(cur.updated_at); }
+      var past = d.notes.filter(function (n) { return n.week !== d.week && n.notes; }), pe = document.querySelector('[data-live=ci-past]');
+      if (pe) pe.innerHTML = past.length ? '<div class="card" style="margin-top:14px"><h3>Past weeks</h3>' + past.map(function (n) { return '<div class="ci-past"><h4>Week of ' + fmt(n.week) + '</h4><p>' + esc(n.notes).replace(/\n/g, '<br>') + '</p></div>'; }).join('') + '</div>' : '';
+      var te = document.querySelector('[data-live=ci-test]');
+      if (te && d.user === 'ricky' && !te.innerHTML) {
+        te.innerHTML = '<div class="note" style="margin-top:14px"><b>Monday email.</b> Goes out Mondays at 7 AM Central to all three of you. <button class="linkbtn" data-digest>Send me a test now</button></div>';
+        te.querySelector('[data-digest]').onclick = function () { api('/digest/test', { method: 'POST' }).then(function (r) { toast(r.sent.length ? 'Test sent to your email' : 'Email not set up yet'); }).catch(function () { toast('Could not send'); }); };
+      }
+    }).catch(function () {});
+  }
+
   /* ---------- roles ---------- */
   var RWHO = ['ricky', 'doug', 'kevin'];
   function scale(id, field, cur) {
@@ -436,10 +493,11 @@
           var ownerTxt = r.owner ? (r.owner === 'shared' ? 'Shared' : NAME[r.owner]) : 'Not decided';
           res += '<div class="rown">Owner: ' + (me === 'ricky'
             ? '<select data-owner="' + r.id + '">' + opt(['', 'ricky', 'doug', 'kevin', 'shared'], r.owner, ['Not decided', 'Ricky', 'Doug', 'Kevin', 'Shared']) + '</select>'
-            : '<b>' + ownerTxt + '</b>') + '</div>';
+            : '<b>' + ownerTxt + '</b>') +
+            (me === 'ricky' && r.tasks_unassigned && RWHO.indexOf(r.owner) > -1 ? ' <button class="assign" data-assign="' + r.id + '">Give ' + NAME[r.owner] + ' the ' + r.tasks_unassigned + ' task' + (r.tasks_unassigned === 1 ? '' : 's') + ' in this role</button>' : '') + '</div>';
         }
         return '<div class="card role' + (rated ? ' rated' : '') + '"><div class="card-top"><h3>' + esc(r.name) + '</h3>' + (rated ? '<span class="tag go">Rated</span>' : '<span class="tag wait">To rate</span>') + '</div>' +
-          (r.blurb ? '<p>' + esc(r.blurb) + '</p>' : '') +
+          (r.blurb ? '<p>' + esc(r.blurb) + '</p>' : '') + (r.tasks_open ? '<p class="rtasks">' + r.tasks_open + ' open task' + (r.tasks_open === 1 ? '' : 's') + ' belong to this role' + (r.tasks_unassigned ? ', ' + r.tasks_unassigned + ' waiting for an owner' : '') + '</p>' : '') +
           '<div class="rq"><span>How good would I be?</span>' + scale(r.id, 'skill', m.skill) + '</div>' +
           '<div class="rq"><span>How bad do I want it?</span>' + scale(r.id, 'want', m.want) + '</div>' + res + '</div>';
       }).join('');
@@ -455,7 +513,14 @@
       });
       el.querySelectorAll('[data-owner]').forEach(function (sel) {
         sel.addEventListener('change', function () {
-          api('/roles/' + sel.dataset.owner, { method: 'PATCH', body: { owner: sel.value || null } }).then(function () { toast('Owner saved'); }).catch(function () { toast('Could not save'); });
+          api('/roles/' + sel.dataset.owner, { method: 'PATCH', body: { owner: sel.value || null } }).then(function () { toast('Owner saved'); renderRoles(); }).catch(function () { toast('Could not save'); });
+        });
+      });
+      el.querySelectorAll('[data-assign]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          b.disabled = true;
+          api('/roles/' + b.dataset.assign + '/assign', { method: 'POST' }).then(function (r) { toast(r.moved + ' task' + (r.moved === 1 ? '' : 's') + ' handed off'); renderRoles(); })
+            .catch(function (e) { b.disabled = false; toast(e.message || 'Could not save'); });
         });
       });
       var sg = document.querySelector('[data-live=rolesug]');
@@ -626,7 +691,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     if (!ls(LS_KEY)) { lock(); return; }
-    renderHub(); renderJobs(); renderContacts(); renderClosed(); renderGear(); renderRoles();
+    renderHub(); renderJobs(); renderContacts(); renderClosed(); renderGear(); renderRoles(); renderCheckin();
     document.querySelectorAll('[data-live=tasks]').forEach(renderTasks);
     bindForms();
   });

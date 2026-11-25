@@ -1,6 +1,8 @@
 /* gbg-os-api: GBG Dubuque CRM backend.
  * D1 binding: DB (gbg-os). Email Service binding: EMAIL (sends from gbg.urbanbackstage.com).
- * Secrets: PIN_RICKY, PIN_DOUG, PIN_KEVIN, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN.
+ * Secrets: PIN_RICKY, PIN_DOUG, PIN_KEVIN, TOKEN_SECRET, FORM_TOKEN, RETELL_TOKEN,
+ *   USER_EMAILS (JSON {ricky,doug,kevin} for the Monday email).
+ * Cron: Mondays 13:00 UTC (7 AM Central) sends each owner their week.
  * No secrets live in this file. Browser sends x-gbg-user + x-gbg-key (HMAC of user).
  * Deploy runbook: gbg-os/_build/WORKER.md */
 
@@ -117,6 +119,50 @@ async function inboundCall(req, env, url) {
   return json(req, { ok: true });
 }
 
+/* ---------- week helpers ---------- */
+// the Sunday this week's check in happens on (today if it is Sunday)
+function sundayOf(d) { const x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + (7 - x.getUTCDay()) % 7); return x.toISOString().slice(0, 10); }
+const REPEAT = ['weekly', 'monthly'];
+function nextDue(due, rep) {
+  const base = due || today();
+  if (rep === 'weekly') return addDays(base, 7);
+  const x = new Date(base + 'T12:00:00Z'); x.setUTCMonth(x.getUTCMonth() + 1); return x.toISOString().slice(0, 10);
+}
+
+/* ---------- Monday email ---------- */
+async function digestFor(env, user) {
+  const DB = env.DB, t = today(), wk = addDays(t, 7), since = addDays(t, -7);
+  const mine = "(owner=? OR owner='both')";
+  const over = (await DB.prepare(`SELECT title,due,owner FROM tasks WHERE status='open' AND ${mine} AND due < ? ORDER BY due`).bind(user, t).all()).results;
+  const week = (await DB.prepare(`SELECT title,due,owner FROM tasks WHERE status='open' AND ${mine} AND due >= ? AND due <= ? ORDER BY due`).bind(user, t, wk).all()).results;
+  const others = (await DB.prepare("SELECT title,done_by FROM tasks WHERE status='done' AND done_by IS NOT NULL AND done_by<>? AND substr(done_at,1,10) >= ? ORDER BY done_at DESC").bind(user, since).all()).results;
+  const mineDone = (await DB.prepare("SELECT COUNT(*) n FROM tasks WHERE status='done' AND done_by=? AND substr(done_at,1,10) >= ?").bind(user, since).first()).n;
+  const nm = { ricky: 'Ricky', doug: 'Doug', kevin: 'Kevin', both: 'All owners' };
+  const md = d => { const x = new Date(d + 'T12:00:00Z'); return x.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }); };
+  const line = r => '  - ' + r.title + (r.due ? ' (' + md(r.due) + (r.owner === 'both' ? ', all owners' : '') + ')' : '');
+  const L = ['Morning ' + nm[user] + ',', '', 'Here is your GBG week. Open the OS to check things off: https://urbanbackstage.com/gbg-os/', ''];
+  L.push('OVERDUE (' + over.length + ')'); L.push(...(over.length ? over.map(line) : ['  Nothing. Nice.'])); L.push('');
+  L.push('DUE THIS WEEK (' + week.length + ')'); L.push(...(week.length ? week.map(line) : ['  Nothing due this week.'])); L.push('');
+  L.push('WHAT THE OTHERS CLOSED LAST WEEK (' + others.length + ')');
+  L.push(...(others.length ? others.slice(0, 25).map(r => '  - ' + (nm[r.done_by] || r.done_by) + ': ' + r.title) : ['  Nothing yet.'])); L.push('');
+  L.push('You closed ' + mineDone + ' last week.'); L.push('');
+  L.push('Sunday check in is 8:30 PM. Agenda builds itself: https://urbanbackstage.com/gbg-os/checkin/');
+  return { subject: 'GBG week: ' + over.length + ' overdue, ' + week.length + ' due this week', text: L.join('\n') };
+}
+async function sendDigests(env, only) {
+  let emails = {}; try { emails = JSON.parse(env.USER_EMAILS || '{}'); } catch (e) { }
+  const sent = [];
+  for (const u of USERS) {
+    if (only && u !== only) continue;
+    if (!emails[u] || !env.EMAIL) continue;
+    const d = await digestFor(env, u);
+    try { await env.EMAIL.send({ to: emails[u], from: ALERT_FROM, subject: d.subject, text: d.text }); sent.push(u); }
+    catch (e) { await log(env, 'system', 'digest_fail', null, null, u); }
+  }
+  if (sent.length) await log(env, 'system', 'digest', null, null, 'Monday email to ' + sent.join(', '));
+  return sent;
+}
+
 /* ---------- contact archive / delete ---------- */
 async function contactAction(env, DB, who, id, action) {
   const c = await DB.prepare('SELECT id,name,archived FROM contacts WHERE id=?').bind(id).first();
@@ -186,10 +232,11 @@ export default {
           q("SELECT at,who,kind,note FROM activity ORDER BY id DESC LIMIT 8")
         ]);
         const done = await q("SELECT COUNT(*) n FROM tasks WHERE status='done'").first();
+        const board = (await q("SELECT done_by, COUNT(*) n FROM tasks WHERE status='done' AND done_by IS NOT NULL AND substr(done_at,1,10) >= ? GROUP BY done_by", addDays(t, -6)).all()).results;
         return json(req, {
           ok: true, user: who, today: t, launch: LAUNCH,
           open: open.results, overdue: overdue.results[0].n, this_week: week.results[0].n, done: done.n,
-          stages: stages.results, contacts: contacts.results[0].n, key_dates: keys.results, recent: recent.results
+          stages: stages.results, contacts: contacts.results[0].n, key_dates: keys.results, recent: recent.results, board
         });
       }
 
@@ -209,8 +256,8 @@ export default {
       if (p === '/tasks' && req.method === 'POST') {
         const b = await body(req);
         if (!s(b.title)) return json(req, { ok: false, error: 'title required' }, 400);
-        const r = await DB.prepare('INSERT INTO tasks (title,owner,due,area,notes,job_id,key_date,source) VALUES (?,?,?,?,?,?,?,?)')
-          .bind(s(b.title), OWNERS.includes(b.owner) ? b.owner : who, s(b.due), s(b.area), s(b.notes), b.job_id || null, b.key_date ? 1 : 0, 'Added by ' + who).run();
+        const r = await DB.prepare('INSERT INTO tasks (title,owner,due,area,notes,job_id,key_date,source,repeat) VALUES (?,?,?,?,?,?,?,?,?)')
+          .bind(s(b.title), OWNERS.includes(b.owner) ? b.owner : who, s(b.due), s(b.area), s(b.notes), b.job_id || null, b.key_date ? 1 : 0, 'Added by ' + who, REPEAT.includes(b.repeat) ? b.repeat : null).run();
         await log(env, who, 'task_add', b.job_id ? 'job' : 'task', b.job_id || r.meta.last_row_id, b.title);
         return json(req, { ok: true, id: r.meta.last_row_id });
       }
@@ -224,14 +271,27 @@ export default {
           owner: OWNERS.includes(b.owner) ? b.owner : cur.owner,
           due: b.due !== undefined ? s(b.due) : cur.due,
           notes: b.notes !== undefined ? s(b.notes) : cur.notes,
-          status: ['open', 'done'].includes(b.status) ? b.status : cur.status
+          status: ['open', 'done'].includes(b.status) ? b.status : cur.status,
+          repeat: b.repeat !== undefined ? (REPEAT.includes(b.repeat) ? b.repeat : null) : cur.repeat
         };
         const doneAt = n.status === 'done' ? (cur.done_at || new Date().toISOString()) : null;
-        await DB.prepare('UPDATE tasks SET title=?,owner=?,due=?,notes=?,status=?,done_at=?,done_by=? WHERE id=?')
-          .bind(n.title, n.owner, n.due, n.notes, n.status, doneAt, n.status === 'done' ? (cur.done_by || who) : null, id).run();
+        await DB.prepare('UPDATE tasks SET title=?,owner=?,due=?,notes=?,status=?,done_at=?,done_by=?,repeat=? WHERE id=?')
+          .bind(n.title, n.owner, n.due, n.notes, n.status, doneAt, n.status === 'done' ? (cur.done_by || who) : null, n.repeat, id).run();
         const kind = n.status !== cur.status ? (n.status === 'done' ? 'task_done' : 'task_reopen') : 'task_edit';
         await log(env, who, kind, cur.job_id ? 'job' : 'task', cur.job_id || id, n.title);
-        return json(req, { ok: true });
+        let next = null;
+        if (n.repeat && n.status === 'done' && cur.status !== 'done' && !cur.next_id) {
+          const nx = await DB.prepare('INSERT INTO tasks (title,owner,due,area,notes,key_date,source,repeat,role_id) VALUES (?,?,?,?,?,?,?,?,?)')
+            .bind(n.title, n.owner, nextDue(n.due, n.repeat), cur.area, n.notes, cur.key_date || 0, 'Repeats ' + n.repeat, n.repeat, cur.role_id || null).run();
+          next = nx.meta.last_row_id;
+          await DB.prepare('UPDATE tasks SET next_id=? WHERE id=?').bind(next, id).run();
+        }
+        if (n.status === 'open' && cur.status === 'done' && cur.next_id) {
+          // undo of a repeating task: remove the copy it made if nobody touched it yet
+          await DB.prepare("DELETE FROM tasks WHERE id=? AND status='open'").bind(cur.next_id).run();
+          await DB.prepare('UPDATE tasks SET next_id=NULL WHERE id=?').bind(id).run();
+        }
+        return json(req, { ok: true, next });
       }
 
       /* contacts */
@@ -375,6 +435,9 @@ export default {
           revealed = true;
         }
         const sug = (await DB.prepare('SELECT * FROM role_suggestions ORDER BY id DESC LIMIT 100').all()).results;
+        const tc = (await DB.prepare("SELECT role_id, COUNT(*) n, SUM(owner='both') unassigned FROM tasks WHERE status='open' AND role_id IS NOT NULL GROUP BY role_id").all()).results;
+        const tcm = {}; for (const x of tc) tcm[x.role_id] = x;
+        roles.forEach(r => { r.tasks_open = tcm[r.id] ? tcm[r.id].n : 0; r.tasks_unassigned = tcm[r.id] ? tcm[r.id].unassigned : 0; });
         return json(req, { ok: true, user: who, roles, total: roles.length, progress, revealed,
           mine: sc.filter(x => x.user === who), scores: revealed ? sc : [], suggestions: sug });
       }
@@ -408,6 +471,44 @@ export default {
         if (active !== cur.active) await log(env, who, active ? 'role_restore' : 'role_remove', 'role', id, cur.name);
         return json(req, { ok: true });
       }
+      m = p.match(/^\/roles\/(\d+)\/assign$/);
+      if (m && req.method === 'POST') {
+        if (who !== 'ricky') return json(req, { ok: false, error: 'Ricky makes the final call' }, 403);
+        const role = await DB.prepare('SELECT * FROM roles WHERE id=?').bind(+m[1]).first();
+        if (!role) return json(req, { ok: false, error: 'not found' }, 404);
+        if (!USERS.includes(role.owner)) return json(req, { ok: false, error: 'pick one person as owner first' }, 400);
+        const r = await DB.prepare("UPDATE tasks SET owner=? WHERE role_id=? AND status='open' AND owner='both'").bind(role.owner, role.id).run();
+        await log(env, who, 'role_assign', 'role', role.id, role.name + ': ' + r.meta.changes + ' tasks to ' + role.owner);
+        return json(req, { ok: true, moved: r.meta.changes });
+      }
+
+      /* Sunday check in */
+      if (p === '/checkin' && req.method === 'GET') {
+        const t = today(), wk = sundayOf(t), since = addDays(t, -7), ahead = addDays(t, 7);
+        const closed = (await DB.prepare("SELECT id,title,done_by,done_at,owner FROM tasks WHERE status='done' AND substr(done_at,1,10) >= ? ORDER BY done_by, done_at DESC").bind(since).all()).results;
+        const due = (await DB.prepare("SELECT id,title,due,owner,area FROM tasks WHERE status='open' AND due >= ? AND due <= ? ORDER BY owner, due").bind(t, ahead).all()).results;
+        const over = (await DB.prepare("SELECT id,title,due,owner,area FROM tasks WHERE status='open' AND due < ? ORDER BY due").bind(t).all()).results;
+        const leads = (await DB.prepare("SELECT COUNT(*) n FROM jobs WHERE substr(created_at,1,10) >= ?").bind(since).first()).n;
+        const roles = (await DB.prepare('SELECT COUNT(*) n FROM roles WHERE active=1').first()).n;
+        const rated = (await DB.prepare("SELECT s.user, COUNT(*) n FROM role_scores s JOIN roles r ON r.id=s.role_id WHERE r.active=1 AND s.skill IS NOT NULL AND s.want IS NOT NULL GROUP BY s.user").all()).results;
+        const revealed = !!(await DB.prepare("SELECT v FROM settings WHERE k='roles_revealed'").first());
+        const notes = (await DB.prepare('SELECT * FROM checkin_notes ORDER BY week DESC LIMIT 6').all()).results;
+        return json(req, { ok: true, user: who, today: t, week: wk, closed, due, overdue: over, new_leads: leads, roles: { total: roles, rated, revealed }, notes });
+      }
+      if (p === '/checkin/notes' && req.method === 'POST') {
+        const b = await body(req);
+        const wk = /^\d{4}-\d{2}-\d{2}$/.test(b.week || '') ? b.week : sundayOf(today());
+        await DB.prepare("INSERT INTO checkin_notes (week,notes,updated_by,updated_at) VALUES (?,?,?,datetime('now')) ON CONFLICT(week) DO UPDATE SET notes=excluded.notes, updated_by=excluded.updated_by, updated_at=excluded.updated_at")
+          .bind(wk, s(b.notes) || '', who).run();
+        await log(env, who, 'checkin_notes', null, null, 'Week of ' + wk);
+        return json(req, { ok: true, week: wk });
+      }
+      if (p === '/digest/test' && req.method === 'POST') {
+        if (who !== 'ricky') return json(req, { ok: false, error: 'Ricky only' }, 403);
+        const sent = await sendDigests(env, 'ricky');
+        return json(req, { ok: true, sent });
+      }
+
       if (p === '/roles/suggest' && req.method === 'POST') {
         const b = await body(req);
         if (!s(b.name)) return json(req, { ok: false, error: 'name required' }, 400);
@@ -495,5 +596,8 @@ export default {
     } catch (e) {
       return json(req, { ok: false, error: 'server error' }, 500);
     }
+  },
+  async scheduled(event, env, ctx) {
+    if (event.cron === '0 13 * * 1') ctx.waitUntil(sendDigests(env));
   }
 };
