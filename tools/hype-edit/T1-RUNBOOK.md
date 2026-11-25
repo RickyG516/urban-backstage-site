@@ -37,6 +37,14 @@ Each row carries `name` (mockup title, tagline dropped), `photos`, `fb`, `identi
 just be extra careful at step 3.1) and `prior_text` (true = Ricky's own text is expected
 in the thread; use the follow-up draft line). Cap 5 a day. Empty list = say so, stop.
 
+### Build-only pause
+When the scheduled task prompt says outreach is paused (first: Thanksgiving week, build-only
+through Fri 2026-11-27, resume Mon 2026-11-30), run `select.py --cap 5 --json --skip-built`
+so each day builds five NEW videos, do steps 2 and 3b only, stamp `t1_video_built` +
+`t1_drive` with `t1_note` "built during outreach pause, not attached", and skip step 3
+entirely. `t1_video_built` never blocks the selector, so when the pause ends the normal
+run rebuilds the video (sessions are fresh) and attaches it as usual.
+
 ## 2. Build each video
 ```
 python3 tools/hype-edit/build.py <slug>

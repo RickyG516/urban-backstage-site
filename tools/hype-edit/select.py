@@ -82,7 +82,7 @@ def identity_hint(name, fburl):
     return "ok" if any(w in slug for w in words) else "check"
 
 
-def due(cap=5, require_photos=False, everything=False):
+def due(cap=5, require_photos=False, everything=False, skip_built=False):
     data = json.load(open(STATUS))
     out = []
     for slug, rec in data.items():
@@ -107,6 +107,8 @@ def due(cap=5, require_photos=False, everything=False):
             continue  # a video already went out, or they answered: not a T1 video target
         if fb.get("t1_skipped") and "thread not empty" not in str(fb.get("t1_note", "")).lower():
             continue  # page not found / they replied; legacy my-text-only skips are eligible again
+        if skip_built and fb.get("t1_video_built"):
+            continue  # build-only days (outreach paused): do not rebuild what is already in Drive
         prior_text = fb.get("sent") or (fb.get("t1_skipped") and "thread not empty" in str(fb.get("t1_note", "")).lower())
         folder = os.path.join(ROOT, "demo", slug)
         if not os.path.isfile(os.path.join(folder, "index.html")):
@@ -137,8 +139,10 @@ if __name__ == "__main__":
     ap.add_argument("--all", action="store_true", help="show the whole eligible pool, ignore --cap")
     ap.add_argument("--require-photos", action="store_true",
                     help="drop rows whose mockup has no usable hook photos")
+    ap.add_argument("--skip-built", action="store_true",
+                    help="build-only days: drop rows that already have a t1_video_built stamp")
     a = ap.parse_args()
-    rows = due(a.cap, a.require_photos, a.all)
+    rows = due(a.cap, a.require_photos, a.all, a.skip_built)
     if a.json:
         print(json.dumps(rows, indent=1))
     else:
