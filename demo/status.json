@@ -2178,7 +2178,10 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-11-25",
-   "variant": "C"
+   "variant": "C",
+   "t1_video_built": "2026-11-25",
+   "t1_drive": "2026-11-25",
+   "t1_note": "built during outreach pause, not attached"
   }
  },
  "wi-davenport-flooring-eau-claire": {
@@ -2639,9 +2642,10 @@
    "prev_staged": "2026-11-05",
    "prev_skipped": "2026-11-06",
    "t1_skipped": "2026-11-18",
-   "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
-   "t1_drive": "2026-11-18",
-   "sent": "2026-11-06"
+   "t1_note": "built during outreach pause, not attached",
+   "t1_drive": "2026-11-25",
+   "sent": "2026-11-06",
+   "t1_video_built": "2026-11-25"
   }
  },
  "il-eric-farwell-construction-plymouth": {
@@ -2721,7 +2725,10 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-11-25",
-   "variant": "B"
+   "variant": "B",
+   "t1_video_built": "2026-11-25",
+   "t1_drive": "2026-11-25",
+   "t1_note": "built during outreach pause, not attached"
   }
  },
  "ia-southeast-iowa-tree-service-milton": {
@@ -2730,7 +2737,12 @@
   "note": "in HubSpot 2026-11-25 (company 374730657512, contact 607465415364 placeholder, owner name unknown) | SOURCE A, Facebook Ad Library: advertiser seen in the active-ads results for 'tree service Iowa' on 2026-11-24 (no landing link on the ad); not re-opened in the Ad Library on 11-25. NO-WEBSITE: the Facebook page lists no website and the Google listing shows 'Add website'; southeastiowatreeservice.com, southeastiowatreeservicellc.com, seiowatreeservice.com and southeastiowatree.com do not resolve | BUILT 2026-11-25 as a new spec mockup, BRONZE (built-in pane, logged out). IDENTITY GATE passed: Facebook page 'Southeast Iowa Tree Service LLC', 405 N High St, Milton IA, (641) 919-4849, 179 followers; Google Maps listing 'Southeast Iowa tree service LLC' shows the same address and phone, 5.0 from 2 reviews. REAL: six job photos from the Facebook Photos tab, each looked at (bucket truck on ground mats, felling cut, bucket at a dead tree, leaning tree before, same yard after, ground stump). No other company's branding in any of them. PLACEHOLDER: logo (the Facebook profile picture is a photo of the truck, no logo found) and reviews (Google has 2 reviews and only one has text; Facebook shows 4 reviews, not rated). Google Business Profile photos (13) were not harvested: Facebook supplied enough. DO NOT SAY: owner name (one Google review thanks 'Caleb', not confirmed as the owner), years in business, insurance or licensing, a review count as a selling point. The service-area town list on the page is our guess from the map: confirm on the call.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_video_built": "2026-11-25",
+   "t1_drive": "2026-11-25",
+   "t1_note": "built during outreach pause, not attached"
+  }
  },
  "il-kaskaskia-outdoor-specialties-tuscola": {
   "channel": "phone",
@@ -2741,7 +2753,10 @@
   "stage": "none",
   "fb_dm": {
    "staged": "2026-11-25",
-   "variant": "A"
+   "variant": "A",
+   "t1_video_built": "2026-11-25",
+   "t1_drive": "2026-11-25",
+   "t1_note": "built during outreach pause, not attached"
   }
  }
 }
