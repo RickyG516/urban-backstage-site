@@ -8,6 +8,10 @@
       hdr: function (k) { return { 'x-unc-key': k }; },
       list: function (st) { return '/tasks?status=' + st; },
       set: function (t, done) { return ['/tasks/' + t.id, 'POST', { status: done ? 'done' : 'open' }]; } },
+    os: { name: 'UNC business', base: 'https://unc-sales-os-sync.ricky-a17.workers.dev', key: 'unc_worker_key', login: '/sales-ops/settings/',
+      hdr: function (k) { return { 'x-unc-key': k }; },
+      list: function (st) { return '/os/tasks?status=' + st; },
+      set: function (t, done) { return ['/os/tasks/' + t.id, 'POST', { status: done ? 'done' : 'open' }]; } },
     gbg: { name: 'GBG', base: 'https://gbg-os-api.ricky-a17.workers.dev', key: 'gbg_key', user: 'gbg_user', login: '/gbg-os/',
       hdr: function (k, u) { return { 'x-gbg-key': k, 'x-gbg-user': u }; },
       list: function (st, u) { return '/tasks?status=' + st + '&owner=' + (u || 'ricky'); },
@@ -18,7 +22,7 @@
       set: function (t, done) { return ['/tasks/' + encodeURIComponent(t.id), 'PATCH', { status: done ? 'done' : 'todo' }]; } }
   };
   var LANES = {
-    UNC: { name: 'UNC', color: '#e36b1e' }, GBG: { name: 'GBG', color: '#5b8bd0' },
+    UNC: { name: 'UNC clients', color: '#e36b1e' }, UNCB: { name: 'UNC business', color: '#f0a875' }, GBG: { name: 'GBG', color: '#5b8bd0' },
     FLWR: { name: 'Flowers', color: '#d9779a' }, MCRG: { name: 'Greens', color: '#6fae5c' },
     GZBO: { name: 'Gazebo', color: '#c9a227' }, ABNB: { name: 'Airbnb', color: '#2f8fbf' }, SHRD: { name: "Petrushka's", color: '#9a958b' }
   };
@@ -57,6 +61,7 @@
 
   function normalize(s, t) {
     if (s === 'unc') return { src: s, lane: 'UNC', id: t.id, title: t.title, due: t.due, prec: 'day', done: t.status === 'done', where: 'HubSpot', link: t.link, raw: t };
+    if (s === 'os') return { src: s, lane: 'UNCB', id: t.id, title: t.title, due: t.due, prec: 'day', done: t.status === 'done', where: t.area || '', link: '/tasks/unc/#' + (t.area || ''), raw: t };
     if (s === 'gbg') return { src: s, lane: 'GBG', id: t.id, title: t.title, due: t.due, prec: 'day', done: t.status === 'done', where: (t.area || '') + (t.owner === 'both' ? ' · both' : ''), link: '/gbg-os/tasks/', raw: t };
     var lane = LANES[t.venture] ? t.venture : 'SHRD';
     var link = '/queen/#/' + (t.unit_id ? 's/' + encodeURIComponent(t.unit_id) + '/' + (PET_LINK[lane] || 'home') : 'p/' + encodeURIComponent(t.project_id) + '/' + (PET_LINK[lane] || 'home'));
@@ -125,7 +130,8 @@
 
   function addForm() {
     var opts = [];
-    if (sources.indexOf('unc') >= 0 && ls(SRC.unc.key)) opts.push('<option value="unc|">UNC (HubSpot)</option>');
+    if (sources.indexOf('unc') >= 0 && ls(SRC.unc.key)) opts.push('<option value="unc|">UNC client (HubSpot)</option>');
+    if (sources.indexOf('os') >= 0 && ls(SRC.os.key)) opts.push('<option value="os|">UNC business</option>');
     if (sources.indexOf('gbg') >= 0 && ls(SRC.gbg.key)) opts.push('<option value="gbg|">GBG</option>');
     petProjects.forEach(function (p) { opts.push('<option value="pet|' + esc(p.id) + '">' + esc((LANES[p.venture] || {}).name || "Petrushka's") + ': ' + esc(p.name) + '</option>'); });
     if (!opts.length) return '';
@@ -162,7 +168,7 @@
 
   function boot() {
     root = document.getElementById('board'); if (!root) return;
-    sources = (root.getAttribute('data-sources') || 'unc,gbg,pet').split(',');
+    sources = (root.getAttribute('data-sources') || 'unc,os,gbg,pet').split(',');
     load();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

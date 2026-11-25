@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Urban Backstage</title>
+<title>Hub | Urban Backstage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -91,6 +91,7 @@
 
   footer{color:#5a5a5a;font-size:11.5px;border-top:1px solid #1e1e1e;margin-top:34px;padding:22px 0 48px}
 </style>
+  <link rel="stylesheet" href="/tasks/unc/os.css?v=202611250500">
   <link rel="stylesheet" href="/sales-ops/shared/mobile.css">
   <script src="/sales-ops/shared/mobile-nav.js" defer></script>
 </head>
@@ -99,7 +100,8 @@
 <nav class="ub-nav">
   <a class="ub-brand" href="/">URBAN&nbsp;<span>BACKSTAGE</span></a>
   <div class="ub-links">
-    <a href="/" class="active">Home</a>
+    <a href="/" class="active">Hub</a>
+    <a href="/tasks/unc/">Tasks</a>
     <a href="/sales-ops/workspace/">Cockpit</a>
     <a href="/sales/">Sales</a>
     <a href="/clients/">Clients</a>
@@ -116,9 +118,12 @@
 
 <div class="wrap">
 
-  <section class="hero">
-    <div class="hero-top">
-      <h1>Urban <span>Backstage</span></h1>
+  <section class="hub-hero">
+    <div class="hub-top">
+      <div>
+        <p class="hub-eyebrow" data-os="greet">Urban Niche Co.</p>
+        <h1>Urban <span>Backstage</span></h1>
+      </div>
       <nav class="ws-switch" aria-label="Workspaces">
         <a class="on" href="/">Urban Backstage</a>
         <a class="pk" href="/queen/">Petrushka's</a>
@@ -126,29 +131,39 @@
         <a class="all" href="/tasks/">All tasks</a>
       </nav>
     </div>
-    <p>One front door to every system that runs Urban Niche Co. Organized the same way the
-       Drive and the weekly executive reports are &mdash; six departments, one mental model.
-       Links only, no passwords stored. Whole domain is noindexed.</p>
+    <div class="kpis">
+      <a class="kpi" href="/sales-ops/workspace/"><div class="k">Dials today</div><div class="v or" data-k="dials">&middot;</div><div class="s">team, logged in the cockpit</div></a>
+      <a class="kpi" href="/sales-ops/workspace/"><div class="k">Callbacks due</div><div class="v" data-k="callbacks">&middot;</div><div class="s">from HubSpot</div></a>
+      <a class="kpi" href="/sales-ops/tasks/"><div class="k">Client tasks</div><div class="v" data-k="hs-open">&middot;</div><div class="s" data-k="hs-late">HubSpot</div></a>
+      <a class="kpi" href="/tasks/unc/"><div class="k">Business overdue</div><div class="v" data-k="os-overdue">&middot;</div><div class="s"><span data-k="os-open">&middot;</span> open</div></a>
+      <a class="kpi" href="/tasks/unc/"><div class="k">Business, next 7 days</div><div class="v" data-k="os-week">&middot;</div><div class="s">due</div></a>
+      <a class="kpi" href="/tasks/unc/"><div class="k">Closed, 7 days</div><div class="v" data-k="os-closed">&middot;</div><div class="s">business tasks</div></a>
+    </div>
   </section>
 
-  <div class="ql-head"><h2>Quick Launch</h2><div class="rule"></div></div>
-  <div class="ql">
-    <a class="primary" href="/sales-ops/workspace/"><span class="n">Workspace</span><span class="s">Sales OS cockpit</span></a>
-    <a href="https://mail.google.com/mail/u/0/" target="_blank" rel="noopener"><span class="n">Gmail</span><span class="s">UNC inbox</span></a>
-    <a href="https://drive.google.com/drive/folders/1Gs4hmmhT0hOccMUGCA0Krds_dkFX7boh" target="_blank" rel="noopener"><span class="n">Drive</span><span class="s">Urban Niche Co</span></a>
-    <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener"><span class="n">Calendar</span><span class="s">Schedule</span></a>
-    <a href="https://app.hubspot.com/contacts/245833525/objects/0-1/views/all/list" target="_blank" rel="noopener"><span class="n">HubSpot</span><span class="s">CRM</span></a>
-    <a href="https://claude.ai/new" target="_blank" rel="noopener"><span class="n">Claude</span><span class="s">Cowork</span></a>
-    <a href="https://publish.buffer.com/" target="_blank" rel="noopener"><span class="n">Buffer</span><span class="s">Scheduling</span></a>
-  </div>
+  <div class="hub-grid">
+    <div class="hub-col">
+      <p class="hub-label">Every day</p>
+      <div class="daily">
+        <a class="primary" href="/sales-ops/workspace/"><span class="n">Cockpit</span><span class="s">Dial and log</span></a>
+        <a href="https://mail.google.com/mail/u/0/" target="_blank" rel="noopener"><span class="n">Gmail</span><span class="s">UNC inbox</span></a>
+        <a href="https://app.hubspot.com/contacts/245833525/objects/0-3/views/all/board" target="_blank" rel="noopener"><span class="n">HubSpot</span><span class="s">Pipeline</span></a>
+        <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener"><span class="n">Calendar</span><span class="s">Schedule</span></a>
+        <a href="https://publish.buffer.com/" target="_blank" rel="noopener"><span class="n">Buffer</span><span class="s">Posts</span></a>
+        <a href="https://drive.google.com/drive/folders/1Gs4hmmhT0hOccMUGCA0Krds_dkFX7boh" target="_blank" rel="noopener"><span class="n">Drive</span><span class="s">Urban Niche Co</span></a>
+        <a href="https://claude.ai/new" target="_blank" rel="noopener"><span class="n">Claude</span><span class="s">Cowork</span></a>
+      </div>
+      <div class="hcard"><div class="hcard-top"><h3>Business: your next moves</h3><a class="more" href="/tasks/unc/">All business tasks</a></div><div data-os="next"><p class="os-muted">Loading…</p></div></div>
+      <div class="hub-pair">
+        <div class="hcard"><div class="hcard-top"><h3>Clients: next up</h3><a class="more" href="/sales-ops/tasks/">HubSpot tasks</a></div><div data-os="client"><p class="os-muted">Loading…</p></div></div>
+        <div class="hcard"><div class="hcard-top"><h3>Needs attention</h3><a class="more" href="/finance/">Brief</a></div><div data-os="brief"><p class="os-muted">Loading…</p></div></div>
+      </div>
+    </div>
 
-  <div class="ql-head"><h2>Departments</h2><div class="rule"></div></div>
-  <div class="depts">
-
-    <div class="dept">
-      <div class="dept-top"><h3>Revenue &amp; Growth</h3><span class="role">Sell</span></div>
-      <p class="desc">Outreach, pipeline, proposals, pricing, and everything that turns a stranger into a signed retainer.</p>
-      <div class="chips">
+    <aside class="hub-col hub-side">
+      <p class="hub-label">Not every day</p>
+      <div class="hcard"><div class="hcard-top"><h3>Business tasks by department</h3></div><div data-os="areas"></div></div>
+      <div class="hcard"><div class="hcard-top"><h3>Departments</h3></div><details><summary>Revenue &amp; Growth<span>Sell</span></summary><div class="chips">
         <a class="int" href="/sales-ops/workspace/">Sales OS Cockpit</a>
         <a class="int" href="/demo/">Demo Mockups</a>
         <a class="int" href="/tools/">Tools Library</a>
@@ -159,74 +174,37 @@
         <a class="int" href="/playbook/rep-onboarding/">Rep Onboarding</a>
         <a href="https://urbannicheco.com/careers/" target="_blank" rel="noopener">Careers (public)</a>
         <a class="drive" href="https://drive.google.com/drive/folders/1Q-vbAP5AFjiVXZA97q1xOnNgGNJtDfBT" target="_blank" rel="noopener">Drive folder</a>
-      </div>
-    </div>
-
-    <div class="dept">
-      <div class="dept-top"><h3>Client Success</h3><span class="role">Keep</span></div>
-      <p class="desc">Onboarding, audits, deliverables, client sites, and the reporting that keeps retainers renewing.</p>
-      <div class="chips">
+      </div></details><details><summary>Client Success<span>Keep</span></summary><div class="chips">
         <a href="https://app.netlify.com/" target="_blank" rel="noopener">Netlify</a>
         <a href="https://business.google.com/" target="_blank" rel="noopener">Google Business Profile</a>
         <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Search Console</a>
         <a class="drive" href="https://drive.google.com/drive/folders/1PvAc7zCYmkBEoPCa8an-P8H46EglXpoX" target="_blank" rel="noopener">Drive folder</a>
-      </div>
-    </div>
-
-    <div class="dept">
-      <div class="dept-top"><h3>Delivery &amp; Ops</h3><span class="role">Run</span></div>
-      <p class="desc">SOPs, Cowork commands, trackers, session memory. The engine room where the AI does the work.</p>
-      <div class="chips">
+      </div></details><details><summary>Delivery &amp; Ops<span>Run</span></summary><div class="chips">
         <a class="int" href="/playbook/">Playbook &amp; SOPs</a>
         <a class="int" href="/playbook/filing/">Naming &amp; Filing</a>
         <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude / Cowork</a>
         <a class="drive" href="https://drive.google.com/drive/folders/1qcY0Z9aakOaOG-1mAZ8yeA0yWg6CaHBV" target="_blank" rel="noopener">Drive folder</a>
-      </div>
-    </div>
-
-    <div class="dept">
-      <div class="dept-top"><h3>Content &amp; Brand</h3><span class="role">Show</span></div>
-      <p class="desc">Social posts, captions, graphics, brand assets. Buffer is the scheduler now &mdash; Meta is legacy.</p>
-      <div class="chips">
+      </div></details><details><summary>Content &amp; Brand<span>Show</span></summary><div class="chips">
         <a class="int" href="/playbook/brand/">Brand Standards</a>
         <a href="https://publish.buffer.com/" target="_blank" rel="noopener">Buffer</a>
         <a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a>
         <a href="https://business.facebook.com/latest/home" target="_blank" rel="noopener" class="legacy">Meta Suite (legacy)</a>
         <a class="drive" href="https://drive.google.com/drive/folders/1IYQTl4xyuIrDqRLtcVAUCSmIQeYtbBcX" target="_blank" rel="noopener">Drive folder</a>
-      </div>
-    </div>
-
-    <div class="dept">
-      <div class="dept-top"><h3>Finance &amp; Admin</h3><span class="role">Count</span></div>
-      <p class="desc">Invoices, contracts, payment dispersal, ITC. Every payment lands in the tracker regardless of method.</p>
-      <div class="chips">
+      </div></details><details><summary>Finance &amp; Admin<span>Count</span></summary><div class="chips">
         <a href="https://dashboard.stripe.com/" target="_blank" rel="noopener">Stripe</a>
         <a href="https://qbo.intuit.com/" target="_blank" rel="noopener">QuickBooks</a>
         <a class="drive" href="https://drive.google.com/drive/folders/13HRbtgNn-of_MOOetzNiVSjSJuiDTw-V" target="_blank" rel="noopener">Drive folder</a>
-      </div>
-    </div>
-
-    <div class="dept">
-      <div class="dept-top"><h3>Tech &amp; Systems</h3><span class="role">Build</span></div>
-      <p class="desc">Repos, DNS, workers, hosting, Workspace admin, and the skill library that powers delivery.</p>
-      <div class="chips">
+      </div></details><details><summary>Tech &amp; Systems<span>Build</span></summary><div class="chips">
         <a href="https://github.com/RickyG516" target="_blank" rel="noopener">GitHub</a>
         <a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>
         <a href="https://dcc.godaddy.com/control/portfolio" target="_blank" rel="noopener">GoDaddy DNS</a>
         <a href="https://admin.google.com/" target="_blank" rel="noopener">Workspace Admin</a>
         <a class="int" href="/verticals/">Verticals</a>
         <a class="drive" href="https://drive.google.com/drive/folders/1gh5a6KLICjclZby6y0c6VwJywGK4hstb" target="_blank" rel="noopener">Drive folder</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="exec">
-    <h3>Executive Command</h3>
-    <p>Six department agents report every Sunday night; the board meeting synthesizes them the first Monday of the month.</p>
-    <div class="chips">
-      <a class="drive" href="https://drive.google.com/drive/folders/16m-L7E_n0O3NQgIUt4tMiVRM-FH6_AmZ" target="_blank" rel="noopener">Open reports</a>
-    </div>
+      </div></details></div>
+      <div class="hcard"><div class="hcard-top"><h3>Executive Command</h3><a class="more" href="https://drive.google.com/drive/folders/16m-L7E_n0O3NQgIUt4tMiVRM-FH6_AmZ" target="_blank" rel="noopener">Reports</a></div><p class="os-muted">Six department reports every Sunday night. Board meeting the first Monday of the month.</p></div>
+      <div class="hcard"><div class="hcard-top"><h3>Recent</h3></div><ul class="os-feed" data-os="feed"></ul></div>
+    </aside>
   </div>
 
   <footer>
@@ -236,5 +214,6 @@
 
 </div>
 <script src="/sales-ops/shared/unc-key.js"></script>
+<script src="/tasks/unc/os.js?v=202611250500"></script>
 </body>
 </html>
