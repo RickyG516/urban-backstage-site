@@ -369,3 +369,5 @@ body.has-side .wrap{margin-left:220px;margin-right:auto}
   body.menu-open{overflow:hidden}
   body.has-side .wrap{margin-left:auto}
 }
+
+.lock .uname{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}

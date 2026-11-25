@@ -41,11 +41,14 @@
       '<div class="who"><label><input type="radio" name="u" value="ricky"' + (who === 'ricky' ? ' checked' : '') + '> Ricky</label>' +
       '<label><input type="radio" name="u" value="doug"' + (who === 'doug' ? ' checked' : '') + '> Doug</label>' +
       '<label><input type="radio" name="u" value="kevin"' + (who === 'kevin' ? ' checked' : '') + '> Kevin</label></div>' +
+      '<input class="uname" name="username" type="text" autocomplete="username" value="' + who + '" tabindex="-1" aria-hidden="true">' +
       '<input class="pin" name="pin" type="password" autocomplete="current-password" placeholder="PIN" required>' +
       '<button type="submit">Unlock</button><div class="err"></div></form>';
     document.body.appendChild(el);
     var f = el.querySelector('form');
     f.pin.focus();
+    // keeps the saved-password username in step with the name picked, so phones offer to save and autofill each PIN
+    f.querySelectorAll('input[name=u]').forEach(function (r) { r.addEventListener('change', function () { f.username.value = r.value; }); });
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var u = f.querySelector('input[name=u]:checked').value;

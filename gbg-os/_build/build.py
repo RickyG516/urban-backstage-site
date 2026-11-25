@@ -4,7 +4,7 @@ Edit content here (checklists, statuses), rebuild. Bump V when os.css or os.js c
 import sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "12"  # cache bust, bump on every os.css / os.js change
+V = "13"  # cache bust, bump on every os.css / os.js change
 
 def doc(i): return f"https://docs.google.com/document/d/{i}/edit"
 def fil(i): return f"https://drive.google.com/file/d/{i}/view"
@@ -283,6 +283,7 @@ start = sh("Logging in") + """  <div class="grid">
       <li>Go to <b>urbanbackstage.com/gbg-os</b> (no www).</li>
       <li>Type your email. Cloudflare emails you a code. Type the code.</li>
       <li>On the orange GBG screen pick your name and enter your PIN. Ricky sends PINs by text, never in a doc.</li>
+      <li>When your phone or browser asks to save the password, tap Save. Your PIN fills in on its own next time.</li>
       <li>That device stays logged in. Use Sign out on the Hub if it is a shared device.</li>
     </ol></div>
     <div class="card"><h3>If it won't let you in</h3><ul>
