@@ -101,12 +101,18 @@ footer{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 16px 40
   <!-- 1 -->
   <section class="card" data-step="1">
     <p class="step-n">Step 1 of 5</p>
-    <h2>What are we working on?</h2>
-    <p class="hint">Pick everything that fits. Not sure is a fine answer.</p>
+    <h2>What kind of work is this?</h2>
+    <p class="hint">Pick everything that fits.</p>
+    <div class="tiles" data-multi="work">
+      <button class="tile" data-v="Maintenance">Maintenance<small>Keep what's there looking right</small></button>
+      <button class="tile" data-v="New install">New install<small>Put in something new</small></button>
+      <button class="tile" data-v="Demolition">Demolition<small>Tear out or haul away first</small></button>
+      <button class="tile" data-v="Not sure yet">Not sure yet<small>Tell me what it needs</small></button>
+    </div>
+    <p class="q">What are we working on? <small>pick any</small></p>
     <div class="tiles" data-multi="project">
-      <button class="tile" data-v="New planting beds">New planting beds<small>Start from grass or bare ground</small></button>
+      <button class="tile" data-v="New beds or full makeover">New beds or full makeover<small>Bare ground, grass, or start over</small></button>
       <button class="tile" data-v="Refresh existing beds">Refresh what's there<small>Tired, overgrown or patchy</small></button>
-      <button class="tile" data-v="Front yard makeover">Front yard makeover<small>Curb appeal, top to bottom</small></button>
       <button class="tile" data-v="Backyard and patio area">Backyard or patio area<small>Where you spend time</small></button>
       <button class="tile" data-v="Trees and privacy">Trees and privacy<small>Shade, screening, a view to block</small></button>
       <button class="tile" data-v="Not sure, design it for me">Not sure yet<small>Show me what's possible</small></button>
@@ -254,7 +260,7 @@ footer{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 16px 40
 (function () {
   // Budget ranges are placeholders for Dallas to set. Left as open choices on purpose: no real prices in the draft.
   var BUDGETS = ['Smaller project', 'Mid size project', 'Larger project', 'Whole yard', 'Not sure, tell me what is realistic'];
-  var S = { project: [], look: '', plants: [], colors: [], upkeep: '', flags: [], budget: '', timing: '', areas: [] };
+  var S = { work: [], project: [], look: '', plants: [], colors: [], upkeep: '', flags: [], budget: '', timing: '', areas: [] };
   var step = 1, aid = 0;
   var $ = function (q, r) { return (r || document).querySelector(q); }, $$ = function (q, r) { return [].slice.call((r || document).querySelectorAll(q)); };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -319,7 +325,8 @@ footer{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 16px 40
 
   // steps
   function check() {
-    if (step === 1 && !S.project.length) return 'Pick at least one.';
+    if (step === 1 && !S.work.length) return 'Pick the kind of work.';
+    if (step === 1 && !S.project.length) return 'Pick what we are working on.';
     if (step === 2) { if (!S.areas.length) return 'Add at least one part of the yard.';
       if (!S.areas.some(function (a) { return a.photos.filter(Boolean).length; })) return 'Add at least one photo so we have something to design from.'; }
     if (step === 3 && !S.look) return 'Pick an overall look.';
@@ -343,7 +350,7 @@ footer{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 16px 40
     var kv = function (k, v) { return '<span>' + k + '</span><div>' + (v || '<i style="color:#9a9a9a">not answered</i>') + '</div>'; };
     $('#brief').innerHTML = '<div class="brief-h"><span>New yard design request</span><small style="color:#6b756d">' + new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) + '</small></div>' +
       '<div class="bsec"><h4>' + esc($('#name').value.trim()) + '</h4><div class="kv">' + kv('Phone', esc($('#phone').value)) + kv('Email', esc($('#email').value)) + kv('Address', esc($('#addr').value)) + '</div></div>' +
-      '<div class="bsec"><h4>The project</h4><div class="kv">' + kv('Wants', esc(S.project.join(', '))) + kv('Budget', esc(S.budget)) + kv('Timing', esc(S.timing)) + kv('Notes', esc($('#notes').value)) + '</div></div>' +
+      '<div class="bsec"><h4>The project</h4><div class="kv">' + kv('Type of work', esc(S.work.join(', '))) + kv('Wants', esc(S.project.join(', '))) + kv('Budget', esc(S.budget)) + kv('Timing', esc(S.timing)) + kv('Notes', esc($('#notes').value)) + '</div></div>' +
       '<div class="bsec"><h4>Style</h4><div class="kv">' + kv('Look', esc(S.look)) + kv('Include', esc(S.plants.join(', '))) +
         kv('Colors', S.colors.length ? '<span class="dots">' + S.colors.map(function (c) { return '<i style="background:' + HEX[c] + '" title="' + c + '"></i>'; }).join('') + '</span> ' + esc(S.colors.join(', ')) : '') +
         kv('Upkeep', esc(S.upkeep)) + kv('Plan around', esc(S.flags.join(', '))) + '</div></div>' +
