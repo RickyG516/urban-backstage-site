@@ -114,9 +114,9 @@ def due(cap=5, require_photos=False, everything=False, skip_built=False):
         if not os.path.isfile(os.path.join(folder, "index.html")):
             continue
         photos = photo_count(folder)
-        if require_photos and photos == 0:
-            continue
         ptype = str(rec.get("photos", "")).lower()
+        if require_photos and (photos == 0 or ptype == "generated"):
+            continue  # their OWN job photos or nothing (Ricky, 2026-11-26)
         name = mockup_name(folder)
         out.append({"slug": slug, "name": name, "photos": photos,
                     "photo_type": ptype, "fb": fburl,
@@ -137,8 +137,10 @@ if __name__ == "__main__":
     ap.add_argument("--days", type=int, default=0, help="ignored (kept for old callers)")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--all", action="store_true", help="show the whole eligible pool, ignore --cap")
-    ap.add_argument("--require-photos", action="store_true",
-                    help="drop rows whose mockup has no usable hook photos")
+    ap.add_argument("--require-photos", dest="require_photos", action="store_true", default=True,
+                    help="(default since 2026-11-26, Ricky) drop rows whose mockup has no real job photos")
+    ap.add_argument("--allow-no-photos", dest="require_photos", action="store_false",
+                    help="old behaviour: include mockups with no job photos (mockup-stills hook)")
     ap.add_argument("--skip-built", action="store_true",
                     help="build-only days: drop rows that already have a t1_video_built stamp")
     a = ap.parse_args()
