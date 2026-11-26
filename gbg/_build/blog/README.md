@@ -35,3 +35,15 @@ Then the body in markdown, with one H1 omitted (title is the H1), H2s for sectio
 ## Queue
 queue.json holds topics. Status values: todo, drafted, published. Each run takes the first
 todo, writes the draft, and sets status to drafted with the draft filename and date.
+
+## Publishing (automatic since 2026-11-26)
+The Monday scheduled task `gbg-weekly-blog-draft` (on Ricky's machine) writes the draft, runs
+`check_draft.py`, does an editorial review, rebuilds staging, then publishes to gbgdubuque.com with:
+
+    python gbg/_build/blog/publish_live.py --slug <slug>
+
+That script builds `--prod` into a temp folder and stages it in `../gbg-dubuque-site` (the live repo,
+Netlify deploys its main). It never overwrites the live CSS, JS, og.png, favicon or netlify.toml, only
+lets .html/.xml/site.webmanifest change, checks canonicals, robots and JSON-LD, and restores the live
+repo if any guard fails. It never commits or pushes; the caller does. `--restore` undoes staged changes.
+Run it with no arguments as a dry run: "nothing to publish" means staging and live are in sync.
