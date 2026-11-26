@@ -33,8 +33,11 @@ Then the body in markdown, with one H1 omitted (title is the H1), H2s for sectio
 "FAQ" section at the end.
 
 ## Queue
-queue.json holds topics. Status values: todo, drafted, published. Each run takes the first
-todo, writes the draft, and sets status to drafted with the draft filename and date.
+queue.json holds topics. Status values: todo, drafted, published. Every topic has "months"
+(1 to 12): the months it fits the season in Dubuque, Iowa. Each run takes the first todo whose
+months include the current month, writes the draft, and sets status to drafted with the draft
+filename and date. If fewer than 2 todo topics fit this month or next, the run adds up to 3
+seasonal topics first. Keep todo topics in month order.
 
 ## Publishing (automatic since 2026-11-26)
 The Monday scheduled task `gbg-weekly-blog-draft` (on Ricky's machine) writes the draft, runs

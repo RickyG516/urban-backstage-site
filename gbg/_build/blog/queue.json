@@ -1,5 +1,5 @@
 {
-  "note": "Topics run top to bottom. Statuses: todo, drafted, published. Add topics freely.",
+  "note": "Topics run top to bottom. Statuses: todo, drafted, published. \"months\" lists the months (1 to 12) when a topic fits the season in Dubuque, Iowa; each run takes the first todo topic whose months include the current month. Add topics freely, always with months.",
   "topics": [
     {
       "slug": "permanent-lights-vs-seasonal-dubuque",
@@ -42,14 +42,6 @@
       "drafted_on": "2026-10-26"
     },
     {
-      "slug": "trash-can-cleaning-worth-it",
-      "title": "Is trash can cleaning worth paying for?",
-      "service_page": "/trash-can-cleaning/",
-      "target_keyword": "trash can cleaning Dubuque",
-      "angle": "Smell, pests, summer heat, route based service. Honest about who it is for.",
-      "status": "todo"
-    },
-    {
       "slug": "epoxy-garage-floor-vs-paint",
       "title": "Epoxy garage floor vs garage floor paint",
       "service_page": "/epoxy-coating/",
@@ -58,22 +50,6 @@
       "status": "drafted",
       "draft": "2026-11-02-epoxy-garage-floor-vs-paint.md",
       "drafted_on": "2026-11-02"
-    },
-    {
-      "slug": "how-to-pick-an-exterior-contractor-dubuque",
-      "title": "How to pick an exterior contractor in Dubuque",
-      "service_page": "/service-areas/",
-      "target_keyword": "exterior services Dubuque",
-      "angle": "Questions to ask, red flags, why one coordinating point of contact beats juggling five trades.",
-      "status": "todo"
-    },
-    {
-      "slug": "yard-spraying-schedule-iowa-lawns",
-      "title": "A simple yard spraying calendar for Iowa lawns",
-      "service_page": "/yard-spraying/",
-      "target_keyword": "lawn spraying Dubuque",
-      "angle": "General seasonal rhythm only. No product names or rates. Note that application rules and licensing apply.",
-      "status": "todo"
     },
     {
       "slug": "questions-to-ask-before-buying-permanent-lights",
@@ -96,14 +72,6 @@
       "drafted_on": "2026-11-16"
     },
     {
-      "slug": "driveway-sealing-vs-resurfacing-vs-replacing",
-      "title": "Sealing, resurfacing or replacing a driveway",
-      "service_page": "/driveway-sealing/",
-      "target_keyword": "driveway sealing vs resurfacing",
-      "angle": "How to tell which fits the condition of the surface. Link to the freeze and thaw post once it exists. No prices.",
-      "status": "todo"
-    },
-    {
       "slug": "get-your-garage-ready-for-epoxy",
       "title": "How to get your garage ready for an epoxy floor",
       "service_page": "/epoxy-coating/",
@@ -119,31 +87,11 @@
       "service_page": "/junk-removal/",
       "target_keyword": "junk removal Dubuque",
       "angle": "Guests coming and no room to park. How to sort keep, donate and haul, what is easier to remove before snow, what junk haulers usually will not take, why quoting from photos helps. No prices.",
-      "status": "todo"
-    },
-    {
-      "slug": "protect-driveway-from-salt-plows-shovels",
-      "title": "Protecting your driveway from salt, plows and shovels",
-      "service_page": "/driveway-sealing/",
-      "target_keyword": "driveway winter damage Dubuque",
-      "angle": "Plow and shovel edge damage, using de-icer sparingly, keeping snow piles off the edges, what to note now so spring repairs are easier. No product names or chemical claims.",
-      "status": "todo"
-    },
-    {
-      "slug": "tree-damage-after-ice-storm-dubuque",
-      "title": "What to do about tree damage after an ice storm",
-      "service_page": "/tree-service/",
-      "target_keyword": "tree service Dubuque",
-      "angle": "Safety first: stay clear of hanging limbs and any limb touching a power line, call the utility for line contact. How to spot a limb that needs a pro, take photos before cleanup, what can wait for a dry day. No insurance promises.",
-      "status": "todo"
-    },
-    {
-      "slug": "garage-floor-salt-slush-season",
-      "title": "Keeping a garage floor in shape through salt and slush season",
-      "service_page": "/epoxy-coating/",
-      "target_keyword": "garage floor salt damage",
-      "angle": "Puddles of salty melt, mats and squeegees, keeping drains clear, what to look for on bare concrete by spring, when a coating is worth a conversation. No product claims or cure times.",
-      "status": "todo"
+      "status": "todo",
+      "months": [
+        11,
+        12
+      ]
     },
     {
       "slug": "permanent-lights-in-a-dubuque-winter",
@@ -151,7 +99,53 @@
       "service_page": "/permanent-lights/",
       "target_keyword": "permanent lights winter Iowa",
       "angle": "Questions to ask an installer about mounting, wiring and controls in cold, snow and ice. What to check after a storm, and why fall or winter installs need a dry, safe roof. No product specs or warranty claims.",
-      "status": "todo"
+      "status": "todo",
+      "months": [
+        11,
+        12,
+        1
+      ]
+    },
+    {
+      "slug": "protect-driveway-from-salt-plows-shovels",
+      "title": "Protecting your driveway from salt, plows and shovels",
+      "service_page": "/driveway-sealing/",
+      "target_keyword": "driveway winter damage Dubuque",
+      "angle": "Plow and shovel edge damage, using de-icer sparingly, keeping snow piles off the edges, what to note now so spring repairs are easier. No product names or chemical claims.",
+      "status": "todo",
+      "months": [
+        12,
+        1,
+        2
+      ]
+    },
+    {
+      "slug": "tree-damage-after-ice-storm-dubuque",
+      "title": "What to do about tree damage after an ice storm",
+      "service_page": "/tree-service/",
+      "target_keyword": "tree service Dubuque",
+      "angle": "Safety first: stay clear of hanging limbs and any limb touching a power line, call the utility for line contact. How to spot a limb that needs a pro, take photos before cleanup, what can wait for a dry day. No insurance promises.",
+      "status": "todo",
+      "months": [
+        12,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "slug": "garage-floor-salt-slush-season",
+      "title": "Keeping a garage floor in shape through salt and slush season",
+      "service_page": "/epoxy-coating/",
+      "target_keyword": "garage floor salt damage",
+      "angle": "Puddles of salty melt, mats and squeegees, keeping drains clear, what to look for on bare concrete by spring, when a coating is worth a conversation. No product claims or cure times.",
+      "status": "todo",
+      "months": [
+        12,
+        1,
+        2,
+        3
+      ]
     },
     {
       "slug": "plan-spring-exterior-projects-in-winter",
@@ -159,15 +153,26 @@
       "service_page": "/service-areas/",
       "target_keyword": "exterior home projects Dubuque",
       "angle": "Walk the house now and note what winter shows you, set priorities and a rough order, get estimates on the calendar before spring fills up, bundle work with one team. No booking promises or dates.",
-      "status": "todo"
+      "status": "todo",
+      "months": [
+        1,
+        2,
+        3
+      ]
     },
     {
-      "slug": "trash-can-cleaning-vs-rinsing-at-home",
-      "title": "Trash can cleaning vs rinsing at home",
-      "service_page": "/trash-can-cleaning/",
-      "target_keyword": "trash can cleaning Dubuque",
-      "angle": "What a hose and soap do and do not reach, and when a recurring service saves the hassle.",
-      "status": "todo"
+      "slug": "how-to-pick-an-exterior-contractor-dubuque",
+      "title": "How to pick an exterior contractor in Dubuque",
+      "service_page": "/service-areas/",
+      "target_keyword": "exterior services Dubuque",
+      "angle": "Questions to ask, red flags, why one coordinating point of contact beats juggling five trades.",
+      "status": "todo",
+      "months": [
+        1,
+        2,
+        3,
+        4
+      ]
     },
     {
       "slug": "exterior-project-order-what-goes-first",
@@ -175,7 +180,12 @@
       "service_page": "/service-areas/",
       "target_keyword": "exterior projects Dubuque",
       "angle": "Tree work, painting, sealing, lights, landscaping: why sequence matters and how coordinating one point of contact helps.",
-      "status": "todo"
+      "status": "todo",
+      "months": [
+        2,
+        3,
+        4
+      ]
     },
     {
       "slug": "spring-exterior-checklist-dubuque",
@@ -183,7 +193,37 @@
       "service_page": "/service-areas/",
       "target_keyword": "spring exterior checklist Iowa",
       "angle": "Walk the property after winter: driveway, bins, lawn, garage floor, roofline. General advice only, no weather facts.",
-      "status": "todo"
+      "status": "todo",
+      "months": [
+        3,
+        4
+      ]
+    },
+    {
+      "slug": "yard-spraying-schedule-iowa-lawns",
+      "title": "A simple yard spraying calendar for Iowa lawns",
+      "service_page": "/yard-spraying/",
+      "target_keyword": "lawn spraying Dubuque",
+      "angle": "General seasonal rhythm only. No product names or rates. Note that application rules and licensing apply.",
+      "status": "todo",
+      "months": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "slug": "driveway-sealing-vs-resurfacing-vs-replacing",
+      "title": "Sealing, resurfacing or replacing a driveway",
+      "service_page": "/driveway-sealing/",
+      "target_keyword": "driveway sealing vs resurfacing",
+      "angle": "How to tell which fits the condition of the surface. Link to the freeze and thaw post once it exists. No prices.",
+      "status": "todo",
+      "months": [
+        4,
+        5,
+        9
+      ]
     },
     {
       "slug": "lighting-and-landscaping-planned-together",
@@ -191,7 +231,40 @@
       "service_page": "/landscaping/",
       "target_keyword": "landscaping and lighting Dubuque",
       "angle": "Why plantings, paths and a roofline light plan work better decided as one project. Landscaping is delivered by a trusted partner.",
-      "status": "todo"
+      "status": "todo",
+      "months": [
+        4,
+        5,
+        6,
+        9
+      ]
+    },
+    {
+      "slug": "trash-can-cleaning-worth-it",
+      "title": "Is trash can cleaning worth paying for?",
+      "service_page": "/trash-can-cleaning/",
+      "target_keyword": "trash can cleaning Dubuque",
+      "angle": "Smell, pests, summer heat, route based service. Honest about who it is for.",
+      "status": "todo",
+      "months": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "slug": "trash-can-cleaning-vs-rinsing-at-home",
+      "title": "Trash can cleaning vs rinsing at home",
+      "service_page": "/trash-can-cleaning/",
+      "target_keyword": "trash can cleaning Dubuque",
+      "angle": "What a hose and soap do and do not reach, and when a recurring service saves the hassle.",
+      "status": "todo",
+      "months": [
+        6,
+        7,
+        8
+      ]
     }
   ]
 }
