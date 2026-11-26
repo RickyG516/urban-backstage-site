@@ -429,7 +429,10 @@
    "sent": "2026-10-28",
    "t2_video_built": "2026-11-10",
    "t2_drive": "2026-11-10",
-   "t2_note": "video built 2026-11-10 with mockup-stills hook (no job photos); NOT attached, Facebook was logged out in Chrome; file in Drive Mockup Videos and in chat for Ricky to attach by hand"
+   "t2_note": "video built 2026-11-10 with mockup-stills hook (no job photos); NOT attached, Facebook was logged out in Chrome; file in Drive Mockup Videos and in chat for Ricky to attach by hand",
+   "t1_video_built": "2026-11-26",
+   "t1_drive": "2026-11-26",
+   "t1_note": "built during outreach pause, not attached"
   }
  },
  "ia-freiburger-heating-cooling-dubuque": {
@@ -648,8 +651,9 @@
   "stage": "none",
   "fb_dm": {
    "t1_skipped": "2026-11-18",
-   "t1_note": "thread not empty: Ricky sent text T1 2026-10-13 (never logged here)",
-   "t1_drive": "2026-11-18"
+   "t1_note": "thread not empty: Ricky sent text T1 2026-10-13 (never logged here); built during outreach pause 2026-11-26, not attached",
+   "t1_drive": "2026-11-26",
+   "t1_video_built": "2026-11-26"
   }
  },
  "ia-mann-construction-eldora": {
@@ -751,7 +755,10 @@
    "sent": "2026-10-22",
    "t2_video_built": "2026-11-10",
    "t2_drive": "2026-11-10",
-   "t2_note": "video built 2026-11-10 with mockup-stills hook (no job photos); NOT attached, Facebook was logged out in Chrome; file in Drive Mockup Videos and in chat for Ricky to attach by hand"
+   "t2_note": "video built 2026-11-10 with mockup-stills hook (no job photos); NOT attached, Facebook was logged out in Chrome; file in Drive Mockup Videos and in chat for Ricky to attach by hand",
+   "t1_video_built": "2026-11-26",
+   "t1_drive": "2026-11-26",
+   "t1_note": "built during outreach pause, not attached"
   }
  },
  "ia-millius-mulch-landscaping-dbq01": {
@@ -2660,9 +2667,10 @@
    "prev_staged": "2026-11-05",
    "prev_skipped": "2026-11-06",
    "t1_skipped": "2026-11-18",
-   "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here)",
-   "t1_drive": "2026-11-18",
-   "sent": "2026-11-06"
+   "t1_note": "thread not empty: Ricky sent text T1 2026-11-06 (never logged here); built during outreach pause 2026-11-26, not attached",
+   "t1_drive": "2026-11-26",
+   "sent": "2026-11-06",
+   "t1_video_built": "2026-11-26"
   }
  },
  "ia-petrushkas-dubuque": {
@@ -2764,7 +2772,12 @@
   "note": "in HubSpot 2026-11-26 (company 374899796713, contact 608085663461 placeholder, owner name unknown) | SOURCE A, Facebook Ad Library: active ad seen 2026-11-26 on the search 'stump grinding Iowa'; the ad carries no landing link. NO-WEBSITE: the Facebook page lists a gmail address and no website; Google Maps shows no listing for the business | BUILT 2026-11-26 as a new spec mockup, BRONZE (built-in pane, logged out). IDENTITY: Facebook page 'White's Tree Service & Brush Removal', 6301 31st Ave, Shellsburg IA, (319) 440-5960, 22 followers, 1 review; their own ad graphic prints 319-440-5960 and 'Serving Linn County, Iowa, and surrounding counties'. There is no second source: Google Maps was searched by name and city and returned only Trees Plus and Sure Wood (different businesses), so name, city and phone rest on the Facebook page and the ad graphic alone. The page is new (first photos posted 2026-11-24). REAL: logo (Facebook profile picture), brand green sampled from it (lightened to #4cb858 for contrast), three job photos from the Facebook Photos tab, each looked at (storm-damaged oak with a limb down, brush pile along a tree line, cleared ground beside a gravel lane). No other company's branding in any of them. Not used: the cover photo and the ad graphic. PLACEHOLDER: reviews (Facebook shows 1 review, not rated; no Google listing). DO NOT SAY: owner name (unknown), years in business, insurance or licensing, any review. Services on the page (tree removal, brush removal, stump grinding) and 'free estimate' come from their own ad graphic. The service-area town list is our guess from the map: confirm on the call. Shellsburg is in Benton County; their own wording is 'Linn County and surrounding counties'.",
   "photos": "real",
   "ready": true,
-  "stage": "none"
+  "stage": "none",
+  "fb_dm": {
+   "t1_video_built": "2026-11-26",
+   "t1_drive": "2026-11-26",
+   "t1_note": "built during outreach pause, not attached"
+  }
  },
  "ia-world-wide-construction-reasnor": {
   "channel": "phone",
