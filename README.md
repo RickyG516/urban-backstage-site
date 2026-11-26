@@ -18,9 +18,9 @@ readable by anyone who finds the URL.
 
 ## ⚠ DO NOT ADD A `.nojekyll` FILE
 
-`sales-ops/_internal/worker.js` currently returns **404** only because GitHub Pages runs
-Jekyll, which skips underscore-prefixed paths. Adding `.nojekyll` would publish the
-Cloudflare Worker source — including its auth logic — to the open internet instantly.
+Underscore-prefixed paths such as `sales-ops/_internal/` and `gbg/_build/` return **404** only
+because GitHub Pages runs Jekyll, which skips them. Adding `.nojekyll` would publish everything
+in them — including any Worker source and auth notes — to the open internet instantly.
 
 If you ever need `.nojekyll` (for asset paths, etc.), **relocate that file out of the
 served tree first.**
