@@ -2188,7 +2188,9 @@
    "variant": "C",
    "t1_video_built": "2026-11-25",
    "t1_drive": "2026-11-25",
-   "t1_note": "built during outreach pause, not attached"
+   "t1_note": "built during outreach pause, not attached",
+   "sent": "2026-11-25",
+   "auto_reply": "2026-11-25"
   }
  },
  "wi-davenport-flooring-eau-claire": {
@@ -2651,7 +2653,8 @@
    "t1_note": "built during outreach pause, not attached (legacy 2026-11-18 skip cleared: thread holds only Ricky text of 2026-11-06)",
    "t1_drive": "2026-11-25",
    "sent": "2026-11-06",
-   "t1_video_built": "2026-11-25"
+   "t1_video_built": "2026-11-25",
+   "seen": "<=2026-11-27"
   }
  },
  "il-eric-farwell-construction-plymouth": {
@@ -2735,7 +2738,8 @@
    "variant": "B",
    "t1_video_built": "2026-11-25",
    "t1_drive": "2026-11-25",
-   "t1_note": "built during outreach pause, not attached"
+   "t1_note": "built during outreach pause, not attached",
+   "sent": "2026-11-25"
   }
  },
  "ia-southeast-iowa-tree-service-milton": {
@@ -2748,7 +2752,9 @@
   "fb_dm": {
    "t1_video_built": "2026-11-25",
    "t1_drive": "2026-11-25",
-   "t1_note": "built during outreach pause, not attached"
+   "t1_note": "built during outreach pause, not attached",
+   "staged": "2026-11-27",
+   "variant": "B"
   }
  },
  "il-kaskaskia-outdoor-specialties-tuscola": {
@@ -2763,7 +2769,8 @@
    "variant": "A",
    "t1_video_built": "2026-11-25",
    "t1_drive": "2026-11-25",
-   "t1_note": "built during outreach pause, not attached"
+   "t1_note": "built during outreach pause, not attached",
+   "sent": "2026-11-25"
   }
  },
  "ia-whites-tree-service-shellsburg": {
@@ -2776,7 +2783,9 @@
   "fb_dm": {
    "t1_video_built": "2026-11-26",
    "t1_drive": "2026-11-26",
-   "t1_note": "built during outreach pause, not attached"
+   "t1_note": "built during outreach pause, not attached",
+   "staged": "2026-11-27",
+   "variant": "C"
   }
  },
  "ia-world-wide-construction-reasnor": {
@@ -2807,7 +2816,7 @@
  "ia-tidy-up-landscape-dubuque": {
   "channel": "phone",
   "fb": "https://www.facebook.com/TidyUpLandscapeandMaintenance",
-  "note": "in HubSpot (company 319150424771 'Tidy Up Lawncare & Maintenance (Family-Owned)', imported 2026-04-20, lead status UNQUALIFIED, lifecycle opportunity: Ricky's call whether that still stands; a duplicate company 374734262992 was created 2026-11-27 by the no-website-leads task; contact 607470940874 Brandon Horkheimer created tonight) | SOURCE: tools/leads/list-2026-11-26 (Tier B, 4.9 from 43 Google reviews, no Website button). NO WORKING WEBSITE: the HubSpot record lists tidyuplawn.com; opened 2026-11-27 it shows a builder 'Site not found / This site is not published' page. Facebook page lists no website. | BUILT 2026-11-27 as a new spec mockup, BRONZE (Claude in Chrome). IDENTITY: Google listing 'Tidy Up Landscape and Maintenance' (service-area business, Dubuque area), (563) 513-3496; Facebook facebook.com/TidyUpLandscapeandMaintenance 'Tidy Up Landscape & Maintenance (Brandon Horkheimer)', same phone, ZIP 52001, service areas Dubuque, East Dubuque, Kieler, Dickeyville, Platteville, Lancaster, Dyersville, Anamosa, Guttenberg, Galena; 487 followers, 100% recommend of 6. REAL: seven job photos from the Google listing's own photo viewer (each DOM tile labelled 'Photos of Tidy Up Landscape and Maintenance', each looked at): new-home mulch beds, rock terraces by steps, stone steps on a slope, garden-shed plantings, shade bed, finished front yard, downspout drain line. Rejected: an 'Arbor Masters' graphic and a kitchen photo (both unlabelled Maps Recents leaks), a duplicate, a photo with two people's faces, and a house-number shot. Reviews: Brendan Kotz, Sally Janes, Kywren Phend (Google, 5 stars, verbatim). Services and towns are from the Facebook intro and service-area list. PLACEHOLDER: logo (Facebook allowed only one download per page tonight; the profile picture could not be saved). Palette amethyst-dusk from palettes.pick(). DO NOT SAY: anything about the dead domain beyond 'it shows Site not found'; review dates are 3 years old for two of the three.",
+  "note": "in HubSpot (company 319150424771 'Tidy Up Lawncare & Maintenance (Family-Owned)', imported 2026-04-20, lead status UNQUALIFIED, lifecycle opportunity: Ricky's call whether that still stands; a duplicate company 374734262992 was created 2026-11-27 by the no-website-leads task; contact 607470940874 Brandon Horkheimer created tonight) | SOURCE: tools/leads/list-2026-11-26 (Tier B, 4.9 from 43 Google reviews, no Website button). NO WORKING WEBSITE: the HubSpot record lists tidyuplawn.com; opened 2026-11-27 it shows a builder 'Site not found / This site is not published' page. Facebook page lists no website. | BUILT 2026-11-27 as a new spec mockup, BRONZE (Claude in Chrome). IDENTITY: Google listing 'Tidy Up Landscape and Maintenance' (service-area business, Dubuque area), (563) 513-3496; Facebook facebook.com/TidyUpLandscapeandMaintenance 'Tidy Up Landscape & Maintenance (Brandon Horkheimer)', same phone, ZIP 52001, service areas Dubuque, East Dubuque, Kieler, Dickeyville, Platteville, Lancaster, Dyersville, Anamosa, Guttenberg, Galena; 487 followers, 100% recommend of 6. REAL: seven job photos from the Google listing's own photo viewer (each DOM tile labelled 'Photos of Tidy Up Landscape and Maintenance', each looked at): new-home mulch beds, rock terraces by steps, stone steps on a slope, garden-shed plantings, shade bed, finished front yard, downspout drain line. Rejected: an 'Arbor Masters' graphic and a kitchen photo (both unlabelled Maps Recents leaks), a duplicate, a photo with two people's faces, and a house-number shot. Reviews: Brendan Kotz, Sally Janes, Kywren Phend (Google, 5 stars, verbatim). Services and towns are from the Facebook intro and service-area list. PLACEHOLDER: logo (Facebook allowed only one download per page tonight; the profile picture could not be saved). Palette amethyst-dusk from palettes.pick(). DO NOT SAY: anything about the dead domain beyond 'it shows Site not found'; review dates are 3 years old for two of the three. | FB-DM 2026-11-27: not staged, HubSpot company 319150424771 carries lifecycle opportunity from the April import, so it may not be a cold prospect; Ricky to confirm before a first-touch DM.",
   "photos": "real",
   "ready": true,
   "stage": "none",
@@ -2820,6 +2829,10 @@
   "photos": "real",
   "ready": true,
   "stage": "none",
-  "enrich_level": "BRONZE"
+  "enrich_level": "BRONZE",
+  "fb_dm": {
+   "staged": "2026-11-27",
+   "variant": "A"
+  }
  }
 }
