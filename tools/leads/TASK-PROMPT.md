@@ -1,0 +1,11 @@
+# Scheduled task "+ UNC NO-WEBSITE LEADS" (weekdays 6:42am Central, needs Ricky's computer for Chrome)
+
+Prompt to store in the scheduled task (push notifications on):
+
+You are running Ricky Garner's (Urban Niche Co., ricky@urbannicheco.com) weekday "No-Website Leads" task. Work unattended, do not ask questions, take the most reasonable reading and carry on. Get today's date from the current time tool (America/Chicago).
+
+GOAL: a scored list of 10-20 Midwest contractors (IA, IL, WI) who are clearly running a real business and have NO website, landed in HubSpot and appended to the Google Sheet UNC_Tracker_NoWebsiteLeads, with any business that is running Meta ads with no website called out on top. This task produces a LIST. It never sends, calls, DMs or emails anyone, never builds a mockup or a video, never enters a password.
+
+The full procedure is in the repo at tools/leads/RUNBOOK.md. Read it first and follow it exactly: STEP 0 clone/pull + load Chrome tools in one ToolSearch call, one new tab; STEP 1 pick 10-14 trade|town queries from tools/leads/queries.json (oldest first, high-ticket trades first, spread across IA/IL/WI); STEP 2 Google Maps scan with tools/leads/maps-scan.js, two searches per javascript_tool call, save tools/leads/scan-DATE.json; STEP 3 dedupe against tools/leads/ledger.json, demo/status.json and HubSpot (phone IN search); STEP 4 verify Tier A/B on the place page, Meta Ad Library exact-phrase check by business name, Facebook page via facebook.com/search/pages; STEP 5 python3 tools/leads/score.py DATE; STEP 6 land it (HubSpot companies for non-dup Tier A/B, confirmationStatus CONFIRMED, Ricky authorized this import on 2026-11-26; append all rows to sheet 1UDhrWM-1H-rIWy36WSHHAd_lgXg21tF5B7mxcFG2FPM; ledger; queries.json done dates; commit and push); STEP 7 short SendUserMessage report (top 5, ads hits first, counts, sheet link, queries) and one PushNotification whenever at least one Tier A/B lead was listed, or when the run could not execute (Chrome unreachable).
+
+NEVER: contact anyone, create HubSpot records for dups / has-website / Tier C rows, list a business twice, build a mockup or video, enter a password, close other tabs. Close the one tab you opened when done.
