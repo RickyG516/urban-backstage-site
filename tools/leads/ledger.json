@@ -1,0 +1,264 @@
+{
+ "_about": "Every business the daily no-website lead scan has listed, keyed by last-10 phone digits (or name when no phone). Dedupe against this before listing again.",
+ "rows": {
+  "7125774217": {
+   "name": "DL Roofing & Construction",
+   "first_seen": "2026-11-26",
+   "tier": "A",
+   "hubspot_company_id": 374737333949,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635701638": {
+   "name": "Liberty Tree Service LLC",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374732834515,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5632199091": {
+   "name": "Davenport Roofing Pros",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374730853059,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6417999560": {
+   "name": "L&G Construction Services LLC",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374730853060,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635002424": {
+   "name": "A+ Tree & Snow Removal",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374732834516,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635133496": {
+   "name": "Tidy Up Landscape and Maintenance",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374734262992,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6084988733": {
+   "name": "La Crosse Tree & Stump LLC.",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 375029291760,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635084297": {
+   "name": "Lackeys Tree Service",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374899868354,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3092353270": {
+   "name": "Affordable Stump Removal",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374737333950,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3099928742": {
+   "name": "Kahuna Roofing & Construction",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374730853061,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "7153056791": {
+   "name": "Badger State Concrete",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374734262993,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6084498244": {
+   "name": "RC Lawns",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374899240636,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635051244": {
+   "name": "Hawkeye Tree Service",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374737333951,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "8159885394": {
+   "name": "Pam's mulch and gravel",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374734262994,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3194811564": {
+   "name": "Blue Line Tree Service LLC",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374899240637,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "7123019445": {
+   "name": "E.REMODELING",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374899868355,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3094539158": {
+   "name": "Cambridge Home Improvement",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": 374899868356,
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5636392074": {
+   "name": "Quad City Custom Improvements LLC",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6084981983": {
+   "name": "Elliott's Stump Grinding LLC",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6083869737": {
+   "name": "Solum's Tree Service",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5633590052": {
+   "name": "All Season Stump Removal",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3193788949": {
+   "name": "Eggleston Concrete Contracting",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "8159146508": {
+   "name": "JRS Landscaping & Lawncare Inc",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5076436988": {
+   "name": "B & B Tree Service, LLC",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "8665836700": {
+   "name": "Tri State Siding & Windows",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635499074": {
+   "name": "Hart's Tree Service, LLC",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635882432": {
+   "name": "Lyons Logging and Tree Care Inc.",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "8155166703": {
+   "name": "Christian's lawn and Landscape",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6414300852": {
+   "name": "Kuppinger Concrete & Construction",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "7124906927": {
+   "name": "JS CUSTOM CONSTRUCTION",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "7122587193": {
+   "name": "Sewalson Contracting Inc",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "8152822799": {
+   "name": "Keeling's Landscape Inc.",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6088812190": {
+   "name": "DPS Services LLC",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "6417770731": {
+   "name": "Frase Construction Inc",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "5635815885": {
+   "name": "Lawn & Order Earthscaping LLC",
+   "first_seen": "2026-11-26",
+   "tier": "C",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3194640857": {
+   "name": "Red Oak Roofing",
+   "first_seen": "2026-11-26",
+   "tier": "A",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  },
+  "3092304461": {
+   "name": "Arborists Advantage Tree Services.",
+   "first_seen": "2026-11-26",
+   "tier": "B",
+   "hubspot_company_id": "",
+   "sheet": "UNC_Tracker_NoWebsiteLeads"
+  }
+ }
+}
